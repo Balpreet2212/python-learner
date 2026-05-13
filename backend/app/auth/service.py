@@ -6,7 +6,13 @@ from datetime import UTC, datetime, timedelta
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.auth.schemas import AccountOut, LoginResponse, MeResponse, SignupRequest
+from app.auth.schemas import (
+    AccountOut,
+    LearnerProfileOut,
+    LoginResponse,
+    MeResponse,
+    SignupRequest,
+)
 from app.core.errors import AppError, bad_request, conflict, unauthorized
 from app.core.security import generate_token, hash_password, verify_password
 from app.db.models import Account, EmailToken, LearnerProfile, Session, Subscription
@@ -207,9 +213,35 @@ async def get_session(db: AsyncSession, session_id: str) -> Session:
     return session
 
 
+def _profile_out(account: Account) -> LearnerProfileOut | None:
+    p = account.profile
+    if p is None:
+        return None
+    import json as _json
+    try:
+        badges: list[str] = _json.loads(p.badges_json)
+    except Exception:
+        badges = []
+    return LearnerProfileOut(
+        track=p.track,
+        world=p.world,
+        current_unit=p.current_unit,
+        current_lesson=p.current_lesson,
+        badges=badges,
+        public_profile=p.public_profile,
+    )
+
+
 async def me(db: AsyncSession, session_id: str) -> MeResponse:
     session = await get_session(db, session_id)
     account = await db.get(Account, session.account_id)
     if account is None:
         raise unauthorized()
-    return MeResponse(account=_account_out(account), csrf_token=session.csrf_token)
+    # Eagerly load profile for learners
+    if account.role == "learner" and account.profile is None:
+        await db.refresh(account, ["profile"])
+    return MeResponse(
+        account=_account_out(account),
+        csrf_token=session.csrf_token,
+        profile=_profile_out(account),
+    )

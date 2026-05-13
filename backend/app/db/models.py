@@ -28,7 +28,7 @@ class Account(Base):
 
     # relationships
     profile: Mapped["LearnerProfile | None"] = relationship(
-        back_populates="account", uselist=False, cascade="all, delete-orphan"
+        back_populates="account", uselist=False, cascade="all, delete-orphan", lazy="selectin"
     )
     subscription: Mapped["Subscription | None"] = relationship(
         back_populates="account", uselist=False, cascade="all, delete-orphan"

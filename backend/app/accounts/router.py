@@ -12,6 +12,7 @@ from app.auth.dependencies import (
     require_csrf,
 )
 from app.auth.schemas import AccountOut, MeResponse
+from app.auth.service import _profile_out
 from app.db.models import Account, Session
 from app.db.session import get_db
 
@@ -22,7 +23,10 @@ router = APIRouter(prefix="/v1", tags=["accounts"])
 async def get_me(
     session: Session = Depends(get_current_session),
     account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
 ) -> MeResponse:
+    if account.role == "learner" and account.profile is None:
+        await db.refresh(account, ["profile"])
     return MeResponse(
         account=AccountOut(
             id=account.id,
@@ -34,6 +38,7 @@ async def get_me(
             is_under_13=account.is_under_13,
         ),
         csrf_token=session.csrf_token,
+        profile=_profile_out(account),
     )
 
 

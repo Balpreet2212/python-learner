@@ -1,15 +1,31 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
-import HomePage from "./pages/HomePage";
+import WorldMapPage from "./pages/WorldMapPage";
+import OnboardingPage from "./pages/OnboardingPage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
 import ParentVerificationPendingPage from "./pages/auth/ParentVerificationPendingPage";
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { account, loading } = useAuth();
-  if (loading) return null; // session restore in progress
+  const { account, profile, loading } = useAuth();
+  if (loading) return null;
   if (!account) return <Navigate to="/auth/login" replace />;
+  // Learners without a track set must complete onboarding first
+  if (account.role === "learner" && (!profile || !profile.track)) {
+    return <Navigate to="/onboarding" replace />;
+  }
+  return <>{children}</>;
+}
+
+function RequireOnboarding({ children }: { children: React.ReactNode }) {
+  const { account, profile, loading } = useAuth();
+  if (loading) return null;
+  if (!account) return <Navigate to="/auth/login" replace />;
+  // Already onboarded — go straight to the map
+  if (account.role === "learner" && profile?.track) {
+    return <Navigate to="/" replace />;
+  }
   return <>{children}</>;
 }
 
@@ -24,12 +40,22 @@ export default function App() {
       <Route path="/auth/parent-verify" element={<ParentVerificationPendingPage />} />
       <Route path="/auth/parent-pending" element={<ParentVerificationPendingPage />} />
 
+      {/* Onboarding (learners only, redirects away once complete) */}
+      <Route
+        path="/onboarding"
+        element={
+          <RequireOnboarding>
+            <OnboardingPage />
+          </RequireOnboarding>
+        }
+      />
+
       {/* Protected routes */}
       <Route
         path="/"
         element={
           <RequireAuth>
-            <HomePage />
+            <WorldMapPage />
           </RequireAuth>
         }
       />

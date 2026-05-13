@@ -14,9 +14,20 @@ export const AccountSchema = z.object({
 });
 export type Account = z.infer<typeof AccountSchema>;
 
+export const LearnerProfileSchema = z.object({
+  track: z.string(),
+  world: z.string(),
+  current_unit: z.number().int(),
+  current_lesson: z.number().int(),
+  badges: z.array(z.string()),
+  public_profile: z.boolean(),
+});
+export type LearnerProfile = z.infer<typeof LearnerProfileSchema>;
+
 export const AuthResponseSchema = z.object({
   account: AccountSchema,
   csrf_token: z.string(),
+  profile: LearnerProfileSchema.nullable().optional(),
 });
 export type AuthResponse = z.infer<typeof AuthResponseSchema>;
 

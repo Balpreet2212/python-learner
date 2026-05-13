@@ -6,48 +6,56 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-import { type Account, getMe } from "../api/auth";
+import { type Account, type LearnerProfile, getMe } from "../api/auth";
 import { setCsrfToken } from "../api/client";
 
 interface AuthState {
   account: Account | null;
+  profile: LearnerProfile | null;
   loading: boolean;
 }
 
 interface AuthContextValue extends AuthState {
-  setAuth: (account: Account, csrf: string) => void;
+  setAuth: (account: Account, csrf: string, profile?: LearnerProfile | null) => void;
+  setProfile: (profile: LearnerProfile) => void;
   clearAuth: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AuthState>({ account: null, loading: true });
+  const [state, setState] = useState<AuthState>({ account: null, profile: null, loading: true });
 
-  // On mount, try to restore session via GET /v1/me (uses the HttpOnly cookie)
   useEffect(() => {
     getMe()
-      .then(({ account, csrf_token }) => {
+      .then(({ account, csrf_token, profile }) => {
         setCsrfToken(csrf_token);
-        setState({ account, loading: false });
+        setState({ account, profile: profile ?? null, loading: false });
       })
       .catch(() => {
-        setState({ account: null, loading: false });
+        setState({ account: null, profile: null, loading: false });
       });
   }, []);
 
-  const setAuth = useCallback((account: Account, csrf: string) => {
-    setCsrfToken(csrf);
-    setState({ account, loading: false });
+  const setAuth = useCallback(
+    (account: Account, csrf: string, profile?: LearnerProfile | null) => {
+      setCsrfToken(csrf);
+      setState({ account, profile: profile ?? null, loading: false });
+    },
+    [],
+  );
+
+  const setProfile = useCallback((profile: LearnerProfile) => {
+    setState((prev) => ({ ...prev, profile }));
   }, []);
 
   const clearAuth = useCallback(() => {
     setCsrfToken("");
-    setState({ account: null, loading: false });
+    setState({ account: null, profile: null, loading: false });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ ...state, setAuth, clearAuth }}>
+    <AuthContext.Provider value={{ ...state, setAuth, setProfile, clearAuth }}>
       {children}
     </AuthContext.Provider>
   );

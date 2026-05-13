@@ -1,10 +1,9 @@
 """Pydantic schemas for auth endpoints."""
 
 import uuid
-from typing import Literal
+from typing import Literal, Self
 
 from pydantic import BaseModel, EmailStr, Field, model_validator
-from typing_extensions import Self
 
 
 class SignupRequest(BaseModel):
@@ -54,6 +53,16 @@ class LoginResponse(BaseModel):
     csrf_token: str
 
 
+class LearnerProfileOut(BaseModel):
+    track: str
+    world: str
+    current_unit: int
+    current_lesson: int
+    badges: list[str]
+    public_profile: bool
+
+
 class MeResponse(BaseModel):
     account: AccountOut
     csrf_token: str
+    profile: LearnerProfileOut | None = None  # None for parent accounts

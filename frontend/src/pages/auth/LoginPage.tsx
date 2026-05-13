@@ -20,8 +20,8 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
     try {
-      const { account, csrf_token } = await login(email, password);
-      setAuth(account, csrf_token);
+      const { account, csrf_token, profile } = await login(email, password);
+      setAuth(account, csrf_token, profile);
       navigate("/");
     } catch (err) {
       if (err instanceof ApiError) {
