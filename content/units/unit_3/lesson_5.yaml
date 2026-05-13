@@ -1,0 +1,37 @@
+unit: 3
+lesson: 5
+xp: 15
+code_starter: |
+  # Define 'square(n)' that returns n squared.
+  def square(n):
+
+  # Define 'sum_of_squares(a, b)' that calls square() for each argument
+  # and returns their sum.
+  def sum_of_squares(a, b):
+
+  result = sum_of_squares(3, 4)
+hints:
+  - "square(n) returns n * n  (or n ** 2)"
+  - "sum_of_squares calls square twice: return square(a) + square(b)"
+tests:
+  - code: "assert square(3) == 9"
+    message: "square(3) should return 9"
+  - code: "assert square(4) == 16"
+    message: "square(4) should return 16"
+  - code: "assert sum_of_squares(3, 4) == 25, f'got {sum_of_squares(3,4)}'"
+    message: "sum_of_squares(3, 4) should return 25 (9 + 16)"
+  - code: "assert result == 25"
+    message: "result should be 25"
+worlds:
+  fantasy:
+    title: "Spells Within Spells"
+    narrative: |
+      The grand counterspell requires two sub-spells combined. "Functions can call other functions — this is how complex behaviour is built from simple pieces," Elara says. "Write `square` first, then `sum_of_squares` delegates to it." Define `square(n)` returning `n²`, then `sum_of_squares(a, b)` that calls `square` for each argument and adds the results.
+  scifi:
+    title: "Recursive Subsystem"
+    narrative: |
+      Computing the Pythagorean distance requires squaring both coordinates. "Breaking a big task into smaller functions makes code easier to read and reuse," the AI explains. "A function can call any other function — even ones you defined earlier." Write `square`, then `sum_of_squares` using it.
+  mystery:
+    title: "Clues Within Clues"
+    narrative: |
+      The final puzzle requires two nested calculations. "Functions are most powerful when they call each other," your mentor says. "Build `square` first, then use it inside `sum_of_squares` — this is called *composition*." Complete both functions and store `sum_of_squares(3, 4)` in `result`.

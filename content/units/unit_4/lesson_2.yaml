@@ -1,0 +1,38 @@
+unit: 4
+lesson: 2
+xp: 10
+code_starter: |
+  inventory = ["sword", "shield"]
+
+  # 1. Append "potion" to inventory
+  inventory.append(   )
+
+  # 2. Store the total item count in 'item_count'
+  item_count =
+
+  # 3. Store the first item in 'first_item'
+  first_item =
+hints:
+  - 'inventory.append("potion")  — adds to the end'
+  - "item_count = len(inventory)  — len() returns the number of items"
+  - "first_item = inventory[0]  — lists are zero-indexed"
+tests:
+  - code: "assert 'potion' in inventory"
+    message: "'potion' should be in inventory"
+  - code: "assert item_count == 3, f'item_count should be 3, got {item_count}'"
+    message: "item_count should be 3"
+  - code: "assert first_item == 'sword', f'first_item should be sword, got {first_item!r}'"
+    message: "first_item should be 'sword'"
+worlds:
+  fantasy:
+    title: "Inventory Management"
+    narrative: |
+      Your pack needs restocking. "Lists have methods — built-in actions you call with a dot," Elara says. "`.append()` adds an item to the end. `len()` tells you how many items there are. And `list[0]` retrieves the first item — Python lists start counting at zero." Add a potion, measure the inventory, and grab the first item.
+  scifi:
+    title: "Cargo Operations"
+    narrative: |
+      Cargo must be logged precisely. "List methods let you modify lists in place," the AI explains. "`.append()` adds to the end without creating a new list. `len()` counts items. Index with `[0]` for the first, `[1]` for the second — lists are zero-indexed." Update and query the inventory.
+  mystery:
+    title: "Evidence Locker"
+    narrative: |
+      New evidence arrives — log it, count it, identify the first item. "`.append()` adds an item to the end of a list," your partner says. "`len()` counts the items, and `[0]` retrieves the first." Append `"potion"` to `inventory`, then find `item_count` and `first_item`.

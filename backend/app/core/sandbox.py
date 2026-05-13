@@ -10,15 +10,46 @@ from pathlib import Path
 TIMEOUT_SECONDS = 10
 MAX_OUTPUT_CHARS = 2000
 
+# Safe subset of builtins available to learner code — no file I/O, no exec/eval, no imports.
+_SAFE_BUILTINS = (
+    "abs all any bin bool breakpoint callable chr delattr dict dir divmod "
+    "enumerate filter float format frozenset getattr hasattr hash hex "
+    "id input int isinstance issubclass iter len list map max min next "
+    "object oct ord pow print range repr reversed round set setattr "
+    "slice sorted str sum tuple type vars zip "
+    "ArithmeticError AssertionError AttributeError EOFError Exception "
+    "FileNotFoundError FloatPoint GeneratorExit IOError ImportError "
+    "IndexError KeyError KeyboardInterrupt LookupError MemoryError "
+    "NameError NotImplementedError OSError OverflowError RecursionError "
+    "RuntimeError StopIteration SyntaxError SystemExit TypeError "
+    "UnicodeDecodeError UnicodeEncodeError UnicodeError ValueError "
+    "ZeroDivisionError True False None"
+)
+
 # Runner template: injected into a temp .py file and executed as a subprocess.
 # User code and test specs are embedded as Python repr() literals — never interpolated raw.
 _RUNNER = """\
-import json as _j, sys as _s, io as _io
+import json as _j, sys as _s, io as _io, builtins as _b
 
 _code = {user_code!r}
 _tests = {tests!r}
 
-_ns: dict = {{"__builtins__": __builtins__}}
+# Restricted namespace: only safe builtins, no open/exec/eval/__import__
+_safe = {{k: getattr(_b, k) for k in dir(_b) if k in (
+    "abs", "all", "any", "bin", "bool", "callable", "chr", "dict",
+    "divmod", "enumerate", "filter", "float", "format", "frozenset",
+    "getattr", "hasattr", "hash", "hex", "id", "int", "isinstance",
+    "issubclass", "iter", "len", "list", "map", "max", "min", "next",
+    "object", "oct", "ord", "pow", "print", "range", "repr", "reversed",
+    "round", "set", "setattr", "slice", "sorted", "str", "sum", "tuple",
+    "type", "vars", "zip",
+    "ArithmeticError", "AssertionError", "AttributeError", "EOFError",
+    "Exception", "IndexError", "KeyError", "NameError", "NotImplementedError",
+    "OSError", "OverflowError", "RecursionError", "RuntimeError",
+    "StopIteration", "SyntaxError", "TypeError", "ValueError",
+    "ZeroDivisionError", "True", "False", "None",
+)}}
+_ns: dict = {{"__builtins__": _safe}}
 _buf = _io.StringIO()
 _s.stdout = _buf
 _exec_err = None

@@ -1,0 +1,46 @@
+unit: 5
+lesson: 5
+xp: 15
+code_starter: |
+  # Define a function 'check_age' that raises ValueError
+  # if age is negative, otherwise returns the age.
+  def check_age(age):
+      if age < 0:
+
+      return age
+
+  # Call it with -5 and catch the ValueError.
+  try:
+      result = check_age(-5)
+      caught = False
+  except ValueError:
+      caught = True
+hints:
+  - 'raise ValueError("Age cannot be negative")  — inside the if block'
+  - "caught should be True because check_age(-5) raises ValueError"
+tests:
+  - code: "assert check_age(10) == 10"
+    message: "check_age(10) should return 10"
+  - code: |
+      try:
+          check_age(-1)
+          _raised = False
+      except ValueError:
+          _raised = True
+      assert _raised, 'check_age(-1) should raise ValueError'
+    message: "check_age with a negative age should raise ValueError"
+  - code: "assert caught is True"
+    message: "caught should be True"
+worlds:
+  fantasy:
+    title: "The Guardian's Challenge"
+    narrative: |
+      The gate guardian rejects those who are too young — and says so loudly. "You can raise exceptions yourself with the `raise` keyword," Elara explains. "This lets functions enforce their own rules: if the input breaks a contract, raise a descriptive error rather than returning a bad value silently." Make `check_age` raise `ValueError` for negative ages.
+  scifi:
+    title: "Input Validation Protocol"
+    narrative: |
+      The life-support system rejects invalid parameters — it doesn't guess. "`raise` lets you signal an error from within your own code," the AI says. "Use it when caller-supplied data violates a rule your function depends on." Raise `ValueError` when `age < 0`, and return the age when valid.
+  mystery:
+    title: "The Witness Challenge"
+    narrative: |
+      An impossible witness statement — call it out, don't ignore it. "`raise` lets you deliberately trigger an exception," your mentor explains. "When a value breaks a rule, raising a descriptive error is clearer than silently returning something wrong." Raise `ValueError` inside `check_age` for negative ages, then catch it in the caller.

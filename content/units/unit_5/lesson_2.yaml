@@ -1,0 +1,30 @@
+unit: 5
+lesson: 2
+xp: 10
+code_starter: |
+  data = "not a number"
+
+  # Try to convert data to int.
+  # If that fails, store 0 in 'value'.
+  try:
+      value = int(data)
+  except ValueError:
+hints:
+  - "int('not a number') raises a ValueError"
+  - "In the except block: value = 0"
+tests:
+  - code: "assert value == 0, f'value should be 0, got {value}'"
+    message: "value should be 0 (ValueError was caught)"
+worlds:
+  fantasy:
+    title: "The Wrong Rune"
+    narrative: |
+      Trying to enchant a stone that wasn't cut for magic. "`ValueError` is raised when you give a function a value it can't work with," Elara explains. "Catch specific exception types rather than catching everything — it keeps your error handling intentional." Catch the `ValueError` from the failed conversion and fall back to `0`.
+  scifi:
+    title: "Bad Telemetry"
+    narrative: |
+      Corrupt telemetry data — the string can't be parsed as a number. "`ValueError` occurs when a type conversion receives an incompatible value," the AI explains. "Catch it specifically so other error types still propagate normally." Handle the conversion error and store `0` in `value`.
+  mystery:
+    title: "The Forged Document"
+    narrative: |
+      The document claimed to hold a number — it doesn't. "`int()` raises a `ValueError` when the string isn't a valid integer," your mentor says. "Catch it to recover gracefully instead of letting the program crash." Set `value = 0` when the conversion fails.

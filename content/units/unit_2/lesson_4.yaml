@@ -1,0 +1,30 @@
+unit: 2
+lesson: 4
+xp: 10
+code_starter: |
+  scores = [12, 47, 3, 89, 22]
+
+  # Find the highest score using a for loop.
+  # Store it in a variable called 'highest'.
+  highest = scores[0]
+  for score in scores:
+      if score > highest:
+hints:
+  - "If the current score beats your best, update highest: highest = score"
+  - "Start by assuming scores[0] is the best, then check each one"
+tests:
+  - code: "assert highest == 89, f'highest should be 89, got {highest}'"
+    message: "highest should be 89"
+worlds:
+  fantasy:
+    title: "The Champion's Trial"
+    narrative: |
+      Five warriors enter the arena — only the strongest advances. "You can use a loop to track the greatest value seen so far," Elara explains. "Start by assuming the first element is the winner, then replace it whenever you find something better." Find `highest` among the scores.
+  scifi:
+    title: "Peak Signal"
+    narrative: |
+      Five sensor readings arrive from deep space. "To find a maximum, keep a running winner — start with the first value, then update it whenever the current reading exceeds it," the AI says. Loop through `scores` and store the peak reading in `highest`.
+  mystery:
+    title: "The Biggest Lead"
+    narrative: |
+      Five suspects — each assigned a suspicion score. "Finding the maximum means walking through every value and keeping the best you've seen," your mentor says. "Assume the first score leads, then check whether each new one beats it." Find the highest score and store it in `highest`.

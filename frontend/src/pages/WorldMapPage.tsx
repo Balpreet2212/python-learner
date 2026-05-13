@@ -146,28 +146,13 @@ export default function WorldMapPage() {
 
   return (
     <main className={`min-h-screen p-6 ${style.bg}`}>
-      {/* Header */}
-      <header className="mx-auto mb-8 flex max-w-2xl items-center justify-between">
-        <div>
-          <h1 className={`text-2xl font-bold ${style.highlight}`}>PyQuest</h1>
-          <p className={`text-sm ${style.muted}`}>
-            {account.display_name ?? account.email} · {profile.track === "junior" ? "Junior" : "Core"} track
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          {profile.badges.length > 0 && (
-            <span className={`text-sm ${style.accent}`}>
-              🏅 {profile.badges.length} badge{profile.badges.length !== 1 ? "s" : ""}
-            </span>
-          )}
-          <button
-            onClick={() => navigate("/settings")}
-            className={`text-sm ${style.muted} hover:${style.text}`}
-          >
-            Settings
-          </button>
-        </div>
-      </header>
+      {/* Page heading */}
+      <div className="mx-auto mb-6 max-w-2xl">
+        <h1 className={`text-xl font-bold ${style.highlight}`}>World Map</h1>
+        <p className={`text-sm ${style.muted}`}>
+          {profile.track === "junior" ? "Junior" : "Core"} track · Unit {currentUnit}
+        </p>
+      </div>
 
       {/* Unit grid */}
       <div className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2">

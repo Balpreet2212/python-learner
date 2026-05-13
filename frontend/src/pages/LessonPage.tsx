@@ -147,24 +147,13 @@ export default function LessonPage() {
 
   return (
     <main className={`min-h-screen ${style.bg}`}>
-      {/* Top bar */}
-      <header className={`border-b ${style.border} px-6 py-3 flex items-center justify-between`}>
-        <button
-          onClick={() => navigate("/")}
-          className={`text-sm ${style.muted} hover:${style.text} transition-colors`}
-        >
-          ← World Map
-        </button>
-        <div className={`text-sm ${style.muted}`}>
-          Unit {lesson.unit} · Lesson {lesson.lesson} of {lesson.total_lessons}
-        </div>
-        <div className={`text-sm font-semibold ${style.accent}`}>+{lesson.xp} XP</div>
-      </header>
-
       <div className="mx-auto max-w-5xl gap-6 p-6 lg:grid lg:grid-cols-2">
         {/* Left panel: narrative */}
         <div className="space-y-4">
-          <h1 className={`text-2xl font-bold ${style.highlight}`}>{lesson.title}</h1>
+          <div className="flex items-start justify-between gap-2">
+            <h1 className={`text-2xl font-bold ${style.highlight}`}>{lesson.title}</h1>
+            <span className={`shrink-0 text-xs font-semibold ${style.accent}`}>+{lesson.xp} XP</span>
+          </div>
           <div className={`rounded-xl p-5 ${style.surface} border ${style.border}`}>
             <p className={`whitespace-pre-line text-sm leading-relaxed ${style.text}`}>
               {lesson.narrative}

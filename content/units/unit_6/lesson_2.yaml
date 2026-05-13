@@ -1,0 +1,39 @@
+unit: 6
+lesson: 2
+xp: 10
+code_starter: |
+  class Hero:
+      def __init__(self, name, hp):
+          self.name = name
+          self.hp = hp
+
+      # Add a method called 'is_alive' that returns True if hp > 0
+      def is_alive(self):
+
+  hero = Hero("Zara", 100)
+  alive = hero.is_alive()
+hints:
+  - "Methods are functions defined inside a class — they always take 'self' as the first parameter"
+  - "return self.hp > 0  — this evaluates to a boolean"
+tests:
+  - code: "assert hero.is_alive() is True"
+    message: "hero.is_alive() should return True when hp is 100"
+  - code: |
+      dead = Hero('Ghost', 0)
+      assert dead.is_alive() is False
+    message: "is_alive() should return False when hp is 0"
+  - code: "assert alive is True"
+    message: "alive should be True"
+worlds:
+  fantasy:
+    title: "The Vitality Check"
+    narrative: |
+      Every hero has a vitality status — and the arena checks before battle. "Methods are functions defined inside a class — they take `self` as their first parameter and can access all the instance's attributes," Elara explains. Add `is_alive` that returns `True` when `hp > 0`.
+  scifi:
+    title: "Life Sign Scan"
+    narrative: |
+      The medical bay checks each crew member's life signs. "Instance methods have access to the object's data through `self`," the AI explains. "They're defined inside the class body with `def`, and the first parameter is always `self`." Add `is_alive()` returning `self.hp > 0`.
+  mystery:
+    title: "Still in the Game"
+    narrative: |
+      An agent must be active to take the mission. "Methods give your objects behaviour — they're functions that live inside the class and use `self` to access instance data," your mentor explains. Implement `is_alive` returning `True` when the hero's `hp` is above zero.

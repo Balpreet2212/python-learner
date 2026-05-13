@@ -1,0 +1,32 @@
+unit: 3
+lesson: 3
+xp: 10
+code_starter: |
+  # Define a function 'add' that takes two parameters a and b
+  # and returns their sum.
+  def add(a, b):
+
+  total = add(15, 27)
+hints:
+  - "def add(a, b):  — two parameters separated by a comma"
+  - "return a + b"
+tests:
+  - code: "assert add(15, 27) == 42, f'add(15, 27) should be 42, got {add(15,27)}'"
+    message: "add(15, 27) should return 42"
+  - code: "assert add(0, 0) == 0"
+    message: "add(0, 0) should return 0"
+  - code: "assert total == 42"
+    message: "total should be 42"
+worlds:
+  fantasy:
+    title: "The Combining Spell"
+    narrative: |
+      Two power sources, combined into one. "Functions can accept multiple parameters — just separate them with commas," Elara says. "Inside the body you can use all of them." Write `add(a, b)` that returns `a + b`, then call it with `15` and `27` to get `total`.
+  scifi:
+    title: "Docking Procedure"
+    narrative: |
+      Two fuel pods need to be combined before the jump. "Multiple parameters let a function process several inputs at once," the AI explains. "List them with commas inside the parentheses." Write `add(a, b)` returning `a + b` and call it with `15` and `27`.
+  mystery:
+    title: "Adding the Evidence"
+    narrative: |
+      Two piles of case files — merge the totals. "A function with two parameters takes two arguments when called," your mentor explains. "Separate parameters with commas in both the definition and the call." Write `add(a, b)` that returns `a + b` and store `add(15, 27)` in `total`.

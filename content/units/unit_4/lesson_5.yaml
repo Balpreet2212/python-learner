@@ -1,0 +1,36 @@
+unit: 4
+lesson: 5
+xp: 15
+code_starter: |
+  team = [
+      {"name": "Alice", "role": "warrior"},
+      {"name": "Bob",   "role": "mage"},
+  ]
+
+  # Build a list of just the names using a list comprehension.
+  names = [member[   ] for member in team]
+
+  # Store the number of team members in 'team_size'
+  team_size =
+hints:
+  - "member['name'] retrieves the name from each dict"
+  - "names = [member['name'] for member in team]"
+  - "team_size = len(team)"
+tests:
+  - code: "assert names == ['Alice', 'Bob'], f'got {names}'"
+    message: "names should be ['Alice', 'Bob']"
+  - code: "assert team_size == 2"
+    message: "team_size should be 2"
+worlds:
+  fantasy:
+    title: "The Party Register"
+    narrative: |
+      The party register holds each hero's full profile — a list of dicts. "A *list comprehension* creates a new list by applying an expression to each item," Elara says. "`[member['name'] for member in team]` extracts the name from every dict in one line." Build `names` from `team` and count the team size.
+  scifi:
+    title: "Crew Roster Query"
+    narrative: |
+      The crew database returns a list of profile dicts — you need just the names. "List comprehensions are a concise way to transform a list in one line," the AI says. "`[item['key'] for item in list]` extracts a field from each dict." Pull `names` from `team` using a comprehension and store `team_size`.
+  mystery:
+    title: "The Informant Network"
+    narrative: |
+      A list of informant dicts — you only need their names for the report. "A list comprehension is a compact loop that produces a new list," your mentor explains. "It reads like English: 'the name of each member in the team'." Use a comprehension to build `names` and store the count in `team_size`.

@@ -1,0 +1,29 @@
+unit: 4
+lesson: 1
+xp: 10
+code_starter: |
+  # Create a list called 'heroes' containing three names (strings).
+  heroes =
+hints:
+  - "Lists use square brackets: heroes = ['Alice', 'Bob', 'Charlie']"
+  - "Items are separated by commas"
+tests:
+  - code: "assert isinstance(heroes, list), 'heroes should be a list'"
+    message: "heroes should be a list"
+  - code: "assert len(heroes) == 3, f'heroes should have 3 items, got {len(heroes)}'"
+    message: "heroes should contain exactly 3 items"
+  - code: "assert all(isinstance(h, str) for h in heroes), 'all items should be strings'"
+    message: "all items in heroes should be strings"
+worlds:
+  fantasy:
+    title: "The Party Roster"
+    narrative: |
+      An adventuring party needs a roster. "A *list* stores multiple values in order, inside square brackets," Elara explains. "Each item is separated by a comma; they can all be the same type or different ones." Create `heroes` as a list of three string names — your party is ready.
+  scifi:
+    title: "Crew Manifest"
+    narrative: |
+      Before departure, the ship needs a crew manifest. "A list is Python's ordered collection — square brackets, comma-separated items," the AI says. "It can hold strings, numbers, booleans, even other lists." Create `heroes` as a list of three crew names.
+  mystery:
+    title: "The Suspects List"
+    narrative: |
+      Every detective keeps a list of suspects. "Python lists store sequences of values in square brackets," your mentor explains. "You can put any type of value inside, mix them, and access them later by position." Create a `heroes` list with three string names.

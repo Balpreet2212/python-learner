@@ -1,0 +1,34 @@
+unit: 4
+lesson: 3
+xp: 10
+code_starter: |
+  # Create a dict called 'character' with keys:
+  #   'name'   -> a string
+  #   'level'  -> the integer 5
+  #   'active' -> the boolean True
+  character =
+hints:
+  - "Dicts use curly braces: {'key': value, ...}"
+  - "character = {'name': 'Zara', 'level': 5, 'active': True}"
+tests:
+  - code: "assert isinstance(character, dict), 'character should be a dict'"
+    message: "character should be a dictionary"
+  - code: "assert character.get('level') == 5, f\"level should be 5, got {character.get('level')}\""
+    message: "character['level'] should be 5"
+  - code: "assert character.get('active') is True"
+    message: "character['active'] should be True"
+  - code: "assert isinstance(character.get('name'), str) and len(character.get('name', '')) > 0"
+    message: "character['name'] should be a non-empty string"
+worlds:
+  fantasy:
+    title: "The Character Sheet"
+    narrative: |
+      Every hero in the Enchanted Realm has a character sheet — a structured collection of named attributes. "A *dictionary* maps keys to values," Elara explains. "Curly braces, colons between key and value, commas between pairs." Create `character` with `'name'`, `'level'`, and `'active'` keys.
+  scifi:
+    title: "Crew Profile Record"
+    narrative: |
+      The ship's database stores crew records as key-value pairs. "Dicts associate labels (keys) with data (values)," the AI explains. "Use curly braces and colons: `{'key': value}`. Keys are usually strings; values can be anything." Build the `character` dict with a name, level, and active status.
+  mystery:
+    title: "The Dossier"
+    narrative: |
+      Every case file is a dossier: a named collection of facts. "A dictionary lets you associate labels with values," your mentor says. "Use curly braces, put the key first, a colon, then the value." Create `character` with a string `'name'`, integer `'level'` of 5, and boolean `'active'` of `True`.

@@ -1,0 +1,42 @@
+unit: 6
+lesson: 5
+xp: 15
+code_starter: |
+  class Animal:
+      def __init__(self, name):
+          self.name = name
+
+      def speak(self):
+          return "..."
+
+  # Define Dog as a subclass of Animal.
+  # Override speak() to return "{name} says Woof!"
+  class Dog(Animal):
+
+  dog = Dog("Rex")
+  sound = dog.speak()
+hints:
+  - "class Dog(Animal):  — Dog inherits everything from Animal"
+  - 'def speak(self): return f"{self.name} says Woof!"'
+tests:
+  - code: "assert isinstance(dog, Animal), 'dog should also be an instance of Animal'"
+    message: "dog should be an instance of Animal (via inheritance)"
+  - code: "assert isinstance(dog, Dog)"
+    message: "dog should be an instance of Dog"
+  - code: "assert 'Rex' in sound, f'sound should contain Rex, got {sound!r}'"
+    message: "sound should contain 'Rex'"
+  - code: "assert 'Woof' in sound, f'sound should contain Woof, got {sound!r}'"
+    message: "sound should contain 'Woof'"
+worlds:
+  fantasy:
+    title: "The Bloodline of Classes"
+    narrative: |
+      A wolf is a beast, but also something more specific. "Inheritance lets a class extend another — `class Dog(Animal)` means Dog gets everything Animal has, plus whatever it adds or overrides," Elara explains. "Overriding `speak` replaces the parent's version with a dog-specific one." Define `Dog`, override `speak`, and create `dog = Dog("Rex")`.
+  scifi:
+    title: "Subclass Protocol"
+    narrative: |
+      Every unit is a machine, but some are specialised. "A subclass inherits all methods and attributes from its parent," the AI explains. "`class Dog(Animal)` gives Dog everything Animal has. Override `speak` to provide a Dog-specific implementation." Build `Dog`, override `speak`, and instantiate `dog = Dog("Rex")`.
+  mystery:
+    title: "The Specialist"
+    narrative: |
+      Every agent is a detective, but some are specialists. "Inheritance creates a relationship: a `Dog` *is-an* `Animal`, but with its own behaviour," your mentor explains. "`class Dog(Animal)` sets up the hierarchy; overriding `speak` customises it." Define `Dog` as a subclass, override `speak`, and create `dog = Dog("Rex")`.

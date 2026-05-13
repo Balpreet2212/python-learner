@@ -1,0 +1,30 @@
+unit: 2
+lesson: 1
+xp: 10
+code_starter: |
+  # Use a for loop and range() to sum the numbers 1 through 5.
+  # Store the result in a variable called 'total'.
+  total = 0
+  for i in range(1, 6):
+      total +=
+hints:
+  - "range(1, 6) produces the numbers 1, 2, 3, 4, 5"
+  - "Inside the loop, add i to total: total += i"
+tests:
+  - code: "assert isinstance(total, int), 'total should be an integer'"
+    message: "total should be an integer"
+  - code: "assert total == 15, f'total should be 15, got {total}'"
+    message: "total should equal 15 (1+2+3+4+5)"
+worlds:
+  fantasy:
+    title: "The Summoning Loop"
+    narrative: |
+      Elara traces a glowing circle on the floor. "Some spells must be cast many times in sequence — that is what a `for` loop is for," she explains. "The loop runs once for each value that `range()` produces. Each pass through the spell accumulates power." Use a `for` loop to sum the first five numbers into `total`.
+  scifi:
+    title: "Power Core Calibration"
+    narrative: |
+      The reactor needs five charging pulses — one for each ignition cycle. "Loops let us repeat an operation automatically," the ship AI explains. "`range(1, 6)` generates the sequence 1, 2, 3, 4, 5 — the AI fires each pulse and adds it to the running total." Use a `for` loop to accumulate the sum into `total`.
+  mystery:
+    title: "Counting the Evidence"
+    narrative: |
+      Five witnesses, five statements — your partner tallies each one. "A `for` loop handles repetition," she says. "`range(1, 6)` steps through 1, 2, 3, 4, 5 automatically. Each step, you add the current number to a running total." Loop through the numbers and sum them into `total`.

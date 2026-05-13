@@ -1,0 +1,28 @@
+unit: 5
+lesson: 1
+xp: 10
+code_starter: |
+  # Use try/except to safely divide 10 by 0.
+  # If a ZeroDivisionError occurs, store -1 in 'result'.
+  try:
+      result = 10 // 0
+  except ZeroDivisionError:
+hints:
+  - "Inside the except block: result = -1"
+  - "The except block only runs if that specific error is raised"
+tests:
+  - code: "assert result == -1, f'result should be -1, got {result}'"
+    message: "result should be -1 (the error was caught)"
+worlds:
+  fantasy:
+    title: "The Exception Ward"
+    narrative: |
+      Dividing a spell by zero — catastrophic in any realm. "Python uses `try`/`except` to handle errors gracefully," Elara says. "Code inside `try` runs normally. If a specific error type occurs, execution jumps to the matching `except` block instead of crashing." Catch the `ZeroDivisionError` and store `-1` in `result`.
+  scifi:
+    title: "Fault Tolerance"
+    narrative: |
+      Dividing by zero would crash the navigation system. "Exceptions are Python's error signals — `try`/`except` lets you intercept them before they propagate," the AI explains. "Name the error type after `except` to catch only that kind." Handle the division error and set `result = -1`.
+  mystery:
+    title: "The Impossible Lead"
+    narrative: |
+      Dividing the evidence count by zero — a dead end, not a crash. "Python raises an exception when something goes wrong," your mentor explains. "Wrap the risky code in `try`, and handle the error in `except`." Catch the `ZeroDivisionError` and assign `-1` to `result`.

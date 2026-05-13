@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
+import AppLayout from "./components/layout/AppLayout";
 import WorldMapPage from "./pages/WorldMapPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LessonPage from "./pages/LessonPage";
@@ -51,12 +52,14 @@ export default function App() {
         }
       />
 
-      {/* Protected routes */}
+      {/* Protected routes (all wrapped in AppLayout for persistent nav) */}
       <Route
         path="/"
         element={
           <RequireAuth>
-            <WorldMapPage />
+            <AppLayout>
+              <WorldMapPage />
+            </AppLayout>
           </RequireAuth>
         }
       />
@@ -64,7 +67,9 @@ export default function App() {
         path="/lesson"
         element={
           <RequireAuth>
-            <LessonPage />
+            <AppLayout>
+              <LessonPage />
+            </AppLayout>
           </RequireAuth>
         }
       />

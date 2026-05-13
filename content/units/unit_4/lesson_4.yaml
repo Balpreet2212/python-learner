@@ -1,0 +1,37 @@
+unit: 4
+lesson: 4
+xp: 10
+code_starter: |
+  stats = {"hp": 100, "mp": 50}
+
+  # 1. Update 'mp' to 75
+  stats[   ] =
+
+  # 2. Add a new key 'stamina' with value 30
+  stats[   ] =
+
+  # 3. Store the total number of keys in 'keys_count'
+  keys_count =
+hints:
+  - "stats['mp'] = 75  — square-bracket assignment updates or adds a key"
+  - "keys_count = len(stats)"
+tests:
+  - code: "assert stats['mp'] == 75, f\"mp should be 75, got {stats['mp']}\""
+    message: "stats['mp'] should be updated to 75"
+  - code: "assert 'stamina' in stats and stats['stamina'] == 30"
+    message: "'stamina' key should exist with value 30"
+  - code: "assert keys_count == 3, f'keys_count should be 3, got {keys_count}'"
+    message: "keys_count should be 3"
+worlds:
+  fantasy:
+    title: "Updating the Grimoire"
+    narrative: |
+      Mid-battle, stats shift — mana restored, stamina added. "You update a dict value by assigning to its key: `stats['mp'] = 75`," Elara says. "The same syntax adds a new key if it didn't exist before." Update `mp`, add `stamina`, and count the keys with `len()`.
+  scifi:
+    title: "System Override"
+    narrative: |
+      The ship's status panel needs a live update. "Dictionaries are mutable — you change values by reassigning to their key," the AI says. "If the key doesn't exist, Python creates it." Update `stats['mp']` to `75`, add `'stamina': 30`, and store `len(stats)` in `keys_count`.
+  mystery:
+    title: "Revising the File"
+    narrative: |
+      New information — update the dossier. "You can change a dict's value by assigning to its key with square brackets," your mentor explains. "Same syntax for adding a brand-new key." Update `mp` to `75`, add `'stamina': 30`, and count all keys into `keys_count`.

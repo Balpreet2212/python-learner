@@ -1,0 +1,30 @@
+unit: 5
+lesson: 3
+xp: 10
+code_starter: |
+  # try/except/else: the 'else' block runs only if NO exception was raised.
+  try:
+      number = int("42")
+  except ValueError:
+      number = -1
+  else:
+      number = number * 2
+hints:
+  - "int('42') succeeds, so the except block is skipped"
+  - "The else block runs because no error occurred — number becomes 42 * 2"
+tests:
+  - code: "assert number == 84, f'number should be 84, got {number}'"
+    message: "number should be 84 (conversion succeeded, then doubled in else)"
+worlds:
+  fantasy:
+    title: "The Successful Ritual"
+    narrative: |
+      When the spell works perfectly, a bonus blessing is granted. "The `else` clause in a try block only executes when no exception was raised," Elara explains. "It's for code that should only run on success — separating the happy path from the recovery path." The conversion succeeds; `else` doubles the result.
+  scifi:
+    title: "Clean Handshake"
+    narrative: |
+      A successful handshake triggers a secondary protocol. "`else` after `except` runs when the `try` block completes without error," the AI explains. "It clearly marks code that depends on success, making intent more readable." The parse succeeds, so `else` doubles `number`.
+  mystery:
+    title: "A Genuine Lead"
+    narrative: |
+      A real clue — follow-up action required. "The `else` block in try/except is the 'it worked' branch," your mentor explains. "It only executes if `try` raised no exception — perfect for actions that only make sense after success." The conversion works; `else` multiplies `number` by 2.

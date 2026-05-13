@@ -1,0 +1,31 @@
+unit: 6
+lesson: 1
+xp: 10
+code_starter: |
+  # Define a class 'Hero' with an __init__ that stores a 'name' attribute.
+  class Hero:
+      def __init__(self, name):
+
+  # Create an instance called 'hero' with the name "Zara"
+  hero = Hero("Zara")
+hints:
+  - "Inside __init__, assign: self.name = name"
+  - "self refers to the instance being created"
+tests:
+  - code: "assert isinstance(hero, Hero), 'hero should be an instance of Hero'"
+    message: "hero should be an instance of Hero"
+  - code: "assert hero.name == 'Zara', f'hero.name should be Zara, got {hero.name!r}'"
+    message: "hero.name should be 'Zara'"
+worlds:
+  fantasy:
+    title: "Kingdom of Classes"
+    narrative: |
+      Every hero in the realm is forged from the same blueprint — yet each is unique. "A *class* defines a blueprint for creating objects," Elara says. "`__init__` is the constructor — it runs automatically when you create an instance. `self` is the instance itself; use it to store attributes." Define `Hero` with a `name` attribute and create `hero = Hero("Zara")`.
+  scifi:
+    title: "Unit Assembly"
+    narrative: |
+      The fabricator builds each android from the same design spec. "A class is a template; an object is a specific instance of that template," the AI explains. "`__init__` initialises the object — `self.name = name` stores the name on *this* instance, not on the class." Define `Hero` and instantiate it with `"Zara"`.
+  mystery:
+    title: "The Agent Profile"
+    narrative: |
+      Every agent is cast from the same mould — same training, different name. "Classes let you create multiple objects with the same structure," your mentor explains. "`__init__` sets up each instance; `self.attribute = value` attaches data to it." Define `Hero`, give it a `name` in `__init__`, and create `hero = Hero("Zara")`.

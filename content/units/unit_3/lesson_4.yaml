@@ -1,0 +1,33 @@
+unit: 3
+lesson: 4
+xp: 10
+code_starter: |
+  # Define a function 'is_even' that takes one parameter n
+  # and returns True if n is even, False otherwise.
+  def is_even(n):
+
+  check_four  = is_even(4)
+  check_seven = is_even(7)
+hints:
+  - "n % 2 == 0 is True when n is even (no remainder when divided by 2)"
+  - "return n % 2 == 0  — this expression already evaluates to True or False"
+tests:
+  - code: "assert is_even(4) is True, 'is_even(4) should be True'"
+    message: "is_even(4) should return True"
+  - code: "assert is_even(7) is False, 'is_even(7) should be False'"
+    message: "is_even(7) should return False"
+  - code: "assert is_even(0) is True"
+    message: "is_even(0) should return True"
+worlds:
+  fantasy:
+    title: "The Parity Oracle"
+    narrative: |
+      The oracle must judge each number: balanced (even) or off-balance (odd). "A function that returns `True` or `False` is called a *predicate*," Elara says. "The modulus operator `%` gives the remainder after division — if `n % 2 == 0`, the number divides evenly." Write `is_even(n)` that returns the boolean result directly.
+  scifi:
+    title: "Binary Parity Check"
+    narrative: |
+      The ship's checksum system flags odd readings as anomalies. "Functions that return booleans are common in real code," the AI notes. "The `%` operator gives the remainder — `n % 2 == 0` is already a boolean expression you can return directly." Write `is_even(n)` returning `True` for even numbers.
+  mystery:
+    title: "The Even-Odd Cipher"
+    narrative: |
+      The coded message uses even numbers as signals. "A function that checks a condition and returns a boolean is called a predicate," your mentor explains. "`n % 2` gives the remainder when dividing by 2 — if it's 0, the number is even." Write `is_even(n)` that returns the result of `n % 2 == 0`.

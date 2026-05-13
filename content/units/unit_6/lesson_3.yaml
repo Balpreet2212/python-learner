@@ -1,0 +1,34 @@
+unit: 6
+lesson: 3
+xp: 10
+code_starter: |
+  class Counter:
+      def __init__(self):
+          self.count = 0
+
+      # Add a method 'increment' that adds 1 to self.count
+      def increment(self):
+
+  c = Counter()
+  c.increment()
+  c.increment()
+  c.increment()
+hints:
+  - "self.count += 1  — inside the increment method"
+  - "Each call to c.increment() adds 1; after 3 calls, count == 3"
+tests:
+  - code: "assert c.count == 3, f'c.count should be 3, got {c.count}'"
+    message: "c.count should be 3 after three increment() calls"
+worlds:
+  fantasy:
+    title: "The Tally Stone"
+    narrative: |
+      The tally stone records each victory, one notch at a time. "Methods can modify the object's own attributes through `self`," Elara explains. "Each call to `increment` changes the state of *this particular instance*." Implement `increment` to add 1 to `self.count` on every call.
+  scifi:
+    title: "Event Counter"
+    narrative: |
+      The ship's event logger counts each anomaly detected. "Methods that change `self.attribute` modify the instance's state — the change persists between calls," the AI explains. Implement `increment` so each call adds 1 to `self.count`.
+  mystery:
+    title: "The Tally Board"
+    narrative: |
+      The detective marks each confirmed clue on the board. "Instance state persists between method calls — that's what makes objects useful," your mentor explains. "Modify `self.count` inside `increment` and it stays changed." Implement `increment` to add 1 each time it's called.

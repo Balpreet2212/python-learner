@@ -1,0 +1,32 @@
+unit: 3
+lesson: 2
+xp: 10
+code_starter: |
+  # Define a function called 'double' that takes one parameter 'n'
+  # and returns n multiplied by 2.
+  def double(n):
+
+  result = double(7)
+hints:
+  - "def double(n):  — n is the parameter (input)"
+  - "return n * 2  — sends the answer back"
+tests:
+  - code: "assert double(7) == 14, f'double(7) should be 14, got {double(7)}'"
+    message: "double(7) should return 14"
+  - code: "assert double(0) == 0"
+    message: "double(0) should return 0"
+  - code: "assert result == 14"
+    message: "result should be 14"
+worlds:
+  fantasy:
+    title: "The Amplification Rune"
+    narrative: |
+      "A function becomes truly powerful when it accepts inputs," Elara says, drawing a rune that doubles the glow of whatever crystal you place before it. "Parameters are the slots where inputs go — listed inside the parentheses of `def`." Define `double(n)` that returns `n * 2`, then call it with `7`.
+  scifi:
+    title: "Signal Amplifier"
+    narrative: |
+      The comms array needs to double incoming signal strength. "Functions accept *parameters* — variables that receive values when the function is called," the AI explains. "Whatever you pass in, the function can use it." Define `double(n)` to return `n * 2` and call it with `7`.
+  mystery:
+    title: "Doubling the Reward"
+    narrative: |
+      A function that doubles a bounty — exactly what the agency needs. "Parameters let a function work with different inputs each time you call it," your mentor says. "Name them inside the parentheses of `def`, use them in the body." Write `double(n)` returning `n * 2` and call it with `7`.

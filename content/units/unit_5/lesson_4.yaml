@@ -1,0 +1,35 @@
+unit: 5
+lesson: 4
+xp: 10
+code_starter: |
+  # 'finally' always runs — whether an error occurred or not.
+  log = []
+  try:
+      x = 1 / 1
+  except ZeroDivisionError:
+      log.append("error")
+  finally:
+      log.append("done")
+hints:
+  - "1 / 1 does NOT raise an error, so the except block is skipped"
+  - "finally always runs — so log will contain only 'done'"
+tests:
+  - code: "assert 'done' in log, f'log should contain done, got {log}'"
+    message: "'done' should always be in log"
+  - code: "assert 'error' not in log, f'error should not be in log since no exception occurred'"
+    message: "'error' should not be in log (no exception was raised)"
+  - code: "assert len(log) == 1"
+    message: "log should contain exactly one item"
+worlds:
+  fantasy:
+    title: "The Binding Seal"
+    narrative: |
+      Some magic must always be completed — regardless of what went wrong. "`finally` always runs, whether the `try` block succeeded or an exception was raised," Elara says. "Use it for cleanup that must happen no matter what — closing a file, releasing a resource, logging a status." No error occurs here, so only `"done"` is logged.
+  scifi:
+    title: "Shutdown Protocol"
+    narrative: |
+      Critical systems must always be shut down safely after an operation. "`finally` guarantees cleanup code runs even if the program encounters an error," the AI explains. "It's the last thing that runs before leaving the try block — exception or not." Division succeeds; only `"done"` ends up in `log`.
+  mystery:
+    title: "Closing the Case"
+    narrative: |
+      Every case must be formally closed — even when nothing goes wrong. "`finally` is Python's guarantee: this code runs regardless of success or failure," your mentor explains. "It's where you put cleanup that cannot be skipped." The division works, so `"error"` is never appended — only `"done"`.

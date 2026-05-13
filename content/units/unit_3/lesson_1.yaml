@@ -1,0 +1,32 @@
+unit: 3
+lesson: 1
+xp: 10
+code_starter: |
+  # Define a function called 'greet' that returns the string "Hello, world!"
+  def greet():
+
+  # Call the function and store the result
+  message = greet()
+hints:
+  - "def greet():  — starts the definition; indent the body"
+  - 'return "Hello, world!"  — inside the function'
+tests:
+  - code: "assert callable(greet), 'greet should be a function'"
+    message: "greet should be a callable function"
+  - code: "assert greet() == 'Hello, world!', f'greet() returned {greet()!r}'"
+    message: "greet() should return 'Hello, world!'"
+  - code: "assert message == 'Hello, world!'"
+    message: "message should equal the return value of greet()"
+worlds:
+  fantasy:
+    title: "The Function Grimoire"
+    narrative: |
+      Elara opens a thick grimoire. "A *function* is a named spell — you define it once, then cast it as many times as you like," she says. "The `def` keyword starts the definition; `return` sends a value back to the caller." Define a function called `greet` that returns `"Hello, world!"`, then call it and store the result in `message`.
+  scifi:
+    title: "Subroutine Alpha"
+    narrative: |
+      The ship's computer runs on subroutines — reusable blocks of code with a name. "In Python, `def` declares a function," the AI explains. "Call it later by using its name followed by parentheses. Whatever `return` sends back is the result." Define `greet` to return `"Hello, world!"` and store the result in `message`.
+  mystery:
+    title: "The Standard Greeting"
+    narrative: |
+      Every detective in the agency uses the same opening line. "A function lets you name a block of code and reuse it," your mentor explains. "`def` starts the definition, `return` sends the value back." Write a function `greet` that returns `"Hello, world!"`, call it, and store the result in `message`.

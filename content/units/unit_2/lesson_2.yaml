@@ -1,0 +1,32 @@
+unit: 2
+lesson: 2
+xp: 10
+code_starter: |
+  numbers = [1, 2, 3, 4, 5]
+
+  # Build a new list called 'doubled' where every item is multiplied by 2.
+  # Use a for loop and .append()
+  doubled = []
+  for n in numbers:
+      doubled.append(   )
+hints:
+  - "doubled.append(n * 2) adds n×2 to the doubled list each iteration"
+  - "When the loop ends, doubled should have 5 items"
+tests:
+  - code: "assert isinstance(doubled, list), 'doubled should be a list'"
+    message: "doubled should be a list"
+  - code: "assert doubled == [2, 4, 6, 8, 10], f'got {doubled}'"
+    message: "doubled should be [2, 4, 6, 8, 10]"
+worlds:
+  fantasy:
+    title: "The Duplication Spell"
+    narrative: |
+      On the enchanted workbench lie five magical crystals. "A duplication spell doubles the power of each crystal," Elara says. "We loop over each item in a list, transform it, and collect the result with `.append()`." Build the `doubled` list by multiplying each number in `numbers` by two.
+  scifi:
+    title: "Sensor Array Boost"
+    narrative: |
+      The sensor array needs its readings doubled for the deep-space scan. "Looping over a list visits each element in turn," the AI explains. "Call `.append()` inside the loop to build a new list as you go." Create `doubled` by multiplying each value in `numbers` by two and appending the result.
+  mystery:
+    title: "Doubling the Reward"
+    narrative: |
+      The agency is doubling the bounty on every open case. "A for loop walks through a list one item at a time," your mentor explains. "Inside the loop, multiply each amount by 2 and append it to a new list." Build `doubled` from the `numbers` list by appending each element times two.

@@ -1,0 +1,30 @@
+unit: 2
+lesson: 5
+xp: 15
+code_starter: |
+  numbers = [3, 7, 4, 9, 2, 6, 1]
+
+  # Find the first even number and store it in 'first_even'.
+  # Use a for loop and break as soon as you find it.
+  first_even = None
+  for n in numbers:
+      if n % 2 == 0:
+hints:
+  - "n % 2 == 0 is True when n is even"
+  - "Store n in first_even, then break to stop the loop immediately"
+tests:
+  - code: "assert first_even == 4, f'first_even should be 4, got {first_even}'"
+    message: "first_even should be 4 (the first even number in the list)"
+worlds:
+  fantasy:
+    title: "The Break Rune"
+    narrative: |
+      The enchanted list contains a hidden even gem. "The `break` statement exits a loop the moment you find what you need," Elara says. "Without it, the loop would check every item even after the answer is found." Loop through `numbers`, and the instant you find an even one, store it in `first_even` and `break`.
+  scifi:
+    title: "First Contact"
+    narrative: |
+      The scanner sweeps through frequencies — stop at the first clean signal. "When you find what you're looking for, `break` lets you exit the loop immediately instead of scanning everything," the AI explains. Find the first even number in `numbers`, store it in `first_even`, and break out of the loop.
+  mystery:
+    title: "The First Solid Lead"
+    narrative: |
+      Seven suspects — but you only need the first one who fits the profile. "`break` stops a loop as soon as you've found your target," your mentor says. "No need to keep searching once you have the answer." Find the first even number in `numbers`, assign it to `first_even`, and break.

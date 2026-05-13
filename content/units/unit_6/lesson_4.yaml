@@ -1,0 +1,37 @@
+unit: 6
+lesson: 4
+xp: 10
+code_starter: |
+  class Point:
+      def __init__(self, x, y):
+          self.x = x
+          self.y = y
+
+  p1 = Point(1, 2)
+  p2 = Point(3, 4)
+
+  # Calculate the horizontal distance between p1 and p2
+  distance_x = abs(p2.x - p1.x)
+hints:
+  - "Access attributes with dot notation: p1.x, p2.y"
+  - "abs() returns the absolute (non-negative) value of a number"
+tests:
+  - code: "assert p1.x == 1 and p1.y == 2"
+    message: "p1 should have x=1, y=2"
+  - code: "assert p2.x == 3 and p2.y == 4"
+    message: "p2 should have x=3, y=4"
+  - code: "assert distance_x == 2, f'distance_x should be 2, got {distance_x}'"
+    message: "distance_x should be 2 (|3 - 1|)"
+worlds:
+  fantasy:
+    title: "Two Towers"
+    narrative: |
+      Two towers stand on the enchanted grid — measure the gap between them. "Each instance of a class holds its own copy of the attributes," Elara says. "You can have as many instances as you need, and they don't share data." Create two `Point` objects and calculate the horizontal distance.
+  scifi:
+    title: "Navigation Fix"
+    narrative: |
+      Two ships on the grid — compute the horizontal separation for docking. "Every object is independent — `p1.x` and `p2.x` are different values on different instances," the AI explains. "Dot notation accesses the attribute of *that specific object*." Build two `Point` instances and compute `distance_x`.
+  mystery:
+    title: "Two Crime Scenes"
+    narrative: |
+      Two crime scenes on the city map — how far apart are they? "Each object you create from a class is its own thing, with its own attribute values," your mentor says. "Dot notation reads a specific object's data." Create `p1` and `p2`, then calculate `distance_x = abs(p2.x - p1.x)`.
