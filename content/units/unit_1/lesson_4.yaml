@@ -1,0 +1,33 @@
+unit: 1
+lesson: 4
+xp: 10
+code_starter: |
+  # Feel free to change this name
+  name = "Ada"
+
+  # Build a greeting using an f-string.
+  # It should say: "Hello, Ada!" (substituting your name)
+  greeting =
+hints:
+  - 'f-strings start with f before the quote: f"Hello, {name}!"'
+  - "Curly braces {} inside the string are replaced with the variable's value"
+tests:
+  - code: "assert isinstance(greeting, str), 'greeting should be a string'"
+    message: "greeting should be a string"
+  - code: "assert greeting.startswith('Hello, '), 'greeting should start with Hello, '"
+    message: "greeting should start with 'Hello, '"
+  - code: "assert name in greeting, 'greeting should contain the value of name'"
+    message: "greeting should contain the name variable's value"
+worlds:
+  fantasy:
+    title: "The Speaking Scroll"
+    narrative: |
+      The enchanted scroll unfurls itself. "A great spell does not just store a value — it weaves values together into a message," Elara says. "In Python, an f-string lets you embed variables directly inside text." She traces the rune: `f"Hello, {name}!"`. "The letter `f` before the quote activates the magic. Anything inside `{}` is replaced by the variable's value. Craft a greeting with your name embedded in it."
+  scifi:
+    title: "Comm Channel Open"
+    narrative: |
+      The comms system crackles. "Personalised hails increase crew morale by 23%," the AI notes in its flat, statistical way. "To build a custom message, use an f-string: put `f` before the opening quote, and wrap any variable name in curly braces." The result: the variable's value is injected directly into the text. Build a `greeting` that says "Hello, " followed by your `name`.
+  mystery:
+    title: "The Calling Card"
+    narrative: |
+      Every detective leaves a calling card. Yours should be personalised. "Python's f-strings let you embed a variable's value right inside a string," your partner explains, sliding a printed card across the table. "Write `f` before the opening quote, then put your variable name inside curly braces — Python swaps it for the actual value at runtime." Create a `greeting` that begins with "Hello, " and includes your `name`.

@@ -1,0 +1,28 @@
+unit: 1
+lesson: 1
+xp: 10
+code_starter: |
+  # Assign your character's name to a variable called 'name'
+  # Example: name = "Alice"
+  name =
+hints:
+  - "Variables store values using the = sign."
+  - 'Text values go inside quotes: name = "Your Name"'
+tests:
+  - code: "assert isinstance(name, str), 'name should be text (a string)'"
+    message: "name should be a string (text in quotes)"
+  - code: "assert len(name) > 0, 'name cannot be empty'"
+    message: "name should not be empty"
+worlds:
+  fantasy:
+    title: "The Sorcerer's Variables"
+    narrative: |
+      The ancient sorcerer Elara holds out a shimmering crystal vial. "Every spell begins with a name," she says, her cloak trailing sparks. "In Python, we store values inside *variables* — containers that hold information so we can use it later." She gestures to the parchment on her desk: "Assign your wizard name to a variable called `name`. Use the `=` sign, and put text inside quotes."
+  scifi:
+    title: "Boot Sequence Alpha"
+    narrative: |
+      The ship's AI flickers to life on the main console, its voice clipped and precise. "Crew registration required before launch." Navigation, weapons, life support — all offline until you check in. "In Python, we store information in variables — labels that point to a value in memory." Your first task: assign your name to a variable called `name` so the system can identify you.
+  mystery:
+    title: "The Detective's Notebook"
+    narrative: |
+      You find a worn leather notebook on the detective's desk. On the first page, every clue is labeled — "suspect = 'unknown'", "location = 'parlour'". Variables, you realise, work just like labels on evidence bags: they give a name to a piece of information so you can find it again. Open your own case file by assigning your detective name to a variable called `name`.

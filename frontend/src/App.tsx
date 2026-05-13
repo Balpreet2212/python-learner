@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import WorldMapPage from "./pages/WorldMapPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import LessonPage from "./pages/LessonPage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -56,6 +57,14 @@ export default function App() {
         element={
           <RequireAuth>
             <WorldMapPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/lesson"
+        element={
+          <RequireAuth>
+            <LessonPage />
           </RequireAuth>
         }
       />

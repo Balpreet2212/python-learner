@@ -1,0 +1,37 @@
+unit: 1
+lesson: 5
+xp: 15
+code_starter: |
+  # Create three variables that describe your character:
+  #   hero_name  — a non-empty string
+  #   power      — an integer between 1 and 100
+  #   is_active  — a boolean (True or False)
+
+  hero_name =
+  power =
+  is_active =
+hints:
+  - "You know all three types now: str, int, bool"
+  - 'hero_name = "Zara"   # any non-empty string'
+  - "power = 75           # any integer 1-100"
+  - "is_active = True     # or False"
+tests:
+  - code: "assert isinstance(hero_name, str) and len(hero_name) > 0, 'hero_name must be a non-empty string'"
+    message: "hero_name should be a non-empty string"
+  - code: "assert isinstance(power, int) and 1 <= power <= 100, 'power must be an integer between 1 and 100'"
+    message: "power should be an integer between 1 and 100"
+  - code: "assert isinstance(is_active, bool), 'is_active must be True or False'"
+    message: "is_active should be a boolean (True or False)"
+worlds:
+  fantasy:
+    title: "The Hero's Registry"
+    narrative: |
+      Elara unrolls the grand registry of all heroes who have passed through the Enchanted Realm. Each row has three columns: a name (string), a power level (integer), and whether the hero is currently active (boolean). "You have learned all three fundamental types," she says. "Now register your own hero — a name, a power between 1 and 100, and your active status." Complete the registry and earn your first badge.
+  scifi:
+    title: "Crew Profile Complete"
+    narrative: |
+      The ship's personnel system is almost fully initialised. One profile slot remains: yours. Three fields required — `hero_name` (a string identifier), `power` (an integer rating from 1 to 100 for the mission record), and `is_active` (a boolean confirming crew readiness). "You've covered all the basic data types," the AI says. "Finalise your profile and the ship can launch." This completes Unit 1.
+  mystery:
+    title: "The Case File Sealed"
+    narrative: |
+      The chief detective slides a form across the desk. "Before you get your badge, every agent must fill in their profile: a name, a power rating, and their active status." Three variables, three types — `hero_name` is a string, `power` is an integer from 1 to 100, and `is_active` is a boolean. You've mastered the building blocks of Python data. Fill in the form and your first case badge is yours.

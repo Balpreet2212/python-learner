@@ -1,0 +1,30 @@
+unit: 1
+lesson: 2
+xp: 10
+code_starter: |
+  # Assign the integer 42 to a variable called 'score'
+  score =
+
+  # Calculate score plus 10 and store it in 'total'
+  total =
+hints:
+  - "Numbers don't need quotes: score = 42"
+  - "Arithmetic uses + - * /  — try: total = score + 10"
+tests:
+  - code: "assert isinstance(score, int), 'score should be a whole number (integer)'"
+    message: "score should be an integer"
+  - code: "assert total == score + 10, 'total should equal score + 10'"
+    message: "total should equal score + 10"
+worlds:
+  fantasy:
+    title: "The Power Counter"
+    narrative: |
+      Elara taps her staff on the stone floor. "Spells cost power — and power is measured in numbers." In Python, integers are whole numbers stored without quotes. "Assign `42` to a variable called `score`," she instructs, "then calculate your total power by adding `10` to it and storing the result in `total`. Numbers let us do arithmetic — the real magic of computation."
+  scifi:
+    title: "Fuel Calculations"
+    narrative: |
+      The ship's fuel gauge is flashing. "Emergency reserves detected," the AI announces. "Current fuel: 42 units. Reserve boost: 10 units. Calculate total available fuel before we can engage the jump drive." In Python, integers are whole numbers — no quotes needed. Assign `42` to `score` (your starting fuel) and compute `score + 10` into `total`. Math in Python works exactly as you'd expect.
+  mystery:
+    title: "Counting the Clues"
+    narrative: |
+      Your case board has 42 pinned notes. The informant just slipped you 10 more. "Quantity matters in detective work," your mentor says, lighting a cigarette. "Store the starting count in a variable called `score`, then add 10 to it and put the result in `total`." In Python, integers are plain numbers — no quotes. Arithmetic is straightforward: `+` adds, `-` subtracts, `*` multiplies, `/` divides.

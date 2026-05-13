@@ -186,10 +186,7 @@ export default function WorldMapPage() {
               current={current}
               completed={completed}
               style={style}
-              onStart={() => {
-                // Lesson routing added in M4
-                console.log("Start unit", unitNumber);
-              }}
+              onStart={() => navigate("/lesson")}
             />
           );
         })}

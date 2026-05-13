@@ -1,0 +1,30 @@
+unit: 1
+lesson: 3
+xp: 10
+code_starter: |
+  # Set is_hero to the boolean True (capital T, no quotes)
+  is_hero =
+
+  # Set level to any integer greater than 5
+  level =
+hints:
+  - "Booleans are True or False — capital first letter, no quotes"
+  - "Pick any number greater than 5 for level, e.g. level = 7"
+tests:
+  - code: "assert is_hero is True, 'is_hero should be the boolean True'"
+    message: "is_hero should be True"
+  - code: "assert isinstance(level, int) and level > 5, 'level should be an integer greater than 5'"
+    message: "level should be an integer greater than 5"
+worlds:
+  fantasy:
+    title: "The Truth Crystal"
+    narrative: |
+      Elara places a crystal on the pedestal. It glows steady gold — then dim grey — depending on the spell. "This is a boolean," she says, "a value that is either `True` or `False`. No quotes, always capitalised." She hands you a quest scroll: "Mark yourself as the hero and set your level above 5 to unlock the next chamber. Python uses booleans wherever a yes-or-no answer is needed."
+  scifi:
+    title: "Hero Status Check"
+    narrative: |
+      The crew manifest has two columns: crew status and clearance level. "Booleans are on/off switches," the AI explains. "In Python they are `True` or `False` — capital first letter, no quotes, not a string." Set `is_hero` to `True` (you're the protagonist — obviously) and assign any integer greater than `5` to `level` to pass the command deck security scan.
+  mystery:
+    title: "The Suspect Register"
+    narrative: |
+      Every name in the detective's register has two fields: cleared (yes/no) and threat level (a number). "Python calls yes/no values *booleans*," your partner explains, flipping through the ledger. "They're either `True` or `False` — capital T or F, never in quotes." Mark `is_hero` as `True` and set `level` to any integer above 5 to gain access to the restricted evidence files.

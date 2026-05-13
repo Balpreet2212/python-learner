@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 from app.accounts.router import router as accounts_router
 from app.auth.router import router as auth_router
 from app.config import settings
+from app.content.router import router as content_router
 from app.core.errors import AppError
 from app.progress.router import router as progress_router
 
@@ -38,6 +39,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(accounts_router)
 app.include_router(progress_router)
+app.include_router(content_router)
 
 
 @app.exception_handler(AppError)
