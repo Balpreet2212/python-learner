@@ -1,7 +1,18 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import logging
 
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
+from app.accounts.router import router as accounts_router
+from app.auth.router import router as auth_router
 from app.config import settings
+from app.core.errors import AppError
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='{"time":"%(asctime)s","level":"%(levelname)s","logger":"%(name)s","msg":%(message)s}',
+)
 
 app = FastAPI(
     title="PyQuest API",
@@ -22,6 +33,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(accounts_router)
+
+
+@app.exception_handler(AppError)
+async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
+    body: dict[str, object] = {"code": exc.code, "message": exc.app_message}
+    if exc.details is not None:
+        body["details"] = exc.details
+    return JSONResponse(status_code=exc.status_code, content=body)
 
 
 @app.get("/health")
