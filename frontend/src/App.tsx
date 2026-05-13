@@ -4,6 +4,7 @@ import AppLayout from "./components/layout/AppLayout";
 import WorldMapPage from "./pages/WorldMapPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LessonPage from "./pages/LessonPage";
+import ParentDashboardPage from "./pages/ParentDashboardPage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -13,10 +14,20 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   const { account, profile, loading } = useAuth();
   if (loading) return null;
   if (!account) return <Navigate to="/auth/login" replace />;
+  // Parents go to their dashboard
+  if (account.role === "parent") return <Navigate to="/parent" replace />;
   // Learners without a track set must complete onboarding first
   if (account.role === "learner" && (!profile || !profile.track)) {
     return <Navigate to="/onboarding" replace />;
   }
+  return <>{children}</>;
+}
+
+function RequireParent({ children }: { children: React.ReactNode }) {
+  const { account, loading } = useAuth();
+  if (loading) return null;
+  if (!account) return <Navigate to="/auth/login" replace />;
+  if (account.role !== "parent") return <Navigate to="/" replace />;
   return <>{children}</>;
 }
 
@@ -71,6 +82,18 @@ export default function App() {
               <LessonPage />
             </AppLayout>
           </RequireAuth>
+        }
+      />
+
+      {/* Parent dashboard */}
+      <Route
+        path="/parent"
+        element={
+          <RequireParent>
+            <AppLayout>
+              <ParentDashboardPage />
+            </AppLayout>
+          </RequireParent>
         }
       />
 

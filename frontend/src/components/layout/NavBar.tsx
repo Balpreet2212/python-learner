@@ -64,9 +64,10 @@ export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const isParent = account?.role === "parent";
   const world = (profile?.world ?? "fantasy") as World;
   const style = getStyle(world);
-  const worldLabel = WORLD_LABELS[world] ?? "PyQuest";
+  const worldLabel = isParent ? "Parent Dashboard" : (WORLD_LABELS[world] ?? "PyQuest");
 
   const onLesson = location.pathname === "/lesson";
 
@@ -80,23 +81,29 @@ export default function NavBar() {
     navigate("/auth/login");
   }
 
+  // Parent nav is minimal — no world theming, no progress
+  const navSurface = isParent ? "bg-gray-900" : style.surface;
+  const navAccent = isParent ? "text-indigo-400" : style.accent;
+  const navMuted = isParent ? "text-gray-400" : style.muted;
+  const navText = isParent ? "text-gray-200" : style.text;
+
   return (
-    <nav className={`${style.surface} border-b border-white/10 px-4 py-2`}>
+    <nav className={`${navSurface} border-b border-white/10 px-4 py-2`}>
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-        {/* Left: logo + world */}
+        {/* Left: logo + context label */}
         <div className="flex items-center gap-3 min-w-0">
           <button
-            onClick={() => navigate("/")}
-            className={`text-lg font-bold ${style.accent} shrink-0`}
+            onClick={() => navigate(isParent ? "/parent" : "/")}
+            className={`text-lg font-bold ${navAccent} shrink-0`}
           >
             PyQuest
           </button>
-          <span className={`hidden text-xs sm:block ${style.muted}`}>·</span>
-          <span className={`hidden text-xs sm:block truncate ${style.muted}`}>{worldLabel}</span>
+          <span className={`hidden text-xs sm:block ${navMuted}`}>·</span>
+          <span className={`hidden text-xs sm:block truncate ${navMuted}`}>{worldLabel}</span>
         </div>
 
-        {/* Center: progress (only on lesson page) */}
-        {onLesson && profile && (
+        {/* Center: lesson progress (learners only, on lesson page) */}
+        {!isParent && onLesson && profile && (
           <div className="flex flex-col items-center gap-0.5">
             <span className={`text-xs ${style.muted}`}>
               Unit {profile.current_unit} · Lesson {profile.current_lesson} / 5
@@ -105,9 +112,16 @@ export default function NavBar() {
           </div>
         )}
 
-        {/* Right: map link + badges + name + logout */}
+        {/* Right: nav link + badges + name + logout */}
         <div className="flex items-center gap-3 shrink-0">
-          {onLesson ? (
+          {isParent ? (
+            <button
+              onClick={() => navigate("/parent")}
+              className={`hidden text-xs sm:block ${navMuted} hover:${navText} transition-colors`}
+            >
+              Dashboard
+            </button>
+          ) : onLesson ? (
             <button
               onClick={() => navigate("/")}
               className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}
@@ -125,19 +139,19 @@ export default function NavBar() {
             )
           )}
 
-          {profile && profile.badges.length > 0 && (
+          {!isParent && profile && profile.badges.length > 0 && (
             <span className={`text-xs ${style.muted}`} title="Badges earned">
               🏅 {profile.badges.length}
             </span>
           )}
 
-          <span className={`hidden text-xs md:block ${style.muted} truncate max-w-[120px]`}>
+          <span className={`hidden text-xs md:block ${navMuted} truncate max-w-[120px]`}>
             {account?.display_name ?? account?.email}
           </span>
 
           <button
             onClick={() => void handleLogout()}
-            className={`text-xs ${style.muted} hover:text-red-400 transition-colors`}
+            className={`text-xs ${navMuted} hover:text-red-400 transition-colors`}
           >
             Sign out
           </button>

@@ -9,6 +9,7 @@ from app.auth.router import router as auth_router
 from app.config import settings
 from app.content.router import router as content_router
 from app.core.errors import AppError
+from app.parent.router import router as parent_router
 from app.progress.router import router as progress_router
 
 logging.basicConfig(
@@ -40,6 +41,7 @@ app.include_router(auth_router)
 app.include_router(accounts_router)
 app.include_router(progress_router)
 app.include_router(content_router)
+app.include_router(parent_router)
 
 
 @app.exception_handler(AppError)
