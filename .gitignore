@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.db
+*.sqlite
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+dist/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Env files
+.env
+.env.local
+*.local
+
+# Docker
+pgdata/
+
+# Editor
+.DS_Store
+Thumbs.db
