@@ -39,7 +39,7 @@ async def send_email(to: str, subject: str, html: str) -> None:
 
 
 async def send_verification_email(to: str, token: str) -> None:
-    link = f"http://{settings.domain}:5173/auth/verify-email?token={token}"
+    link = f"{settings.public_url}/auth/verify-email?token={token}"
     await send_email(
         to=to,
         subject="Verify your PyQuest email",
@@ -52,7 +52,7 @@ async def send_verification_email(to: str, token: str) -> None:
 
 
 async def send_parent_invite_email(parent_email: str, learner_display: str, token: str) -> None:
-    link = f"http://{settings.domain}:5173/auth/parent-verify?token={token}"
+    link = f"{settings.public_url}/auth/parent-verify?token={token}"
     await send_email(
         to=parent_email,
         subject="Your child wants to join PyQuest",
@@ -67,7 +67,7 @@ async def send_parent_invite_email(parent_email: str, learner_display: str, toke
 
 
 async def send_password_reset_email(to: str, token: str) -> None:
-    link = f"http://{settings.domain}:5173/auth/reset-password?token={token}"
+    link = f"{settings.public_url}/auth/reset-password?token={token}"
     await send_email(
         to=to,
         subject="Reset your PyQuest password",

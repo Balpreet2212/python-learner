@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     stripe_webhook_secret: str = ""
     stripe_price_id: str = ""
 
+    # Public base URL for email links — set to your Railway domain in production
+    # e.g. https://python-learner-production.up.railway.app
+    public_url: str = "http://localhost:5173"
+
     # CORS — comma-separated origins allowed in production
     allowed_origins: list[str] = []
 
