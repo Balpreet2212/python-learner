@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     stripe_webhook_secret: str = ""
     stripe_price_id: str = ""
 
+    # CORS — comma-separated origins allowed in production
+    allowed_origins: list[str] = []
+
     # Sessions
     session_max_age: int = 60 * 60 * 24 * 30  # 30 days
 

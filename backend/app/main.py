@@ -1,8 +1,10 @@
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.accounts.router import router as accounts_router
 from app.auth.router import router as auth_router
@@ -24,14 +26,16 @@ app = FastAPI(
     redoc_url=None,
 )
 
+_cors_origins = [
+    f"http://{settings.domain}",
+    f"https://{settings.domain}",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    *settings.allowed_origins,
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        f"http://{settings.domain}",
-        f"https://{settings.domain}",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -55,3 +59,9 @@ async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok", "version": "1.0.0"}
+
+
+# Serve built frontend in production (Railway single-service deploy)
+_static = Path(__file__).parent / "static"
+if _static.is_dir():
+    app.mount("/", StaticFiles(directory=str(_static), html=True), name="spa")
