@@ -29,5 +29,5 @@ COPY --from=frontend /build/dist ./app/static
 
 EXPOSE 8000
 
-# Run migrations then start the server
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Run migrations (log result but don't abort if they fail) then start server
+CMD ["sh", "-c", "alembic upgrade head || echo 'WARNING: alembic failed, continuing'; uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

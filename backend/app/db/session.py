@@ -5,11 +5,9 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from app.config import settings
 
 engine = create_async_engine(
-    settings.database_url,
-    # echo=True in dev is noisy; enable via env if needed
+    settings.db_url,
     echo=False,
-    # SQLite needs this to work properly across threads
-    connect_args={"check_same_thread": False} if "sqlite" in settings.database_url else {},
+    connect_args={"check_same_thread": False} if "sqlite" in settings.db_url else {},
 )
 
 async_session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(

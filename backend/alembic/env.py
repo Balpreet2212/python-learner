@@ -17,7 +17,7 @@ from app.db.base import Base
 config = context.config
 
 # Override the URL from app settings so it matches the running environment
-config.set_main_option("sqlalchemy.url", settings.database_url)
+config.set_main_option("sqlalchemy.url", settings.db_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

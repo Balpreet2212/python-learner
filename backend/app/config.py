@@ -4,6 +4,21 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
+    @property
+    def db_url(self) -> str:
+        """Return a SQLAlchemy-compatible async URL.
+
+        Railway (and many PaaS providers) supply DATABASE_URL as
+        'postgres://' or 'postgresql://' — both need the '+asyncpg' driver
+        suffix for async SQLAlchemy.
+        """
+        url = self.database_url
+        if url.startswith("postgres://"):
+            return "postgresql+asyncpg://" + url[len("postgres://"):]
+        if url.startswith("postgresql://"):
+            return "postgresql+asyncpg://" + url[len("postgresql://"):]
+        return url  # already correct (e.g. sqlite+aiosqlite://...)
+
     # App
     app_env: str = "development"
     secret_key: str = "change-me-in-production"
