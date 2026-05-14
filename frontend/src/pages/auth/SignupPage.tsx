@@ -34,7 +34,7 @@ export default function SignupPage() {
       if (result.status === "pending_parent_verification") {
         navigate("/auth/parent-pending");
       } else {
-        navigate("/auth/verify-pending");
+        navigate("/auth/login");
       }
     } catch (err) {
       if (err instanceof ApiError) {

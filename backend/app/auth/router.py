@@ -48,7 +48,7 @@ async def signup(
     await service.signup(db, body)
     if body.is_under_13:
         return {"status": "pending_parent_verification"}
-    return {"status": "verification_email_sent"}
+    return {"status": "account_created"}
 
 
 @router.post("/login")

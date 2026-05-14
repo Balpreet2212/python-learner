@@ -53,8 +53,8 @@ async def signup(db: AsyncSession, body: SignupRequest) -> None:
         password_hash=hash_password(body.password),
         role=body.role,
         display_name=body.display_name,
-        email_verified=False,
-        # Under-13 accounts are inactive until parent verifies
+        # Skip email verification — accounts are active immediately
+        email_verified=not is_under_13,
         is_active=not is_under_13,
         is_under_13=is_under_13,
         parent_invite_email=str(body.parent_email) if is_under_13 else None,
@@ -83,7 +83,7 @@ async def signup(db: AsyncSession, body: SignupRequest) -> None:
         )
 
     if is_under_13 and body.parent_email:
-        # Send parent invite; learner's email doesn't need its own verification
+        # Under-13 still requires parent consent before account is active
         parent_token = EmailToken(
             token=generate_token(),
             account_id=account.id,
@@ -98,15 +98,8 @@ async def signup(db: AsyncSession, body: SignupRequest) -> None:
             parent_token.token,
         )
     else:
-        verify_token = EmailToken(
-            token=generate_token(),
-            account_id=account.id,
-            purpose="email_verify",
-            expires_at=now + timedelta(hours=EMAIL_VERIFY_TTL_HOURS),
-        )
-        db.add(verify_token)
+        # No email verification — account is immediately active
         await db.commit()
-        await send_verification_email(account.email, verify_token.token)
 
 
 async def verify_email(db: AsyncSession, token: str) -> None:
