@@ -43,6 +43,7 @@ _safe = {{k: getattr(_b, k) for k in dir(_b) if k in (
     "object", "oct", "ord", "pow", "print", "range", "repr", "reversed",
     "round", "set", "setattr", "slice", "sorted", "str", "sum", "tuple",
     "type", "vars", "zip",
+    "__build_class__", "__name__",
     "ArithmeticError", "AssertionError", "AttributeError", "EOFError",
     "Exception", "IndexError", "KeyError", "NameError", "NotImplementedError",
     "OSError", "OverflowError", "RecursionError", "RuntimeError",
