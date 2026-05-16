@@ -5,6 +5,7 @@ import WorldMapPage from "./pages/WorldMapPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LessonPage from "./pages/LessonPage";
 import ParentDashboardPage from "./pages/ParentDashboardPage";
+import CapstoneChallengePage from "./pages/CapstoneChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -80,6 +81,17 @@ export default function App() {
           <RequireAuth>
             <AppLayout>
               <LessonPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/capstone"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <CapstoneChallengePage />
             </AppLayout>
           </RequireAuth>
         }

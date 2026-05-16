@@ -70,6 +70,8 @@ export default function NavBar() {
   const worldLabel = isParent ? "Parent Dashboard" : (WORLD_LABELS[world] ?? "PyQuest");
 
   const onLesson = location.pathname === "/lesson";
+  const onCapstone = location.pathname === "/capstone";
+  const onLessonOrCapstone = onLesson || onCapstone;
 
   async function handleLogout() {
     try {
@@ -102,13 +104,19 @@ export default function NavBar() {
           <span className={`hidden text-xs sm:block truncate ${navMuted}`}>{worldLabel}</span>
         </div>
 
-        {/* Center: lesson progress (learners only, on lesson page) */}
-        {!isParent && onLesson && profile && (
+        {/* Center: lesson progress (learners only, on lesson/capstone page) */}
+        {!isParent && onLessonOrCapstone && profile && (
           <div className="flex flex-col items-center gap-0.5">
-            <span className={`text-xs ${style.muted}`}>
-              Unit {profile.current_unit} · Lesson {profile.current_lesson} / 5
-            </span>
-            <LessonPips total={5} current={profile.current_lesson} />
+            {onCapstone ? (
+              <span className={`text-xs ${style.muted}`}>
+                Unit {profile.current_unit} · Capstone ★
+              </span>
+            ) : (
+              <span className={`text-xs ${style.muted}`}>
+                Unit {profile.current_unit} · Lesson {profile.current_lesson} / 5
+              </span>
+            )}
+            <LessonPips total={5} current={onCapstone ? 6 : profile.current_lesson} />
           </div>
         )}
 
@@ -121,7 +129,7 @@ export default function NavBar() {
             >
               Dashboard
             </button>
-          ) : onLesson ? (
+          ) : onLessonOrCapstone ? (
             <button
               onClick={() => navigate("/")}
               className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}

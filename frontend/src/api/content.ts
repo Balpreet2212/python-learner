@@ -4,6 +4,19 @@ import { LearnerProfileSchema, type LearnerProfile } from "./auth";
 
 // ── Schemas ───────────────────────────────────────────────────────────────────
 
+export const CapstoneSchema = z.object({
+  unit: z.number().int(),
+  title: z.string(),
+  narrative: z.string(),
+  story_beat: z.string(),
+  code_starter: z.string(),
+  hints: z.array(z.string()),
+  xp: z.number().int(),
+  test_count: z.number().int(),
+  plan_prompts: z.array(z.string()),
+});
+export type Capstone = z.infer<typeof CapstoneSchema>;
+
 export const LessonSchema = z.object({
   unit: z.number().int(),
   lesson: z.number().int(),
@@ -47,6 +60,26 @@ export async function submitChallenge(code: string): Promise<SubmitResult> {
 
 export async function advanceLesson(): Promise<LearnerProfile> {
   const raw = await apiFetch<unknown>("/v1/learner/lesson/advance", {
+    method: "POST",
+  });
+  return LearnerProfileSchema.parse(raw);
+}
+
+export async function getCapstone(): Promise<Capstone> {
+  const raw = await apiFetch<unknown>("/v1/learner/capstone");
+  return CapstoneSchema.parse(raw);
+}
+
+export async function submitCapstone(code: string): Promise<SubmitResult> {
+  const raw = await apiFetch<unknown>("/v1/learner/capstone/submit", {
+    method: "POST",
+    body: JSON.stringify({ code }),
+  });
+  return SubmitResultSchema.parse(raw);
+}
+
+export async function advanceCapstone(): Promise<LearnerProfile> {
+  const raw = await apiFetch<unknown>("/v1/learner/capstone/advance", {
     method: "POST",
   });
   return LearnerProfileSchema.parse(raw);

@@ -1,0 +1,81 @@
+unit: 5
+xp: 150
+
+plan_prompts:
+  - "In one sentence, what should this program do?"
+  - "What inputs does it have? What output?"
+  - "What are the steps, in order, in plain English?"
+  - "Translate each step into Python."
+
+code_starter: |
+  def mask_word(word, guessed):
+      # Return the word with unguessed letters replaced by "_"
+      # Letters in the guessed list are shown; others become "_"
+      # Example: mask_word("python", ["p","y","n"]) -> "py___n"
+      pass
+
+  def is_winner(word, guessed):
+      # Return True if every letter in word has been guessed, False otherwise
+      pass
+
+hints:
+  - "For mask_word: loop over each letter in word. If it's in guessed, keep it; otherwise use \"_\""
+  - "Build the result with a list comprehension: [letter if letter in guessed else \"_\" for letter in word]"
+  - "Then join the list into a string: \"\".join(...)"
+  - "For is_winner: check that every letter in word is also in guessed"
+
+tests:
+  - code: |
+      assert mask_word("python", ["p","y","n"]) == "py___n"
+    message: "mask_word shows guessed letters and hides the rest"
+  - code: |
+      assert mask_word("cat", []) == "___"
+      assert mask_word("cat", ["c","a","t"]) == "cat"
+    message: "No guesses = all underscores; all guessed = full word"
+  - code: |
+      assert is_winner("cat", ["c","a","t"]) == True
+      assert is_winner("cat", ["c","a"]) == False
+    message: "is_winner returns True only when all letters are guessed"
+  - code: |
+      assert is_winner("hello", ["h","e","l","o"]) == True
+    message: "is_winner handles repeated letters correctly"
+
+worlds:
+  fantasy:
+    title: "The Word-Warden's Puzzle"
+    narrative: |
+      The Word-Warden guards the gate to the next kingdom with an ancient word puzzle.
+      To pass, you must write two functions that power the guessing game.
+
+      mask_word(word, guessed) shows the word with unguessed letters hidden as "_".
+      is_winner(word, guessed) returns True when every letter has been found.
+
+      Write both functions. The Word-Warden will test them before opening the gate.
+    story_beat: |
+      The Word-Warden runs every test case. One by one, the gate's runes light up gold.
+      The great door swings open. "You have tamed the puzzle," she says. "The next
+      chapter of your journey begins beyond this gate."
+  scifi:
+    title: "Decryption Module"
+    narrative: |
+      The ship's decryption module needs two functions to process intercepted alien
+      transmissions. mask_word reveals only the characters that have been decoded so far,
+      replacing unknowns with "_". is_winner signals when a word is fully decoded.
+
+      Write both functions. The communications officer is waiting.
+    story_beat: |
+      "Decryption complete." The alien transmission resolves into readable text.
+      The linguistics team crowds around the screen. Your two functions cracked the
+      encoding that stumped the entire crew.
+  mystery:
+    title: "The Cipher Game"
+    narrative: |
+      The suspect left a cipher game as a clue. To decode it, you need two functions:
+      mask_word shows which letters of the hidden word have been guessed so far, hiding
+      the rest with "_". is_winner checks if the word is fully revealed.
+
+      Write both functions to advance through the cipher and crack the case.
+    story_beat: |
+      The final letter clicks into place. The hidden word spells out the location of
+      the missing evidence. Morgan looks at you. "That cipher has baffled three
+      detectives. You cracked it in one session."

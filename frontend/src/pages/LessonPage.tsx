@@ -252,17 +252,24 @@ export default function LessonPage() {
             </div>
           )}
 
-          {/* Next lesson button */}
+          {/* Next lesson / capstone button */}
           {allPassed && (
-            <Button
-              onClick={() => void handleAdvance()}
-              loading={advancing}
-              className="w-full bg-green-600 hover:bg-green-500"
-            >
-              {lesson.lesson < lesson.total_lessons
-                ? `Next Lesson →`
-                : `Complete Unit ${lesson.unit} →`}
-            </Button>
+            lesson.lesson < lesson.total_lessons ? (
+              <Button
+                onClick={() => void handleAdvance()}
+                loading={advancing}
+                className="w-full bg-green-600 hover:bg-green-500"
+              >
+                Next Lesson →
+              </Button>
+            ) : (
+              <Button
+                onClick={() => navigate("/capstone")}
+                className="w-full bg-amber-600 hover:bg-amber-500"
+              >
+                Unit {lesson.unit} Capstone →
+              </Button>
+            )
           )}
 
           {/* Account info strip */}

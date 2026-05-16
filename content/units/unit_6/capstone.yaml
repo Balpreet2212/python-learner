@@ -1,0 +1,107 @@
+unit: 6
+xp: 200
+
+plan_prompts:
+  - "In one sentence, what should this program do?"
+  - "What inputs does it have? What output?"
+  - "What are the steps, in order, in plain English?"
+  - "Translate each step into Python."
+
+code_starter: |
+  class Hero:
+      def __init__(self, name, health):
+          # Store name and health as instance attributes
+          pass
+
+      def take_damage(self, amount):
+          # Reduce health by amount (health cannot go below 0)
+          pass
+
+      def heal(self, amount):
+          # Increase health by amount
+          pass
+
+      def is_alive(self):
+          # Return True if health > 0, otherwise False
+          pass
+
+hints:
+  - "In __init__, use self.name = name and self.health = health"
+  - "For take_damage, use max(0, self.health - amount) to prevent negative health"
+  - "For heal, just add to self.health: self.health += amount"
+  - "is_alive is one line: return self.health > 0"
+
+tests:
+  - code: |
+      h = Hero("Aria", 100)
+      assert h.name == "Aria"
+      assert h.health == 100
+    message: "Hero stores name and health correctly"
+  - code: |
+      h = Hero("Aria", 100)
+      h.take_damage(30)
+      assert h.health == 70
+    message: "take_damage reduces health"
+  - code: |
+      h = Hero("Aria", 20)
+      h.take_damage(50)
+      assert h.health == 0
+    message: "Health never goes below 0"
+  - code: |
+      h = Hero("Aria", 50)
+      h.heal(25)
+      assert h.health == 75
+    message: "heal increases health"
+  - code: |
+      h = Hero("Aria", 100)
+      assert h.is_alive() == True
+      h.take_damage(100)
+      assert h.is_alive() == False
+    message: "is_alive returns True when health > 0, False when at 0"
+  - code: |
+      h1 = Hero("Aria", 100)
+      h2 = Hero("Zed", 80)
+      h1.take_damage(10)
+      assert h1.health == 90
+      assert h2.health == 80
+    message: "Two Hero instances are independent"
+
+worlds:
+  fantasy:
+    title: "The Hero's Codex"
+    narrative: |
+      The kingdom's battle registry is written in a forgotten language — code. To
+      register heroes for the tournament, you must define a Hero class. Each hero
+      has a name and health points. They can take_damage (which never drops below 0),
+      heal, and check if they are is_alive.
+
+      Write the Hero class with all four methods. The tournament cannot begin without it.
+    story_beat: |
+      Heroes materialize in the registry one by one — Aria, Zed, Brennan — each with
+      their stats intact. The tournament herald raises her staff. "The Codex is complete.
+      Let the final chapter of your training begin."
+  scifi:
+    title: "Combat Unit Simulator"
+    narrative: |
+      The ship's combat simulation needs a Hero class to model crew members in training
+      scenarios. Each unit has a name and health. They receive take_damage (floored at 0),
+      can heal, and report is_alive for the simulation engine to track.
+
+      Write the complete class. The simulation cannot run without it.
+    story_beat: |
+      Simulation results scroll across the screen — every unit responding correctly.
+      The training officer marks the results: "All combat behaviors verified. Your class
+      definition just passed the full test suite. Well done, Engineer."
+  mystery:
+    title: "The Suspect Tracker"
+    narrative: |
+      The detective agency needs a Hero class to model investigators in field simulations.
+      Each investigator has a name and health (representing stamina). They take_damage
+      during tough cases (never below 0), can heal after rest, and the system checks
+      is_alive to see if they can continue.
+
+      Write the full class. The agency's training simulation depends on it.
+    story_beat: |
+      Every investigator passes the simulation. Chief Morgan reviews the output.
+      "Your class handled every edge case — negative damage, zero health, independent
+      instances. That's the mark of a real detective coder."

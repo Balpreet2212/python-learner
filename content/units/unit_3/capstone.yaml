@@ -1,0 +1,80 @@
+unit: 3
+xp: 150
+
+plan_prompts:
+  - "In one sentence, what should this program do?"
+  - "What inputs does it have? What output?"
+  - "What are the steps, in order, in plain English?"
+  - "Translate each step into Python."
+
+code_starter: |
+  def grade(score):
+      # Return the letter grade for a score out of 100:
+      # A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60
+      pass
+
+hints:
+  - "Use if / elif / elif / elif / else to check each grade boundary"
+  - "Check the highest grade first: if score >= 90: return \"A\""
+  - "The final else covers everything below 60 — that's an F"
+
+tests:
+  - code: |
+      assert grade(95) == "A"
+      assert grade(90) == "A"
+    message: "90-100 returns 'A'"
+  - code: |
+      assert grade(85) == "B"
+      assert grade(80) == "B"
+    message: "80-89 returns 'B'"
+  - code: |
+      assert grade(75) == "C"
+      assert grade(70) == "C"
+    message: "70-79 returns 'C'"
+  - code: |
+      assert grade(65) == "D"
+      assert grade(60) == "D"
+    message: "60-69 returns 'D'"
+  - code: |
+      assert grade(59) == "F"
+      assert grade(0) == "F"
+    message: "Below 60 returns 'F'"
+
+worlds:
+  fantasy:
+    title: "The Arcane Exam"
+    narrative: |
+      The Mage Academy awards ranks based on exam scores: Archmage (90-100), Wizard
+      (80-89), Apprentice (70-79), Novice (60-69), and Dismissed (below 60). The
+      enchanted grading orb is shattered and must be replaced with code.
+
+      Write a function called grade that takes a score and returns the letter grade:
+      "A", "B", "C", "D", or "F". Use if/elif/else to cover every range.
+    story_beat: |
+      The grading orb glows as results pour through. Students crowd around the noticeboard.
+      Your function has awarded every rank correctly. The Headmistress seals your name in
+      the Academy records as the one who restored the examination system.
+  scifi:
+    title: "Performance Rating"
+    narrative: |
+      The ship's crew evaluation system classifies performance using a letter scale. The
+      algorithm was wiped in a solar flare and must be rewritten. Scores 90-100 earn A,
+      80-89 earn B, 70-79 earn C, 60-69 earn D, and anything below 60 is F.
+
+      Write a function called grade that takes a score and returns the correct letter.
+    story_beat: |
+      Crew performance reports populate across all terminals. The commander reviews them
+      and nods. "Accurate ratings across the board. The evaluation system is operational.
+      Good work, Engineer."
+  mystery:
+    title: "The Evidence Rating"
+    narrative: |
+      The detective agency rates evidence quality on a letter scale. A (90-100) is
+      ironclad, B (80-89) is strong, C (70-79) is circumstantial, D (60-69) is weak,
+      and F (below 60) is inadmissible. The rating function was corrupted.
+
+      Write grade to classify each piece of evidence. Use if/elif/else for every range.
+    story_beat: |
+      Evidence ratings appear on the case board. Inspector Morgan studies them. "Every
+      piece classified correctly — this is exactly what the prosecution needed. Case is
+      ready for trial."

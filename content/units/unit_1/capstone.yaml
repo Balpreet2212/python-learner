@@ -1,0 +1,71 @@
+unit: 1
+xp: 150
+
+plan_prompts:
+  - "In one sentence, what should this program do?"
+  - "What inputs does it have? What output?"
+  - "What are the steps, in order, in plain English?"
+  - "Translate each step into Python."
+
+code_starter: |
+  def mad_lib(adjective, noun, verb):
+      # Use all three words to build a story sentence and return it
+      pass
+
+hints:
+  - "Use an f-string to slot the words into a sentence: f\"The {adjective} {noun}...\""
+  - "Make sure your function has a return statement"
+  - "Example: return f\"A {adjective} {noun} began to {verb} across the land!\""
+
+tests:
+  - code: |
+      result = mad_lib("brave", "dragon", "roar")
+      assert isinstance(result, str), "mad_lib must return a string"
+    message: "Returns a string"
+  - code: |
+      result = mad_lib("brave", "dragon", "roar")
+      assert "brave" in result and "dragon" in result and "roar" in result
+    message: "All three words appear in the story"
+  - code: |
+      r1 = mad_lib("tiny", "cat", "sleep")
+      r2 = mad_lib("huge", "dragon", "fly")
+      assert r1 != r2
+    message: "Different inputs produce different stories"
+
+worlds:
+  fantasy:
+    title: "The Enchanted Scroll"
+    narrative: |
+      A magical scroll-filling machine in the royal library has broken down. It used to
+      accept three enchanted words — an adjective, a noun, and a verb — and weave them
+      into a tale automatically. Without it, the scribes are writing every story by hand.
+
+      Write a function called mad_lib that takes an adjective, a noun, and a verb, then
+      returns a story string containing all three. Restore the magic of the library!
+    story_beat: |
+      The scroll shimmers as the words rearrange into a glowing tale. The head librarian
+      claps her hands. "The machine lives again! Every story in the realm will carry your
+      mark, apprentice."
+  scifi:
+    title: "Transmission Protocol"
+    narrative: |
+      The ship's communication array needs a new encoding function. Command requires
+      every message to weave three descriptor codes — an adjective, a noun, and a verb —
+      into a single transmission string before broadcast.
+
+      Write mad_lib to assemble these codes into a properly formatted message string.
+      Re-establish contact with command before the window closes.
+    story_beat: |
+      "Transmission received, signal strong." The command console crackles back to life.
+      Your encoding function has bridged the void. Mission status: communication restored.
+  mystery:
+    title: "The Detective's Report"
+    narrative: |
+      A power surge scrambled the report-assembly function used by the agency. Every
+      case summary needs three words — an adjective, a noun, and a verb — stitched
+      together into a formatted report sentence before it can be filed.
+
+      Write mad_lib to rebuild the function and get the reports flowing again.
+    story_beat: |
+      The report prints cleanly. Inspector Morgan stamps it approved. "Exactly what we
+      needed. The evidence trail is reconstructed — the case can proceed."
