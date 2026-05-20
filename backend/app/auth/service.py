@@ -16,7 +16,7 @@ from app.auth.schemas import (
 from app.core.errors import AppError, bad_request, conflict, unauthorized
 from app.core.security import generate_token, hash_password, verify_password
 from app.db.models import Account, EmailToken, LearnerProfile, Session, Subscription
-from app.email.service import send_parent_invite_email, send_verification_email
+from app.email.service import send_parent_invite_email
 
 SESSION_TTL_DAYS = 30
 EMAIL_VERIFY_TTL_HOURS = 24

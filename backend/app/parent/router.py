@@ -6,7 +6,7 @@ from app.core.errors import forbidden
 from app.db.models import Account
 from app.db.session import get_db
 from app.parent import service
-from app.parent.schemas import LinkLearnerRequest, LinkOut, LearnerSummaryOut
+from app.parent.schemas import LearnerSummaryOut, LinkLearnerRequest, LinkOut
 
 router = APIRouter(prefix="/v1/parent", tags=["parent"])
 
