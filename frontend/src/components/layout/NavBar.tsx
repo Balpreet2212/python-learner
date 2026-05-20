@@ -134,15 +134,15 @@ export default function NavBar() {
               onClick={() => { navigate("/"); }}
               className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}
             >
-              World Map
+              Home
             </button>
           ) : (
             profile && (
               <button
-                onClick={() => { navigate("/lesson"); }}
+                onClick={() => { navigate("/learn"); }}
                 className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}
               >
-                Continue Lesson
+                World Map
               </button>
             )
           )}

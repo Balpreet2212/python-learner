@@ -1,11 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import AppLayout from "./components/layout/AppLayout";
+import HomePage from "./pages/HomePage";
 import WorldMapPage from "./pages/WorldMapPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import LessonPage from "./pages/LessonPage";
 import ParentDashboardPage from "./pages/ParentDashboardPage";
 import CapstoneChallengePage from "./pages/CapstoneChallengePage";
+import SettingsPage from "./pages/SettingsPage";
+import BillingPage from "./pages/BillingPage";
+import AccountPage from "./pages/AccountPage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -70,6 +74,16 @@ export default function App() {
         element={
           <RequireAuth>
             <AppLayout>
+              <HomePage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/learn"
+        element={
+          <RequireAuth>
+            <AppLayout>
               <WorldMapPage />
             </AppLayout>
           </RequireAuth>
@@ -85,13 +99,42 @@ export default function App() {
           </RequireAuth>
         }
       />
-
       <Route
         path="/capstone"
         element={
           <RequireAuth>
             <AppLayout>
               <CapstoneChallengePage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <SettingsPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/billing"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <BillingPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/account"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <AccountPage />
             </AppLayout>
           </RequireAuth>
         }
