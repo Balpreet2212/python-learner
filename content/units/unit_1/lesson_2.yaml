@@ -1,6 +1,21 @@
 unit: 1
 lesson: 2
 xp: 10
+
+example:
+  code: |
+    price = 80
+    discount = 15
+    final = price - discount
+    print(final)
+    print(price * 2)
+  explanation: |
+    Numbers in Python are stored without quotes — just write the number.
+    Basic arithmetic works exactly as expected: + adds, - subtracts, * multiplies, / divides.
+    Here we subtract discount from price and store the result in a third variable 'final'.
+    You can also do arithmetic directly inside print().
+  output: "65\n160"
+
 code_starter: |
   # Assign the integer 42 to a variable called 'score'
   score =
@@ -15,16 +30,60 @@ tests:
     message: "score should be an integer"
   - code: "assert total == score + 10, 'total should equal score + 10'"
     message: "total should equal score + 10"
+
+final_challenge:
+  code_starter: |
+    # Compute the total gold a party earns
+  hints:
+    - "gold = 120  — store the starting amount"
+    - "bonus = 45  — the extra reward"
+    - "total_gold = gold + bonus  — add them together"
+    - "print(total_gold)"
+  tests:
+    - code: "assert gold == 120"
+      message: "gold should be 120"
+    - code: "assert bonus == 45"
+      message: "bonus should be 45"
+    - code: "assert total_gold == 165"
+      message: "total_gold should be 165 (120 + 45)"
+
 worlds:
   fantasy:
     title: "The Power Counter"
-    narrative: |
-      Elara taps her staff on the stone floor. "Spells cost power — and power is measured in numbers." In Python, integers are whole numbers stored without quotes. "Assign `42` to a variable called `score`," she instructs, "then calculate your total power by adding `10` to it and storing the result in `total`. Numbers let us do arithmetic — the real magic of computation."
+    setup: |
+      Elara taps her staff on the stone floor. "Spells cost power — and power is
+      measured in numbers." In Python, integers are whole numbers stored without quotes.
+
+      "Assign 42 to a variable called 'score'," she instructs, "then calculate your
+      total power by adding 10 to it and storing the result in 'total'. Numbers let
+      us do arithmetic — the real engine beneath all magic."
+    final_challenge_prompt: |
+      The party defeated a dragon and split the gold hoard. Create a variable gold
+      set to 120 (the base reward) and bonus set to 45 (the dragon slayer bonus).
+      Calculate total_gold by adding them, then print it.
   scifi:
     title: "Fuel Calculations"
-    narrative: |
-      The ship's fuel gauge is flashing. "Emergency reserves detected," the AI announces. "Current fuel: 42 units. Reserve boost: 10 units. Calculate total available fuel before we can engage the jump drive." In Python, integers are whole numbers — no quotes needed. Assign `42` to `score` (your starting fuel) and compute `score + 10` into `total`. Math in Python works exactly as you'd expect.
+    setup: |
+      The ship's fuel gauge is flashing. "Emergency reserves detected," the AI announces.
+      "Current fuel: 42 units. Reserve boost: 10 units. Calculate total available fuel
+      before we can engage the jump drive."
+
+      In Python, integers are whole numbers — no quotes needed. Assign 42 to 'score'
+      and compute score + 10 into 'total'. Math in Python works exactly as you'd expect.
+    final_challenge_prompt: |
+      Two fuel pods are loaded for the mission. Set gold to 120 (primary pod capacity)
+      and bonus to 45 (emergency reserve). Calculate total_gold by adding them —
+      that is the total fuel available. Print it.
   mystery:
     title: "Counting the Clues"
-    narrative: |
-      Your case board has 42 pinned notes. The informant just slipped you 10 more. "Quantity matters in detective work," your mentor says, lighting a cigarette. "Store the starting count in a variable called `score`, then add 10 to it and put the result in `total`." In Python, integers are plain numbers — no quotes. Arithmetic is straightforward: `+` adds, `-` subtracts, `*` multiplies, `/` divides.
+    setup: |
+      Your case board has 42 pinned notes. The informant just slipped you 10 more.
+      "Quantity matters in detective work," your mentor says, lighting a cigarette.
+
+      "Store the starting count in a variable called 'score', then add 10 to it and
+      put the result in 'total'. In Python, integers are plain numbers — no quotes.
+      Arithmetic is straightforward: + adds, - subtracts, * multiplies, / divides."
+    final_challenge_prompt: |
+      Two witnesses provided leads. The first gave gold = 120 pieces of evidence;
+      the second contributed bonus = 45. Create both variables, add them into
+      total_gold, and print the result.

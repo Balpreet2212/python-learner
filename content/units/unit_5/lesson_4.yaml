@@ -1,35 +1,98 @@
 unit: 5
 lesson: 4
 xp: 10
+
+example:
+  code: |
+    def read_config(text):
+        log = []
+        try:
+            value = int(text)
+        except ValueError:
+            value = 0
+        finally:
+            log.append("processed")
+        return value, log
+
+    print(read_config("10"))
+    print(read_config("bad"))
+  explanation: |
+    The finally block always runs — whether the try succeeded, the except caught an error, or even if the function returns early.
+    Use it for clean-up tasks that must happen regardless of outcome: closing a file, logging that work was attempted, releasing a resource.
+    Here, "processed" is appended to log no matter what the input was.
+  output: "(10, ['processed'])\n(0, ['processed'])"
+
 code_starter: |
-  # 'finally' always runs — whether an error occurred or not.
-  log = []
-  try:
-      x = 1 / 1
-  except ZeroDivisionError:
-      log.append("error")
-  finally:
-      log.append("done")
+  def safe_read(text):
+      log = []
+      try:
+          value = int(text)
+      except ValueError:
+          value = -1
+      finally:
+          log.append(___)
+      return value, log
 hints:
-  - "1 / 1 does NOT raise an error, so the except block is skipped"
-  - "finally always runs — so log will contain only 'done'"
+  - "Append the string \"done\" inside the finally block"
+  - "finally runs whether or not an exception occurred"
+
 tests:
-  - code: "assert 'done' in log, f'log should contain done, got {log}'"
-    message: "'done' should always be in log"
-  - code: "assert 'error' not in log, f'error should not be in log since no exception occurred'"
-    message: "'error' should not be in log (no exception was raised)"
-  - code: "assert len(log) == 1"
-    message: "log should contain exactly one item"
+  - code: "v, lg = safe_read('5'); assert v == 5 and lg == ['done'], f'got {v}, {lg}'"
+    message: "safe_read('5') returns (5, ['done'])"
+  - code: "v, lg = safe_read('x'); assert v == -1 and lg == ['done'], f'got {v}, {lg}'"
+    message: "safe_read('x') returns (-1, ['done'])"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "def safe_read(text): log = []"
+    - "try: value = int(text)"
+    - "except ValueError: value = -1"
+    - "finally: log.append(\"done\")"
+    - "return value, log"
+  tests:
+    - code: "v, lg = safe_read('99'); assert v == 99 and lg == ['done']"
+      message: "safe_read('99') returns (99, ['done'])"
+    - code: "v, lg = safe_read('nope'); assert v == -1 and lg == ['done']"
+      message: "safe_read('nope') returns (-1, ['done'])"
+    - code: "v, lg = safe_read('0'); assert v == 0 and lg == ['done']"
+      message: "safe_read('0') returns (0, ['done'])"
+
 worlds:
   fantasy:
-    title: "The Binding Seal"
-    narrative: |
-      Some magic must always be completed — regardless of what went wrong. "`finally` always runs, whether the `try` block succeeded or an exception was raised," Elara says. "Use it for cleanup that must happen no matter what — closing a file, releasing a resource, logging a status." No error occurs here, so only `"done"` is logged.
+    title: "The Ritual Log — Always Recorded"
+    setup: |
+      Every enchantment in the Grand Library must be logged, successful or not. The Archivist insists: even a failed spell needs a record that it was attempted. Without the log, there is no accountability.
+      Python's finally block is the enchanter's logbook — it runs unconditionally, after the try and any except. You can count on it the same way you count on the sun rising: regardless of what happened, this code executes.
+    final_challenge_prompt: |
+      Write safe_read(text) for the library's enchantment logger:
+      — log = [] at the start
+      — try: value = int(text)
+      — except ValueError: value = -1
+      — finally: log.append("done") — this must run always
+      — return value, log
   scifi:
-    title: "Shutdown Protocol"
-    narrative: |
-      Critical systems must always be shut down safely after an operation. "`finally` guarantees cleanup code runs even if the program encounters an error," the AI explains. "It's the last thing that runs before leaving the try block — exception or not." Division succeeds; only `"done"` ends up in `log`.
+    title: "Mission Telemetry — Always Acknowledged"
+    setup: |
+      The Meridian's mission recorder has one hard requirement: every data read attempt must be acknowledged in the telemetry log, even if the data was corrupted. An unacknowledged read means a gap in the black-box record, which is a mission violation.
+      The finally block provides this guarantee in Python: it fires after try, after any except, after return statements — always.
+    final_challenge_prompt: |
+      Write safe_read(text) for the telemetry recorder:
+      — Initialise log = []
+      — try to parse text as int (value = int(text))
+      — except ValueError: set value = -1
+      — finally: append "done" to log unconditionally
+      — return value, log
   mystery:
-    title: "Closing the Case"
-    narrative: |
-      Every case must be formally closed — even when nothing goes wrong. "`finally` is Python's guarantee: this code runs regardless of success or failure," your mentor explains. "It's where you put cleanup that cannot be skipped." The division works, so `"error"` is never appended — only `"done"`.
+    title: "The Case File — Always Stamped"
+    setup: |
+      Every piece of evidence the detective touches must be stamped "processed" in the chain-of-custody log — success or failure doesn't matter. An unstamped document is inadmissible in court.
+      Python's finally clause is exactly this: a guarantee that a block of code runs no matter how the try/except resolves. Even if an exception escapes, finally runs before the exception propagates.
+    final_challenge_prompt: |
+      Write safe_read(text) for the evidence processing system:
+      — log = []
+      — try to parse int(text) → value
+      — except ValueError → value = -1
+      — finally: log.append("done")
+      — return value, log

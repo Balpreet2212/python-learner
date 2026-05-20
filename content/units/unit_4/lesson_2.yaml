@@ -1,6 +1,22 @@
 unit: 4
 lesson: 2
 xp: 10
+
+example:
+  code: |
+    tools = ["hammer", "drill"]
+    tools.append("saw")
+    print(tools)
+    print(len(tools))
+    print(tools[0])
+    print(tools[-1])
+  explanation: |
+    .append() adds a new item to the end of a list in-place (it changes the original).
+    len() counts the total number of items.
+    Positive indexes count from the front: [0] is first, [1] is second.
+    Negative indexes count from the back: [-1] is always the last item.
+  output: "['hammer', 'drill', 'saw']\n3\nhammer\nsaw"
+
 code_starter: |
   inventory = ["sword", "shield"]
 
@@ -23,16 +39,59 @@ tests:
     message: "item_count should be 3"
   - code: "assert first_item == 'sword', f'first_item should be sword, got {first_item!r}'"
     message: "first_item should be 'sword'"
+
+final_challenge:
+  code_starter: |
+    # Build an item bag and query it
+    items = ["torch", "rope"]
+  hints:
+    - 'items.append("key")  — add the key'
+    - "item_count = len(items)  — should be 3"
+    - "first_item = items[0]  — should be torch"
+  tests:
+    - code: "assert 'key' in items"
+      message: "'key' should be in items"
+    - code: "assert len(items) == 3, f'items should have 3 items, got {len(items)}'"
+      message: "items should have 3 items after appending"
+    - code: "assert item_count == 3"
+      message: "item_count should be 3"
+    - code: "assert first_item == 'torch'"
+      message: "first_item should be 'torch'"
+
 worlds:
   fantasy:
     title: "Inventory Management"
-    narrative: |
-      Your pack needs restocking. "Lists have methods — built-in actions you call with a dot," Elara says. "`.append()` adds an item to the end. `len()` tells you how many items there are. And `list[0]` retrieves the first item — Python lists start counting at zero." Add a potion, measure the inventory, and grab the first item.
+    setup: |
+      Your pack needs restocking. "Lists have methods — built-in actions you call
+      with a dot," Elara says. ".append() adds an item to the end. len() tells you
+      how many items there are. And list[0] retrieves the first item — Python lists
+      start counting at zero."
+
+      Add a potion, measure the inventory size, and grab the first item by index.
+    final_challenge_prompt: |
+      Your bag already has a torch and rope. Append "key" to items. Then store the
+      total count in item_count (len()) and store the first item in first_item
+      (items[0]).
   scifi:
     title: "Cargo Operations"
-    narrative: |
-      Cargo must be logged precisely. "List methods let you modify lists in place," the AI explains. "`.append()` adds to the end without creating a new list. `len()` counts items. Index with `[0]` for the first, `[1]` for the second — lists are zero-indexed." Update and query the inventory.
+    setup: |
+      Cargo must be logged precisely. "List methods let you modify lists in place,"
+      the AI explains. ".append() adds to the end without creating a new list.
+      len() counts items. Index with [0] for the first — lists are zero-indexed."
+
+      Update and query the inventory using the methods you've learned.
+    final_challenge_prompt: |
+      The cargo hold has a torch and rope. Add "key" to items using append. Store
+      len(items) in item_count and items[0] in first_item.
   mystery:
     title: "Evidence Locker"
-    narrative: |
-      New evidence arrives — log it, count it, identify the first item. "`.append()` adds an item to the end of a list," your partner says. "`len()` counts the items, and `[0]` retrieves the first." Append `"potion"` to `inventory`, then find `item_count` and `first_item`.
+    setup: |
+      New evidence arrives — log it, count it, identify the first item. ".append()
+      adds an item to the end of a list," your partner says. "len() counts the items,
+      and [0] retrieves the first."
+
+      Append "potion" to inventory, then find item_count and first_item.
+    final_challenge_prompt: |
+      The evidence locker has a torch and rope. A new key has been found — append
+      it to items. Then store the total count in item_count and the first item in
+      first_item.

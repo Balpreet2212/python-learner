@@ -18,14 +18,31 @@ class LessonTest:
 
 
 @dataclass
+class ExampleContent:
+    code: str
+    explanation: str
+    output: str
+
+
+@dataclass
+class FinalChallengeContent:
+    prompt: str
+    code_starter: str
+    hints: list[str]
+    tests: list[LessonTest]
+
+
+@dataclass
 class LessonContent:
     unit: int
     lesson: int
     title: str
-    narrative: str
+    setup: str
+    example: ExampleContent
     code_starter: str
     hints: list[str]
     tests: list[LessonTest]
+    final_challenge: FinalChallengeContent
     xp: int
     total_lessons: int = LESSONS_PER_UNIT
 
@@ -45,7 +62,6 @@ class CapstoneContent:
 
 def _resolve_world(data: dict[str, Any], world: str) -> dict[str, Any]:
     worlds: dict[str, Any] = data.get("worlds", {})
-    # Fall back to fantasy if requested world not found
     return worlds.get(world) or worlds.get("fantasy") or {}
 
 
@@ -75,14 +91,28 @@ def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
         return None
     data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
     world_data = _resolve_world(data, world)
+    raw_example: dict[str, Any] = data.get("example", {})
     raw_tests: list[dict[str, str]] = data.get("tests", [])
+    raw_fc: dict[str, Any] = data.get("final_challenge", {})
+    raw_fc_tests: list[dict[str, str]] = raw_fc.get("tests", [])
     return LessonContent(
         unit=unit,
         lesson=lesson,
         title=world_data.get("title", f"Unit {unit} · Lesson {lesson}"),
-        narrative=world_data.get("narrative", "").strip(),
+        setup=world_data.get("setup", "").strip(),
+        example=ExampleContent(
+            code=raw_example.get("code", "").rstrip(),
+            explanation=raw_example.get("explanation", "").strip(),
+            output=raw_example.get("output", "").strip(),
+        ),
         code_starter=data.get("code_starter", "").rstrip(),
         hints=data.get("hints", []),
         tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_tests],
+        final_challenge=FinalChallengeContent(
+            prompt=world_data.get("final_challenge_prompt", "").strip(),
+            code_starter=raw_fc.get("code_starter", "").rstrip(),
+            hints=raw_fc.get("hints", []),
+            tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_fc_tests],
+        ),
         xp=data.get("xp", 10),
     )

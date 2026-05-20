@@ -24,16 +24,31 @@ BADGE_TEMPLATE = "unit_{unit}_complete"
 # ── Response schemas ──────────────────────────────────────────────────────────
 
 
+class ExampleOut(BaseModel):
+    code: str
+    explanation: str
+    output: str
+
+
+class FinalChallengeOut(BaseModel):
+    prompt: str
+    code_starter: str
+    hints: list[str]
+    test_count: int
+
+
 class LessonOut(BaseModel):
     unit: int
     lesson: int
     title: str
-    narrative: str
+    setup: str
+    example: ExampleOut
     code_starter: str
     hints: list[str]
     xp: int
     test_count: int
     total_lessons: int
+    final_challenge: FinalChallengeOut
 
 
 class TestResultOut(BaseModel):
@@ -90,12 +105,23 @@ async def get_lesson(
         unit=content.unit,
         lesson=content.lesson,
         title=content.title,
-        narrative=content.narrative,
+        setup=content.setup,
+        example=ExampleOut(
+            code=content.example.code,
+            explanation=content.example.explanation,
+            output=content.example.output,
+        ),
         code_starter=content.code_starter,
         hints=content.hints,
         xp=content.xp,
         test_count=len(content.tests),
         total_lessons=content.total_lessons,
+        final_challenge=FinalChallengeOut(
+            prompt=content.final_challenge.prompt,
+            code_starter=content.final_challenge.code_starter,
+            hints=content.final_challenge.hints,
+            test_count=len(content.final_challenge.tests),
+        ),
     )
 
 
@@ -132,13 +158,46 @@ async def submit_challenge(
     )
 
 
+@router.post("/final/submit")
+async def submit_final(
+    body: SubmitRequest,
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+    _csrf: None = Depends(require_csrf),
+) -> SubmitOut:
+    if account.role != "learner":
+        raise forbidden("Only learner accounts can submit")
+    if len(body.code) > 10_000:
+        raise bad_request("Code submission too large")
+
+    profile = account.profile
+    if profile is None or not profile.track:
+        raise bad_request("Complete onboarding before submitting")
+
+    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
+    if content is None:
+        raise bad_request("Lesson content not found")
+
+    tests = [{"code": t.code, "message": t.message} for t in content.final_challenge.tests]
+    result = run_challenge(body.code, tests)
+    return SubmitOut(
+        all_passed=result.all_passed,
+        exec_error=result.exec_error,
+        stdout=result.stdout,
+        tests=[
+            TestResultOut(passed=bool(t["passed"]), message=str(t["message"]))
+            for t in result.tests
+        ],
+    )
+
+
 @router.post("/lesson/advance")
 async def advance_lesson(
     account: Account = Depends(get_current_account),
     db: AsyncSession = Depends(get_db),
     _csrf: None = Depends(require_csrf),
 ) -> LearnerProfileOut:
-    """Advance to the next lesson (or next unit). Must have completed the challenge first."""
+    """Advance to the next lesson. Must complete the final challenge first."""
     if account.role != "learner":
         raise forbidden("Only learner accounts can advance lessons")
 
@@ -146,10 +205,7 @@ async def advance_lesson(
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before advancing lessons")
 
-    current_unit = profile.current_unit
-    current_lesson = profile.current_lesson
-
-    if current_lesson < LESSONS_PER_UNIT:
+    if profile.current_lesson < LESSONS_PER_UNIT:
         profile.current_lesson += 1
     else:
         raise bad_request("Complete the unit capstone to advance to the next unit")
@@ -244,7 +300,6 @@ async def advance_capstone(
 
     current_unit = profile.current_unit
 
-    # Award the unit-completion badge
     badge = BADGE_TEMPLATE.format(unit=current_unit)
     try:
         badges: list[str] = json.loads(profile.badges_json)

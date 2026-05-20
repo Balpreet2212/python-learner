@@ -1,6 +1,23 @@
 unit: 2
 lesson: 4
 xp: 10
+
+example:
+  code: |
+    temps = [18, 25, 12, 31, 22]
+    highest = temps[0]
+    for t in temps:
+        if t > highest:
+            highest = t
+    print("Highest:", highest)
+  explanation: |
+    To find the maximum in a list, keep a "running best" variable.
+    Start by assuming the first element is the best (highest = temps[0]).
+    Then loop through every item: if the current item beats the best, update it.
+    After the loop, highest holds the largest value in the list.
+    This pattern works for any comparison — min, max, first match, etc.
+  output: "Highest: 31"
+
 code_starter: |
   scores = [12, 47, 3, 89, 22]
 
@@ -15,16 +32,56 @@ hints:
 tests:
   - code: "assert highest == 89, f'highest should be 89, got {highest}'"
     message: "highest should be 89"
+
+final_challenge:
+  code_starter: |
+    readings = [3, 91, 27, 64, 8]
+    # Find the peak reading using a for loop
+    # Store it in 'peak'
+  hints:
+    - "peak = readings[0]  — assume the first is highest"
+    - "for r in readings:  — check each value"
+    - "    if r > peak:  — update if better"
+    - "        peak = r"
+  tests:
+    - code: "assert peak == 91, f'peak should be 91, got {peak}'"
+      message: "peak should be 91 (the largest value in readings)"
+
 worlds:
   fantasy:
     title: "The Champion's Trial"
-    narrative: |
-      Five warriors enter the arena — only the strongest advances. "You can use a loop to track the greatest value seen so far," Elara explains. "Start by assuming the first element is the winner, then replace it whenever you find something better." Find `highest` among the scores.
+    setup: |
+      Five warriors enter the arena — only the strongest advances. "You can use a
+      loop to track the greatest value seen so far," Elara explains. "Start by
+      assuming the first element is the winner, then replace it whenever you find
+      something better."
+
+      This pattern — a running maximum — is fundamental to many algorithms. Find
+      'highest' among the scores and the champion enters the next round.
+    final_challenge_prompt: |
+      Five arcane readings were taken from different ley lines. Find the peak energy
+      reading from the list [3, 91, 27, 64, 8]. Use a for loop and a running maximum
+      to find the largest value and store it in 'peak'.
   scifi:
     title: "Peak Signal"
-    narrative: |
-      Five sensor readings arrive from deep space. "To find a maximum, keep a running winner — start with the first value, then update it whenever the current reading exceeds it," the AI says. Loop through `scores` and store the peak reading in `highest`.
+    setup: |
+      Five sensor readings arrive from deep space. "To find a maximum, keep a
+      running winner — start with the first value, then update it whenever the
+      current reading exceeds it," the AI says.
+
+      Loop through 'scores' and store the peak reading in 'highest'.
+    final_challenge_prompt: |
+      Five telemetry readings came in: [3, 91, 27, 64, 8]. Find the strongest
+      signal. Use a for loop with a running maximum and store the result in 'peak'.
   mystery:
     title: "The Biggest Lead"
-    narrative: |
-      Five suspects — each assigned a suspicion score. "Finding the maximum means walking through every value and keeping the best you've seen," your mentor says. "Assume the first score leads, then check whether each new one beats it." Find the highest score and store it in `highest`.
+    setup: |
+      Five suspects — each assigned a suspicion score. "Finding the maximum means
+      walking through every value and keeping the best you've seen," your mentor
+      says. "Assume the first score leads, then check whether each new one beats it."
+
+      Find the highest score and store it in 'highest'.
+    final_challenge_prompt: |
+      Five informants each provided a reliability rating: [3, 91, 27, 64, 8].
+      Find the highest rating using a for loop with a running maximum. Store the
+      result in 'peak'.

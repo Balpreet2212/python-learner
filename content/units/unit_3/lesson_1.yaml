@@ -1,6 +1,22 @@
 unit: 3
 lesson: 1
 xp: 10
+
+example:
+  code: |
+    def make_greeting():
+        return "Welcome to PyQuest!"
+
+    result = make_greeting()
+    print(result)
+    print(make_greeting())
+  explanation: |
+    def declares a function — a named, reusable block of code.
+    The function body is indented. return sends a value back to whoever called it.
+    You call a function by writing its name followed by parentheses.
+    The same function can be called as many times as you need.
+  output: "Welcome to PyQuest!\nWelcome to PyQuest!"
+
 code_starter: |
   # Define a function called 'greet' that returns the string "Hello, world!"
   def greet():
@@ -17,16 +33,60 @@ tests:
     message: "greet() should return 'Hello, world!'"
   - code: "assert message == 'Hello, world!'"
     message: "message should equal the return value of greet()"
+
+final_challenge:
+  code_starter: |
+    # Define a function that returns your mission name
+  hints:
+    - "def mission_name():  — no parameters needed"
+    - '    return "Operation Sunrise"  — return this exact string'
+    - "result = mission_name()  — call it and store the result"
+  tests:
+    - code: "assert callable(mission_name)"
+      message: "mission_name should be a callable function"
+    - code: "assert mission_name() == 'Operation Sunrise'"
+      message: "mission_name() should return 'Operation Sunrise'"
+    - code: "assert result == 'Operation Sunrise'"
+      message: "result should store the return value"
+
 worlds:
   fantasy:
     title: "The Function Grimoire"
-    narrative: |
-      Elara opens a thick grimoire. "A *function* is a named spell — you define it once, then cast it as many times as you like," she says. "The `def` keyword starts the definition; `return` sends a value back to the caller." Define a function called `greet` that returns `"Hello, world!"`, then call it and store the result in `message`.
+    setup: |
+      Elara opens a thick grimoire. "A function is a named spell — you define it
+      once, then cast it as many times as you like," she says. "The def keyword
+      starts the definition; return sends a value back to the caller."
+
+      Think of it as writing a recipe that can be cooked on demand. Define a
+      function called 'greet' that returns "Hello, world!", then call it and store
+      the result in 'message'.
+    final_challenge_prompt: |
+      The Academy's announcement crystal needs a mission name. Define a function
+      called mission_name that takes no parameters and returns the string
+      "Operation Sunrise". Call it and store the result in 'result'.
   scifi:
     title: "Subroutine Alpha"
-    narrative: |
-      The ship's computer runs on subroutines — reusable blocks of code with a name. "In Python, `def` declares a function," the AI explains. "Call it later by using its name followed by parentheses. Whatever `return` sends back is the result." Define `greet` to return `"Hello, world!"` and store the result in `message`.
+    setup: |
+      The ship's computer runs on subroutines — reusable blocks of code with a
+      name. "In Python, def declares a function," the AI explains. "Call it later
+      by using its name followed by parentheses. Whatever return sends back is
+      the result."
+
+      Define 'greet' to return "Hello, world!" and store the result in 'message'.
+    final_challenge_prompt: |
+      The ship's mission log needs a name entry. Define a function called
+      mission_name that returns "Operation Sunrise". Call it and store the
+      result in 'result'.
   mystery:
     title: "The Standard Greeting"
-    narrative: |
-      Every detective in the agency uses the same opening line. "A function lets you name a block of code and reuse it," your mentor explains. "`def` starts the definition, `return` sends the value back." Write a function `greet` that returns `"Hello, world!"`, call it, and store the result in `message`.
+    setup: |
+      Every detective in the agency uses the same opening line. "A function lets
+      you name a block of code and reuse it," your mentor explains. "def starts
+      the definition, return sends the value back."
+
+      Write a function 'greet' that returns "Hello, world!", call it, and store
+      the result in 'message'.
+    final_challenge_prompt: |
+      Every case file starts with the operation name. Define a function called
+      mission_name that returns "Operation Sunrise". Call it and store the
+      return value in 'result'.

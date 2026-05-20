@@ -1,6 +1,21 @@
 unit: 3
 lesson: 2
 xp: 10
+
+example:
+  code: |
+    def square(n):
+        return n * n
+
+    print(square(5))
+    print(square(3))
+  explanation: |
+    A parameter is a variable listed inside the parentheses of def.
+    When you call the function, you pass a value — called an argument — and it
+    fills the parameter slot. The function can then use that value in its body.
+    Parameters make functions flexible: the same function works with any input.
+  output: "25\n9"
+
 code_starter: |
   # Define a function called 'double' that takes one parameter 'n'
   # and returns n multiplied by 2.
@@ -17,16 +32,58 @@ tests:
     message: "double(0) should return 0"
   - code: "assert result == 14"
     message: "result should be 14"
+
+final_challenge:
+  code_starter: |
+    # Define a function that triples a level value
+  hints:
+    - "def power_up(level):  — one parameter"
+    - "    return level * 3  — triple it"
+    - "assert power_up(5) == 15"
+  tests:
+    - code: "assert power_up(5) == 15, f'power_up(5) should be 15, got {power_up(5)}'"
+      message: "power_up(5) should return 15"
+    - code: "assert power_up(0) == 0"
+      message: "power_up(0) should return 0"
+    - code: "assert power_up(10) == 30"
+      message: "power_up(10) should return 30"
+
 worlds:
   fantasy:
     title: "The Amplification Rune"
-    narrative: |
-      "A function becomes truly powerful when it accepts inputs," Elara says, drawing a rune that doubles the glow of whatever crystal you place before it. "Parameters are the slots where inputs go — listed inside the parentheses of `def`." Define `double(n)` that returns `n * 2`, then call it with `7`.
+    setup: |
+      "A function becomes truly powerful when it accepts inputs," Elara says,
+      drawing a rune that triples the glow of whatever crystal you place before it.
+      "Parameters are the slots where inputs go — listed inside the parentheses
+      of def."
+
+      Each call can pass a different value. Define 'double(n)' that returns n * 2,
+      then call it with 7. The rune amplifies whatever you feed it.
+    final_challenge_prompt: |
+      The rune of amplification has been upgraded — it now triples power instead of
+      doubling. Define a function called power_up that takes a level parameter and
+      returns level * 3. Test it: power_up(5) should equal 15.
   scifi:
     title: "Signal Amplifier"
-    narrative: |
-      The comms array needs to double incoming signal strength. "Functions accept *parameters* — variables that receive values when the function is called," the AI explains. "Whatever you pass in, the function can use it." Define `double(n)` to return `n * 2` and call it with `7`.
+    setup: |
+      The comms array needs to double incoming signal strength. "Functions accept
+      parameters — variables that receive values when the function is called," the
+      AI explains. "Whatever you pass in, the function can use it."
+
+      Define 'double(n)' to return n * 2 and call it with 7.
+    final_challenge_prompt: |
+      The new amplifier triples signal strength. Define a function called power_up
+      that accepts a level parameter and returns level * 3. It should work for any
+      value: power_up(5) returns 15, power_up(10) returns 30.
   mystery:
     title: "Doubling the Reward"
-    narrative: |
-      A function that doubles a bounty — exactly what the agency needs. "Parameters let a function work with different inputs each time you call it," your mentor says. "Name them inside the parentheses of `def`, use them in the body." Write `double(n)` returning `n * 2` and call it with `7`.
+    setup: |
+      A function that doubles a bounty — exactly what the agency needs. "Parameters
+      let a function work with different inputs each time you call it," your mentor
+      says. "Name them inside the parentheses of def, use them in the body."
+
+      Write 'double(n)' returning n * 2 and call it with 7.
+    final_challenge_prompt: |
+      The agency tripled its rewards program. Define a function called power_up that
+      takes a level parameter and returns level * 3. Verify: power_up(5) == 15 and
+      power_up(10) == 30.

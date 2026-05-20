@@ -1,6 +1,20 @@
 unit: 1
 lesson: 1
 xp: 10
+
+example:
+  code: |
+    city = "Paris"
+    country = "France"
+    print(city)
+    print(country)
+  explanation: |
+    A variable is a labelled container. The = sign assigns a value to it.
+    Here 'city' holds the text "Paris" and 'country' holds "France".
+    Calling print() displays whatever the variable contains.
+    Text values (strings) must be wrapped in quotes — single or double both work.
+  output: "Paris\nFrance"
+
 code_starter: |
   # Assign your character's name to a variable called 'name'
   # Example: name = "Alice"
@@ -13,16 +27,59 @@ tests:
     message: "name should be a string (text in quotes)"
   - code: "assert len(name) > 0, 'name cannot be empty'"
     message: "name should not be empty"
+
+final_challenge:
+  code_starter: |
+    # Create two variables and print both
+  hints:
+    - 'quest_name = "The Ember Stone"  — use exactly this string'
+    - 'hero_name = "Aria"  — use exactly this string'
+    - "print() each variable on its own line"
+  tests:
+    - code: "assert quest_name == 'The Ember Stone'"
+      message: "quest_name should be 'The Ember Stone'"
+    - code: "assert hero_name == 'Aria'"
+      message: "hero_name should be 'Aria'"
+
 worlds:
   fantasy:
     title: "The Sorcerer's Variables"
-    narrative: |
-      The ancient sorcerer Elara holds out a shimmering crystal vial. "Every spell begins with a name," she says, her cloak trailing sparks. "In Python, we store values inside *variables* — containers that hold information so we can use it later." She gestures to the parchment on her desk: "Assign your wizard name to a variable called `name`. Use the `=` sign, and put text inside quotes."
+    setup: |
+      The ancient sorcerer Elara holds out a shimmering crystal vial. "Every spell
+      begins with a name," she says, her cloak trailing sparks. "In Python, we store
+      values inside variables — containers that hold information so we can use it later."
+
+      She gestures to the parchment on her desk. "Assign your wizard name to a variable
+      called 'name'. Use the = sign, and put text inside quotes. That single line is
+      the foundation of all magic to come."
+    final_challenge_prompt: |
+      The Academy's quest board needs a new entry. Create a variable called quest_name
+      and store the string "The Ember Stone" in it. Then create hero_name and store
+      "Aria". Print both so the board can display them.
   scifi:
     title: "Boot Sequence Alpha"
-    narrative: |
-      The ship's AI flickers to life on the main console, its voice clipped and precise. "Crew registration required before launch." Navigation, weapons, life support — all offline until you check in. "In Python, we store information in variables — labels that point to a value in memory." Your first task: assign your name to a variable called `name` so the system can identify you.
+    setup: |
+      The ship's AI flickers to life on the main console, its voice clipped and precise.
+      "Crew registration required before launch." Navigation, weapons, life support —
+      all offline until you check in.
+
+      "In Python, we store information in variables — labels that point to a value in
+      memory. Your first task: assign your name to a variable called 'name' so the
+      system can identify you. Use the = sign. Text goes in quotes."
+    final_challenge_prompt: |
+      Log the mission and pilot names into the ship's computer. Create quest_name
+      storing "The Ember Stone" and hero_name storing "Aria". Print both so they
+      appear in the mission log.
   mystery:
     title: "The Detective's Notebook"
-    narrative: |
-      You find a worn leather notebook on the detective's desk. On the first page, every clue is labeled — "suspect = 'unknown'", "location = 'parlour'". Variables, you realise, work just like labels on evidence bags: they give a name to a piece of information so you can find it again. Open your own case file by assigning your detective name to a variable called `name`.
+    setup: |
+      You find a worn leather notebook on the detective's desk. On the first page,
+      every clue is labelled — suspect = 'unknown', location = 'parlour'. Variables,
+      you realise, work just like labels on evidence bags: they give a name to a
+      piece of information so you can find it again.
+
+      "Open your own case file," Chief Morgan says. "Assign your detective name to a
+      variable called 'name'. The = sign is your pen. Quotes frame the text."
+    final_challenge_prompt: |
+      File the case. Create quest_name with the value "The Ember Stone" and hero_name
+      with "Aria". Print both to confirm the filing.

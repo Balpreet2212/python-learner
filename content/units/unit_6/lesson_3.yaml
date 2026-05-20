@@ -1,34 +1,108 @@
 unit: 6
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    class Battery:
+        def __init__(self, charge):
+            self.charge = charge
+
+        def drain(self, amount):
+            self.charge -= amount
+            if self.charge < 0:
+                self.charge = 0
+
+    b = Battery(100)
+    b.drain(30)
+    print(b.charge)
+    b.drain(80)
+    print(b.charge)
+  explanation: |
+    Methods can mutate (change) an object's own attributes by assigning through self.
+    b.drain(30) subtracts 30 from self.charge. The if guard prevents charge from going below 0.
+    State changes persist on the object — each call to drain sees the updated value from the previous call.
+  output: "70\n0"
+
 code_starter: |
   class Counter:
-      def __init__(self):
-          self.count = 0
+      def __init__(self, start):
+          self.count = start
 
-      # Add a method 'increment' that adds 1 to self.count
       def increment(self):
+          self.___ += ___
 
-  c = Counter()
+      def reset(self):
+          self.___ = ___
+
+  c = Counter(0)
   c.increment()
   c.increment()
   c.increment()
 hints:
-  - "self.count += 1  — inside the increment method"
-  - "Each call to c.increment() adds 1; after 3 calls, count == 3"
+  - "self.count += 1 inside increment"
+  - "self.count = 0 inside reset"
+
 tests:
-  - code: "assert c.count == 3, f'c.count should be 3, got {c.count}'"
-    message: "c.count should be 3 after three increment() calls"
+  - code: "assert c.count == 3, f'count should be 3, got {c.count}'"
+    message: "count is 3 after three increments"
+  - code: "c.reset(); assert c.count == 0, 'count should be 0 after reset'"
+    message: "count resets to 0"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "class Mana:"
+    - "    def __init__(self, total): self.mana = total"
+    - "    def use(self, amount): self.mana -= amount; if self.mana < 0: self.mana = 0"
+    - "m = Mana(100); m.use(40); m.use(80)"
+  tests:
+    - code: |
+        m = Mana(100)
+        m.use(40)
+        assert m.mana == 60, f'mana should be 60, got {m.mana}'
+      message: "mana is 60 after use(40)"
+    - code: |
+        m = Mana(100)
+        m.use(40)
+        m.use(80)
+        assert m.mana == 0, f'mana should not go below 0, got {m.mana}'
+      message: "mana does not go below 0"
+    - code: |
+        m = Mana(50)
+        m.use(50)
+        assert m.mana == 0
+      message: "mana reaches exactly 0"
+
 worlds:
   fantasy:
-    title: "The Tally Stone"
-    narrative: |
-      The tally stone records each victory, one notch at a time. "Methods can modify the object's own attributes through `self`," Elara explains. "Each call to `increment` changes the state of *this particular instance*." Implement `increment` to add 1 to `self.count` on every call.
+    title: "The Mana Pool — State That Changes"
+    setup: |
+      A wizard's mana pool is not a fixed number — it drains with every spell cast. After a long battle, it might be exhausted entirely, but it never goes negative (there is no "debt" of magical energy).
+      This is stateful object behaviour: a method that modifies self.attribute and then enforces a constraint. Each call to use() sees the result of the previous call, because the change is stored on the object itself.
+    final_challenge_prompt: |
+      Write a Mana class:
+      — __init__(self, total) stores total as self.mana
+      — use(self, amount) subtracts amount from self.mana, but never lets it drop below 0
+      — Test: m = Mana(100); m.use(40) → mana is 60; m.use(80) → mana is 0
   scifi:
-    title: "Event Counter"
-    narrative: |
-      The ship's event logger counts each anomaly detected. "Methods that change `self.attribute` modify the instance's state — the change persists between calls," the AI explains. Implement `increment` so each call adds 1 to `self.count`.
+    title: "Fuel Cell Drain Protocol"
+    setup: |
+      The Meridian's fuel cells deplete as the ship manoeuvres. A cell cannot have negative fuel — when it hits zero, the reading stays at zero until a resupply occurs. Code that lets fuel go negative causes incorrect range calculations and mission aborts.
+      Stateful mutation through self is how objects track this kind of changing resource over time. The method both modifies the attribute and enforces the floor constraint in one place.
+    final_challenge_prompt: |
+      Write a Mana class (models a fuel cell):
+      — __init__(self, total): self.mana = total
+      — use(self, amount): subtract amount, floor at 0
+      — Verify: Mana(100).use(40) → 60; then use(80) → 0
   mystery:
-    title: "The Tally Board"
-    narrative: |
-      The detective marks each confirmed clue on the board. "Instance state persists between method calls — that's what makes objects useful," your mentor explains. "Modify `self.count` inside `increment` and it stays changed." Implement `increment` to add 1 each time it's called.
+    title: "The Informant's Credibility — Draining Under Pressure"
+    setup: |
+      An informant's credibility score drops every time they give conflicting testimony. It can never go below zero — at that point they have no credibility left, and further contradictions don't matter.
+      Modelling this as a class with a use() method that mutates self and enforces the zero floor is cleaner than managing the variable externally. The constraint lives with the data.
+    final_challenge_prompt: |
+      Write a Mana class (credibility model):
+      — __init__(self, total) → self.mana = total
+      — use(self, amount): self.mana -= amount; floor at 0
+      — Create m = Mana(100), call m.use(40) then m.use(80), verify mana is 0

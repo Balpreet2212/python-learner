@@ -1,6 +1,21 @@
 unit: 2
 lesson: 1
 xp: 10
+
+example:
+  code: |
+    total = 0
+    for i in range(1, 4):
+        total += i
+        print(i, "->", total)
+    print("Final:", total)
+  explanation: |
+    A for loop repeats a block of code once for each value that range() produces.
+    range(1, 4) generates the sequence 1, 2, 3 — it stops before 4.
+    The indented lines below 'for' are the loop body — they run each iteration.
+    total += i is shorthand for total = total + i.
+  output: "1 -> 1\n2 -> 3\n3 -> 6\nFinal: 6"
+
 code_starter: |
   # Use a for loop and range() to sum the numbers 1 through 5.
   # Store the result in a variable called 'total'.
@@ -15,16 +30,60 @@ tests:
     message: "total should be an integer"
   - code: "assert total == 15, f'total should be 15, got {total}'"
     message: "total should equal 15 (1+2+3+4+5)"
+
+final_challenge:
+  code_starter: |
+    # Sum all numbers from 1 to 10 using a for loop
+    # Store the result in 'grand_total'
+  hints:
+    - "grand_total = 0  — start at zero"
+    - "for i in range(1, 11):  — range stops before 11, so includes 10"
+    - "    grand_total += i"
+  tests:
+    - code: "assert grand_total == 55, f'grand_total should be 55, got {grand_total}'"
+      message: "grand_total should be 55 (sum of 1 through 10)"
+
 worlds:
   fantasy:
     title: "The Summoning Loop"
-    narrative: |
-      Elara traces a glowing circle on the floor. "Some spells must be cast many times in sequence — that is what a `for` loop is for," she explains. "The loop runs once for each value that `range()` produces. Each pass through the spell accumulates power." Use a `for` loop to sum the first five numbers into `total`.
+    setup: |
+      Elara traces a glowing circle on the floor. "Some spells must be cast many
+      times in sequence — that is what a for loop is for," she explains. "The loop
+      runs once for each value that range() produces. Each pass through the spell
+      accumulates power."
+
+      She demonstrates: range(1, 6) steps through 1, 2, 3, 4, 5. Inside the loop,
+      you collect each number into a growing total. This is how repetition becomes
+      computation. Use a for loop to sum the first five numbers into 'total'.
+    final_challenge_prompt: |
+      The grand summoning ritual demands ten rounds of energy collection — one for
+      each of the ten great runes. Use a for loop to sum all numbers from 1 to 10
+      and store the result in grand_total. The ritual is only complete when you
+      reach the magic number 55.
   scifi:
     title: "Power Core Calibration"
-    narrative: |
-      The reactor needs five charging pulses — one for each ignition cycle. "Loops let us repeat an operation automatically," the ship AI explains. "`range(1, 6)` generates the sequence 1, 2, 3, 4, 5 — the AI fires each pulse and adds it to the running total." Use a `for` loop to accumulate the sum into `total`.
+    setup: |
+      The reactor needs five charging pulses — one for each ignition cycle. "Loops
+      let us repeat an operation automatically," the ship AI explains. "range(1, 6)
+      generates the sequence 1, 2, 3, 4, 5 — the AI fires each pulse and adds it
+      to the running total."
+
+      Use a for loop to accumulate the sum into 'total'. The engine won't start
+      until the calibration total reaches exactly 15.
+    final_challenge_prompt: |
+      The deep-space scanner requires ten calibration pulses. Use a for loop to
+      sum all numbers from 1 to 10 and store the result in grand_total. The scanner
+      confirms readiness when grand_total equals 55.
   mystery:
     title: "Counting the Evidence"
-    narrative: |
-      Five witnesses, five statements — your partner tallies each one. "A `for` loop handles repetition," she says. "`range(1, 6)` steps through 1, 2, 3, 4, 5 automatically. Each step, you add the current number to a running total." Loop through the numbers and sum them into `total`.
+    setup: |
+      Five witnesses, five statements — your partner tallies each one. "A for loop
+      handles repetition," she says. "range(1, 6) steps through 1, 2, 3, 4, 5
+      automatically. Each step, you add the current number to a running total."
+
+      Loop through the numbers and sum them into 'total'. The case file needs an
+      exact count before it can be submitted to the prosecutor.
+    final_challenge_prompt: |
+      The evidence inventory spans ten categories. Use a for loop to sum all numbers
+      from 1 to 10 and store the total in grand_total. The case is sealed when
+      grand_total reaches 55 — the system validates the count automatically.

@@ -1,28 +1,83 @@
 unit: 5
 lesson: 1
 xp: 10
+
+example:
+  code: |
+    def divide(a, b):
+        try:
+            result = a / b
+        except ZeroDivisionError:
+            result = 0
+        return result
+
+    print(divide(10, 2))
+    print(divide(5, 0))
+  explanation: |
+    A try block contains code that might fail. If it raises the named exception, execution jumps to the except block instead of crashing.
+    Here, dividing by zero raises ZeroDivisionError. The except clause catches it and sets result to 0 — the function always returns safely.
+  output: "5.0\n0"
+
 code_starter: |
-  # Use try/except to safely divide 10 by 0.
-  # If a ZeroDivisionError occurs, store -1 in 'result'.
-  try:
-      result = 10 // 0
-  except ZeroDivisionError:
+  def safe_divide(a, b):
+      try:
+          result = ___
+      except ZeroDivisionError:
+          result = ___
+      return result
 hints:
-  - "Inside the except block: result = -1"
-  - "The except block only runs if that specific error is raised"
+  - "result = a // b for integer division"
+  - "Return 0 when ZeroDivisionError is caught"
+
 tests:
-  - code: "assert result == -1, f'result should be -1, got {result}'"
-    message: "result should be -1 (the error was caught)"
+  - code: "assert safe_divide(10, 2) == 5, 'safe_divide(10,2) should be 5'"
+    message: "safe_divide(10, 2) returns 5"
+  - code: "assert safe_divide(7, 0) == 0, 'safe_divide(7,0) should be 0'"
+    message: "safe_divide(7, 0) returns 0 safely"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "def safe_divide(a, b):"
+    - "Use integer division a // b inside try"
+    - "Return 0 in the except ZeroDivisionError block"
+  tests:
+    - code: "assert safe_divide(9, 3) == 3, 'safe_divide(9,3) should be 3'"
+      message: "safe_divide(9, 3) returns 3"
+    - code: "assert safe_divide(15, 0) == 0, 'safe_divide(15,0) should be 0'"
+      message: "safe_divide(15, 0) returns 0"
+    - code: "assert safe_divide(0, 5) == 0, 'safe_divide(0,5) should be 0'"
+      message: "safe_divide(0, 5) returns 0"
+
 worlds:
   fantasy:
-    title: "The Exception Ward"
-    narrative: |
-      Dividing a spell by zero — catastrophic in any realm. "Python uses `try`/`except` to handle errors gracefully," Elara says. "Code inside `try` runs normally. If a specific error type occurs, execution jumps to the matching `except` block instead of crashing." Catch the `ZeroDivisionError` and store `-1` in `result`.
+    title: "The Fail-Safe Enchantment"
+    setup: |
+      Every seasoned enchanter knows that some spells can backfire. Dividing a potion's strength by zero vials — because none were prepared — would cause the whole ritual to collapse in a puff of acrid smoke.
+      The Guild's solution: wrap dangerous operations in a try block. If the error occurs, the except clause catches it like a magical ward, letting the spell finish gracefully instead of exploding.
+      This is Python's exception-handling mechanism. You name the specific error you expect, handle it cleanly, and your program carries on.
+    final_challenge_prompt: |
+      The castle treasury needs a function to divide gold evenly among soldiers. If there are no soldiers (b = 0), dividing is impossible — return 0 instead of crashing.
+      Write safe_divide(a, b) that:
+      — Returns a // b normally
+      — Returns 0 if a ZeroDivisionError occurs
   scifi:
-    title: "Fault Tolerance"
-    narrative: |
-      Dividing by zero would crash the navigation system. "Exceptions are Python's error signals — `try`/`except` lets you intercept them before they propagate," the AI explains. "Name the error type after `except` to catch only that kind." Handle the division error and set `result = -1`.
+    title: "Fault-Tolerant Navigation Subroutines"
+    setup: |
+      Aboard the Meridian, a navigation subroutine that crashes on divide-by-zero could send the ship into an unrecoverable spin. Mission protocol requires every computation function to be fault-tolerant.
+      Python's try/except pattern is the engineering solution: put the risky line inside try, name the exception you're guarding against in except, and define a safe fallback. The program continues — no crash, no spin.
+    final_challenge_prompt: |
+      Write a fault-tolerant safe_divide(a, b) function for the navigation computer:
+      — Returns a // b when b is non-zero
+      — Returns 0 when b is 0, catching ZeroDivisionError
   mystery:
-    title: "The Impossible Lead"
-    narrative: |
-      Dividing the evidence count by zero — a dead end, not a crash. "Python raises an exception when something goes wrong," your mentor explains. "Wrap the risky code in `try`, and handle the error in `except`." Catch the `ZeroDivisionError` and assign `-1` to `result`.
+    title: "The Detective's Failproof Calculation"
+    setup: |
+      Calculating evidence ratios is routine — until one day the denominator is zero. A witness count of zero, a crime rate of zero, an empty suspect list. Without a guard, the whole analysis crashes and the case goes cold.
+      The try/except block is the detective's safety net: attempt the calculation, and if ZeroDivisionError is raised, fall back to a known-safe value and keep working.
+    final_challenge_prompt: |
+      Write safe_divide(a, b) for the evidence analysis toolkit:
+      — Returns a // b normally
+      — Returns 0 if ZeroDivisionError is raised
+      — Works for any integer inputs

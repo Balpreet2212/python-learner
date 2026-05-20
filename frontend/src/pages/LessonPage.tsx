@@ -1,7 +1,14 @@
-import { useState, useEffect, useRef, type KeyboardEvent } from "react";
+import { useState, useEffect, type KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getLesson, submitChallenge, advanceLesson, type Lesson, type SubmitResult } from "../api/content";
+import {
+  getLesson,
+  submitChallenge,
+  submitFinalChallenge,
+  advanceLesson,
+  type Lesson,
+  type SubmitResult,
+} from "../api/content";
 import { ApiError } from "../api/client";
 import Button from "../components/ui/Button";
 
@@ -44,18 +51,96 @@ function getStyle(world: string) {
   return WORLD_STYLE[(world as World) in WORLD_STYLE ? (world as World) : "fantasy"];
 }
 
+function CodeEditor({
+  value,
+  onChange,
+  rows = 10,
+  disabled = false,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  rows?: number;
+  disabled?: boolean;
+}) {
+  function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const el = e.currentTarget;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const next = value.slice(0, start) + "    " + value.slice(end);
+    onChange(next);
+    requestAnimationFrame(() => {
+      el.selectionStart = el.selectionEnd = start + 4;
+    });
+  }
+  return (
+    <textarea
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      onKeyDown={handleKeyDown}
+      spellCheck={false}
+      rows={rows}
+      disabled={disabled}
+      className="w-full resize-none bg-gray-950 p-4 font-code text-sm leading-relaxed text-gray-100 outline-none disabled:opacity-50"
+    />
+  );
+}
+
+function TestResults({ result, style }: { result: SubmitResult; style: ReturnType<typeof getStyle> }) {
+  return (
+    <div className={`rounded-xl border ${style.border} overflow-hidden`}>
+      {result.stdout && (
+        <div className="border-b border-gray-800 bg-gray-950 px-4 py-3">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Output</p>
+          <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{result.stdout}</pre>
+        </div>
+      )}
+      {result.exec_error && (
+        <div className="border-b border-gray-800 bg-red-950/30 px-4 py-3">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-red-400">Error</p>
+          <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
+        </div>
+      )}
+      <div className={`${style.surface} px-4 py-3 space-y-2`}>
+        <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
+        {result.tests.map((t, i) => (
+          <div key={i} className="flex items-start gap-2">
+            <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
+            <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function LessonPage() {
-  const { account, profile, setProfile } = useAuth();
+  const { profile, setProfile } = useAuth();
   const navigate = useNavigate();
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [code, setCode] = useState("");
-  const [result, setResult] = useState<SubmitResult | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Example section
+  const [showOutput, setShowOutput] = useState(false);
+
+  // Exercise section
+  const [exerciseCode, setExerciseCode] = useState("");
+  const [exerciseResult, setExerciseResult] = useState<SubmitResult | null>(null);
+  const [exerciseSubmitting, setExerciseSubmitting] = useState(false);
+  const [exerciseError, setExerciseError] = useState<string | null>(null);
+  const [exerciseHintIndex, setExerciseHintIndex] = useState(-1);
+
+  // Final challenge section
+  const [finalCode, setFinalCode] = useState("");
+  const [finalResult, setFinalResult] = useState<SubmitResult | null>(null);
+  const [finalSubmitting, setFinalSubmitting] = useState(false);
+  const [finalError, setFinalError] = useState<string | null>(null);
+  const [finalHintIndex, setFinalHintIndex] = useState(-1);
+
+  // Advance
   const [advancing, setAdvancing] = useState(false);
-  const [hintIndex, setHintIndex] = useState(-1); // -1 = hidden
-  const [error, setError] = useState<string | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const world = profile?.world ?? "fantasy";
   const style = getStyle(world);
@@ -64,66 +149,60 @@ export default function LessonPage() {
     getLesson()
       .then((l) => {
         setLesson(l);
-        setCode(l.code_starter);
+        setExerciseCode(l.code_starter);
+        setFinalCode(l.final_challenge.code_starter);
       })
       .catch((err) => {
-        setError(err instanceof ApiError ? err.message : "Failed to load lesson");
+        setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
       });
   }, []);
 
-  // Reset result when code changes after a run
-  function handleCodeChange(value: string) {
-    setCode(value);
-    if (result) setResult(null);
-  }
-
-  // Insert 4 spaces on Tab key instead of changing focus
-  function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key !== "Tab") return;
-    e.preventDefault();
-    const el = e.currentTarget;
-    const start = el.selectionStart;
-    const end = el.selectionEnd;
-    const next = code.slice(0, start) + "    " + code.slice(end);
-    setCode(next);
-    // Restore cursor after React re-render
-    requestAnimationFrame(() => {
-      el.selectionStart = el.selectionEnd = start + 4;
-    });
-  }
-
-  async function handleSubmit() {
+  async function handleExerciseSubmit() {
     if (!lesson) return;
-    setSubmitting(true);
-    setError(null);
+    setExerciseSubmitting(true);
+    setExerciseError(null);
     try {
-      const res = await submitChallenge(code);
-      setResult(res);
+      const res = await submitChallenge(exerciseCode);
+      setExerciseResult(res);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Submission failed. Try again.");
+      setExerciseError(err instanceof ApiError ? err.message : "Submission failed.");
     } finally {
-      setSubmitting(false);
+      setExerciseSubmitting(false);
+    }
+  }
+
+  async function handleFinalSubmit() {
+    if (!lesson) return;
+    setFinalSubmitting(true);
+    setFinalError(null);
+    try {
+      const res = await submitFinalChallenge(finalCode);
+      setFinalResult(res);
+    } catch (err) {
+      setFinalError(err instanceof ApiError ? err.message : "Submission failed.");
+    } finally {
+      setFinalSubmitting(false);
     }
   }
 
   async function handleAdvance() {
     setAdvancing(true);
-    setError(null);
     try {
       const updated = await advanceLesson();
       setProfile(updated);
-      // Reload the new lesson
       const next = await getLesson();
       setLesson(next);
-      setCode(next.code_starter);
-      setResult(null);
-      setHintIndex(-1);
+      setExerciseCode(next.code_starter);
+      setFinalCode(next.final_challenge.code_starter);
+      setExerciseResult(null);
+      setFinalResult(null);
+      setExerciseHintIndex(-1);
+      setFinalHintIndex(-1);
+      setShowOutput(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       if (err instanceof ApiError && err.message.includes("all available units")) {
-        // Course complete!
         navigate("/");
-      } else {
-        setError(err instanceof ApiError ? err.message : "Failed to advance. Try again.");
       }
     } finally {
       setAdvancing(false);
@@ -133,8 +212,8 @@ export default function LessonPage() {
   if (!lesson) {
     return (
       <main className={`flex min-h-screen items-center justify-center ${style.bg}`}>
-        {error ? (
-          <p className="text-red-400">{error}</p>
+        {loadError ? (
+          <p className="text-red-400">{loadError}</p>
         ) : (
           <p className={style.muted}>Loading lesson…</p>
         )}
@@ -142,119 +221,187 @@ export default function LessonPage() {
     );
   }
 
-  const allPassed = result?.all_passed ?? false;
-  const showHint = hintIndex >= 0 && hintIndex < lesson.hints.length;
+  const exercisePassed = exerciseResult?.all_passed ?? false;
+  const finalPassed = finalResult?.all_passed ?? false;
 
   return (
     <main className={`min-h-screen ${style.bg}`}>
-      <div className="mx-auto max-w-5xl gap-6 p-6 lg:grid lg:grid-cols-2">
-        {/* Left panel: narrative */}
-        <div className="space-y-4">
+      <div className="mx-auto max-w-3xl space-y-8 p-6">
+
+        {/* ── Section 1: Setup ─────────────────────────────────────────── */}
+        <section className="space-y-3">
           <div className="flex items-start justify-between gap-2">
-            <h1 className={`text-2xl font-bold ${style.highlight}`}>{lesson.title}</h1>
-            <span className={`shrink-0 text-xs font-semibold ${style.accent}`}>+{lesson.xp} XP</span>
+            <div>
+              <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>
+                Unit {lesson.unit} · Lesson {lesson.lesson} of {lesson.total_lessons}
+              </span>
+              <h1 className={`mt-1 text-2xl font-bold ${style.highlight}`}>{lesson.title}</h1>
+            </div>
+            <span className={`shrink-0 text-sm font-semibold ${style.accent}`}>+{lesson.xp} XP</span>
           </div>
-          <div className={`rounded-xl p-5 ${style.surface} border ${style.border}`}>
-            <p className={`whitespace-pre-line text-sm leading-relaxed ${style.text}`}>
-              {lesson.narrative}
+          <div className={`rounded-xl border ${style.border} p-5 ${style.surface}`}>
+            <p className={`whitespace-pre-line text-sm leading-relaxed ${style.text}`}>{lesson.setup}</p>
+          </div>
+        </section>
+
+        {/* ── Section 2: Example ───────────────────────────────────────── */}
+        <section className={`rounded-xl border ${style.border} overflow-hidden`}>
+          <div className={`border-b ${style.border} px-5 py-3 ${style.surface} flex items-center justify-between`}>
+            <h2 className={`text-sm font-semibold ${style.highlight}`}>How It Works — Example</h2>
+            <span className={`text-xs ${style.muted}`}>Read-only</span>
+          </div>
+
+          {/* Code display */}
+          <div className="bg-gray-950 px-5 py-4">
+            <pre className="font-code text-sm leading-relaxed text-gray-100 whitespace-pre-wrap">
+              {lesson.example.code}
+            </pre>
+          </div>
+
+          {/* Explanation */}
+          <div className={`border-t ${style.border} px-5 py-4 ${style.surface}`}>
+            <p className={`text-sm leading-relaxed ${style.text}`}>{lesson.example.explanation}</p>
+          </div>
+
+          {/* Show output button */}
+          <div className={`border-t ${style.border} px-5 py-3 ${style.surface}`}>
+            {!showOutput ? (
+              <button
+                onClick={() => setShowOutput(true)}
+                className={`text-sm font-medium ${style.accent} underline underline-offset-2`}
+              >
+                ▶ Run example — see output
+              </button>
+            ) : (
+              <div>
+                <p className={`mb-1 text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Output</p>
+                <pre className="font-code text-sm text-green-400 whitespace-pre-wrap">
+                  {lesson.example.output || "(no output)"}
+                </pre>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── Section 3: Exercise ──────────────────────────────────────── */}
+        <section className="space-y-4">
+          <div>
+            <h2 className={`text-base font-semibold ${style.highlight}`}>Exercise — Complete the Code</h2>
+            <p className={`text-sm ${style.muted} mt-0.5`}>
+              Fill in the blanks to make all tests pass.
             </p>
           </div>
 
-          {/* Hints */}
-          {lesson.hints.length > 0 && (
-            <div>
-              <button
-                onClick={() => setHintIndex((i) => (i < lesson.hints.length - 1 ? i + 1 : i))}
-                className={`text-sm underline ${style.muted} hover:${style.accent}`}
-              >
-                {hintIndex < 0 ? "Show hint" : hintIndex < lesson.hints.length - 1 ? "Next hint" : "No more hints"}
-              </button>
-              {showHint && (
-                <div className={`mt-2 rounded-lg border ${style.border} px-4 py-3 ${style.surface}`}>
-                  <p className={`font-mono text-sm ${style.text}`}>{lesson.hints[hintIndex]}</p>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Right panel: editor + results */}
-        <div className="mt-6 space-y-4 lg:mt-0">
-          {/* Code editor */}
           <div className={`rounded-xl border ${style.border} overflow-hidden`}>
             <div className={`flex items-center justify-between px-4 py-2 ${style.surface} border-b ${style.border}`}>
-              <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>
-                Python
-              </span>
-              {result && (
-                <span className={`text-xs font-semibold ${allPassed ? "text-green-400" : "text-red-400"}`}>
-                  {allPassed ? "All tests passed ✓" : "Tests failed"}
+              <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Python</span>
+              {exerciseResult && (
+                <span className={`text-xs font-semibold ${exercisePassed ? "text-green-400" : "text-red-400"}`}>
+                  {exercisePassed ? "All tests passed ✓" : "Tests failed"}
                 </span>
               )}
             </div>
-            <textarea
-              ref={textareaRef}
-              value={code}
-              onChange={(e) => handleCodeChange(e.target.value)}
-              onKeyDown={handleKeyDown}
-              spellCheck={false}
-              rows={12}
-              className={`w-full resize-none bg-gray-950 p-4 font-code text-sm leading-relaxed text-gray-100 outline-none`}
+            <CodeEditor
+              value={exerciseCode}
+              onChange={(v) => { setExerciseCode(v); if (exerciseResult) setExerciseResult(null); }}
             />
           </div>
 
-          {/* Run button */}
-          <Button
-            onClick={() => void handleSubmit()}
-            loading={submitting}
-            disabled={!code.trim()}
-            className="w-full"
-          >
-            Run Code
-          </Button>
-
-          {/* Error */}
-          {error && <p className="text-center text-sm text-red-400">{error}</p>}
-
-          {/* Results panel */}
-          {result && (
-            <div className={`rounded-xl border ${style.border} overflow-hidden`}>
-              {/* stdout */}
-              {result.stdout && (
-                <div className="border-b border-gray-800 bg-gray-950 px-4 py-3">
-                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Output</p>
-                  <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{result.stdout}</pre>
+          {/* Exercise hints */}
+          {lesson.hints.length > 0 && (
+            <div>
+              <button
+                onClick={() => setExerciseHintIndex((i) => Math.min(i + 1, lesson.hints.length - 1))}
+                className={`text-sm underline ${style.muted}`}
+              >
+                {exerciseHintIndex < 0 ? "Show hint" : exerciseHintIndex < lesson.hints.length - 1 ? "Next hint" : "No more hints"}
+              </button>
+              {exerciseHintIndex >= 0 && (
+                <div className={`mt-2 rounded-lg border ${style.border} px-4 py-3 ${style.surface}`}>
+                  <p className={`font-mono text-sm ${style.text}`}>{lesson.hints[exerciseHintIndex]}</p>
                 </div>
               )}
-
-              {/* exec error */}
-              {result.exec_error && (
-                <div className="border-b border-gray-800 bg-red-950/30 px-4 py-3">
-                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-red-400">Error</p>
-                  <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
-                </div>
-              )}
-
-              {/* test results */}
-              <div className={`${style.surface} px-4 py-3 space-y-2`}>
-                <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
-                {result.tests.map((t, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className={t.passed ? "text-green-400" : "text-red-400"}>
-                      {t.passed ? "✓" : "✗"}
-                    </span>
-                    <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>
-                      {t.message}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
           )}
 
-          {/* Next lesson / capstone button */}
-          {allPassed && (
-            lesson.lesson < lesson.total_lessons ? (
+          <Button onClick={() => void handleExerciseSubmit()} loading={exerciseSubmitting} disabled={!exerciseCode.trim()} className="w-full">
+            Check Exercise
+          </Button>
+
+          {exerciseError && <p className="text-center text-sm text-red-400">{exerciseError}</p>}
+          {exerciseResult && <TestResults result={exerciseResult} style={style} />}
+        </section>
+
+        {/* ── Section 4: Final Challenge ───────────────────────────────── */}
+        <section className={`rounded-xl border-2 ${exercisePassed ? `${style.border}` : "border-gray-700"} overflow-hidden transition-all`}>
+          <div className={`px-5 py-4 ${exercisePassed ? style.surface : "bg-gray-900"} border-b ${exercisePassed ? style.border : "border-gray-700"}`}>
+            <h2 className={`text-base font-semibold ${exercisePassed ? style.highlight : "text-gray-400"}`}>
+              Final Challenge — Code It from Scratch
+            </h2>
+            {!exercisePassed && (
+              <p className="text-xs text-gray-500 mt-0.5">Complete the exercise above to unlock.</p>
+            )}
+          </div>
+
+          {exercisePassed && (
+            <>
+              <div className={`px-5 py-4 ${style.surface} border-b ${style.border}`}>
+                <p className={`text-sm leading-relaxed ${style.text}`}>{lesson.final_challenge.prompt}</p>
+              </div>
+
+              <div className={`border-b ${style.border} overflow-hidden`}>
+                <div className={`flex items-center justify-between px-4 py-2 ${style.surface} border-b ${style.border}`}>
+                  <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Python</span>
+                  {finalResult && (
+                    <span className={`text-xs font-semibold ${finalPassed ? "text-green-400" : "text-red-400"}`}>
+                      {finalPassed ? "All tests passed ✓" : "Tests failed"}
+                    </span>
+                  )}
+                </div>
+                <CodeEditor
+                  value={finalCode}
+                  onChange={(v) => { setFinalCode(v); if (finalResult) setFinalResult(null); }}
+                  rows={12}
+                />
+              </div>
+
+              {/* Final challenge hints */}
+              {lesson.final_challenge.hints.length > 0 && (
+                <div className={`px-5 py-3 ${style.surface} border-b ${style.border}`}>
+                  <button
+                    onClick={() => setFinalHintIndex((i) => Math.min(i + 1, lesson.final_challenge.hints.length - 1))}
+                    className={`text-sm underline ${style.muted}`}
+                  >
+                    {finalHintIndex < 0 ? "Show hint" : finalHintIndex < lesson.final_challenge.hints.length - 1 ? "Next hint" : "No more hints"}
+                  </button>
+                  {finalHintIndex >= 0 && (
+                    <div className={`mt-2 rounded-lg border ${style.border} px-4 py-3 bg-gray-950`}>
+                      <p className={`font-mono text-sm ${style.text}`}>{lesson.final_challenge.hints[finalHintIndex]}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div className={`p-4 ${style.surface} space-y-3`}>
+                <Button onClick={() => void handleFinalSubmit()} loading={finalSubmitting} disabled={!finalCode.trim()} className="w-full">
+                  Run Code
+                </Button>
+                {finalError && <p className="text-center text-sm text-red-400">{finalError}</p>}
+              </div>
+
+              {finalResult && (
+                <div className="px-4 pb-4">
+                  <TestResults result={finalResult} style={style} />
+                </div>
+              )}
+            </>
+          )}
+        </section>
+
+        {/* ── Advance button ───────────────────────────────────────────── */}
+        {finalPassed && (
+          <div className="pb-8">
+            {lesson.lesson < lesson.total_lessons ? (
               <Button
                 onClick={() => void handleAdvance()}
                 loading={advancing}
@@ -269,14 +416,10 @@ export default function LessonPage() {
               >
                 Unit {lesson.unit} Capstone →
               </Button>
-            )
-          )}
+            )}
+          </div>
+        )}
 
-          {/* Account info strip */}
-          <p className={`text-center text-xs ${style.muted}`}>
-            {account?.display_name ?? account?.email}
-          </p>
-        </div>
       </div>
     </main>
   );

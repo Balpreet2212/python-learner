@@ -1,6 +1,23 @@
 unit: 2
 lesson: 5
 xp: 15
+
+example:
+  code: |
+    items = ["book", "pen", "ruler", "eraser", "notebook"]
+    target = None
+    for item in items:
+        if item == "ruler":
+            target = item
+            break
+    print("Found:", target)
+  explanation: |
+    The break statement immediately exits a loop — even if there are items left.
+    This is useful when you've found what you were looking for and don't need to
+    keep searching. Without break, the loop would check every remaining item uselessly.
+    After break, the code continues from the line after the loop.
+  output: "Found: ruler"
+
 code_starter: |
   numbers = [3, 7, 4, 9, 2, 6, 1]
 
@@ -15,16 +32,56 @@ hints:
 tests:
   - code: "assert first_even == 4, f'first_even should be 4, got {first_even}'"
     message: "first_even should be 4 (the first even number in the list)"
+
+final_challenge:
+  code_starter: |
+    suspects = [5, 12, -3, 7, -1]
+    # Find the first negative number and store it in 'first_negative'
+  hints:
+    - "first_negative = None  — start with no result"
+    - "for n in suspects:  — check each value"
+    - "    if n < 0:  — negative numbers are less than zero"
+    - "        first_negative = n"
+    - "        break"
+  tests:
+    - code: "assert first_negative == -3, f'first_negative should be -3, got {first_negative}'"
+      message: "first_negative should be -3 (the first negative number)"
+
 worlds:
   fantasy:
     title: "The Break Rune"
-    narrative: |
-      The enchanted list contains a hidden even gem. "The `break` statement exits a loop the moment you find what you need," Elara says. "Without it, the loop would check every item even after the answer is found." Loop through `numbers`, and the instant you find an even one, store it in `first_even` and `break`.
+    setup: |
+      The enchanted list contains a hidden even gem. "The break statement exits a
+      loop the moment you find what you need," Elara says. "Without it, the loop
+      would check every item even after the answer is found — wasteful magic."
+
+      Loop through 'numbers', and the instant you find an even one, store it in
+      'first_even' and break. Speed is power in the Enchanted Realm.
+    final_challenge_prompt: |
+      Among the energy readings [5, 12, -3, 7, -1], the first negative reading
+      marks a power drain that must be isolated immediately. Use a for loop with
+      break to find the first negative number and store it in first_negative.
   scifi:
     title: "First Contact"
-    narrative: |
-      The scanner sweeps through frequencies — stop at the first clean signal. "When you find what you're looking for, `break` lets you exit the loop immediately instead of scanning everything," the AI explains. Find the first even number in `numbers`, store it in `first_even`, and break out of the loop.
+    setup: |
+      The scanner sweeps through frequencies — stop at the first clean signal.
+      "When you find what you're looking for, break lets you exit the loop
+      immediately instead of scanning everything," the AI explains.
+
+      Find the first even number in 'numbers', store it in 'first_even', and break.
+    final_challenge_prompt: |
+      The ship's diagnostics flagged readings [5, 12, -3, 7, -1]. The first negative
+      reading is a critical fault that needs immediate attention. Use a for loop and
+      break to find it and store it in first_negative.
   mystery:
     title: "The First Solid Lead"
-    narrative: |
-      Seven suspects — but you only need the first one who fits the profile. "`break` stops a loop as soon as you've found your target," your mentor says. "No need to keep searching once you have the answer." Find the first even number in `numbers`, assign it to `first_even`, and break.
+    setup: |
+      Seven suspects — but you only need the first one who fits the profile. "break
+      stops a loop as soon as you've found your target," your mentor says. "No need
+      to keep searching once you have the answer."
+
+      Find the first even number in 'numbers', assign it to 'first_even', and break.
+    final_challenge_prompt: |
+      Examining the list of witness scores [5, 12, -3, 7, -1], the first negative
+      value reveals the witness who lied. Use a for loop and break to find it and
+      store it in first_negative.

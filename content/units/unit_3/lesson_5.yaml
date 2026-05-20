@@ -1,6 +1,23 @@
 unit: 3
 lesson: 5
 xp: 15
+
+example:
+  code: |
+    def triple(n):
+        return n * 3
+
+    def sum_of_triples(a, b):
+        return triple(a) + triple(b)
+
+    print(sum_of_triples(2, 4))
+  explanation: |
+    Functions can call other functions — this is called composition.
+    triple(2) returns 6 and triple(4) returns 12, so sum_of_triples(2, 4) returns 18.
+    Breaking a big task into smaller helper functions makes code easier to read,
+    test, and reuse. Define the simpler function first, then build on top of it.
+  output: "18"
+
 code_starter: |
   # Define 'square(n)' that returns n squared.
   def square(n):
@@ -22,16 +39,58 @@ tests:
     message: "sum_of_squares(3, 4) should return 25 (9 + 16)"
   - code: "assert result == 25"
     message: "result should be 25"
+
+final_challenge:
+  code_starter: |
+    # Define cube(n) then sum_of_cubes(a, b) which uses cube
+  hints:
+    - "def cube(n):  — return n ** 3  (or n * n * n)"
+    - "def sum_of_cubes(a, b):  — return cube(a) + cube(b)"
+    - "cube(2) == 8, cube(3) == 27, so sum_of_cubes(2, 3) == 35"
+  tests:
+    - code: "assert cube(2) == 8"
+      message: "cube(2) should return 8"
+    - code: "assert cube(3) == 27"
+      message: "cube(3) should return 27"
+    - code: "assert sum_of_cubes(2, 3) == 35, f'got {sum_of_cubes(2, 3)}'"
+      message: "sum_of_cubes(2, 3) should return 35 (8 + 27)"
+
 worlds:
   fantasy:
     title: "Spells Within Spells"
-    narrative: |
-      The grand counterspell requires two sub-spells combined. "Functions can call other functions — this is how complex behaviour is built from simple pieces," Elara says. "Write `square` first, then `sum_of_squares` delegates to it." Define `square(n)` returning `n²`, then `sum_of_squares(a, b)` that calls `square` for each argument and adds the results.
+    setup: |
+      The grand counterspell requires two sub-spells combined. "Functions can call
+      other functions — this is how complex behaviour is built from simple pieces,"
+      Elara says. "Write 'square' first, then 'sum_of_squares' delegates to it."
+
+      Define square(n) returning n², then sum_of_squares(a, b) that calls square
+      for each argument and adds the results. The most powerful spells are composed
+      of smaller, precise incantations.
+    final_challenge_prompt: |
+      The ancient power theorem uses cubes, not squares. Define cube(n) that returns
+      n cubed (n ** 3 or n * n * n). Then define sum_of_cubes(a, b) that calls
+      cube for each argument and returns their sum. sum_of_cubes(2, 3) should equal 35.
   scifi:
     title: "Recursive Subsystem"
-    narrative: |
-      Computing the Pythagorean distance requires squaring both coordinates. "Breaking a big task into smaller functions makes code easier to read and reuse," the AI explains. "A function can call any other function — even ones you defined earlier." Write `square`, then `sum_of_squares` using it.
+    setup: |
+      Computing the Pythagorean distance requires squaring both coordinates. "Breaking
+      a big task into smaller functions makes code easier to read and reuse," the AI
+      explains. "A function can call any other function — even ones you defined earlier."
+
+      Write 'square', then 'sum_of_squares' using it.
+    final_challenge_prompt: |
+      The energy calculation uses cubic values. Define cube(n) returning n ** 3.
+      Then define sum_of_cubes(a, b) that calls cube(a) + cube(b). Verify:
+      sum_of_cubes(2, 3) == 35.
   mystery:
     title: "Clues Within Clues"
-    narrative: |
-      The final puzzle requires two nested calculations. "Functions are most powerful when they call each other," your mentor says. "Build `square` first, then use it inside `sum_of_squares` — this is called *composition*." Complete both functions and store `sum_of_squares(3, 4)` in `result`.
+    setup: |
+      The final puzzle requires two nested calculations. "Functions are most powerful
+      when they call each other," your mentor says. "Build 'square' first, then use
+      it inside 'sum_of_squares' — this is called composition."
+
+      Complete both functions and store sum_of_squares(3, 4) in 'result'.
+    final_challenge_prompt: |
+      The cipher uses cubic transformations. Define cube(n) returning n ** 3, then
+      sum_of_cubes(a, b) that returns cube(a) + cube(b). The cipher unlocks when
+      sum_of_cubes(2, 3) equals 35.

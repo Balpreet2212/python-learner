@@ -1,6 +1,20 @@
 unit: 4
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    person = {"name": "Aria", "age": 28, "active": True}
+    print(person)
+    print(person["name"])
+    print(person["age"])
+  explanation: |
+    A dictionary maps keys to values using curly braces and colons.
+    Each pair is written as key: value, separated from the next by a comma.
+    Keys are usually strings; values can be any type.
+    You retrieve a value by writing dict["key"] — the key in square brackets.
+  output: "{'name': 'Aria', 'age': 28, 'active': True}\nAria\n28"
+
 code_starter: |
   # Create a dict called 'character' with keys:
   #   'name'   -> a string
@@ -19,16 +33,60 @@ tests:
     message: "character['active'] should be True"
   - code: "assert isinstance(character.get('name'), str) and len(character.get('name', '')) > 0"
     message: "character['name'] should be a non-empty string"
+
+final_challenge:
+  code_starter: |
+    # Create a mission dictionary with three specific keys
+  hints:
+    - "mission = {'name': ..., 'difficulty': ..., 'active': ...}"
+    - "'name' should be a non-empty string"
+    - "'difficulty' should be the integer 8"
+    - "'active' should be the boolean True"
+  tests:
+    - code: "assert isinstance(mission, dict)"
+      message: "mission should be a dictionary"
+    - code: "assert isinstance(mission.get('name'), str) and len(mission.get('name', '')) > 0"
+      message: "mission['name'] should be a non-empty string"
+    - code: "assert mission.get('difficulty') == 8"
+      message: "mission['difficulty'] should be 8"
+    - code: "assert mission.get('active') is True"
+      message: "mission['active'] should be True"
+
 worlds:
   fantasy:
     title: "The Character Sheet"
-    narrative: |
-      Every hero in the Enchanted Realm has a character sheet — a structured collection of named attributes. "A *dictionary* maps keys to values," Elara explains. "Curly braces, colons between key and value, commas between pairs." Create `character` with `'name'`, `'level'`, and `'active'` keys.
+    setup: |
+      Every hero in the Enchanted Realm has a character sheet — a structured
+      collection of named attributes. "A dictionary maps keys to values," Elara
+      explains. "Curly braces, colons between key and value, commas between pairs."
+
+      Unlike a list (which uses numbers as positions), a dict uses meaningful labels.
+      Create 'character' with 'name', 'level', and 'active' keys — a proper
+      hero profile.
+    final_challenge_prompt: |
+      A new quest has been issued. Create a dictionary called mission with three
+      keys: 'name' (any non-empty string), 'difficulty' set to the integer 8,
+      and 'active' set to True.
   scifi:
     title: "Crew Profile Record"
-    narrative: |
-      The ship's database stores crew records as key-value pairs. "Dicts associate labels (keys) with data (values)," the AI explains. "Use curly braces and colons: `{'key': value}`. Keys are usually strings; values can be anything." Build the `character` dict with a name, level, and active status.
+    setup: |
+      The ship's database stores crew records as key-value pairs. "Dicts associate
+      labels (keys) with data (values)," the AI explains. "Use curly braces and
+      colons: {'key': value}. Keys are usually strings; values can be anything."
+
+      Build the 'character' dict with a name, level, and active status.
+    final_challenge_prompt: |
+      Log a new mission to the database. Create a dict called mission with 'name'
+      (non-empty string), 'difficulty' set to 8, and 'active' set to True.
   mystery:
     title: "The Dossier"
-    narrative: |
-      Every case file is a dossier: a named collection of facts. "A dictionary lets you associate labels with values," your mentor says. "Use curly braces, put the key first, a colon, then the value." Create `character` with a string `'name'`, integer `'level'` of 5, and boolean `'active'` of `True`.
+    setup: |
+      Every case file is a dossier: a named collection of facts. "A dictionary lets
+      you associate labels with values," your mentor says. "Use curly braces, put the
+      key first, a colon, then the value."
+
+      Create 'character' with a string 'name', integer 'level' of 5, and boolean
+      'active' of True.
+    final_challenge_prompt: |
+      Open a new case file. Create a dictionary called mission with 'name' (any
+      non-empty string), 'difficulty' set to 8, and 'active' set to True.

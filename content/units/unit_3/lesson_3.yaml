@@ -1,6 +1,21 @@
 unit: 3
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    def describe(name, age):
+        return f"{name} is {age} years old"
+
+    print(describe("Aria", 25))
+    print(describe("Rex", 30))
+  explanation: |
+    Functions can accept multiple parameters — just separate them with commas.
+    When you call the function, you pass one argument per parameter, in the same order.
+    Inside the body, all parameters are available as variables.
+    This lets one function produce different results for different inputs.
+  output: "Aria is 25 years old\nRex is 30 years old"
+
 code_starter: |
   # Define a function 'add' that takes two parameters a and b
   # and returns their sum.
@@ -17,16 +32,57 @@ tests:
     message: "add(0, 0) should return 0"
   - code: "assert total == 42"
     message: "total should be 42"
+
+final_challenge:
+  code_starter: |
+    # Define a function that combines two combat stats
+  hints:
+    - "def combine_stats(attack, defense):  — two parameters"
+    - "    return attack + defense"
+    - "result = combine_stats(30, 20)  — should equal 50"
+  tests:
+    - code: "assert combine_stats(30, 20) == 50, f'combine_stats(30, 20) should be 50'"
+      message: "combine_stats(30, 20) should return 50"
+    - code: "assert combine_stats(0, 0) == 0"
+      message: "combine_stats(0, 0) should return 0"
+    - code: "assert combine_stats(100, 50) == 150"
+      message: "combine_stats(100, 50) should return 150"
+
 worlds:
   fantasy:
     title: "The Combining Spell"
-    narrative: |
-      Two power sources, combined into one. "Functions can accept multiple parameters — just separate them with commas," Elara says. "Inside the body you can use all of them." Write `add(a, b)` that returns `a + b`, then call it with `15` and `27` to get `total`.
+    setup: |
+      Two power sources, combined into one. "Functions can accept multiple parameters
+      — just separate them with commas," Elara says. "Inside the body you can use
+      all of them."
+
+      Write 'add(a, b)' that returns a + b, then call it with 15 and 27 to get
+      'total'. The combining spell grows stronger with each value it merges.
+    final_challenge_prompt: |
+      A warrior's combat power is the sum of their attack and defense stats.
+      Define a function called combine_stats that takes attack and defense as
+      parameters and returns their sum. Verify: combine_stats(30, 20) == 50.
   scifi:
     title: "Docking Procedure"
-    narrative: |
-      Two fuel pods need to be combined before the jump. "Multiple parameters let a function process several inputs at once," the AI explains. "List them with commas inside the parentheses." Write `add(a, b)` returning `a + b` and call it with `15` and `27`.
+    setup: |
+      Two fuel pods need to be combined before the jump. "Multiple parameters let
+      a function process several inputs at once," the AI explains. "List them with
+      commas inside the parentheses."
+
+      Write 'add(a, b)' returning a + b and call it with 15 and 27.
+    final_challenge_prompt: |
+      The ship's combat system calculates effective power as attack plus defense.
+      Define combine_stats(attack, defense) that returns attack + defense.
+      Test: combine_stats(30, 20) should equal 50.
   mystery:
     title: "Adding the Evidence"
-    narrative: |
-      Two piles of case files — merge the totals. "A function with two parameters takes two arguments when called," your mentor explains. "Separate parameters with commas in both the definition and the call." Write `add(a, b)` that returns `a + b` and store `add(15, 27)` in `total`.
+    setup: |
+      Two piles of case files — merge the totals. "A function with two parameters
+      takes two arguments when called," your mentor explains. "Separate parameters
+      with commas in both the definition and the call."
+
+      Write 'add(a, b)' that returns a + b and store add(15, 27) in 'total'.
+    final_challenge_prompt: |
+      An agent's effectiveness score is the sum of their street contacts and
+      technical skills. Define combine_stats(attack, defense) returning attack +
+      defense. combine_stats(30, 20) should equal 50.

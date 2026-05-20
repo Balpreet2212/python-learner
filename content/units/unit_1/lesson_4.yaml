@@ -1,6 +1,20 @@
 unit: 1
 lesson: 4
 xp: 10
+
+example:
+  code: |
+    hero = "Aria"
+    level = 7
+    message = f"{hero} has reached level {level}!"
+    print(message)
+  explanation: |
+    An f-string starts with the letter f immediately before the opening quote.
+    Inside the string, any variable name wrapped in curly braces {} is replaced
+    by that variable's actual value when the string is created.
+    This makes it easy to build sentences that include variable data.
+  output: "Aria has reached level 7!"
+
 code_starter: |
   # Feel free to change this name
   name = "Ada"
@@ -18,16 +32,65 @@ tests:
     message: "greeting should start with 'Hello, '"
   - code: "assert name in greeting, 'greeting should contain the value of name'"
     message: "greeting should contain the name variable's value"
+
+final_challenge:
+  code_starter: |
+    # Build a themed status line using an f-string
+    hero_name = "Aria"
+    unit_number = 1
+  hints:
+    - "status must be an f-string using hero_name and unit_number"
+    - 'status = f"{hero_name} is on unit {unit_number}"'
+    - "Check that both variables appear in the result"
+  tests:
+    - code: "assert 'Aria' in status"
+      message: "status should contain 'Aria'"
+    - code: "assert '1' in status"
+      message: "status should contain the unit number"
+    - code: "assert isinstance(status, str)"
+      message: "status should be a string"
+
 worlds:
   fantasy:
     title: "The Speaking Scroll"
-    narrative: |
-      The enchanted scroll unfurls itself. "A great spell does not just store a value — it weaves values together into a message," Elara says. "In Python, an f-string lets you embed variables directly inside text." She traces the rune: `f"Hello, {name}!"`. "The letter `f` before the quote activates the magic. Anything inside `{}` is replaced by the variable's value. Craft a greeting with your name embedded in it."
+    setup: |
+      The enchanted scroll unfurls itself. "A great spell does not just store a
+      value — it weaves values together into a message," Elara says. "In Python,
+      an f-string lets you embed variables directly inside text."
+
+      She traces the rune: f"Hello, {name}!". "The letter f before the quote
+      activates the magic. Anything inside {} is replaced by the variable's value.
+      Craft a greeting with your name embedded in it — the scroll will speak it aloud."
+    final_challenge_prompt: |
+      The speaking scroll needs to announce your progress. Use hero_name = "Aria"
+      and unit_number = 1 (already provided). Build an f-string called status that
+      includes both — something like "Aria is on unit 1". The exact wording is up
+      to you, as long as both values appear.
   scifi:
     title: "Comm Channel Open"
-    narrative: |
-      The comms system crackles. "Personalised hails increase crew morale by 23%," the AI notes in its flat, statistical way. "To build a custom message, use an f-string: put `f` before the opening quote, and wrap any variable name in curly braces." The result: the variable's value is injected directly into the text. Build a `greeting` that says "Hello, " followed by your `name`.
+    setup: |
+      The comms system crackles. "Personalised hails increase crew morale by 23%,"
+      the AI notes in its flat, statistical way. "To build a custom message, use
+      an f-string: put f before the opening quote, and wrap any variable name in
+      curly braces."
+
+      The result: the variable's value is injected directly into the text. Build a
+      'greeting' that says "Hello, " followed by your 'name'.
+    final_challenge_prompt: |
+      The ship's status panel shows a one-line summary for each crew member. Using
+      hero_name = "Aria" and unit_number = 1 (already provided), create status as
+      an f-string that mentions both. The display requires both values to appear.
   mystery:
     title: "The Calling Card"
-    narrative: |
-      Every detective leaves a calling card. Yours should be personalised. "Python's f-strings let you embed a variable's value right inside a string," your partner explains, sliding a printed card across the table. "Write `f` before the opening quote, then put your variable name inside curly braces — Python swaps it for the actual value at runtime." Create a `greeting` that begins with "Hello, " and includes your `name`.
+    setup: |
+      Every detective leaves a calling card. Yours should be personalised. "Python's
+      f-strings let you embed a variable's value right inside a string," your partner
+      explains, sliding a printed card across the table.
+
+      "Write f before the opening quote, then put your variable name inside curly
+      braces — Python swaps it for the actual value at runtime." Create a 'greeting'
+      that begins with "Hello, " and includes your 'name'.
+    final_challenge_prompt: |
+      The case summary card must show the detective's name and the unit they're
+      assigned to. Using hero_name = "Aria" and unit_number = 1 (already provided),
+      create an f-string called status that contains both values.

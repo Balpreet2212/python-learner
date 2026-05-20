@@ -1,46 +1,113 @@
 unit: 5
 lesson: 5
-xp: 15
+xp: 10
+
+example:
+  code: |
+    def set_level(level):
+        if level < 1:
+            raise ValueError("Level must be at least 1")
+        if level > 100:
+            raise ValueError("Level cannot exceed 100")
+        return level
+
+    print(set_level(50))
+
+    try:
+        print(set_level(0))
+    except ValueError as e:
+        print("Error:", e)
+  explanation: |
+    raise creates and immediately raises an exception. You choose the exception type (ValueError here) and give it a message.
+    Callers can catch it with except, just like any built-in exception.
+    This lets you enforce rules inside your functions: instead of silently returning a wrong value, you loudly report what went wrong.
+  output: "50\nError: Level must be at least 1"
+
 code_starter: |
-  # Define a function 'check_age' that raises ValueError
-  # if age is negative, otherwise returns the age.
-  def check_age(age):
-      if age < 0:
-
-      return age
-
-  # Call it with -5 and catch the ValueError.
-  try:
-      result = check_age(-5)
-      caught = False
-  except ValueError:
-      caught = True
+  def validate_score(score):
+      if score < 0:
+          raise ValueError(___)
+      if score > 100:
+          raise ___(___) 
+      return score
 hints:
-  - 'raise ValueError("Age cannot be negative")  — inside the if block'
-  - "caught should be True because check_age(-5) raises ValueError"
+  - "raise ValueError(\"Score must be between 0 and 100\")"
+  - "Both branches should raise ValueError with a descriptive message"
+
 tests:
-  - code: "assert check_age(10) == 10"
-    message: "check_age(10) should return 10"
+  - code: "assert validate_score(50) == 50, 'validate_score(50) should return 50'"
+    message: "validate_score(50) returns 50"
   - code: |
       try:
-          check_age(-1)
-          _raised = False
+          validate_score(-1)
+          assert False, 'Should have raised'
       except ValueError:
-          _raised = True
-      assert _raised, 'check_age(-1) should raise ValueError'
-    message: "check_age with a negative age should raise ValueError"
-  - code: "assert caught is True"
-    message: "caught should be True"
+          pass
+    message: "validate_score(-1) raises ValueError"
+  - code: |
+      try:
+          validate_score(101)
+          assert False, 'Should have raised'
+      except ValueError:
+          pass
+    message: "validate_score(101) raises ValueError"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "def validate_power(level):"
+    - "if level < 1: raise ValueError(...)"
+    - "if level > 100: raise ValueError(...)"
+    - "return level"
+  tests:
+    - code: "assert validate_power(75) == 75"
+      message: "validate_power(75) returns 75"
+    - code: "assert validate_power(1) == 1"
+      message: "validate_power(1) returns 1 (boundary)"
+    - code: |
+        try:
+            validate_power(0)
+            assert False
+        except ValueError:
+            pass
+      message: "validate_power(0) raises ValueError"
+    - code: |
+        try:
+            validate_power(101)
+            assert False
+        except ValueError:
+            pass
+      message: "validate_power(101) raises ValueError"
+
 worlds:
   fantasy:
-    title: "The Guardian's Challenge"
-    narrative: |
-      The gate guardian rejects those who are too young — and says so loudly. "You can raise exceptions yourself with the `raise` keyword," Elara explains. "This lets functions enforce their own rules: if the input breaks a contract, raise a descriptive error rather than returning a bad value silently." Make `check_age` raise `ValueError` for negative ages.
+    title: "The Power Scale Enforcement Spell"
+    setup: |
+      The Archmage's power registry has strict limits: no enchantment may be registered below power level 1 (that would be inert), and none above 100 (that would be catastrophically unstable). Any attempt to register outside these bounds must be rejected loudly, not silently accepted.
+      In Python, raise lets your function be the enforcer. Instead of returning a wrong value, it fires an exception with a clear message — giving the caller a chance to handle it or crash with a useful description of what went wrong.
+    final_challenge_prompt: |
+      Write validate_power(level) for the Archmage's registry:
+      — If level < 1, raise ValueError with a descriptive message
+      — If level > 100, raise ValueError with a descriptive message
+      — Otherwise, return level
   scifi:
-    title: "Input Validation Protocol"
-    narrative: |
-      The life-support system rejects invalid parameters — it doesn't guess. "`raise` lets you signal an error from within your own code," the AI says. "Use it when caller-supplied data violates a rule your function depends on." Raise `ValueError` when `age < 0`, and return the age when valid.
+    title: "Reactor Power Limit Enforcement"
+    setup: |
+      The Meridian's reactor accepts power settings from 1 to 100. A setting of 0 means the reactor is offline — unacceptable mid-mission. A setting above 100 risks a cascade failure. The control interface must reject both extremes immediately by raising an exception, not by silently clamping the value.
+      raise in Python is how a function says "I refuse to continue with this input." It is the right tool for enforcing hard constraints at the boundary of a system.
+    final_challenge_prompt: |
+      Write validate_power(level) for the reactor control module:
+      — Raise ValueError if level < 1
+      — Raise ValueError if level > 100
+      — Return level when it is within bounds
   mystery:
-    title: "The Witness Challenge"
-    narrative: |
-      An impossible witness statement — call it out, don't ignore it. "`raise` lets you deliberately trigger an exception," your mentor explains. "When a value breaks a rule, raising a descriptive error is clearer than silently returning something wrong." Raise `ValueError` inside `check_age` for negative ages, then catch it in the caller.
+    title: "The Evidence Strength Validator"
+    setup: |
+      The detective's evidence-strength system rates items from 1 (barely relevant) to 100 (ironclad). A zero means no evidence exists — that is inadmissible. A number above 100 is a data-entry error that would corrupt the jury's scoring model.
+      raise ValueError is how you enforce these rules in Python code: stop execution, report the exact problem, and let the caller decide how to recover. Silent bad values are worse than loud errors.
+    final_challenge_prompt: |
+      Write validate_power(level) for the evidence rating system:
+      — Raise ValueError if level is below 1
+      — Raise ValueError if level exceeds 100
+      — Return level if it passes both checks

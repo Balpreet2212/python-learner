@@ -1,39 +1,94 @@
 unit: 6
 lesson: 2
 xp: 10
+
+example:
+  code: |
+    class Lamp:
+        def __init__(self, brightness):
+            self.brightness = brightness
+
+        def is_bright(self):
+            return self.brightness >= 50
+
+    desk_lamp = Lamp(70)
+    candle = Lamp(20)
+
+    print(desk_lamp.is_bright())
+    print(candle.is_bright())
+  explanation: |
+    Methods are functions defined inside a class. They always take self as their first parameter, which gives them access to the instance's attributes.
+    is_bright() reads self.brightness and returns a boolean — no arguments needed when calling it, because self is passed automatically.
+    Each instance has its own attribute values, so the same method produces different results depending on which object calls it.
+  output: "True\nFalse"
+
 code_starter: |
-  class Hero:
+  class Creature:
       def __init__(self, name, hp):
           self.name = name
           self.hp = hp
 
-      # Add a method called 'is_alive' that returns True if hp > 0
       def is_alive(self):
+          return ___ > ___
 
-  hero = Hero("Zara", 100)
-  alive = hero.is_alive()
+  dragon = Creature("Dragon", 120)
+  ghost  = Creature("Ghost", 0)
 hints:
-  - "Methods are functions defined inside a class — they always take 'self' as the first parameter"
-  - "return self.hp > 0  — this evaluates to a boolean"
+  - "Check self.hp > 0"
+  - "is_alive() should return a boolean"
+
 tests:
-  - code: "assert hero.is_alive() is True"
-    message: "hero.is_alive() should return True when hp is 100"
-  - code: |
-      dead = Hero('Ghost', 0)
-      assert dead.is_alive() is False
-    message: "is_alive() should return False when hp is 0"
-  - code: "assert alive is True"
-    message: "alive should be True"
+  - code: "assert dragon.is_alive() == True, 'dragon should be alive'"
+    message: "dragon.is_alive() is True"
+  - code: "assert ghost.is_alive() == False, 'ghost should not be alive'"
+    message: "ghost.is_alive() is False"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "class Weapon:"
+    - "    def __init__(self, name, power): ..."
+    - "    def is_strong(self): return self.power >= 50"
+    - "sword = Weapon(\"Excalibur\", 90)"
+    - "dagger = Weapon(\"Dagger\", 30)"
+  tests:
+    - code: "assert sword.is_strong() == True, 'sword should be strong'"
+      message: "sword.is_strong() is True"
+    - code: "assert dagger.is_strong() == False, 'dagger should not be strong'"
+      message: "dagger.is_strong() is False"
+    - code: "assert sword.name == 'Excalibur'"
+      message: "sword.name is 'Excalibur'"
+
 worlds:
   fantasy:
-    title: "The Vitality Check"
-    narrative: |
-      Every hero has a vitality status — and the arena checks before battle. "Methods are functions defined inside a class — they take `self` as their first parameter and can access all the instance's attributes," Elara explains. Add `is_alive` that returns `True` when `hp > 0`.
+    title: "Enchanting Objects with Behaviour"
+    setup: |
+      A blueprint without behaviour is just a data container. To make objects truly useful, you add methods — functions that live inside the class and can read the object's own attributes using self.
+      The blacksmith enchants each weapon not just with properties (name, power) but with knowledge of itself: a weapon that knows whether it is strong enough for the king's knights.
+      Methods are called on an instance with dot notation: sword.is_strong(). Python automatically passes the instance as the first argument (self), so you never write it yourself when calling.
+    final_challenge_prompt: |
+      Create a Weapon class:
+      — __init__(self, name, power) stores both attributes
+      — is_strong(self) returns True if power >= 50, otherwise False
+      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)
   scifi:
-    title: "Life Sign Scan"
-    narrative: |
-      The medical bay checks each crew member's life signs. "Instance methods have access to the object's data through `self`," the AI explains. "They're defined inside the class body with `def`, and the first parameter is always `self`." Add `is_alive()` returning `self.hp > 0`.
+    title: "Adding Behaviour to Ship Systems"
+    setup: |
+      Ship systems on the Meridian don't just hold data — they report their own status. A life-support unit knows whether it is operating at safe levels; a weapon knows whether it is charged enough to fire.
+      Instance methods give objects this self-knowledge. The method reads self.attribute and returns a result. Every instance of the same class shares the method code, but each uses its own attribute values — so two weapons give different answers to is_strong().
+    final_challenge_prompt: |
+      Build a Weapon class for the ship's arsenal registry:
+      — __init__(self, name, power)
+      — is_strong(self) returns True if self.power >= 50
+      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)
   mystery:
-    title: "Still in the Game"
-    narrative: |
-      An agent must be active to take the mission. "Methods give your objects behaviour — they're functions that live inside the class and use `self` to access instance data," your mentor explains. Implement `is_alive` returning `True` when the hero's `hp` is above zero.
+    title: "Evidence Objects That Know Themselves"
+    setup: |
+      The detective agency has started encoding evidence items as objects. Each piece of evidence knows its own strength — whether it is persuasive enough to bring to court. An evidence item with strength below 50 is circumstantial; 50 and above is solid.
+      Instance methods are how an object reports on itself. self inside the method refers to the specific piece of evidence calling it, so the same is_strong method gives different answers for different items.
+    final_challenge_prompt: |
+      Write a Weapon class (the agency's evidence-strength model):
+      — __init__(self, name, power)
+      — is_strong(self): returns True if power >= 50
+      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)

@@ -1,6 +1,22 @@
 unit: 2
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    counter = 3
+    while counter > 0:
+        print("Counting:", counter)
+        counter -= 1
+    print("Done!")
+  explanation: |
+    A while loop keeps repeating as long as its condition stays True.
+    Unlike a for loop, you control when it stops by updating a variable yourself.
+    Here counter starts at 3; each iteration subtracts 1 (counter -= 1).
+    When counter reaches 0, the condition (counter > 0) becomes False and the loop exits.
+    Forgetting to update the variable causes an infinite loop — always decrement!
+  output: "Counting: 3\nCounting: 2\nCounting: 1\nDone!"
+
 code_starter: |
   # Use a while loop to count down from 5 to 1.
   # Append each number to 'result' as you go, then stop.
@@ -17,16 +33,61 @@ tests:
     message: "result should be [5, 4, 3, 2, 1]"
   - code: "assert count == 0, f'count should be 0 after the loop'"
     message: "count should reach 0"
+
+final_challenge:
+  code_starter: |
+    # Drain a power source using a while loop
+    # Start at 100, subtract 25 each step, count the steps
+  hints:
+    - "power = 100  — starting level"
+    - "steps = 0  — will count iterations"
+    - "while power > 0:  — keep going while power remains"
+    - "    power -= 25"
+    - "    steps += 1"
+  tests:
+    - code: "assert power == 0, f'power should be 0, got {power}'"
+      message: "power should reach 0"
+    - code: "assert steps == 4, f'steps should be 4, got {steps}'"
+      message: "steps should be 4 (100 drained in 4 rounds of 25)"
+
 worlds:
   fantasy:
     title: "The Countdown Incantation"
-    narrative: |
-      The spell requires a precise countdown. "A `while` loop repeats *while* a condition stays true," Elara says. "Unlike `for`, the loop keeps going as long as you want — but you must update the variable yourself, or it runs forever." Count down from 5 to 1, appending each number to `result`, and reduce `count` by 1 each pass.
+    setup: |
+      The spell requires a precise countdown. "A while loop repeats while a condition
+      stays true," Elara says. "Unlike for, the loop keeps going as long as you want
+      — but you must update the variable yourself, or it runs forever."
+
+      Count down from 5 to 1, appending each number to 'result', and reduce 'count'
+      by 1 each pass. The enchantment activates only when the countdown is perfect.
+    final_challenge_prompt: |
+      The ancient power crystal holds 100 units of energy. Each ritual pulse drains
+      exactly 25 units. Write a while loop that drains the crystal completely —
+      subtract 25 from power each iteration and increment steps by 1. When power
+      reaches 0, steps should equal 4.
   scifi:
     title: "Launch Sequence"
-    narrative: |
-      The launch countdown begins. "A `while` loop is condition-driven — it keeps running as long as its test passes," the AI says. "You control when it stops by changing the variable yourself." Count down from `count = 5`, appending each value to `result` and decrementing by 1 each cycle until liftoff.
+    setup: |
+      The launch countdown begins. "A while loop is condition-driven — it keeps
+      running as long as its test passes," the AI says. "You control when it stops
+      by changing the variable yourself."
+
+      Count down from count = 5, appending each value to 'result' and decrementing
+      by 1 each cycle until liftoff.
+    final_challenge_prompt: |
+      The reactor has 100 units of power. Each thruster burst consumes exactly 25.
+      Use a while loop: subtract 25 from power each iteration, increment steps by 1.
+      The mission proceeds when power == 0 and steps == 4.
   mystery:
     title: "The Ticking Clock"
-    narrative: |
-      A bomb's timer ticks down — five seconds left. "A `while` loop runs as long as its condition is true," your partner says urgently. "You have to decrement the counter yourself inside the loop — otherwise it runs forever." Record each second in `result` and reduce `count` by 1 each iteration.
+    setup: |
+      A bomb's timer ticks down — five seconds left. "A while loop runs as long as
+      its condition is true," your partner says urgently. "You have to decrement the
+      counter yourself inside the loop — otherwise it runs forever."
+
+      Record each second in 'result' and reduce 'count' by 1 each iteration.
+    final_challenge_prompt: |
+      A vault locks down after its 100-point security score is exhausted. Each
+      bypass attempt costs 25 points. Write a while loop that drains the security
+      score to zero — subtract 25 each iteration, increment steps by 1. When
+      power == 0 and steps == 4, the vault opens.

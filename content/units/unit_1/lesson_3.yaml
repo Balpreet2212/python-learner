@@ -1,6 +1,21 @@
 unit: 1
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    is_raining = True
+    is_sunny = False
+    print(is_raining)
+    print(is_sunny)
+    print(type(is_raining))
+  explanation: |
+    Booleans are Python's yes/no values. There are exactly two: True and False.
+    They must be capitalised exactly like that — no quotes, not strings.
+    True and False are their own data type, called 'bool'.
+    Use them wherever you need an on/off switch or a condition.
+  output: "True\nFalse\n<class 'bool'>"
+
 code_starter: |
   # Set is_hero to the boolean True (capital T, no quotes)
   is_hero =
@@ -15,16 +30,59 @@ tests:
     message: "is_hero should be True"
   - code: "assert isinstance(level, int) and level > 5, 'level should be an integer greater than 5'"
     message: "level should be an integer greater than 5"
+
+final_challenge:
+  code_starter: |
+    # Set up the quest status flags
+  hints:
+    - "quest_ready = True"
+    - "dragon_slain = False"
+    - "print() both variables"
+  tests:
+    - code: "assert quest_ready is True"
+      message: "quest_ready should be True"
+    - code: "assert dragon_slain is False"
+      message: "dragon_slain should be False"
+
 worlds:
   fantasy:
     title: "The Truth Crystal"
-    narrative: |
-      Elara places a crystal on the pedestal. It glows steady gold — then dim grey — depending on the spell. "This is a boolean," she says, "a value that is either `True` or `False`. No quotes, always capitalised." She hands you a quest scroll: "Mark yourself as the hero and set your level above 5 to unlock the next chamber. Python uses booleans wherever a yes-or-no answer is needed."
+    setup: |
+      Elara places a crystal on the pedestal. It glows steady gold — then dim grey —
+      depending on the spell cast upon it. "This is a boolean," she says, "a value
+      that is either True or False. No quotes, always capitalised."
+
+      She hands you a quest scroll: "Mark yourself as the hero and set your level
+      above 5 to unlock the next chamber. Python uses booleans wherever a yes-or-no
+      answer is needed — gates, conditions, status flags."
+    final_challenge_prompt: |
+      The quest begins. Create two status flags for the adventure log:
+      quest_ready set to True (the party is prepared) and dragon_slain set to False
+      (the battle hasn't happened yet). Print both.
   scifi:
     title: "Hero Status Check"
-    narrative: |
-      The crew manifest has two columns: crew status and clearance level. "Booleans are on/off switches," the AI explains. "In Python they are `True` or `False` — capital first letter, no quotes, not a string." Set `is_hero` to `True` (you're the protagonist — obviously) and assign any integer greater than `5` to `level` to pass the command deck security scan.
+    setup: |
+      The crew manifest has two columns: hero status and clearance level. "Booleans
+      are on/off switches," the AI explains. "In Python they are True or False —
+      capital first letter, no quotes, not a string."
+
+      Set is_hero to True (you're the protagonist — obviously) and assign any integer
+      greater than 5 to level to pass the command deck security scan.
+    final_challenge_prompt: |
+      The mission control board shows two readouts. Set quest_ready to True (launch
+      approved) and dragon_slain to False (target not yet neutralised). Print both
+      to confirm the status display.
   mystery:
     title: "The Suspect Register"
-    narrative: |
-      Every name in the detective's register has two fields: cleared (yes/no) and threat level (a number). "Python calls yes/no values *booleans*," your partner explains, flipping through the ledger. "They're either `True` or `False` — capital T or F, never in quotes." Mark `is_hero` as `True` and set `level` to any integer above 5 to gain access to the restricted evidence files.
+    setup: |
+      Every name in the detective's register has two fields: cleared (yes/no) and
+      threat level (a number). "Python calls yes/no values booleans," your partner
+      explains, flipping through the ledger.
+
+      "They're either True or False — capital T or F, never in quotes." Mark is_hero
+      as True and set level to any integer above 5 to gain access to the restricted
+      evidence files.
+    final_challenge_prompt: |
+      Update the case log. Set quest_ready to True (investigation active) and
+      dragon_slain to False (primary suspect still at large). Print both so the
+      status board reflects the current situation.

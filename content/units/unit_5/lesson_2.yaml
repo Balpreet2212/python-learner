@@ -1,30 +1,85 @@
 unit: 5
 lesson: 2
 xp: 10
-code_starter: |
-  data = "not a number"
 
-  # Try to convert data to int.
-  # If that fails, store 0 in 'value'.
-  try:
-      value = int(data)
-  except ValueError:
+example:
+  code: |
+    def parse_age(text):
+        try:
+            age = int(text)
+        except ValueError:
+            age = -1
+        return age
+
+    print(parse_age("25"))
+    print(parse_age("twenty"))
+    print(parse_age(""))
+  explanation: |
+    int() raises ValueError when the string cannot be converted to an integer — for example "twenty" or "".
+    Wrapping the call in try/except ValueError lets you return a safe fallback (-1 here) instead of crashing.
+    ValueError is the right exception for "wrong type of value", not a hardware or division error.
+  output: "25\n-1\n-1"
+
+code_starter: |
+  def safe_int(text):
+      try:
+          value = ___
+      except ___:
+          value = ___
+      return value
 hints:
-  - "int('not a number') raises a ValueError"
-  - "In the except block: value = 0"
+  - "value = int(text) inside the try block"
+  - "Catch ValueError"
+  - "Return -1 when conversion fails"
+
 tests:
-  - code: "assert value == 0, f'value should be 0, got {value}'"
-    message: "value should be 0 (ValueError was caught)"
+  - code: "assert safe_int('42') == 42, 'safe_int(\"42\") should be 42'"
+    message: "safe_int('42') returns 42"
+  - code: "assert safe_int('abc') == -1, 'safe_int(\"abc\") should be -1'"
+    message: "safe_int('abc') returns -1"
+  - code: "assert safe_int('') == -1, 'safe_int(\"\") should be -1'"
+    message: "safe_int('') returns -1"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "def safe_int(text): ..."
+    - "try: value = int(text)"
+    - "except ValueError: value = -1"
+  tests:
+    - code: "assert safe_int('7') == 7, 'safe_int(\"7\") should be 7'"
+      message: "safe_int('7') returns 7"
+    - code: "assert safe_int('hello') == -1, 'safe_int(\"hello\") should be -1'"
+      message: "safe_int('hello') returns -1"
+    - code: "assert safe_int('3.14') == -1, 'safe_int(\"3.14\") should be -1'"
+      message: "safe_int('3.14') returns -1 (not a whole number string)"
+
 worlds:
   fantasy:
-    title: "The Wrong Rune"
-    narrative: |
-      Trying to enchant a stone that wasn't cut for magic. "`ValueError` is raised when you give a function a value it can't work with," Elara explains. "Catch specific exception types rather than catching everything — it keeps your error handling intentional." Catch the `ValueError` from the failed conversion and fall back to `0`.
+    title: "Reading Rune Inscriptions Safely"
+    setup: |
+      Ancient runes are inscribed on every artifact in the vault — but not all of them contain numbers. Some runes spell words, some are blank, some are symbols from a dead language. Trying to read a word-rune as a number without protection causes the reading spell to unravel entirely.
+      Python raises ValueError when int() is given a string it cannot convert. Your job is to wrap the conversion in try/except ValueError, returning -1 whenever the rune is unreadable as a number.
+    final_challenge_prompt: |
+      The vault's inscription scanner sends text values from each artifact. Write safe_int(text) that:
+      — Returns int(text) when the string is a valid whole number
+      — Returns -1 if ValueError is raised (the text is not a valid integer)
   scifi:
-    title: "Bad Telemetry"
-    narrative: |
-      Corrupt telemetry data — the string can't be parsed as a number. "`ValueError` occurs when a type conversion receives an incompatible value," the AI explains. "Catch it specifically so other error types still propagate normally." Handle the conversion error and store `0` in `value`.
+    title: "Parsing Corrupted Sensor Readings"
+    setup: |
+      The Meridian's sensor array occasionally transmits corrupted packets — a reading might come through as "ERR", "N/A", or a floating-point string like "3.14" instead of a clean integer. Calling int() on those strings raises ValueError.
+      The fix is the same try/except pattern from last lesson, but now catching ValueError instead of ZeroDivisionError. One wrong string no longer crashes the whole telemetry pipeline.
+    final_challenge_prompt: |
+      Write safe_int(text) for the sensor parsing module:
+      — Returns int(text) for clean integer strings
+      — Returns -1 for any string that raises ValueError (floats, words, empty strings)
   mystery:
-    title: "The Forged Document"
-    narrative: |
-      The document claimed to hold a number — it doesn't. "`int()` raises a `ValueError` when the string isn't a valid integer," your mentor says. "Catch it to recover gracefully instead of letting the program crash." Set `value = 0` when the conversion fails.
+    title: "Decoding the Suspect's Encoded Notes"
+    setup: |
+      The suspect's notebooks are full of numbers — but half of them turn out to be words in disguise. "forty-two", "??", blank lines. The code-breaking routine crashes every time it hits one.
+      ValueError is raised when int() receives a string it cannot parse. Catching it with except ValueError lets the decoder skip bad values and return a sentinel (-1) that tells downstream code "this one was unreadable".
+    final_challenge_prompt: |
+      Write safe_int(text) for the code-breaking tool:
+      — Returns int(text) when text is a valid integer string
+      — Returns -1 on ValueError (invalid text — words, decimals, blank)

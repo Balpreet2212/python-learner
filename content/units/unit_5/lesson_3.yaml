@@ -1,30 +1,84 @@
 unit: 5
 lesson: 3
 xp: 10
+
+example:
+  code: |
+    def read_score(text):
+        try:
+            score = int(text)
+        except ValueError:
+            return 0
+        else:
+            return score * 2
+
+    print(read_score("5"))
+    print(read_score("bad"))
+  explanation: |
+    The else clause runs only when the try block succeeds — no exception was raised.
+    Here: if int(text) works, the else block doubles the score. If it raises ValueError, the except block returns 0 immediately.
+    Use else when you have follow-up logic that should only run on success, keeping it clearly separate from the error path.
+  output: "10\n0"
+
 code_starter: |
-  # try/except/else: the 'else' block runs only if NO exception was raised.
-  try:
-      number = int("42")
-  except ValueError:
-      number = -1
-  else:
-      number = number * 2
+  def parse_and_double(text):
+      try:
+          number = int(text)
+      except ValueError:
+          return ___
+      else:
+          return ___
 hints:
-  - "int('42') succeeds, so the except block is skipped"
-  - "The else block runs because no error occurred — number becomes 42 * 2"
+  - "Return 0 in the except block"
+  - "In the else block, return number * 2"
+
 tests:
-  - code: "assert number == 84, f'number should be 84, got {number}'"
-    message: "number should be 84 (conversion succeeded, then doubled in else)"
+  - code: "assert parse_and_double('4') == 8, 'parse_and_double(\"4\") should be 8'"
+    message: "parse_and_double('4') returns 8"
+  - code: "assert parse_and_double('abc') == 0, 'parse_and_double(\"abc\") should be 0'"
+    message: "parse_and_double('abc') returns 0"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "def parse_and_double(text):"
+    - "try: number = int(text)"
+    - "except ValueError: return 0"
+    - "else: return number * 2"
+  tests:
+    - code: "assert parse_and_double('6') == 12, 'parse_and_double(\"6\") should be 12'"
+      message: "parse_and_double('6') returns 12"
+    - code: "assert parse_and_double('0') == 0, 'parse_and_double(\"0\") should be 0'"
+      message: "parse_and_double('0') returns 0"
+    - code: "assert parse_and_double('xyz') == 0, 'parse_and_double(\"xyz\") should be 0'"
+      message: "parse_and_double('xyz') returns 0"
+
 worlds:
   fantasy:
-    title: "The Successful Ritual"
-    narrative: |
-      When the spell works perfectly, a bonus blessing is granted. "The `else` clause in a try block only executes when no exception was raised," Elara explains. "It's for code that should only run on success — separating the happy path from the recovery path." The conversion succeeds; `else` doubles the result.
+    title: "The Alchemist's Double-or-Nothing Reagent"
+    setup: |
+      The royal alchemist has a strict rule: if you can read the measurement on the vial, you must use double the amount (the second step amplifies the first). But if the label is smudged and unreadable, use nothing — zero — and move on.
+      Python's try/except/else maps perfectly to this: try the reading, except catches a bad label and returns 0, and the else block — which only runs when the reading succeeded — applies the doubling logic.
+    final_challenge_prompt: |
+      Write parse_and_double(text) for the alchemist's measuring tool:
+      — If text is a valid integer, return that integer multiplied by 2 (in the else block)
+      — If ValueError is raised, return 0
   scifi:
-    title: "Clean Handshake"
-    narrative: |
-      A successful handshake triggers a secondary protocol. "`else` after `except` runs when the `try` block completes without error," the AI explains. "It clearly marks code that depends on success, making intent more readable." The parse succeeds, so `else` doubles `number`.
+    title: "Sensor Amplification with Safe Parsing"
+    setup: |
+      The Meridian's amplifier circuit takes a raw sensor reading, parses it as an integer, and doubles the signal for long-range transmission. If the input is corrupted, the amplifier must return zero rather than broadcast garbage.
+      try/except/else makes the success path and the error path explicit: the else block only executes when the try block completes without raising an exception.
+    final_challenge_prompt: |
+      Write parse_and_double(text) for the amplifier module:
+      — On success: parse text as int, then return it doubled (in the else block)
+      — On ValueError: return 0
   mystery:
-    title: "A Genuine Lead"
-    narrative: |
-      A real clue — follow-up action required. "The `else` block in try/except is the 'it worked' branch," your mentor explains. "It only executes if `try` raised no exception — perfect for actions that only make sense after success." The conversion works; `else` multiplies `number` by 2.
+    title: "The Witness Statement Amplifier"
+    setup: |
+      The detective's interview protocol doubles a witness's reliability score when they give a valid numeric rating. If a witness just shrugs and gives a non-numeric answer, the score is recorded as zero.
+      The else clause in try/except/else is ideal here: it runs only when parsing succeeded, making the success logic unmistakably clear and the fallback equally obvious.
+    final_challenge_prompt: |
+      Write parse_and_double(text) for the witness scoring system:
+      — Parse text as an integer; if successful, return it * 2 using the else clause
+      — Return 0 on ValueError

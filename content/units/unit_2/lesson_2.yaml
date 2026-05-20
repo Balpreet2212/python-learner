@@ -1,6 +1,22 @@
 unit: 2
 lesson: 2
 xp: 10
+
+example:
+  code: |
+    fruits = ["apple", "banana", "cherry"]
+    print(fruits)
+    print(len(fruits))
+    print(fruits[0])
+    fruits.append("date")
+    print(fruits)
+  explanation: |
+    A list stores multiple values in order, inside square brackets, separated by commas.
+    len() returns how many items are in the list.
+    Lists are zero-indexed: fruits[0] is the first item, fruits[1] is the second.
+    .append() adds a new item to the end of the list without creating a new list.
+  output: "['apple', 'banana', 'cherry']\n3\napple\n['apple', 'banana', 'cherry', 'date']"
+
 code_starter: |
   numbers = [1, 2, 3, 4, 5]
 
@@ -17,16 +33,64 @@ tests:
     message: "doubled should be a list"
   - code: "assert doubled == [2, 4, 6, 8, 10], f'got {doubled}'"
     message: "doubled should be [2, 4, 6, 8, 10]"
+
+final_challenge:
+  code_starter: |
+    # Build a crew list from scratch, then query it
+  hints:
+    - 'crew = []  — start with an empty list'
+    - 'crew.append("Aria")  — add the first member'
+    - 'crew.append("Rex") and crew.append("Mira")  — add the rest'
+    - "crew_size = len(crew)"
+  tests:
+    - code: "assert len(crew) == 3, f'crew should have 3 members, got {len(crew)}'"
+      message: "crew should have exactly 3 members"
+    - code: "assert 'Aria' in crew"
+      message: "crew should contain 'Aria'"
+    - code: "assert 'Rex' in crew"
+      message: "crew should contain 'Rex'"
+    - code: "assert 'Mira' in crew"
+      message: "crew should contain 'Mira'"
+    - code: "assert crew_size == 3"
+      message: "crew_size should be 3"
+
 worlds:
   fantasy:
     title: "The Duplication Spell"
-    narrative: |
-      On the enchanted workbench lie five magical crystals. "A duplication spell doubles the power of each crystal," Elara says. "We loop over each item in a list, transform it, and collect the result with `.append()`." Build the `doubled` list by multiplying each number in `numbers` by two.
+    setup: |
+      On the enchanted workbench lie five magical crystals. "A duplication spell
+      doubles the power of each crystal," Elara says. "We loop over each item in a
+      list, transform it, and collect the result with .append()."
+
+      She demonstrates: start with an empty list, loop through the originals, and
+      append each one multiplied by two. Build the 'doubled' list by multiplying
+      each number in 'numbers' by two.
+    final_challenge_prompt: |
+      The adventuring party needs a roster. Start with an empty list called crew.
+      Use .append() to add "Aria", "Rex", and "Mira" — one call per name. Then
+      store the count in crew_size using len().
   scifi:
     title: "Sensor Array Boost"
-    narrative: |
-      The sensor array needs its readings doubled for the deep-space scan. "Looping over a list visits each element in turn," the AI explains. "Call `.append()` inside the loop to build a new list as you go." Create `doubled` by multiplying each value in `numbers` by two and appending the result.
+    setup: |
+      The sensor array needs its readings doubled for the deep-space scan. "Looping
+      over a list visits each element in turn," the AI explains. "Call .append()
+      inside the loop to build a new list as you go."
+
+      Create 'doubled' by multiplying each value in 'numbers' by two and appending
+      the result. The scanner cannot calibrate until all five doubled values are correct.
+    final_challenge_prompt: |
+      The crew manifest needs three names added. Start with crew as an empty list.
+      Append "Aria", "Rex", and "Mira" using .append(). Store len(crew) in crew_size.
   mystery:
     title: "Doubling the Reward"
-    narrative: |
-      The agency is doubling the bounty on every open case. "A for loop walks through a list one item at a time," your mentor explains. "Inside the loop, multiply each amount by 2 and append it to a new list." Build `doubled` from the `numbers` list by appending each element times two.
+    setup: |
+      The agency is doubling the bounty on every open case. "A for loop walks through
+      a list one item at a time," your mentor explains. "Inside the loop, multiply
+      each amount by 2 and append it to a new list."
+
+      Build 'doubled' from the 'numbers' list by appending each element times two.
+      The bookkeeper won't accept the ledger until every value is exact.
+    final_challenge_prompt: |
+      Three informants need to be added to the contact list. Start with crew as an
+      empty list. Use .append() to add "Aria", "Rex", and "Mira". Then store
+      len(crew) in crew_size.

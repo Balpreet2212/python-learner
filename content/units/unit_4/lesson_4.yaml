@@ -1,37 +1,102 @@
 unit: 4
 lesson: 4
 xp: 10
+
+example:
+  code: |
+    inventory = {"sword": 1, "shield": 2, "potion": 5}
+
+    # Update an existing key
+    inventory["potion"] = 3
+
+    # Add a brand new key
+    inventory["rope"] = 10
+
+    # Count total distinct items
+    item_count = len(inventory)
+
+    print(inventory)
+    print("Distinct items:", item_count)
+  explanation: |
+    You update or add a key using the same assignment syntax: dict[key] = value.
+    If the key already exists, its value is overwritten. If it does not exist, a new entry is created.
+    len() on a dictionary returns the number of keys, not the sum of the values.
+  output: "{'sword': 1, 'shield': 2, 'potion': 3, 'rope': 10}\nDistinct items: 4"
+
 code_starter: |
   stats = {"hp": 100, "mp": 50}
 
-  # 1. Update 'mp' to 75
-  stats[   ] =
+  # Update mp to 75
+  stats[___] = ___
 
-  # 2. Add a new key 'stamina' with value 30
-  stats[   ] =
+  # Add a new key "stamina" with value 30
+  stats[___] = ___
 
-  # 3. Store the total number of keys in 'keys_count'
-  keys_count =
+  # Count how many keys stats has
+  keys_count = len(___)
 hints:
-  - "stats['mp'] = 75  — square-bracket assignment updates or adds a key"
-  - "keys_count = len(stats)"
+  - "stats[\"mp\"] = 75 updates the mp key"
+  - "stats[\"stamina\"] = 30 creates a new key"
+  - "len(stats) counts the number of keys"
+
 tests:
-  - code: "assert stats['mp'] == 75, f\"mp should be 75, got {stats['mp']}\""
-    message: "stats['mp'] should be updated to 75"
-  - code: "assert 'stamina' in stats and stats['stamina'] == 30"
-    message: "'stamina' key should exist with value 30"
-  - code: "assert keys_count == 3, f'keys_count should be 3, got {keys_count}'"
-    message: "keys_count should be 3"
+  - code: "assert stats['mp'] == 75, 'mp should be 75'"
+    message: "mp updated to 75"
+  - code: "assert stats['stamina'] == 30, 'stamina should be 30'"
+    message: "stamina added with value 30"
+  - code: "assert keys_count == 3, 'keys_count should be 3'"
+    message: "keys_count equals 3"
+
+final_challenge:
+  code_starter: |
+    stats = {"hp": 80, "mp": 40}
+
+    # Your code here
+  hints:
+    - "Use stats[\"hp\"] = 100 to update hp"
+    - "Use stats[\"shield\"] = 25 to add the shield key"
+    - "keys_count = len(stats)"
+  tests:
+    - code: "assert stats['hp'] == 100, 'hp should be updated to 100'"
+      message: "hp updated to 100"
+    - code: "assert stats.get('shield') == 25, 'shield key should be 25'"
+      message: "shield key added with value 25"
+    - code: "assert keys_count == 3, 'keys_count should be 3'"
+      message: "keys_count is 3"
+
 worlds:
   fantasy:
-    title: "Updating the Grimoire"
-    narrative: |
-      Mid-battle, stats shift — mana restored, stamina added. "You update a dict value by assigning to its key: `stats['mp'] = 75`," Elara says. "The same syntax adds a new key if it didn't exist before." Update `mp`, add `stamina`, and count the keys with `len()`.
+    title: "Updating the Spellbook's Registry"
+    setup: |
+      The royal Spellbook is a living dictionary — entries must be kept current or spells fail at the worst possible moment.
+      Sir Aldric hands you a worn leather tome. "Three things," he says. "The healing potion supply was miscounted — fix it. The armory finally finished crafting rope bridges, so add that stock. Then tell me how many distinct categories we're tracking."
+      Dictionaries in Python work the same way: one syntax, dict[key] = value, both updates existing entries and creates new ones.
+    final_challenge_prompt: |
+      The battle-worn stats board in the castle war room shows stale numbers. You have been given the real figures.
+      Starting with stats = {"hp": 80, "mp": 40}:
+      — Update "hp" to 100 (soldiers recovered overnight)
+      — Add "shield" with value 25 (new shields arrived)
+      — Store the number of distinct stats keys in a variable called keys_count
   scifi:
-    title: "System Override"
-    narrative: |
-      The ship's status panel needs a live update. "Dictionaries are mutable — you change values by reassigning to their key," the AI says. "If the key doesn't exist, Python creates it." Update `stats['mp']` to `75`, add `'stamina': 30`, and store `len(stats)` in `keys_count`.
+    title: "Patching the Ship's Resource Database"
+    setup: |
+      The Meridian's onboard resource database is the single source of truth for mission-critical supplies. An error crept in during the last sync — medical packs were over-reported, tether cables were never logged, and command wants a precise count of tracked resource types.
+      Updating a dictionary entry uses the exact same syntax as adding one: database[key] = value. Python checks whether the key exists and either overwrites or creates as needed.
+    final_challenge_prompt: |
+      Ship diagnostics show the stored stats are from yesterday's damaged-hull readings.
+      Starting with stats = {"hp": 80, "mp": 40}:
+      — Update "hp" to 100 (hull fully repaired)
+      — Add "shield" with value 25 (deflector array online)
+      — Store len(stats) in keys_count
   mystery:
-    title: "Revising the File"
-    narrative: |
-      New information — update the dossier. "You can change a dict's value by assigning to its key with square brackets," your mentor explains. "Same syntax for adding a brand-new key." Update `mp` to `75`, add `'stamina': 30`, and count all keys into `keys_count`.
+    title: "Correcting the Detective's Case File"
+    setup: |
+      The detective's case file is a dictionary of clues — but two entries are wrong and one key is missing entirely. If the file goes to the judge as-is, the wrong suspect walks free.
+      You sit at the oak desk, pen in hand. Cross out the wrong number, ink in the correction. Add the new evidence tag. Then count how many distinct evidence categories are now tracked.
+      In Python: evidence[key] = value handles both corrections and additions identically.
+    final_challenge_prompt: |
+      A new witness report has come in, changing the case stats entirely.
+      Starting with stats = {"hp": 80, "mp": 40}:
+      — Update "hp" to 100 (suspect's stamina reassessed)
+      — Add "shield" with value 25 (alibi partially confirmed)
+      — Store the key count in keys_count
