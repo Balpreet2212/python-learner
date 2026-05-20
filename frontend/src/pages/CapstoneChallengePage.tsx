@@ -50,16 +50,11 @@ function getStyle(world: string) {
   return WORLD_STYLE[(world as World) in WORLD_STYLE ? (world as World) : "fantasy"];
 }
 
-// Indices of plan prompts that are required to unlock the editor
-const REQUIRED_PLAN_INDICES = [0, 2];
-
 export default function CapstoneChallengePage() {
   const { profile, setProfile } = useAuth();
   const navigate = useNavigate();
 
   const [capstone, setCapstone] = useState<Capstone | null>(null);
-  const [planAnswers, setPlanAnswers] = useState<string[]>([]);
-  const [editorUnlocked, setEditorUnlocked] = useState(false);
   const [code, setCode] = useState("");
   const [result, setResult] = useState<SubmitResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -74,29 +69,12 @@ export default function CapstoneChallengePage() {
     getCapstone()
       .then((c) => {
         setCapstone(c);
-        setPlanAnswers(Array(c.plan_prompts.length).fill(""));
         setCode(c.code_starter);
       })
       .catch((err: unknown) => {
         setError(err instanceof ApiError ? err.message : "Failed to load capstone");
       });
   }, []);
-
-  function handlePlanChange(index: number, value: string) {
-    setPlanAnswers((prev) => {
-      const next = [...prev];
-      next[index] = value;
-      return next;
-    });
-  }
-
-  function canUnlock(): boolean {
-    return REQUIRED_PLAN_INDICES.every((i) => planAnswers[i]?.trim().length > 0);
-  }
-
-  function handleUnlock() {
-    if (canUnlock()) setEditorUnlocked(true);
-  }
 
   function handleCodeChange(value: string) {
     setCode(value);
@@ -161,7 +139,7 @@ export default function CapstoneChallengePage() {
 
   return (
     <main className={`min-h-screen ${style.bg}`}>
-      <div className="mx-auto max-w-5xl p-6 space-y-6">
+      <div className="mx-auto max-w-3xl p-6 space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between gap-2">
           <div>
@@ -180,152 +158,84 @@ export default function CapstoneChallengePage() {
           </p>
         </div>
 
-        {/* Plan section */}
-        {!editorUnlocked && (
-          <div className={`rounded-xl border ${style.border} ${style.surface} overflow-hidden`}>
-            <div className={`border-b ${style.border} px-5 py-3`}>
-              <h2 className={`text-sm font-semibold ${style.highlight}`}>
-                Plan Before You Code
-              </h2>
-              <p className={`text-xs mt-0.5 ${style.muted}`}>
-                Answer the starred questions to unlock the editor.
-              </p>
-            </div>
-            <div className="p-5 space-y-4">
-              {capstone.plan_prompts.map((prompt, i) => {
-                const required = REQUIRED_PLAN_INDICES.includes(i);
-                return (
-                  <div key={i} className="space-y-1">
-                    <label className={`text-xs font-medium ${style.text}`}>
-                      {required && (
-                        <span className={`mr-1 ${style.accent}`}>★</span>
-                      )}
-                      {prompt}
-                    </label>
-                    <textarea
-                      value={planAnswers[i] ?? ""}
-                      onChange={(e) => { handlePlanChange(i, e.target.value); }}
-                      rows={2}
-                      placeholder={required ? "Required…" : "Optional…"}
-                      className={`w-full resize-none rounded-lg border ${style.border} bg-gray-950 px-3 py-2 font-mono text-sm text-gray-100 outline-none focus:ring-1 focus:ring-white/20 placeholder:text-gray-600`}
-                    />
-                  </div>
-                );
-              })}
-              <Button
-                onClick={handleUnlock}
-                disabled={!canUnlock()}
-                className="w-full"
-              >
-                Unlock Editor →
-              </Button>
-            </div>
+        {/* Hints */}
+        {capstone.hints.length > 0 && (
+          <div>
+            <button
+              onClick={() => { setHintIndex((i) => (i < capstone.hints.length - 1 ? i + 1 : i)); }}
+              className={`text-sm underline ${style.muted}`}
+            >
+              {hintIndex < 0
+                ? "Show hint"
+                : hintIndex < capstone.hints.length - 1
+                  ? "Next hint"
+                  : "No more hints"}
+            </button>
+            {showHint && (
+              <div className={`mt-2 rounded-lg border ${style.border} px-4 py-3 ${style.surface}`}>
+                <p className={`font-mono text-sm ${style.text}`}>{capstone.hints[hintIndex]}</p>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Code editor + results (shown after plan) */}
-        {editorUnlocked && (
-          <div className="lg:grid lg:grid-cols-2 gap-6 space-y-6 lg:space-y-0">
-            {/* Left: hints */}
-            <div className="space-y-4">
-              <div className={`rounded-xl border ${style.border} p-4 ${style.surface}`}>
-                <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted} mb-2`}>
-                  Your Plan
-                </p>
-                {capstone.plan_prompts.map((prompt, i) =>
-                  planAnswers[i]?.trim() ? (
-                    <div key={i} className="mb-3">
-                      <p className={`text-xs ${style.muted}`}>{prompt}</p>
-                      <p className={`text-sm mt-0.5 ${style.text}`}>{planAnswers[i]}</p>
-                    </div>
-                  ) : null
-                )}
+        {/* Editor */}
+        <div className={`rounded-xl border ${style.border} overflow-hidden`}>
+          <div className={`flex items-center justify-between px-4 py-2 ${style.surface} border-b ${style.border}`}>
+            <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Python</span>
+            {result && (
+              <span className={`text-xs font-semibold ${allPassed ? "text-green-400" : "text-red-400"}`}>
+                {allPassed ? "All tests passed ✓" : "Tests failed"}
+              </span>
+            )}
+          </div>
+          <textarea
+            value={code}
+            onChange={(e) => { handleCodeChange(e.target.value); }}
+            onKeyDown={handleKeyDown}
+            spellCheck={false}
+            rows={16}
+            className="w-full resize-none bg-gray-950 p-4 font-code text-sm leading-relaxed text-gray-100 outline-none"
+          />
+        </div>
+
+        <Button
+          onClick={() => void handleSubmit()}
+          loading={submitting}
+          disabled={!code.trim()}
+          className="w-full"
+        >
+          Run Code
+        </Button>
+
+        {error && <p className="text-center text-sm text-red-400">{error}</p>}
+
+        {result && (
+          <div className={`rounded-xl border ${style.border} overflow-hidden`}>
+            {result.stdout && (
+              <div className="border-b border-gray-800 bg-gray-950 px-4 py-3">
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Output</p>
+                <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{result.stdout}</pre>
               </div>
-
-              {capstone.hints.length > 0 && (
-                <div>
-                  <button
-                    onClick={() => { setHintIndex((i) => (i < capstone.hints.length - 1 ? i + 1 : i)); }}
-                    className={`text-sm underline ${style.muted} hover:${style.accent}`}
-                  >
-                    {hintIndex < 0
-                      ? "Show hint"
-                      : hintIndex < capstone.hints.length - 1
-                        ? "Next hint"
-                        : "No more hints"}
-                  </button>
-                  {showHint && (
-                    <div className={`mt-2 rounded-lg border ${style.border} px-4 py-3 ${style.surface}`}>
-                      <p className={`font-mono text-sm ${style.text}`}>{capstone.hints[hintIndex]}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Right: editor + submit */}
-            <div className="space-y-4">
-              <div className={`rounded-xl border ${style.border} overflow-hidden`}>
-                <div className={`flex items-center justify-between px-4 py-2 ${style.surface} border-b ${style.border}`}>
-                  <span className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>
-                    Python
+            )}
+            {result.exec_error && (
+              <div className="border-b border-gray-800 bg-red-950/30 px-4 py-3">
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-red-400">Error</p>
+                <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
+              </div>
+            )}
+            <div className={`${style.surface} px-4 py-3 space-y-2`}>
+              <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
+              {result.tests.map((t, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className={t.passed ? "text-green-400" : "text-red-400"}>
+                    {t.passed ? "✓" : "✗"}
                   </span>
-                  {result && (
-                    <span className={`text-xs font-semibold ${allPassed ? "text-green-400" : "text-red-400"}`}>
-                      {allPassed ? "All tests passed ✓" : "Tests failed"}
-                    </span>
-                  )}
+                  <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>
+                    {t.message}
+                  </span>
                 </div>
-                <textarea
-                  value={code}
-                  onChange={(e) => { handleCodeChange(e.target.value); }}
-                  onKeyDown={handleKeyDown}
-                  spellCheck={false}
-                  rows={14}
-                  className="w-full resize-none bg-gray-950 p-4 font-code text-sm leading-relaxed text-gray-100 outline-none"
-                />
-              </div>
-
-              <Button
-                onClick={() => void handleSubmit()}
-                loading={submitting}
-                disabled={!code.trim()}
-                className="w-full"
-              >
-                Run Code
-              </Button>
-
-              {error && <p className="text-center text-sm text-red-400">{error}</p>}
-
-              {result && (
-                <div className={`rounded-xl border ${style.border} overflow-hidden`}>
-                  {result.stdout && (
-                    <div className="border-b border-gray-800 bg-gray-950 px-4 py-3">
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Output</p>
-                      <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{result.stdout}</pre>
-                    </div>
-                  )}
-                  {result.exec_error && (
-                    <div className="border-b border-gray-800 bg-red-950/30 px-4 py-3">
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-red-400">Error</p>
-                      <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
-                    </div>
-                  )}
-                  <div className={`${style.surface} px-4 py-3 space-y-2`}>
-                    <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
-                    {result.tests.map((t, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <span className={t.passed ? "text-green-400" : "text-red-400"}>
-                          {t.passed ? "✓" : "✗"}
-                        </span>
-                        <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>
-                          {t.message}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              ))}
             </div>
           </div>
         )}
