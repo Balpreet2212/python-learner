@@ -77,7 +77,7 @@ function CodeEditor({
   return (
     <textarea
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => { onChange(e.target.value); }}
       onKeyDown={handleKeyDown}
       spellCheck={false}
       rows={rows}
@@ -152,7 +152,7 @@ export default function LessonPage() {
         setExerciseCode(l.code_starter);
         setFinalCode(l.final_challenge.code_starter);
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
       });
   }, []);
@@ -267,7 +267,7 @@ export default function LessonPage() {
           <div className={`border-t ${style.border} px-5 py-3 ${style.surface}`}>
             {!showOutput ? (
               <button
-                onClick={() => setShowOutput(true)}
+                onClick={() => { setShowOutput(true); }}
                 className={`text-sm font-medium ${style.accent} underline underline-offset-2`}
               >
                 ▶ Run example — see output
@@ -311,7 +311,7 @@ export default function LessonPage() {
           {lesson.hints.length > 0 && (
             <div>
               <button
-                onClick={() => setExerciseHintIndex((i) => Math.min(i + 1, lesson.hints.length - 1))}
+                onClick={() => { setExerciseHintIndex((i) => Math.min(i + 1, lesson.hints.length - 1)); }}
                 className={`text-sm underline ${style.muted}`}
               >
                 {exerciseHintIndex < 0 ? "Show hint" : exerciseHintIndex < lesson.hints.length - 1 ? "Next hint" : "No more hints"}
@@ -333,7 +333,7 @@ export default function LessonPage() {
         </section>
 
         {/* ── Section 4: Final Challenge ───────────────────────────────── */}
-        <section className={`rounded-xl border-2 ${exercisePassed ? `${style.border}` : "border-gray-700"} overflow-hidden transition-all`}>
+        <section className={`rounded-xl border-2 ${exercisePassed ? style.border : "border-gray-700"} overflow-hidden transition-all`}>
           <div className={`px-5 py-4 ${exercisePassed ? style.surface : "bg-gray-900"} border-b ${exercisePassed ? style.border : "border-gray-700"}`}>
             <h2 className={`text-base font-semibold ${exercisePassed ? style.highlight : "text-gray-400"}`}>
               Final Challenge — Code It from Scratch
@@ -369,7 +369,7 @@ export default function LessonPage() {
               {lesson.final_challenge.hints.length > 0 && (
                 <div className={`px-5 py-3 ${style.surface} border-b ${style.border}`}>
                   <button
-                    onClick={() => setFinalHintIndex((i) => Math.min(i + 1, lesson.final_challenge.hints.length - 1))}
+                    onClick={() => { setFinalHintIndex((i) => Math.min(i + 1, lesson.final_challenge.hints.length - 1)); }}
                     className={`text-sm underline ${style.muted}`}
                   >
                     {finalHintIndex < 0 ? "Show hint" : finalHintIndex < lesson.final_challenge.hints.length - 1 ? "Next hint" : "No more hints"}
@@ -411,7 +411,7 @@ export default function LessonPage() {
               </Button>
             ) : (
               <Button
-                onClick={() => navigate("/capstone")}
+                onClick={() => { navigate("/capstone"); }}
                 className="w-full bg-amber-600 hover:bg-amber-500"
               >
                 Unit {lesson.unit} Capstone →

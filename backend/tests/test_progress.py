@@ -2,17 +2,13 @@
 
 import pytest
 from httpx import AsyncClient
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.db.models import Account, EmailToken
-
 
 _counter = 0
 
 
-async def _create_and_login(client: AsyncClient, db_session: AsyncSession) -> str:
-    """Helper: signup + verify email + login. Returns CSRF token."""
+async def _create_and_login(client: AsyncClient) -> str:
+    """Helper: signup + login. Returns CSRF token."""
     global _counter
     _counter += 1
     email = f"prog{_counter}@example.com"
@@ -20,11 +16,6 @@ async def _create_and_login(client: AsyncClient, db_session: AsyncSession) -> st
         "/v1/auth/signup",
         json={"email": email, "password": "securepass1", "role": "learner"},
     )
-    token_row = await db_session.scalar(
-        select(EmailToken).where(EmailToken.purpose == "email_verify")
-    )
-    assert token_row is not None
-    await client.post("/v1/auth/verify-email", json={"token": token_row.token})
     login = await client.post(
         "/v1/auth/login", json={"email": email, "password": "securepass1"}
     )
@@ -35,7 +26,7 @@ async def _create_and_login(client: AsyncClient, db_session: AsyncSession) -> st
 async def test_onboarding_sets_track_and_world(
     client: AsyncClient, db_session: AsyncSession
 ) -> None:
-    csrf = await _create_and_login(client, db_session)
+    csrf = await _create_and_login(client)
     resp = await client.post(
         "/v1/learner/onboarding",
         json={"track": "junior", "world": "fantasy"},
@@ -53,7 +44,7 @@ async def test_onboarding_sets_track_and_world(
 async def test_onboarding_is_idempotent(
     client: AsyncClient, db_session: AsyncSession
 ) -> None:
-    csrf = await _create_and_login(client, db_session)
+    csrf = await _create_and_login(client)
     headers = {"X-CSRF-Token": csrf}
     await client.post(
         "/v1/learner/onboarding",
@@ -75,7 +66,7 @@ async def test_onboarding_is_idempotent(
 async def test_onboarding_rejects_invalid_world(
     client: AsyncClient, db_session: AsyncSession
 ) -> None:
-    csrf = await _create_and_login(client, db_session)
+    csrf = await _create_and_login(client)
     resp = await client.post(
         "/v1/learner/onboarding",
         json={"track": "junior", "world": "underwater"},
@@ -88,7 +79,7 @@ async def test_onboarding_rejects_invalid_world(
 async def test_onboarding_rejects_missing_csrf(
     client: AsyncClient, db_session: AsyncSession
 ) -> None:
-    csrf = await _create_and_login(client, db_session)
+    csrf = await _create_and_login(client)
     _ = csrf  # obtained but intentionally not sent
     resp = await client.post(
         "/v1/learner/onboarding",
@@ -101,7 +92,7 @@ async def test_onboarding_rejects_missing_csrf(
 async def test_me_returns_profile_after_onboarding(
     client: AsyncClient, db_session: AsyncSession
 ) -> None:
-    csrf = await _create_and_login(client, db_session)
+    csrf = await _create_and_login(client)
     await client.post(
         "/v1/learner/onboarding",
         json={"track": "core", "world": "mystery"},

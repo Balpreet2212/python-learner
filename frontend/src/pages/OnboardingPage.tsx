@@ -135,7 +135,7 @@ export default function OnboardingPage() {
             {TRACK_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
-                onClick={() => setTrack(opt.value)}
+                onClick={() => { setTrack(opt.value); }}
                 className={`w-full rounded-xl border-2 p-5 text-left transition-all ${
                   track === opt.value
                     ? "border-indigo-500 bg-indigo-950"
@@ -149,7 +149,7 @@ export default function OnboardingPage() {
           </div>
 
           <Button
-            onClick={() => setStep("world")}
+            onClick={() => { setStep("world"); }}
             disabled={!track}
             className="w-full"
           >
@@ -176,7 +176,7 @@ export default function OnboardingPage() {
             {WORLD_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
-                onClick={() => setWorld(opt.value)}
+                onClick={() => { setWorld(opt.value); }}
                 className={`w-full rounded-xl border-2 p-5 text-left transition-all ${
                   world === opt.value
                     ? `${opt.surface} border-2 ${opt.accent}`
@@ -197,7 +197,7 @@ export default function OnboardingPage() {
           {error && <p className="text-center text-sm text-red-400">{error}</p>}
 
           <div className="flex gap-3">
-            <Button variant="ghost" onClick={() => setStep("track")} className="flex-1">
+            <Button variant="ghost" onClick={() => { setStep("track"); }} className="flex-1">
               Back
             </Button>
             <Button

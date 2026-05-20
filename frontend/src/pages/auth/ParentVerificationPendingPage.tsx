@@ -14,7 +14,7 @@ export default function ParentVerificationPendingPage() {
   useEffect(() => {
     if (!token) return;
     parentVerify(token)
-      .then(() => setStatus("ok"))
+      .then(() => { setStatus("ok"); })
       .catch((err: unknown) => {
         setErrorMsg(
           err instanceof ApiError

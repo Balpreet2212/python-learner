@@ -71,7 +71,7 @@ export default function SignupPage() {
             label="Display name (optional)"
             type="text"
             value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={(e) => { setDisplayName(e.target.value); }}
             autoComplete="nickname"
             maxLength={100}
           />
@@ -79,7 +79,7 @@ export default function SignupPage() {
             label="Email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => { setEmail(e.target.value); }}
             autoComplete="email"
             required
           />
@@ -87,7 +87,7 @@ export default function SignupPage() {
             label="Password (8+ characters)"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => { setPassword(e.target.value); }}
             autoComplete="new-password"
             minLength={8}
             required
@@ -126,7 +126,7 @@ export default function SignupPage() {
               <input
                 type="checkbox"
                 checked={isUnder13}
-                onChange={(e) => setIsUnder13(e.target.checked)}
+                onChange={(e) => { setIsUnder13(e.target.checked); }}
                 className="accent-indigo-500"
               />
               <span className="text-sm text-gray-300">I am under 13 years old</span>
@@ -138,7 +138,7 @@ export default function SignupPage() {
               label="Parent / guardian email"
               type="email"
               value={parentEmail}
-              onChange={(e) => setParentEmail(e.target.value)}
+              onChange={(e) => { setParentEmail(e.target.value); }}
               required
               autoComplete="email"
             />

@@ -67,7 +67,7 @@ export default function NavBar() {
   const isParent = account?.role === "parent";
   const world = (profile?.world ?? "fantasy") as World;
   const style = getStyle(world);
-  const worldLabel = isParent ? "Parent Dashboard" : (WORLD_LABELS[world] ?? "PyQuest");
+  const worldLabel = isParent ? "Parent Dashboard" : WORLD_LABELS[world];
 
   const onLesson = location.pathname === "/lesson";
   const onCapstone = location.pathname === "/capstone";
@@ -95,7 +95,7 @@ export default function NavBar() {
         {/* Left: logo + context label */}
         <div className="flex items-center gap-3 min-w-0">
           <button
-            onClick={() => navigate(isParent ? "/parent" : "/")}
+            onClick={() => { navigate(isParent ? "/parent" : "/"); }}
             className={`text-lg font-bold ${navAccent} shrink-0`}
           >
             PyQuest
@@ -124,14 +124,14 @@ export default function NavBar() {
         <div className="flex items-center gap-3 shrink-0">
           {isParent ? (
             <button
-              onClick={() => navigate("/parent")}
+              onClick={() => { navigate("/parent"); }}
               className={`hidden text-xs sm:block ${navMuted} hover:${navText} transition-colors`}
             >
               Dashboard
             </button>
           ) : onLessonOrCapstone ? (
             <button
-              onClick={() => navigate("/")}
+              onClick={() => { navigate("/"); }}
               className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}
             >
               World Map
@@ -139,7 +139,7 @@ export default function NavBar() {
           ) : (
             profile && (
               <button
-                onClick={() => navigate("/lesson")}
+                onClick={() => { navigate("/lesson"); }}
                 className={`hidden text-xs sm:block ${style.muted} hover:${style.text} transition-colors`}
               >
                 Continue Lesson

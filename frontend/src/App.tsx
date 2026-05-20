@@ -18,7 +18,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   // Parents go to their dashboard
   if (account.role === "parent") return <Navigate to="/parent" replace />;
   // Learners without a track set must complete onboarding first
-  if (account.role === "learner" && (!profile || !profile.track)) {
+  if (!profile?.track) {
     return <Navigate to="/onboarding" replace />;
   }
   return <>{children}</>;

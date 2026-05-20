@@ -140,9 +140,9 @@ export default function WorldMapPage() {
   }
 
   const world = (profile.world || "fantasy") as World;
-  const style = WORLD_META[world] ?? WORLD_META.fantasy;
-  const unitNames = UNIT_NAMES[world] ?? UNIT_NAMES.fantasy;
-  const currentUnit = profile.current_unit || 1;
+  const style = WORLD_META[world];
+  const unitNames = UNIT_NAMES[world];
+  const currentUnit = profile.current_unit;
 
   return (
     <main className={`min-h-screen p-6 ${style.bg}`}>
@@ -171,7 +171,7 @@ export default function WorldMapPage() {
               current={current}
               completed={completed}
               style={style}
-              onStart={() => navigate("/lesson")}
+              onStart={() => { navigate("/lesson"); }}
             />
           );
         })}

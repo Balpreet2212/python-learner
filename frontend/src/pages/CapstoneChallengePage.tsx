@@ -77,7 +77,7 @@ export default function CapstoneChallengePage() {
         setPlanAnswers(Array(c.plan_prompts.length).fill(""));
         setCode(c.code_starter);
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         setError(err instanceof ApiError ? err.message : "Failed to load capstone");
       });
   }, []);
@@ -204,7 +204,7 @@ export default function CapstoneChallengePage() {
                     </label>
                     <textarea
                       value={planAnswers[i] ?? ""}
-                      onChange={(e) => handlePlanChange(i, e.target.value)}
+                      onChange={(e) => { handlePlanChange(i, e.target.value); }}
                       rows={2}
                       placeholder={required ? "Required…" : "Optional…"}
                       className={`w-full resize-none rounded-lg border ${style.border} bg-gray-950 px-3 py-2 font-mono text-sm text-gray-100 outline-none focus:ring-1 focus:ring-white/20 placeholder:text-gray-600`}
@@ -245,7 +245,7 @@ export default function CapstoneChallengePage() {
               {capstone.hints.length > 0 && (
                 <div>
                   <button
-                    onClick={() => setHintIndex((i) => (i < capstone.hints.length - 1 ? i + 1 : i))}
+                    onClick={() => { setHintIndex((i) => (i < capstone.hints.length - 1 ? i + 1 : i)); }}
                     className={`text-sm underline ${style.muted} hover:${style.accent}`}
                   >
                     {hintIndex < 0
@@ -278,7 +278,7 @@ export default function CapstoneChallengePage() {
                 </div>
                 <textarea
                   value={code}
-                  onChange={(e) => handleCodeChange(e.target.value)}
+                  onChange={(e) => { handleCodeChange(e.target.value); }}
                   onKeyDown={handleKeyDown}
                   spellCheck={false}
                   rows={14}

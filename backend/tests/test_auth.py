@@ -1,9 +1,9 @@
 """Integration tests for auth endpoints (M2).
 
 Covers:
-- Happy-path signup → verify-email → login → me → logout
+- Happy-path signup → login → me → logout (email verification removed)
 - Under-13 signup flow (parent invite sent, learner inactive until parent-verify)
-- Login failures (bad password, unverified email, inactive account)
+- Login failures (bad password, inactive account)
 - CSRF rejection on write endpoints
 """
 
@@ -13,7 +13,6 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models import Account, EmailToken
-
 
 # ── Signup ──────────────────────────────────────────────────────────────────
 
@@ -25,14 +24,14 @@ async def test_signup_happy_path(client: AsyncClient, db_session: AsyncSession) 
         json={"email": "alice@example.com", "password": "securepass1", "role": "learner"},
     )
     assert resp.status_code == 201
-    assert resp.json()["status"] == "verification_email_sent"
+    assert resp.json()["status"] == "account_created"
 
     account = await db_session.scalar(
         select(Account).where(Account.email == "alice@example.com")
     )
     assert account is not None
-    assert account.email_verified is False
-    assert account.is_active is True  # 13+ learners are active, just unverified
+    assert account.email_verified is True
+    assert account.is_active is True
 
 
 @pytest.mark.asyncio
@@ -84,28 +83,7 @@ async def test_signup_under_13_with_parent_email(
     assert account.is_under_13 is True
 
 
-# ── Email verification ───────────────────────────────────────────────────────
-
-
-@pytest.mark.asyncio
-async def test_verify_email(client: AsyncClient, db_session: AsyncSession) -> None:
-    await client.post(
-        "/v1/auth/signup",
-        json={"email": "bob@example.com", "password": "securepass1", "role": "learner"},
-    )
-    token_row = await db_session.scalar(
-        select(EmailToken).where(EmailToken.purpose == "email_verify")
-    )
-    assert token_row is not None
-
-    resp = await client.post("/v1/auth/verify-email", json={"token": token_row.token})
-    assert resp.status_code == 200
-
-    account = await db_session.scalar(
-        select(Account).where(Account.email == "bob@example.com")
-    )
-    assert account is not None
-    assert account.email_verified is True
+# ── Email verification (bad-token path still reachable) ─────────────────────
 
 
 @pytest.mark.asyncio
@@ -153,30 +131,22 @@ async def test_parent_verify_activates_learner(
 _learner_counter = 0
 
 
-async def _create_verified_learner(
-    client: AsyncClient, db_session: AsyncSession, suffix: str = ""
-) -> str:
-    """Helper: signup + verify email. Returns email."""
+async def _create_learner(client: AsyncClient, suffix: str = "") -> str:
+    """Helper: signup (accounts are active immediately). Returns email."""
     global _learner_counter
     _learner_counter += 1
     email = f"learner{_learner_counter}{suffix}@example.com"
-    await client.post(
+    resp = await client.post(
         "/v1/auth/signup",
         json={"email": email, "password": "securepass1", "role": "learner"},
     )
-    token_row = await db_session.scalar(
-        select(EmailToken).where(
-            EmailToken.purpose == "email_verify",
-        )
-    )
-    assert token_row is not None, "email_verify token not found — signup may have failed"
-    await client.post("/v1/auth/verify-email", json={"token": token_row.token})
+    assert resp.status_code == 201
     return email
 
 
 @pytest.mark.asyncio
 async def test_login_happy_path(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     resp = await client.post(
         "/v1/auth/login", json={"email": email, "password": "securepass1"}
     )
@@ -189,24 +159,12 @@ async def test_login_happy_path(client: AsyncClient, db_session: AsyncSession) -
 
 @pytest.mark.asyncio
 async def test_login_wrong_password(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     resp = await client.post(
         "/v1/auth/login", json={"email": email, "password": "wrongpassword"}
     )
     assert resp.status_code == 401
 
-
-@pytest.mark.asyncio
-async def test_login_unverified_email(client: AsyncClient) -> None:
-    await client.post(
-        "/v1/auth/signup",
-        json={"email": "dave@example.com", "password": "securepass1", "role": "learner"},
-    )
-    resp = await client.post(
-        "/v1/auth/login", json={"email": "dave@example.com", "password": "securepass1"}
-    )
-    assert resp.status_code == 403
-    assert resp.json()["code"] == "email_not_verified"
 
 
 @pytest.mark.asyncio
@@ -217,7 +175,7 @@ async def test_me_requires_session(client: AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_me_returns_account(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     login = await client.post(
         "/v1/auth/login", json={"email": email, "password": "securepass1"}
     )
@@ -231,7 +189,7 @@ async def test_me_returns_account(client: AsyncClient, db_session: AsyncSession)
 
 @pytest.mark.asyncio
 async def test_logout(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     login = await client.post(
         "/v1/auth/login", json={"email": email, "password": "securepass1"}
     )
@@ -250,7 +208,7 @@ async def test_logout(client: AsyncClient, db_session: AsyncSession) -> None:
 
 @pytest.mark.asyncio
 async def test_csrf_rejection_on_logout(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     await client.post("/v1/auth/login", json={"email": email, "password": "securepass1"})
 
     # Attempt logout without CSRF header
@@ -261,7 +219,7 @@ async def test_csrf_rejection_on_logout(client: AsyncClient, db_session: AsyncSe
 
 @pytest.mark.asyncio
 async def test_csrf_wrong_token_rejected(client: AsyncClient, db_session: AsyncSession) -> None:
-    email = await _create_verified_learner(client, db_session)
+    email = await _create_learner(client)
     await client.post("/v1/auth/login", json={"email": email, "password": "securepass1"})
 
     resp = await client.post(

@@ -55,7 +55,7 @@ export default function LoginPage() {
             label="Email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => { setEmail(e.target.value); }}
             autoComplete="email"
             required
           />
@@ -63,7 +63,7 @@ export default function LoginPage() {
             label="Password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => { setPassword(e.target.value); }}
             autoComplete="current-password"
             required
           />

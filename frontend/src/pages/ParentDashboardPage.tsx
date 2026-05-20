@@ -28,7 +28,7 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-700">
       <div
         className="h-full rounded-full bg-indigo-500 transition-all"
-        style={{ width: `${pct}%` }}
+        style={{ width: `${String(pct)}%` }}
       />
     </div>
   );
@@ -100,8 +100,8 @@ export default function ParentDashboardPage() {
   useEffect(() => {
     getLinkedLearners()
       .then(setLearners)
-      .catch((err) => setError(err instanceof ApiError ? err.message : "Failed to load learners"))
-      .finally(() => setLoading(false));
+      .catch((err: unknown) => { setError(err instanceof ApiError ? err.message : "Failed to load learners"); })
+      .finally(() => { setLoading(false); });
   }, []);
 
   async function handleLink(e: FormEvent) {

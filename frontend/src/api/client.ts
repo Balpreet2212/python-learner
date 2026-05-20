@@ -75,7 +75,7 @@ export async function apiFetch<T>(
     if (isErrorBody(body)) {
       throw new ApiError(resp.status, body.code, body.message, body.details);
     }
-    throw new ApiError(resp.status, "unknown", `HTTP ${resp.status}`);
+    throw new ApiError(resp.status, "unknown", `HTTP ${String(resp.status)}`);
   }
 
   if (resp.status === 204) {

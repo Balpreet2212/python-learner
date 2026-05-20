@@ -15,7 +15,7 @@ export default function VerifyEmailPendingPage() {
     if (!token) return;
     setStatus("verifying");
     verifyEmail(token)
-      .then(() => setStatus("ok"))
+      .then(() => { setStatus("ok"); })
       .catch((err: unknown) => {
         setErrorMsg(
           err instanceof ApiError
