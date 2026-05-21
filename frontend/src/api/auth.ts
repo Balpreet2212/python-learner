@@ -84,3 +84,7 @@ export async function getMe(): Promise<AuthResponse> {
   const raw = await apiFetch<unknown>("/v1/me");
   return AuthResponseSchema.parse(raw);
 }
+
+export async function deleteAccount(): Promise<void> {
+  await apiFetch<undefined>("/v1/me", { method: "DELETE" });
+}

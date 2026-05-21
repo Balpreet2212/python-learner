@@ -1,3 +1,5 @@
+import uuid
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -6,7 +8,7 @@ from app.core.errors import forbidden
 from app.db.models import Account
 from app.db.session import get_db
 from app.parent import service
-from app.parent.schemas import LearnerSummaryOut, LinkLearnerRequest, LinkOut
+from app.parent.schemas import LearnerDetailOut, LearnerSummaryOut, LinkLearnerRequest, LinkOut
 
 router = APIRouter(prefix="/v1/parent", tags=["parent"])
 
@@ -25,6 +27,15 @@ async def list_learners(
     db: AsyncSession = Depends(get_db),
 ) -> list[LearnerSummaryOut]:
     return await service.get_linked_learners(db, account.id)
+
+
+@router.get("/learners/{learner_id}/detail", response_model=LearnerDetailOut)
+async def get_learner_detail(
+    learner_id: uuid.UUID,
+    account: Account = Depends(_require_parent),
+    db: AsyncSession = Depends(get_db),
+) -> LearnerDetailOut:
+    return await service.get_learner_detail(db, account.id, learner_id)
 
 
 @router.post("/link", response_model=LinkOut, status_code=201)

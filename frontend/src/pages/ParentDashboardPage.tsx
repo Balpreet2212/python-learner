@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef, type FormEvent } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getLinkedLearners, linkLearner, type LearnerSummary } from "../api/parent";
+import {
+  getLinkedLearners,
+  getLearnerDetail,
+  linkLearner,
+  type LearnerSummary,
+  type LearnerDetail,
+} from "../api/parent";
 import { ApiError } from "../api/client";
 import Button from "../components/ui/Button";
 
@@ -16,10 +22,22 @@ const WORLD_LABEL: Record<string, string> = {
   mystery: "Detective Agency",
 };
 
-const WORLD_COLOR: Record<string, string> = {
-  fantasy: "text-purple-400 border-purple-700",
-  scifi: "text-cyan-400 border-cyan-700",
-  mystery: "text-amber-400 border-amber-700",
+const WORLD_BORDER: Record<string, string> = {
+  fantasy: "border-purple-700",
+  scifi: "border-cyan-700",
+  mystery: "border-amber-700",
+};
+
+const WORLD_TEXT: Record<string, string> = {
+  fantasy: "text-purple-400",
+  scifi: "text-cyan-400",
+  mystery: "text-amber-400",
+};
+
+const WORLD_BAR: Record<string, string> = {
+  fantasy: "bg-purple-500",
+  scifi: "bg-cyan-500",
+  mystery: "bg-amber-500",
 };
 
 function ProgressBar({ value, max }: { value: number; max: number }) {
@@ -34,15 +52,56 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
   );
 }
 
+function Sparkline({ data, barClass }: { data: number[]; barClass: string }) {
+  const max = Math.max(...data, 1);
+  return (
+    <div className="flex items-end gap-px" style={{ height: "32px" }}>
+      {data.map((v, i) => {
+        const h = v === 0 ? 4 : Math.max(Math.round((v / max) * 100), 12);
+        return (
+          <div
+            key={i}
+            className={`flex-1 rounded-sm ${v > 0 ? barClass : "bg-gray-700"}`}
+            style={{ height: `${String(h)}%` }}
+            title={`${String(v)} lesson${v !== 1 ? "s" : ""}`}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 function LearnerCard({ learner }: { learner: LearnerSummary }) {
+  const [expanded, setExpanded] = useState(false);
+  const [detail, setDetail] = useState<LearnerDetail | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailError, setDetailError] = useState<string | null>(null);
+
   const totalLessons = learner.total_units * learner.total_lessons_per_unit;
   const completedLessons =
     (learner.current_unit - 1) * learner.total_lessons_per_unit +
     (learner.current_lesson - 1);
-  const worldColor = WORLD_COLOR[learner.world] ?? "text-gray-400 border-gray-700";
+
+  const borderClass = WORLD_BORDER[learner.world] ?? "border-gray-700";
+  const textClass = WORLD_TEXT[learner.world] ?? "text-gray-400";
+  const barClass = WORLD_BAR[learner.world] ?? "bg-indigo-500";
+
+  function handleToggle() {
+    if (!expanded && detail === null && !detailLoading) {
+      setDetailLoading(true);
+      setDetailError(null);
+      getLearnerDetail(learner.id)
+        .then((d) => { setDetail(d); })
+        .catch((err: unknown) => {
+          setDetailError(err instanceof ApiError ? err.message : "Failed to load details");
+        })
+        .finally(() => { setDetailLoading(false); });
+    }
+    setExpanded((prev) => !prev);
+  }
 
   return (
-    <div className={`rounded-2xl border bg-gray-900 p-5 ${worldColor.split(" ")[1]}`}>
+    <div className={`rounded-2xl border bg-gray-900 p-5 ${borderClass}`}>
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="truncate font-semibold text-white">
@@ -57,7 +116,7 @@ function LearnerCard({ learner }: { learner: LearnerSummary }) {
 
       <div className="mt-4 space-y-2">
         <div className="flex items-center justify-between text-xs">
-          <span className={worldColor.split(" ")[0]}>
+          <span className={textClass}>
             {WORLD_LABEL[learner.world] ?? learner.world}
           </span>
           <span className="text-gray-400 capitalize">
@@ -80,6 +139,53 @@ function LearnerCard({ learner }: { learner: LearnerSummary }) {
         <p className="mt-3 text-xs text-gray-500">
           🏅 {learner.badges.length} badge{learner.badges.length !== 1 ? "s" : ""} earned
         </p>
+      )}
+
+      <button
+        onClick={handleToggle}
+        className="mt-3 flex w-full items-center justify-between text-xs text-gray-500 transition-colors hover:text-gray-300"
+      >
+        <span>Activity details</span>
+        <span aria-hidden="true">{expanded ? "▲" : "▼"}</span>
+      </button>
+
+      {expanded && (
+        <div className="mt-3 space-y-3 border-t border-gray-800 pt-3">
+          {detailLoading && (
+            <p className="text-xs text-gray-500">Loading…</p>
+          )}
+          {detailError && (
+            <p className="text-xs text-red-400">{detailError}</p>
+          )}
+          {detail && (
+            <>
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div>
+                  <p className="text-gray-500">Streak</p>
+                  <p className="font-semibold text-white">
+                    {detail.streak_days}d
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-500">This week</p>
+                  <p className="font-semibold text-white">
+                    {detail.lessons_this_week} lesson{detail.lessons_this_week !== 1 ? "s" : ""}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-500">Last active</p>
+                  <p className="font-semibold text-white">
+                    {detail.last_active ?? "—"}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p className="mb-1.5 text-xs text-gray-500">30-day activity</p>
+                <Sparkline data={detail.sparkline_30d} barClass={barClass} />
+              </div>
+            </>
+          )}
+        </div>
       )}
     </div>
   );
@@ -114,7 +220,6 @@ export default function ParentDashboardPage() {
       await linkLearner(linkEmail.trim());
       setLinkSuccess(`Linked ${linkEmail.trim()} successfully.`);
       setLinkEmail("");
-      // Reload learner list
       const updated = await getLinkedLearners();
       setLearners(updated);
     } catch (err) {
@@ -128,7 +233,6 @@ export default function ParentDashboardPage() {
   return (
     <main className="min-h-screen bg-gray-950 p-6">
       <div className="mx-auto max-w-3xl space-y-8">
-        {/* Header */}
         <div>
           <h1 className="text-2xl font-bold text-white">Parent Dashboard</h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -136,7 +240,6 @@ export default function ParentDashboardPage() {
           </p>
         </div>
 
-        {/* Link a learner */}
         <section className="rounded-2xl border border-gray-800 bg-gray-900 p-6">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
             Add a Learner
@@ -166,7 +269,6 @@ export default function ParentDashboardPage() {
           </p>
         </section>
 
-        {/* Learner list */}
         <section>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
             Your Learners

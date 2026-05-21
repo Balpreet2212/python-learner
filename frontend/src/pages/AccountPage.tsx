@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { logout } from "../api/auth";
+import { logout, deleteAccount } from "../api/auth";
 import { resetProgress } from "../api/learner";
 import Button from "../components/ui/Button";
 import { useState } from "react";
@@ -12,6 +12,7 @@ export default function AccountPage() {
   const [signingOut, setSigningOut] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [resetDone, setResetDone] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   async function handleSignOut() {
     setSigningOut(true);
@@ -22,6 +23,20 @@ export default function AccountPage() {
     } finally {
       clearAuth();
       navigate("/auth/login");
+    }
+  }
+
+  async function handleDelete() {
+    if (!confirm("Permanently delete your account and all data? This cannot be undone.")) return;
+    setDeleting(true);
+    try {
+      await deleteAccount();
+      clearAuth();
+      navigate("/auth/login");
+    } catch {
+      // ignore — user stays on page if request fails
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -108,6 +123,22 @@ export default function AccountPage() {
           >
             Sign out
           </Button>
+        </section>
+
+        {/* Danger zone */}
+        <section className="space-y-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-red-700">Danger zone</h2>
+          <Button
+            variant="ghost"
+            loading={deleting}
+            onClick={() => void handleDelete()}
+            className="w-full border border-red-900 text-red-500 hover:border-red-500 hover:text-red-300"
+          >
+            Delete account
+          </Button>
+          <p className="text-center text-xs text-gray-600">
+            Permanently deletes your account and all associated data.
+          </p>
         </section>
       </div>
     </main>

@@ -13,7 +13,7 @@ from app.auth.service import _profile_out
 from app.content.service import LESSONS_PER_UNIT, MAX_UNITS, load_capstone, load_lesson
 from app.core.errors import bad_request, forbidden
 from app.core.sandbox import run_challenge
-from app.db.models import Account
+from app.db.models import Account, ProgressEvent
 from app.db.session import get_db
 
 router = APIRouter(prefix="/v1/learner", tags=["content"])
@@ -205,11 +205,19 @@ async def advance_lesson(
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before advancing lessons")
 
+    completed_lesson = profile.current_lesson
     if profile.current_lesson < LESSONS_PER_UNIT:
         profile.current_lesson += 1
     else:
         raise bad_request("Complete the unit capstone to advance to the next unit")
 
+    db.add(ProgressEvent(
+        account_id=account.id,
+        event_type="lesson_complete",
+        unit=profile.current_unit,
+        lesson=completed_lesson,
+        created_at=datetime.now(UTC),
+    ))
     account.updated_at = datetime.now(UTC)
     await db.commit()
 
@@ -315,6 +323,12 @@ async def advance_capstone(
     else:
         raise bad_request("You have completed all available units!")
 
+    db.add(ProgressEvent(
+        account_id=account.id,
+        event_type="unit_complete",
+        unit=current_unit,
+        created_at=datetime.now(UTC),
+    ))
     account.updated_at = datetime.now(UTC)
     await db.commit()
 

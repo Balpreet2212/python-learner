@@ -146,3 +146,19 @@ class EmailToken(Base):
     used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     account: Mapped["Account"] = relationship(back_populates="email_tokens")
+
+
+class ProgressEvent(Base):
+    """Records learner activity events for the parent dashboard."""
+
+    __tablename__ = "progress_event"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("account.id", ondelete="CASCADE"), nullable=False
+    )
+    # 'session_start' | 'lesson_complete' | 'unit_complete'
+    event_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    unit: Mapped[int | None] = mapped_column(nullable=True)
+    lesson: Mapped[int | None] = mapped_column(nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)

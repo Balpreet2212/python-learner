@@ -16,9 +16,26 @@ export const LearnerSummarySchema = z.object({
 
 export type LearnerSummary = z.infer<typeof LearnerSummarySchema>;
 
+export const LearnerDetailSchema = z.object({
+  id: z.string().uuid(),
+  display_name: z.string().nullable(),
+  email: z.string(),
+  streak_days: z.number().int(),
+  last_active: z.string().nullable(),
+  lessons_this_week: z.number().int(),
+  sparkline_30d: z.array(z.number().int()),
+});
+
+export type LearnerDetail = z.infer<typeof LearnerDetailSchema>;
+
 export async function getLinkedLearners(): Promise<LearnerSummary[]> {
   const data = await apiFetch<unknown[]>("/v1/parent/learners");
   return z.array(LearnerSummarySchema).parse(data);
+}
+
+export async function getLearnerDetail(learnerId: string): Promise<LearnerDetail> {
+  const data = await apiFetch<unknown>(`/v1/parent/learners/${learnerId}/detail`);
+  return LearnerDetailSchema.parse(data);
 }
 
 export async function linkLearner(email: string): Promise<{ status: string }> {
