@@ -36,6 +36,7 @@ const WORLD_META: Record<
 const UNIT_NAMES: Record<World, string[]> = {
   fantasy: [
     "The Sorcerer's Variables",
+    "The Gate of Truth",
     "Loops of Fate",
     "The Function Grimoire",
     "Data Dungeon",
@@ -44,6 +45,7 @@ const UNIT_NAMES: Record<World, string[]> = {
   ],
   scifi: [
     "Boot Sequence",
+    "Binary Decision Node",
     "Orbital Loops",
     "Subroutine Nexus",
     "Cargo Manifest",
@@ -52,6 +54,7 @@ const UNIT_NAMES: Record<World, string[]> = {
   ],
   mystery: [
     "The First Clue",
+    "The Hidden Clue",
     "Looping Leads",
     "The Informant",
     "Evidence Files",
