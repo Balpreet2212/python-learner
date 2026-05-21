@@ -1,85 +1,97 @@
-unit: 5
+unit: 4
 lesson: 2
 xp: 10
 
 example:
   code: |
-    def parse_age(text):
-        try:
-            age = int(text)
-        except ValueError:
-            age = -1
-        return age
-
-    print(parse_age("25"))
-    print(parse_age("twenty"))
-    print(parse_age(""))
+    tools = ["hammer", "drill"]
+    tools.append("saw")
+    print(tools)
+    print(len(tools))
+    print(tools[0])
+    print(tools[-1])
   explanation: |
-    int() raises ValueError when the string cannot be converted to an integer — for example "twenty" or "".
-    Wrapping the call in try/except ValueError lets you return a safe fallback (-1 here) instead of crashing.
-    ValueError is the right exception for "wrong type of value", not a hardware or division error.
-  output: "25\n-1\n-1"
+    .append() adds a new item to the end of a list in-place (it changes the original).
+    len() counts the total number of items.
+    Positive indexes count from the front: [0] is first, [1] is second.
+    Negative indexes count from the back: [-1] is always the last item.
+  output: "['hammer', 'drill', 'saw']\n3\nhammer\nsaw"
 
 code_starter: |
-  def safe_int(text):
-      try:
-          value = ___
-      except ___:
-          value = ___
-      return value
-hints:
-  - "value = int(text) inside the try block"
-  - "Catch ValueError"
-  - "Return -1 when conversion fails"
+  inventory = ["sword", "shield"]
 
+  # 1. Append "potion" to inventory
+  inventory.append(   )
+
+  # 2. Store the total item count in 'item_count'
+  item_count =
+
+  # 3. Store the first item in 'first_item'
+  first_item =
+hints:
+  - 'inventory.append("potion")  — adds to the end'
+  - "item_count = len(inventory)  — len() returns the number of items"
+  - "first_item = inventory[0]  — lists are zero-indexed"
 tests:
-  - code: "assert safe_int('42') == 42, 'safe_int(\"42\") should be 42'"
-    message: "safe_int('42') returns 42"
-  - code: "assert safe_int('abc') == -1, 'safe_int(\"abc\") should be -1'"
-    message: "safe_int('abc') returns -1"
-  - code: "assert safe_int('') == -1, 'safe_int(\"\") should be -1'"
-    message: "safe_int('') returns -1"
+  - code: "assert 'potion' in inventory"
+    message: "'potion' should be in inventory"
+  - code: "assert item_count == 3, f'item_count should be 3, got {item_count}'"
+    message: "item_count should be 3"
+  - code: "assert first_item == 'sword', f'first_item should be sword, got {first_item!r}'"
+    message: "first_item should be 'sword'"
 
 final_challenge:
   code_starter: |
-    # Your code here
+    # Build an item bag and query it
+    items = ["torch", "rope"]
   hints:
-    - "def safe_int(text): ..."
-    - "try: value = int(text)"
-    - "except ValueError: value = -1"
+    - 'items.append("key")  — add the key'
+    - "item_count = len(items)  — should be 3"
+    - "first_item = items[0]  — should be torch"
   tests:
-    - code: "assert safe_int('7') == 7, 'safe_int(\"7\") should be 7'"
-      message: "safe_int('7') returns 7"
-    - code: "assert safe_int('hello') == -1, 'safe_int(\"hello\") should be -1'"
-      message: "safe_int('hello') returns -1"
-    - code: "assert safe_int('3.14') == -1, 'safe_int(\"3.14\") should be -1'"
-      message: "safe_int('3.14') returns -1 (not a whole number string)"
+    - code: "assert 'key' in items"
+      message: "'key' should be in items"
+    - code: "assert len(items) == 3, f'items should have 3 items, got {len(items)}'"
+      message: "items should have 3 items after appending"
+    - code: "assert item_count == 3"
+      message: "item_count should be 3"
+    - code: "assert first_item == 'torch'"
+      message: "first_item should be 'torch'"
 
 worlds:
   fantasy:
-    title: "Reading Rune Inscriptions Safely"
+    title: "Inventory Management"
     setup: |
-      Ancient runes are inscribed on every artifact in the vault — but not all of them contain numbers. Some runes spell words, some are blank, some are symbols from a dead language. Trying to read a word-rune as a number without protection causes the reading spell to unravel entirely.
-      Python raises ValueError when int() is given a string it cannot convert. Your job is to wrap the conversion in try/except ValueError, returning -1 whenever the rune is unreadable as a number.
+      Your pack needs restocking. "Lists have methods — built-in actions you call
+      with a dot," Elara says. ".append() adds an item to the end. len() tells you
+      how many items there are. And list[0] retrieves the first item — Python lists
+      start counting at zero."
+
+      Add a potion, measure the inventory size, and grab the first item by index.
     final_challenge_prompt: |
-      The vault's inscription scanner sends text values from each artifact. Write safe_int(text) that:
-      — Returns int(text) when the string is a valid whole number
-      — Returns -1 if ValueError is raised (the text is not a valid integer)
+      Your bag already has a torch and rope. Append "key" to items. Then store the
+      total count in item_count (len()) and store the first item in first_item
+      (items[0]).
   scifi:
-    title: "Parsing Corrupted Sensor Readings"
+    title: "Cargo Operations"
     setup: |
-      The Meridian's sensor array occasionally transmits corrupted packets — a reading might come through as "ERR", "N/A", or a floating-point string like "3.14" instead of a clean integer. Calling int() on those strings raises ValueError.
-      The fix is the same try/except pattern from last lesson, but now catching ValueError instead of ZeroDivisionError. One wrong string no longer crashes the whole telemetry pipeline.
+      Cargo must be logged precisely. "List methods let you modify lists in place,"
+      the AI explains. ".append() adds to the end without creating a new list.
+      len() counts items. Index with [0] for the first — lists are zero-indexed."
+
+      Update and query the inventory using the methods you've learned.
     final_challenge_prompt: |
-      Write safe_int(text) for the sensor parsing module:
-      — Returns int(text) for clean integer strings
-      — Returns -1 for any string that raises ValueError (floats, words, empty strings)
+      The cargo hold has a torch and rope. Add "key" to items using append. Store
+      len(items) in item_count and items[0] in first_item.
   mystery:
-    title: "Decoding the Suspect's Encoded Notes"
+    title: "Evidence Locker"
     setup: |
-      The suspect's notebooks are full of numbers — but half of them turn out to be words in disguise. "forty-two", "??", blank lines. The code-breaking routine crashes every time it hits one.
-      ValueError is raised when int() receives a string it cannot parse. Catching it with except ValueError lets the decoder skip bad values and return a sentinel (-1) that tells downstream code "this one was unreadable".
+      New evidence arrives — log it, count it, identify the first item. ".append()
+      adds an item to the end of a list," your partner says. "len() counts the items,
+      and [0] retrieves the first."
+
+      Append "potion" to inventory, then find item_count and first_item.
     final_challenge_prompt: |
-      Write safe_int(text) for the code-breaking tool:
-      — Returns int(text) when text is a valid integer string
-      — Returns -1 on ValueError (invalid text — words, decimals, blank)
+      The evidence locker has a torch and rope. A new key has been found — append
+      it to items. Then store the total count in item_count and the first item in
+      first_item.

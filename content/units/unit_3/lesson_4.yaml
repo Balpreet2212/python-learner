@@ -1,94 +1,87 @@
-unit: 3
+unit: 2
 lesson: 4
 xp: 10
 
 example:
   code: |
-    def is_adult(age):
-        return age >= 18
-
-    print(is_adult(20))
-    print(is_adult(15))
-    print(type(is_adult(20)))
+    temps = [18, 25, 12, 31, 22]
+    highest = temps[0]
+    for t in temps:
+        if t > highest:
+            highest = t
+    print("Highest:", highest)
   explanation: |
-    A predicate function is one that returns True or False.
-    The expression age >= 18 already evaluates to a boolean — you can return it directly.
-    There's no need to write if/else just to return True or False;
-    returning the comparison directly is cleaner and more Pythonic.
-  output: "True\nFalse\n<class 'bool'>"
+    To find the maximum in a list, keep a "running best" variable.
+    Start by assuming the first element is the best (highest = temps[0]).
+    Then loop through every item: if the current item beats the best, update it.
+    After the loop, highest holds the largest value in the list.
+    This pattern works for any comparison — min, max, first match, etc.
+  output: "Highest: 31"
 
 code_starter: |
-  # Define a function 'is_even' that takes one parameter n
-  # and returns True if n is even, False otherwise.
-  def is_even(n):
+  scores = [12, 47, 3, 89, 22]
 
-  check_four  = is_even(4)
-  check_seven = is_even(7)
+  # Find the highest score using a for loop.
+  # Store it in a variable called 'highest'.
+  highest = scores[0]
+  for score in scores:
+      if score > highest:
 hints:
-  - "n % 2 == 0 is True when n is even (no remainder when divided by 2)"
-  - "return n % 2 == 0  — this expression already evaluates to True or False"
+  - "If the current score beats your best, update highest: highest = score"
+  - "Start by assuming scores[0] is the best, then check each one"
 tests:
-  - code: "assert is_even(4) is True, 'is_even(4) should be True'"
-    message: "is_even(4) should return True"
-  - code: "assert is_even(7) is False, 'is_even(7) should be False'"
-    message: "is_even(7) should return False"
-  - code: "assert is_even(0) is True"
-    message: "is_even(0) should return True"
+  - code: "assert highest == 89, f'highest should be 89, got {highest}'"
+    message: "highest should be 89"
 
 final_challenge:
   code_starter: |
-    # Define a function that checks if a level qualifies as powerful
+    readings = [3, 91, 27, 64, 8]
+    # Find the peak reading using a for loop
+    # Store it in 'peak'
   hints:
-    - "def is_powerful(level):  — one parameter"
-    - "    return level >= 10  — True if level is 10 or more"
-    - "is_powerful(10) should be True, is_powerful(5) should be False"
+    - "peak = readings[0]  — assume the first is highest"
+    - "for r in readings:  — check each value"
+    - "    if r > peak:  — update if better"
+    - "        peak = r"
   tests:
-    - code: "assert is_powerful(10) is True"
-      message: "is_powerful(10) should return True"
-    - code: "assert is_powerful(9) is False"
-      message: "is_powerful(9) should return False"
-    - code: "assert is_powerful(5) is False"
-      message: "is_powerful(5) should return False"
-    - code: "assert is_powerful(100) is True"
-      message: "is_powerful(100) should return True"
+    - code: "assert peak == 91, f'peak should be 91, got {peak}'"
+      message: "peak should be 91 (the largest value in readings)"
 
 worlds:
   fantasy:
-    title: "The Parity Oracle"
+    title: "The Champion's Trial"
     setup: |
-      The oracle must judge each number: balanced (even) or off-balance (odd).
-      "A function that returns True or False is called a predicate," Elara says.
-      "The modulus operator % gives the remainder after division — if n % 2 == 0,
-      the number divides evenly."
+      Five warriors enter the arena — only the strongest advances. "You can use a
+      loop to track the greatest value seen so far," Elara explains. "Start by
+      assuming the first element is the winner, then replace it whenever you find
+      something better."
 
-      Write 'is_even(n)' that returns the boolean result directly. No if/else needed
-      — the comparison itself is already True or False.
+      This pattern — a running maximum — is fundamental to many algorithms. Find
+      'highest' among the scores and the champion enters the next round.
     final_challenge_prompt: |
-      The enchanted gate only opens for heroes of level 10 or above. Define a
-      function called is_powerful that takes a level parameter and returns True
-      if level >= 10, False otherwise. Return the comparison directly.
+      Five arcane readings were taken from different ley lines. Find the peak energy
+      reading from the list [3, 91, 27, 64, 8]. Use a for loop and a running maximum
+      to find the largest value and store it in 'peak'.
   scifi:
-    title: "Binary Parity Check"
+    title: "Peak Signal"
     setup: |
-      The ship's checksum system flags odd readings as anomalies. "Functions that
-      return booleans are common in real code," the AI notes. "The % operator gives
-      the remainder — n % 2 == 0 is already a boolean expression you can return
-      directly."
+      Five sensor readings arrive from deep space. "To find a maximum, keep a
+      running winner — start with the first value, then update it whenever the
+      current reading exceeds it," the AI says.
 
-      Write 'is_even(n)' returning True for even numbers.
+      Loop through 'scores' and store the peak reading in 'highest'.
     final_challenge_prompt: |
-      The clearance system grants access only to crew members with a level of 10
-      or higher. Define is_powerful(level) that returns True when level >= 10 and
-      False otherwise. Return the comparison directly — no if needed.
+      Five telemetry readings came in: [3, 91, 27, 64, 8]. Find the strongest
+      signal. Use a for loop with a running maximum and store the result in 'peak'.
   mystery:
-    title: "The Even-Odd Cipher"
+    title: "The Biggest Lead"
     setup: |
-      The coded message uses even numbers as signals. "A function that checks a
-      condition and returns a boolean is called a predicate," your mentor explains.
-      "n % 2 gives the remainder when dividing by 2 — if it's 0, the number is even."
+      Five suspects — each assigned a suspicion score. "Finding the maximum means
+      walking through every value and keeping the best you've seen," your mentor
+      says. "Assume the first score leads, then check whether each new one beats it."
 
-      Write 'is_even(n)' that returns the result of n % 2 == 0.
+      Find the highest score and store it in 'highest'.
     final_challenge_prompt: |
-      The security clearance check requires a threat level of 10 or above to
-      trigger the alarm. Define is_powerful(level) returning True if level >= 10.
-      The function should return the boolean comparison directly.
+      Five informants each provided a reliability rating: [3, 91, 27, 64, 8].
+      Find the highest rating using a for loop with a running maximum. Store the
+      result in 'peak'.

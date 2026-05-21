@@ -8,7 +8,7 @@ import yaml
 
 CONTENT_DIR = Path(__file__).parents[3] / "content"
 LESSONS_PER_UNIT = 5
-MAX_UNITS = 6
+MAX_UNITS = 7
 
 
 @dataclass

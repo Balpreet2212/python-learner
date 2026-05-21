@@ -1,108 +1,84 @@
-unit: 6
+unit: 5
 lesson: 3
 xp: 10
 
 example:
   code: |
-    class Battery:
-        def __init__(self, charge):
-            self.charge = charge
+    def read_score(text):
+        try:
+            score = int(text)
+        except ValueError:
+            return 0
+        else:
+            return score * 2
 
-        def drain(self, amount):
-            self.charge -= amount
-            if self.charge < 0:
-                self.charge = 0
-
-    b = Battery(100)
-    b.drain(30)
-    print(b.charge)
-    b.drain(80)
-    print(b.charge)
+    print(read_score("5"))
+    print(read_score("bad"))
   explanation: |
-    Methods can mutate (change) an object's own attributes by assigning through self.
-    b.drain(30) subtracts 30 from self.charge. The if guard prevents charge from going below 0.
-    State changes persist on the object — each call to drain sees the updated value from the previous call.
-  output: "70\n0"
+    The else clause runs only when the try block succeeds — no exception was raised.
+    Here: if int(text) works, the else block doubles the score. If it raises ValueError, the except block returns 0 immediately.
+    Use else when you have follow-up logic that should only run on success, keeping it clearly separate from the error path.
+  output: "10\n0"
 
 code_starter: |
-  class Counter:
-      def __init__(self, start):
-          self.count = start
-
-      def increment(self):
-          self.___ += ___
-
-      def reset(self):
-          self.___ = ___
-
-  c = Counter(0)
-  c.increment()
-  c.increment()
-  c.increment()
+  def parse_and_double(text):
+      try:
+          number = int(text)
+      except ValueError:
+          return ___
+      else:
+          return ___
 hints:
-  - "self.count += 1 inside increment"
-  - "self.count = 0 inside reset"
+  - "Return 0 in the except block"
+  - "In the else block, return number * 2"
 
 tests:
-  - code: "assert c.count == 3, f'count should be 3, got {c.count}'"
-    message: "count is 3 after three increments"
-  - code: "c.reset(); assert c.count == 0, 'count should be 0 after reset'"
-    message: "count resets to 0"
+  - code: "assert parse_and_double('4') == 8, 'parse_and_double(\"4\") should be 8'"
+    message: "parse_and_double('4') returns 8"
+  - code: "assert parse_and_double('abc') == 0, 'parse_and_double(\"abc\") should be 0'"
+    message: "parse_and_double('abc') returns 0"
 
 final_challenge:
   code_starter: |
     # Your code here
   hints:
-    - "class Mana:"
-    - "    def __init__(self, total): self.mana = total"
-    - "    def use(self, amount): self.mana -= amount; if self.mana < 0: self.mana = 0"
-    - "m = Mana(100); m.use(40); m.use(80)"
+    - "def parse_and_double(text):"
+    - "try: number = int(text)"
+    - "except ValueError: return 0"
+    - "else: return number * 2"
   tests:
-    - code: |
-        m = Mana(100)
-        m.use(40)
-        assert m.mana == 60, f'mana should be 60, got {m.mana}'
-      message: "mana is 60 after use(40)"
-    - code: |
-        m = Mana(100)
-        m.use(40)
-        m.use(80)
-        assert m.mana == 0, f'mana should not go below 0, got {m.mana}'
-      message: "mana does not go below 0"
-    - code: |
-        m = Mana(50)
-        m.use(50)
-        assert m.mana == 0
-      message: "mana reaches exactly 0"
+    - code: "assert parse_and_double('6') == 12, 'parse_and_double(\"6\") should be 12'"
+      message: "parse_and_double('6') returns 12"
+    - code: "assert parse_and_double('0') == 0, 'parse_and_double(\"0\") should be 0'"
+      message: "parse_and_double('0') returns 0"
+    - code: "assert parse_and_double('xyz') == 0, 'parse_and_double(\"xyz\") should be 0'"
+      message: "parse_and_double('xyz') returns 0"
 
 worlds:
   fantasy:
-    title: "The Mana Pool — State That Changes"
+    title: "The Alchemist's Double-or-Nothing Reagent"
     setup: |
-      A wizard's mana pool is not a fixed number — it drains with every spell cast. After a long battle, it might be exhausted entirely, but it never goes negative (there is no "debt" of magical energy).
-      This is stateful object behaviour: a method that modifies self.attribute and then enforces a constraint. Each call to use() sees the result of the previous call, because the change is stored on the object itself.
+      The royal alchemist has a strict rule: if you can read the measurement on the vial, you must use double the amount (the second step amplifies the first). But if the label is smudged and unreadable, use nothing — zero — and move on.
+      Python's try/except/else maps perfectly to this: try the reading, except catches a bad label and returns 0, and the else block — which only runs when the reading succeeded — applies the doubling logic.
     final_challenge_prompt: |
-      Write a Mana class:
-      — __init__(self, total) stores total as self.mana
-      — use(self, amount) subtracts amount from self.mana, but never lets it drop below 0
-      — Test: m = Mana(100); m.use(40) → mana is 60; m.use(80) → mana is 0
+      Write parse_and_double(text) for the alchemist's measuring tool:
+      — If text is a valid integer, return that integer multiplied by 2 (in the else block)
+      — If ValueError is raised, return 0
   scifi:
-    title: "Fuel Cell Drain Protocol"
+    title: "Sensor Amplification with Safe Parsing"
     setup: |
-      The Meridian's fuel cells deplete as the ship manoeuvres. A cell cannot have negative fuel — when it hits zero, the reading stays at zero until a resupply occurs. Code that lets fuel go negative causes incorrect range calculations and mission aborts.
-      Stateful mutation through self is how objects track this kind of changing resource over time. The method both modifies the attribute and enforces the floor constraint in one place.
+      The Meridian's amplifier circuit takes a raw sensor reading, parses it as an integer, and doubles the signal for long-range transmission. If the input is corrupted, the amplifier must return zero rather than broadcast garbage.
+      try/except/else makes the success path and the error path explicit: the else block only executes when the try block completes without raising an exception.
     final_challenge_prompt: |
-      Write a Mana class (models a fuel cell):
-      — __init__(self, total): self.mana = total
-      — use(self, amount): subtract amount, floor at 0
-      — Verify: Mana(100).use(40) → 60; then use(80) → 0
+      Write parse_and_double(text) for the amplifier module:
+      — On success: parse text as int, then return it doubled (in the else block)
+      — On ValueError: return 0
   mystery:
-    title: "The Informant's Credibility — Draining Under Pressure"
+    title: "The Witness Statement Amplifier"
     setup: |
-      An informant's credibility score drops every time they give conflicting testimony. It can never go below zero — at that point they have no credibility left, and further contradictions don't matter.
-      Modelling this as a class with a use() method that mutates self and enforces the zero floor is cleaner than managing the variable externally. The constraint lives with the data.
+      The detective's interview protocol doubles a witness's reliability score when they give a valid numeric rating. If a witness just shrugs and gives a non-numeric answer, the score is recorded as zero.
+      The else clause in try/except/else is ideal here: it runs only when parsing succeeded, making the success logic unmistakably clear and the fallback equally obvious.
     final_challenge_prompt: |
-      Write a Mana class (credibility model):
-      — __init__(self, total) → self.mana = total
-      — use(self, amount): self.mana -= amount; floor at 0
-      — Create m = Mana(100), call m.use(40) then m.use(80), verify mana is 0
+      Write parse_and_double(text) for the witness scoring system:
+      — Parse text as an integer; if successful, return it * 2 using the else clause
+      — Return 0 on ValueError

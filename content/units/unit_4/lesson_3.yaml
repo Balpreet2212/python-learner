@@ -1,92 +1,88 @@
-unit: 4
+unit: 3
 lesson: 3
 xp: 10
 
 example:
   code: |
-    person = {"name": "Aria", "age": 28, "active": True}
-    print(person)
-    print(person["name"])
-    print(person["age"])
+    def describe(name, age):
+        return f"{name} is {age} years old"
+
+    print(describe("Aria", 25))
+    print(describe("Rex", 30))
   explanation: |
-    A dictionary maps keys to values using curly braces and colons.
-    Each pair is written as key: value, separated from the next by a comma.
-    Keys are usually strings; values can be any type.
-    You retrieve a value by writing dict["key"] — the key in square brackets.
-  output: "{'name': 'Aria', 'age': 28, 'active': True}\nAria\n28"
+    Functions can accept multiple parameters — just separate them with commas.
+    When you call the function, you pass one argument per parameter, in the same order.
+    Inside the body, all parameters are available as variables.
+    This lets one function produce different results for different inputs.
+  output: "Aria is 25 years old\nRex is 30 years old"
 
 code_starter: |
-  # Create a dict called 'character' with keys:
-  #   'name'   -> a string
-  #   'level'  -> the integer 5
-  #   'active' -> the boolean True
-  character =
+  # Define a function 'add' that takes two parameters a and b
+  # and returns their sum.
+  def add(a, b):
+
+  total = add(15, 27)
 hints:
-  - "Dicts use curly braces: {'key': value, ...}"
-  - "character = {'name': 'Zara', 'level': 5, 'active': True}"
+  - "def add(a, b):  — two parameters separated by a comma"
+  - "return a + b"
 tests:
-  - code: "assert isinstance(character, dict), 'character should be a dict'"
-    message: "character should be a dictionary"
-  - code: "assert character.get('level') == 5, f\"level should be 5, got {character.get('level')}\""
-    message: "character['level'] should be 5"
-  - code: "assert character.get('active') is True"
-    message: "character['active'] should be True"
-  - code: "assert isinstance(character.get('name'), str) and len(character.get('name', '')) > 0"
-    message: "character['name'] should be a non-empty string"
+  - code: "assert add(15, 27) == 42, f'add(15, 27) should be 42, got {add(15,27)}'"
+    message: "add(15, 27) should return 42"
+  - code: "assert add(0, 0) == 0"
+    message: "add(0, 0) should return 0"
+  - code: "assert total == 42"
+    message: "total should be 42"
 
 final_challenge:
   code_starter: |
-    # Create a mission dictionary with three specific keys
+    # Define a function that combines two combat stats
   hints:
-    - "mission = {'name': ..., 'difficulty': ..., 'active': ...}"
-    - "'name' should be a non-empty string"
-    - "'difficulty' should be the integer 8"
-    - "'active' should be the boolean True"
+    - "def combine_stats(attack, defense):  — two parameters"
+    - "    return attack + defense"
+    - "result = combine_stats(30, 20)  — should equal 50"
   tests:
-    - code: "assert isinstance(mission, dict)"
-      message: "mission should be a dictionary"
-    - code: "assert isinstance(mission.get('name'), str) and len(mission.get('name', '')) > 0"
-      message: "mission['name'] should be a non-empty string"
-    - code: "assert mission.get('difficulty') == 8"
-      message: "mission['difficulty'] should be 8"
-    - code: "assert mission.get('active') is True"
-      message: "mission['active'] should be True"
+    - code: "assert combine_stats(30, 20) == 50, f'combine_stats(30, 20) should be 50'"
+      message: "combine_stats(30, 20) should return 50"
+    - code: "assert combine_stats(0, 0) == 0"
+      message: "combine_stats(0, 0) should return 0"
+    - code: "assert combine_stats(100, 50) == 150"
+      message: "combine_stats(100, 50) should return 150"
 
 worlds:
   fantasy:
-    title: "The Character Sheet"
+    title: "The Combining Spell"
     setup: |
-      Every hero in the Enchanted Realm has a character sheet — a structured
-      collection of named attributes. "A dictionary maps keys to values," Elara
-      explains. "Curly braces, colons between key and value, commas between pairs."
+      Two power sources, combined into one. "Functions can accept multiple parameters
+      — just separate them with commas," Elara says. "Inside the body you can use
+      all of them."
 
-      Unlike a list (which uses numbers as positions), a dict uses meaningful labels.
-      Create 'character' with 'name', 'level', and 'active' keys — a proper
-      hero profile.
+      Write 'add(a, b)' that returns a + b, then call it with 15 and 27 to get
+      'total'. The combining spell grows stronger with each value it merges.
     final_challenge_prompt: |
-      A new quest has been issued. Create a dictionary called mission with three
-      keys: 'name' (any non-empty string), 'difficulty' set to the integer 8,
-      and 'active' set to True.
+      A warrior's combat power is the sum of their attack and defense stats.
+      Define a function called combine_stats that takes attack and defense as
+      parameters and returns their sum. Verify: combine_stats(30, 20) == 50.
   scifi:
-    title: "Crew Profile Record"
+    title: "Docking Procedure"
     setup: |
-      The ship's database stores crew records as key-value pairs. "Dicts associate
-      labels (keys) with data (values)," the AI explains. "Use curly braces and
-      colons: {'key': value}. Keys are usually strings; values can be anything."
+      Two fuel pods need to be combined before the jump. "Multiple parameters let
+      a function process several inputs at once," the AI explains. "List them with
+      commas inside the parentheses."
 
-      Build the 'character' dict with a name, level, and active status.
+      Write 'add(a, b)' returning a + b and call it with 15 and 27.
     final_challenge_prompt: |
-      Log a new mission to the database. Create a dict called mission with 'name'
-      (non-empty string), 'difficulty' set to 8, and 'active' set to True.
+      The ship's combat system calculates effective power as attack plus defense.
+      Define combine_stats(attack, defense) that returns attack + defense.
+      Test: combine_stats(30, 20) should equal 50.
   mystery:
-    title: "The Dossier"
+    title: "Adding the Evidence"
     setup: |
-      Every case file is a dossier: a named collection of facts. "A dictionary lets
-      you associate labels with values," your mentor says. "Use curly braces, put the
-      key first, a colon, then the value."
+      Two piles of case files — merge the totals. "A function with two parameters
+      takes two arguments when called," your mentor explains. "Separate parameters
+      with commas in both the definition and the call."
 
-      Create 'character' with a string 'name', integer 'level' of 5, and boolean
-      'active' of True.
+      Write 'add(a, b)' that returns a + b and store add(15, 27) in 'total'.
     final_challenge_prompt: |
-      Open a new case file. Create a dictionary called mission with 'name' (any
-      non-empty string), 'difficulty' set to 8, and 'active' set to True.
+      An agent's effectiveness score is the sum of their street contacts and
+      technical skills. Define combine_stats(attack, defense) returning attack +
+      defense. combine_stats(30, 20) should equal 50.

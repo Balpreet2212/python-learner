@@ -1,87 +1,191 @@
 unit: 2
 lesson: 5
-xp: 15
+xp: 10
 
 example:
   code: |
-    items = ["book", "pen", "ruler", "eraser", "notebook"]
-    target = None
-    for item in items:
-        if item == "ruler":
-            target = item
-            break
-    print("Found:", target)
+    logged_in = True
+    role = "admin"
+    if logged_in:
+        if role == "admin":
+            print("Full access")
+        else:
+            print("Limited access")
+    else:
+        print("Please log in")
   explanation: |
-    The break statement immediately exits a loop — even if there are items left.
-    This is useful when you've found what you were looking for and don't need to
-    keep searching. Without break, the loop would check every remaining item uselessly.
-    After break, the code continues from the line after the loop.
-  output: "Found: ruler"
+    An if statement can contain another if inside its block — this is called nesting.
+    The inner block only runs when the outer condition is already True.
+    Here logged_in is True so we enter the outer block, then role == "admin" is True
+    so "Full access" prints. Nesting lets you layer conditions precisely.
+  output: "Full access"
 
 code_starter: |
-  numbers = [3, 7, 4, 9, 2, 6, 1]
-
-  # Find the first even number and store it in 'first_even'.
-  # Use a for loop and break as soon as you find it.
-  first_even = None
-  for n in numbers:
-      if n % 2 == 0:
+  is_member = True
+  score = 85
+  # If is_member is True:
+  #   if score >= 90, print "Gold member"
+  #   else print "Silver member"
+  # else print "Not a member"
 hints:
-  - "n % 2 == 0 is True when n is even"
-  - "Store n in first_even, then break to stop the loop immediately"
+  - "Outer if checks is_member"
+  - "Inner if/else checks score — indent it one extra level (8 spaces)"
+  - "The else for the outer if is at the same indent as the outer if"
 tests:
-  - code: "assert first_even == 4, f'first_even should be 4, got {first_even}'"
-    message: "first_even should be 4 (the first even number in the list)"
+  - code: "assert is_member is True and score == 85"
+    message: "is_member and score should not be changed"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      is_member = True
+      score = 85
+      if is_member:
+          if score >= 90:
+              print("Gold member")
+          else:
+              print("Silver member")
+      else:
+          print("Not a member")
+      sys.stdout = sys.__stdout__
+      assert "Silver member" in out.getvalue()
+    message: "Should print 'Silver member' when is_member=True and score=85"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      is_member = True
+      score = 95
+      if is_member:
+          if score >= 90:
+              print("Gold member")
+          else:
+              print("Silver member")
+      else:
+          print("Not a member")
+      sys.stdout = sys.__stdout__
+      assert "Gold member" in out.getvalue()
+    message: "Should print 'Gold member' when is_member=True and score=95"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      is_member = False
+      score = 95
+      if is_member:
+          if score >= 90:
+              print("Gold member")
+          else:
+              print("Silver member")
+      else:
+          print("Not a member")
+      sys.stdout = sys.__stdout__
+      assert "Not a member" in out.getvalue()
+    message: "Should print 'Not a member' when is_member=False"
 
 final_challenge:
   code_starter: |
-    suspects = [5, 12, -3, 7, -1]
-    # Find the first negative number and store it in 'first_negative'
+    has_key = True
+    door_level = 3
+    # If has_key is True:
+    #   if door_level <= 2, print "Door unlocked"
+    #   else print "Key too weak"
+    # else print "No key"
   hints:
-    - "first_negative = None  — start with no result"
-    - "for n in suspects:  — check each value"
-    - "    if n < 0:  — negative numbers are less than zero"
-    - "        first_negative = n"
-    - "        break"
+    - "Outer if checks has_key"
+    - "Inner if checks door_level <= 2"
+    - "Three possible outputs: 'Door unlocked', 'Key too weak', 'No key'"
   tests:
-    - code: "assert first_negative == -3, f'first_negative should be -3, got {first_negative}'"
-      message: "first_negative should be -3 (the first negative number)"
+    - code: "assert has_key is True and door_level == 3"
+      message: "has_key and door_level should not be changed"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        has_key = True
+        door_level = 3
+        if has_key:
+            if door_level <= 2:
+                print("Door unlocked")
+            else:
+                print("Key too weak")
+        else:
+            print("No key")
+        sys.stdout = sys.__stdout__
+        assert "Key too weak" in out.getvalue()
+      message: "Should print 'Key too weak' when has_key=True and door_level=3"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        has_key = True
+        door_level = 1
+        if has_key:
+            if door_level <= 2:
+                print("Door unlocked")
+            else:
+                print("Key too weak")
+        else:
+            print("No key")
+        sys.stdout = sys.__stdout__
+        assert "Door unlocked" in out.getvalue()
+      message: "Should print 'Door unlocked' when has_key=True and door_level=1"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        has_key = False
+        door_level = 1
+        if has_key:
+            if door_level <= 2:
+                print("Door unlocked")
+            else:
+                print("Key too weak")
+        else:
+            print("No key")
+        sys.stdout = sys.__stdout__
+        assert "No key" in out.getvalue()
+      message: "Should print 'No key' when has_key=False"
 
 worlds:
   fantasy:
-    title: "The Break Rune"
+    title: "The Nested Gates"
     setup: |
-      The enchanted list contains a hidden even gem. "The break statement exits a
-      loop the moment you find what you need," Elara says. "Without it, the loop
-      would check every item even after the answer is found — wasteful magic."
+      The citadel has two gates — the outer checks if you hold a guild card,
+      the inner checks your rank. You must pass both to reach the inner hall.
+      In Python, nesting an if inside another if mirrors exactly this — you
+      must satisfy the outer condition before the inner one is even checked.
 
-      Loop through 'numbers', and the instant you find an even one, store it in
-      'first_even' and break. Speed is power in the Enchanted Realm.
+      is_member is True, score is 85. Write the nested if: members with score
+      >= 90 get "Gold member", others get "Silver member". Non-members get
+      "Not a member".
     final_challenge_prompt: |
-      Among the energy readings [5, 12, -3, 7, -1], the first negative reading
-      marks a power drain that must be isolated immediately. Use a for loop with
-      break to find the first negative number and store it in first_negative.
+      The vault has two locks. has_key is True, door_level is 3.
+      If you have the key: unlock the door if door_level <= 2, otherwise
+      "Key too weak". Without a key: "No key". One of three messages prints.
   scifi:
-    title: "First Contact"
+    title: "Two-Factor Access"
     setup: |
-      The scanner sweeps through frequencies — stop at the first clean signal.
-      "When you find what you're looking for, break lets you exit the loop
-      immediately instead of scanning everything," the AI explains.
+      The bridge requires two-factor authentication: first a valid crew badge,
+      then a clearance level check. Nested if statements mirror this — the inner
+      condition is only evaluated once the outer one passes.
 
-      Find the first even number in 'numbers', store it in 'first_even', and break.
+      is_member is True, score is 85. If is_member: print "Gold member" for
+      score >= 90, otherwise "Silver member". Else print "Not a member".
     final_challenge_prompt: |
-      The ship's diagnostics flagged readings [5, 12, -3, 7, -1]. The first negative
-      reading is a critical fault that needs immediate attention. Use a for loop and
-      break to find it and store it in first_negative.
+      The airlock uses two-step verification. has_key is True, door_level is 3.
+      Key present + low door level = "Door unlocked". Key present + high level =
+      "Key too weak". No key = "No key".
   mystery:
-    title: "The First Solid Lead"
+    title: "Locked Room, Locked Box"
     setup: |
-      Seven suspects — but you only need the first one who fits the profile. "break
-      stops a loop as soon as you've found your target," your mentor says. "No need
-      to keep searching once you have the answer."
+      The evidence room requires a badge to enter, and a separate combination
+      to open the inner safe. Two layers of access — just like nested if statements.
+      The inner check only matters if the outer one passes.
 
-      Find the first even number in 'numbers', assign it to 'first_even', and break.
+      is_member is True, score is 85. Nest an if inside another: Gold for high
+      scorers, Silver for the rest, "Not a member" for outsiders.
     final_challenge_prompt: |
-      Examining the list of witness scores [5, 12, -3, 7, -1], the first negative
-      value reveals the witness who lied. Use a for loop and break to find it and
-      store it in first_negative.
+      The case file has two security checks. has_key is True, door_level is 3.
+      Key + low level = "Door unlocked". Key + high level = "Key too weak".
+      No key at all = "No key".

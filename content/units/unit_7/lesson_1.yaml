@@ -1,0 +1,82 @@
+unit: 6
+lesson: 1
+xp: 10
+
+example:
+  code: |
+    class Dog:
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+
+    rex = Dog("Rex", 4)
+    print(rex.name)
+    print(rex.age)
+  explanation: |
+    A class is a blueprint. __init__ is the special method that runs automatically when you create an instance with Dog("Rex", 4).
+    self refers to the specific object being created. self.name = name stores the value as an attribute on that object.
+    After creation, rex.name and rex.age let you read those attributes from anywhere.
+  output: "Rex\n4"
+
+code_starter: |
+  class Hero:
+      def __init__(self, name, power):
+          self.___ = ___
+          self.___ = ___
+
+  hero = Hero("Aldric", 85)
+hints:
+  - "self.name = name stores the name attribute"
+  - "self.power = power stores the power attribute"
+
+tests:
+  - code: "assert hero.name == 'Aldric', f'hero.name should be Aldric, got {hero.name}'"
+    message: "hero.name is 'Aldric'"
+  - code: "assert hero.power == 85, f'hero.power should be 85, got {hero.power}'"
+    message: "hero.power is 85"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "class Spell:"
+    - "    def __init__(self, name, power):"
+    - "        self.name = name"
+    - "        self.power = power"
+    - "spell = Spell(\"Fireball\", 80)"
+  tests:
+    - code: "assert spell.name == 'Fireball', f'spell.name should be Fireball'"
+      message: "spell.name is 'Fireball'"
+    - code: "assert spell.power == 80, f'spell.power should be 80'"
+      message: "spell.power is 80"
+    - code: "assert isinstance(spell, Spell), 'spell should be an instance of Spell'"
+      message: "spell is an instance of Spell"
+
+worlds:
+  fantasy:
+    title: "Forging the First Blueprint"
+    setup: |
+      Every legendary weapon, every arcane artifact in the Grand Archive started as a blueprint — a class. The blueprint describes what a thing IS: its name, its power, its properties. The actual object — the sword on the rack, the wand in the case — is an instance made from that blueprint.
+      In Python, a class is defined with the class keyword. The __init__ method is the forge: it runs automatically each time you create a new instance, and self refers to the specific object being made.
+    final_challenge_prompt: |
+      The Archmage needs a Spell class to register enchantments in the archive.
+      Write class Spell with __init__(self, name, power) that stores both as attributes.
+      Then create an instance: spell = Spell("Fireball", 80)
+  scifi:
+    title: "Designing the First Object Blueprint"
+    setup: |
+      Every ship system on the Meridian — life support, navigation, weapons — is modelled in code as an object created from a class blueprint. The blueprint specifies what data each system holds (its attributes). Creating an instance is like deploying one live copy of that system.
+      __init__ is the constructor: Python calls it automatically when you write ClassName(...). Inside, self refers to the fresh instance, and self.attribute = value stores data on it.
+    final_challenge_prompt: |
+      Design a Spell class to model the weapon-system registry:
+      — __init__(self, name, power) stores both attributes
+      — Create spell = Spell("Fireball", 80)
+  mystery:
+    title: "The Detective's Case-File Template"
+    setup: |
+      Every case in the detective agency starts from the same template: a name, a power rating (how serious the case is), and any other relevant facts. Rather than building each case from scratch, the agency uses a class — a reusable mold that stamps out consistent case objects.
+      __init__ is the intake form: fill in the details when you create the object, and the form stores them for the lifetime of that object.
+    final_challenge_prompt: |
+      Write a Spell class (the agency repurposes it for evidence tagging):
+      — __init__(self, name, power) stores both as attributes on self
+      — Create the instance spell = Spell("Fireball", 80)

@@ -4,84 +4,131 @@ xp: 10
 
 example:
   code: |
-    temps = [18, 25, 12, 31, 22]
-    highest = temps[0]
-    for t in temps:
-        if t > highest:
-            highest = t
-    print("Highest:", highest)
+    age = 20
+    has_pass = True
+    if age >= 18 and has_pass:
+        print("Entry granted")
+    else:
+        print("Entry denied")
   explanation: |
-    To find the maximum in a list, keep a "running best" variable.
-    Start by assuming the first element is the best (highest = temps[0]).
-    Then loop through every item: if the current item beats the best, update it.
-    After the loop, highest holds the largest value in the list.
-    This pattern works for any comparison — min, max, first match, etc.
-  output: "Highest: 31"
+    'and' requires BOTH conditions to be True for the whole expression to be True.
+    'or' requires at least ONE condition to be True.
+    Here both age >= 18 and has_pass are True, so "Entry granted" prints.
+    Change either one to False and the else branch runs instead.
+  output: "Entry granted"
 
 code_starter: |
-  scores = [12, 47, 3, 89, 22]
-
-  # Find the highest score using a for loop.
-  # Store it in a variable called 'highest'.
-  highest = scores[0]
-  for score in scores:
-      if score > highest:
+  level = 8
+  coins = 150
+  # If level >= 5 AND coins >= 100, print "Can buy", else print "Cannot buy"
 hints:
-  - "If the current score beats your best, update highest: highest = score"
-  - "Start by assuming scores[0] is the best, then check each one"
+  - "if level >= 5 and coins >= 100:"
+  - "Both conditions must be True for 'and' to pass"
 tests:
-  - code: "assert highest == 89, f'highest should be 89, got {highest}'"
-    message: "highest should be 89"
+  - code: "assert level == 8 and coins == 150"
+    message: "level and coins should not be changed"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      level = 8
+      coins = 150
+      if level >= 5 and coins >= 100:
+          print("Can buy")
+      else:
+          print("Cannot buy")
+      sys.stdout = sys.__stdout__
+      assert "Can buy" in out.getvalue()
+    message: "Should print 'Can buy' when both conditions pass"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      level = 3
+      coins = 150
+      if level >= 5 and coins >= 100:
+          print("Can buy")
+      else:
+          print("Cannot buy")
+      sys.stdout = sys.__stdout__
+      assert "Cannot buy" in out.getvalue()
+    message: "Should print 'Cannot buy' when level is too low"
 
 final_challenge:
   code_starter: |
-    readings = [3, 91, 27, 64, 8]
-    # Find the peak reading using a for loop
-    # Store it in 'peak'
+    hp = 25
+    mp = 10
+    # Print "Critical" if hp < 30 OR mp < 20, else print "Stable"
   hints:
-    - "peak = readings[0]  — assume the first is highest"
-    - "for r in readings:  — check each value"
-    - "    if r > peak:  — update if better"
-    - "        peak = r"
+    - "if hp < 30 or mp < 20:"
+    - "'or' is True when at least one condition is True"
   tests:
-    - code: "assert peak == 91, f'peak should be 91, got {peak}'"
-      message: "peak should be 91 (the largest value in readings)"
+    - code: "assert hp == 25 and mp == 10"
+      message: "hp and mp should not be changed"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        hp = 25
+        mp = 10
+        if hp < 30 or mp < 20:
+            print("Critical")
+        else:
+            print("Stable")
+        sys.stdout = sys.__stdout__
+        assert "Critical" in out.getvalue()
+      message: "Should print 'Critical' when hp < 30 or mp < 20"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        hp = 80
+        mp = 50
+        if hp < 30 or mp < 20:
+            print("Critical")
+        else:
+            print("Stable")
+        sys.stdout = sys.__stdout__
+        assert "Stable" in out.getvalue()
+      message: "Should print 'Stable' when both hp and mp are healthy"
 
 worlds:
   fantasy:
-    title: "The Champion's Trial"
+    title: "The Enchanted Market"
     setup: |
-      Five warriors enter the arena — only the strongest advances. "You can use a
-      loop to track the greatest value seen so far," Elara explains. "Start by
-      assuming the first element is the winner, then replace it whenever you find
-      something better."
+      The market stall requires two things: enough level and enough coins.
+      In Python, 'and' combines conditions so both must be True. 'or' means
+      at least one must be True. They let you express more precise rules.
 
-      This pattern — a running maximum — is fundamental to many algorithms. Find
-      'highest' among the scores and the champion enters the next round.
+      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
+      "Can buy", else print "Cannot buy". Both conditions must hold.
     final_challenge_prompt: |
-      Five arcane readings were taken from different ley lines. Find the peak energy
-      reading from the list [3, 91, 27, 64, 8]. Use a for loop and a running maximum
-      to find the largest value and store it in 'peak'.
+      The healer flags critical status when either hp or mp is low.
+      hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
+      otherwise print "Stable".
   scifi:
-    title: "Peak Signal"
+    title: "Docking Clearance"
     setup: |
-      Five sensor readings arrive from deep space. "To find a maximum, keep a
-      running winner — start with the first value, then update it whenever the
-      current reading exceeds it," the AI says.
+      Docking requires both a valid crew level AND enough fuel credits.
+      Python's 'and' operator ensures both gates pass before entry is granted.
+      'or' would open the gate for either — use the right operator for the rule.
 
-      Loop through 'scores' and store the peak reading in 'highest'.
+      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
+      "Can buy", else print "Cannot buy".
     final_challenge_prompt: |
-      Five telemetry readings came in: [3, 91, 27, 64, 8]. Find the strongest
-      signal. Use a for loop with a running maximum and store the result in 'peak'.
+      The ship monitors both hull points and energy. Either reading below threshold
+      triggers an alert. hp is 25, mp is 10. Print "Critical" if hp < 30 or
+      mp < 20, otherwise print "Stable".
   mystery:
-    title: "The Biggest Lead"
+    title: "Two Clues, One Verdict"
     setup: |
-      Five suspects — each assigned a suspicion score. "Finding the maximum means
-      walking through every value and keeping the best you've seen," your mentor
-      says. "Assume the first score leads, then check whether each new one beats it."
+      Two pieces of evidence together seal a case. In Python, 'and' means both
+      conditions must be True. 'or' means either one is enough. Choosing the
+      right operator is as important as choosing the right clue.
 
-      Find the highest score and store it in 'highest'.
+      level is 8, coins is 150. If level >= 5 and coins >= 100, print "Can buy",
+      else print "Cannot buy". Both requirements must be satisfied.
     final_challenge_prompt: |
-      Five informants each provided a reliability rating: [3, 91, 27, 64, 8].
-      Find the highest rating using a for loop with a running maximum. Store the
-      result in 'peak'.
+      A suspect is flagged if either alibi score or evidence count falls below
+      threshold. hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
+      otherwise print "Stable".

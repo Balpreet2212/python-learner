@@ -1,84 +1,92 @@
-unit: 5
+unit: 4
 lesson: 3
 xp: 10
 
 example:
   code: |
-    def read_score(text):
-        try:
-            score = int(text)
-        except ValueError:
-            return 0
-        else:
-            return score * 2
-
-    print(read_score("5"))
-    print(read_score("bad"))
+    person = {"name": "Aria", "age": 28, "active": True}
+    print(person)
+    print(person["name"])
+    print(person["age"])
   explanation: |
-    The else clause runs only when the try block succeeds — no exception was raised.
-    Here: if int(text) works, the else block doubles the score. If it raises ValueError, the except block returns 0 immediately.
-    Use else when you have follow-up logic that should only run on success, keeping it clearly separate from the error path.
-  output: "10\n0"
+    A dictionary maps keys to values using curly braces and colons.
+    Each pair is written as key: value, separated from the next by a comma.
+    Keys are usually strings; values can be any type.
+    You retrieve a value by writing dict["key"] — the key in square brackets.
+  output: "{'name': 'Aria', 'age': 28, 'active': True}\nAria\n28"
 
 code_starter: |
-  def parse_and_double(text):
-      try:
-          number = int(text)
-      except ValueError:
-          return ___
-      else:
-          return ___
+  # Create a dict called 'character' with keys:
+  #   'name'   -> a string
+  #   'level'  -> the integer 5
+  #   'active' -> the boolean True
+  character =
 hints:
-  - "Return 0 in the except block"
-  - "In the else block, return number * 2"
-
+  - "Dicts use curly braces: {'key': value, ...}"
+  - "character = {'name': 'Zara', 'level': 5, 'active': True}"
 tests:
-  - code: "assert parse_and_double('4') == 8, 'parse_and_double(\"4\") should be 8'"
-    message: "parse_and_double('4') returns 8"
-  - code: "assert parse_and_double('abc') == 0, 'parse_and_double(\"abc\") should be 0'"
-    message: "parse_and_double('abc') returns 0"
+  - code: "assert isinstance(character, dict), 'character should be a dict'"
+    message: "character should be a dictionary"
+  - code: "assert character.get('level') == 5, f\"level should be 5, got {character.get('level')}\""
+    message: "character['level'] should be 5"
+  - code: "assert character.get('active') is True"
+    message: "character['active'] should be True"
+  - code: "assert isinstance(character.get('name'), str) and len(character.get('name', '')) > 0"
+    message: "character['name'] should be a non-empty string"
 
 final_challenge:
   code_starter: |
-    # Your code here
+    # Create a mission dictionary with three specific keys
   hints:
-    - "def parse_and_double(text):"
-    - "try: number = int(text)"
-    - "except ValueError: return 0"
-    - "else: return number * 2"
+    - "mission = {'name': ..., 'difficulty': ..., 'active': ...}"
+    - "'name' should be a non-empty string"
+    - "'difficulty' should be the integer 8"
+    - "'active' should be the boolean True"
   tests:
-    - code: "assert parse_and_double('6') == 12, 'parse_and_double(\"6\") should be 12'"
-      message: "parse_and_double('6') returns 12"
-    - code: "assert parse_and_double('0') == 0, 'parse_and_double(\"0\") should be 0'"
-      message: "parse_and_double('0') returns 0"
-    - code: "assert parse_and_double('xyz') == 0, 'parse_and_double(\"xyz\") should be 0'"
-      message: "parse_and_double('xyz') returns 0"
+    - code: "assert isinstance(mission, dict)"
+      message: "mission should be a dictionary"
+    - code: "assert isinstance(mission.get('name'), str) and len(mission.get('name', '')) > 0"
+      message: "mission['name'] should be a non-empty string"
+    - code: "assert mission.get('difficulty') == 8"
+      message: "mission['difficulty'] should be 8"
+    - code: "assert mission.get('active') is True"
+      message: "mission['active'] should be True"
 
 worlds:
   fantasy:
-    title: "The Alchemist's Double-or-Nothing Reagent"
+    title: "The Character Sheet"
     setup: |
-      The royal alchemist has a strict rule: if you can read the measurement on the vial, you must use double the amount (the second step amplifies the first). But if the label is smudged and unreadable, use nothing — zero — and move on.
-      Python's try/except/else maps perfectly to this: try the reading, except catches a bad label and returns 0, and the else block — which only runs when the reading succeeded — applies the doubling logic.
+      Every hero in the Enchanted Realm has a character sheet — a structured
+      collection of named attributes. "A dictionary maps keys to values," Elara
+      explains. "Curly braces, colons between key and value, commas between pairs."
+
+      Unlike a list (which uses numbers as positions), a dict uses meaningful labels.
+      Create 'character' with 'name', 'level', and 'active' keys — a proper
+      hero profile.
     final_challenge_prompt: |
-      Write parse_and_double(text) for the alchemist's measuring tool:
-      — If text is a valid integer, return that integer multiplied by 2 (in the else block)
-      — If ValueError is raised, return 0
+      A new quest has been issued. Create a dictionary called mission with three
+      keys: 'name' (any non-empty string), 'difficulty' set to the integer 8,
+      and 'active' set to True.
   scifi:
-    title: "Sensor Amplification with Safe Parsing"
+    title: "Crew Profile Record"
     setup: |
-      The Meridian's amplifier circuit takes a raw sensor reading, parses it as an integer, and doubles the signal for long-range transmission. If the input is corrupted, the amplifier must return zero rather than broadcast garbage.
-      try/except/else makes the success path and the error path explicit: the else block only executes when the try block completes without raising an exception.
+      The ship's database stores crew records as key-value pairs. "Dicts associate
+      labels (keys) with data (values)," the AI explains. "Use curly braces and
+      colons: {'key': value}. Keys are usually strings; values can be anything."
+
+      Build the 'character' dict with a name, level, and active status.
     final_challenge_prompt: |
-      Write parse_and_double(text) for the amplifier module:
-      — On success: parse text as int, then return it doubled (in the else block)
-      — On ValueError: return 0
+      Log a new mission to the database. Create a dict called mission with 'name'
+      (non-empty string), 'difficulty' set to 8, and 'active' set to True.
   mystery:
-    title: "The Witness Statement Amplifier"
+    title: "The Dossier"
     setup: |
-      The detective's interview protocol doubles a witness's reliability score when they give a valid numeric rating. If a witness just shrugs and gives a non-numeric answer, the score is recorded as zero.
-      The else clause in try/except/else is ideal here: it runs only when parsing succeeded, making the success logic unmistakably clear and the fallback equally obvious.
+      Every case file is a dossier: a named collection of facts. "A dictionary lets
+      you associate labels with values," your mentor says. "Use curly braces, put the
+      key first, a colon, then the value."
+
+      Create 'character' with a string 'name', integer 'level' of 5, and boolean
+      'active' of True.
     final_challenge_prompt: |
-      Write parse_and_double(text) for the witness scoring system:
-      — Parse text as an integer; if successful, return it * 2 using the else clause
-      — Return 0 on ValueError
+      Open a new case file. Create a dictionary called mission with 'name' (any
+      non-empty string), 'difficulty' set to 8, and 'active' set to True.

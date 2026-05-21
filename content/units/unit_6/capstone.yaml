@@ -1,5 +1,5 @@
-unit: 6
-xp: 200
+unit: 5
+xp: 150
 
 plan_prompts:
   - "In one sentence, what should this program do?"
@@ -8,100 +8,74 @@ plan_prompts:
   - "Translate each step into Python."
 
 code_starter: |
-  class Hero:
-      def __init__(self, name, health):
-          # Store name and health as instance attributes
-          pass
+  def mask_word(word, guessed):
+      # Return the word with unguessed letters replaced by "_"
+      # Letters in the guessed list are shown; others become "_"
+      # Example: mask_word("python", ["p","y","n"]) -> "py___n"
+      pass
 
-      def take_damage(self, amount):
-          # Reduce health by amount (health cannot go below 0)
-          pass
-
-      def heal(self, amount):
-          # Increase health by amount
-          pass
-
-      def is_alive(self):
-          # Return True if health > 0, otherwise False
-          pass
+  def is_winner(word, guessed):
+      # Return True if every letter in word has been guessed, False otherwise
+      pass
 
 hints:
-  - "In __init__, use self.name = name and self.health = health"
-  - "For take_damage, use max(0, self.health - amount) to prevent negative health"
-  - "For heal, just add to self.health: self.health += amount"
-  - "is_alive is one line: return self.health > 0"
+  - "For mask_word: loop over each letter in word. If it's in guessed, keep it; otherwise use \"_\""
+  - "Build the result with a list comprehension: [letter if letter in guessed else \"_\" for letter in word]"
+  - "Then join the list into a string: \"\".join(...)"
+  - "For is_winner: check that every letter in word is also in guessed"
 
 tests:
   - code: |
-      h = Hero("Aria", 100)
-      assert h.name == "Aria"
-      assert h.health == 100
-    message: "Hero stores name and health correctly"
+      assert mask_word("python", ["p","y","n"]) == "py___n"
+    message: "mask_word shows guessed letters and hides the rest"
   - code: |
-      h = Hero("Aria", 100)
-      h.take_damage(30)
-      assert h.health == 70
-    message: "take_damage reduces health"
+      assert mask_word("cat", []) == "___"
+      assert mask_word("cat", ["c","a","t"]) == "cat"
+    message: "No guesses = all underscores; all guessed = full word"
   - code: |
-      h = Hero("Aria", 20)
-      h.take_damage(50)
-      assert h.health == 0
-    message: "Health never goes below 0"
+      assert is_winner("cat", ["c","a","t"]) == True
+      assert is_winner("cat", ["c","a"]) == False
+    message: "is_winner returns True only when all letters are guessed"
   - code: |
-      h = Hero("Aria", 50)
-      h.heal(25)
-      assert h.health == 75
-    message: "heal increases health"
-  - code: |
-      h = Hero("Aria", 100)
-      assert h.is_alive() == True
-      h.take_damage(100)
-      assert h.is_alive() == False
-    message: "is_alive returns True when health > 0, False when at 0"
-  - code: |
-      h1 = Hero("Aria", 100)
-      h2 = Hero("Zed", 80)
-      h1.take_damage(10)
-      assert h1.health == 90
-      assert h2.health == 80
-    message: "Two Hero instances are independent"
+      assert is_winner("hello", ["h","e","l","o"]) == True
+    message: "is_winner handles repeated letters correctly"
 
 worlds:
   fantasy:
-    title: "The Hero's Codex"
+    title: "The Word-Warden's Puzzle"
     narrative: |
-      The kingdom's battle registry is written in a forgotten language — code. To
-      register heroes for the tournament, you must define a Hero class. Each hero
-      has a name and health points. They can take_damage (which never drops below 0),
-      heal, and check if they are is_alive.
+      The Word-Warden guards the gate to the next kingdom with an ancient word puzzle.
+      To pass, you must write two functions that power the guessing game.
 
-      Write the Hero class with all four methods. The tournament cannot begin without it.
+      mask_word(word, guessed) shows the word with unguessed letters hidden as "_".
+      is_winner(word, guessed) returns True when every letter has been found.
+
+      Write both functions. The Word-Warden will test them before opening the gate.
     story_beat: |
-      Heroes materialize in the registry one by one — Aria, Zed, Brennan — each with
-      their stats intact. The tournament herald raises her staff. "The Codex is complete.
-      Let the final chapter of your training begin."
+      The Word-Warden runs every test case. One by one, the gate's runes light up gold.
+      The great door swings open. "You have tamed the puzzle," she says. "The next
+      chapter of your journey begins beyond this gate."
   scifi:
-    title: "Combat Unit Simulator"
+    title: "Decryption Module"
     narrative: |
-      The ship's combat simulation needs a Hero class to model crew members in training
-      scenarios. Each unit has a name and health. They receive take_damage (floored at 0),
-      can heal, and report is_alive for the simulation engine to track.
+      The ship's decryption module needs two functions to process intercepted alien
+      transmissions. mask_word reveals only the characters that have been decoded so far,
+      replacing unknowns with "_". is_winner signals when a word is fully decoded.
 
-      Write the complete class. The simulation cannot run without it.
+      Write both functions. The communications officer is waiting.
     story_beat: |
-      Simulation results scroll across the screen — every unit responding correctly.
-      The training officer marks the results: "All combat behaviors verified. Your class
-      definition just passed the full test suite. Well done, Engineer."
+      "Decryption complete." The alien transmission resolves into readable text.
+      The linguistics team crowds around the screen. Your two functions cracked the
+      encoding that stumped the entire crew.
   mystery:
-    title: "The Suspect Tracker"
+    title: "The Cipher Game"
     narrative: |
-      The detective agency needs a Hero class to model investigators in field simulations.
-      Each investigator has a name and health (representing stamina). They take_damage
-      during tough cases (never below 0), can heal after rest, and the system checks
-      is_alive to see if they can continue.
+      The suspect left a cipher game as a clue. To decode it, you need two functions:
+      mask_word shows which letters of the hidden word have been guessed so far, hiding
+      the rest with "_". is_winner checks if the word is fully revealed.
 
-      Write the full class. The agency's training simulation depends on it.
+      Write both functions to advance through the cipher and crack the case.
     story_beat: |
-      Every investigator passes the simulation. Chief Morgan reviews the output.
-      "Your class handled every edge case — negative damage, zero health, independent
-      instances. That's the mark of a real detective coder."
+      The final letter clicks into place. The hidden word spells out the location of
+      the missing evidence. Morgan looks at you. "That cipher has baffled three
+      detectives. You cracked it in one session."

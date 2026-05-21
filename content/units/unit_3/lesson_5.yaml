@@ -1,96 +1,87 @@
-unit: 3
+unit: 2
 lesson: 5
 xp: 15
 
 example:
   code: |
-    def triple(n):
-        return n * 3
-
-    def sum_of_triples(a, b):
-        return triple(a) + triple(b)
-
-    print(sum_of_triples(2, 4))
+    items = ["book", "pen", "ruler", "eraser", "notebook"]
+    target = None
+    for item in items:
+        if item == "ruler":
+            target = item
+            break
+    print("Found:", target)
   explanation: |
-    Functions can call other functions — this is called composition.
-    triple(2) returns 6 and triple(4) returns 12, so sum_of_triples(2, 4) returns 18.
-    Breaking a big task into smaller helper functions makes code easier to read,
-    test, and reuse. Define the simpler function first, then build on top of it.
-  output: "18"
+    The break statement immediately exits a loop — even if there are items left.
+    This is useful when you've found what you were looking for and don't need to
+    keep searching. Without break, the loop would check every remaining item uselessly.
+    After break, the code continues from the line after the loop.
+  output: "Found: ruler"
 
 code_starter: |
-  # Define 'square(n)' that returns n squared.
-  def square(n):
+  numbers = [3, 7, 4, 9, 2, 6, 1]
 
-  # Define 'sum_of_squares(a, b)' that calls square() for each argument
-  # and returns their sum.
-  def sum_of_squares(a, b):
-
-  result = sum_of_squares(3, 4)
+  # Find the first even number and store it in 'first_even'.
+  # Use a for loop and break as soon as you find it.
+  first_even = None
+  for n in numbers:
+      if n % 2 == 0:
 hints:
-  - "square(n) returns n * n  (or n ** 2)"
-  - "sum_of_squares calls square twice: return square(a) + square(b)"
+  - "n % 2 == 0 is True when n is even"
+  - "Store n in first_even, then break to stop the loop immediately"
 tests:
-  - code: "assert square(3) == 9"
-    message: "square(3) should return 9"
-  - code: "assert square(4) == 16"
-    message: "square(4) should return 16"
-  - code: "assert sum_of_squares(3, 4) == 25, f'got {sum_of_squares(3,4)}'"
-    message: "sum_of_squares(3, 4) should return 25 (9 + 16)"
-  - code: "assert result == 25"
-    message: "result should be 25"
+  - code: "assert first_even == 4, f'first_even should be 4, got {first_even}'"
+    message: "first_even should be 4 (the first even number in the list)"
 
 final_challenge:
   code_starter: |
-    # Define cube(n) then sum_of_cubes(a, b) which uses cube
+    suspects = [5, 12, -3, 7, -1]
+    # Find the first negative number and store it in 'first_negative'
   hints:
-    - "def cube(n):  — return n ** 3  (or n * n * n)"
-    - "def sum_of_cubes(a, b):  — return cube(a) + cube(b)"
-    - "cube(2) == 8, cube(3) == 27, so sum_of_cubes(2, 3) == 35"
+    - "first_negative = None  — start with no result"
+    - "for n in suspects:  — check each value"
+    - "    if n < 0:  — negative numbers are less than zero"
+    - "        first_negative = n"
+    - "        break"
   tests:
-    - code: "assert cube(2) == 8"
-      message: "cube(2) should return 8"
-    - code: "assert cube(3) == 27"
-      message: "cube(3) should return 27"
-    - code: "assert sum_of_cubes(2, 3) == 35, f'got {sum_of_cubes(2, 3)}'"
-      message: "sum_of_cubes(2, 3) should return 35 (8 + 27)"
+    - code: "assert first_negative == -3, f'first_negative should be -3, got {first_negative}'"
+      message: "first_negative should be -3 (the first negative number)"
 
 worlds:
   fantasy:
-    title: "Spells Within Spells"
+    title: "The Break Rune"
     setup: |
-      The grand counterspell requires two sub-spells combined. "Functions can call
-      other functions — this is how complex behaviour is built from simple pieces,"
-      Elara says. "Write 'square' first, then 'sum_of_squares' delegates to it."
+      The enchanted list contains a hidden even gem. "The break statement exits a
+      loop the moment you find what you need," Elara says. "Without it, the loop
+      would check every item even after the answer is found — wasteful magic."
 
-      Define square(n) returning n², then sum_of_squares(a, b) that calls square
-      for each argument and adds the results. The most powerful spells are composed
-      of smaller, precise incantations.
+      Loop through 'numbers', and the instant you find an even one, store it in
+      'first_even' and break. Speed is power in the Enchanted Realm.
     final_challenge_prompt: |
-      The ancient power theorem uses cubes, not squares. Define cube(n) that returns
-      n cubed (n ** 3 or n * n * n). Then define sum_of_cubes(a, b) that calls
-      cube for each argument and returns their sum. sum_of_cubes(2, 3) should equal 35.
+      Among the energy readings [5, 12, -3, 7, -1], the first negative reading
+      marks a power drain that must be isolated immediately. Use a for loop with
+      break to find the first negative number and store it in first_negative.
   scifi:
-    title: "Recursive Subsystem"
+    title: "First Contact"
     setup: |
-      Computing the Pythagorean distance requires squaring both coordinates. "Breaking
-      a big task into smaller functions makes code easier to read and reuse," the AI
-      explains. "A function can call any other function — even ones you defined earlier."
+      The scanner sweeps through frequencies — stop at the first clean signal.
+      "When you find what you're looking for, break lets you exit the loop
+      immediately instead of scanning everything," the AI explains.
 
-      Write 'square', then 'sum_of_squares' using it.
+      Find the first even number in 'numbers', store it in 'first_even', and break.
     final_challenge_prompt: |
-      The energy calculation uses cubic values. Define cube(n) returning n ** 3.
-      Then define sum_of_cubes(a, b) that calls cube(a) + cube(b). Verify:
-      sum_of_cubes(2, 3) == 35.
+      The ship's diagnostics flagged readings [5, 12, -3, 7, -1]. The first negative
+      reading is a critical fault that needs immediate attention. Use a for loop and
+      break to find it and store it in first_negative.
   mystery:
-    title: "Clues Within Clues"
+    title: "The First Solid Lead"
     setup: |
-      The final puzzle requires two nested calculations. "Functions are most powerful
-      when they call each other," your mentor says. "Build 'square' first, then use
-      it inside 'sum_of_squares' — this is called composition."
+      Seven suspects — but you only need the first one who fits the profile. "break
+      stops a loop as soon as you've found your target," your mentor says. "No need
+      to keep searching once you have the answer."
 
-      Complete both functions and store sum_of_squares(3, 4) in 'result'.
+      Find the first even number in 'numbers', assign it to 'first_even', and break.
     final_challenge_prompt: |
-      The cipher uses cubic transformations. Define cube(n) returning n ** 3, then
-      sum_of_cubes(a, b) that returns cube(a) + cube(b). The cipher unlocks when
-      sum_of_cubes(2, 3) equals 35.
+      Examining the list of witness scores [5, 12, -3, 7, -1], the first negative
+      value reveals the witness who lied. Use a for loop and break to find it and
+      store it in first_negative.

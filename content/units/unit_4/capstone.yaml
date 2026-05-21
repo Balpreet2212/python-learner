@@ -1,4 +1,4 @@
-unit: 4
+unit: 3
 xp: 150
 
 plan_prompts:
@@ -8,73 +8,73 @@ plan_prompts:
   - "Translate each step into Python."
 
 code_starter: |
-  def launch_sequence(n):
-      # Return a list that counts down from n to 1, then ends with "Launch!"
-      # Example: launch_sequence(3) -> [3, 2, 1, "Launch!"]
+  def grade(score):
+      # Return the letter grade for a score out of 100:
+      # A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60
       pass
 
 hints:
-  - "Create an empty list, then use a loop to add numbers to it"
-  - "range(n, 0, -1) counts down from n to 1"
-  - "After the loop, append the string \"Launch!\" to the list, then return it"
+  - "Use if / elif / elif / elif / else to check each grade boundary"
+  - "Check the highest grade first: if score >= 90: return \"A\""
+  - "The final else covers everything below 60 — that's an F"
 
 tests:
   - code: |
-      result = launch_sequence(3)
-      assert result == [3, 2, 1, "Launch!"], f"Got {result}"
-    message: "launch_sequence(3) returns [3, 2, 1, 'Launch!']"
+      assert grade(95) == "A"
+      assert grade(90) == "A"
+    message: "90-100 returns 'A'"
   - code: |
-      result = launch_sequence(5)
-      assert result == [5, 4, 3, 2, 1, "Launch!"], f"Got {result}"
-    message: "launch_sequence(5) returns [5, 4, 3, 2, 1, 'Launch!']"
+      assert grade(85) == "B"
+      assert grade(80) == "B"
+    message: "80-89 returns 'B'"
   - code: |
-      result = launch_sequence(1)
-      assert result == [1, "Launch!"], f"Got {result}"
-    message: "launch_sequence(1) returns [1, 'Launch!']"
+      assert grade(75) == "C"
+      assert grade(70) == "C"
+    message: "70-79 returns 'C'"
   - code: |
-      result = launch_sequence(4)
-      assert result[-1] == "Launch!"
-      assert len(result) == 5
-    message: "Always ends with 'Launch!' and has the right length"
+      assert grade(65) == "D"
+      assert grade(60) == "D"
+    message: "60-69 returns 'D'"
+  - code: |
+      assert grade(59) == "F"
+      assert grade(0) == "F"
+    message: "Below 60 returns 'F'"
 
 worlds:
   fantasy:
-    title: "The Dragon's Countdown"
+    title: "The Arcane Exam"
     narrative: |
-      The ancient dragon Vaelthorn awakens only after hearing a precise countdown
-      ritual. The court wizard needs a function that builds the ritual sequence: a list
-      of numbers counting down from n to 1, followed by the word "Launch!" to signal
-      the awakening.
+      The Mage Academy awards ranks based on exam scores: Archmage (90-100), Wizard
+      (80-89), Apprentice (70-79), Novice (60-69), and Dismissed (below 60). The
+      enchanted grading orb is shattered and must be replaced with code.
 
-      Write launch_sequence(n) to produce this list using a loop. The dragon's patience
-      is legendary, but the wizard's is not.
+      Write a function called grade that takes a score and returns the letter grade:
+      "A", "B", "C", "D", or "F". Use if/elif/else to cover every range.
     story_beat: |
-      The list is read aloud by the wizard. Vaelthorn's eye opens — one golden, ancient
-      eye. "The sequence was perfect," whispers the court historian, scribbling furiously.
-      "No dragon has awakened this smoothly in three centuries."
+      The grading orb glows as results pour through. Students crowd around the noticeboard.
+      Your function has awarded every rank correctly. The Headmistress seals your name in
+      the Academy records as the one who restored the examination system.
   scifi:
-    title: "Rocket Launch Protocol"
+    title: "Performance Rating"
     narrative: |
-      Mission Control needs the launch sequence generator rebuilt after the system
-      crashed during a test firing. The function must return a list counting down from
-      n to 1, with "Launch!" as the final element — exactly what the launch computer
-      expects to receive.
+      The ship's crew evaluation system classifies performance using a letter scale. The
+      algorithm was wiped in a solar flare and must be rewritten. Scores 90-100 earn A,
+      80-89 earn B, 70-79 earn C, 60-69 earn D, and anything below 60 is F.
 
-      Write launch_sequence(n) using a loop to build and return the list.
+      Write a function called grade that takes a score and returns the correct letter.
     story_beat: |
-      "T-minus zero. Ignition." The rocket lifts clean off the pad. Mission Control
-      erupts. Your sequence generator fed the launch computer perfectly timed data.
-      The mission is go.
+      Crew performance reports populate across all terminals. The commander reviews them
+      and nods. "Accurate ratings across the board. The evaluation system is operational.
+      Good work, Engineer."
   mystery:
-    title: "The Vault Timer"
+    title: "The Evidence Rating"
     narrative: |
-      The detective needs to crack a time-locked vault before evidence is destroyed.
-      The vault accepts a countdown list: numbers from n down to 1, then the word
-      "Launch!" to trigger the unlock sequence.
+      The detective agency rates evidence quality on a letter scale. A (90-100) is
+      ironclad, B (80-89) is strong, C (70-79) is circumstantial, D (60-69) is weak,
+      and F (below 60) is inadmissible. The rating function was corrupted.
 
-      Write launch_sequence(n) to generate the correct list using a loop. Every second
-      counts.
+      Write grade to classify each piece of evidence. Use if/elif/else for every range.
     story_beat: |
-      The vault clicks open at the final element of the list. Inside: every document
-      needed to close the case. "Cutting it close," says Morgan, pulling out the files.
-      "But cutting it perfectly."
+      Evidence ratings appear on the case board. Inspector Morgan studies them. "Every
+      piece classified correctly — this is exactly what the prosecution needed. Case is
+      ready for trial."

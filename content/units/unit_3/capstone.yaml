@@ -1,4 +1,4 @@
-unit: 3
+unit: 2
 xp: 150
 
 plan_prompts:
@@ -8,73 +8,66 @@ plan_prompts:
   - "Translate each step into Python."
 
 code_starter: |
-  def grade(score):
-      # Return the letter grade for a score out of 100:
-      # A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60
+  def calculate_split(bill, tip_percent, num_people):
+      # Calculate total including tip, then divide by number of people
+      # Return the amount each person owes, rounded to 2 decimal places
       pass
 
 hints:
-  - "Use if / elif / elif / elif / else to check each grade boundary"
-  - "Check the highest grade first: if score >= 90: return \"A\""
-  - "The final else covers everything below 60 — that's an F"
+  - "First calculate the tip amount: tip = bill * tip_percent / 100"
+  - "Add the tip to the bill to get the total"
+  - "Divide the total by num_people, then use round(..., 2) to get 2 decimal places"
 
 tests:
   - code: |
-      assert grade(95) == "A"
-      assert grade(90) == "A"
-    message: "90-100 returns 'A'"
+      result = calculate_split(100, 20, 4)
+      assert result == 30.0, f"Expected 30.0, got {result}"
+    message: "100 bill + 20% tip split 4 ways = 30.0 each"
   - code: |
-      assert grade(85) == "B"
-      assert grade(80) == "B"
-    message: "80-89 returns 'B'"
+      result = calculate_split(50, 10, 2)
+      assert result == 27.5, f"Expected 27.5, got {result}"
+    message: "50 bill + 10% tip split 2 ways = 27.5 each"
   - code: |
-      assert grade(75) == "C"
-      assert grade(70) == "C"
-    message: "70-79 returns 'C'"
-  - code: |
-      assert grade(65) == "D"
-      assert grade(60) == "D"
-    message: "60-69 returns 'D'"
-  - code: |
-      assert grade(59) == "F"
-      assert grade(0) == "F"
-    message: "Below 60 returns 'F'"
+      result = calculate_split(200, 15, 5)
+      assert result == 46.0, f"Expected 46.0, got {result}"
+    message: "200 bill + 15% tip split 5 ways = 46.0 each"
 
 worlds:
   fantasy:
-    title: "The Arcane Exam"
+    title: "The Tavern Bill"
     narrative: |
-      The Mage Academy awards ranks based on exam scores: Archmage (90-100), Wizard
-      (80-89), Apprentice (70-79), Novice (60-69), and Dismissed (below 60). The
-      enchanted grading orb is shattered and must be replaced with code.
+      After a long quest, your adventuring party has gathered at the Rusty Flagon tavern
+      for a celebratory feast. The innkeeper presents the bill, but nobody can agree on
+      who owes what — especially with the traditional tip added on top.
 
-      Write a function called grade that takes a score and returns the letter grade:
-      "A", "B", "C", "D", or "F". Use if/elif/else to cover every range.
+      Write a function called calculate_split that takes the total bill amount, the tip
+      percentage, and the number of adventurers, then returns how much each person owes.
     story_beat: |
-      The grading orb glows as results pour through. Students crowd around the noticeboard.
-      Your function has awarded every rank correctly. The Headmistress seals your name in
-      the Academy records as the one who restored the examination system.
+      Each adventurer places the exact right number of coins on the table. The innkeeper
+      beams. "Never had a party settle so fairly!" Word spreads through the tavern: this
+      party is both brave and mathematically gifted.
   scifi:
-    title: "Performance Rating"
+    title: "Resource Allocation"
     narrative: |
-      The ship's crew evaluation system classifies performance using a letter scale. The
-      algorithm was wiped in a solar flare and must be rewritten. Scores 90-100 earn A,
-      80-89 earn B, 70-79 earn C, 60-69 earn D, and anything below 60 is F.
+      The crew's resource allocation system is malfunctioning. After a supply run, the
+      ship's computer needs to split the total cost — including a standard maintenance
+      surcharge — fairly among all crew members.
 
-      Write a function called grade that takes a score and returns the correct letter.
+      Write calculate_split: it receives the base cost, the surcharge percentage, and
+      the crew count, and returns each crew member's fair share.
     story_beat: |
-      Crew performance reports populate across all terminals. The commander reviews them
-      and nods. "Accurate ratings across the board. The evaluation system is operational.
-      Good work, Engineer."
+      Resource tokens distribute evenly across every crew account. The first mate looks
+      impressed. "Perfect allocation. You've saved us from another argument over the
+      cargo manifest."
   mystery:
-    title: "The Evidence Rating"
+    title: "The Expense Report"
     narrative: |
-      The detective agency rates evidence quality on a letter scale. A (90-100) is
-      ironclad, B (80-89) is strong, C (70-79) is circumstantial, D (60-69) is weak,
-      and F (below 60) is inadmissible. The rating function was corrupted.
+      Detective Morgan always splits investigation expenses fairly among informants —
+      total cost plus a discretionary fee percentage, divided evenly. The accounting
+      department wants this automated before the next case review.
 
-      Write grade to classify each piece of evidence. Use if/elif/else for every range.
+      Write calculate_split to compute each party's share from the bill, fee percentage,
+      and number of parties.
     story_beat: |
-      Evidence ratings appear on the case board. Inspector Morgan studies them. "Every
-      piece classified correctly — this is exactly what the prosecution needed. Case is
-      ready for trial."
+      The expense report clears in seconds. "Flawless arithmetic," says the accountant.
+      "The Commissioner will be pleased — no more disputed reimbursements."

@@ -1,111 +1,113 @@
-unit: 6
+unit: 5
 lesson: 5
 xp: 10
 
 example:
   code: |
-    class Animal:
-        def __init__(self, name):
-            self.name = name
+    def set_level(level):
+        if level < 1:
+            raise ValueError("Level must be at least 1")
+        if level > 100:
+            raise ValueError("Level cannot exceed 100")
+        return level
 
-        def speak(self):
-            return "..."
+    print(set_level(50))
 
-    class Cat(Animal):
-        def speak(self):
-            return "Meow"
-
-    class Dog(Animal):
-        def speak(self):
-            return "Woof"
-
-    animals = [Cat("Whiskers"), Dog("Buddy"), Cat("Luna")]
-    for a in animals:
-        print(a.name, "says", a.speak())
+    try:
+        print(set_level(0))
+    except ValueError as e:
+        print("Error:", e)
   explanation: |
-    class Cat(Animal) means Cat inherits from Animal — it gets all of Animal's attributes and methods.
-    By defining speak() again inside Cat, the child class overrides the parent's version (called method overriding).
-    Each subclass can have its own behaviour while sharing the same structure. This is the core of inheritance.
-  output: "Whiskers says Meow\nBuddy says Woof\nLuna says Meow"
+    raise creates and immediately raises an exception. You choose the exception type (ValueError here) and give it a message.
+    Callers can catch it with except, just like any built-in exception.
+    This lets you enforce rules inside your functions: instead of silently returning a wrong value, you loudly report what went wrong.
+  output: "50\nError: Level must be at least 1"
 
 code_starter: |
-  class Animal:
-      def __init__(self, name):
-          self.name = name
-
-      def move(self):
-          return "Moving"
-
-  class Bird(___):
-      def move(self):
-          return ___
-
-  class Fish(___):
-      def move(self):
-          return ___
-
-  eagle = Bird("Eagle")
-  salmon = Fish("Salmon")
+  def validate_score(score):
+      if score < 0:
+          raise ValueError(___)
+      if score > 100:
+          raise ___(___) 
+      return score
 hints:
-  - "class Bird(Animal): inherits from Animal"
-  - "Bird.move should return \"Flying\""
-  - "Fish.move should return \"Swimming\""
+  - "raise ValueError(\"Score must be between 0 and 100\")"
+  - "Both branches should raise ValueError with a descriptive message"
 
 tests:
-  - code: "assert eagle.move() == 'Flying', f'got {eagle.move()}'"
-    message: "eagle.move() returns 'Flying'"
-  - code: "assert salmon.move() == 'Swimming', f'got {salmon.move()}'"
-    message: "salmon.move() returns 'Swimming'"
-  - code: "assert eagle.name == 'Eagle'"
-    message: "eagle.name inherited from Animal"
+  - code: "assert validate_score(50) == 50, 'validate_score(50) should return 50'"
+    message: "validate_score(50) returns 50"
+  - code: |
+      try:
+          validate_score(-1)
+          assert False, 'Should have raised'
+      except ValueError:
+          pass
+    message: "validate_score(-1) raises ValueError"
+  - code: |
+      try:
+          validate_score(101)
+          assert False, 'Should have raised'
+      except ValueError:
+          pass
+    message: "validate_score(101) raises ValueError"
 
 final_challenge:
   code_starter: |
     # Your code here
   hints:
-    - "class Vehicle: def move(self): return \"Moving\""
-    - "class Car(Vehicle): def move(self): return \"Driving\""
-    - "car = Car()"
+    - "def validate_power(level):"
+    - "if level < 1: raise ValueError(...)"
+    - "if level > 100: raise ValueError(...)"
+    - "return level"
   tests:
+    - code: "assert validate_power(75) == 75"
+      message: "validate_power(75) returns 75"
+    - code: "assert validate_power(1) == 1"
+      message: "validate_power(1) returns 1 (boundary)"
     - code: |
-        v = Vehicle()
-        assert v.move() == "Moving", f'Vehicle.move should return Moving, got {v.move()}'
-      message: "Vehicle.move() returns 'Moving'"
+        try:
+            validate_power(0)
+            assert False
+        except ValueError:
+            pass
+      message: "validate_power(0) raises ValueError"
     - code: |
-        car = Car()
-        assert car.move() == "Driving", f'Car.move should return Driving, got {car.move()}'
-      message: "Car.move() returns 'Driving'"
-    - code: "assert issubclass(Car, Vehicle), 'Car must inherit from Vehicle'"
-      message: "Car inherits from Vehicle"
+        try:
+            validate_power(101)
+            assert False
+        except ValueError:
+            pass
+      message: "validate_power(101) raises ValueError"
 
 worlds:
   fantasy:
-    title: "The Order of Inheritance"
+    title: "The Power Scale Enforcement Spell"
     setup: |
-      The ancient Orders of the realm share a common creed — all members can move. But each Order moves differently: sky riders soar on griffins, deep-sea navigators swim in submersibles, ground troops march.
-      In Python, inheritance lets a child class (Bird, Fish) receive all of the parent class's (Animal) attributes and methods for free, then override specific methods to provide its own behaviour. The child says: "I am an Animal, but I move differently."
+      The Archmage's power registry has strict limits: no enchantment may be registered below power level 1 (that would be inert), and none above 100 (that would be catastrophically unstable). Any attempt to register outside these bounds must be rejected loudly, not silently accepted.
+      In Python, raise lets your function be the enforcer. Instead of returning a wrong value, it fires an exception with a clear message — giving the caller a chance to handle it or crash with a useful description of what went wrong.
     final_challenge_prompt: |
-      Build a two-level class hierarchy:
-      — class Vehicle with a move(self) method that returns "Moving"
-      — class Car(Vehicle) that overrides move(self) to return "Driving"
-      — Create an instance: car = Car()
+      Write validate_power(level) for the Archmage's registry:
+      — If level < 1, raise ValueError with a descriptive message
+      — If level > 100, raise ValueError with a descriptive message
+      — Otherwise, return level
   scifi:
-    title: "Subclassed Ship Modules"
+    title: "Reactor Power Limit Enforcement"
     setup: |
-      Every module aboard the Meridian derives from a common base — they all have a move() command in the firmware interface. But the implementation differs: surface rovers drive, atmospheric shuttles fly, aquatic probes swim.
-      Inheritance captures this hierarchy cleanly. The base class defines the shared interface; each subclass overrides the method with its specific behaviour. Code that talks to the base class works with any subclass — this is polymorphism.
+      The Meridian's reactor accepts power settings from 1 to 100. A setting of 0 means the reactor is offline — unacceptable mid-mission. A setting above 100 risks a cascade failure. The control interface must reject both extremes immediately by raising an exception, not by silently clamping the value.
+      raise in Python is how a function says "I refuse to continue with this input." It is the right tool for enforcing hard constraints at the boundary of a system.
     final_challenge_prompt: |
-      Define:
-      — class Vehicle with move(self) returning "Moving"
-      — class Car(Vehicle) overriding move(self) to return "Driving"
-      — Instantiate car = Car()
+      Write validate_power(level) for the reactor control module:
+      — Raise ValueError if level < 1
+      — Raise ValueError if level > 100
+      — Return level when it is within bounds
   mystery:
-    title: "Undercover Agents — Same Alias, Different Cover"
+    title: "The Evidence Strength Validator"
     setup: |
-      Every undercover agent at the agency operates under the same basic protocol — they all have a move() operation for relocating between safe houses. But each agent type moves differently based on their cover identity: a courier drives, a sailor sails, a diplomat flies.
-      Inheritance in Python models this perfectly. The parent class defines the shared operation; each subclass overrides it with its cover-specific implementation. The agency can treat all agents uniformly while each behaves distinctly.
+      The detective's evidence-strength system rates items from 1 (barely relevant) to 100 (ironclad). A zero means no evidence exists — that is inadmissible. A number above 100 is a data-entry error that would corrupt the jury's scoring model.
+      raise ValueError is how you enforce these rules in Python code: stop execution, report the exact problem, and let the caller decide how to recover. Silent bad values are worse than loud errors.
     final_challenge_prompt: |
-      Create the inheritance chain:
-      — class Vehicle (the agent protocol) with move(self) returning "Moving"
-      — class Car(Vehicle) with move(self) returning "Driving"
-      — Create car = Car()
+      Write validate_power(level) for the evidence rating system:
+      — Raise ValueError if level is below 1
+      — Raise ValueError if level exceeds 100
+      — Return level if it passes both checks

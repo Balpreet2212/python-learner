@@ -4,93 +4,122 @@ xp: 10
 
 example:
   code: |
-    fruits = ["apple", "banana", "cherry"]
-    print(fruits)
-    print(len(fruits))
-    print(fruits[0])
-    fruits.append("date")
-    print(fruits)
+    temp = 40
+    if temp >= 100:
+        print("Boiling")
+    else:
+        print("Not boiling")
   explanation: |
-    A list stores multiple values in order, inside square brackets, separated by commas.
-    len() returns how many items are in the list.
-    Lists are zero-indexed: fruits[0] is the first item, fruits[1] is the second.
-    .append() adds a new item to the end of the list without creating a new list.
-  output: "['apple', 'banana', 'cherry']\n3\napple\n['apple', 'banana', 'cherry', 'date']"
+    else provides a second branch that runs when the if condition is False.
+    Exactly one of the two blocks always executes — never both, never neither.
+    Here temp is 40, so the condition is False and "Not boiling" prints.
+  output: "Not boiling"
 
 code_starter: |
-  numbers = [1, 2, 3, 4, 5]
-
-  # Build a new list called 'doubled' where every item is multiplied by 2.
-  # Use a for loop and .append()
-  doubled = []
-  for n in numbers:
-      doubled.append(   )
+  score = 45
+  # If score >= 50 print "Pass", otherwise print "Fail"
 hints:
-  - "doubled.append(n * 2) adds n×2 to the doubled list each iteration"
-  - "When the loop ends, doubled should have 5 items"
+  - "if score >= 50:"
+  - "    print(\"Pass\")"
+  - "else:"
+  - "    print(\"Fail\")"
 tests:
-  - code: "assert isinstance(doubled, list), 'doubled should be a list'"
-    message: "doubled should be a list"
-  - code: "assert doubled == [2, 4, 6, 8, 10], f'got {doubled}'"
-    message: "doubled should be [2, 4, 6, 8, 10]"
+  - code: "assert score == 45"
+    message: "score should remain 45"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      score = 45
+      if score >= 50:
+          print("Pass")
+      else:
+          print("Fail")
+      sys.stdout = sys.__stdout__
+      assert "Fail" in out.getvalue()
+    message: "Should print 'Fail' when score is 45"
+  - code: |
+      import io, sys
+      out = io.StringIO()
+      sys.stdout = out
+      score = 75
+      if score >= 50:
+          print("Pass")
+      else:
+          print("Fail")
+      sys.stdout = sys.__stdout__
+      assert "Pass" in out.getvalue()
+    message: "Should print 'Pass' when score is 75"
 
 final_challenge:
   code_starter: |
-    # Build a crew list from scratch, then query it
+    strength = 30
+    # If strength >= 50 print "Strong", else print "Weak"
   hints:
-    - 'crew = []  — start with an empty list'
-    - 'crew.append("Aria")  — add the first member'
-    - 'crew.append("Rex") and crew.append("Mira")  — add the rest'
-    - "crew_size = len(crew)"
+    - "if strength >= 50:"
+    - "else: covers all other cases"
   tests:
-    - code: "assert len(crew) == 3, f'crew should have 3 members, got {len(crew)}'"
-      message: "crew should have exactly 3 members"
-    - code: "assert 'Aria' in crew"
-      message: "crew should contain 'Aria'"
-    - code: "assert 'Rex' in crew"
-      message: "crew should contain 'Rex'"
-    - code: "assert 'Mira' in crew"
-      message: "crew should contain 'Mira'"
-    - code: "assert crew_size == 3"
-      message: "crew_size should be 3"
+    - code: "assert strength == 30"
+      message: "strength should remain 30"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        strength = 30
+        if strength >= 50:
+            print("Strong")
+        else:
+            print("Weak")
+        sys.stdout = sys.__stdout__
+        assert "Weak" in out.getvalue()
+      message: "Should print 'Weak' when strength is 30"
+    - code: |
+        import io, sys
+        out = io.StringIO()
+        sys.stdout = out
+        strength = 70
+        if strength >= 50:
+            print("Strong")
+        else:
+            print("Weak")
+        sys.stdout = sys.__stdout__
+        assert "Strong" in out.getvalue()
+      message: "Should print 'Strong' when strength is 70"
 
 worlds:
   fantasy:
-    title: "The Duplication Spell"
+    title: "Two Paths in the Forest"
     setup: |
-      On the enchanted workbench lie five magical crystals. "A duplication spell
-      doubles the power of each crystal," Elara says. "We loop over each item in a
-      list, transform it, and collect the result with .append()."
+      The forest trail splits. "Every choice leads somewhere," the guide says.
+      In Python, if/else gives you exactly two paths — the if block runs when the
+      condition is True, the else block runs when it is False. One always executes.
 
-      She demonstrates: start with an empty list, loop through the originals, and
-      append each one multiplied by two. Build the 'doubled' list by multiplying
-      each number in 'numbers' by two.
+      score is set to 45. Write an if/else: if score >= 50 print "Pass",
+      otherwise print "Fail". Try changing score to 75 and see which path runs.
     final_challenge_prompt: |
-      The adventuring party needs a roster. Start with an empty list called crew.
-      Use .append() to add "Aria", "Rex", and "Mira" — one call per name. Then
-      store the count in crew_size using len().
+      A warrior's strength test: if strength >= 50, print "Strong". Otherwise
+      print "Weak". strength is 30 — only one path should run.
   scifi:
-    title: "Sensor Array Boost"
+    title: "Binary Decision Node"
     setup: |
-      The sensor array needs its readings doubled for the deep-space scan. "Looping
-      over a list visits each element in turn," the AI explains. "Call .append()
-      inside the loop to build a new list as you go."
+      The navigation computer reaches a binary fork: thrust or coast. A ship
+      responds to exactly one of two states — if/else in Python works the same way.
+      When the if condition is True the first block runs; when False, the else block runs.
 
-      Create 'doubled' by multiplying each value in 'numbers' by two and appending
-      the result. The scanner cannot calibrate until all five doubled values are correct.
+      score is 45. Write if score >= 50 print "Pass", else print "Fail". Exactly
+      one message will appear.
     final_challenge_prompt: |
-      The crew manifest needs three names added. Start with crew as an empty list.
-      Append "Aria", "Rex", and "Mira" using .append(). Store len(crew) in crew_size.
+      The hull scanner returns a strength reading of 30. Print "Strong" if strength
+      >= 50, otherwise print "Weak". Only one output should appear.
   mystery:
-    title: "Doubling the Reward"
+    title: "Guilty or Innocent"
     setup: |
-      The agency is doubling the bounty on every open case. "A for loop walks through
-      a list one item at a time," your mentor explains. "Inside the loop, multiply
-      each amount by 2 and append it to a new list."
+      The verdict form has two boxes: Guilty or Innocent — one must be marked.
+      Python's if/else works the same way: one branch runs, the other doesn't.
+      There is no middle ground.
 
-      Build 'doubled' from the 'numbers' list by appending each element times two.
-      The bookkeeper won't accept the ledger until every value is exact.
+      score is 45. Write an if/else: if score >= 50 print "Pass", else print "Fail".
+      Exactly one message will print.
     final_challenge_prompt: |
-      Three informants need to be added to the contact list. Start with crew as an
-      empty list. Use .append() to add "Aria", "Rex", and "Mira". Then store
-      len(crew) in crew_size.
+      The suspect's alibi strength is rated 30. Print "Strong" if strength >= 50,
+      otherwise print "Weak". Mark exactly one verdict.

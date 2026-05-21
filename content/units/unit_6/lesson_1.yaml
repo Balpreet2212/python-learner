@@ -1,82 +1,83 @@
-unit: 6
+unit: 5
 lesson: 1
 xp: 10
 
 example:
   code: |
-    class Dog:
-        def __init__(self, name, age):
-            self.name = name
-            self.age = age
+    def divide(a, b):
+        try:
+            result = a / b
+        except ZeroDivisionError:
+            result = 0
+        return result
 
-    rex = Dog("Rex", 4)
-    print(rex.name)
-    print(rex.age)
+    print(divide(10, 2))
+    print(divide(5, 0))
   explanation: |
-    A class is a blueprint. __init__ is the special method that runs automatically when you create an instance with Dog("Rex", 4).
-    self refers to the specific object being created. self.name = name stores the value as an attribute on that object.
-    After creation, rex.name and rex.age let you read those attributes from anywhere.
-  output: "Rex\n4"
+    A try block contains code that might fail. If it raises the named exception, execution jumps to the except block instead of crashing.
+    Here, dividing by zero raises ZeroDivisionError. The except clause catches it and sets result to 0 — the function always returns safely.
+  output: "5.0\n0"
 
 code_starter: |
-  class Hero:
-      def __init__(self, name, power):
-          self.___ = ___
-          self.___ = ___
-
-  hero = Hero("Aldric", 85)
+  def safe_divide(a, b):
+      try:
+          result = ___
+      except ZeroDivisionError:
+          result = ___
+      return result
 hints:
-  - "self.name = name stores the name attribute"
-  - "self.power = power stores the power attribute"
+  - "result = a // b for integer division"
+  - "Return 0 when ZeroDivisionError is caught"
 
 tests:
-  - code: "assert hero.name == 'Aldric', f'hero.name should be Aldric, got {hero.name}'"
-    message: "hero.name is 'Aldric'"
-  - code: "assert hero.power == 85, f'hero.power should be 85, got {hero.power}'"
-    message: "hero.power is 85"
+  - code: "assert safe_divide(10, 2) == 5, 'safe_divide(10,2) should be 5'"
+    message: "safe_divide(10, 2) returns 5"
+  - code: "assert safe_divide(7, 0) == 0, 'safe_divide(7,0) should be 0'"
+    message: "safe_divide(7, 0) returns 0 safely"
 
 final_challenge:
   code_starter: |
     # Your code here
   hints:
-    - "class Spell:"
-    - "    def __init__(self, name, power):"
-    - "        self.name = name"
-    - "        self.power = power"
-    - "spell = Spell(\"Fireball\", 80)"
+    - "def safe_divide(a, b):"
+    - "Use integer division a // b inside try"
+    - "Return 0 in the except ZeroDivisionError block"
   tests:
-    - code: "assert spell.name == 'Fireball', f'spell.name should be Fireball'"
-      message: "spell.name is 'Fireball'"
-    - code: "assert spell.power == 80, f'spell.power should be 80'"
-      message: "spell.power is 80"
-    - code: "assert isinstance(spell, Spell), 'spell should be an instance of Spell'"
-      message: "spell is an instance of Spell"
+    - code: "assert safe_divide(9, 3) == 3, 'safe_divide(9,3) should be 3'"
+      message: "safe_divide(9, 3) returns 3"
+    - code: "assert safe_divide(15, 0) == 0, 'safe_divide(15,0) should be 0'"
+      message: "safe_divide(15, 0) returns 0"
+    - code: "assert safe_divide(0, 5) == 0, 'safe_divide(0,5) should be 0'"
+      message: "safe_divide(0, 5) returns 0"
 
 worlds:
   fantasy:
-    title: "Forging the First Blueprint"
+    title: "The Fail-Safe Enchantment"
     setup: |
-      Every legendary weapon, every arcane artifact in the Grand Archive started as a blueprint — a class. The blueprint describes what a thing IS: its name, its power, its properties. The actual object — the sword on the rack, the wand in the case — is an instance made from that blueprint.
-      In Python, a class is defined with the class keyword. The __init__ method is the forge: it runs automatically each time you create a new instance, and self refers to the specific object being made.
+      Every seasoned enchanter knows that some spells can backfire. Dividing a potion's strength by zero vials — because none were prepared — would cause the whole ritual to collapse in a puff of acrid smoke.
+      The Guild's solution: wrap dangerous operations in a try block. If the error occurs, the except clause catches it like a magical ward, letting the spell finish gracefully instead of exploding.
+      This is Python's exception-handling mechanism. You name the specific error you expect, handle it cleanly, and your program carries on.
     final_challenge_prompt: |
-      The Archmage needs a Spell class to register enchantments in the archive.
-      Write class Spell with __init__(self, name, power) that stores both as attributes.
-      Then create an instance: spell = Spell("Fireball", 80)
+      The castle treasury needs a function to divide gold evenly among soldiers. If there are no soldiers (b = 0), dividing is impossible — return 0 instead of crashing.
+      Write safe_divide(a, b) that:
+      — Returns a // b normally
+      — Returns 0 if a ZeroDivisionError occurs
   scifi:
-    title: "Designing the First Object Blueprint"
+    title: "Fault-Tolerant Navigation Subroutines"
     setup: |
-      Every ship system on the Meridian — life support, navigation, weapons — is modelled in code as an object created from a class blueprint. The blueprint specifies what data each system holds (its attributes). Creating an instance is like deploying one live copy of that system.
-      __init__ is the constructor: Python calls it automatically when you write ClassName(...). Inside, self refers to the fresh instance, and self.attribute = value stores data on it.
+      Aboard the Meridian, a navigation subroutine that crashes on divide-by-zero could send the ship into an unrecoverable spin. Mission protocol requires every computation function to be fault-tolerant.
+      Python's try/except pattern is the engineering solution: put the risky line inside try, name the exception you're guarding against in except, and define a safe fallback. The program continues — no crash, no spin.
     final_challenge_prompt: |
-      Design a Spell class to model the weapon-system registry:
-      — __init__(self, name, power) stores both attributes
-      — Create spell = Spell("Fireball", 80)
+      Write a fault-tolerant safe_divide(a, b) function for the navigation computer:
+      — Returns a // b when b is non-zero
+      — Returns 0 when b is 0, catching ZeroDivisionError
   mystery:
-    title: "The Detective's Case-File Template"
+    title: "The Detective's Failproof Calculation"
     setup: |
-      Every case in the detective agency starts from the same template: a name, a power rating (how serious the case is), and any other relevant facts. Rather than building each case from scratch, the agency uses a class — a reusable mold that stamps out consistent case objects.
-      __init__ is the intake form: fill in the details when you create the object, and the form stores them for the lifetime of that object.
+      Calculating evidence ratios is routine — until one day the denominator is zero. A witness count of zero, a crime rate of zero, an empty suspect list. Without a guard, the whole analysis crashes and the case goes cold.
+      The try/except block is the detective's safety net: attempt the calculation, and if ZeroDivisionError is raised, fall back to a known-safe value and keep working.
     final_challenge_prompt: |
-      Write a Spell class (the agency repurposes it for evidence tagging):
-      — __init__(self, name, power) stores both as attributes on self
-      — Create the instance spell = Spell("Fireball", 80)
+      Write safe_divide(a, b) for the evidence analysis toolkit:
+      — Returns a // b normally
+      — Returns 0 if ZeroDivisionError is raised
+      — Works for any integer inputs

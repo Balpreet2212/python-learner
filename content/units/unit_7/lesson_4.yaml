@@ -1,0 +1,93 @@
+unit: 6
+lesson: 4
+xp: 10
+
+example:
+  code: |
+    class Coin:
+        def __init__(self, denomination):
+            self.denomination = denomination
+
+    penny  = Coin(1)
+    quarter = Coin(25)
+    loonie  = Coin(100)
+
+    print(penny.denomination)
+    print(quarter.denomination)
+    print(loonie.denomination)
+  explanation: |
+    Every time you call Coin(...) you create a completely independent object with its own attribute values.
+    penny, quarter, and loonie are three separate instances — changing one does not affect the others.
+    A class is a factory: one blueprint, unlimited distinct objects.
+  output: "1\n25\n100"
+
+code_starter: |
+  class Warrior:
+      def __init__(self, name, power):
+          self.___ = ___
+          self.___ = ___
+
+  warrior_1 = Warrior(___, ___)
+  warrior_2 = Warrior(___, ___)
+hints:
+  - "self.name = name; self.power = power"
+  - "warrior_1 = Warrior(\"Thor\", 95)"
+  - "warrior_2 = Warrior(\"Loki\", 60)"
+
+tests:
+  - code: "assert warrior_1.name == 'Thor' and warrior_1.power == 95"
+    message: "warrior_1 is Thor with power 95"
+  - code: "assert warrior_2.name == 'Loki' and warrior_2.power == 60"
+    message: "warrior_2 is Loki with power 60"
+  - code: "assert warrior_1 is not warrior_2, 'They must be separate objects'"
+    message: "warrior_1 and warrior_2 are distinct objects"
+
+final_challenge:
+  code_starter: |
+    # Your code here
+  hints:
+    - "class Warrior:"
+    - "    def __init__(self, name, power): ..."
+    - "warrior_1 = Warrior(\"Thor\", 95)"
+    - "warrior_2 = Warrior(\"Loki\", 60)"
+  tests:
+    - code: "assert warrior_1.name == 'Thor' and warrior_1.power == 95"
+      message: "warrior_1 has correct attributes"
+    - code: "assert warrior_2.name == 'Loki' and warrior_2.power == 60"
+      message: "warrior_2 has correct attributes"
+    - code: "assert isinstance(warrior_1, Warrior) and isinstance(warrior_2, Warrior)"
+      message: "Both are Warrior instances"
+    - code: "assert warrior_1 is not warrior_2"
+      message: "warrior_1 and warrior_2 are separate objects"
+
+worlds:
+  fantasy:
+    title: "Two Warriors, One Blueprint"
+    setup: |
+      The Hall of Heroes houses hundreds of warriors — each unique, each forged from the same Warrior blueprint. Thor carries a thunder hammer and 95 power. Loki relies on cunning and 60 power. They share the same class definition but are completely independent objects.
+      Every call to Warrior(...) produces a fresh instance with its own attribute values stored in its own memory. Modifying warrior_1.power does not touch warrior_2 at all — they are entirely separate.
+    final_challenge_prompt: |
+      Write the Warrior class and create two distinct warriors:
+      — class Warrior with __init__(self, name, power) storing both attributes
+      — warrior_1 = Warrior("Thor", 95)
+      — warrior_2 = Warrior("Loki", 60)
+  scifi:
+    title: "Two Ship Units, One Blueprint"
+    setup: |
+      The Meridian carries two fighter drones: Vanguard (power 95) and Shadow (power 60). They run identical firmware — the same class — but each drone has its own onboard state. If Vanguard takes damage, Shadow's power reading is unchanged.
+      This is the key insight about multiple instances: one class, many independent objects, each with its own attribute values.
+    final_challenge_prompt: |
+      Define a Warrior class (models a drone unit) and create two instances:
+      — __init__(self, name, power) stores both attributes
+      — warrior_1 = Warrior("Thor", 95)
+      — warrior_2 = Warrior("Loki", 60)
+  mystery:
+    title: "Two Suspects, One Template"
+    setup: |
+      The detective's profiling template is applied to every suspect: record their name and threat level (power). Two suspects are in the files — Thor (threat 95) and Loki (threat 60). They share a template but are separate cases; updating one record does not alter the other.
+      Multiple instances is the Python way to model a collection of similar-but-distinct real-world entities.
+    final_challenge_prompt: |
+      Create the profiling class and two suspect objects:
+      — class Warrior with __init__(self, name, power)
+      — warrior_1 = Warrior("Thor", 95)
+      — warrior_2 = Warrior("Loki", 60)
