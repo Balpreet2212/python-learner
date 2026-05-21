@@ -44,3 +44,28 @@ async def set_onboarding(
     if result is None:
         raise bad_request("Profile unavailable after save")
     return result
+
+
+@router.post("/reset-progress")
+async def reset_progress(
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+    _csrf: None = Depends(require_csrf),
+) -> LearnerProfileOut:
+    """Reset the learner's progress to unit 1, lesson 1, no badges."""
+    if account.role != "learner":
+        raise forbidden("Only learner accounts can reset progress")
+    if account.profile is None:
+        await db.refresh(account, ["profile"])
+    if account.profile is None:
+        raise bad_request("Learner profile not found")
+
+    account.profile.current_unit = 1
+    account.profile.current_lesson = 1
+    account.profile.badges_json = "[]"
+    await db.commit()
+
+    result = _profile_out(account)
+    if result is None:
+        raise bad_request("Profile unavailable after reset")
+    return result

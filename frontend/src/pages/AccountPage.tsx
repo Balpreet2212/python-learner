@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { logout } from "../api/auth";
+import { resetProgress } from "../api/learner";
 import Button from "../components/ui/Button";
 import { useState } from "react";
 import { ApiError } from "../api/client";
 
 export default function AccountPage() {
-  const { account, profile, clearAuth } = useAuth();
+  const { account, profile, clearAuth, setProfile } = useAuth();
   const navigate = useNavigate();
   const [signingOut, setSigningOut] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [resetDone, setResetDone] = useState(false);
 
   async function handleSignOut() {
     setSigningOut(true);
@@ -19,6 +22,21 @@ export default function AccountPage() {
     } finally {
       clearAuth();
       navigate("/auth/login");
+    }
+  }
+
+  async function handleReset() {
+    if (!confirm("Reset progress to Unit 1, Lesson 1? This cannot be undone.")) return;
+    setResetting(true);
+    setResetDone(false);
+    try {
+      const updated = await resetProgress();
+      setProfile(updated);
+      setResetDone(true);
+    } catch {
+      // ignore
+    } finally {
+      setResetting(false);
     }
   }
 
@@ -61,7 +79,25 @@ export default function AccountPage() {
           )}
         </section>
 
-        {/* Danger zone */}
+        {/* Progress reset */}
+        {profile && (
+          <section className="space-y-3">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Progress</h2>
+            <Button
+              variant="ghost"
+              loading={resetting}
+              onClick={() => void handleReset()}
+              className="w-full border border-gray-700 hover:border-yellow-500 hover:text-yellow-400"
+            >
+              Reset progress to Unit 1
+            </Button>
+            {resetDone && (
+              <p className="text-center text-xs text-green-400">Progress reset — you're back at Unit 1, Lesson 1.</p>
+            )}
+          </section>
+        )}
+
+        {/* Session */}
         <section className="space-y-3">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Session</h2>
           <Button
