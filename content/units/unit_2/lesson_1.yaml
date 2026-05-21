@@ -4,75 +4,108 @@ xp: 10
 
 example:
   code: |
-    score = 72
-    if score >= 50:
-        print("Pass")
+    apples = 17
+    per_basket = 5
+    baskets = apples // per_basket
+    leftover = apples % per_basket
+    power = 2 ** 8
+    print(baskets, leftover, power)
   explanation: |
-    An if statement runs its indented block only when the condition is True.
-    Here, score >= 50 evaluates to True, so "Pass" is printed.
-    If score were 40 the condition would be False and nothing prints.
-  output: "Pass"
+    // (floor division) divides and drops the decimal — 17 // 5 = 3.
+    % (modulo) gives only the remainder — 17 % 5 = 2.
+    ** (exponentiation) raises to a power — 2 ** 8 = 256.
+    These three operators extend the basic +  -  *  / you already know.
+  output: "3 2 256"
 
 code_starter: |
-  health = 80
-  # Write an if statement: if health is greater than 0, print "Alive"
+  # Split 23 items into groups of 7
+  items = 23
+  group_size = 7
+  # How many full groups fit?
+  full_groups =
+  # How many items are left over?
+  leftover =
 hints:
-  - "if health > 0:"
-  - "Indent the print() call by 4 spaces under the if"
+  - "Use // for full groups: full_groups = items // group_size"
+  - "Use % for the remainder: leftover = items % group_size"
+
 tests:
-  - code: "assert health == 80, 'do not change the value of health'"
-    message: "health should remain 80"
-  - code: "assert 'Alive' in _stdout"
-    message: "Should print 'Alive' when health > 0"
+  - code: "assert full_groups == 3"
+    message: "full_groups should be 3 (23 // 7)"
+  - code: "assert leftover == 2"
+    message: "leftover should be 2 (23 % 7)"
+  - code: "assert '//' in _code"
+    message: "use // (floor division) to calculate full_groups"
+  - code: "assert '%' in _code"
+    message: "use % (modulo) to calculate leftover"
+
+predict:
+  code: |
+    x = 10 ** 3
+    print(x)
+  explanation: "** raises a number to a power. 10 ** 3 = 10 × 10 × 10 = 1000."
+
+break_and_fix:
+  broken_code: |
+    base = 2
+    result = base ^ 4
+    print(result)
+  hint: "Python uses ** for exponentiation — ^ is a different operator (bitwise XOR)"
+  tests:
+    - code: "assert result == 16"
+      message: "result should be 16 (2 to the power of 4)"
+    - code: "assert '**' in _code"
+      message: "use ** for exponentiation, not ^"
 
 final_challenge:
   code_starter: |
-    power = 100
-    # If power equals 100, print "Maximum power!"
+    # A tournament needs 50 warriors split into teams of 8
   hints:
-    - "Use == to check for equality: if power == 100:"
-    - "print(\"Maximum power!\") indented inside the if"
+    - "players = 50"
+    - "group_size = 8"
+    - "full_teams = players // group_size"
+    - "bench = players % group_size"
+    - "print(full_teams, bench)"
   tests:
-    - code: "assert power == 100, 'do not change the value of power'"
-      message: "power should remain 100"
-    - code: "assert 'Maximum power!' in _stdout"
-      message: "Should print 'Maximum power!' when power == 100"
+    - code: "assert full_teams == 6"
+      message: "full_teams should be 6"
+    - code: "assert bench == 2"
+      message: "bench should be 2 (leftover players)"
 
 worlds:
   fantasy:
-    title: "The Gate of Truth"
+    title: "The Rune Counter"
     setup: |
-      The ancient gate ahead glows with a silver rune. "Only those who speak the
-      truth pass," the guardian says. In Python, an if statement is that truth test —
-      it runs a block of code only when a condition is True.
+      "Numbers in Python go further than +, -, *, /," Elara says, carving
+      runes into the stone floor. "// divides and discards the remainder.
+      % captures only the remainder. ** raises a number to a power."
 
-      health is already set to 80. Write an if statement: if health is greater than
-      0, print "Alive". The indented line beneath if only runs when the condition holds.
+      You have 23 spell fragments to distribute into groups of 7.
+      Calculate how many full_groups fit and how many fragments are left over.
     final_challenge_prompt: |
-      The power crystal reads 100 — maximum charge. Write an if statement so that
-      when power equals 100, the message "Maximum power!" is printed to the console.
+      A tournament needs 50 warriors split into teams of 8.
+      Calculate full_teams and bench (leftover warriors). Print both.
   scifi:
-    title: "System Integrity Check"
+    title: "Crew Division Protocol"
     setup: |
-      The ship's damage-control AI flashes a warning: hull integrity unknown.
-      An if statement in Python lets you run code only when a condition is True —
-      like a circuit that only closes when the signal is strong enough.
+      "Extended arithmetic operators are essential for resource allocation,"
+      the ship AI states. "// gives full portions, % gives remainders,
+      and ** computes exponential growth."
 
-      health is set to 80. Write an if statement: if health is greater than 0,
-      print "Alive". Only the indented block beneath the if keyword executes when
-      the condition passes.
+      Divide 23 crew members into pods of 7.
+      Calculate full_groups and leftover.
     final_challenge_prompt: |
-      The reactor's power gauge reads 100. Write an if statement so the console
-      prints "Maximum power!" only when power equals 100.
+      A fleet of 50 crew must be divided into squads of 8.
+      Calculate full_teams and bench (remaining crew). Print both.
   mystery:
-    title: "The Hidden Clue"
+    title: "Dividing the Evidence"
     setup: |
-      Inspector Morgan drops a folder on your desk. "Some evidence only matters
-      under the right conditions." In Python, an if statement works the same way —
-      the indented code beneath it runs only when the condition is True.
+      "Cases come down to dividing things evenly," your mentor says,
+      handing you a pile of case files. "// divides cleanly, % tells
+      you what's left over, ** raises to a power."
 
-      health is set to 80. Write an if statement: if health is greater than 0,
-      print "Alive". The colon after the condition and the four-space indent are both required.
+      Split 23 evidence files into folders of 7.
+      Calculate full_groups and leftover.
     final_challenge_prompt: |
-      A vital clue is locked behind a power check. Write an if statement so that
-      when power equals 100, the message "Maximum power!" is printed.
+      50 suspects need interview groups of 8.
+      Compute full_teams and bench (leftover suspects). Print both.

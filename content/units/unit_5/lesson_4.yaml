@@ -1,102 +1,94 @@
-unit: 4
+unit: 3
 lesson: 4
 xp: 10
 
 example:
   code: |
-    inventory = {"sword": 1, "shield": 2, "potion": 5}
+    def is_adult(age):
+        return age >= 18
 
-    # Update an existing key
-    inventory["potion"] = 3
-
-    # Add a brand new key
-    inventory["rope"] = 10
-
-    # Count total distinct items
-    item_count = len(inventory)
-
-    print(inventory)
-    print("Distinct items:", item_count)
+    print(is_adult(20))
+    print(is_adult(15))
+    print(type(is_adult(20)))
   explanation: |
-    You update or add a key using the same assignment syntax: dict[key] = value.
-    If the key already exists, its value is overwritten. If it does not exist, a new entry is created.
-    len() on a dictionary returns the number of keys, not the sum of the values.
-  output: "{'sword': 1, 'shield': 2, 'potion': 3, 'rope': 10}\nDistinct items: 4"
+    A predicate function is one that returns True or False.
+    The expression age >= 18 already evaluates to a boolean — you can return it directly.
+    There's no need to write if/else just to return True or False;
+    returning the comparison directly is cleaner and more Pythonic.
+  output: "True\nFalse\n<class 'bool'>"
 
 code_starter: |
-  stats = {"hp": 100, "mp": 50}
+  # Define a function 'is_even' that takes one parameter n
+  # and returns True if n is even, False otherwise.
+  def is_even(n):
 
-  # Update mp to 75
-  stats[___] = ___
-
-  # Add a new key "stamina" with value 30
-  stats[___] = ___
-
-  # Count how many keys stats has
-  keys_count = len(___)
+  check_four  = is_even(4)
+  check_seven = is_even(7)
 hints:
-  - "stats[\"mp\"] = 75 updates the mp key"
-  - "stats[\"stamina\"] = 30 creates a new key"
-  - "len(stats) counts the number of keys"
-
+  - "n % 2 == 0 is True when n is even (no remainder when divided by 2)"
+  - "return n % 2 == 0  — this expression already evaluates to True or False"
 tests:
-  - code: "assert stats['mp'] == 75, 'mp should be 75'"
-    message: "mp updated to 75"
-  - code: "assert stats['stamina'] == 30, 'stamina should be 30'"
-    message: "stamina added with value 30"
-  - code: "assert keys_count == 3, 'keys_count should be 3'"
-    message: "keys_count equals 3"
+  - code: "assert is_even(4) is True, 'is_even(4) should be True'"
+    message: "is_even(4) should return True"
+  - code: "assert is_even(7) is False, 'is_even(7) should be False'"
+    message: "is_even(7) should return False"
+  - code: "assert is_even(0) is True"
+    message: "is_even(0) should return True"
 
 final_challenge:
   code_starter: |
-    stats = {"hp": 80, "mp": 40}
-
-    # Your code here
+    # Define a function that checks if a level qualifies as powerful
   hints:
-    - "Use stats[\"hp\"] = 100 to update hp"
-    - "Use stats[\"shield\"] = 25 to add the shield key"
-    - "keys_count = len(stats)"
+    - "def is_powerful(level):  — one parameter"
+    - "    return level >= 10  — True if level is 10 or more"
+    - "is_powerful(10) should be True, is_powerful(5) should be False"
   tests:
-    - code: "assert stats['hp'] == 100, 'hp should be updated to 100'"
-      message: "hp updated to 100"
-    - code: "assert stats.get('shield') == 25, 'shield key should be 25'"
-      message: "shield key added with value 25"
-    - code: "assert keys_count == 3, 'keys_count should be 3'"
-      message: "keys_count is 3"
+    - code: "assert is_powerful(10) is True"
+      message: "is_powerful(10) should return True"
+    - code: "assert is_powerful(9) is False"
+      message: "is_powerful(9) should return False"
+    - code: "assert is_powerful(5) is False"
+      message: "is_powerful(5) should return False"
+    - code: "assert is_powerful(100) is True"
+      message: "is_powerful(100) should return True"
 
 worlds:
   fantasy:
-    title: "Updating the Spellbook's Registry"
+    title: "The Parity Oracle"
     setup: |
-      The royal Spellbook is a living dictionary — entries must be kept current or spells fail at the worst possible moment.
-      Sir Aldric hands you a worn leather tome. "Three things," he says. "The healing potion supply was miscounted — fix it. The armory finally finished crafting rope bridges, so add that stock. Then tell me how many distinct categories we're tracking."
-      Dictionaries in Python work the same way: one syntax, dict[key] = value, both updates existing entries and creates new ones.
+      The oracle must judge each number: balanced (even) or off-balance (odd).
+      "A function that returns True or False is called a predicate," Elara says.
+      "The modulus operator % gives the remainder after division — if n % 2 == 0,
+      the number divides evenly."
+
+      Write 'is_even(n)' that returns the boolean result directly. No if/else needed
+      — the comparison itself is already True or False.
     final_challenge_prompt: |
-      The battle-worn stats board in the castle war room shows stale numbers. You have been given the real figures.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (soldiers recovered overnight)
-      — Add "shield" with value 25 (new shields arrived)
-      — Store the number of distinct stats keys in a variable called keys_count
+      The enchanted gate only opens for heroes of level 10 or above. Define a
+      function called is_powerful that takes a level parameter and returns True
+      if level >= 10, False otherwise. Return the comparison directly.
   scifi:
-    title: "Patching the Ship's Resource Database"
+    title: "Binary Parity Check"
     setup: |
-      The Meridian's onboard resource database is the single source of truth for mission-critical supplies. An error crept in during the last sync — medical packs were over-reported, tether cables were never logged, and command wants a precise count of tracked resource types.
-      Updating a dictionary entry uses the exact same syntax as adding one: database[key] = value. Python checks whether the key exists and either overwrites or creates as needed.
+      The ship's checksum system flags odd readings as anomalies. "Functions that
+      return booleans are common in real code," the AI notes. "The % operator gives
+      the remainder — n % 2 == 0 is already a boolean expression you can return
+      directly."
+
+      Write 'is_even(n)' returning True for even numbers.
     final_challenge_prompt: |
-      Ship diagnostics show the stored stats are from yesterday's damaged-hull readings.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (hull fully repaired)
-      — Add "shield" with value 25 (deflector array online)
-      — Store len(stats) in keys_count
+      The clearance system grants access only to crew members with a level of 10
+      or higher. Define is_powerful(level) that returns True when level >= 10 and
+      False otherwise. Return the comparison directly — no if needed.
   mystery:
-    title: "Correcting the Detective's Case File"
+    title: "The Even-Odd Cipher"
     setup: |
-      The detective's case file is a dictionary of clues — but two entries are wrong and one key is missing entirely. If the file goes to the judge as-is, the wrong suspect walks free.
-      You sit at the oak desk, pen in hand. Cross out the wrong number, ink in the correction. Add the new evidence tag. Then count how many distinct evidence categories are now tracked.
-      In Python: evidence[key] = value handles both corrections and additions identically.
+      The coded message uses even numbers as signals. "A function that checks a
+      condition and returns a boolean is called a predicate," your mentor explains.
+      "n % 2 gives the remainder when dividing by 2 — if it's 0, the number is even."
+
+      Write 'is_even(n)' that returns the result of n % 2 == 0.
     final_challenge_prompt: |
-      A new witness report has come in, changing the case stats entirely.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (suspect's stamina reassessed)
-      — Add "shield" with value 25 (alibi partially confirmed)
-      — Store the key count in keys_count
+      The security clearance check requires a threat level of 10 or above to
+      trigger the alarm. Define is_powerful(level) returning True if level >= 10.
+      The function should return the boolean comparison directly.

@@ -10,6 +10,7 @@ import CapstoneChallengePage from "./pages/CapstoneChallengePage";
 import SettingsPage from "./pages/SettingsPage";
 import BillingPage from "./pages/BillingPage";
 import AccountPage from "./pages/AccountPage";
+import WeeklyChallengePage from "./pages/WeeklyChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -135,6 +136,18 @@ export default function App() {
           <RequireAuth>
             <AppLayout>
               <AccountPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+
+      {/* Weekly challenge */}
+      <Route
+        path="/weekly"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <WeeklyChallengePage />
             </AppLayout>
           </RequireAuth>
         }

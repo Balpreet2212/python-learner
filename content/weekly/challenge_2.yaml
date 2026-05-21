@@ -1,0 +1,48 @@
+title: "The Grade Classifier"
+xp: 50
+difficulty: "easy"
+description: |
+  Write a function grade(score) that returns:
+  - "A" if score >= 90
+  - "B" if score >= 75
+  - "C" if score >= 60
+  - "F" otherwise
+
+code_starter: |
+  def grade(score):
+
+hints:
+  - "Check the highest tier first (score >= 90)"
+  - "Use elif for each lower tier"
+  - "The final else handles F"
+
+tests:
+  - code: "assert grade(95) == 'A'"
+    message: "95 should be an A"
+  - code: "assert grade(82) == 'B'"
+    message: "82 should be a B"
+  - code: "assert grade(61) == 'C'"
+    message: "61 should be a C"
+  - code: "assert grade(45) == 'F'"
+    message: "45 should be an F"
+  - code: "assert grade(90) == 'A'"
+    message: "Exactly 90 is an A"
+  - code: "assert grade(75) == 'B'"
+    message: "Exactly 75 is a B"
+
+worlds:
+  fantasy:
+    title: "The Apprentice Ranking"
+    description: |
+      The Mage Academy ranks apprentices by their spell accuracy score.
+      Write grade(score) to return the correct rank: "A", "B", "C", or "F".
+  scifi:
+    title: "Crew Performance Rating"
+    description: |
+      The ship evaluates crew performance after each mission.
+      Write grade(score) to assign the correct performance rating.
+  mystery:
+    title: "The Case Difficulty Rating"
+    description: |
+      The agency rates detective performance on each case.
+      Write grade(score) to return the correct performance tier.

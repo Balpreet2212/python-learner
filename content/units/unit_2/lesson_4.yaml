@@ -4,87 +4,93 @@ xp: 10
 
 example:
   code: |
-    age = 20
-    has_pass = True
-    if age >= 18 and has_pass:
-        print("Entry granted")
-    else:
-        print("Entry denied")
+    print(bool(0))        # False
+    print(bool(42))       # True
+    print(bool(""))       # False
+    print(bool("hello"))  # True
+    active = True
+    print(type(active))
   explanation: |
-    'and' requires BOTH conditions to be True for the whole expression to be True.
-    'or' requires at least ONE condition to be True.
-    Here both age >= 18 and has_pass are True, so "Entry granted" prints.
-    Change either one to False and the else branch runs instead.
-  output: "Entry granted"
+    True and False are Python's boolean values — they express yes/no, on/off.
+    bool() reveals a value's truthiness: 0, "", None, and empty collections
+    are False. Everything else is True.
+    Boolean variable names read like facts: is_active, has_key, can_fly.
+  output: "False\nTrue\nFalse\nTrue\n<class 'bool'>"
 
 code_starter: |
-  level = 8
-  coins = 150
-  # If level >= 5 AND coins >= 100, print "Can buy", else print "Cannot buy"
+  score = 0
+  name = "Alex"
+  # Convert score to a boolean — is it truthy?
+  has_score =
+  # Convert name to a boolean — is it truthy?
+  has_name =
 hints:
-  - "if level >= 5 and coins >= 100:"
-  - "Both conditions must be True for 'and' to pass"
+  - "has_score = bool(score)  — 0 converts to False"
+  - "has_name = bool(name)  — a non-empty string converts to True"
+
 tests:
-  - code: "assert level == 8 and coins == 150"
-    message: "level and coins should not be changed"
-  - code: "assert 'Can buy' in _stdout"
-    message: "Should print 'Can buy' when both conditions pass"
-  - code: "assert 'Cannot buy' not in _stdout"
-    message: "Should not print 'Cannot buy'"
+  - code: "assert has_score == False"
+    message: "has_score should be False (bool(0) is False)"
+  - code: "assert has_name == True"
+    message: "has_name should be True (bool('Alex') is True)"
+  - code: "assert 'bool' in _code"
+    message: "use bool() to convert the values"
 
 final_challenge:
   code_starter: |
-    hp = 25
-    mp = 10
-    # Print "Critical" if hp < 30 OR mp < 20, else print "Stable"
+    items_in_bag = 0
+    player_name = "Hero"
+    lives_remaining = 3
   hints:
-    - "if hp < 30 or mp < 20:"
-    - "'or' is True when at least one condition is True"
+    - "bag_empty = not bool(items_in_bag)"
+    - "has_name = bool(player_name)"
+    - "is_alive = bool(lives_remaining)"
+    - "print(bag_empty, has_name, is_alive)"
   tests:
-    - code: "assert hp == 25 and mp == 10"
-      message: "hp and mp should not be changed"
-    - code: "assert 'Critical' in _stdout"
-      message: "Should print 'Critical' when hp < 30 or mp < 20"
-    - code: "assert 'Stable' not in _stdout"
-      message: "Should not print 'Stable'"
+    - code: "assert bag_empty == True"
+      message: "bag_empty should be True (items_in_bag is 0)"
+    - code: "assert has_name == True"
+      message: "has_name should be True"
+    - code: "assert is_alive == True"
+      message: "is_alive should be True (lives_remaining is 3)"
 
 worlds:
   fantasy:
-    title: "The Enchanted Market"
+    title: "The Truth Stone"
     setup: |
-      The market stall requires two things: enough level and enough coins.
-      In Python, 'and' combines conditions so both must be True. 'or' means
-      at least one must be True. They let you express more precise rules.
+      The truth stone glows when something is real. "In Python every value
+      carries truthiness," Elara explains. "0, empty strings, and None are
+      falsy — everything else is truthy. bool() reveals this hidden truth."
 
-      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
-      "Can buy", else print "Cannot buy". Both conditions must hold.
+      A wizard has score = 0 and name = "Alex".
+      Use bool() to find has_score and has_name.
     final_challenge_prompt: |
-      The healer flags critical status when either hp or mp is low.
-      hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
-      otherwise print "Stable".
+      The party's state: items_in_bag = 0, player_name = "Hero",
+      lives_remaining = 3. Determine bag_empty (not bool of items),
+      has_name, and is_alive. Print all three.
   scifi:
-    title: "Docking Clearance"
+    title: "System Status Signals"
     setup: |
-      Docking requires both a valid crew level AND enough fuel credits.
-      Python's 'and' operator ensures both gates pass before entry is granted.
-      'or' would open the gate for either — use the right operator for the rule.
+      "Every system state reduces to True or False," the AI explains.
+      "bool() converts any value: 0 and empty strings are False,
+      non-zero numbers and non-empty strings are True."
 
-      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
-      "Can buy", else print "Cannot buy".
+      Readings: score = 0, name = "Alex".
+      Compute has_score and has_name.
     final_challenge_prompt: |
-      The ship monitors both hull points and energy. Either reading below threshold
-      triggers an alert. hp is 25, mp is 10. Print "Critical" if hp < 30 or
-      mp < 20, otherwise print "Stable".
+      System status: items_in_bag = 0, player_name = "Hero",
+      lives_remaining = 3. Compute bag_empty, has_name, and is_alive.
+      Print all three.
   mystery:
-    title: "Two Clues, One Verdict"
+    title: "The Lie Detector"
     setup: |
-      Two pieces of evidence together seal a case. In Python, 'and' means both
-      conditions must be True. 'or' means either one is enough. Choosing the
-      right operator is as important as choosing the right clue.
+      "Truth has a value in Python," your mentor says.
+      "bool() converts anything: 0 and empty strings return False,
+      everything else True."
 
-      level is 8, coins is 150. If level >= 5 and coins >= 100, print "Can buy",
-      else print "Cannot buy". Both requirements must be satisfied.
+      Readings: score = 0, name = "Alex".
+      Evaluate has_score and has_name.
     final_challenge_prompt: |
-      A suspect is flagged if either alibi score or evidence count falls below
-      threshold. hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
-      otherwise print "Stable".
+      Evidence state: items_in_bag = 0, player_name = "Hero",
+      lives_remaining = 3. Evaluate bag_empty, has_name, and is_alive.
+      Print all three.

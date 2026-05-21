@@ -4,80 +4,107 @@ xp: 10
 
 example:
   code: |
-    temp = 40
-    if temp >= 100:
-        print("Boiling")
-    else:
-        print("Not boiling")
+    a = 2 + 3 * 4      # * before +  →  14
+    b = (2 + 3) * 4    # () first    →  20
+    c = 10 - 4 / 2     # / before -  →  8.0
+    print(a, b, c)
   explanation: |
-    else provides a second branch that runs when the if condition is False.
-    Exactly one of the two blocks always executes — never both, never neither.
-    Here temp is 40, so the condition is False and "Not boiling" prints.
-  output: "Not boiling"
+    Python follows standard maths order: parentheses first, then **,
+    then * and / (left to right), then + and - (left to right).
+    Without parentheses: 2 + 3 * 4 = 2 + 12 = 14.
+    With parentheses: (2 + 3) * 4 = 5 * 4 = 20.
+    Use parentheses whenever you need to control the order.
+  output: "14 20 8.0"
 
 code_starter: |
-  score = 45
-  # If score >= 50 print "Pass", otherwise print "Fail"
+  price = 50
+  discount = 10
+  quantity = 3
+  # Calculate total: apply discount to price, then multiply by quantity
+  # Hint: you need parentheses!
+  total =
 hints:
-  - "if score >= 50:"
-  - "    print(\"Pass\")"
-  - "else:"
-  - "    print(\"Fail\")"
+  - "Subtract discount from price first: (price - discount)"
+  - "total = (price - discount) * quantity"
+
 tests:
-  - code: "assert score == 45"
-    message: "score should remain 45"
-  - code: "assert 'Fail' in _stdout"
-    message: "Should print 'Fail' when score is 45"
+  - code: "assert total == 120"
+    message: "total should be 120 — discount applied before multiplying"
+  - code: "assert '(' in _code"
+    message: "use parentheses to apply the discount before multiplying"
+
+predict:
+  code: |
+    print(3 + 4 * 2)
+    print((3 + 4) * 2)
+  explanation: "Without parentheses * runs before +, giving 11. With parentheses the addition happens first, giving 14."
+
+break_and_fix:
+  broken_code: |
+    a = 80
+    b = 85
+    c = 90
+    average = a + b + c / 3
+    print(average)
+  hint: "To average three numbers add them ALL first then divide — wrap a + b + c in parentheses"
+  tests:
+    - code: "assert average == 85.0"
+      message: "average should be 85.0 — use (a + b + c) / 3"
+    - code: "assert '(' in _code"
+      message: "use parentheses: (a + b + c) / 3"
 
 final_challenge:
   code_starter: |
-    strength = 30
-    # If strength >= 50 print "Strong", else print "Weak"
+    # Calculate a bill with service charge
+    meal = 45
+    drinks = 20
+    service_rate = 15  # percent
   hints:
-    - "if strength >= 50:"
-    - "else: covers all other cases"
+    - "subtotal = meal + drinks"
+    - "service = subtotal * service_rate / 100"
+    - "total = subtotal + service"
+    - "print(total)"
   tests:
-    - code: "assert strength == 30"
-      message: "strength should remain 30"
-    - code: "assert 'Weak' in _stdout"
-      message: "Should print 'Weak' when strength is 30"
-    - code: "assert 'Strong' not in _stdout"
-      message: "Should not print 'Strong' when strength is 30"
+    - code: "assert subtotal == 65"
+      message: "subtotal should be 65 (meal + drinks)"
+    - code: "assert service == 9.75"
+      message: "service should be 9.75 (15% of 65)"
+    - code: "assert total == 74.75"
+      message: "total should be 74.75"
 
 worlds:
   fantasy:
-    title: "Two Paths in the Forest"
+    title: "The Spell Formula"
     setup: |
-      The forest trail splits. "Every choice leads somewhere," the guide says.
-      In Python, if/else gives you exactly two paths — the if block runs when the
-      condition is True, the else block runs when it is False. One always executes.
+      "Order of operations is the grammar of maths," Elara explains,
+      drawing glowing symbols in the air. "Python evaluates * and /
+      before + and -. Parentheses override everything."
 
-      score is set to 45. Write an if/else: if score >= 50 print "Pass",
-      otherwise print "Fail". Try changing score to 75 and see which path runs.
+      A potion costs 50 gold with a 10 gold discount — you need 3.
+      Calculate total by applying the discount before multiplying.
     final_challenge_prompt: |
-      A warrior's strength test: if strength >= 50, print "Strong". Otherwise
-      print "Weak". strength is 30 — only one path should run.
+      A tavern bill: meal = 45 gold, drinks = 20, service_rate = 15%.
+      Compute subtotal, service (the charge), and total. Print total.
   scifi:
-    title: "Binary Decision Node"
+    title: "Mission Fuel Formula"
     setup: |
-      The navigation computer reaches a binary fork: thrust or coast. A ship
-      responds to exactly one of two states — if/else in Python works the same way.
-      When the if condition is True the first block runs; when False, the else block runs.
+      "Operator precedence is strict as navigation protocol," the AI
+      announces. "Multiplication and division execute before addition.
+      Parentheses override that precedence."
 
-      score is 45. Write if score >= 50 print "Pass", else print "Fail". Exactly
-      one message will appear.
+      Fuel costs 50 credits per unit with a 10 credit rebate.
+      Compute total for 3 units — apply the rebate first.
     final_challenge_prompt: |
-      The hull scanner returns a strength reading of 30. Print "Strong" if strength
-      >= 50, otherwise print "Weak". Only one output should appear.
+      Mission bill: meal = 45 credits, drinks = 20, service_rate = 15%.
+      Compute subtotal, service (the fee), and total.
   mystery:
-    title: "Guilty or Innocent"
+    title: "The Expense Formula"
     setup: |
-      The verdict form has two boxes: Guilty or Innocent — one must be marked.
-      Python's if/else works the same way: one branch runs, the other doesn't.
-      There is no middle ground.
+      "Maths has rules — break them and your budget breaks too," your
+      partner says. "Parentheses tell Python what to calculate first."
 
-      score is 45. Write an if/else: if score >= 50 print "Pass", else print "Fail".
-      Exactly one message will print.
+      A stakeout costs 50 per night with a 10 discount — 3 nights.
+      Calculate total: apply the discount before multiplying.
     final_challenge_prompt: |
-      The suspect's alibi strength is rated 30. Print "Strong" if strength >= 50,
-      otherwise print "Weak". Mark exactly one verdict.
+      Invoice: meal = 45, drinks = 20, service_rate = 15%.
+      Compute subtotal, service, and total.

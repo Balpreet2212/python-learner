@@ -162,3 +162,18 @@ class ProgressEvent(Base):
     unit: Mapped[int | None] = mapped_column(nullable=True)
     lesson: Mapped[int | None] = mapped_column(nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
+class WeeklyAttempt(Base):
+    """Records a learner's weekly challenge completion."""
+
+    __tablename__ = "weekly_attempt"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("account.id", ondelete="CASCADE"), nullable=False
+    )
+    challenge_index: Mapped[int] = mapped_column(nullable=False)
+    week_key: Mapped[str] = mapped_column(String(10), nullable=False)  # e.g. "2026-W21"
+    passed: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)

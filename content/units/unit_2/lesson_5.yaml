@@ -4,100 +4,94 @@ xp: 10
 
 example:
   code: |
-    logged_in = True
-    role = "admin"
-    if logged_in:
-        if role == "admin":
-            print("Full access")
-        else:
-            print("Limited access")
-    else:
-        print("Please log in")
+    level = 8
+    gold = 150
+    has_quest = False
+    can_buy = level >= 5 and gold >= 100
+    can_act = has_quest or level >= 10
+    blocked = not has_quest
+    print(can_buy, can_act, blocked)
   explanation: |
-    An if statement can contain another if inside its block — this is called nesting.
-    The inner block only runs when the outer condition is already True.
-    Here logged_in is True so we enter the outer block, then role == "admin" is True
-    so "Full access" prints. Nesting lets you layer conditions precisely.
-  output: "Full access"
+    and: both conditions must be True for the result to be True.
+    or: at least one condition must be True.
+    not: flips True to False and False to True.
+    These let you combine comparisons into compound conditions.
+  output: "True False True"
 
 code_starter: |
-  is_member = True
-  score = 85
-  # If is_member is True:
-  #   if score >= 90, print "Gold member"
-  #   else print "Silver member"
-  # else print "Not a member"
+  stamina = 80
+  has_weapon = True
+  # Can attack: stamina >= 50 AND has a weapon
+  can_attack =
+  # Is tired: stamina < 20 OR has no weapon
+  is_tired =
 hints:
-  - "Outer if checks is_member"
-  - "Inner if/else checks score — indent it one extra level (8 spaces)"
-  - "The else for the outer if is at the same indent as the outer if"
+  - "can_attack = stamina >= 50 and has_weapon"
+  - "is_tired = stamina < 20 or not has_weapon"
+
 tests:
-  - code: "assert is_member is True and score == 85"
-    message: "is_member and score should not be changed"
-  - code: "assert 'Silver member' in _stdout"
-    message: "Should print 'Silver member' when is_member=True and score=85"
-  - code: "assert 'Gold member' not in _stdout and 'Not a member' not in _stdout"
-    message: "Only 'Silver member' should print"
+  - code: "assert can_attack == True"
+    message: "can_attack should be True (80 >= 50 and has_weapon)"
+  - code: "assert is_tired == False"
+    message: "is_tired should be False (80 is not < 20, has_weapon is True)"
+  - code: "assert 'and' in _code"
+    message: "use 'and' for can_attack"
+  - code: "assert 'or' in _code"
+    message: "use 'or' for is_tired"
 
 final_challenge:
   code_starter: |
-    has_key = True
-    door_level = 3
-    # If has_key is True:
-    #   if door_level <= 2, print "Door unlocked"
-    #   else print "Key too weak"
-    # else print "No key"
+    age = 16
+    has_licence = False
+    is_emergency = True
   hints:
-    - "Outer if checks has_key"
-    - "Inner if checks door_level <= 2"
-    - "Three possible outputs: 'Door unlocked', 'Key too weak', 'No key'"
+    - "can_drive = age >= 17 and has_licence"
+    - "can_proceed = can_drive or is_emergency"
+    - "is_blocked = not can_proceed"
+    - "print(can_drive, can_proceed, is_blocked)"
   tests:
-    - code: "assert has_key is True and door_level == 3"
-      message: "has_key and door_level should not be changed"
-    - code: "assert 'Key too weak' in _stdout"
-      message: "Should print 'Key too weak' when has_key=True and door_level=3"
-    - code: "assert 'Door unlocked' not in _stdout and 'No key' not in _stdout"
-      message: "Only 'Key too weak' should print"
+    - code: "assert can_drive == False"
+      message: "can_drive should be False (16 < 17 and no licence)"
+    - code: "assert can_proceed == True"
+      message: "can_proceed should be True (emergency override)"
+    - code: "assert is_blocked == False"
+      message: "is_blocked should be False (can_proceed is True)"
 
 worlds:
   fantasy:
-    title: "The Nested Gates"
+    title: "The Logic Gate"
     setup: |
-      The citadel has two gates — the outer checks if you hold a guild card,
-      the inner checks your rank. You must pass both to reach the inner hall.
-      In Python, nesting an if inside another if mirrors exactly this — you
-      must satisfy the outer condition before the inner one is even checked.
+      Three runes hang above the gate: AND, OR, NOT.
+      "and requires both sides to be True," Elara says. "or requires
+      only one. not reverses the value entirely."
 
-      is_member is True, score is 85. Write the nested if: members with score
-      >= 90 get "Gold member", others get "Silver member". Non-members get
-      "Not a member".
+      A warrior: stamina = 80, has_weapon = True.
+      Determine can_attack (stamina >= 50 and armed) and
+      is_tired (low stamina or unarmed).
     final_challenge_prompt: |
-      The vault has two locks. has_key is True, door_level is 3.
-      If you have the key: unlock the door if door_level <= 2, otherwise
-      "Key too weak". Without a key: "No key". One of three messages prints.
+      At the crossroads: age = 16, has_licence = False, is_emergency = True.
+      Compute can_drive, can_proceed (drive or emergency), and
+      is_blocked (not can_proceed). Print all three.
   scifi:
-    title: "Two-Factor Access"
+    title: "Access Control Logic"
     setup: |
-      The bridge requires two-factor authentication: first a valid crew badge,
-      then a clearance level check. Nested if statements mirror this — the inner
-      condition is only evaluated once the outer one passes.
+      "Logic gates are the soul of computing," the AI explains.
+      "and: both inputs must be True. or: either suffices.
+      not: inverts the signal."
 
-      is_member is True, score is 85. If is_member: print "Gold member" for
-      score >= 90, otherwise "Silver member". Else print "Not a member".
+      Crew: stamina = 80, has_weapon = True.
+      Compute can_attack and is_tired using and/or/not.
     final_challenge_prompt: |
-      The airlock uses two-step verification. has_key is True, door_level is 3.
-      Key present + low door level = "Door unlocked". Key present + high level =
-      "Key too weak". No key = "No key".
+      Airlock check: age = 16, has_licence = False, is_emergency = True.
+      Compute can_drive, can_proceed, and is_blocked. Print all three.
   mystery:
-    title: "Locked Room, Locked Box"
+    title: "The Case Conditions"
     setup: |
-      The evidence room requires a badge to enter, and a separate combination
-      to open the inner safe. Two layers of access — just like nested if statements.
-      The inner check only matters if the outer one passes.
+      "Conclusions require evidence," your mentor says. "and means you
+      need both facts. or means either will do. not means the opposite."
 
-      is_member is True, score is 85. Nest an if inside another: Gold for high
-      scorers, Silver for the rest, "Not a member" for outsiders.
+      Suspect: stamina = 80, has_weapon = True.
+      Assess can_attack and is_tired.
     final_challenge_prompt: |
-      The case file has two security checks. has_key is True, door_level is 3.
-      Key + low level = "Door unlocked". Key + high level = "Key too weak".
-      No key at all = "No key".
+      Case conditions: age = 16, has_licence = False, is_emergency = True.
+      Evaluate can_drive, can_proceed, and is_blocked. Print all three.

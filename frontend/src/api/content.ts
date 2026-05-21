@@ -30,6 +30,18 @@ export const FinalChallengeSchema = z.object({
   test_count: z.number().int(),
 });
 
+export const PredictCardSchema = z.object({
+  code: z.string(),
+});
+export type PredictCard = z.infer<typeof PredictCardSchema>;
+
+export const BreakAndFixSchema = z.object({
+  broken_code: z.string(),
+  hint: z.string(),
+  test_count: z.number().int(),
+});
+export type BreakAndFix = z.infer<typeof BreakAndFixSchema>;
+
 export const LessonSchema = z.object({
   unit: z.number().int(),
   lesson: z.number().int(),
@@ -42,8 +54,17 @@ export const LessonSchema = z.object({
   test_count: z.number().int(),
   total_lessons: z.number().int(),
   final_challenge: FinalChallengeSchema,
+  predict: PredictCardSchema.nullable().optional(),
+  break_and_fix: BreakAndFixSchema.nullable().optional(),
 });
 export type Lesson = z.infer<typeof LessonSchema>;
+
+export const PredictResultSchema = z.object({
+  correct: z.boolean(),
+  actual_output: z.string(),
+  explanation: z.string(),
+});
+export type PredictResult = z.infer<typeof PredictResultSchema>;
 
 export const TestResultSchema = z.object({
   passed: z.boolean(),
@@ -67,6 +88,22 @@ export async function getLesson(): Promise<Lesson> {
 
 export async function submitChallenge(code: string): Promise<SubmitResult> {
   const raw = await apiFetch<unknown>("/v1/learner/challenge/submit", {
+    method: "POST",
+    body: JSON.stringify({ code }),
+  });
+  return SubmitResultSchema.parse(raw);
+}
+
+export async function checkPredict(answer: string): Promise<PredictResult> {
+  const raw = await apiFetch<unknown>("/v1/learner/predict/check", {
+    method: "POST",
+    body: JSON.stringify({ answer }),
+  });
+  return PredictResultSchema.parse(raw);
+}
+
+export async function submitFix(code: string): Promise<SubmitResult> {
+  const raw = await apiFetch<unknown>("/v1/learner/fix/submit", {
     method: "POST",
     body: JSON.stringify({ code }),
   });

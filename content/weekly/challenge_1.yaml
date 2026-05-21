@@ -1,0 +1,44 @@
+title: "The Tax Calculator"
+xp: 50
+difficulty: "easy"
+description: |
+  Write a function tax_total(price, quantity, tax_rate) that:
+  - Calculates the subtotal (price × quantity)
+  - Calculates the tax amount (subtotal × tax_rate / 100)
+  - Returns the total (subtotal + tax) rounded to 2 decimal places
+
+code_starter: |
+  def tax_total(price, quantity, tax_rate):
+      # tax_rate is a percentage, e.g. 20 means 20%
+
+hints:
+  - "subtotal = price * quantity"
+  - "tax = subtotal * tax_rate / 100"
+  - "return round(subtotal + tax, 2)"
+
+tests:
+  - code: "assert tax_total(10, 3, 20) == 36.0"
+    message: "10 × 3 = 30, 20% tax = 6.0, total = 36.0"
+  - code: "assert tax_total(25, 2, 10) == 55.0"
+    message: "25 × 2 = 50, 10% tax = 5.0, total = 55.0"
+  - code: "assert tax_total(7, 4, 15) == 32.2"
+    message: "7 × 4 = 28, 15% tax = 4.2, total = 32.2"
+
+worlds:
+  fantasy:
+    title: "The Guild Tax Scroll"
+    description: |
+      The Merchant Guild charges tax on every potion sold. The guild master
+      needs a reliable calculation. Write tax_total(price, quantity, tax_rate)
+      to compute the final bill including tax.
+  scifi:
+    title: "Trade Port Levy Calculator"
+    description: |
+      The space station collects a levy on all cargo shipments. The port
+      authority requires an automated calculator. Write tax_total(price,
+      quantity, tax_rate) to compute the total cost including the levy.
+  mystery:
+    title: "The Expense Report"
+    description: |
+      The detective agency invoices clients with tax included. Write
+      tax_total(price, quantity, tax_rate) to compute the full invoice amount.

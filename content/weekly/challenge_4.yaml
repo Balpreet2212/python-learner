@@ -1,0 +1,49 @@
+title: "The Sequence Analyser"
+xp: 75
+difficulty: "medium"
+description: |
+  Write a function analyse(numbers) that, given a non-empty list of numbers,
+  returns a tuple of (minimum, maximum, total, average) where average is
+  rounded to 2 decimal places.
+
+  Use: min(), max(), sum(), len(), round()
+
+code_starter: |
+  def analyse(numbers):
+
+hints:
+  - "minimum = min(numbers)"
+  - "maximum = max(numbers)"
+  - "total = sum(numbers)"
+  - "average = round(total / len(numbers), 2)"
+  - "return (minimum, maximum, total, average)"
+
+tests:
+  - code: "assert analyse([1, 2, 3, 4, 5]) == (1, 5, 15, 3.0)"
+    message: "min=1, max=5, total=15, avg=3.0"
+  - code: "assert analyse([10, 20, 30]) == (10, 30, 60, 20.0)"
+    message: "Three values"
+  - code: "assert analyse([7, 3, 9, 1]) == (1, 9, 20, 5.0)"
+    message: "Four values"
+  - code: "assert analyse([100]) == (100, 100, 100, 100.0)"
+    message: "Single element"
+
+worlds:
+  fantasy:
+    title: "The Rune Sequence Oracle"
+    description: |
+      The oracle analyses sequences of rune power levels and needs a
+      summary function. Write analyse(numbers) to return a tuple of
+      (minimum, maximum, total, average) for any sequence.
+  scifi:
+    title: "Telemetry Data Analyser"
+    description: |
+      The ship's computer summarises sensor readings from each mission.
+      Write analyse(numbers) to return (minimum, maximum, total, average)
+      for a list of sensor values.
+  mystery:
+    title: "The Evidence Scorer"
+    description: |
+      The detective bureau analyses suspect credibility scores.
+      Write analyse(numbers) to return (minimum, maximum, total, average)
+      for a list of values.

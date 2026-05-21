@@ -1,103 +1,66 @@
-unit: 2
 xp: 150
 
-plan_prompts:
-  - "What three inputs does the function receive?"
-  - "What are all the possible outputs?"
-  - "In what order should you check the conditions?"
-  - "Which operator — and / or — do you need, and where?"
-
 code_starter: |
-  def check_status(hp, mp, level):
-      # Return a status string based on the conditions below:
-      # If hp <= 0: return "Defeated"
-      # Elif hp < 20 or mp < 10: return "Critical"
-      # Elif level >= 10 and hp >= 80: return "Elite"
-      # Else: return "Active"
-      pass
+  def logic_engine(score, lives, name):
+      """
+      Return a status string:
+      - "Game Over"  if lives == 0
+      - "Champion"   if score >= 100 and lives >= 3
+      - "Active"     if score >= 50 or (lives >= 1 and bool(name))
+      - "Critical"   otherwise
+      """
 
 hints:
-  - "Check hp <= 0 first — a defeated character has no other status"
-  - "The Critical branch uses 'or': either resource being low triggers it"
-  - "The Elite branch uses 'and': both conditions must be true"
-  - "The final else covers everything that doesn't match above"
+  - "Check lives == 0 first — that's Game Over regardless of everything else"
+  - "Use 'and' for Champion: both score >= 100 and lives >= 3 must be True"
+  - "Use 'or' and 'and' together for Active"
+  - "The final else returns 'Critical'"
+
+plan_prompts:
+  - "What is the first condition to check? Why does order matter?"
+  - "What two conditions make a Champion?"
+  - "When is a player Active — what combinations cover it?"
 
 tests:
-  - code: |
-      result = check_status(0, 50, 5)
-      assert result == "Defeated", f"Expected 'Defeated', got '{result}'"
-    message: "Returns 'Defeated' when hp is 0"
-  - code: |
-      result = check_status(15, 50, 5)
-      assert result == "Critical", f"Expected 'Critical', got '{result}'"
-    message: "Returns 'Critical' when hp < 20"
-  - code: |
-      result = check_status(50, 5, 5)
-      assert result == "Critical", f"Expected 'Critical', got '{result}'"
-    message: "Returns 'Critical' when mp < 10"
-  - code: |
-      result = check_status(90, 60, 12)
-      assert result == "Elite", f"Expected 'Elite', got '{result}'"
-    message: "Returns 'Elite' when level >= 10 and hp >= 80"
-  - code: |
-      result = check_status(50, 50, 5)
-      assert result == "Active", f"Expected 'Active', got '{result}'"
-    message: "Returns 'Active' for a healthy, mid-level character"
+  - code: "assert logic_engine(0, 0, 'Hero') == 'Game Over'"
+    message: "lives == 0 should return 'Game Over'"
+  - code: "assert logic_engine(100, 3, 'Hero') == 'Champion'"
+    message: "score >= 100 and lives >= 3 should return 'Champion'"
+  - code: "assert logic_engine(50, 1, 'Hero') == 'Active'"
+    message: "score >= 50 with lives and name should return 'Active'"
+  - code: "assert logic_engine(10, 1, '') == 'Critical'"
+    message: "low score and no name should return 'Critical'"
+  - code: "assert logic_engine(0, 3, 'Hero') == 'Active'"
+    message: "score 0 but lives >= 1 and name → 'Active'"
 
 worlds:
   fantasy:
-    title: "The Arcane Status Orb"
+    title: "The Arcane Logic Engine"
     narrative: |
-      The Guild's status orb assigns every adventurer a rank based on their
-      current condition. The orb has malfunctioned — it returns the same label
-      for everyone regardless of their stats. Adventurers are walking into
-      dungeons unmarked.
-
-      Write a function called check_status(hp, mp, level) that returns the
-      correct status string using if/elif/else:
-      - "Defeated" when hp <= 0
-      - "Critical" when hp < 20 or mp < 10
-      - "Elite" when level >= 10 and hp >= 80
-      - "Active" for everyone else
+      Elara hands you a crystal orb that pulses with four possible glows —
+      each representing a different fate for the adventurers who pass through
+      the gate. "Your function must classify them correctly," she says,
+      "using everything you have learned: division, comparison, booleans,
+      and logical operators."
     story_beat: |
-      The orb pulses with colour — crimson for Defeated, amber for Critical,
-      gold for Elite, steady blue for Active. Adventurers file past, each
-      receiving the right assessment for the first time in weeks.
-
-      "Well done," the Guild Master says. "A warrior who doesn't know their
-      status is a warrior who doesn't come home."
+      Write logic_engine(score, lives, name) that returns the correct
+      status string. The fate of every adventurer depends on accurate logic.
   scifi:
-    title: "Crew Combat Readiness"
+    title: "Crew Status Classifier"
     narrative: |
-      The ship's AI evaluates crew readiness before every mission. A recent
-      firmware wipe erased the classification logic — now every crew member
-      shows "Unknown" regardless of their condition. Command won't authorise
-      launch without it.
-
-      Write check_status(hp, mp, level) to restore the readiness system:
-      - "Defeated" when hp <= 0
-      - "Critical" when hp < 20 or mp < 10
-      - "Elite" when level >= 10 and hp >= 80
-      - "Active" for all other crew
+      The ship AI needs a status function to evaluate crew fitness for each
+      mission. Using performance score, remaining lives, and crew name, the
+      function must return the correct mission status in real time.
     story_beat: |
-      The readiness panel flickers back to life. Crew statuses cascade down
-      the display — Defeated, Critical, Elite, Active — each correctly tagged.
-      The mission commander gives a thumbs-up. "Launch window is open.
-      Good work getting the system back online."
+      Implement logic_engine(score, lives, name) returning "Game Over",
+      "Champion", "Active", or "Critical" based on the given conditions.
   mystery:
-    title: "The Detective's Condition Report"
+    title: "The Case Verdict Engine"
     narrative: |
-      The agency's case-assignment algorithm evaluates each detective's fitness
-      before handing out a new case. A database corruption wiped the evaluation
-      logic — every detective now shows "Unknown" and no cases are being assigned.
-
-      Restore the function check_status(hp, mp, level):
-      - "Defeated" when hp <= 0
-      - "Critical" when hp < 20 or mp < 10
-      - "Elite" when level >= 10 and hp >= 80
-      - "Active" for detectives in good standing
+      The detective bureau has commissioned an automated verdict system.
+      Each case is rated by score, remaining leads (lives), and the
+      suspect's name. Your function must return the correct verdict
+      using all the logic skills you have developed.
     story_beat: |
-      The assignment board refreshes. Detectives are sorted into their correct
-      categories and cases start flowing again. Inspector Morgan looks up from
-      her desk. "The right detective on the right case — that's how this agency
-      works. You kept it running."
+      Write logic_engine(score, lives, name) that classifies each case
+      and returns the appropriate verdict string.

@@ -4,87 +4,114 @@ xp: 10
 
 example:
   code: |
-    grade = 78
-    if grade >= 90:
-        print("A")
-    elif grade >= 75:
-        print("B")
-    elif grade >= 60:
-        print("C")
-    else:
-        print("F")
+    score = 85
+    print(score > 50)    # True
+    print(score >= 90)   # False
+    print(score == 85)   # True
+    print(score != 100)  # True
+    print(score < 0)     # False
   explanation: |
-    elif (short for "else if") lets you check multiple conditions in sequence.
-    Python tests each condition top to bottom and runs the first block that is True.
-    All remaining branches are skipped. The final else catches everything else.
-    Here grade is 78, so the second branch (>= 75) matches and "B" prints.
-  output: "B"
+    Comparison operators compare two values and always return True or False.
+    == checks equality (two equals signs — not the assignment =).
+    != means "not equal". > >= < <= work as in maths.
+    The result is a boolean — the foundation of all decisions in Python.
+  output: "True\nFalse\nTrue\nTrue\nFalse"
 
 code_starter: |
-  speed = 85
-  # Print "Fast" if speed > 100, "Normal" if speed >= 60, else "Slow"
+  health = 30
+  max_health = 100
+  # Is health critically low? (below 25)
+  is_critical =
+  # Is health at maximum?
+  is_full =
 hints:
-  - "if speed > 100:"
-  - "elif speed >= 60:"
-  - "else:"
+  - "Use < to check if health is below 25: is_critical = health < 25"
+  - "Use == to check equality: is_full = health == max_health"
+
 tests:
-  - code: "assert speed == 85"
-    message: "speed should remain 85"
-  - code: "assert 'Normal' in _stdout"
-    message: "Should print 'Normal' when speed is 85"
-  - code: "assert 'Fast' not in _stdout and 'Slow' not in _stdout"
-    message: "Only 'Normal' should print — not Fast or Slow"
+  - code: "assert is_critical == False"
+    message: "is_critical should be False (30 is not below 25)"
+  - code: "assert is_full == False"
+    message: "is_full should be False (30 != 100)"
+  - code: "assert '<' in _code or '<=' in _code"
+    message: "use a comparison operator (< or <=) for is_critical"
+  - code: "assert '==' in _code"
+    message: "use == (not =) for is_full"
+
+predict:
+  code: |
+    x = 7
+    print(x > 5)
+    print(x == 7)
+    print(x != 10)
+    print(x < 3)
+  explanation: "Comparisons return True or False. = assigns; == compares."
+
+break_and_fix:
+  broken_code: |
+    level = 10
+    # Check if level equals 10
+    is_max = level = 10
+    print(is_max)
+  hint: "= assigns a value; == checks equality. Change = to == in the comparison."
+  tests:
+    - code: "assert is_max == True"
+      message: "is_max should be True (level equals 10)"
+    - code: "assert '==' in _code"
+      message: "use == not = for comparison"
 
 final_challenge:
   code_starter: |
-    level = 12
-    # Print "Novice" if level < 5, "Apprentice" if level < 20, else "Master"
+    speed = 120
+    limit = 100
+    fuel = 0
   hints:
-    - "if level < 5:"
-    - "elif level < 20:"
-    - "else:  # covers level >= 20"
+    - "is_speeding = speed > limit"
+    - "is_empty = fuel == 0"
+    - "is_safe_speed = speed <= limit"
+    - "print(is_speeding, is_empty, is_safe_speed)"
   tests:
-    - code: "assert level == 12"
-      message: "level should remain 12"
-    - code: "assert 'Apprentice' in _stdout"
-      message: "Should print 'Apprentice' when level is 12"
-    - code: "assert 'Novice' not in _stdout and 'Master' not in _stdout"
-      message: "Only 'Apprentice' should print"
+    - code: "assert is_speeding == True"
+      message: "is_speeding should be True (120 > 100)"
+    - code: "assert is_empty == True"
+      message: "is_empty should be True (fuel == 0)"
+    - code: "assert is_safe_speed == False"
+      message: "is_safe_speed should be False (120 is not <= 100)"
 
 worlds:
   fantasy:
-    title: "The Rank Crystal"
+    title: "The Truth Rune"
     setup: |
-      The Guild Hall's rank crystal glows a different colour for each tier.
-      In Python, elif lets you chain multiple conditions — Python checks each
-      one in order and runs the first that matches. All others are ignored.
+      "Numbers can be compared — and Python speaks the result as truth or
+      falsehood," Elara says. "== checks equality, != means not equal,
+      > >= < <= work as in mathematics. The result is always True or False."
 
-      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
-      "Normal", else print "Slow". Only one branch should run.
+      A warrior has health = 30 out of max_health = 100.
+      Determine is_critical (below 25?) and is_full (at maximum?).
     final_challenge_prompt: |
-      The Guild assigns ranks by level. level is 12. Print "Novice" if level < 5,
-      "Apprentice" if level < 20, and "Master" otherwise. Exactly one title prints.
+      A carriage: speed = 120, limit = 100, fuel = 0.
+      Set is_speeding, is_empty, and is_safe_speed using comparisons.
+      Print all three.
   scifi:
-    title: "Threat Level Protocol"
+    title: "Sensor Calibration"
     setup: |
-      The security system classifies incoming ships by speed: intercept, shadow, or
-      let pass. Python's elif chain works the same way — each condition is tested
-      top to bottom, the first match wins, the rest are skipped.
+      "Sensor outputs are binary — True or False," the AI states.
+      "Comparison operators convert numbers into boolean readings.
+      == for equality, != for difference, > >= < <= for magnitude."
 
-      speed is 85. Write the three-branch elif chain: Fast (> 100), Normal (>= 60),
-      Slow (everything else). Only one label prints.
+      Hull integrity: health = 30 out of max_health = 100.
+      Set is_critical (below 25?) and is_full (at max?).
     final_challenge_prompt: |
-      The crew classification system uses level. level is 12. Print "Novice" for
-      level < 5, "Apprentice" for level < 20, "Master" for anything higher.
+      Spacecraft: speed = 120, limit = 100, fuel = 0.
+      Compute is_speeding, is_empty, and is_safe_speed. Print all three.
   mystery:
-    title: "Suspect Ranking"
+    title: "Reading the Clues"
     setup: |
-      The case file rates suspects: prime, secondary, or cleared. More than two
-      categories means you need elif — Python's way of chaining multiple conditions,
-      testing each until one matches.
+      "Facts either check out or they don't," your mentor says.
+      "Comparisons give you True or False — the raw truth."
 
-      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
-      "Normal", else print "Slow". One match, one output.
+      Suspect's stamina: health = 30, max_health = 100.
+      Determine is_critical (below 25?) and is_full (at max?).
     final_challenge_prompt: |
-      Detectives have rank. level is 12. Print "Novice" for level < 5,
-      "Apprentice" for level < 20, "Master" for level >= 20. One rank prints.
+      A vehicle: speed = 120, limit = 100, fuel = 0.
+      Determine is_speeding, is_empty, and is_safe_speed. Print all three.

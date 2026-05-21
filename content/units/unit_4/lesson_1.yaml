@@ -1,92 +1,89 @@
-unit: 3
+unit: 2
 lesson: 1
 xp: 10
 
 example:
   code: |
-    def make_greeting():
-        return "Welcome to PyQuest!"
-
-    result = make_greeting()
-    print(result)
-    print(make_greeting())
+    total = 0
+    for i in range(1, 4):
+        total += i
+        print(i, "->", total)
+    print("Final:", total)
   explanation: |
-    def declares a function — a named, reusable block of code.
-    The function body is indented. return sends a value back to whoever called it.
-    You call a function by writing its name followed by parentheses.
-    The same function can be called as many times as you need.
-  output: "Welcome to PyQuest!\nWelcome to PyQuest!"
+    A for loop repeats a block of code once for each value that range() produces.
+    range(1, 4) generates the sequence 1, 2, 3 — it stops before 4.
+    The indented lines below 'for' are the loop body — they run each iteration.
+    total += i is shorthand for total = total + i.
+  output: "1 -> 1\n2 -> 3\n3 -> 6\nFinal: 6"
 
 code_starter: |
-  # Define a function called 'greet' that returns the string "Hello, world!"
-  def greet():
-
-  # Call the function and store the result
-  message = greet()
+  # Use a for loop and range() to sum the numbers 1 through 5.
+  # Store the result in a variable called 'total'.
+  total = 0
+  for i in range(1, 6):
+      total +=
 hints:
-  - "def greet():  — starts the definition; indent the body"
-  - 'return "Hello, world!"  — inside the function'
+  - "range(1, 6) produces the numbers 1, 2, 3, 4, 5"
+  - "Inside the loop, add i to total: total += i"
 tests:
-  - code: "assert callable(greet), 'greet should be a function'"
-    message: "greet should be a callable function"
-  - code: "assert greet() == 'Hello, world!', f'greet() returned {greet()!r}'"
-    message: "greet() should return 'Hello, world!'"
-  - code: "assert message == 'Hello, world!'"
-    message: "message should equal the return value of greet()"
+  - code: "assert isinstance(total, int), 'total should be an integer'"
+    message: "total should be an integer"
+  - code: "assert total == 15, f'total should be 15, got {total}'"
+    message: "total should equal 15 (1+2+3+4+5)"
 
 final_challenge:
   code_starter: |
-    # Define a function that returns your mission name
+    # Sum all numbers from 1 to 10 using a for loop
+    # Store the result in 'grand_total'
   hints:
-    - "def mission_name():  — no parameters needed"
-    - '    return "Operation Sunrise"  — return this exact string'
-    - "result = mission_name()  — call it and store the result"
+    - "grand_total = 0  — start at zero"
+    - "for i in range(1, 11):  — range stops before 11, so includes 10"
+    - "    grand_total += i"
   tests:
-    - code: "assert callable(mission_name)"
-      message: "mission_name should be a callable function"
-    - code: "assert mission_name() == 'Operation Sunrise'"
-      message: "mission_name() should return 'Operation Sunrise'"
-    - code: "assert result == 'Operation Sunrise'"
-      message: "result should store the return value"
+    - code: "assert grand_total == 55, f'grand_total should be 55, got {grand_total}'"
+      message: "grand_total should be 55 (sum of 1 through 10)"
 
 worlds:
   fantasy:
-    title: "The Function Grimoire"
+    title: "The Summoning Loop"
     setup: |
-      Elara opens a thick grimoire. "A function is a named spell — you define it
-      once, then cast it as many times as you like," she says. "The def keyword
-      starts the definition; return sends a value back to the caller."
+      Elara traces a glowing circle on the floor. "Some spells must be cast many
+      times in sequence — that is what a for loop is for," she explains. "The loop
+      runs once for each value that range() produces. Each pass through the spell
+      accumulates power."
 
-      Think of it as writing a recipe that can be cooked on demand. Define a
-      function called 'greet' that returns "Hello, world!", then call it and store
-      the result in 'message'.
+      She demonstrates: range(1, 6) steps through 1, 2, 3, 4, 5. Inside the loop,
+      you collect each number into a growing total. This is how repetition becomes
+      computation. Use a for loop to sum the first five numbers into 'total'.
     final_challenge_prompt: |
-      The Academy's announcement crystal needs a mission name. Define a function
-      called mission_name that takes no parameters and returns the string
-      "Operation Sunrise". Call it and store the result in 'result'.
+      The grand summoning ritual demands ten rounds of energy collection — one for
+      each of the ten great runes. Use a for loop to sum all numbers from 1 to 10
+      and store the result in grand_total. The ritual is only complete when you
+      reach the magic number 55.
   scifi:
-    title: "Subroutine Alpha"
+    title: "Power Core Calibration"
     setup: |
-      The ship's computer runs on subroutines — reusable blocks of code with a
-      name. "In Python, def declares a function," the AI explains. "Call it later
-      by using its name followed by parentheses. Whatever return sends back is
-      the result."
+      The reactor needs five charging pulses — one for each ignition cycle. "Loops
+      let us repeat an operation automatically," the ship AI explains. "range(1, 6)
+      generates the sequence 1, 2, 3, 4, 5 — the AI fires each pulse and adds it
+      to the running total."
 
-      Define 'greet' to return "Hello, world!" and store the result in 'message'.
+      Use a for loop to accumulate the sum into 'total'. The engine won't start
+      until the calibration total reaches exactly 15.
     final_challenge_prompt: |
-      The ship's mission log needs a name entry. Define a function called
-      mission_name that returns "Operation Sunrise". Call it and store the
-      result in 'result'.
+      The deep-space scanner requires ten calibration pulses. Use a for loop to
+      sum all numbers from 1 to 10 and store the result in grand_total. The scanner
+      confirms readiness when grand_total equals 55.
   mystery:
-    title: "The Standard Greeting"
+    title: "Counting the Evidence"
     setup: |
-      Every detective in the agency uses the same opening line. "A function lets
-      you name a block of code and reuse it," your mentor explains. "def starts
-      the definition, return sends the value back."
+      Five witnesses, five statements — your partner tallies each one. "A for loop
+      handles repetition," she says. "range(1, 6) steps through 1, 2, 3, 4, 5
+      automatically. Each step, you add the current number to a running total."
 
-      Write a function 'greet' that returns "Hello, world!", call it, and store
-      the result in 'message'.
+      Loop through the numbers and sum them into 'total'. The case file needs an
+      exact count before it can be submitted to the prosecutor.
     final_challenge_prompt: |
-      Every case file starts with the operation name. Define a function called
-      mission_name that returns "Operation Sunrise". Call it and store the
-      return value in 'result'.
+      The evidence inventory spans ten categories. Use a for loop to sum all numbers
+      from 1 to 10 and store the total in grand_total. The case is sealed when
+      grand_total reaches 55 — the system validates the count automatically.

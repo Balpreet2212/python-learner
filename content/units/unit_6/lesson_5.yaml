@@ -1,113 +1,89 @@
-unit: 5
+unit: 4
 lesson: 5
 xp: 10
 
 example:
   code: |
-    def set_level(level):
-        if level < 1:
-            raise ValueError("Level must be at least 1")
-        if level > 100:
-            raise ValueError("Level cannot exceed 100")
-        return level
+    numbers = [1, 2, 3, 4, 5]
 
-    print(set_level(50))
+    # List comprehension — square each number
+    squares = [n * n for n in numbers]
 
-    try:
-        print(set_level(0))
-    except ValueError as e:
-        print("Error:", e)
+    # List comprehension with condition — only evens
+    evens = [n for n in numbers if n % 2 == 0]
+
+    print(squares)
+    print(evens)
   explanation: |
-    raise creates and immediately raises an exception. You choose the exception type (ValueError here) and give it a message.
-    Callers can catch it with except, just like any built-in exception.
-    This lets you enforce rules inside your functions: instead of silently returning a wrong value, you loudly report what went wrong.
-  output: "50\nError: Level must be at least 1"
+    A list comprehension builds a new list in one line: [expression for item in iterable].
+    You can add an if clause at the end to filter: [expression for item in iterable if condition].
+    The result is always a brand-new list — the original is unchanged.
+  output: "[1, 4, 9, 16, 25]\n[2, 4]"
 
 code_starter: |
-  def validate_score(score):
-      if score < 0:
-          raise ValueError(___)
-      if score > 100:
-          raise ___(___) 
-      return score
+  team = [
+      {"name": "Alice", "role": "warrior"},
+      {"name": "Bob",   "role": "mage"},
+      {"name": "Cara",  "role": "rogue"},
+  ]
+
+  # Extract just the names using a list comprehension
+  names = [member[___] for member in ___]
 hints:
-  - "raise ValueError(\"Score must be between 0 and 100\")"
-  - "Both branches should raise ValueError with a descriptive message"
+  - "Each member is a dict — member[\"name\"] gets the name"
+  - "Iterate over team: for member in team"
 
 tests:
-  - code: "assert validate_score(50) == 50, 'validate_score(50) should return 50'"
-    message: "validate_score(50) returns 50"
-  - code: |
-      try:
-          validate_score(-1)
-          assert False, 'Should have raised'
-      except ValueError:
-          pass
-    message: "validate_score(-1) raises ValueError"
-  - code: |
-      try:
-          validate_score(101)
-          assert False, 'Should have raised'
-      except ValueError:
-          pass
-    message: "validate_score(101) raises ValueError"
+  - code: "assert names == ['Alice', 'Bob', 'Cara'], f'got {names}'"
+    message: "names list extracted correctly"
 
 final_challenge:
   code_starter: |
+    agents = [
+        {"name": "Rex",   "clearance": 3},
+        {"name": "Nova",  "clearance": 5},
+        {"name": "Zara",  "clearance": 2},
+    ]
+
     # Your code here
   hints:
-    - "def validate_power(level):"
-    - "if level < 1: raise ValueError(...)"
-    - "if level > 100: raise ValueError(...)"
-    - "return level"
+    - "names = [a[\"name\"] for a in agents]"
+    - "high_clearance = [a[\"name\"] for a in agents if a[\"clearance\"] >= 3]"
   tests:
-    - code: "assert validate_power(75) == 75"
-      message: "validate_power(75) returns 75"
-    - code: "assert validate_power(1) == 1"
-      message: "validate_power(1) returns 1 (boundary)"
-    - code: |
-        try:
-            validate_power(0)
-            assert False
-        except ValueError:
-            pass
-      message: "validate_power(0) raises ValueError"
-    - code: |
-        try:
-            validate_power(101)
-            assert False
-        except ValueError:
-            pass
-      message: "validate_power(101) raises ValueError"
+    - code: "assert names == ['Rex', 'Nova', 'Zara'], f'got {names}'"
+      message: "names list is correct"
+    - code: "assert high_clearance == ['Rex', 'Nova'], f'got {high_clearance}'"
+      message: "high_clearance filters correctly"
 
 worlds:
   fantasy:
-    title: "The Power Scale Enforcement Spell"
+    title: "The Guild Roster Comprehension"
     setup: |
-      The Archmage's power registry has strict limits: no enchantment may be registered below power level 1 (that would be inert), and none above 100 (that would be catastrophically unstable). Any attempt to register outside these bounds must be rejected loudly, not silently accepted.
-      In Python, raise lets your function be the enforcer. Instead of returning a wrong value, it fires an exception with a clear message — giving the caller a chance to handle it or crash with a useful description of what went wrong.
+      The Adventurers' Guild keeps its roster as a list of dictionaries — one entry per member, each containing their name, rank, and role.
+      The guild secretary needs two quick reports: a plain list of every member's name, and a filtered list of members who have clearance level 3 or above to enter the restricted archive.
+      Looping through a list of dicts and pulling out one field each time is so common that Python has a shorthand for it: the list comprehension.
     final_challenge_prompt: |
-      Write validate_power(level) for the Archmage's registry:
-      — If level < 1, raise ValueError with a descriptive message
-      — If level > 100, raise ValueError with a descriptive message
-      — Otherwise, return level
+      The guild's agent roster has just been delivered to you as a list of dicts.
+      agents = [{"name": "Rex", "clearance": 3}, {"name": "Nova", "clearance": 5}, {"name": "Zara", "clearance": 2}]
+      — Build names: a list of every agent's name using a list comprehension
+      — Build high_clearance: a list of names where clearance >= 3, using a comprehension with an if clause
   scifi:
-    title: "Reactor Power Limit Enforcement"
+    title: "Crew Manifest Extraction Protocol"
     setup: |
-      The Meridian's reactor accepts power settings from 1 to 100. A setting of 0 means the reactor is offline — unacceptable mid-mission. A setting above 100 risks a cascade failure. The control interface must reject both extremes immediately by raising an exception, not by silently clamping the value.
-      raise in Python is how a function says "I refuse to continue with this input." It is the right tool for enforcing hard constraints at the boundary of a system.
+      The Meridian's crew manifest is stored as a list of dicts. Navigation needs a plain name list for the intercom broadcast; Security needs a filtered list of personnel with clearance level 3 or above.
+      Iterating over a list of dicts and selecting a single field every time is the perfect use case for a list comprehension. One line replaces four.
     final_challenge_prompt: |
-      Write validate_power(level) for the reactor control module:
-      — Raise ValueError if level < 1
-      — Raise ValueError if level > 100
-      — Return level when it is within bounds
+      Ship security uploads the agent roster as a list of dicts.
+      agents = [{"name": "Rex", "clearance": 3}, {"name": "Nova", "clearance": 5}, {"name": "Zara", "clearance": 2}]
+      — Use a list comprehension to build names (all agent names)
+      — Use a filtered list comprehension to build high_clearance (names where clearance >= 3)
   mystery:
-    title: "The Evidence Strength Validator"
+    title: "The Witness List Filter"
     setup: |
-      The detective's evidence-strength system rates items from 1 (barely relevant) to 100 (ironclad). A zero means no evidence exists — that is inadmissible. A number above 100 is a data-entry error that would corrupt the jury's scoring model.
-      raise ValueError is how you enforce these rules in Python code: stop execution, report the exact problem, and let the caller decide how to recover. Silent bad values are worse than loud errors.
+      The detective's witness records arrive as a list of dicts. The clerk needs two extracts: every witness's name in a plain list, and a shorter list of only those witnesses rated with reliability 3 or higher — the ones the DA will call to the stand.
+      A list comprehension lets you produce either list in a single readable line, without a verbose for-loop and append calls.
     final_challenge_prompt: |
-      Write validate_power(level) for the evidence rating system:
-      — Raise ValueError if level is below 1
-      — Raise ValueError if level exceeds 100
-      — Return level if it passes both checks
+      You receive the informant roster as a list of dicts.
+      agents = [{"name": "Rex", "clearance": 3}, {"name": "Nova", "clearance": 5}, {"name": "Zara", "clearance": 2}]
+      — Build names using a list comprehension over agents
+      — Build high_clearance: names of agents whose clearance is 3 or above, using a comprehension with an if clause

@@ -1,83 +1,86 @@
-unit: 5
+unit: 4
 lesson: 1
 xp: 10
 
 example:
   code: |
-    def divide(a, b):
-        try:
-            result = a / b
-        except ZeroDivisionError:
-            result = 0
-        return result
-
-    print(divide(10, 2))
-    print(divide(5, 0))
+    colours = ["red", "green", "blue"]
+    print(colours)
+    print(colours[0])
+    print(colours[2])
+    print(len(colours))
   explanation: |
-    A try block contains code that might fail. If it raises the named exception, execution jumps to the except block instead of crashing.
-    Here, dividing by zero raises ZeroDivisionError. The except clause catches it and sets result to 0 — the function always returns safely.
-  output: "5.0\n0"
+    A list stores multiple values in order, inside square brackets.
+    Items are separated by commas and can be any type — strings, numbers, booleans.
+    Lists are zero-indexed: the first item is at index 0, the second at 1, and so on.
+    len() tells you how many items are in the list.
+  output: "['red', 'green', 'blue']\nred\nblue\n3"
 
 code_starter: |
-  def safe_divide(a, b):
-      try:
-          result = ___
-      except ZeroDivisionError:
-          result = ___
-      return result
+  # Create a list called 'heroes' containing three names (strings).
+  heroes =
 hints:
-  - "result = a // b for integer division"
-  - "Return 0 when ZeroDivisionError is caught"
-
+  - "Lists use square brackets: heroes = ['Alice', 'Bob', 'Charlie']"
+  - "Items are separated by commas"
 tests:
-  - code: "assert safe_divide(10, 2) == 5, 'safe_divide(10,2) should be 5'"
-    message: "safe_divide(10, 2) returns 5"
-  - code: "assert safe_divide(7, 0) == 0, 'safe_divide(7,0) should be 0'"
-    message: "safe_divide(7, 0) returns 0 safely"
+  - code: "assert isinstance(heroes, list), 'heroes should be a list'"
+    message: "heroes should be a list"
+  - code: "assert len(heroes) == 3, f'heroes should have 3 items, got {len(heroes)}'"
+    message: "heroes should contain exactly 3 items"
+  - code: "assert all(isinstance(h, str) for h in heroes), 'all items should be strings'"
+    message: "all items in heroes should be strings"
 
 final_challenge:
   code_starter: |
-    # Your code here
+    # Create a spells list with exactly four spell names
   hints:
-    - "def safe_divide(a, b):"
-    - "Use integer division a // b inside try"
-    - "Return 0 in the except ZeroDivisionError block"
+    - 'spells = ["Fireball", "Ice Shard", "Thunder Strike", "Wind Slash"]'
+    - "Use square brackets, separate items with commas"
+    - "All four items must be non-empty strings"
   tests:
-    - code: "assert safe_divide(9, 3) == 3, 'safe_divide(9,3) should be 3'"
-      message: "safe_divide(9, 3) returns 3"
-    - code: "assert safe_divide(15, 0) == 0, 'safe_divide(15,0) should be 0'"
-      message: "safe_divide(15, 0) returns 0"
-    - code: "assert safe_divide(0, 5) == 0, 'safe_divide(0,5) should be 0'"
-      message: "safe_divide(0, 5) returns 0"
+    - code: "assert isinstance(spells, list)"
+      message: "spells should be a list"
+    - code: "assert len(spells) == 4, f'spells should have 4 items, got {len(spells)}'"
+      message: "spells should have exactly 4 items"
+    - code: "assert all(isinstance(s, str) and len(s) > 0 for s in spells)"
+      message: "all items in spells should be non-empty strings"
 
 worlds:
   fantasy:
-    title: "The Fail-Safe Enchantment"
+    title: "The Party Roster"
     setup: |
-      Every seasoned enchanter knows that some spells can backfire. Dividing a potion's strength by zero vials — because none were prepared — would cause the whole ritual to collapse in a puff of acrid smoke.
-      The Guild's solution: wrap dangerous operations in a try block. If the error occurs, the except clause catches it like a magical ward, letting the spell finish gracefully instead of exploding.
-      This is Python's exception-handling mechanism. You name the specific error you expect, handle it cleanly, and your program carries on.
+      An adventuring party needs a roster. "A list stores multiple values in order,
+      inside square brackets," Elara explains. "Each item is separated by a comma;
+      they can all be the same type or different ones."
+
+      Lists remember the order you put things in. You can access any item by its
+      position (starting from 0) and get the total count with len(). Create 'heroes'
+      as a list of three string names — your party is assembled.
     final_challenge_prompt: |
-      The castle treasury needs a function to divide gold evenly among soldiers. If there are no soldiers (b = 0), dividing is impossible — return 0 instead of crashing.
-      Write safe_divide(a, b) that:
-      — Returns a // b normally
-      — Returns 0 if a ZeroDivisionError occurs
+      The spell registry needs your four signature spells documented. Create a list
+      called spells containing exactly four spell names (non-empty strings of your
+      choice). The registry requires exactly four entries.
   scifi:
-    title: "Fault-Tolerant Navigation Subroutines"
+    title: "Crew Manifest"
     setup: |
-      Aboard the Meridian, a navigation subroutine that crashes on divide-by-zero could send the ship into an unrecoverable spin. Mission protocol requires every computation function to be fault-tolerant.
-      Python's try/except pattern is the engineering solution: put the risky line inside try, name the exception you're guarding against in except, and define a safe fallback. The program continues — no crash, no spin.
+      Before departure, the ship needs a crew manifest. "A list is Python's ordered
+      collection — square brackets, comma-separated items," the AI says. "It can hold
+      strings, numbers, booleans, even other lists."
+
+      Create 'heroes' as a list of three crew member names (strings).
     final_challenge_prompt: |
-      Write a fault-tolerant safe_divide(a, b) function for the navigation computer:
-      — Returns a // b when b is non-zero
-      — Returns 0 when b is 0, catching ZeroDivisionError
+      The weapons system needs four loadout options registered. Create a list called
+      spells containing four non-empty strings (weapon names of your choice). The
+      system requires exactly four slots to be filled.
   mystery:
-    title: "The Detective's Failproof Calculation"
+    title: "The Suspects List"
     setup: |
-      Calculating evidence ratios is routine — until one day the denominator is zero. A witness count of zero, a crime rate of zero, an empty suspect list. Without a guard, the whole analysis crashes and the case goes cold.
-      The try/except block is the detective's safety net: attempt the calculation, and if ZeroDivisionError is raised, fall back to a known-safe value and keep working.
+      Every detective keeps a list of suspects. "Python lists store sequences of
+      values in square brackets," your mentor explains. "You can put any type of
+      value inside, mix them, and access them later by position."
+
+      Create a 'heroes' list with three string names.
     final_challenge_prompt: |
-      Write safe_divide(a, b) for the evidence analysis toolkit:
-      — Returns a // b normally
-      — Returns 0 if ZeroDivisionError is raised
-      — Works for any integer inputs
+      The case board needs four suspects documented. Create a list called spells
+      containing four non-empty strings (suspect names or lead descriptions). The
+      board system requires exactly four entries to activate the analysis mode.

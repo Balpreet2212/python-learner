@@ -1,0 +1,51 @@
+title: "The Password Validator"
+xp: 75
+difficulty: "medium"
+description: |
+  Write a function is_valid_password(password) that returns True if ALL of:
+  - Length is at least 8 characters
+  - Contains at least one digit (use: any(c.isdigit() for c in password))
+  - Does not start with a space
+
+  Returns False otherwise.
+
+code_starter: |
+  def is_valid_password(password):
+
+hints:
+  - "len(password) >= 8 checks the length"
+  - "any(c.isdigit() for c in password) checks for a digit"
+  - "password[0] != ' ' or password and password[0] != ' '"
+  - "Combine all three conditions with 'and'"
+
+tests:
+  - code: "assert is_valid_password('Secret123') == True"
+    message: "Valid password should return True"
+  - code: "assert is_valid_password('short1') == False"
+    message: "Too short (under 8 chars) should return False"
+  - code: "assert is_valid_password('noDIGITS!') == False"
+    message: "No digits should return False"
+  - code: "assert is_valid_password(' leading1') == False"
+    message: "Leading space should return False"
+  - code: "assert is_valid_password('Exactly81') == True"
+    message: "8 chars with digit returns True"
+
+worlds:
+  fantasy:
+    title: "The Arcane Password Ward"
+    description: |
+      The wizard's tower uses magical passwords with strict rules.
+      Write is_valid_password(password) to verify whether a password
+      meets all the tower's security requirements.
+  scifi:
+    title: "Security Clearance Verification"
+    description: |
+      The ship's security system validates crew passwords before granting
+      access to restricted areas. Write is_valid_password(password) to
+      check whether a password meets all the rules.
+  mystery:
+    title: "The Safe Combination Checker"
+    description: |
+      The evidence safe requires a valid combination password.
+      Write is_valid_password(password) to verify whether it meets
+      all the security rules.

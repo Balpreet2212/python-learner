@@ -50,6 +50,12 @@ const NAV_CARDS = [
     path: "/learn",
   },
   {
+    icon: "⭐",
+    label: "Weekly Challenge",
+    description: "A fresh coding puzzle every week. Earn bonus XP.",
+    path: "/weekly",
+  },
+  {
     icon: "⚙️",
     label: "Settings",
     description: "Change your learning track or world theme.",

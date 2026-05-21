@@ -4,90 +4,87 @@ xp: 10
 
 example:
   code: |
-    counter = 3
-    while counter > 0:
-        print("Counting:", counter)
-        counter -= 1
-    print("Done!")
+    grade = 78
+    if grade >= 90:
+        print("A")
+    elif grade >= 75:
+        print("B")
+    elif grade >= 60:
+        print("C")
+    else:
+        print("F")
   explanation: |
-    A while loop keeps repeating as long as its condition stays True.
-    Unlike a for loop, you control when it stops by updating a variable yourself.
-    Here counter starts at 3; each iteration subtracts 1 (counter -= 1).
-    When counter reaches 0, the condition (counter > 0) becomes False and the loop exits.
-    Forgetting to update the variable causes an infinite loop — always decrement!
-  output: "Counting: 3\nCounting: 2\nCounting: 1\nDone!"
+    elif (short for "else if") lets you check multiple conditions in sequence.
+    Python tests each condition top to bottom and runs the first block that is True.
+    All remaining branches are skipped. The final else catches everything else.
+    Here grade is 78, so the second branch (>= 75) matches and "B" prints.
+  output: "B"
 
 code_starter: |
-  # Use a while loop to count down from 5 to 1.
-  # Append each number to 'result' as you go, then stop.
-  result = []
-  count = 5
-  while count > 0:
-      result.append(count)
-      count -=
+  speed = 85
+  # Print "Fast" if speed > 100, "Normal" if speed >= 60, else "Slow"
 hints:
-  - "Decrement count each pass: count -= 1"
-  - "The loop stops as soon as count reaches 0"
+  - "if speed > 100:"
+  - "elif speed >= 60:"
+  - "else:"
 tests:
-  - code: "assert result == [5, 4, 3, 2, 1], f'got {result}'"
-    message: "result should be [5, 4, 3, 2, 1]"
-  - code: "assert count == 0, f'count should be 0 after the loop'"
-    message: "count should reach 0"
+  - code: "assert speed == 85"
+    message: "speed should remain 85"
+  - code: "assert 'Normal' in _stdout"
+    message: "Should print 'Normal' when speed is 85"
+  - code: "assert 'Fast' not in _stdout and 'Slow' not in _stdout"
+    message: "Only 'Normal' should print — not Fast or Slow"
 
 final_challenge:
   code_starter: |
-    # Drain a power source using a while loop
-    # Start at 100, subtract 25 each step, count the steps
+    level = 12
+    # Print "Novice" if level < 5, "Apprentice" if level < 20, else "Master"
   hints:
-    - "power = 100  — starting level"
-    - "steps = 0  — will count iterations"
-    - "while power > 0:  — keep going while power remains"
-    - "    power -= 25"
-    - "    steps += 1"
+    - "if level < 5:"
+    - "elif level < 20:"
+    - "else:  # covers level >= 20"
   tests:
-    - code: "assert power == 0, f'power should be 0, got {power}'"
-      message: "power should reach 0"
-    - code: "assert steps == 4, f'steps should be 4, got {steps}'"
-      message: "steps should be 4 (100 drained in 4 rounds of 25)"
+    - code: "assert level == 12"
+      message: "level should remain 12"
+    - code: "assert 'Apprentice' in _stdout"
+      message: "Should print 'Apprentice' when level is 12"
+    - code: "assert 'Novice' not in _stdout and 'Master' not in _stdout"
+      message: "Only 'Apprentice' should print"
 
 worlds:
   fantasy:
-    title: "The Countdown Incantation"
+    title: "The Rank Crystal"
     setup: |
-      The spell requires a precise countdown. "A while loop repeats while a condition
-      stays true," Elara says. "Unlike for, the loop keeps going as long as you want
-      — but you must update the variable yourself, or it runs forever."
+      The Guild Hall's rank crystal glows a different colour for each tier.
+      In Python, elif lets you chain multiple conditions — Python checks each
+      one in order and runs the first that matches. All others are ignored.
 
-      Count down from 5 to 1, appending each number to 'result', and reduce 'count'
-      by 1 each pass. The enchantment activates only when the countdown is perfect.
+      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
+      "Normal", else print "Slow". Only one branch should run.
     final_challenge_prompt: |
-      The ancient power crystal holds 100 units of energy. Each ritual pulse drains
-      exactly 25 units. Write a while loop that drains the crystal completely —
-      subtract 25 from power each iteration and increment steps by 1. When power
-      reaches 0, steps should equal 4.
+      The Guild assigns ranks by level. level is 12. Print "Novice" if level < 5,
+      "Apprentice" if level < 20, and "Master" otherwise. Exactly one title prints.
   scifi:
-    title: "Launch Sequence"
+    title: "Threat Level Protocol"
     setup: |
-      The launch countdown begins. "A while loop is condition-driven — it keeps
-      running as long as its test passes," the AI says. "You control when it stops
-      by changing the variable yourself."
+      The security system classifies incoming ships by speed: intercept, shadow, or
+      let pass. Python's elif chain works the same way — each condition is tested
+      top to bottom, the first match wins, the rest are skipped.
 
-      Count down from count = 5, appending each value to 'result' and decrementing
-      by 1 each cycle until liftoff.
+      speed is 85. Write the three-branch elif chain: Fast (> 100), Normal (>= 60),
+      Slow (everything else). Only one label prints.
     final_challenge_prompt: |
-      The reactor has 100 units of power. Each thruster burst consumes exactly 25.
-      Use a while loop: subtract 25 from power each iteration, increment steps by 1.
-      The mission proceeds when power == 0 and steps == 4.
+      The crew classification system uses level. level is 12. Print "Novice" for
+      level < 5, "Apprentice" for level < 20, "Master" for anything higher.
   mystery:
-    title: "The Ticking Clock"
+    title: "Suspect Ranking"
     setup: |
-      A bomb's timer ticks down — five seconds left. "A while loop runs as long as
-      its condition is true," your partner says urgently. "You have to decrement the
-      counter yourself inside the loop — otherwise it runs forever."
+      The case file rates suspects: prime, secondary, or cleared. More than two
+      categories means you need elif — Python's way of chaining multiple conditions,
+      testing each until one matches.
 
-      Record each second in 'result' and reduce 'count' by 1 each iteration.
+      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
+      "Normal", else print "Slow". One match, one output.
     final_challenge_prompt: |
-      A vault locks down after its 100-point security score is exhausted. Each
-      bypass attempt costs 25 points. Write a while loop that drains the security
-      score to zero — subtract 25 each iteration, increment steps by 1. When
-      power == 0 and steps == 4, the vault opens.
+      Detectives have rank. level is 12. Print "Novice" for level < 5,
+      "Apprentice" for level < 20, "Master" for level >= 20. One rank prints.

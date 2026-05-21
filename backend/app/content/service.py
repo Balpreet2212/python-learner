@@ -1,6 +1,7 @@
-"""Load lesson content from YAML files in content/units/."""
+"""Load lesson and weekly challenge content from YAML files."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -33,6 +34,19 @@ class FinalChallengeContent:
 
 
 @dataclass
+class PredictCard:
+    code: str
+    explanation: str
+
+
+@dataclass
+class BreakAndFixCard:
+    broken_code: str
+    hint: str
+    tests: list[LessonTest]
+
+
+@dataclass
 class LessonContent:
     unit: int
     lesson: int
@@ -45,6 +59,8 @@ class LessonContent:
     final_challenge: FinalChallengeContent
     xp: int
     total_lessons: int = LESSONS_PER_UNIT
+    predict: PredictCard | None = field(default=None)
+    break_and_fix: BreakAndFixCard | None = field(default=None)
 
 
 @dataclass
@@ -58,6 +74,19 @@ class CapstoneContent:
     tests: list[LessonTest]
     plan_prompts: list[str]
     xp: int
+
+
+@dataclass
+class WeeklyChallengeContent:
+    challenge_index: int
+    week_key: str
+    title: str
+    description: str
+    code_starter: str
+    hints: list[str]
+    tests: list[LessonTest]
+    xp: int
+    difficulty: str
 
 
 def _resolve_world(data: dict[str, Any], world: str) -> dict[str, Any]:
@@ -95,6 +124,25 @@ def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
     raw_tests: list[dict[str, str]] = data.get("tests", [])
     raw_fc: dict[str, Any] = data.get("final_challenge", {})
     raw_fc_tests: list[dict[str, str]] = raw_fc.get("tests", [])
+
+    predict: PredictCard | None = None
+    raw_predict: dict[str, Any] | None = data.get("predict")
+    if raw_predict:
+        predict = PredictCard(
+            code=raw_predict.get("code", "").rstrip(),
+            explanation=raw_predict.get("explanation", "").strip(),
+        )
+
+    break_and_fix: BreakAndFixCard | None = None
+    raw_baf: dict[str, Any] | None = data.get("break_and_fix")
+    if raw_baf:
+        baf_tests: list[dict[str, str]] = raw_baf.get("tests", [])
+        break_and_fix = BreakAndFixCard(
+            broken_code=raw_baf.get("broken_code", "").rstrip(),
+            hint=raw_baf.get("hint", "").strip(),
+            tests=[LessonTest(code=t["code"], message=t["message"]) for t in baf_tests],
+        )
+
     return LessonContent(
         unit=unit,
         lesson=lesson,
@@ -115,4 +163,41 @@ def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
             tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_fc_tests],
         ),
         xp=data.get("xp", 10),
+        predict=predict,
+        break_and_fix=break_and_fix,
+    )
+
+
+def _week_key(dt: datetime) -> str:
+    iso = dt.isocalendar()
+    return f"{iso.year}-W{iso.week:02d}"
+
+
+def _current_challenge_index() -> int:
+    files = sorted((CONTENT_DIR / "weekly").glob("challenge_*.yaml"))
+    total = len(files)
+    if total == 0:
+        return 1
+    iso_week = datetime.now(UTC).isocalendar().week
+    return (iso_week - 1) % total + 1
+
+
+def load_weekly_challenge(world: str) -> WeeklyChallengeContent | None:
+    idx = _current_challenge_index()
+    path = CONTENT_DIR / "weekly" / f"challenge_{idx}.yaml"
+    if not path.exists():
+        return None
+    data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
+    world_data = _resolve_world(data, world)
+    raw_tests: list[dict[str, str]] = data.get("tests", [])
+    return WeeklyChallengeContent(
+        challenge_index=idx,
+        week_key=_week_key(datetime.now(UTC)),
+        title=world_data.get("title", data.get("title", "Weekly Challenge")),
+        description=world_data.get("description", data.get("description", "")).strip(),
+        code_starter=data.get("code_starter", "").rstrip(),
+        hints=data.get("hints", []),
+        tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_tests],
+        xp=data.get("xp", 50),
+        difficulty=data.get("difficulty", "medium"),
     )

@@ -37,6 +37,16 @@ class FinalChallengeOut(BaseModel):
     test_count: int
 
 
+class PredictCardOut(BaseModel):
+    code: str
+
+
+class BreakAndFixOut(BaseModel):
+    broken_code: str
+    hint: str
+    test_count: int
+
+
 class LessonOut(BaseModel):
     unit: int
     lesson: int
@@ -49,6 +59,8 @@ class LessonOut(BaseModel):
     test_count: int
     total_lessons: int
     final_challenge: FinalChallengeOut
+    predict: PredictCardOut | None = None
+    break_and_fix: BreakAndFixOut | None = None
 
 
 class TestResultOut(BaseModel):
@@ -65,6 +77,16 @@ class SubmitOut(BaseModel):
 
 class SubmitRequest(BaseModel):
     code: str
+
+
+class PredictCheckRequest(BaseModel):
+    answer: str
+
+
+class PredictCheckOut(BaseModel):
+    correct: bool
+    actual_output: str
+    explanation: str
 
 
 class CapstonOut(BaseModel):
@@ -122,6 +144,12 @@ async def get_lesson(
             hints=content.final_challenge.hints,
             test_count=len(content.final_challenge.tests),
         ),
+        predict=PredictCardOut(code=content.predict.code) if content.predict else None,
+        break_and_fix=BreakAndFixOut(
+            broken_code=content.break_and_fix.broken_code,
+            hint=content.break_and_fix.hint,
+            test_count=len(content.break_and_fix.tests),
+        ) if content.break_and_fix else None,
     )
 
 
@@ -179,6 +207,67 @@ async def submit_final(
         raise bad_request("Lesson content not found")
 
     tests = [{"code": t.code, "message": t.message} for t in content.final_challenge.tests]
+    result = run_challenge(body.code, tests)
+    return SubmitOut(
+        all_passed=result.all_passed,
+        exec_error=result.exec_error,
+        stdout=result.stdout,
+        tests=[
+            TestResultOut(passed=bool(t["passed"]), message=str(t["message"]))
+            for t in result.tests
+        ],
+    )
+
+
+@router.post("/predict/check")
+async def check_predict(
+    body: PredictCheckRequest,
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+    _csrf: None = Depends(require_csrf),
+) -> PredictCheckOut:
+    if account.role != "learner":
+        raise forbidden("Only learner accounts can check predictions")
+
+    profile = account.profile
+    if profile is None or not profile.track:
+        raise bad_request("Complete onboarding before checking predictions")
+
+    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
+    if content is None or content.predict is None:
+        raise bad_request("No predict card for this lesson")
+
+    result = run_challenge(content.predict.code, [])
+    actual = result.stdout.strip()
+    correct = actual == body.answer.strip()
+    return PredictCheckOut(
+        correct=correct,
+        actual_output=actual,
+        explanation=content.predict.explanation,
+    )
+
+
+@router.post("/fix/submit")
+async def submit_fix(
+    body: SubmitRequest,
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+    _csrf: None = Depends(require_csrf),
+) -> SubmitOut:
+    if account.role != "learner":
+        raise forbidden("Only learner accounts can submit fixes")
+    if len(body.code) > 10_000:
+        raise bad_request("Code submission too large")
+
+    profile = account.profile
+    if profile is None or not profile.track:
+        raise bad_request("Complete onboarding before submitting")
+
+    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
+    if content is None or content.break_and_fix is None:
+        raise bad_request("No break-and-fix card for this lesson")
+
+    tests = [{"code": t.code, "message": t.message} for t in content.break_and_fix.tests]
     result = run_challenge(body.code, tests)
     return SubmitOut(
         all_passed=result.all_passed,

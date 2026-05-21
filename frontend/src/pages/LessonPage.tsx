@@ -5,9 +5,12 @@ import {
   getLesson,
   submitChallenge,
   submitFinalChallenge,
+  checkPredict,
+  submitFix,
   advanceLesson,
   type Lesson,
   type SubmitResult,
+  type PredictResult,
 } from "../api/content";
 import { ApiError } from "../api/client";
 import Button from "../components/ui/Button";
@@ -132,6 +135,19 @@ export default function LessonPage() {
   const [exerciseError, setExerciseError] = useState<string | null>(null);
   const [exerciseHintIndex, setExerciseHintIndex] = useState(-1);
 
+  // Predict card
+  const [predictAnswer, setPredictAnswer] = useState("");
+  const [predictResult, setPredictResult] = useState<PredictResult | null>(null);
+  const [predictSubmitting, setPredictSubmitting] = useState(false);
+  const [predictError, setPredictError] = useState<string | null>(null);
+
+  // Break-and-fix card
+  const [fixCode, setFixCode] = useState("");
+  const [fixResult, setFixResult] = useState<SubmitResult | null>(null);
+  const [fixSubmitting, setFixSubmitting] = useState(false);
+  const [fixError, setFixError] = useState<string | null>(null);
+  const [fixHintShown, setFixHintShown] = useState(false);
+
   // Final challenge section
   const [finalCode, setFinalCode] = useState("");
   const [finalResult, setFinalResult] = useState<SubmitResult | null>(null);
@@ -151,6 +167,7 @@ export default function LessonPage() {
         setLesson(l);
         setExerciseCode(l.code_starter);
         setFinalCode(l.final_challenge.code_starter);
+        setFixCode(l.break_and_fix?.broken_code ?? "");
       })
       .catch((err: unknown) => {
         setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
@@ -168,6 +185,34 @@ export default function LessonPage() {
       setExerciseError(err instanceof ApiError ? err.message : "Submission failed.");
     } finally {
       setExerciseSubmitting(false);
+    }
+  }
+
+  async function handlePredictCheck() {
+    if (!lesson?.predict) return;
+    setPredictSubmitting(true);
+    setPredictError(null);
+    try {
+      const res = await checkPredict(predictAnswer);
+      setPredictResult(res);
+    } catch (err) {
+      setPredictError(err instanceof ApiError ? err.message : "Submission failed.");
+    } finally {
+      setPredictSubmitting(false);
+    }
+  }
+
+  async function handleFixSubmit() {
+    if (!lesson?.break_and_fix) return;
+    setFixSubmitting(true);
+    setFixError(null);
+    try {
+      const res = await submitFix(fixCode);
+      setFixResult(res);
+    } catch (err) {
+      setFixError(err instanceof ApiError ? err.message : "Submission failed.");
+    } finally {
+      setFixSubmitting(false);
     }
   }
 
@@ -194,8 +239,13 @@ export default function LessonPage() {
       setLesson(next);
       setExerciseCode(next.code_starter);
       setFinalCode(next.final_challenge.code_starter);
+      setFixCode(next.break_and_fix?.broken_code ?? "");
       setExerciseResult(null);
       setFinalResult(null);
+      setPredictResult(null);
+      setPredictAnswer("");
+      setFixResult(null);
+      setFixHintShown(false);
       setExerciseHintIndex(-1);
       setFinalHintIndex(-1);
       setShowOutput(false);
@@ -222,6 +272,9 @@ export default function LessonPage() {
   }
 
   const exercisePassed = exerciseResult?.all_passed ?? false;
+  const predictPassed = !lesson?.predict || (predictResult?.correct ?? false);
+  const fixPassed = !lesson?.break_and_fix || (fixResult?.all_passed ?? false);
+  const finalUnlocked = exercisePassed && predictPassed && fixPassed;
   const finalPassed = finalResult?.all_passed ?? false;
 
   return (
@@ -332,18 +385,148 @@ export default function LessonPage() {
           {exerciseResult && <TestResults result={exerciseResult} style={style} />}
         </section>
 
+        {/* ── Section 3b: Predict Card ─────────────────────────────────── */}
+        {lesson.predict && (
+          <section className={`rounded-xl border ${exercisePassed ? style.border : "border-gray-700"} overflow-hidden transition-all`}>
+            <div className={`border-b ${exercisePassed ? style.border : "border-gray-700"} px-5 py-3 ${exercisePassed ? style.surface : "bg-gray-900"} flex items-center justify-between`}>
+              <div>
+                <h2 className={`text-sm font-semibold ${exercisePassed ? style.highlight : "text-gray-400"}`}>
+                  Predict the Output
+                </h2>
+                {!exercisePassed && (
+                  <p className="text-xs text-gray-500 mt-0.5">Complete the exercise to unlock.</p>
+                )}
+              </div>
+              {predictResult?.correct && (
+                <span className="text-xs font-semibold text-green-400">Correct ✓</span>
+              )}
+            </div>
+
+            {exercisePassed && (
+              <>
+                <div className="bg-gray-950 px-5 py-4">
+                  <pre className="font-code text-sm leading-relaxed text-gray-100 whitespace-pre-wrap">
+                    {lesson.predict.code}
+                  </pre>
+                </div>
+                <div className={`border-t ${style.border} px-5 py-4 ${style.surface} space-y-3`}>
+                  <p className={`text-sm ${style.muted}`}>What will this code print? Type the exact output below.</p>
+                  <input
+                    type="text"
+                    value={predictAnswer}
+                    onChange={(e) => { setPredictAnswer(e.target.value); if (predictResult) setPredictResult(null); }}
+                    placeholder="Expected output…"
+                    disabled={predictResult?.correct}
+                    className={`w-full rounded-lg border ${style.border} bg-gray-950 px-4 py-2 font-code text-sm text-gray-100 outline-none placeholder:text-gray-600 disabled:opacity-50`}
+                  />
+                  <Button
+                    onClick={() => void handlePredictCheck()}
+                    loading={predictSubmitting}
+                    disabled={!predictAnswer.trim() || (predictResult?.correct ?? false)}
+                    className="w-full"
+                  >
+                    Check Answer
+                  </Button>
+                  {predictError && <p className="text-center text-sm text-red-400">{predictError}</p>}
+                  {predictResult && !predictResult.correct && (
+                    <div className={`rounded-lg border ${style.border} px-4 py-3 space-y-2 ${style.surface}`}>
+                      <p className="text-sm text-red-400">Not quite. The actual output was:</p>
+                      <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{predictResult.actual_output || "(no output)"}</pre>
+                      <p className={`text-sm ${style.text}`}>{predictResult.explanation}</p>
+                    </div>
+                  )}
+                  {predictResult?.correct && (
+                    <div className={`rounded-lg border border-green-700/40 bg-green-950/20 px-4 py-3`}>
+                      <p className="text-sm text-green-400">{predictResult.explanation}</p>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </section>
+        )}
+
+        {/* ── Section 3c: Break and Fix ────────────────────────────────── */}
+        {lesson.break_and_fix && (
+          <section className={`rounded-xl border ${exercisePassed ? style.border : "border-gray-700"} overflow-hidden transition-all`}>
+            <div className={`border-b ${exercisePassed ? style.border : "border-gray-700"} px-5 py-3 ${exercisePassed ? style.surface : "bg-gray-900"} flex items-center justify-between`}>
+              <div>
+                <h2 className={`text-sm font-semibold ${exercisePassed ? style.highlight : "text-gray-400"}`}>
+                  Break and Fix
+                </h2>
+                {!exercisePassed && (
+                  <p className="text-xs text-gray-500 mt-0.5">Complete the exercise to unlock.</p>
+                )}
+              </div>
+              {fixResult?.all_passed && (
+                <span className="text-xs font-semibold text-green-400">Fixed ✓</span>
+              )}
+            </div>
+
+            {exercisePassed && (
+              <>
+                <div className={`border-b ${style.border} px-5 py-3 ${style.surface}`}>
+                  <p className={`text-sm ${style.muted}`}>The code below has a bug. Find and fix it.</p>
+                </div>
+                <div className={`border-b ${style.border} overflow-hidden`}>
+                  <CodeEditor
+                    value={fixCode}
+                    onChange={(v) => { setFixCode(v); if (fixResult) setFixResult(null); }}
+                    rows={6}
+                    disabled={fixResult?.all_passed ?? false}
+                  />
+                </div>
+                <div className={`px-5 py-3 ${style.surface} border-b ${style.border} space-y-2`}>
+                  {!fixHintShown ? (
+                    <button
+                      onClick={() => { setFixHintShown(true); }}
+                      className={`text-sm underline ${style.muted}`}
+                    >
+                      Show hint
+                    </button>
+                  ) : (
+                    <div className={`rounded-lg border ${style.border} px-4 py-3 bg-gray-950`}>
+                      <p className={`font-mono text-sm ${style.text}`}>{lesson.break_and_fix.hint}</p>
+                    </div>
+                  )}
+                </div>
+                <div className={`p-4 ${style.surface} space-y-3`}>
+                  <Button
+                    onClick={() => void handleFixSubmit()}
+                    loading={fixSubmitting}
+                    disabled={!fixCode.trim() || (fixResult?.all_passed ?? false)}
+                    className="w-full"
+                  >
+                    Test Fix
+                  </Button>
+                  {fixError && <p className="text-center text-sm text-red-400">{fixError}</p>}
+                </div>
+                {fixResult && (
+                  <div className="px-4 pb-4">
+                    <TestResults result={fixResult} style={style} />
+                  </div>
+                )}
+              </>
+            )}
+          </section>
+        )}
+
         {/* ── Section 4: Final Challenge ───────────────────────────────── */}
-        <section className={`rounded-xl border-2 ${exercisePassed ? style.border : "border-gray-700"} overflow-hidden transition-all`}>
-          <div className={`px-5 py-4 ${exercisePassed ? style.surface : "bg-gray-900"} border-b ${exercisePassed ? style.border : "border-gray-700"}`}>
-            <h2 className={`text-base font-semibold ${exercisePassed ? style.highlight : "text-gray-400"}`}>
+        <section className={`rounded-xl border-2 ${finalUnlocked ? style.border : "border-gray-700"} overflow-hidden transition-all`}>
+          <div className={`px-5 py-4 ${finalUnlocked ? style.surface : "bg-gray-900"} border-b ${finalUnlocked ? style.border : "border-gray-700"}`}>
+            <h2 className={`text-base font-semibold ${finalUnlocked ? style.highlight : "text-gray-400"}`}>
               Final Challenge — Code It from Scratch
             </h2>
-            {!exercisePassed && (
-              <p className="text-xs text-gray-500 mt-0.5">Complete the exercise above to unlock.</p>
+            {!finalUnlocked && (
+              <p className="text-xs text-gray-500 mt-0.5">
+                {!exercisePassed
+                  ? "Complete the exercise above to unlock."
+                  : "Complete the predict and fix cards above to unlock."}
+              </p>
             )}
           </div>
 
-          {exercisePassed && (
+          {finalUnlocked && (
             <>
               <div className={`px-5 py-4 ${style.surface} border-b ${style.border}`}>
                 <p className={`text-sm leading-relaxed ${style.text}`}>{lesson.final_challenge.prompt}</p>
