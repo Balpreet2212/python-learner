@@ -37,15 +37,15 @@ final_challenge:
   code_starter: |
     # Build a themed status line using an f-string
     hero_name = "Aria"
-    unit_number = 1
+    unit_number = 7
   hints:
     - "status must be an f-string using hero_name and unit_number"
     - 'status = f"{hero_name} is on unit {unit_number}"'
     - "Check that both variables appear in the result"
   tests:
-    - code: "assert 'Aria' in status"
-      message: "status should contain 'Aria'"
-    - code: "assert '1' in status"
+    - code: "assert hero_name in status"
+      message: "status should contain the hero's name"
+    - code: "assert str(unit_number) in status"
       message: "status should contain the unit number"
     - code: "assert isinstance(status, str)"
       message: "status should be a string"
@@ -63,7 +63,7 @@ worlds:
       Craft a greeting with your name embedded in it — the scroll will speak it aloud."
     final_challenge_prompt: |
       The speaking scroll needs to announce your progress. Use hero_name = "Aria"
-      and unit_number = 1 (already provided). Build an f-string called status that
+      and unit_number = 7 (already provided). Build an f-string called status that
       includes both — something like "Aria is on unit 1". The exact wording is up
       to you, as long as both values appear.
   scifi:
@@ -78,7 +78,7 @@ worlds:
       'greeting' that says "Hello, " followed by your 'name'.
     final_challenge_prompt: |
       The ship's status panel shows a one-line summary for each crew member. Using
-      hero_name = "Aria" and unit_number = 1 (already provided), create status as
+      hero_name = "Aria" and unit_number = 7 (already provided), create status as
       an f-string that mentions both. The display requires both values to appear.
   mystery:
     title: "The Calling Card"
@@ -92,5 +92,5 @@ worlds:
       that begins with "Hello, " and includes your 'name'.
     final_challenge_prompt: |
       The case summary card must show the detective's name and the unit they're
-      assigned to. Using hero_name = "Aria" and unit_number = 1 (already provided),
+      assigned to. Using hero_name = "Aria" and unit_number = 7 (already provided),
       create an f-string called status that contains both values.

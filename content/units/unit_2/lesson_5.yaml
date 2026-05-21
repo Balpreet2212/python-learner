@@ -34,54 +34,10 @@ hints:
 tests:
   - code: "assert is_member is True and score == 85"
     message: "is_member and score should not be changed"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      is_member = True
-      score = 85
-      if is_member:
-          if score >= 90:
-              print("Gold member")
-          else:
-              print("Silver member")
-      else:
-          print("Not a member")
-      sys.stdout = sys.__stdout__
-      assert "Silver member" in out.getvalue()
+  - code: "assert 'Silver member' in _stdout"
     message: "Should print 'Silver member' when is_member=True and score=85"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      is_member = True
-      score = 95
-      if is_member:
-          if score >= 90:
-              print("Gold member")
-          else:
-              print("Silver member")
-      else:
-          print("Not a member")
-      sys.stdout = sys.__stdout__
-      assert "Gold member" in out.getvalue()
-    message: "Should print 'Gold member' when is_member=True and score=95"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      is_member = False
-      score = 95
-      if is_member:
-          if score >= 90:
-              print("Gold member")
-          else:
-              print("Silver member")
-      else:
-          print("Not a member")
-      sys.stdout = sys.__stdout__
-      assert "Not a member" in out.getvalue()
-    message: "Should print 'Not a member' when is_member=False"
+  - code: "assert 'Gold member' not in _stdout and 'Not a member' not in _stdout"
+    message: "Only 'Silver member' should print"
 
 final_challenge:
   code_starter: |
@@ -98,54 +54,10 @@ final_challenge:
   tests:
     - code: "assert has_key is True and door_level == 3"
       message: "has_key and door_level should not be changed"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        has_key = True
-        door_level = 3
-        if has_key:
-            if door_level <= 2:
-                print("Door unlocked")
-            else:
-                print("Key too weak")
-        else:
-            print("No key")
-        sys.stdout = sys.__stdout__
-        assert "Key too weak" in out.getvalue()
+    - code: "assert 'Key too weak' in _stdout"
       message: "Should print 'Key too weak' when has_key=True and door_level=3"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        has_key = True
-        door_level = 1
-        if has_key:
-            if door_level <= 2:
-                print("Door unlocked")
-            else:
-                print("Key too weak")
-        else:
-            print("No key")
-        sys.stdout = sys.__stdout__
-        assert "Door unlocked" in out.getvalue()
-      message: "Should print 'Door unlocked' when has_key=True and door_level=1"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        has_key = False
-        door_level = 1
-        if has_key:
-            if door_level <= 2:
-                print("Door unlocked")
-            else:
-                print("Key too weak")
-        else:
-            print("No key")
-        sys.stdout = sys.__stdout__
-        assert "No key" in out.getvalue()
-      message: "Should print 'No key' when has_key=False"
+    - code: "assert 'Door unlocked' not in _stdout and 'No key' not in _stdout"
+      message: "Only 'Key too weak' should print"
 
 worlds:
   fantasy:

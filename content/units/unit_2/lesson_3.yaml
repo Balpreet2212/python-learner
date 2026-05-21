@@ -30,48 +30,10 @@ hints:
 tests:
   - code: "assert speed == 85"
     message: "speed should remain 85"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      speed = 85
-      if speed > 100:
-          print("Fast")
-      elif speed >= 60:
-          print("Normal")
-      else:
-          print("Slow")
-      sys.stdout = sys.__stdout__
-      assert "Normal" in out.getvalue()
+  - code: "assert 'Normal' in _stdout"
     message: "Should print 'Normal' when speed is 85"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      speed = 120
-      if speed > 100:
-          print("Fast")
-      elif speed >= 60:
-          print("Normal")
-      else:
-          print("Slow")
-      sys.stdout = sys.__stdout__
-      assert "Fast" in out.getvalue()
-    message: "Should print 'Fast' when speed is 120"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      speed = 30
-      if speed > 100:
-          print("Fast")
-      elif speed >= 60:
-          print("Normal")
-      else:
-          print("Slow")
-      sys.stdout = sys.__stdout__
-      assert "Slow" in out.getvalue()
-    message: "Should print 'Slow' when speed is 30"
+  - code: "assert 'Fast' not in _stdout and 'Slow' not in _stdout"
+    message: "Only 'Normal' should print — not Fast or Slow"
 
 final_challenge:
   code_starter: |
@@ -84,48 +46,10 @@ final_challenge:
   tests:
     - code: "assert level == 12"
       message: "level should remain 12"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        level = 12
-        if level < 5:
-            print("Novice")
-        elif level < 20:
-            print("Apprentice")
-        else:
-            print("Master")
-        sys.stdout = sys.__stdout__
-        assert "Apprentice" in out.getvalue()
+    - code: "assert 'Apprentice' in _stdout"
       message: "Should print 'Apprentice' when level is 12"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        level = 2
-        if level < 5:
-            print("Novice")
-        elif level < 20:
-            print("Apprentice")
-        else:
-            print("Master")
-        sys.stdout = sys.__stdout__
-        assert "Novice" in out.getvalue()
-      message: "Should print 'Novice' when level is 2"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        level = 50
-        if level < 5:
-            print("Novice")
-        elif level < 20:
-            print("Apprentice")
-        else:
-            print("Master")
-        sys.stdout = sys.__stdout__
-        assert "Master" in out.getvalue()
-      message: "Should print 'Master' when level is 50"
+    - code: "assert 'Novice' not in _stdout and 'Master' not in _stdout"
+      message: "Only 'Apprentice' should print"
 
 worlds:
   fantasy:

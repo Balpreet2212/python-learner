@@ -17,17 +17,19 @@ example:
   output: "65\n160"
 
 code_starter: |
-  # Assign the integer 42 to a variable called 'score'
+  # Assign the integer 37 to a variable called 'score'
   score =
 
   # Calculate score plus 10 and store it in 'total'
   total =
 hints:
-  - "Numbers don't need quotes: score = 42"
+  - "Numbers don't need quotes: score = 37"
   - "Arithmetic uses + - * /  — try: total = score + 10"
 tests:
   - code: "assert isinstance(score, int), 'score should be a whole number (integer)'"
     message: "score should be an integer"
+  - code: "assert score == 37, 'assign exactly 37 to score'"
+    message: "score should be 37"
   - code: "assert total == score + 10, 'total should equal score + 10'"
     message: "total should equal score + 10"
 

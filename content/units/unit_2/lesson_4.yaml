@@ -27,32 +27,10 @@ hints:
 tests:
   - code: "assert level == 8 and coins == 150"
     message: "level and coins should not be changed"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      level = 8
-      coins = 150
-      if level >= 5 and coins >= 100:
-          print("Can buy")
-      else:
-          print("Cannot buy")
-      sys.stdout = sys.__stdout__
-      assert "Can buy" in out.getvalue()
+  - code: "assert 'Can buy' in _stdout"
     message: "Should print 'Can buy' when both conditions pass"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      level = 3
-      coins = 150
-      if level >= 5 and coins >= 100:
-          print("Can buy")
-      else:
-          print("Cannot buy")
-      sys.stdout = sys.__stdout__
-      assert "Cannot buy" in out.getvalue()
-    message: "Should print 'Cannot buy' when level is too low"
+  - code: "assert 'Cannot buy' not in _stdout"
+    message: "Should not print 'Cannot buy'"
 
 final_challenge:
   code_starter: |
@@ -65,32 +43,10 @@ final_challenge:
   tests:
     - code: "assert hp == 25 and mp == 10"
       message: "hp and mp should not be changed"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        hp = 25
-        mp = 10
-        if hp < 30 or mp < 20:
-            print("Critical")
-        else:
-            print("Stable")
-        sys.stdout = sys.__stdout__
-        assert "Critical" in out.getvalue()
+    - code: "assert 'Critical' in _stdout"
       message: "Should print 'Critical' when hp < 30 or mp < 20"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        hp = 80
-        mp = 50
-        if hp < 30 or mp < 20:
-            print("Critical")
-        else:
-            print("Stable")
-        sys.stdout = sys.__stdout__
-        assert "Stable" in out.getvalue()
-      message: "Should print 'Stable' when both hp and mp are healthy"
+    - code: "assert 'Stable' not in _stdout"
+      message: "Should not print 'Stable'"
 
 worlds:
   fantasy:

@@ -26,30 +26,8 @@ hints:
 tests:
   - code: "assert score == 45"
     message: "score should remain 45"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      score = 45
-      if score >= 50:
-          print("Pass")
-      else:
-          print("Fail")
-      sys.stdout = sys.__stdout__
-      assert "Fail" in out.getvalue()
+  - code: "assert 'Fail' in _stdout"
     message: "Should print 'Fail' when score is 45"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      score = 75
-      if score >= 50:
-          print("Pass")
-      else:
-          print("Fail")
-      sys.stdout = sys.__stdout__
-      assert "Pass" in out.getvalue()
-    message: "Should print 'Pass' when score is 75"
 
 final_challenge:
   code_starter: |
@@ -61,30 +39,10 @@ final_challenge:
   tests:
     - code: "assert strength == 30"
       message: "strength should remain 30"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        strength = 30
-        if strength >= 50:
-            print("Strong")
-        else:
-            print("Weak")
-        sys.stdout = sys.__stdout__
-        assert "Weak" in out.getvalue()
+    - code: "assert 'Weak' in _stdout"
       message: "Should print 'Weak' when strength is 30"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        strength = 70
-        if strength >= 50:
-            print("Strong")
-        else:
-            print("Weak")
-        sys.stdout = sys.__stdout__
-        assert "Strong" in out.getvalue()
-      message: "Should print 'Strong' when strength is 70"
+    - code: "assert 'Strong' not in _stdout"
+      message: "Should not print 'Strong' when strength is 30"
 
 worlds:
   fantasy:

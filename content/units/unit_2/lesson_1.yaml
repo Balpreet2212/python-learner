@@ -22,15 +22,7 @@ hints:
 tests:
   - code: "assert health == 80, 'do not change the value of health'"
     message: "health should remain 80"
-  - code: |
-      import io, sys
-      out = io.StringIO()
-      sys.stdout = out
-      health = 80
-      if health > 0:
-          print("Alive")
-      sys.stdout = sys.__stdout__
-      assert "Alive" in out.getvalue()
+  - code: "assert 'Alive' in _stdout"
     message: "Should print 'Alive' when health > 0"
 
 final_challenge:
@@ -43,15 +35,7 @@ final_challenge:
   tests:
     - code: "assert power == 100, 'do not change the value of power'"
       message: "power should remain 100"
-    - code: |
-        import io, sys
-        out = io.StringIO()
-        sys.stdout = out
-        power = 100
-        if power == 100:
-            print("Maximum power!")
-        sys.stdout = sys.__stdout__
-        assert "Maximum power!" in out.getvalue()
+    - code: "assert 'Maximum power!' in _stdout"
       message: "Should print 'Maximum power!' when power == 100"
 
 worlds:
