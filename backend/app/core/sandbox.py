@@ -63,6 +63,7 @@ finally:
     _out = _buf.getvalue()[:{max_output}]
 
 _ns["_stdout"] = _out
+_ns["_code"] = _code
 _results = []
 for _t in _tests:
     if _exec_err:

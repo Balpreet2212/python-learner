@@ -43,12 +43,12 @@ final_challenge:
     - 'status = f"{hero_name} is on unit {unit_number}"'
     - "Check that both variables appear in the result"
   tests:
-    - code: "assert hero_name in status"
-      message: "status should contain the hero's name"
-    - code: "assert str(unit_number) in status"
-      message: "status should contain the unit number"
     - code: "assert isinstance(status, str)"
       message: "status should be a string"
+    - code: "assert hero_name in status and str(unit_number) in status"
+      message: "status should contain the hero name and unit number"
+    - code: "assert '{hero_name}' in _code and '{unit_number}' in _code"
+      message: "use {hero_name} and {unit_number} inside the f-string, not hardcoded text"
 
 worlds:
   fantasy:
