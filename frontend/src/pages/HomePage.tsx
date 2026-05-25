@@ -45,33 +45,15 @@ const WORLD_LABEL: Record<World, string> = {
 const NAV_CARDS = [
   {
     icon: "🗺️",
-    label: "Continue Learning",
+    label: "Learning",
     description: "Pick up where you left off on the world map.",
     path: "/learn",
   },
   {
     icon: "⭐",
-    label: "Weekly Challenge",
+    label: "Challenges",
     description: "A fresh coding puzzle every week. Earn bonus XP.",
     path: "/weekly",
-  },
-  {
-    icon: "⚙️",
-    label: "Settings",
-    description: "Change your learning track or world theme.",
-    path: "/settings",
-  },
-  {
-    icon: "💳",
-    label: "Billing",
-    description: "View your plan and subscription details.",
-    path: "/billing",
-  },
-  {
-    icon: "👤",
-    label: "Account",
-    description: "Manage your email, display name, and security.",
-    path: "/account",
   },
 ] as const;
 
@@ -101,19 +83,19 @@ export default function HomePage() {
         </div>
 
         {/* Nav cards */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4">
           {NAV_CARDS.map((card) => (
             <button
               key={card.path}
               onClick={() => { navigate(card.path); }}
-              className={`flex items-start gap-4 rounded-2xl border ${theme.border} ${theme.surface} p-5 text-left transition-all hover:brightness-110 active:scale-[0.98]`}
+              className={`flex items-center gap-6 rounded-2xl border ${theme.border} ${theme.surface} p-8 text-left transition-all hover:brightness-110 active:scale-[0.98]`}
             >
-              <span className="text-3xl leading-none">{card.icon}</span>
+              <span className="text-5xl leading-none">{card.icon}</span>
               <div className="min-w-0 flex-1">
-                <p className={`font-semibold ${theme.highlight}`}>{card.label}</p>
-                <p className={`mt-0.5 text-sm ${theme.muted}`}>{card.description}</p>
+                <p className={`text-xl font-bold ${theme.highlight}`}>{card.label}</p>
+                <p className={`mt-1 text-sm ${theme.muted}`}>{card.description}</p>
               </div>
-              <span className={`shrink-0 text-xl ${theme.accent}`}>›</span>
+              <span className={`shrink-0 text-2xl ${theme.accent}`}>›</span>
             </button>
           ))}
         </div>
