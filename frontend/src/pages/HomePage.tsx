@@ -52,8 +52,8 @@ const NAV_CARDS = [
   {
     icon: "⭐",
     label: "Challenges",
-    description: "A fresh coding puzzle every week. Earn bonus XP.",
-    path: "/weekly",
+    description: "Daily and weekly logic puzzles to sharpen your skills.",
+    path: "/challenges",
   },
 ] as const;
 

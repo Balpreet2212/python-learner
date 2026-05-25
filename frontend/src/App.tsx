@@ -11,6 +11,7 @@ import SettingsPage from "./pages/SettingsPage";
 import BillingPage from "./pages/BillingPage";
 import AccountPage from "./pages/AccountPage";
 import DashboardPage from "./pages/DashboardPage";
+import ChallengesPage from "./pages/ChallengesPage";
 import WeeklyChallengePage from "./pages/WeeklyChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
@@ -132,6 +133,18 @@ export default function App() {
       <Route path="/account" element={<Navigate to="/dashboard/account" replace />} />
       <Route path="/billing" element={<Navigate to="/dashboard/billing" replace />} />
       <Route path="/settings" element={<Navigate to="/dashboard/settings" replace />} />
+
+      {/* Challenges hub */}
+      <Route
+        path="/challenges"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <ChallengesPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
 
       {/* Weekly challenge */}
       <Route
