@@ -1,66 +1,70 @@
 xp: 150
 
 code_starter: |
-  def logic_engine(score, lives, name):
-      """
-      Return a status string:
-      - "Game Over"  if lives == 0
-      - "Champion"   if score >= 100 and lives >= 3
-      - "Active"     if score >= 50 or (lives >= 1 and bool(name))
-      - "Critical"   otherwise
-      """
+  score = 340
+  bonus = 60
+  rounds = 7
+  lives = 2
+
+  # Print True if ALL of the following hold:
+  #   score + bonus > 350
+  #   score // rounds > 45
+  #   score % 10 == 0
+  #   lives >= 2 or bonus >= 100
+  print(...)
 
 hints:
-  - "Check lives == 0 first — that's Game Over regardless of everything else"
-  - "Use 'and' for Champion: both score >= 100 and lives >= 3 must be True"
-  - "Use 'or' and 'and' together for Active"
-  - "The final else returns 'Critical'"
+  - "score + bonus = 400. Is 400 > 350?"
+  - "score // rounds = 340 // 7 = 48. Is 48 > 45?"
+  - "score % 10 = 340 % 10 = 0. Does 0 == 0?"
+  - "Connect the first three conditions with 'and'. Wrap the last part in parentheses: (lives >= 2 or bonus >= 100)."
 
 plan_prompts:
-  - "What is the first condition to check? Why does order matter?"
-  - "What two conditions make a Champion?"
-  - "When is a player Active — what combinations cover it?"
+  - "What does score + bonus equal? Is it greater than 350?"
+  - "What is 340 // 7? Is that greater than 45?"
+  - "What is 340 % 10? Does it equal 0?"
+  - "How do you combine all four conditions into one print statement using 'and' and 'or'?"
 
 tests:
-  - code: "assert logic_engine(0, 0, 'Hero') == 'Game Over'"
-    message: "lives == 0 should return 'Game Over'"
-  - code: "assert logic_engine(100, 3, 'Hero') == 'Champion'"
-    message: "score >= 100 and lives >= 3 should return 'Champion'"
-  - code: "assert logic_engine(50, 1, 'Hero') == 'Active'"
-    message: "score >= 50 with lives and name should return 'Active'"
-  - code: "assert logic_engine(10, 1, '') == 'Critical'"
-    message: "low score and no name should return 'Critical'"
-  - code: "assert logic_engine(0, 3, 'Hero') == 'Active'"
-    message: "score 0 but lives >= 1 and name → 'Active'"
+  - code: "_stdout.strip() == 'True'"
+    message: "All four conditions hold — should print True"
 
 worlds:
   fantasy:
-    title: "The Arcane Logic Engine"
+    title: "The Champion's Gate"
     narrative: |
-      Elara hands you a crystal orb that pulses with four possible glows —
-      each representing a different fate for the adventurers who pass through
-      the gate. "Your function must classify them correctly," she says,
-      "using everything you have learned: division, comparison, booleans,
-      and logical operators."
+      The tournament gates open only for adventurers who satisfy every
+      requirement at once: their combined score must clear the threshold,
+      their score per round must meet the minimum, their score must be
+      perfectly divisible, and they must have enough lives or bonus gems.
+
+      Elara hands you the values. "The gate reads only one expression,"
+      she says. "Write it correctly and the doors swing open."
     story_beat: |
-      Write logic_engine(score, lives, name) that returns the correct
-      status string. The fate of every adventurer depends on accurate logic.
+      You arrange the conditions into one line. The gate glows — True.
+      A deep boom echoes as the doors swing wide. The crowd cheers.
+      "A true champion," Elara smiles. "You spoke the right truth."
   scifi:
-    title: "Crew Status Classifier"
+    title: "Launch Clearance Check"
     narrative: |
-      The ship AI needs a status function to evaluate crew fitness for each
-      mission. Using performance score, remaining lives, and crew name, the
-      function must return the correct mission status in real time.
+      Before launch the ship's computer runs a single clearance query:
+      combined fuel must exceed the threshold, efficiency per cycle must
+      clear the floor, the fuel load must divide cleanly, and backup
+      power must be available. All values are on the console.
+
+      Write the single print statement that evaluates every condition.
     story_beat: |
-      Implement logic_engine(score, lives, name) returning "Game Over",
-      "Champion", "Active", or "Critical" based on the given conditions.
+      True. Launch clearance granted. The crew exhales.
+      "Clean expression, clean launch," the navigator says, strapping in.
   mystery:
-    title: "The Case Verdict Engine"
+    title: "The Admission Test"
     narrative: |
-      The detective bureau has commissioned an automated verdict system.
-      Each case is rated by score, remaining leads (lives), and the
-      suspect's name. Your function must return the correct verdict
-      using all the logic skills you have developed.
+      Entry to the detective bureau's inner circle requires passing a logic
+      gate: combined score must exceed the threshold, cases-per-week must
+      clear the floor, your score must end on a clean ten, and you need
+      enough lives or bonus points to spare.
+
+      Write the expression. One print. One answer.
     story_beat: |
-      Write logic_engine(score, lives, name) that classifies each case
-      and returns the appropriate verdict string.
+      True. The bureau's inner door clicks open. Inspector Morgan nods.
+      "No one gets past that gate without clean logic. Welcome in."

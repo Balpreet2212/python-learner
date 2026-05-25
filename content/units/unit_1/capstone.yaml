@@ -1,71 +1,67 @@
-unit: 1
 xp: 150
 
-plan_prompts:
-  - "In one sentence, what should this program do?"
-  - "What inputs does it have? What output?"
-  - "What are the steps, in order, in plain English?"
-  - "Translate each step into Python."
-
 code_starter: |
-  def mad_lib(adjective, noun, verb):
-      # Use all three words to build a story sentence and return it
-      pass
+  name = "Aria"
+  level = 5
+  gold = 120
+  bonus = 30
+
+  # Print a one-line character summary using an f-string.
+  # Format exactly: "[name] is level [level] with [gold + bonus] gold."
+  print(f"...")
 
 hints:
-  - "Use an f-string to slot the words into a sentence: f\"The {adjective} {noun}...\""
-  - "Make sure your function has a return statement"
-  - "Example: return f\"A {adjective} {noun} began to {verb} across the land!\""
+  - "Use an f-string: f\"...\""
+  - "You can do arithmetic inside curly braces: {gold + bonus}"
+  - "Check your spacing and punctuation — the test expects an exact match"
+
+plan_prompts:
+  - "What variables do you have, and what type is each one?"
+  - "How do you embed a variable inside a string?"
+  - "How do you do arithmetic inside an f-string?"
 
 tests:
-  - code: |
-      result = mad_lib("brave", "dragon", "roar")
-      assert isinstance(result, str), "mad_lib must return a string"
-    message: "Returns a string"
-  - code: |
-      result = mad_lib("brave", "dragon", "roar")
-      assert "brave" in result and "dragon" in result and "roar" in result
-    message: "All three words appear in the story"
-  - code: |
-      r1 = mad_lib("tiny", "cat", "sleep")
-      r2 = mad_lib("huge", "dragon", "fly")
-      assert r1 != r2
-    message: "Different inputs produce different stories"
+  - code: "_stdout.strip() == 'Aria is level 5 with 150 gold.'"
+    message: "Should print: Aria is level 5 with 150 gold."
 
 worlds:
   fantasy:
     title: "The Enchanted Scroll"
     narrative: |
-      A magical scroll-filling machine in the royal library has broken down. It used to
-      accept three enchanted words — an adjective, a noun, and a verb — and weave them
-      into a tale automatically. Without it, the scribes are writing every story by hand.
+      A magical scroll-filling machine in the royal library has broken down.
+      It used to read a hero's stats and weave them into a single polished
+      line — but the formatting spell has been lost. Without it, the scribes
+      are writing every summary by hand.
 
-      Write a function called mad_lib that takes an adjective, a noun, and a verb, then
-      returns a story string containing all three. Restore the magic of the library!
+      You have the stats. Write a single print statement using an f-string
+      that produces the hero's summary line exactly as specified.
     story_beat: |
-      The scroll shimmers as the words rearrange into a glowing tale. The head librarian
-      claps her hands. "The machine lives again! Every story in the realm will carry your
-      mark, apprentice."
+      The scroll shimmers. The line appears, perfectly formatted: name, level,
+      and gold all in the right place. The head librarian claps. "The machine
+      lives again. Every hero in the realm will be properly recorded."
   scifi:
-    title: "Transmission Protocol"
+    title: "Crew Manifest Entry"
     narrative: |
-      The ship's communication array needs a new encoding function. Command requires
-      every message to weave three descriptor codes — an adjective, a noun, and a verb —
-      into a single transmission string before broadcast.
+      The ship's manifest system requires one formatted line per crew member:
+      name, rank level, and total resource allocation (base plus bonus).
+      A data wipe erased the formatting script. Without it, no crew member
+      can be logged and the ship cannot launch.
 
-      Write mad_lib to assemble these codes into a properly formatted message string.
-      Re-establish contact with command before the window closes.
+      Write the print statement that produces the correct manifest entry.
     story_beat: |
-      "Transmission received, signal strong." The command console crackles back to life.
-      Your encoding function has bridged the void. Mission status: communication restored.
+      The manifest flickers back to life. "Aria is level 5 with 150 gold."
+      Entry confirmed. The launch commander gives a thumbs-up. "All crew
+      accounted for. We're cleared to go."
   mystery:
-    title: "The Detective's Report"
+    title: "The Case File Header"
     narrative: |
-      A power surge scrambled the report-assembly function used by the agency. Every
-      case summary needs three words — an adjective, a noun, and a verb — stitched
-      together into a formatted report sentence before it can be filed.
+      Every case file at the bureau starts with a one-line subject summary:
+      name, clearance level, and total budget (base plus bonus allocation).
+      The formatting script was wiped in a system crash, and cases are
+      piling up without headers.
 
-      Write mad_lib to rebuild the function and get the reports flowing again.
+      Write the print statement that generates the correct header line.
     story_beat: |
-      The report prints cleanly. Inspector Morgan stamps it approved. "Exactly what we
-      needed. The evidence trail is reconstructed — the case can proceed."
+      The header prints cleanly. Inspector Morgan stamps the file approved.
+      "Exactly right. Now we can open the case. Good work getting the
+      system back online."
