@@ -153,9 +153,18 @@ export default function NavBar() {
             </span>
           )}
 
-          <span className={`hidden text-xs md:block ${navMuted} truncate max-w-[120px]`}>
-            {account?.display_name ?? account?.email}
-          </span>
+          {isParent ? (
+            <span className={`hidden text-xs md:block ${navMuted} truncate max-w-[120px]`}>
+              {account?.display_name ?? account?.email}
+            </span>
+          ) : (
+            <button
+              onClick={() => { navigate("/dashboard"); }}
+              className={`hidden text-xs md:block ${navMuted} hover:${navText} transition-colors truncate max-w-[120px] hover:underline`}
+            >
+              {account?.display_name ?? account?.email}
+            </button>
+          )}
 
           <button
             onClick={() => void handleLogout()}

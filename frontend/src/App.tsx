@@ -10,6 +10,7 @@ import CapstoneChallengePage from "./pages/CapstoneChallengePage";
 import SettingsPage from "./pages/SettingsPage";
 import BillingPage from "./pages/BillingPage";
 import AccountPage from "./pages/AccountPage";
+import DashboardPage from "./pages/DashboardPage";
 import WeeklyChallengePage from "./pages/WeeklyChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
@@ -110,36 +111,27 @@ export default function App() {
           </RequireAuth>
         }
       />
+      {/* User dashboard (account / billing / settings) */}
       <Route
-        path="/settings"
+        path="/dashboard"
         element={
           <RequireAuth>
             <AppLayout>
-              <SettingsPage />
+              <DashboardPage />
             </AppLayout>
           </RequireAuth>
         }
-      />
-      <Route
-        path="/billing"
-        element={
-          <RequireAuth>
-            <AppLayout>
-              <BillingPage />
-            </AppLayout>
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/account"
-        element={
-          <RequireAuth>
-            <AppLayout>
-              <AccountPage />
-            </AppLayout>
-          </RequireAuth>
-        }
-      />
+      >
+        <Route index element={<Navigate to="/dashboard/account" replace />} />
+        <Route path="account" element={<AccountPage />} />
+        <Route path="billing" element={<BillingPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+
+      {/* Redirect old standalone routes to dashboard */}
+      <Route path="/account" element={<Navigate to="/dashboard/account" replace />} />
+      <Route path="/billing" element={<Navigate to="/dashboard/billing" replace />} />
+      <Route path="/settings" element={<Navigate to="/dashboard/settings" replace />} />
 
       {/* Weekly challenge */}
       <Route

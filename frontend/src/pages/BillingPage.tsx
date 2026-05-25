@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const PLAN_FEATURES = [
@@ -11,22 +10,12 @@ const PLAN_FEATURES = [
 
 export default function BillingPage() {
   const { profile } = useAuth();
-  const navigate = useNavigate();
 
   const completedUnits = profile ? profile.current_unit - 1 : 0;
 
   return (
-    <main className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="mx-auto max-w-xl p-6 space-y-8">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => { navigate("/"); }}
-            className="text-gray-500 hover:text-gray-300 transition-colors text-sm"
-          >
-            ← Home
-          </button>
-          <h1 className="text-2xl font-bold">Billing</h1>
-        </div>
+    <div className="mx-auto max-w-xl p-6 space-y-8">
+        <h1 className="text-2xl font-bold">Billing</h1>
 
         {/* Current plan */}
         <section className="rounded-2xl border border-indigo-500/40 bg-indigo-950/30 p-6 space-y-4">
@@ -74,7 +63,6 @@ export default function BillingPage() {
         <p className="text-center text-xs text-gray-600">
           Questions about your subscription? Contact support.
         </p>
-      </div>
-    </main>
+    </div>
   );
 }

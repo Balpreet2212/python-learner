@@ -67,17 +67,8 @@ export default function AccountPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="mx-auto max-w-xl p-6 space-y-8">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => { navigate("/"); }}
-            className="text-gray-500 hover:text-gray-300 transition-colors text-sm"
-          >
-            ← Home
-          </button>
-          <h1 className="text-2xl font-bold">Account</h1>
-        </div>
+    <div className="mx-auto max-w-xl p-6 space-y-8">
+        <h1 className="text-2xl font-bold">Account</h1>
 
         {/* Account info */}
         <section className="rounded-2xl border border-gray-700 bg-gray-900 divide-y divide-gray-800">
@@ -140,8 +131,7 @@ export default function AccountPage() {
             Permanently deletes your account and all associated data.
           </p>
         </section>
-      </div>
-    </main>
+    </div>
   );
 }
 

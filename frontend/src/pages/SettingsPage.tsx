@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { postOnboarding } from "../api/learner";
 import { ApiError } from "../api/client";
@@ -21,7 +20,6 @@ const TRACK_OPTIONS: { value: Track; label: string; description: string }[] = [
 
 export default function SettingsPage() {
   const { profile, setProfile } = useAuth();
-  const navigate = useNavigate();
 
   const [world, setWorld] = useState<World>((profile?.world ?? "fantasy") as World);
   const [track, setTrack] = useState<Track>((profile?.track ?? "junior") as Track);
@@ -47,17 +45,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="mx-auto max-w-xl p-6 space-y-8">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => { navigate("/"); }}
-            className="text-gray-500 hover:text-gray-300 transition-colors text-sm"
-          >
-            ← Home
-          </button>
-          <h1 className="text-2xl font-bold">Settings</h1>
-        </div>
+    <div className="mx-auto max-w-xl p-6 space-y-8">
+        <h1 className="text-2xl font-bold">Settings</h1>
 
         {/* World */}
         <section className="space-y-3">
@@ -112,7 +101,6 @@ export default function SettingsPage() {
         >
           Save Changes
         </Button>
-      </div>
-    </main>
+    </div>
   );
 }
