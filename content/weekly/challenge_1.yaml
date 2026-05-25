@@ -2,10 +2,19 @@ title: "The Tax Calculator"
 xp: 50
 difficulty: "easy"
 description: |
-  Write a function tax_total(price, quantity, tax_rate) that:
-  - Calculates the subtotal (price × quantity)
-  - Calculates the tax amount (subtotal × tax_rate / 100)
-  - Returns the total (subtotal + tax) rounded to 2 decimal places
+  Write a function tax_total(price, quantity, tax_rate) that computes the
+  final bill including tax.
+
+  Step 1 — Subtotal: multiply price by quantity.
+  Step 2 — Tax amount: multiply the subtotal by tax_rate, then divide by 100.
+            A tax_rate of 20 means 20 percent, so dividing by 100 converts it.
+  Step 3 — Total: add the tax amount to the subtotal and return the result
+            rounded to 2 decimal places.
+
+  Example: price=10, quantity=3, tax_rate=20
+    Subtotal = 30
+    Tax      = 30 × 20 / 100 = 6.0
+    Total    = 36.0
 
 code_starter: |
   def tax_total(price, quantity, tax_rate):
@@ -18,27 +27,60 @@ hints:
 
 tests:
   - code: "assert tax_total(10, 3, 20) == 36.0"
-    message: "10 × 3 = 30, 20% tax = 6.0, total = 36.0"
+    message: "10 x 3 = 30, 20% tax = 6.0, total = 36.0"
   - code: "assert tax_total(25, 2, 10) == 55.0"
-    message: "25 × 2 = 50, 10% tax = 5.0, total = 55.0"
+    message: "25 x 2 = 50, 10% tax = 5.0, total = 55.0"
   - code: "assert tax_total(7, 4, 15) == 32.2"
-    message: "7 × 4 = 28, 15% tax = 4.2, total = 32.2"
+    message: "7 x 4 = 28, 15% tax = 4.2, total = 32.2"
 
 worlds:
   fantasy:
     title: "The Guild Tax Scroll"
     description: |
       The Merchant Guild charges tax on every potion sold. The guild master
-      needs a reliable calculation. Write tax_total(price, quantity, tax_rate)
-      to compute the final bill including tax.
+      needs a reliable way to compute the final bill for any order.
+
+      Write a function tax_total(price, quantity, tax_rate) that works as
+      follows:
+
+      First, calculate the subtotal by multiplying price by quantity.
+      Then calculate the tax amount: take the subtotal, multiply it by
+      tax_rate, and divide by 100 (so a tax_rate of 20 means 20 percent).
+      Finally, add the tax to the subtotal and return the result rounded
+      to 2 decimal places.
+
+      Example: 3 potions at 10 gold each with a 20 percent tax.
+        Subtotal = 30, tax = 6.0, total returned = 36.0
+
   scifi:
     title: "Trade Port Levy Calculator"
     description: |
       The space station collects a levy on all cargo shipments. The port
-      authority requires an automated calculator. Write tax_total(price,
-      quantity, tax_rate) to compute the total cost including the levy.
+      authority needs an automated calculator before approving any manifest.
+
+      Write a function tax_total(price, quantity, tax_rate) that computes
+      the total cost including the levy:
+
+      Subtotal = price multiplied by quantity.
+      Levy amount = subtotal multiplied by tax_rate, divided by 100.
+      (A tax_rate of 10 means 10 percent of the subtotal.)
+      Return the subtotal plus the levy, rounded to 2 decimal places.
+
+      Example: 2 cargo units at 25 credits each with a 10 percent levy.
+        Subtotal = 50, levy = 5.0, total returned = 55.0
+
   mystery:
     title: "The Expense Report"
     description: |
-      The detective agency invoices clients with tax included. Write
-      tax_total(price, quantity, tax_rate) to compute the full invoice amount.
+      The detective agency invoices clients with tax included on every line
+      item. The accounting department needs a reliable formula.
+
+      Write a function tax_total(price, quantity, tax_rate):
+
+      Subtotal = price multiplied by quantity.
+      Tax = subtotal multiplied by tax_rate, then divided by 100.
+      (tax_rate of 15 means 15 percent.)
+      Return the total — subtotal plus tax — rounded to 2 decimal places.
+
+      Example: 4 items at 7 each with a 15 percent tax.
+        Subtotal = 28, tax = 4.2, total returned = 32.2

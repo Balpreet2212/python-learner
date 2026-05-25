@@ -2,11 +2,23 @@ title: "The Sequence Analyser"
 xp: 75
 difficulty: "medium"
 description: |
-  Write a function analyse(numbers) that, given a non-empty list of numbers,
-  returns a tuple of (minimum, maximum, total, average) where average is
-  rounded to 2 decimal places.
+  Write a function analyse(numbers) that takes a non-empty list of numbers
+  and returns a tuple of exactly four values in this order:
 
-  Use: min(), max(), sum(), len(), round()
+    (minimum, maximum, total, average)
+
+  minimum — the smallest number in the list
+  maximum — the largest number in the list
+  total   — the sum of all numbers in the list
+  average — total divided by the count of numbers, rounded to 2 decimal places
+
+  Return all four as a single tuple.
+
+  Example: analyse([1, 2, 3, 4, 5])
+    minimum = 1, maximum = 5, total = 15, average = 3.0
+    Returns: (1, 5, 15, 3.0)
+
+  Useful built-ins: min(), max(), sum(), len(), round()
 
 code_starter: |
   def analyse(numbers):
@@ -16,34 +28,82 @@ hints:
   - "maximum = max(numbers)"
   - "total = sum(numbers)"
   - "average = round(total / len(numbers), 2)"
-  - "return (minimum, maximum, total, average)"
+  - "return (minimum, maximum, total, average) — note the order"
 
 tests:
   - code: "assert analyse([1, 2, 3, 4, 5]) == (1, 5, 15, 3.0)"
-    message: "min=1, max=5, total=15, avg=3.0"
+    message: "min=1, max=5, total=15, average=3.0"
   - code: "assert analyse([10, 20, 30]) == (10, 30, 60, 20.0)"
-    message: "Three values"
+    message: "Three values: min=10, max=30, total=60, average=20.0"
   - code: "assert analyse([7, 3, 9, 1]) == (1, 9, 20, 5.0)"
-    message: "Four values"
+    message: "Four values: min=1, max=9, total=20, average=5.0"
   - code: "assert analyse([100]) == (100, 100, 100, 100.0)"
-    message: "Single element"
+    message: "Single element: all four values are 100"
 
 worlds:
   fantasy:
     title: "The Rune Sequence Oracle"
     description: |
-      The oracle analyses sequences of rune power levels and needs a
-      summary function. Write analyse(numbers) to return a tuple of
-      (minimum, maximum, total, average) for any sequence.
+      The oracle studies sequences of rune power levels and needs a summary
+      function that extracts four key values from any sequence.
+
+      Write a function analyse(numbers) that returns a tuple of four values
+      in this exact order: (minimum, maximum, total, average)
+
+        minimum — the smallest number in the list
+        maximum — the largest number in the list
+        total   — the sum of every number in the list
+        average — total divided by the count, rounded to 2 decimal places
+
+      The result must be a tuple with all four values in the order above.
+
+      Example: analyse([1, 2, 3, 4, 5])
+        minimum = 1, maximum = 5, total = 15, average = 3.0
+        Returns (1, 5, 15, 3.0)
+
+      Useful built-ins: min(), max(), sum(), len(), round()
+
   scifi:
     title: "Telemetry Data Analyser"
     description: |
-      The ship's computer summarises sensor readings from each mission.
-      Write analyse(numbers) to return (minimum, maximum, total, average)
-      for a list of sensor values.
+      The ship's computer needs to summarise sensor readings after each mission.
+      Given a list of readings, it must compute four statistics and return them
+      together as a single tuple.
+
+      Write a function analyse(numbers) that returns:
+
+        (minimum, maximum, total, average)
+
+        minimum — the lowest reading
+        maximum — the highest reading
+        total   — the sum of all readings
+        average — total divided by the number of readings, rounded to 2 decimal places
+
+      The tuple must be in exactly that order.
+
+      Example: analyse([10, 20, 30])
+        Returns (10, 30, 60, 20.0)
+
+      Useful built-ins: min(), max(), sum(), len(), round()
+
   mystery:
     title: "The Evidence Scorer"
     description: |
-      The detective bureau analyses suspect credibility scores.
-      Write analyse(numbers) to return (minimum, maximum, total, average)
-      for a list of values.
+      The detective bureau analyses the credibility scores of witnesses across
+      a case. Before closing the file, four summary statistics are required.
+
+      Write a function analyse(numbers) that returns a tuple in this order:
+
+        (minimum, maximum, total, average)
+
+        minimum — the lowest score in the list
+        maximum — the highest score in the list
+        total   — the sum of all scores
+        average — the total divided by the count of scores, rounded to 2 decimal places
+
+      Return all four as a single tuple in that exact order.
+
+      Example: analyse([7, 3, 9, 1])
+        Returns (1, 9, 20, 5.0)
+
+      Useful built-ins: min(), max(), sum(), len(), round()

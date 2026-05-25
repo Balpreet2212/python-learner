@@ -2,50 +2,106 @@ title: "The Password Validator"
 xp: 75
 difficulty: "medium"
 description: |
-  Write a function is_valid_password(password) that returns True if ALL of:
-  - Length is at least 8 characters
-  - Contains at least one digit (use: any(c.isdigit() for c in password))
-  - Does not start with a space
+  Write a function is_valid_password(password) that returns True only if
+  all three rules are satisfied, or False the moment any rule fails.
 
-  Returns False otherwise.
+  Rule 1 — Length: the password must be at least 8 characters long.
+  Rule 2 — Digit:  the password must contain at least one digit (0 to 9).
+            Use: any(c.isdigit() for c in password)
+  Rule 3 — No leading space: the first character must not be a space.
+
+  All three rules must pass. If even one fails, return False.
+
+  Examples:
+    "Secret123"  → True  (8 chars, has digit, no leading space)
+    "short1"     → False (only 6 characters)
+    "noDIGITS!"  → False (no digit found)
+    " leading1"  → False (starts with a space)
 
 code_starter: |
   def is_valid_password(password):
 
 hints:
-  - "len(password) >= 8 checks the length"
+  - "len(password) >= 8 checks the length rule"
   - "any(c.isdigit() for c in password) checks for a digit"
-  - "password[0] != ' ' or password and password[0] != ' '"
-  - "Combine all three conditions with 'and'"
+  - "password[0] != ' ' checks the leading space rule — but only if password is non-empty"
+  - "Combine all three with 'and' so all must be True"
 
 tests:
   - code: "assert is_valid_password('Secret123') == True"
-    message: "Valid password should return True"
+    message: "Valid password returns True"
   - code: "assert is_valid_password('short1') == False"
-    message: "Too short (under 8 chars) should return False"
+    message: "Under 8 characters returns False"
   - code: "assert is_valid_password('noDIGITS!') == False"
-    message: "No digits should return False"
+    message: "No digit returns False"
   - code: "assert is_valid_password(' leading1') == False"
-    message: "Leading space should return False"
+    message: "Leading space returns False"
   - code: "assert is_valid_password('Exactly81') == True"
-    message: "8 chars with digit returns True"
+    message: "Exactly 8 characters with a digit returns True"
 
 worlds:
   fantasy:
     title: "The Arcane Password Ward"
     description: |
-      The wizard's tower uses magical passwords with strict rules.
-      Write is_valid_password(password) to verify whether a password
-      meets all the tower's security requirements.
+      The wizard's tower is sealed by magical passwords. The ward checks three
+      rules before granting entry, and all three must pass — fail any one and
+      the door stays locked.
+
+      Write a function is_valid_password(password) that returns True only when
+      every rule is satisfied:
+
+      Rule 1 — Length: the password must be at least 8 characters long.
+      Rule 2 — Contains a digit: there must be at least one digit (0 through 9)
+               somewhere in the password. Use: any(c.isdigit() for c in password)
+      Rule 3 — No leading space: the very first character must not be a space.
+
+      If all three rules pass, return True. If even one fails, return False.
+
+      Examples:
+        "Secret123"  passes all rules → True
+        "short1"     fails Rule 1 (only 6 chars) → False
+        "noDIGITS!"  fails Rule 2 (no digit) → False
+        " leading1"  fails Rule 3 (starts with space) → False
+
   scifi:
     title: "Security Clearance Verification"
     description: |
-      The ship's security system validates crew passwords before granting
-      access to restricted areas. Write is_valid_password(password) to
-      check whether a password meets all the rules.
+      The ship's security system validates passwords before granting access to
+      restricted areas. Three rules must all pass — any failure blocks entry.
+
+      Write a function is_valid_password(password) that returns True only when:
+
+      Rule 1 — Length: the password is at least 8 characters long.
+      Rule 2 — Digit present: the password contains at least one digit (0 to 9).
+               Use: any(c.isdigit() for c in password)
+      Rule 3 — Clean start: the first character is not a space.
+
+      Return True only if all three rules hold. Return False if any one fails.
+
+      Examples:
+        "Secret123"  → True   (passes all three)
+        "short1"     → False  (too short)
+        "noDIGITS!"  → False  (no digit)
+        " leading1"  → False  (space at start)
+
   mystery:
     title: "The Safe Combination Checker"
     description: |
-      The evidence safe requires a valid combination password.
-      Write is_valid_password(password) to verify whether it meets
-      all the security rules.
+      The evidence safe uses password combinations with strict rules. An
+      automated checker must verify every combination before the lock accepts it.
+
+      Write a function is_valid_password(password) that returns True only when
+      all three rules are met:
+
+      Rule 1 — Minimum length: the password must have at least 8 characters.
+      Rule 2 — Must contain a digit: at least one character must be a digit
+               (0 through 9). Check with: any(c.isdigit() for c in password)
+      Rule 3 — No leading space: the password cannot begin with a space.
+
+      All three must pass to return True. Any single failure returns False.
+
+      Examples:
+        "Secret123" → True
+        "short1"    → False (too short)
+        "noDIGITS!" → False (no digit)
+        " leading1" → False (leading space)
