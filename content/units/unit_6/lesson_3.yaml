@@ -1,92 +1,91 @@
-unit: 4
-lesson: 3
-xp: 10
+title: "Slicing and Searching Lists"
+xp: 12
 
-example:
-  code: |
-    person = {"name": "Aria", "age": 28, "active": True}
-    print(person)
-    print(person["name"])
-    print(person["age"])
-  explanation: |
-    A dictionary maps keys to values using curly braces and colons.
-    Each pair is written as key: value, separated from the next by a comma.
-    Keys are usually strings; values can be any type.
-    You retrieve a value by writing dict["key"] — the key in square brackets.
-  output: "{'name': 'Aria', 'age': 28, 'active': True}\nAria\n28"
+exercises:
+  - type: concept
+    code: |
+      nums = [10, 20, 30, 40, 50]
+      print(nums[1:3])
+      print(nums[:2])
+      print(nums[3:])
+      print(30 in nums)
+      print(99 in nums)
+    output: "[20, 30]\n[10, 20]\n[40, 50]\nTrue\nFalse"
+    explanation: "Slicing extracts a portion: list[start:stop] (stop is exclusive). in checks membership — it returns True or False."
 
-code_starter: |
-  # Create a dict called 'character' with keys:
-  #   'name'   -> a string
-  #   'level'  -> the integer 5
-  #   'active' -> the boolean True
-  character =
-hints:
-  - "Dicts use curly braces: {'key': value, ...}"
-  - "character = {'name': 'Zara', 'level': 5, 'active': True}"
-tests:
-  - code: "assert isinstance(character, dict), 'character should be a dict'"
-    message: "character should be a dictionary"
-  - code: "assert character.get('level') == 5, f\"level should be 5, got {character.get('level')}\""
-    message: "character['level'] should be 5"
-  - code: "assert character.get('active') is True"
-    message: "character['active'] should be True"
-  - code: "assert isinstance(character.get('name'), str) and len(character.get('name', '')) > 0"
-    message: "character['name'] should be a non-empty string"
+  - type: mcq
+    question: "What does this print?"
+    code: "letters = ['a', 'b', 'c', 'd', 'e']\nprint(letters[1:4])"
+    choices: ["['b', 'c', 'd']", "['a', 'b', 'c']", "['c', 'd', 'e']", "['b', 'c', 'd', 'e']"]
+    correct: "['b', 'c', 'd']"
+    explanation: "letters[1:4] starts at index 1, stops before index 4: b, c, d."
 
-final_challenge:
-  code_starter: |
-    # Create a mission dictionary with three specific keys
-  hints:
-    - "mission = {'name': ..., 'difficulty': ..., 'active': ...}"
-    - "'name' should be a non-empty string"
-    - "'difficulty' should be the integer 8"
-    - "'active' should be the boolean True"
-  tests:
-    - code: "assert isinstance(mission, dict)"
-      message: "mission should be a dictionary"
-    - code: "assert isinstance(mission.get('name'), str) and len(mission.get('name', '')) > 0"
-      message: "mission['name'] should be a non-empty string"
-    - code: "assert mission.get('difficulty') == 8"
-      message: "mission['difficulty'] should be 8"
-    - code: "assert mission.get('active') is True"
-      message: "mission['active'] should be True"
+  - type: fill_blank
+    before: "items = [1, 2, 3, 4, 5]\nprint(items[:"
+    after: "])"
+    choices: ["3", "2", "4", "0"]
+    answer: "3"
+    explanation: "items[:3] takes the first 3 items: [1, 2, 3]."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "words = ['hello', 'world', 'python']\nprint('world' in words)"
+    choices: ["True", "False", "world", "1"]
+    correct: "True"
+    explanation: "'world' is in the list, so in returns True."
+
+  - type: arrange
+    instruction: "Print the last 2 items of nums = [10, 20, 30, 40, 50]"
+    blocks: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+    correct: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+    explanation: "nums[3:] starts at index 3 and goes to the end: [40, 50]."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "scores = [85, 92, 78, 95, 88]\nprint(scores[2:4])"
+    choices: ["[78, 95]", "[92, 78]", "[78, 95, 88]", "[85, 92]"]
+    correct: "[78, 95]"
+    explanation: "scores[2:4] takes indices 2 and 3: 78 and 95."
+
+  - type: fill_blank
+    before: "fruits = ['apple', 'banana', 'cherry']\nprint('grape' "
+    after: " fruits)"
+    choices: ["in", "not", "==", "is"]
+    answer: "in"
+    explanation: "'grape' in fruits checks if 'grape' is in the list. It is not, so it prints False."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "data = [1, 2, 3, 4, 5]\nprint(data[:3])"
+    choices: ["[1, 2, 3]", "[1, 2]", "[2, 3, 4]", "[3, 4, 5]"]
+    correct: "[1, 2, 3]"
+    explanation: "data[:3] starts from the beginning and stops before index 3."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "names = ['Alice', 'Bob', 'Carol']\nprint('Bob' in names)\nprint('Dave' in names)"
+    choices: ["True\nFalse", "False\nTrue", "True\nTrue", "False\nFalse"]
+    correct: "True\nFalse"
+    explanation: "'Bob' is in the list (True). 'Dave' is not (False)."
+
+  - type: mini_code
+    prompt: "Create a list of 5 numbers. Print a slice of the middle 3 items."
+    starter: ""
+    tests:
+      - code: "len(eval(_stdout.strip())) == 3"
+        message: "Should print exactly 3 items"
+
+  - type: mini_code
+    prompt: "Create a list called menu with 4 food items. Print True if 'pizza' is in menu, False if not. Then print the first 2 items."
+    starter: ""
+    tests:
+      - code: "'True' in _stdout or 'False' in _stdout"
+        message: "Should print True or False for the in check"
 
 worlds:
   fantasy:
-    title: "The Character Sheet"
-    setup: |
-      Every hero in the Enchanted Realm has a character sheet — a structured
-      collection of named attributes. "A dictionary maps keys to values," Elara
-      explains. "Curly braces, colons between key and value, commas between pairs."
-
-      Unlike a list (which uses numbers as positions), a dict uses meaningful labels.
-      Create 'character' with 'name', 'level', and 'active' keys — a proper
-      hero profile.
-    final_challenge_prompt: |
-      A new quest has been issued. Create a dictionary called mission with three
-      keys: 'name' (any non-empty string), 'difficulty' set to the integer 8,
-      and 'active' set to True.
+    title: "The Spell Library"
   scifi:
-    title: "Crew Profile Record"
-    setup: |
-      The ship's database stores crew records as key-value pairs. "Dicts associate
-      labels (keys) with data (values)," the AI explains. "Use curly braces and
-      colons: {'key': value}. Keys are usually strings; values can be anything."
-
-      Build the 'character' dict with a name, level, and active status.
-    final_challenge_prompt: |
-      Log a new mission to the database. Create a dict called mission with 'name'
-      (non-empty string), 'difficulty' set to 8, and 'active' set to True.
+    title: "Database Queries"
   mystery:
-    title: "The Dossier"
-    setup: |
-      Every case file is a dossier: a named collection of facts. "A dictionary lets
-      you associate labels with values," your mentor says. "Use curly braces, put the
-      key first, a colon, then the value."
-
-      Create 'character' with a string 'name', integer 'level' of 5, and boolean
-      'active' of True.
-    final_challenge_prompt: |
-      Open a new case file. Create a dictionary called mission with 'name' (any
-      non-empty string), 'difficulty' set to 8, and 'active' set to True.
+    title: "Narrowing Suspects"

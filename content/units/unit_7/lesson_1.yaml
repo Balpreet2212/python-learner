@@ -1,82 +1,100 @@
-unit: 6
-lesson: 1
-xp: 10
+title: "Classes and Attributes"
+xp: 12
 
-example:
-  code: |
-    class Dog:
-        def __init__(self, name, age):
-            self.name = name
-            self.age = age
+exercises:
+  - type: concept
+    code: |
+      class Dog:
+          def __init__(self, name, age):
+              self.name = name
+              self.age = age
 
-    rex = Dog("Rex", 4)
-    print(rex.name)
-    print(rex.age)
-  explanation: |
-    A class is a blueprint. __init__ is the special method that runs automatically when you create an instance with Dog("Rex", 4).
-    self refers to the specific object being created. self.name = name stores the value as an attribute on that object.
-    After creation, rex.name and rex.age let you read those attributes from anywhere.
-  output: "Rex\n4"
+      rex = Dog("Rex", 4)
+      print(rex.name)
+      print(rex.age)
+    output: "Rex\n4"
+    explanation: "class defines a blueprint. __init__ runs automatically when you create an instance. self.name stores the value as an attribute on the object."
 
-code_starter: |
-  class Hero:
-      def __init__(self, name, power):
-          self.___ = ___
-          self.___ = ___
+  - type: mcq
+    question: "What does this print?"
+    code: "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc = Car('Toyota')\nprint(c.brand)"
+    choices: ["Toyota", "brand", "Car", "self"]
+    correct: "Toyota"
+    explanation: "Car('Toyota') creates an instance. c.brand reads the stored attribute."
 
-  hero = Hero("Aldric", 85)
-hints:
-  - "self.name = name stores the name attribute"
-  - "self.power = power stores the power attribute"
+  - type: fill_blank
+    before: "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        "
+    after: ".y = y\n\np = Point(3, 5)\nprint(p.x)"
+    choices: ["self", "Point", "x", "y"]
+    answer: "self"
+    explanation: "self refers to the object being created. self.y stores the y value on that object."
 
-tests:
-  - code: "assert hero.name == 'Aldric', f'hero.name should be Aldric, got {hero.name}'"
-    message: "hero.name is 'Aldric'"
-  - code: "assert hero.power == 85, f'hero.power should be 85, got {hero.power}'"
-    message: "hero.power is 85"
+  - type: mcq
+    question: "What does this print?"
+    code: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\nc = Circle(7)\nprint(c.radius * 2)"
+    choices: ["14", "7", "radius", "49"]
+    correct: "14"
+    explanation: "c.radius is 7. 7 * 2 = 14."
 
-final_challenge:
-  code_starter: |
-    # Your code here
-  hints:
-    - "class Spell:"
-    - "    def __init__(self, name, power):"
-    - "        self.name = name"
-    - "        self.power = power"
-    - "spell = Spell(\"Fireball\", 80)"
-  tests:
-    - code: "assert spell.name == 'Fireball', f'spell.name should be Fireball'"
-      message: "spell.name is 'Fireball'"
-    - code: "assert spell.power == 80, f'spell.power should be 80'"
-      message: "spell.power is 80"
-    - code: "assert isinstance(spell, Spell), 'spell should be an instance of Spell'"
-      message: "spell is an instance of Spell"
+  - type: arrange
+    instruction: "Define a Book class with title and author attributes, then create an instance"
+    blocks: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
+    correct: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
+    explanation: "Define class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access with dot notation."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Person('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
+    choices: ["Alice is 30", "name is age", "Person is 30", "Alice 30"]
+    correct: "Alice is 30"
+    explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
+
+  - type: fill_blank
+    before: "class Lamp:\n    def __init__(self, brightness):\n        self.brightness = brightness\n\ndesk = Lamp(80)\nprint("
+    after: ".brightness)"
+    choices: ["desk", "Lamp", "self", "brightness"]
+    answer: "desk"
+    explanation: "desk is the instance variable. desk.brightness accesses the attribute."
+
+  - type: mcq
+    question: "What is the purpose of __init__?"
+    code: ""
+    choices: [
+      "It runs automatically when a new object is created and sets up its attributes",
+      "It prints the object",
+      "It is required in every Python file",
+      "It defines the class name"
+    ]
+    correct: "It runs automatically when a new object is created and sets up its attributes"
+    explanation: "__init__ is the constructor — it initialises the object's state when you write ClassName(...)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "class Square:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Square(6)\nprint(s.area)"
+    choices: ["36", "6", "12", "side * side"]
+    correct: "36"
+    explanation: "area = 6 * 6 = 36 is stored in __init__. s.area reads it."
+
+  - type: mini_code
+    prompt: "Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
+    starter: ""
+    tests:
+      - code: "r = Rectangle(4, 7); r.width == 4 and r.height == 7"
+        message: "Rectangle should store width=4 and height=7"
+      - code: "'4' in _stdout and '7' in _stdout"
+        message: "Should print 4 and 7"
+
+  - type: mini_code
+    prompt: "Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
+    starter: ""
+    tests:
+      - code: "s = Student('Test', 90); s.name == 'Test' and s.grade == 90"
+        message: "Student should have name and grade attributes"
 
 worlds:
   fantasy:
-    title: "Forging the First Blueprint"
-    setup: |
-      Every legendary weapon, every arcane artifact in the Grand Archive started as a blueprint — a class. The blueprint describes what a thing IS: its name, its power, its properties. The actual object — the sword on the rack, the wand in the case — is an instance made from that blueprint.
-      In Python, a class is defined with the class keyword. The __init__ method is the forge: it runs automatically each time you create a new instance, and self refers to the specific object being made.
-    final_challenge_prompt: |
-      The Archmage needs a Spell class to register enchantments in the archive.
-      Write class Spell with __init__(self, name, power) that stores both as attributes.
-      Then create an instance: spell = Spell("Fireball", 80)
+    title: "Blueprints of Magic"
   scifi:
-    title: "Designing the First Object Blueprint"
-    setup: |
-      Every ship system on the Meridian — life support, navigation, weapons — is modelled in code as an object created from a class blueprint. The blueprint specifies what data each system holds (its attributes). Creating an instance is like deploying one live copy of that system.
-      __init__ is the constructor: Python calls it automatically when you write ClassName(...). Inside, self refers to the fresh instance, and self.attribute = value stores data on it.
-    final_challenge_prompt: |
-      Design a Spell class to model the weapon-system registry:
-      — __init__(self, name, power) stores both attributes
-      — Create spell = Spell("Fireball", 80)
+    title: "Unit Schematics"
   mystery:
-    title: "The Detective's Case-File Template"
-    setup: |
-      Every case in the detective agency starts from the same template: a name, a power rating (how serious the case is), and any other relevant facts. Rather than building each case from scratch, the agency uses a class — a reusable mold that stamps out consistent case objects.
-      __init__ is the intake form: fill in the details when you create the object, and the form stores them for the lifetime of that object.
-    final_challenge_prompt: |
-      Write a Spell class (the agency repurposes it for evidence tagging):
-      — __init__(self, name, power) stores both as attributes on self
-      — Create the instance spell = Spell("Fireball", 80)
+    title: "The Suspect Profile"

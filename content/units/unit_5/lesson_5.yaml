@@ -1,96 +1,101 @@
-unit: 3
-lesson: 5
-xp: 15
+title: "Functions Calling Functions"
+xp: 12
 
-example:
-  code: |
-    def triple(n):
-        return n * 3
+exercises:
+  - type: concept
+    code: |
+      def celsius_to_kelvin(c):
+          return c + 273.15
 
-    def sum_of_triples(a, b):
-        return triple(a) + triple(b)
+      def is_absolute_zero(c):
+          return celsius_to_kelvin(c) == 0
 
-    print(sum_of_triples(2, 4))
-  explanation: |
-    Functions can call other functions — this is called composition.
-    triple(2) returns 6 and triple(4) returns 12, so sum_of_triples(2, 4) returns 18.
-    Breaking a big task into smaller helper functions makes code easier to read,
-    test, and reuse. Define the simpler function first, then build on top of it.
-  output: "18"
+      print(is_absolute_zero(-273.15))
+    output: "True"
+    explanation: "Functions can call other functions. This lets you build complex behaviour from simple, tested pieces."
 
-code_starter: |
-  # Define 'square(n)' that returns n squared.
-  def square(n):
+  - type: mcq
+    question: "What does this print?"
+    code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
+    choices: ["12", "6", "24", "9"]
+    correct: "12"
+    explanation: "double(3) = 6. double(6) = 12."
 
-  # Define 'sum_of_squares(a, b)' that calls square() for each argument
-  # and returns their sum.
-  def sum_of_squares(a, b):
+  - type: fill_blank
+    before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
+    after: "(a) + square(b)"
+    choices: ["square", "print", "double", "int"]
+    answer: "square"
+    explanation: "sum_of_squares calls square twice, once for each argument."
 
-  result = sum_of_squares(3, 4)
-hints:
-  - "square(n) returns n * n  (or n ** 2)"
-  - "sum_of_squares calls square twice: return square(a) + square(b)"
-tests:
-  - code: "assert square(3) == 9"
-    message: "square(3) should return 9"
-  - code: "assert square(4) == 16"
-    message: "square(4) should return 16"
-  - code: "assert sum_of_squares(3, 4) == 25, f'got {sum_of_squares(3,4)}'"
-    message: "sum_of_squares(3, 4) should return 25 (9 + 16)"
-  - code: "assert result == 25"
-    message: "result should be 25"
+  - type: mcq
+    question: "What does this print?"
+    code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
+    choices: ["6", "3", "123", "12"]
+    correct: "6"
+    explanation: "add(1, 2) = 3. add(3, 3) = 6."
 
-final_challenge:
-  code_starter: |
-    # Define cube(n) then sum_of_cubes(a, b) which uses cube
-  hints:
-    - "def cube(n):  — return n ** 3  (or n * n * n)"
-    - "def sum_of_cubes(a, b):  — return cube(a) + cube(b)"
-    - "cube(2) == 8, cube(3) == 27, so sum_of_cubes(2, 3) == 35"
-  tests:
-    - code: "assert cube(2) == 8"
-      message: "cube(2) should return 8"
-    - code: "assert cube(3) == 27"
-      message: "cube(3) should return 27"
-    - code: "assert sum_of_cubes(2, 3) == 35, f'got {sum_of_cubes(2, 3)}'"
-      message: "sum_of_cubes(2, 3) should return 35 (8 + 27)"
+  - type: arrange
+    instruction: "Build a function hypotenuse(a, b) that uses square and computes the square root"
+    blocks: ["def", "square", "(", "n", ")", ":", "return", "n", "*", "n", "def", "hypotenuse", "(", "a", ",", "b", ")", ":", "return", "(", "square", "(", "a", ")", "+", "square", "(", "b", ")", ")", "**", "0.5"]
+    correct: ["def", "square", "(", "n", ")", ":", "return", "n", "*", "n", "def", "hypotenuse", "(", "a", ",", "b", ")", ":", "return", "(", "square", "(", "a", ")", "+", "square", "(", "b", ")", ")", "**", "0.5"]
+    explanation: "** 0.5 computes the square root. Hypotenuse = sqrt(a² + b²)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if is_even(n):\n            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
+    choices: ["3", "6", "2", "4"]
+    correct: "3"
+    explanation: "2, 4, 6 are even. is_even() is called for each element."
+
+  - type: fill_blank
+    before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
+    after: "(n % 2 == 0)"
+    choices: ["negate", "not", "bool", "int"]
+    answer: "negate"
+    explanation: "negate(True) returns False. negate(n % 2 == 0) flips even to odd."
+
+  - type: mcq
+    question: "What is the main benefit of calling a function from another function?"
+    code: ""
+    choices: [
+      "Code reuse — you don't repeat logic, just call what you wrote",
+      "It is faster than writing code directly",
+      "Python requires it for large programs",
+      "It avoids using loops"
+    ]
+    correct: "Code reuse — you don't repeat logic, just call what you wrote"
+    explanation: "Functions compose: each does one thing, and you combine them to build complex behaviour."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\ndef normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
+    choices: ["100", "150", "0", "50"]
+    correct: "100"
+    explanation: "clamp(150, 0, 100) returns 100 because 150 > 100."
+
+  - type: mini_code
+    prompt: "Define is_even(n) and is_odd(n) (odd calls is_even). Use them to print whether 7 is odd."
+    starter: ""
+    tests:
+      - code: "is_even(7) == False"
+        message: "7 is not even"
+      - code: "is_odd(7) == True"
+        message: "7 is odd"
+      - code: "'True' in _stdout"
+        message: "Should print True"
+
+  - type: mini_code
+    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1). Print factorial(5)."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '120'"
+        message: "5! = 120"
 
 worlds:
   fantasy:
     title: "Spells Within Spells"
-    setup: |
-      The grand counterspell requires two sub-spells combined. "Functions can call
-      other functions — this is how complex behaviour is built from simple pieces,"
-      Elara says. "Write 'square' first, then 'sum_of_squares' delegates to it."
-
-      Define square(n) returning n², then sum_of_squares(a, b) that calls square
-      for each argument and adds the results. The most powerful spells are composed
-      of smaller, precise incantations.
-    final_challenge_prompt: |
-      The ancient power theorem uses cubes, not squares. Define cube(n) that returns
-      n cubed (n ** 3 or n * n * n). Then define sum_of_cubes(a, b) that calls
-      cube for each argument and returns their sum. sum_of_cubes(2, 3) should equal 35.
   scifi:
-    title: "Recursive Subsystem"
-    setup: |
-      Computing the Pythagorean distance requires squaring both coordinates. "Breaking
-      a big task into smaller functions makes code easier to read and reuse," the AI
-      explains. "A function can call any other function — even ones you defined earlier."
-
-      Write 'square', then 'sum_of_squares' using it.
-    final_challenge_prompt: |
-      The energy calculation uses cubic values. Define cube(n) returning n ** 3.
-      Then define sum_of_cubes(a, b) that calls cube(a) + cube(b). Verify:
-      sum_of_cubes(2, 3) == 35.
+    title: "Nested Subroutines"
   mystery:
-    title: "Clues Within Clues"
-    setup: |
-      The final puzzle requires two nested calculations. "Functions are most powerful
-      when they call each other," your mentor says. "Build 'square' first, then use
-      it inside 'sum_of_squares' — this is called composition."
-
-      Complete both functions and store sum_of_squares(3, 4) in 'result'.
-    final_challenge_prompt: |
-      The cipher uses cubic transformations. Define cube(n) returning n ** 3, then
-      sum_of_cubes(a, b) that returns cube(a) + cube(b). The cipher unlocks when
-      sum_of_cubes(2, 3) equals 35.
+    title: "Building the Case"

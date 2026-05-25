@@ -1,83 +1,98 @@
-unit: 2
-lesson: 2
-xp: 10
+title: "if / else"
+xp: 12
 
-example:
-  code: |
-    temp = 40
-    if temp >= 100:
-        print("Boiling")
-    else:
-        print("Not boiling")
-  explanation: |
-    else provides a second branch that runs when the if condition is False.
-    Exactly one of the two blocks always executes — never both, never neither.
-    Here temp is 40, so the condition is False and "Not boiling" prints.
-  output: "Not boiling"
+exercises:
+  - type: concept
+    code: |
+      score = 45
+      if score >= 60:
+          print("Passed")
+      else:
+          print("Failed")
+    output: "Failed"
+    explanation: "else runs when the if condition is False. Exactly one branch always executes."
 
-code_starter: |
-  score = 45
-  # If score >= 50 print "Pass", otherwise print "Fail"
-hints:
-  - "if score >= 50:"
-  - "    print(\"Pass\")"
-  - "else:"
-  - "    print(\"Fail\")"
-tests:
-  - code: "assert score == 45"
-    message: "score should remain 45"
-  - code: "assert 'Fail' in _stdout"
-    message: "Should print 'Fail' when score is 45"
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 3\nif x > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
+    choices: ["small", "big", "big\nsmall", "Nothing"]
+    correct: "small"
+    explanation: "x > 5 is False (3 is not > 5), so the else branch runs."
 
-final_challenge:
-  code_starter: |
-    strength = 30
-    # If strength >= 50 print "Strong", else print "Weak"
-  hints:
-    - "if strength >= 50:"
-    - "else: covers all other cases"
-  tests:
-    - code: "assert strength == 30"
-      message: "strength should remain 30"
-    - code: "assert 'Weak' in _stdout"
-      message: "Should print 'Weak' when strength is 30"
-    - code: "assert 'Strong' not in _stdout"
-      message: "Should not print 'Strong' when strength is 30"
+  - type: arrange
+    instruction: "Build an if/else that prints 'even' when n % 2 == 0, else 'odd'"
+    blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
+    correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
+    explanation: "The if checks divisibility. else catches when n is odd."
+
+  - type: fill_blank
+    before: "if logged_in:\n    print(\"Welcome\")\n"
+    after: ":\n    print(\"Please log in\")"
+    choices: ["else", "elif", "if", "then"]
+    answer: "else"
+    explanation: "else catches the case when logged_in is False."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "temp = 100\nif temp > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
+    choices: ["hot", "cold", "hot\ncold", "Nothing"]
+    correct: "hot"
+    explanation: "100 > 50 is True, so the if branch runs and else is skipped."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
+    choices: ["No name", "Hello, ", "Hello,\nNo name", "Error"]
+    correct: "No name"
+    explanation: "An empty string is falsy. The else branch runs."
+
+  - type: fill_blank
+    before: "if age >= 18:\n    status = \"adult\"\n"
+    after: ":\n    status = \"minor\""
+    choices: ["else", "elif", "if not", "then"]
+    answer: "else"
+    explanation: "else handles the case where age < 18."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
+    choices: ["falsy", "truthy", "0", "None"]
+    correct: "falsy"
+    explanation: "0 is falsy, so the else branch runs."
+
+  - type: arrange
+    instruction: "Build code: if hp > 0 print 'alive', else print 'dead'"
+    blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
+    correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
+    explanation: "The else handles the hp == 0 case."
+
+  - type: mcq
+    question: "How many branches run in an if/else statement?"
+    code: ""
+    choices: ["Exactly one", "Both", "None if condition is False", "Two always"]
+    correct: "Exactly one"
+    explanation: "Either the if block or the else block runs — never both, never neither."
+
+  - type: mini_code
+    prompt: "Set n = 7. Print 'odd' if n is odd, 'even' if it is even."
+    starter: "n = 7\n"
+    tests:
+      - code: "'odd' in _stdout"
+        message: "7 is odd, should print 'odd'"
+      - code: "'even' not in _stdout"
+        message: "Should not print 'even'"
+
+  - type: mini_code
+    prompt: "Set speed = 120 and limit = 100. If speed > limit print 'speeding', else print 'ok'."
+    starter: "speed = 120\nlimit = 100\n"
+    tests:
+      - code: "'speeding' in _stdout"
+        message: "120 > 100, should print 'speeding'"
 
 worlds:
   fantasy:
     title: "Two Paths in the Forest"
-    setup: |
-      The forest trail splits. "Every choice leads somewhere," the guide says.
-      In Python, if/else gives you exactly two paths — the if block runs when the
-      condition is True, the else block runs when it is False. One always executes.
-
-      score is set to 45. Write an if/else: if score >= 50 print "Pass",
-      otherwise print "Fail". Try changing score to 75 and see which path runs.
-    final_challenge_prompt: |
-      A warrior's strength test: if strength >= 50, print "Strong". Otherwise
-      print "Weak". strength is 30 — only one path should run.
   scifi:
-    title: "Binary Decision Node"
-    setup: |
-      The navigation computer reaches a binary fork: thrust or coast. A ship
-      responds to exactly one of two states — if/else in Python works the same way.
-      When the if condition is True the first block runs; when False, the else block runs.
-
-      score is 45. Write if score >= 50 print "Pass", else print "Fail". Exactly
-      one message will appear.
-    final_challenge_prompt: |
-      The hull scanner returns a strength reading of 30. Print "Strong" if strength
-      >= 50, otherwise print "Weak". Only one output should appear.
+    title: "Mission Go / No Go"
   mystery:
-    title: "Guilty or Innocent"
-    setup: |
-      The verdict form has two boxes: Guilty or Innocent — one must be marked.
-      Python's if/else works the same way: one branch runs, the other doesn't.
-      There is no middle ground.
-
-      score is 45. Write an if/else: if score >= 50 print "Pass", else print "Fail".
-      Exactly one message will print.
-    final_challenge_prompt: |
-      The suspect's alibi strength is rated 30. Print "Strong" if strength >= 50,
-      otherwise print "Weak". Mark exactly one verdict.
+    title: "Suspect or Witness?"

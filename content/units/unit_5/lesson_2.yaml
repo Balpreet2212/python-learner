@@ -1,89 +1,90 @@
-unit: 3
-lesson: 2
-xp: 10
+title: "return Values"
+xp: 12
 
-example:
-  code: |
-    def square(n):
-        return n * n
+exercises:
+  - type: concept
+    code: |
+      def add(a, b):
+          return a + b
 
-    print(square(5))
-    print(square(3))
-  explanation: |
-    A parameter is a variable listed inside the parentheses of def.
-    When you call the function, you pass a value — called an argument — and it
-    fills the parameter slot. The function can then use that value in its body.
-    Parameters make functions flexible: the same function works with any input.
-  output: "25\n9"
+      result = add(3, 4)
+      print(result)
+    output: "7"
+    explanation: "return sends a value back from a function. The caller can store or use it. Without return, functions give back None."
 
-code_starter: |
-  # Define a function called 'double' that takes one parameter 'n'
-  # and returns n multiplied by 2.
-  def double(n):
+  - type: mcq
+    question: "What does this print?"
+    code: "def square(n):\n    return n * n\n\nprint(square(5))"
+    choices: ["25", "5", "n * n", "None"]
+    correct: "25"
+    explanation: "square(5) returns 5 * 5 = 25. print() shows that returned value."
 
-  result = double(7)
-hints:
-  - "def double(n):  — n is the parameter (input)"
-  - "return n * 2  — sends the answer back"
-tests:
-  - code: "assert double(7) == 14, f'double(7) should be 14, got {double(7)}'"
-    message: "double(7) should return 14"
-  - code: "assert double(0) == 0"
-    message: "double(0) should return 0"
-  - code: "assert result == 14"
-    message: "result should be 14"
+  - type: fill_blank
+    before: "def double(n):\n    "
+    after: " n * 2"
+    choices: ["return", "print", "def", "="]
+    answer: "return"
+    explanation: "return sends the value back to the caller. Without it, the function returns None."
 
-final_challenge:
-  code_starter: |
-    # Define a function that triples a level value
-  hints:
-    - "def power_up(level):  — one parameter"
-    - "    return level * 3  — triple it"
-    - "assert power_up(5) == 15"
-  tests:
-    - code: "assert power_up(5) == 15, f'power_up(5) should be 15, got {power_up(5)}'"
-      message: "power_up(5) should return 15"
-    - code: "assert power_up(0) == 0"
-      message: "power_up(0) should return 0"
-    - code: "assert power_up(10) == 30"
-      message: "power_up(10) should return 30"
+  - type: mcq
+    question: "What does this print?"
+    code: "def make_greeting(name):\n    return f\"Hello, {name}!\"\n\nmsg = make_greeting(\"Alice\")\nprint(msg)"
+    choices: ["Hello, Alice!", "None", "name", "msg"]
+    correct: "Hello, Alice!"
+    explanation: "The function returns the f-string. It's stored in msg and then printed."
+
+  - type: arrange
+    instruction: "Build a function that returns the larger of two numbers"
+    blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+    correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+    explanation: "If a > b, return a. Otherwise, return b (the fallback after the if)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+    choices: ["None", "5", "x", "Error"]
+    correct: "None"
+    explanation: "Functions without return give back None automatically."
+
+  - type: fill_blank
+    before: "def is_even(n):\n    return n "
+    after: " 2 == 0"
+    choices: ["%", "//", "/", "**"]
+    answer: "%"
+    explanation: "n % 2 == 0 is True when n is even. This boolean is returned."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+    choices: ["18", "6", "2", "12"]
+    correct: "18"
+    explanation: "triple(2) = 6. triple(6) = 18."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
+    choices: ["100", "150", "0", "150"]
+    correct: "100"
+    explanation: "150 > 100, so the function returns high = 100."
+
+  - type: mini_code
+    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32. Print the result for c = 100."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '212.0'"
+        message: "100°C = 212°F"
+
+  - type: mini_code
+    prompt: "Define a function power(base, exp) that returns base ** exp. Print power(2, 10)."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '1024'"
+        message: "2 ** 10 = 1024"
 
 worlds:
   fantasy:
     title: "The Amplification Rune"
-    setup: |
-      "A function becomes truly powerful when it accepts inputs," Elara says,
-      drawing a rune that triples the glow of whatever crystal you place before it.
-      "Parameters are the slots where inputs go — listed inside the parentheses
-      of def."
-
-      Each call can pass a different value. Define 'double(n)' that returns n * 2,
-      then call it with 7. The rune amplifies whatever you feed it.
-    final_challenge_prompt: |
-      The rune of amplification has been upgraded — it now triples power instead of
-      doubling. Define a function called power_up that takes a level parameter and
-      returns level * 3. Test it: power_up(5) should equal 15.
   scifi:
-    title: "Signal Amplifier"
-    setup: |
-      The comms array needs to double incoming signal strength. "Functions accept
-      parameters — variables that receive values when the function is called," the
-      AI explains. "Whatever you pass in, the function can use it."
-
-      Define 'double(n)' to return n * 2 and call it with 7.
-    final_challenge_prompt: |
-      The new amplifier triples signal strength. Define a function called power_up
-      that accepts a level parameter and returns level * 3. It should work for any
-      value: power_up(5) returns 15, power_up(10) returns 30.
+    title: "Function Output"
   mystery:
-    title: "Doubling the Reward"
-    setup: |
-      A function that doubles a bounty — exactly what the agency needs. "Parameters
-      let a function work with different inputs each time you call it," your mentor
-      says. "Name them inside the parentheses of def, use them in the body."
-
-      Write 'double(n)' returning n * 2 and call it with 7.
-    final_challenge_prompt: |
-      The agency tripled its rewards program. Define a function called power_up that
-      takes a level parameter and returns level * 3. Verify: power_up(5) == 15 and
-      power_up(10) == 30.
+    title: "Returning Findings"

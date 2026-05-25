@@ -1,94 +1,102 @@
-unit: 6
-lesson: 2
-xp: 10
+title: "Methods"
+xp: 12
 
-example:
-  code: |
-    class Lamp:
-        def __init__(self, brightness):
-            self.brightness = brightness
+exercises:
+  - type: concept
+    code: |
+      class Lamp:
+          def __init__(self, brightness):
+              self.brightness = brightness
 
-        def is_bright(self):
-            return self.brightness >= 50
+          def is_bright(self):
+              return self.brightness >= 50
 
-    desk_lamp = Lamp(70)
-    candle = Lamp(20)
+          def describe(self):
+              return f"Lamp at {self.brightness}%"
 
-    print(desk_lamp.is_bright())
-    print(candle.is_bright())
-  explanation: |
-    Methods are functions defined inside a class. They always take self as their first parameter, which gives them access to the instance's attributes.
-    is_bright() reads self.brightness and returns a boolean — no arguments needed when calling it, because self is passed automatically.
-    Each instance has its own attribute values, so the same method produces different results depending on which object calls it.
-  output: "True\nFalse"
+      desk = Lamp(70)
+      print(desk.is_bright())
+      print(desk.describe())
+    output: "True\nLamp at 70%"
+    explanation: "Methods are functions inside a class. They always take self as their first parameter to access the object's attributes."
 
-code_starter: |
-  class Creature:
-      def __init__(self, name, hp):
-          self.name = name
-          self.hp = hp
+  - type: mcq
+    question: "What does this print?"
+    code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return self.name + ' says Woof!'\n\nd = Dog('Rex')\nprint(d.bark())"
+    choices: ["Rex says Woof!", "Woof!", "name says Woof!", "self.name"]
+    correct: "Rex says Woof!"
+    explanation: "bark() returns self.name + ' says Woof!'. self.name is 'Rex'."
 
-      def is_alive(self):
-          return ___ > ___
+  - type: fill_blank
+    before: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
+    after: " ** 2\n\nc = Circle(5)\nprint(c.area())"
+    choices: ["radius", "area", "self", "r"]
+    answer: "radius"
+    explanation: "self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5."
 
-  dragon = Creature("Dragon", 120)
-  ghost  = Creature("Ghost", 0)
-hints:
-  - "Check self.hp > 0"
-  - "is_alive() should return a boolean"
+  - type: mcq
+    question: "What does this print?"
+    code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\nc = Counter()\nprint(c.value())"
+    choices: ["0", "None", "count", "self.count"]
+    correct: "0"
+    explanation: "count starts at 0 in __init__. value() returns self.count which is 0."
 
-tests:
-  - code: "assert dragon.is_alive() == True, 'dragon should be alive'"
-    message: "dragon.is_alive() is True"
-  - code: "assert ghost.is_alive() == False, 'ghost should not be alive'"
-    message: "ghost.is_alive() is False"
+  - type: arrange
+    instruction: "Add a method greet() to Person that returns 'Hi, I am [name]'"
+    blocks: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
+    correct: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
+    explanation: "Define greet with (self) parameter, return an f-string using self.name. Call with p.greet()."
 
-final_challenge:
-  code_starter: |
-    # Your code here
-  hints:
-    - "class Weapon:"
-    - "    def __init__(self, name, power): ..."
-    - "    def is_strong(self): return self.power >= 50"
-    - "sword = Weapon(\"Excalibur\", 90)"
-    - "dagger = Weapon(\"Dagger\", 30)"
-  tests:
-    - code: "assert sword.is_strong() == True, 'sword should be strong'"
-      message: "sword.is_strong() is True"
-    - code: "assert dagger.is_strong() == False, 'dagger should not be strong'"
-      message: "dagger.is_strong() is False"
-    - code: "assert sword.name == 'Excalibur'"
-      message: "sword.name is 'Excalibur'"
+  - type: mcq
+    question: "What does this print?"
+    code: "class Rectangle:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = Rectangle(4, 5)\nprint(r.area())"
+    choices: ["20", "9", "4", "5"]
+    correct: "20"
+    explanation: "area() returns self.w * self.h = 4 * 5 = 20."
+
+  - type: fill_blank
+    before: "class Thermometer:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
+    after: " 32\n\nt = Thermometer(100)\nprint(t.to_fahrenheit())"
+    choices: ["+", "-", "*", "/"]
+    answer: "+"
+    explanation: "Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "class Password:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw) >= 8\n\np = Password('abc123')\nprint(p.is_strong())"
+    choices: ["False", "True", "6", "8"]
+    correct: "False"
+    explanation: "'abc123' has 6 characters. len >= 8 is False."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "class Box:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n        return self.l * self.w * self.h\n\nb = Box(2, 3, 4)\nprint(b.volume())"
+    choices: ["24", "9", "6", "12"]
+    correct: "24"
+    explanation: "volume = 2 * 3 * 4 = 24."
+
+  - type: mini_code
+    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height. Print the area of a Triangle(6, 4)."
+    starter: ""
+    tests:
+      - code: "Triangle(6, 4).area() == 12.0"
+        message: "area() should return 12.0"
+      - code: "'12' in _stdout"
+        message: "Should print 12.0"
+
+  - type: mini_code
+    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance < 0. Test with balance=50 and balance=-10."
+    starter: ""
+    tests:
+      - code: "BankAccount(50).is_overdrawn() == False"
+        message: "50 is not overdrawn"
+      - code: "BankAccount(-10).is_overdrawn() == True"
+        message: "-10 is overdrawn"
 
 worlds:
   fantasy:
-    title: "Enchanting Objects with Behaviour"
-    setup: |
-      A blueprint without behaviour is just a data container. To make objects truly useful, you add methods — functions that live inside the class and can read the object's own attributes using self.
-      The blacksmith enchants each weapon not just with properties (name, power) but with knowledge of itself: a weapon that knows whether it is strong enough for the king's knights.
-      Methods are called on an instance with dot notation: sword.is_strong(). Python automatically passes the instance as the first argument (self), so you never write it yourself when calling.
-    final_challenge_prompt: |
-      Create a Weapon class:
-      — __init__(self, name, power) stores both attributes
-      — is_strong(self) returns True if power >= 50, otherwise False
-      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)
+    title: "Spellbook Methods"
   scifi:
-    title: "Adding Behaviour to Ship Systems"
-    setup: |
-      Ship systems on the Meridian don't just hold data — they report their own status. A life-support unit knows whether it is operating at safe levels; a weapon knows whether it is charged enough to fire.
-      Instance methods give objects this self-knowledge. The method reads self.attribute and returns a result. Every instance of the same class shares the method code, but each uses its own attribute values — so two weapons give different answers to is_strong().
-    final_challenge_prompt: |
-      Build a Weapon class for the ship's arsenal registry:
-      — __init__(self, name, power)
-      — is_strong(self) returns True if self.power >= 50
-      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)
+    title: "Unit Functions"
   mystery:
-    title: "Evidence Objects That Know Themselves"
-    setup: |
-      The detective agency has started encoding evidence items as objects. Each piece of evidence knows its own strength — whether it is persuasive enough to bring to court. An evidence item with strength below 50 is circumstantial; 50 and above is solid.
-      Instance methods are how an object reports on itself. self inside the method refers to the specific piece of evidence calling it, so the same is_strong method gives different answers for different items.
-    final_challenge_prompt: |
-      Write a Weapon class (the agency's evidence-strength model):
-      — __init__(self, name, power)
-      — is_strong(self): returns True if power >= 50
-      — Create sword = Weapon("Excalibur", 90) and dagger = Weapon("Dagger", 30)
+    title: "Detective Techniques"

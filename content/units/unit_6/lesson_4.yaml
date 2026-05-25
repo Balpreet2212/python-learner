@@ -1,102 +1,91 @@
-unit: 4
-lesson: 4
-xp: 10
+title: "Looping Over Lists"
+xp: 12
 
-example:
-  code: |
-    inventory = {"sword": 1, "shield": 2, "potion": 5}
+exercises:
+  - type: concept
+    code: |
+      scores = [85, 72, 91, 68]
+      total = 0
+      for s in scores:
+          total += s
+      print(total)
+      print(total / len(scores))
+    output: "316\n79.0"
+    explanation: "for loops over every item in a list. You can accumulate values with a running total. Combine with len() to compute averages."
 
-    # Update an existing key
-    inventory["potion"] = 3
+  - type: mcq
+    question: "What does this print?"
+    code: "fruits = ['apple', 'banana', 'cherry']\nfor f in fruits:\n    print(f)"
+    choices: ["apple\nbanana\ncherry", "['apple', 'banana', 'cherry']", "f\nf\nf", "0\n1\n2"]
+    correct: "apple\nbanana\ncherry"
+    explanation: "The loop assigns each item to f in turn and prints it."
 
-    # Add a brand new key
-    inventory["rope"] = 10
+  - type: fill_blank
+    before: "nums = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in nums:\n    total "
+    after: " n\nprint(total)"
+    choices: ["+=", "=", "-=", "*="]
+    answer: "+="
+    explanation: "+= adds each n to total. After the loop total = 15."
 
-    # Count total distinct items
-    item_count = len(inventory)
+  - type: mcq
+    question: "What does this print?"
+    code: "words = ['hi', 'hello', 'hey']\nfor w in words:\n    print(len(w))"
+    choices: ["2\n5\n3", "hi\nhello\nhey", "3\n3\n3", "2\n3\n4"]
+    correct: "2\n5\n3"
+    explanation: "len('hi')=2, len('hello')=5, len('hey')=3."
 
-    print(inventory)
-    print("Distinct items:", item_count)
-  explanation: |
-    You update or add a key using the same assignment syntax: dict[key] = value.
-    If the key already exists, its value is overwritten. If it does not exist, a new entry is created.
-    len() on a dictionary returns the number of keys, not the sum of the values.
-  output: "{'sword': 1, 'shield': 2, 'potion': 3, 'rope': 10}\nDistinct items: 4"
+  - type: arrange
+    instruction: "Print each item in prices = [9.99, 4.99, 14.99] doubled"
+    blocks: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "for", "p", "in", "prices", ":", "print", "(", "p", "*", "2", ")"]
+    correct: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "for", "p", "in", "prices", ":", "print", "(", "p", "*", "2", ")"]
+    explanation: "Iterate with for, multiply each price by 2, and print it."
 
-code_starter: |
-  stats = {"hp": 100, "mp": 50}
+  - type: mcq
+    question: "What does this print?"
+    code: "nums = [3, 1, 4, 1, 5]\ncount = 0\nfor n in nums:\n    if n > 2:\n        count += 1\nprint(count)"
+    choices: ["3", "5", "2", "4"]
+    correct: "3"
+    explanation: "3, 4, 5 are greater than 2. Count = 3."
 
-  # Update mp to 75
-  stats[___] = ___
+  - type: fill_blank
+    before: "names = [\"Alice\", \"Bob\", \"Carol\"]\nfor name in names:\n    print("
+    after: ".upper())"
+    choices: ["name", "names", "n", "item"]
+    answer: "name"
+    explanation: "name is the loop variable. .upper() converts each to uppercase."
 
-  # Add a new key "stamina" with value 30
-  stats[___] = ___
+  - type: mcq
+    question: "What does this print?"
+    code: "items = [10, 20, 30]\nnew = []\nfor x in items:\n    new.append(x * 2)\nprint(new)"
+    choices: ["[20, 40, 60]", "[10, 20, 30]", "[2, 4, 6]", "[10, 20, 30, 20, 40, 60]"]
+    correct: "[20, 40, 60]"
+    explanation: "Each item is doubled and appended to new. Result: [20, 40, 60]."
 
-  # Count how many keys stats has
-  keys_count = len(___)
-hints:
-  - "stats[\"mp\"] = 75 updates the mp key"
-  - "stats[\"stamina\"] = 30 creates a new key"
-  - "len(stats) counts the number of keys"
+  - type: mcq
+    question: "What does this print?"
+    code: "letters = ['a', 'b', 'c']\nresult = ''\nfor l in letters:\n    result += l\nprint(result)"
+    choices: ["abc", "a\nb\nc", "['a', 'b', 'c']", "cba"]
+    correct: "abc"
+    explanation: "Each letter is concatenated onto result. Final result: 'abc'."
 
-tests:
-  - code: "assert stats['mp'] == 75, 'mp should be 75'"
-    message: "mp updated to 75"
-  - code: "assert stats['stamina'] == 30, 'stamina should be 30'"
-    message: "stamina added with value 30"
-  - code: "assert keys_count == 3, 'keys_count should be 3'"
-    message: "keys_count equals 3"
+  - type: mini_code
+    prompt: "Create a list of 5 numbers. Use a loop to print only the numbers greater than 10."
+    starter: ""
+    tests:
+      - code: "all(int(x) > 10 for x in _stdout.strip().split('\\n') if x)"
+        message: "Should only print numbers greater than 10"
 
-final_challenge:
-  code_starter: |
-    stats = {"hp": 80, "mp": 40}
-
-    # Your code here
-  hints:
-    - "Use stats[\"hp\"] = 100 to update hp"
-    - "Use stats[\"shield\"] = 25 to add the shield key"
-    - "keys_count = len(stats)"
-  tests:
-    - code: "assert stats['hp'] == 100, 'hp should be updated to 100'"
-      message: "hp updated to 100"
-    - code: "assert stats.get('shield') == 25, 'shield key should be 25'"
-      message: "shield key added with value 25"
-    - code: "assert keys_count == 3, 'keys_count should be 3'"
-      message: "keys_count is 3"
+  - type: mini_code
+    prompt: "Create a list called temps with 4 temperatures. Find and print the maximum temperature without using max()."
+    starter: ""
+    tests:
+      - code: "str(max(temps)) in _stdout"
+        message: "Should print the maximum temperature"
 
 worlds:
   fantasy:
-    title: "Updating the Spellbook's Registry"
-    setup: |
-      The royal Spellbook is a living dictionary — entries must be kept current or spells fail at the worst possible moment.
-      Sir Aldric hands you a worn leather tome. "Three things," he says. "The healing potion supply was miscounted — fix it. The armory finally finished crafting rope bridges, so add that stock. Then tell me how many distinct categories we're tracking."
-      Dictionaries in Python work the same way: one syntax, dict[key] = value, both updates existing entries and creates new ones.
-    final_challenge_prompt: |
-      The battle-worn stats board in the castle war room shows stale numbers. You have been given the real figures.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (soldiers recovered overnight)
-      — Add "shield" with value 25 (new shields arrived)
-      — Store the number of distinct stats keys in a variable called keys_count
+    title: "Enchanted Inventory Loop"
   scifi:
-    title: "Patching the Ship's Resource Database"
-    setup: |
-      The Meridian's onboard resource database is the single source of truth for mission-critical supplies. An error crept in during the last sync — medical packs were over-reported, tether cables were never logged, and command wants a precise count of tracked resource types.
-      Updating a dictionary entry uses the exact same syntax as adding one: database[key] = value. Python checks whether the key exists and either overwrites or creates as needed.
-    final_challenge_prompt: |
-      Ship diagnostics show the stored stats are from yesterday's damaged-hull readings.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (hull fully repaired)
-      — Add "shield" with value 25 (deflector array online)
-      — Store len(stats) in keys_count
+    title: "Sensor Array Processing"
   mystery:
-    title: "Correcting the Detective's Case File"
-    setup: |
-      The detective's case file is a dictionary of clues — but two entries are wrong and one key is missing entirely. If the file goes to the judge as-is, the wrong suspect walks free.
-      You sit at the oak desk, pen in hand. Cross out the wrong number, ink in the correction. Add the new evidence tag. Then count how many distinct evidence categories are now tracked.
-      In Python: evidence[key] = value handles both corrections and additions identically.
-    final_challenge_prompt: |
-      A new witness report has come in, changing the case stats entirely.
-      Starting with stats = {"hp": 80, "mp": 40}:
-      — Update "hp" to 100 (suspect's stamina reassessed)
-      — Add "shield" with value 25 (alibi partially confirmed)
-      — Store the key count in keys_count
+    title: "Reviewing All Clues"

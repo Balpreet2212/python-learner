@@ -1,97 +1,96 @@
-unit: 2
-lesson: 5
-xp: 10
+title: "Logical Operators: and, or, not"
+xp: 12
 
-example:
-  code: |
-    level = 8
-    gold = 150
-    has_quest = False
-    can_buy = level >= 5 and gold >= 100
-    can_act = has_quest or level >= 10
-    blocked = not has_quest
-    print(can_buy, can_act, blocked)
-  explanation: |
-    and: both conditions must be True for the result to be True.
-    or: at least one condition must be True.
-    not: flips True to False and False to True.
-    These let you combine comparisons into compound conditions.
-  output: "True False True"
+exercises:
+  - type: concept
+    code: |
+      x = 7
+      print(x > 0 and x < 10)
+      print(x < 0 or x > 5)
+      print(not x > 10)
+    output: "True\nTrue\nTrue"
+    explanation: "and: both sides must be True. or: at least one side must be True. not: flips True to False and vice versa."
 
-code_starter: |
-  stamina = 80
-  has_weapon = True
-  # Can attack: stamina >= 50 AND has a weapon
-  can_attack =
-  # Is tired: stamina < 20 OR has no weapon
-  is_tired =
-hints:
-  - "can_attack = stamina >= 50 and has_weapon"
-  - "is_tired = stamina < 20 or not has_weapon"
+  - type: mcq
+    question: "What does this print?"
+    code: "print(True and False)"
+    choices: ["False", "True", "None", "Error"]
+    correct: "False"
+    explanation: "and requires both sides to be True. True and False = False."
 
-tests:
-  - code: "assert can_attack == True"
-    message: "can_attack should be True (80 >= 50 and has_weapon)"
-  - code: "assert is_tired == False"
-    message: "is_tired should be False (80 is not < 20, has_weapon is True)"
-  - code: "assert 'and' in _code"
-    message: "use 'and' for can_attack"
-  - code: "assert 'or' in _code"
-    message: "use 'or' for is_tired"
+  - type: mcq
+    question: "What does this print?"
+    code: "print(True or False)"
+    choices: ["True", "False", "None", "Error"]
+    correct: "True"
+    explanation: "or only needs one side to be True. True or False = True."
 
-final_challenge:
-  code_starter: |
-    age = 16
-    has_licence = False
-    is_emergency = True
-  hints:
-    - "can_drive = age >= 17 and has_licence"
-    - "can_proceed = can_drive or is_emergency"
-    - "is_blocked = not can_proceed"
-    - "print(can_drive, can_proceed, is_blocked)"
-  tests:
-    - code: "assert can_drive == False"
-      message: "can_drive should be False (16 < 17 and no licence)"
-    - code: "assert can_proceed == True"
-      message: "can_proceed should be True (emergency override)"
-    - code: "assert is_blocked == False"
-      message: "is_blocked should be False (can_proceed is True)"
+  - type: fill_blank
+    before: "can_enter = age >= 18 "
+    after: " has_ticket"
+    choices: ["and", "or", "not", "=="]
+    answer: "and"
+    explanation: "and requires both conditions: age >= 18 AND has_ticket must both be True."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "score = 45\nprint(score >= 60 or score < 50)"
+    choices: ["True", "False", "45", "None"]
+    correct: "True"
+    explanation: "score >= 60 is False, but score < 50 is True. False or True = True."
+
+  - type: arrange
+    instruction: "Build code to check: x is positive AND x is less than 100"
+    blocks: ["print", "(", "x", ">", "0", "and", "x", "<", "100", ")"]
+    correct: ["print", "(", "x", ">", "0", "and", "x", "<", "100", ")"]
+    explanation: "Both conditions must be True for and to return True."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 15\nprint(not (x > 10))"
+    choices: ["False", "True", "15", "None"]
+    correct: "False"
+    explanation: "x > 10 is True (15 > 10). not True = False."
+
+  - type: fill_blank
+    before: "is_invalid = "
+    after: " (score >= 0)"
+    choices: ["not", "and", "or", "bool"]
+    answer: "not"
+    explanation: "not flips the boolean. not True is False, not False is True."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "a = True\nb = False\nprint(a and b)\nprint(a or b)"
+    choices: ["False\nTrue", "True\nTrue", "False\nFalse", "True\nFalse"]
+    correct: "False\nTrue"
+    explanation: "True and False = False. True or False = True."
+
+  - type: mcq
+    question: "Which expression is True when x is between 1 and 10 (inclusive)?"
+    code: ""
+    choices: ["x >= 1 and x <= 10", "x >= 1 or x <= 10", "not x >= 1 and x <= 10", "x > 1 and x < 10"]
+    correct: "x >= 1 and x <= 10"
+    explanation: "Both conditions must hold: x must be >= 1 AND <= 10."
+
+  - type: mini_code
+    prompt: "hp = 80, shield = True. Print True if hp > 50 AND shield is True, otherwise False."
+    starter: "hp = 80\nshield = True\n"
+    tests:
+      - code: "_stdout.strip() == 'True'"
+        message: "hp > 50 and shield should be True"
+
+  - type: mini_code
+    prompt: "age = 16. Print True if age < 13 OR age >= 18 (either a child or an adult), otherwise False."
+    starter: "age = 16\n"
+    tests:
+      - code: "_stdout.strip() == 'False'"
+        message: "16 is neither < 13 nor >= 18, so result is False"
 
 worlds:
   fantasy:
     title: "The Logic Gate"
-    setup: |
-      Three runes hang above the gate: AND, OR, NOT.
-      "and requires both sides to be True," Elara says. "or requires
-      only one. not reverses the value entirely."
-
-      A warrior: stamina = 80, has_weapon = True.
-      Determine can_attack (stamina >= 50 and armed) and
-      is_tired (low stamina or unarmed).
-    final_challenge_prompt: |
-      At the crossroads: age = 16, has_licence = False, is_emergency = True.
-      Compute can_drive, can_proceed (drive or emergency), and
-      is_blocked (not can_proceed). Print all three.
   scifi:
-    title: "Access Control Logic"
-    setup: |
-      "Logic gates are the soul of computing," the AI explains.
-      "and: both inputs must be True. or: either suffices.
-      not: inverts the signal."
-
-      Crew: stamina = 80, has_weapon = True.
-      Compute can_attack and is_tired using and/or/not.
-    final_challenge_prompt: |
-      Airlock check: age = 16, has_licence = False, is_emergency = True.
-      Compute can_drive, can_proceed, and is_blocked. Print all three.
+    title: "System Logic"
   mystery:
-    title: "The Case Conditions"
-    setup: |
-      "Conclusions require evidence," your mentor says. "and means you
-      need both facts. or means either will do. not means the opposite."
-
-      Suspect: stamina = 80, has_weapon = True.
-      Assess can_attack and is_tired.
-    final_challenge_prompt: |
-      Case conditions: age = 16, has_licence = False, is_emergency = True.
-      Evaluate can_drive, can_proceed, and is_blocked. Print all three.
+    title: "Deductive Reasoning"

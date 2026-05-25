@@ -1,88 +1,100 @@
-unit: 1
-lesson: 3
+title: "Strings"
 xp: 10
 
-example:
-  code: |
-    is_raining = True
-    is_sunny = False
-    print(is_raining)
-    print(is_sunny)
-    print(type(is_raining))
-  explanation: |
-    Booleans are Python's yes/no values. There are exactly two: True and False.
-    They must be capitalised exactly like that — no quotes, not strings.
-    True and False are their own data type, called 'bool'.
-    Use them wherever you need an on/off switch or a condition.
-  output: "True\nFalse\n<class 'bool'>"
+exercises:
+  - type: concept
+    code: |
+      greeting = "Hello, world!"
+      print(len(greeting))
+      print(greeting.upper())
+    output: "13\nHELLO, WORLD!"
+    explanation: "Strings are text in quotes. len() counts characters. .upper() converts to uppercase. You call methods with a dot."
 
-code_starter: |
-  # Set is_hero to the boolean True (capital T, no quotes)
-  is_hero =
+  - type: mcq
+    question: "What does this print?"
+    code: "word = \"python\"\nprint(len(word))"
+    choices: ["6", "7", "word", "\"python\""]
+    correct: "6"
+    explanation: "\"python\" has 6 characters: p-y-t-h-o-n."
 
-  # Set level to any integer greater than 5
-  level =
-hints:
-  - "Booleans are True or False — capital first letter, no quotes"
-  - "Pick any number greater than 5 for level, e.g. level = 7"
-tests:
-  - code: "assert is_hero is True, 'is_hero should be the boolean True'"
-    message: "is_hero should be True"
-  - code: "assert isinstance(level, int) and level > 5, 'level should be an integer greater than 5'"
-    message: "level should be an integer greater than 5"
+  - type: fill_blank
+    before: "name = \"Alice\"\nprint(name."
+    after: "())"
+    choices: ["upper", "print", "len", "int"]
+    answer: "upper"
+    explanation: ".upper() returns the string in all capitals: 'ALICE'."
 
-final_challenge:
-  code_starter: |
-    # Set up the quest status flags
-  hints:
-    - "quest_ready = True"
-    - "dragon_slain = False"
-    - "print() both variables"
-  tests:
-    - code: "assert quest_ready is True"
-      message: "quest_ready should be True"
-    - code: "assert dragon_slain is False"
-      message: "dragon_slain should be False"
+  - type: mcq
+    question: "What does this print?"
+    code: "s = \"Hello\"\nprint(s.lower())"
+    choices: ["hello", "HELLO", "Hello", "5"]
+    correct: "hello"
+    explanation: ".lower() converts all characters to lowercase."
+
+  - type: arrange
+    instruction: "Build code to get the length of the string 'cat'"
+    blocks: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+    correct: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+    explanation: "len('cat') counts 3 characters. print wraps the whole call."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "a = \"hello\"\nb = \"world\"\nprint(a + \" \" + b)"
+    choices: ["hello world", "helloworld", "a b", "hello\nworld"]
+    correct: "hello world"
+    explanation: "+ joins strings. We add a space \" \" between them."
+
+  - type: fill_blank
+    before: "result = \"hello\" "
+    after: " \"world\""
+    choices: ["+", "*", "-", "="]
+    answer: "+"
+    explanation: "+ concatenates (joins) two strings."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "word = \"Python\"\nprint(word[0])"
+    choices: ["P", "y", "Python", "0"]
+    correct: "P"
+    explanation: "[0] gets the first character. Python uses 0-based indexing."
+
+  - type: arrange
+    instruction: "Build code to print 'hello' in uppercase"
+    blocks: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+    correct: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+    explanation: ".upper() is called on the string with dot notation."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "s = \"  hello  \"\nprint(s.strip())"
+    choices: ["hello", "  hello  ", "hello  ", "HELLO"]
+    correct: "hello"
+    explanation: ".strip() removes leading and trailing spaces."
+
+  - type: mini_code
+    prompt: "Store your name in a variable called name and print it in uppercase."
+    starter: ""
+    tests:
+      - code: "assert isinstance(name, str) and len(name) > 0"
+        message: "name should be a non-empty string"
+      - code: "name.upper() in _stdout"
+        message: "Should print name in uppercase"
+
+  - type: mini_code
+    prompt: "Store \"Hello\" in greeting and \"World\" in target. Print them joined with a space."
+    starter: ""
+    tests:
+      - code: "assert greeting == 'Hello'"
+        message: "greeting should be 'Hello'"
+      - code: "assert target == 'World'"
+        message: "target should be 'World'"
+      - code: "'Hello World' in _stdout"
+        message: "Should print 'Hello World'"
 
 worlds:
   fantasy:
     title: "The Truth Crystal"
-    setup: |
-      Elara places a crystal on the pedestal. It glows steady gold — then dim grey —
-      depending on the spell cast upon it. "This is a boolean," she says, "a value
-      that is either True or False. No quotes, always capitalised."
-
-      She hands you a quest scroll: "Mark yourself as the hero and set your level
-      above 5 to unlock the next chamber. Python uses booleans wherever a yes-or-no
-      answer is needed — gates, conditions, status flags."
-    final_challenge_prompt: |
-      The quest begins. Create two status flags for the adventure log:
-      quest_ready set to True (the party is prepared) and dragon_slain set to False
-      (the battle hasn't happened yet). Print both.
   scifi:
-    title: "Hero Status Check"
-    setup: |
-      The crew manifest has two columns: hero status and clearance level. "Booleans
-      are on/off switches," the AI explains. "In Python they are True or False —
-      capital first letter, no quotes, not a string."
-
-      Set is_hero to True (you're the protagonist — obviously) and assign any integer
-      greater than 5 to level to pass the command deck security scan.
-    final_challenge_prompt: |
-      The mission control board shows two readouts. Set quest_ready to True (launch
-      approved) and dragon_slain to False (target not yet neutralised). Print both
-      to confirm the status display.
+    title: "Starship Comms"
   mystery:
-    title: "The Suspect Register"
-    setup: |
-      Every name in the detective's register has two fields: cleared (yes/no) and
-      threat level (a number). "Python calls yes/no values booleans," your partner
-      explains, flipping through the ledger.
-
-      "They're either True or False — capital T or F, never in quotes." Mark is_hero
-      as True and set level to any integer above 5 to gain access to the restricted
-      evidence files.
-    final_challenge_prompt: |
-      Update the case log. Set quest_ready to True (investigation active) and
-      dragon_slain to False (primary suspect still at large). Print both so the
-      status board reflects the current situation.
+    title: "Decoding Messages"

@@ -1,96 +1,96 @@
-unit: 2
-lesson: 2
-xp: 10
+title: "for Loops with Lists"
+xp: 12
 
-example:
-  code: |
-    fruits = ["apple", "banana", "cherry"]
-    print(fruits)
-    print(len(fruits))
-    print(fruits[0])
-    fruits.append("date")
-    print(fruits)
-  explanation: |
-    A list stores multiple values in order, inside square brackets, separated by commas.
-    len() returns how many items are in the list.
-    Lists are zero-indexed: fruits[0] is the first item, fruits[1] is the second.
-    .append() adds a new item to the end of the list without creating a new list.
-  output: "['apple', 'banana', 'cherry']\n3\napple\n['apple', 'banana', 'cherry', 'date']"
+exercises:
+  - type: concept
+    code: |
+      heroes = ["Alice", "Bob", "Carol"]
+      for hero in heroes:
+          print(hero)
+    output: "Alice\nBob\nCarol"
+    explanation: "A for loop can iterate over a list directly. Each item is assigned to the loop variable in turn."
 
-code_starter: |
-  numbers = [1, 2, 3, 4, 5]
+  - type: mcq
+    question: "What does this print?"
+    code: "nums = [10, 20, 30]\nfor n in nums:\n    print(n)"
+    choices: ["10\n20\n30", "nums", "10 20 30", "3"]
+    correct: "10\n20\n30"
+    explanation: "The loop visits each element. print(n) shows each number on its own line."
 
-  # Build a new list called 'doubled' where every item is multiplied by 2.
-  # Use a for loop and .append()
-  doubled = []
-  for n in numbers:
-      doubled.append(   )
-hints:
-  - "doubled.append(n * 2) adds n×2 to the doubled list each iteration"
-  - "When the loop ends, doubled should have 5 items"
-tests:
-  - code: "assert isinstance(doubled, list), 'doubled should be a list'"
-    message: "doubled should be a list"
-  - code: "assert doubled == [2, 4, 6, 8, 10], f'got {doubled}'"
-    message: "doubled should be [2, 4, 6, 8, 10]"
+  - type: fill_blank
+    before: "items = [\"a\", \"b\", \"c\"]\nfor "
+    after: " in items:\n    print(item)"
+    choices: ["item", "items", "i", "x"]
+    answer: "item"
+    explanation: "The loop variable (here item) takes the value of each element in turn."
 
-final_challenge:
-  code_starter: |
-    # Build a crew list from scratch, then query it
-  hints:
-    - 'crew = []  — start with an empty list'
-    - 'crew.append("Aria")  — add the first member'
-    - 'crew.append("Rex") and crew.append("Mira")  — add the rest'
-    - "crew_size = len(crew)"
-  tests:
-    - code: "assert len(crew) == 3, f'crew should have 3 members, got {len(crew)}'"
-      message: "crew should have exactly 3 members"
-    - code: "assert 'Aria' in crew"
-      message: "crew should contain 'Aria'"
-    - code: "assert 'Rex' in crew"
-      message: "crew should contain 'Rex'"
-    - code: "assert 'Mira' in crew"
-      message: "crew should contain 'Mira'"
-    - code: "assert crew_size == 3"
-      message: "crew_size should be 3"
+  - type: arrange
+    instruction: "Build a loop that prints each number in the list doubled"
+    blocks: ["for", "n", "in", "numbers", ":", "print", "(", "n", "*", "2", ")"]
+    correct: ["for", "n", "in", "numbers", ":", "print", "(", "n", "*", "2", ")"]
+    explanation: "n takes each value in numbers, and n * 2 doubles it."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "words = [\"hi\", \"bye\"]\nfor w in words:\n    print(w.upper())"
+    choices: ["HI\nBYE", "hi\nbye", "hi\nBYE", "words"]
+    correct: "HI\nBYE"
+    explanation: ".upper() converts each word to uppercase inside the loop."
+
+  - type: fill_blank
+    before: "scores = [80, 90, 70]\ntotal = 0\nfor s in scores:\n    total = total "
+    after: " s"
+    choices: ["+", "-", "*", "/"]
+    answer: "+"
+    explanation: "total + s accumulates the running sum of all scores."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "prices = [5, 10, 15]\ntotal = 0\nfor p in prices:\n    total += p\nprint(total)"
+    choices: ["30", "51015", "3", "0"]
+    correct: "30"
+    explanation: "+= adds each price to total. 5 + 10 + 15 = 30."
+
+  - type: arrange
+    instruction: "Build a loop that counts how many items are in a list using a counter"
+    blocks: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+    correct: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+    explanation: "count += 1 increments for each item. After the loop, print shows the total."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "nums = [3, 1, 4, 1, 5]\nmax_n = 0\nfor n in nums:\n    if n > max_n:\n        max_n = n\nprint(max_n)"
+    choices: ["5", "3", "1", "14"]
+    correct: "5"
+    explanation: "The loop tracks the maximum. After visiting all elements, max_n is 5."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "names = [\"a\", \"b\", \"c\"]\nfor i, name in enumerate(names):\n    print(i, name)"
+    choices: ["0 a\n1 b\n2 c", "a\nb\nc", "0\n1\n2", "1 a\n2 b\n3 c"]
+    correct: "0 a\n1 b\n2 c"
+    explanation: "enumerate() gives both the index and the value. Print shows them separated by a space."
+
+  - type: mini_code
+    prompt: "Temperatures = [22, 19, 25, 18, 30]. Print each temperature that is above 20."
+    starter: "temperatures = [22, 19, 25, 18, 30]\n"
+    tests:
+      - code: "lines = [l.strip() for l in _stdout.strip().split('\\n')]"
+        message: "Parse output lines"
+      - code: "set(lines) == {'22', '25', '30'}"
+        message: "Should print 22, 25, 30"
+
+  - type: mini_code
+    prompt: "Given a list of numbers, calculate and print their average."
+    starter: "numbers = [10, 20, 30, 40, 50]\ntotal = 0\n"
+    tests:
+      - code: "_stdout.strip() == '30.0'"
+        message: "Average of 10,20,30,40,50 is 30.0"
 
 worlds:
   fantasy:
     title: "The Duplication Spell"
-    setup: |
-      On the enchanted workbench lie five magical crystals. "A duplication spell
-      doubles the power of each crystal," Elara says. "We loop over each item in a
-      list, transform it, and collect the result with .append()."
-
-      She demonstrates: start with an empty list, loop through the originals, and
-      append each one multiplied by two. Build the 'doubled' list by multiplying
-      each number in 'numbers' by two.
-    final_challenge_prompt: |
-      The adventuring party needs a roster. Start with an empty list called crew.
-      Use .append() to add "Aria", "Rex", and "Mira" — one call per name. Then
-      store the count in crew_size using len().
   scifi:
-    title: "Sensor Array Boost"
-    setup: |
-      The sensor array needs its readings doubled for the deep-space scan. "Looping
-      over a list visits each element in turn," the AI explains. "Call .append()
-      inside the loop to build a new list as you go."
-
-      Create 'doubled' by multiplying each value in 'numbers' by two and appending
-      the result. The scanner cannot calibrate until all five doubled values are correct.
-    final_challenge_prompt: |
-      The crew manifest needs three names added. Start with crew as an empty list.
-      Append "Aria", "Rex", and "Mira" using .append(). Store len(crew) in crew_size.
+    title: "Scanning Crew Members"
   mystery:
-    title: "Doubling the Reward"
-    setup: |
-      The agency is doubling the bounty on every open case. "A for loop walks through
-      a list one item at a time," your mentor explains. "Inside the loop, multiply
-      each amount by 2 and append it to a new list."
-
-      Build 'doubled' from the 'numbers' list by appending each element times two.
-      The bookkeeper won't accept the ledger until every value is exact.
-    final_challenge_prompt: |
-      Three informants need to be added to the contact list. Start with crew as an
-      empty list. Use .append() to add "Aria", "Rex", and "Mira". Then store
-      len(crew) in crew_size.
+    title: "Reviewing Evidence"

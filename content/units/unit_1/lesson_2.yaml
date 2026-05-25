@@ -1,91 +1,97 @@
-unit: 1
-lesson: 2
+title: "Numbers and Maths"
 xp: 10
 
-example:
-  code: |
-    price = 80
-    discount = 15
-    final = price - discount
-    print(final)
-    print(price * 2)
-  explanation: |
-    Numbers in Python are stored without quotes — just write the number.
-    Basic arithmetic works exactly as expected: + adds, - subtracts, * multiplies, / divides.
-    Here we subtract discount from price and store the result in a third variable 'final'.
-    You can also do arithmetic directly inside print().
-  output: "65\n160"
+exercises:
+  - type: concept
+    code: |
+      apples = 5
+      oranges = 3
+      total = apples + oranges
+      print(total)
+    output: "8"
+    explanation: "Numbers don't use quotes. You can do maths with variables. + adds, - subtracts, * multiplies, / divides."
 
-code_starter: |
-  # Assign the integer 42 to a variable called 'score'
-  score =
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 10\ny = 3\nprint(x - y)"
+    choices: ["7", "13", "10", "3"]
+    correct: "7"
+    explanation: "10 - 3 = 7."
 
-  # Calculate score plus 10 and store it in 'total'
-  total =
-hints:
-  - "Numbers don't need quotes: score = 42"
-  - "Arithmetic uses + - * /  — try: total = score + 10"
-tests:
-  - code: "assert isinstance(score, int), 'score should be a whole number (integer)'"
-    message: "score should be an integer"
-  - code: "assert total == score + 10, 'total should equal score + 10'"
-    message: "total should equal score + 10"
-  - code: "assert 'score' in _code and ('+' in _code), 'use score + 10, not a hardcoded number'"
-    message: "total must be calculated using score, not hardcoded"
+  - type: fill_blank
+    before: "result = 4 "
+    after: " 5"
+    choices: ["*", "=", "+", "print"]
+    answer: "*"
+    explanation: "* is multiplication. 4 * 5 = 20."
 
-final_challenge:
-  code_starter: |
-    # Compute the total gold a party earns
-  hints:
-    - "gold = 120  — store the starting amount"
-    - "bonus = 45  — the extra reward"
-    - "total_gold = gold + bonus  — add them together"
-    - "print(total_gold)"
-  tests:
-    - code: "assert gold == 120"
-      message: "gold should be 120"
-    - code: "assert bonus == 45"
-      message: "bonus should be 45"
-    - code: "assert total_gold == 165"
-      message: "total_gold should be 165 (120 + 45)"
+  - type: mcq
+    question: "What does this print?"
+    code: "price = 12\nqty = 4\nprint(price * qty)"
+    choices: ["48", "124", "16", "3"]
+    correct: "48"
+    explanation: "12 × 4 = 48."
+
+  - type: arrange
+    instruction: "Build code to divide 20 by 4 and print the result"
+    blocks: ["print", "(", "20", "/", "4", ")", "*"]
+    correct: ["print", "(", "20", "/", "4", ")"]
+    explanation: "/ divides. print(20 / 4) shows 5.0."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "a = 7\nb = 2\nprint(a / b)"
+    choices: ["3.5", "3", "4", "7/2"]
+    correct: "3.5"
+    explanation: "/ always produces a float. 7 / 2 = 3.5."
+
+  - type: fill_blank
+    before: "total = price "
+    after: " tax"
+    choices: ["+", "=", "print", "*"]
+    answer: "+"
+    explanation: "+ adds. total = price + tax sums the two values."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 5\nn = n + 1\nprint(n)"
+    choices: ["6", "5", "n + 1", "1"]
+    correct: "6"
+    explanation: "n + 1 computes 5 + 1 = 6, then stores 6 back into n."
+
+  - type: arrange
+    instruction: "Store the result of 100 minus 37 in a variable called remaining"
+    blocks: ["remaining", "=", "100", "-", "37", "+", "print"]
+    correct: ["remaining", "=", "100", "-", "37"]
+    explanation: "= assigns the computed result 63 to remaining."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 3\nprint(x * x)"
+    choices: ["9", "6", "33", "x * x"]
+    correct: "9"
+    explanation: "x * x = 3 * 3 = 9."
+
+  - type: mini_code
+    prompt: "You have 3 boxes, each containing 8 items. Print the total number of items."
+    starter: "boxes = 3\nitems_per_box = 8\n"
+    tests:
+      - code: "_stdout.strip() == '24'"
+        message: "Should print 24 (3 × 8)"
+
+  - type: mini_code
+    prompt: "Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it."
+    starter: ""
+    tests:
+      - code: "assert remaining == 65"
+        message: "remaining should be 65"
+      - code: "_stdout.strip() == '65'"
+        message: "Should print 65"
 
 worlds:
   fantasy:
     title: "The Power Counter"
-    setup: |
-      Elara taps her staff on the stone floor. "Spells cost power — and power is
-      measured in numbers." In Python, integers are whole numbers stored without quotes.
-
-      "Assign 42 to a variable called 'score'," she instructs, "then calculate your
-      total power by adding 10 to it and storing the result in 'total'. Numbers let
-      us do arithmetic — the real engine beneath all magic."
-    final_challenge_prompt: |
-      The party defeated a dragon and split the gold hoard. Create a variable gold
-      set to 120 (the base reward) and bonus set to 45 (the dragon slayer bonus).
-      Calculate total_gold by adding them, then print it.
   scifi:
-    title: "Fuel Calculations"
-    setup: |
-      The ship's fuel gauge is flashing. "Emergency reserves detected," the AI announces.
-      "Current fuel: 42 units. Reserve boost: 10 units. Calculate total available fuel
-      before we can engage the jump drive."
-
-      In Python, integers are whole numbers — no quotes needed. Assign 42 to 'score'
-      and compute score + 10 into 'total'. Math in Python works exactly as you'd expect.
-    final_challenge_prompt: |
-      Two fuel pods are loaded for the mission. Set gold to 120 (primary pod capacity)
-      and bonus to 45 (emergency reserve). Calculate total_gold by adding them —
-      that is the total fuel available. Print it.
+    title: "Navigation Maths"
   mystery:
-    title: "Counting the Clues"
-    setup: |
-      Your case board has 42 pinned notes. The informant just slipped you 10 more.
-      "Quantity matters in detective work," your mentor says, lighting a cigarette.
-
-      "Store the starting count in a variable called 'score', then add 10 to it and
-      put the result in 'total'. In Python, integers are plain numbers — no quotes.
-      Arithmetic is straightforward: + adds, - subtracts, * multiplies, / divides."
-    final_challenge_prompt: |
-      Two witnesses provided leads. The first gave gold = 120 pieces of evidence;
-      the second contributed bonus = 45. Create both variables, add them into
-      total_gold, and print the result.
+    title: "Counting Clues"

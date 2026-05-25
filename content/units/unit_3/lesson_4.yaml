@@ -1,90 +1,91 @@
-unit: 2
-lesson: 4
-xp: 10
+title: "Conditions with and / or"
+xp: 12
 
-example:
-  code: |
-    age = 20
-    has_pass = True
-    if age >= 18 and has_pass:
-        print("Entry granted")
-    else:
-        print("Entry denied")
-  explanation: |
-    'and' requires BOTH conditions to be True for the whole expression to be True.
-    'or' requires at least ONE condition to be True.
-    Here both age >= 18 and has_pass are True, so "Entry granted" prints.
-    Change either one to False and the else branch runs instead.
-  output: "Entry granted"
+exercises:
+  - type: concept
+    code: |
+      age = 17
+      has_ticket = True
+      if age >= 18 and has_ticket:
+          print("Enter")
+      else:
+          print("Denied")
+    output: "Denied"
+    explanation: "Combining comparisons in if conditions with and/or lets you check multiple things at once."
 
-code_starter: |
-  level = 8
-  coins = 150
-  # If level >= 5 AND coins >= 100, print "Can buy", else print "Cannot buy"
-hints:
-  - "if level >= 5 and coins >= 100:"
-  - "Both conditions must be True for 'and' to pass"
-tests:
-  - code: "assert level == 8 and coins == 150"
-    message: "level and coins should not be changed"
-  - code: "assert 'Can buy' in _stdout"
-    message: "Should print 'Can buy' when both conditions pass"
-  - code: "assert 'Cannot buy' not in _stdout"
-    message: "Should not print 'Cannot buy'"
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
+    choices: ["in range", "Nothing", "True", "x"]
+    correct: "in range"
+    explanation: "Both x > 0 (True) and x < 10 (True) are True, so the if block runs."
 
-final_challenge:
-  code_starter: |
-    hp = 25
-    mp = 10
-    # Print "Critical" if hp < 30 OR mp < 20, else print "Stable"
-  hints:
-    - "if hp < 30 or mp < 20:"
-    - "'or' is True when at least one condition is True"
-  tests:
-    - code: "assert hp == 25 and mp == 10"
-      message: "hp and mp should not be changed"
-    - code: "assert 'Critical' in _stdout"
-      message: "Should print 'Critical' when hp < 30 or mp < 20"
-    - code: "assert 'Stable' not in _stdout"
-      message: "Should not print 'Stable'"
+  - type: fill_blank
+    before: "if age >= 13 "
+    after: " age <= 19:\n    print(\"teenager\")"
+    choices: ["and", "or", "not", "=="]
+    answer: "and"
+    explanation: "Both conditions must be True: age >= 13 AND age <= 19."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "score = 45\nif score < 0 or score > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
+    choices: ["valid", "invalid", "45", "Nothing"]
+    correct: "valid"
+    explanation: "score < 0 is False and score > 100 is False. False or False = False, so else runs."
+
+  - type: arrange
+    instruction: "Build: if name is not empty AND score >= 50, print 'qualified'"
+    blocks: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
+    correct: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
+    explanation: "name is truthy when non-empty. Both conditions must hold."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "is_raining = True\nhas_umbrella = False\nif not (is_raining and not has_umbrella):\n    print(\"go outside\")\nelse:\n    print(\"stay inside\")"
+    choices: ["stay inside", "go outside", "True", "False"]
+    correct: "stay inside"
+    explanation: "is_raining is True, not has_umbrella is True. True and True = True. not True = False. else runs."
+
+  - type: fill_blank
+    before: "if username == \"admin\" "
+    after: " password == \"1234\":\n    print(\"access\")"
+    choices: ["and", "or", "not", "if"]
+    answer: "and"
+    explanation: "Both username AND password must match to grant access."
+
+  - type: mcq
+    question: "Which condition is True when n is outside the range 1 to 100?"
+    code: ""
+    choices: ["n < 1 or n > 100", "n < 1 and n > 100", "not n >= 1 and n <= 100", "n <= 0 and n >= 101"]
+    correct: "n < 1 or n > 100"
+    explanation: "Outside the range means less than 1 OR greater than 100."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
+    choices: ["safe", "danger", "safe\ndanger", "True"]
+    correct: "safe"
+    explanation: "hp > 20 is True and shield is True. True and True = True. 'safe' prints."
+
+  - type: mini_code
+    prompt: "Set score = 55 and passed_exam = False. Print 'pass' if score >= 50 AND passed_exam is True, else print 'fail'."
+    starter: "score = 55\npassed_exam = False\n"
+    tests:
+      - code: "'fail' in _stdout"
+        message: "passed_exam is False so result is 'fail'"
+
+  - type: mini_code
+    prompt: "Set hour = 14. Print 'open' if hour >= 9 and hour <= 17, else print 'closed'."
+    starter: "hour = 14\n"
+    tests:
+      - code: "'open' in _stdout"
+        message: "14 is between 9 and 17, so 'open'"
 
 worlds:
   fantasy:
     title: "The Enchanted Market"
-    setup: |
-      The market stall requires two things: enough level and enough coins.
-      In Python, 'and' combines conditions so both must be True. 'or' means
-      at least one must be True. They let you express more precise rules.
-
-      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
-      "Can buy", else print "Cannot buy". Both conditions must hold.
-    final_challenge_prompt: |
-      The healer flags critical status when either hp or mp is low.
-      hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
-      otherwise print "Stable".
   scifi:
-    title: "Docking Clearance"
-    setup: |
-      Docking requires both a valid crew level AND enough fuel credits.
-      Python's 'and' operator ensures both gates pass before entry is granted.
-      'or' would open the gate for either — use the right operator for the rule.
-
-      level is 8, coins is 150. Write: if level >= 5 and coins >= 100 print
-      "Can buy", else print "Cannot buy".
-    final_challenge_prompt: |
-      The ship monitors both hull points and energy. Either reading below threshold
-      triggers an alert. hp is 25, mp is 10. Print "Critical" if hp < 30 or
-      mp < 20, otherwise print "Stable".
+    title: "Clearance Level Check"
   mystery:
-    title: "Two Clues, One Verdict"
-    setup: |
-      Two pieces of evidence together seal a case. In Python, 'and' means both
-      conditions must be True. 'or' means either one is enough. Choosing the
-      right operator is as important as choosing the right clue.
-
-      level is 8, coins is 150. If level >= 5 and coins >= 100, print "Can buy",
-      else print "Cannot buy". Both requirements must be satisfied.
-    final_challenge_prompt: |
-      A suspect is flagged if either alibi score or evidence count falls below
-      threshold. hp is 25, mp is 10. Print "Critical" if hp < 30 or mp < 20,
-      otherwise print "Stable".
+    title: "Multi-Condition Evidence"

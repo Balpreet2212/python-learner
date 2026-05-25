@@ -1,110 +1,93 @@
-unit: 2
-lesson: 2
-xp: 10
+title: "Order of Operations"
+xp: 12
 
-example:
-  code: |
-    a = 2 + 3 * 4      # * before +  →  14
-    b = (2 + 3) * 4    # () first    →  20
-    c = 10 - 4 / 2     # / before -  →  8.0
-    print(a, b, c)
-  explanation: |
-    Python follows standard maths order: parentheses first, then **,
-    then * and / (left to right), then + and - (left to right).
-    Without parentheses: 2 + 3 * 4 = 2 + 12 = 14.
-    With parentheses: (2 + 3) * 4 = 5 * 4 = 20.
-    Use parentheses whenever you need to control the order.
-  output: "14 20 8.0"
+exercises:
+  - type: concept
+    code: |
+      print(3 + 4 * 2)
+      print((3 + 4) * 2)
+    output: "11\n14"
+    explanation: "Python follows BODMAS/PEMDAS: brackets first, then * and /, then + and -. Parentheses override the default order."
 
-code_starter: |
-  price = 50
-  discount = 10
-  quantity = 3
-  # Calculate total: apply discount to price, then multiply by quantity
-  # Hint: you need parentheses!
-  total =
-hints:
-  - "Subtract discount from price first: (price - discount)"
-  - "total = (price - discount) * quantity"
+  - type: mcq
+    question: "What does this print?"
+    code: "print(2 + 3 * 4)"
+    choices: ["14", "20", "2", "24"]
+    correct: "14"
+    explanation: "* has higher precedence. 3 * 4 = 12 first, then 2 + 12 = 14."
 
-tests:
-  - code: "assert total == 120"
-    message: "total should be 120 — discount applied before multiplying"
-  - code: "assert '(' in _code"
-    message: "use parentheses to apply the discount before multiplying"
+  - type: fill_blank
+    before: "result = "
+    after: "2 + 3) * 4"
+    choices: ["(", "[", "{", "\""]
+    answer: "("
+    explanation: "Parentheses make the addition happen first: (2 + 3) = 5, then 5 * 4 = 20."
 
-predict:
-  code: |
-    print(3 + 4 * 2)
-    print((3 + 4) * 2)
-  explanation: "Without parentheses * runs before +, giving 11. With parentheses the addition happens first, giving 14."
+  - type: mcq
+    question: "What does this print?"
+    code: "print(10 - 2 * 3)"
+    choices: ["4", "24", "10", "1"]
+    correct: "4"
+    explanation: "* first: 2 * 3 = 6. Then 10 - 6 = 4."
 
-break_and_fix:
-  broken_code: |
-    a = 80
-    b = 85
-    c = 90
-    average = a + b + c / 3
-    print(average)
-  hint: "To average three numbers add them ALL first then divide — wrap a + b + c in parentheses"
-  tests:
-    - code: "assert average == 85.0"
-      message: "average should be 85.0 — use (a + b + c) / 3"
-    - code: "assert '(' in _code"
-      message: "use parentheses: (a + b + c) / 3"
+  - type: arrange
+    instruction: "Build code to compute the average of 6, 8, and 10 correctly"
+    blocks: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+    correct: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+    explanation: "Without parentheses, only 10 / 3 would be computed first. The brackets group the sum."
 
-final_challenge:
-  code_starter: |
-    # Calculate a bill with service charge
-    meal = 45
-    drinks = 20
-    service_rate = 15  # percent
-  hints:
-    - "subtotal = meal + drinks"
-    - "service = subtotal * service_rate / 100"
-    - "total = subtotal + service"
-    - "print(total)"
-  tests:
-    - code: "assert subtotal == 65"
-      message: "subtotal should be 65 (meal + drinks)"
-    - code: "assert service == 9.75"
-      message: "service should be 9.75 (15% of 65)"
-    - code: "assert total == 74.75"
-      message: "total should be 74.75"
+  - type: mcq
+    question: "What does this print?"
+    code: "print((10 - 3) ** 2)"
+    choices: ["49", "7", "94", "100"]
+    correct: "49"
+    explanation: "(10 - 3) = 7 first (brackets), then 7 ** 2 = 49."
+
+  - type: fill_blank
+    before: "average = (a + b + c) "
+    after: " 3"
+    choices: ["/", "//", "*", "+"]
+    answer: "/"
+    explanation: "After summing a, b, c, divide by 3 to get the average."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 5\nprint(x * 2 + 1)"
+    choices: ["11", "15", "12", "25"]
+    correct: "11"
+    explanation: "x * 2 = 10 first, then 10 + 1 = 11."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "print(8 / 2 + 6 / 3)"
+    choices: ["6.0", "4.0", "8.0", "2.0"]
+    correct: "6.0"
+    explanation: "8 / 2 = 4.0 and 6 / 3 = 2.0 happen first, then 4.0 + 2.0 = 6.0."
+
+  - type: arrange
+    instruction: "Fix the average calculation by adding parentheses around a + b"
+    blocks: ["(", "a", "+", "b", ")", "/", "2", "a", "+", "b", "/"]
+    correct: ["(", "a", "+", "b", ")", "/", "2"]
+    explanation: "(a + b) / 2 computes the sum first, then divides by 2."
+
+  - type: mini_code
+    prompt: "Three scores are 70, 85, and 91. Calculate their average and print it."
+    starter: "a = 70\nb = 85\nc = 91\n"
+    tests:
+      - code: "abs(float(_stdout.strip()) - 82.0) < 0.01"
+        message: "Average should be 82.0"
+
+  - type: mini_code
+    prompt: "Print the result of (12 + 8) * (5 - 3). Make sure you use parentheses to get the right answer."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '40'"
+        message: "Should print 40: (20) * (2) = 40"
 
 worlds:
   fantasy:
     title: "The Spell Formula"
-    setup: |
-      "Order of operations is the grammar of maths," Elara explains,
-      drawing glowing symbols in the air. "Python evaluates * and /
-      before + and -. Parentheses override everything."
-
-      A potion costs 50 gold with a 10 gold discount — you need 3.
-      Calculate total by applying the discount before multiplying.
-    final_challenge_prompt: |
-      A tavern bill: meal = 45 gold, drinks = 20, service_rate = 15%.
-      Compute subtotal, service (the charge), and total. Print total.
   scifi:
-    title: "Mission Fuel Formula"
-    setup: |
-      "Operator precedence is strict as navigation protocol," the AI
-      announces. "Multiplication and division execute before addition.
-      Parentheses override that precedence."
-
-      Fuel costs 50 credits per unit with a 10 credit rebate.
-      Compute total for 3 units — apply the rebate first.
-    final_challenge_prompt: |
-      Mission bill: meal = 45 credits, drinks = 20, service_rate = 15%.
-      Compute subtotal, service (the fee), and total.
+    title: "Trajectory Calculation"
   mystery:
-    title: "The Expense Formula"
-    setup: |
-      "Maths has rules — break them and your budget breaks too," your
-      partner says. "Parentheses tell Python what to calculate first."
-
-      A stakeout costs 50 per night with a 10 discount — 3 nights.
-      Calculate total: apply the discount before multiplying.
-    final_challenge_prompt: |
-      Invoice: meal = 45, drinks = 20, service_rate = 15%.
-      Compute subtotal, service, and total.
+    title: "Calculating Evidence"

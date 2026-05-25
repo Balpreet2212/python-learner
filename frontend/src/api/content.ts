@@ -2,69 +2,73 @@ import { z } from "zod";
 import { apiFetch } from "./client";
 import { LearnerProfileSchema, type LearnerProfile } from "./auth";
 
-// ── Schemas ───────────────────────────────────────────────────────────────────
+// ── Exercise schemas ───────────────────────────────────────────────────────────
 
-export const CapstoneSchema = z.object({
-  unit: z.number().int(),
-  title: z.string(),
-  narrative: z.string(),
-  story_beat: z.string(),
-  code_starter: z.string(),
-  hints: z.array(z.string()),
-  xp: z.number().int(),
-  test_count: z.number().int(),
-  plan_prompts: z.array(z.string()),
-});
-export type Capstone = z.infer<typeof CapstoneSchema>;
-
-export const ExampleSchema = z.object({
+export const ConceptExSchema = z.object({
+  type: z.literal("concept"),
   code: z.string(),
-  explanation: z.string(),
   output: z.string(),
+  explanation: z.string(),
 });
 
-export const FinalChallengeSchema = z.object({
-  prompt: z.string(),
-  code_starter: z.string(),
-  hints: z.array(z.string()),
-  test_count: z.number().int(),
-});
-
-export const PredictCardSchema = z.object({
+export const McqExSchema = z.object({
+  type: z.literal("mcq"),
+  question: z.string(),
   code: z.string(),
+  choices: z.array(z.string()),
+  correct: z.string(),
+  explanation: z.string(),
 });
-export type PredictCard = z.infer<typeof PredictCardSchema>;
 
-export const BreakAndFixSchema = z.object({
-  broken_code: z.string(),
-  hint: z.string(),
+export const ArrangeExSchema = z.object({
+  type: z.literal("arrange"),
+  instruction: z.string(),
+  blocks: z.array(z.string()),
+  correct: z.array(z.string()),
+  explanation: z.string(),
+});
+
+export const FillBlankExSchema = z.object({
+  type: z.literal("fill_blank"),
+  before: z.string(),
+  after: z.string(),
+  choices: z.array(z.string()),
+  answer: z.string(),
+  explanation: z.string(),
+});
+
+export const MiniCodeExSchema = z.object({
+  type: z.literal("mini_code"),
+  prompt: z.string(),
+  starter: z.string(),
   test_count: z.number().int(),
 });
-export type BreakAndFix = z.infer<typeof BreakAndFixSchema>;
+
+export const ExerciseSchema = z.discriminatedUnion("type", [
+  ConceptExSchema,
+  McqExSchema,
+  ArrangeExSchema,
+  FillBlankExSchema,
+  MiniCodeExSchema,
+]);
+
+export type ConceptEx = z.infer<typeof ConceptExSchema>;
+export type McqEx = z.infer<typeof McqExSchema>;
+export type ArrangeEx = z.infer<typeof ArrangeExSchema>;
+export type FillBlankEx = z.infer<typeof FillBlankExSchema>;
+export type MiniCodeEx = z.infer<typeof MiniCodeExSchema>;
+export type Exercise = z.infer<typeof ExerciseSchema>;
 
 export const LessonSchema = z.object({
   unit: z.number().int(),
   lesson: z.number().int(),
   title: z.string(),
-  setup: z.string(),
-  example: ExampleSchema,
-  code_starter: z.string(),
-  hints: z.array(z.string()),
   xp: z.number().int(),
-  test_count: z.number().int(),
   total_lessons: z.number().int(),
-  final_challenge: FinalChallengeSchema,
-  predict: PredictCardSchema.nullable().optional(),
-  break_and_fix: BreakAndFixSchema.nullable().optional(),
+  exercise_count: z.number().int(),
+  exercises: z.array(ExerciseSchema),
 });
 export type Lesson = z.infer<typeof LessonSchema>;
-
-export const PredictResultSchema = z.object({
-  correct: z.boolean(),
-  actual_output: z.string(),
-  explanation: z.string(),
-});
-export type PredictResult = z.infer<typeof PredictResultSchema>;
 
 export const TestResultSchema = z.object({
   passed: z.boolean(),
@@ -79,6 +83,19 @@ export const SubmitResultSchema = z.object({
 });
 export type SubmitResult = z.infer<typeof SubmitResultSchema>;
 
+export const CapstoneSchema = z.object({
+  unit: z.number().int(),
+  title: z.string(),
+  narrative: z.string(),
+  story_beat: z.string(),
+  code_starter: z.string(),
+  hints: z.array(z.string()),
+  xp: z.number().int(),
+  test_count: z.number().int(),
+  plan_prompts: z.array(z.string()),
+});
+export type Capstone = z.infer<typeof CapstoneSchema>;
+
 // ── API functions ─────────────────────────────────────────────────────────────
 
 export async function getLesson(): Promise<Lesson> {
@@ -86,34 +103,10 @@ export async function getLesson(): Promise<Lesson> {
   return LessonSchema.parse(raw);
 }
 
-export async function submitChallenge(code: string): Promise<SubmitResult> {
-  const raw = await apiFetch<unknown>("/v1/learner/challenge/submit", {
+export async function checkExerciseCode(code: string, exerciseIndex: number): Promise<SubmitResult> {
+  const raw = await apiFetch<unknown>("/v1/learner/exercise/code", {
     method: "POST",
-    body: JSON.stringify({ code }),
-  });
-  return SubmitResultSchema.parse(raw);
-}
-
-export async function checkPredict(answer: string): Promise<PredictResult> {
-  const raw = await apiFetch<unknown>("/v1/learner/predict/check", {
-    method: "POST",
-    body: JSON.stringify({ answer }),
-  });
-  return PredictResultSchema.parse(raw);
-}
-
-export async function submitFix(code: string): Promise<SubmitResult> {
-  const raw = await apiFetch<unknown>("/v1/learner/fix/submit", {
-    method: "POST",
-    body: JSON.stringify({ code }),
-  });
-  return SubmitResultSchema.parse(raw);
-}
-
-export async function submitFinalChallenge(code: string): Promise<SubmitResult> {
-  const raw = await apiFetch<unknown>("/v1/learner/final/submit", {
-    method: "POST",
-    body: JSON.stringify({ code }),
+    body: JSON.stringify({ code, exercise_index: exerciseIndex }),
   });
   return SubmitResultSchema.parse(raw);
 }

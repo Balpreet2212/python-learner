@@ -1,87 +1,101 @@
-unit: 2
-lesson: 4
-xp: 10
+title: "while Loops"
+xp: 12
 
-example:
-  code: |
-    temps = [18, 25, 12, 31, 22]
-    highest = temps[0]
-    for t in temps:
-        if t > highest:
-            highest = t
-    print("Highest:", highest)
-  explanation: |
-    To find the maximum in a list, keep a "running best" variable.
-    Start by assuming the first element is the best (highest = temps[0]).
-    Then loop through every item: if the current item beats the best, update it.
-    After the loop, highest holds the largest value in the list.
-    This pattern works for any comparison — min, max, first match, etc.
-  output: "Highest: 31"
+exercises:
+  - type: concept
+    code: |
+      count = 0
+      while count < 5:
+          print(count)
+          count += 1
+    output: "0\n1\n2\n3\n4"
+    explanation: "while repeats as long as the condition stays True. You must update the variable inside the loop, otherwise it runs forever."
 
-code_starter: |
-  scores = [12, 47, 3, 89, 22]
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
+    choices: ["3\n2\n1", "3\n2\n1\n0", "0\n1\n2\n3", "3"]
+    correct: "3\n2\n1"
+    explanation: "n starts at 3, decrements by 1 each time. Stops when n reaches 0 (condition n > 0 becomes False)."
 
-  # Find the highest score using a for loop.
-  # Store it in a variable called 'highest'.
-  highest = scores[0]
-  for score in scores:
-      if score > highest:
-hints:
-  - "If the current score beats your best, update highest: highest = score"
-  - "Start by assuming scores[0] is the best, then check each one"
-tests:
-  - code: "assert highest == 89, f'highest should be 89, got {highest}'"
-    message: "highest should be 89"
+  - type: fill_blank
+    before: "x = 1\nwhile x "
+    after: " 100:\n    x *= 2\nprint(x)"
+    choices: ["<=", ">=", "==", "!="]
+    answer: "<="
+    explanation: "x <= 100 keeps doubling while x is at most 100. When x exceeds 100 the loop stops."
 
-final_challenge:
-  code_starter: |
-    readings = [3, 91, 27, 64, 8]
-    # Find the peak reading using a for loop
-    # Store it in 'peak'
-  hints:
-    - "peak = readings[0]  — assume the first is highest"
-    - "for r in readings:  — check each value"
-    - "    if r > peak:  — update if better"
-    - "        peak = r"
-  tests:
-    - code: "assert peak == 91, f'peak should be 91, got {peak}'"
-      message: "peak should be 91 (the largest value in readings)"
+  - type: mcq
+    question: "What does this print?"
+    code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
+    choices: ["10", "4", "0", "1"]
+    correct: "10"
+    explanation: "1 + 2 + 3 + 4 = 10."
+
+  - type: arrange
+    instruction: "Build a while loop that prints 1, 2, 3 then stops"
+    blocks: ["i", "=", "1", "while", "i", "<=", "3", ":", "print", "(", "i", ")", "i", "+=", "1"]
+    correct: ["i", "=", "1", "while", "i", "<=", "3", ":", "print", "(", "i", ")", "i", "+=", "1"]
+    explanation: "Set i = 1 before the loop, print i, increment i each iteration."
+
+  - type: mcq
+    question: "What is the key difference between for and while?"
+    code: ""
+    choices: [
+      "while runs while a condition is True; for iterates over a sequence",
+      "while is faster; for is safer",
+      "while can only count; for can do anything",
+      "They are identical"
+    ]
+    correct: "while runs while a condition is True; for iterates over a sequence"
+    explanation: "for is best when you know the number of iterations. while is best when you loop until something changes."
+
+  - type: fill_blank
+    before: "hp = 100\nwhile hp > 0:\n    hp "
+    after: "= 10"
+    choices: ["-", "+", "*", "/"]
+    answer: "-"
+    explanation: "hp -= 10 reduces hp by 10 each iteration until hp reaches 0 or below."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
+    choices: ["32", "64", "16", "31"]
+    correct: "32"
+    explanation: "n doubles: 1, 2, 4, 8, 16, 32. When n = 32, the condition n < 32 is False. Loop ends."
+
+  - type: mcq
+    question: "What is an infinite loop?"
+    code: ""
+    choices: [
+      "A while loop whose condition never becomes False",
+      "A for loop with a very large range",
+      "A loop that runs exactly once",
+      "A loop inside another loop"
+    ]
+    correct: "A while loop whose condition never becomes False"
+    explanation: "If the condition stays True forever, the loop never ends. Always make sure something changes the condition."
+
+  - type: mini_code
+    prompt: "Starting from 1, keep doubling until you exceed 1000. Print the final value."
+    starter: "n = 1\n"
+    tests:
+      - code: "_stdout.strip() == '1024'"
+        message: "Should print 1024 (first power of 2 > 1000)"
+
+  - type: mini_code
+    prompt: "Print all multiples of 7 that are less than 50, using a while loop."
+    starter: "n = 7\n"
+    tests:
+      - code: "lines = _stdout.strip().split('\\n')"
+        message: "Parse output"
+      - code: "lines[0].strip() == '7' and lines[-1].strip() == '49'"
+        message: "Should print 7, 14, 21, 28, 35, 42, 49"
 
 worlds:
   fantasy:
     title: "The Champion's Trial"
-    setup: |
-      Five warriors enter the arena — only the strongest advances. "You can use a
-      loop to track the greatest value seen so far," Elara explains. "Start by
-      assuming the first element is the winner, then replace it whenever you find
-      something better."
-
-      This pattern — a running maximum — is fundamental to many algorithms. Find
-      'highest' among the scores and the champion enters the next round.
-    final_challenge_prompt: |
-      Five arcane readings were taken from different ley lines. Find the peak energy
-      reading from the list [3, 91, 27, 64, 8]. Use a for loop and a running maximum
-      to find the largest value and store it in 'peak'.
   scifi:
-    title: "Peak Signal"
-    setup: |
-      Five sensor readings arrive from deep space. "To find a maximum, keep a
-      running winner — start with the first value, then update it whenever the
-      current reading exceeds it," the AI says.
-
-      Loop through 'scores' and store the peak reading in 'highest'.
-    final_challenge_prompt: |
-      Five telemetry readings came in: [3, 91, 27, 64, 8]. Find the strongest
-      signal. Use a for loop with a running maximum and store the result in 'peak'.
+    title: "Power Build-Up"
   mystery:
-    title: "The Biggest Lead"
-    setup: |
-      Five suspects — each assigned a suspicion score. "Finding the maximum means
-      walking through every value and keeping the best you've seen," your mentor
-      says. "Assume the first score leads, then check whether each new one beats it."
-
-      Find the highest score and store it in 'highest'.
-    final_challenge_prompt: |
-      Five informants each provided a reliability rating: [3, 91, 27, 64, 8].
-      Find the highest rating using a for loop with a running maximum. Store the
-      result in 'peak'.
+    title: "Repeating the Search"

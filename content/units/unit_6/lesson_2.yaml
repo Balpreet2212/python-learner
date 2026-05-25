@@ -1,97 +1,97 @@
-unit: 4
-lesson: 2
-xp: 10
+title: "Modifying Lists"
+xp: 12
 
-example:
-  code: |
-    tools = ["hammer", "drill"]
-    tools.append("saw")
-    print(tools)
-    print(len(tools))
-    print(tools[0])
-    print(tools[-1])
-  explanation: |
-    .append() adds a new item to the end of a list in-place (it changes the original).
-    len() counts the total number of items.
-    Positive indexes count from the front: [0] is first, [1] is second.
-    Negative indexes count from the back: [-1] is always the last item.
-  output: "['hammer', 'drill', 'saw']\n3\nhammer\nsaw"
+exercises:
+  - type: concept
+    code: |
+      tools = ["hammer", "drill"]
+      tools.append("saw")
+      print(tools)
+      tools.remove("drill")
+      print(tools)
+      last = tools.pop()
+      print(last)
+      print(tools)
+    output: "['hammer', 'drill', 'saw']\n['hammer', 'saw']\nsaw\n['hammer']"
+    explanation: "append() adds to the end. remove() deletes the first matching item. pop() removes and returns the last item."
 
-code_starter: |
-  inventory = ["sword", "shield"]
+  - type: mcq
+    question: "What does this print?"
+    code: "nums = [1, 2, 3]\nnums.append(4)\nprint(len(nums))"
+    choices: ["4", "3", "5", "1"]
+    correct: "4"
+    explanation: "append(4) adds 4 to the list. Length becomes 4."
 
-  # 1. Append "potion" to inventory
-  inventory.append(   )
+  - type: fill_blank
+    before: "items = [\"a\", \"b\", \"c\"]\nitems."
+    after: "(\"b\")\nprint(items)"
+    choices: ["remove", "append", "pop", "delete"]
+    answer: "remove"
+    explanation: "remove('b') finds and deletes the first 'b' from the list."
 
-  # 2. Store the total item count in 'item_count'
-  item_count =
+  - type: mcq
+    question: "What does this print?"
+    code: "stack = [10, 20, 30]\nval = stack.pop()\nprint(val)\nprint(stack)"
+    choices: ["30\n[10, 20]", "10\n[20, 30]", "30\n[10, 20, 30]", "20\n[10, 30]"]
+    correct: "30\n[10, 20]"
+    explanation: "pop() removes and returns the last item (30). The list becomes [10, 20]."
 
-  # 3. Store the first item in 'first_item'
-  first_item =
-hints:
-  - 'inventory.append("potion")  — adds to the end'
-  - "item_count = len(inventory)  — len() returns the number of items"
-  - "first_item = inventory[0]  — lists are zero-indexed"
-tests:
-  - code: "assert 'potion' in inventory"
-    message: "'potion' should be in inventory"
-  - code: "assert item_count == 3, f'item_count should be 3, got {item_count}'"
-    message: "item_count should be 3"
-  - code: "assert first_item == 'sword', f'first_item should be sword, got {first_item!r}'"
-    message: "first_item should be 'sword'"
+  - type: arrange
+    instruction: "Append 'potion' to inventory and print it"
+    blocks: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
+    correct: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
+    explanation: "Call .append() on the list to add the item, then print."
 
-final_challenge:
-  code_starter: |
-    # Build an item bag and query it
-    items = ["torch", "rope"]
-  hints:
-    - 'items.append("key")  — add the key'
-    - "item_count = len(items)  — should be 3"
-    - "first_item = items[0]  — should be torch"
-  tests:
-    - code: "assert 'key' in items"
-      message: "'key' should be in items"
-    - code: "assert len(items) == 3, f'items should have 3 items, got {len(items)}'"
-      message: "items should have 3 items after appending"
-    - code: "assert item_count == 3"
-      message: "item_count should be 3"
-    - code: "assert first_item == 'torch'"
-      message: "first_item should be 'torch'"
+  - type: mcq
+    question: "What does this print?"
+    code: "letters = [\"x\", \"y\", \"z\"]\nletters.remove(\"y\")\nprint(letters)"
+    choices: ["['x', 'z']", "['x', 'y']", "['y', 'z']", "['x', 'y', 'z']"]
+    correct: "['x', 'z']"
+    explanation: "remove('y') deletes 'y'. The list becomes ['x', 'z']."
+
+  - type: fill_blank
+    before: "nums = [5, 10, 15]\nlast = nums."
+    after: "()\nprint(last)"
+    choices: ["pop", "remove", "append", "len"]
+    answer: "pop"
+    explanation: "pop() removes and returns the last item. last = 15."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "animals = [\"cat\", \"dog\", \"bird\"]\nanimals.append(\"fish\")\nanimals.remove(\"dog\")\nprint(len(animals))"
+    choices: ["3", "4", "2", "1"]
+    correct: "3"
+    explanation: "Start with 3, append adds 1 (→4), remove deletes 1 (→3)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "q = [1, 2, 3]\nq.append(q.pop())\nprint(q)"
+    choices: ["[1, 2, 3]", "[1, 2]", "[3, 1, 2]", "[1, 2, 3, 3]"]
+    correct: "[1, 2, 3]"
+    explanation: "pop() removes 3, then append(3) adds it back. No net change."
+
+  - type: mini_code
+    prompt: "Start with a list of 3 fruits. Append a 4th fruit, then remove the first fruit. Print the final list."
+    starter: ""
+    tests:
+      - code: "isinstance(eval(_stdout.strip()), list)"
+        message: "Should print a list"
+      - code: "len(eval(_stdout.strip())) == 3"
+        message: "Final list should have 3 items"
+
+  - type: mini_code
+    prompt: "Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list."
+    starter: ""
+    tests:
+      - code: "len(eval(_stdout.strip())) == 2"
+        message: "Should have 2 items remaining"
+      - code: "eval(_stdout.strip()) == [1, 2]"
+        message: "Should be [1, 2]"
 
 worlds:
   fantasy:
     title: "Inventory Management"
-    setup: |
-      Your pack needs restocking. "Lists have methods — built-in actions you call
-      with a dot," Elara says. ".append() adds an item to the end. len() tells you
-      how many items there are. And list[0] retrieves the first item — Python lists
-      start counting at zero."
-
-      Add a potion, measure the inventory size, and grab the first item by index.
-    final_challenge_prompt: |
-      Your bag already has a torch and rope. Append "key" to items. Then store the
-      total count in item_count (len()) and store the first item in first_item
-      (items[0]).
   scifi:
     title: "Cargo Operations"
-    setup: |
-      Cargo must be logged precisely. "List methods let you modify lists in place,"
-      the AI explains. ".append() adds to the end without creating a new list.
-      len() counts items. Index with [0] for the first — lists are zero-indexed."
-
-      Update and query the inventory using the methods you've learned.
-    final_challenge_prompt: |
-      The cargo hold has a torch and rope. Add "key" to items using append. Store
-      len(items) in item_count and items[0] in first_item.
   mystery:
     title: "Evidence Locker"
-    setup: |
-      New evidence arrives — log it, count it, identify the first item. ".append()
-      adds an item to the end of a list," your partner says. "len() counts the items,
-      and [0] retrieves the first."
-
-      Append "potion" to inventory, then find item_count and first_item.
-    final_challenge_prompt: |
-      The evidence locker has a torch and rope. A new key has been found — append
-      it to items. Then store the total count in item_count and the first item in
-      first_item.

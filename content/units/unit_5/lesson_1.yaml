@@ -1,92 +1,101 @@
-unit: 3
-lesson: 1
-xp: 10
+title: "Defining Functions"
+xp: 12
 
-example:
-  code: |
-    def make_greeting():
-        return "Welcome to PyQuest!"
+exercises:
+  - type: concept
+    code: |
+      def greet(name):
+          print(f"Hello, {name}!")
 
-    result = make_greeting()
-    print(result)
-    print(make_greeting())
-  explanation: |
-    def declares a function — a named, reusable block of code.
-    The function body is indented. return sends a value back to whoever called it.
-    You call a function by writing its name followed by parentheses.
-    The same function can be called as many times as you need.
-  output: "Welcome to PyQuest!\nWelcome to PyQuest!"
+      greet("Alice")
+      greet("Bob")
+    output: "Hello, Alice!\nHello, Bob!"
+    explanation: "def defines a function. The name in parentheses is a parameter. Call it with different arguments to reuse the same code."
 
-code_starter: |
-  # Define a function called 'greet' that returns the string "Hello, world!"
-  def greet():
+  - type: mcq
+    question: "What does this print?"
+    code: "def say_hi():\n    print(\"Hi!\")\n\nsay_hi()"
+    choices: ["Hi!", "say_hi", "def", "Nothing"]
+    correct: "Hi!"
+    explanation: "say_hi() calls the function. The indented block runs."
 
-  # Call the function and store the result
-  message = greet()
-hints:
-  - "def greet():  — starts the definition; indent the body"
-  - 'return "Hello, world!"  — inside the function'
-tests:
-  - code: "assert callable(greet), 'greet should be a function'"
-    message: "greet should be a callable function"
-  - code: "assert greet() == 'Hello, world!', f'greet() returned {greet()!r}'"
-    message: "greet() should return 'Hello, world!'"
-  - code: "assert message == 'Hello, world!'"
-    message: "message should equal the return value of greet()"
+  - type: fill_blank
+    before: ""
+    after: " double(n):\n    print(n * 2)"
+    choices: ["def", "for", "if", "class"]
+    answer: "def"
+    explanation: "def starts a function definition. double is the name, n is its parameter."
 
-final_challenge:
-  code_starter: |
-    # Define a function that returns your mission name
-  hints:
-    - "def mission_name():  — no parameters needed"
-    - '    return "Operation Sunrise"  — return this exact string'
-    - "result = mission_name()  — call it and store the result"
-  tests:
-    - code: "assert callable(mission_name)"
-      message: "mission_name should be a callable function"
-    - code: "assert mission_name() == 'Operation Sunrise'"
-      message: "mission_name() should return 'Operation Sunrise'"
-    - code: "assert result == 'Operation Sunrise'"
-      message: "result should store the return value"
+  - type: arrange
+    instruction: "Build a function that prints 'hello' and then call it"
+    blocks: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
+    correct: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
+    explanation: "First define the function with def, then call it by writing its name with ()."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def show(x):\n    print(x * 2)\n\nshow(5)"
+    choices: ["10", "5", "x * 2", "Nothing"]
+    correct: "10"
+    explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10."
+
+  - type: fill_blank
+    before: "def add(a, b):\n    print(a "
+    after: " b)\n\nadd(3, 4)"
+    choices: ["+", "=", "*", "-"]
+    answer: "+"
+    explanation: "a + b adds the two parameters. add(3, 4) prints 7."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
+    choices: ["1\n4\n9", "1\n2\n3", "1\n4\n9\n16", "n * n"]
+    correct: "1\n4\n9"
+    explanation: "Calling square with 1, 2, 3 prints 1, 4, 9."
+
+  - type: mcq
+    question: "What is a parameter?"
+    code: ""
+    choices: [
+      "A variable in the function definition that receives a value when called",
+      "The name of the function",
+      "The indented code inside a function",
+      "The value you pass when calling"
+    ]
+    correct: "A variable in the function definition that receives a value when called"
+    explanation: "In def greet(name), name is the parameter. 'Alice' is the argument passed when calling greet('Alice')."
+
+  - type: arrange
+    instruction: "Call the function describe with the argument 'Python'"
+    blocks: ["describe", "(", "\"Python\"", ")", "def", "describe"]
+    correct: ["describe", "(", "\"Python\"", ")"]
+    explanation: "Function name followed by () with the argument inside."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
+    choices: ["Alice is 25", "name is age", "25 is Alice", "intro"]
+    correct: "Alice is 25"
+    explanation: "name gets 'Alice' and age gets 25. The f-string combines them."
+
+  - type: mini_code
+    prompt: "Define a function called double that takes a number n and prints n * 2. Call it with 7."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '14'"
+        message: "double(7) should print 14"
+
+  - type: mini_code
+    prompt: "Define a function called greet that takes a name and prints 'Hello, [name]!'. Call it with 'World'."
+    starter: ""
+    tests:
+      - code: "'Hello, World!' in _stdout"
+        message: "Should print 'Hello, World!'"
 
 worlds:
   fantasy:
     title: "The Function Grimoire"
-    setup: |
-      Elara opens a thick grimoire. "A function is a named spell — you define it
-      once, then cast it as many times as you like," she says. "The def keyword
-      starts the definition; return sends a value back to the caller."
-
-      Think of it as writing a recipe that can be cooked on demand. Define a
-      function called 'greet' that returns "Hello, world!", then call it and store
-      the result in 'message'.
-    final_challenge_prompt: |
-      The Academy's announcement crystal needs a mission name. Define a function
-      called mission_name that takes no parameters and returns the string
-      "Operation Sunrise". Call it and store the result in 'result'.
   scifi:
-    title: "Subroutine Alpha"
-    setup: |
-      The ship's computer runs on subroutines — reusable blocks of code with a
-      name. "In Python, def declares a function," the AI explains. "Call it later
-      by using its name followed by parentheses. Whatever return sends back is
-      the result."
-
-      Define 'greet' to return "Hello, world!" and store the result in 'message'.
-    final_challenge_prompt: |
-      The ship's mission log needs a name entry. Define a function called
-      mission_name that returns "Operation Sunrise". Call it and store the
-      result in 'result'.
+    title: "Ship Subroutines"
   mystery:
-    title: "The Standard Greeting"
-    setup: |
-      Every detective in the agency uses the same opening line. "A function lets
-      you name a block of code and reuse it," your mentor explains. "def starts
-      the definition, return sends the value back."
-
-      Write a function 'greet' that returns "Hello, world!", call it, and store
-      the result in 'message'.
-    final_challenge_prompt: |
-      Every case file starts with the operation name. Define a function called
-      mission_name that returns "Operation Sunrise". Call it and store the
-      return value in 'result'.
+    title: "Investigative Procedures"

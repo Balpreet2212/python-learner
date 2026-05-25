@@ -1,78 +1,94 @@
-unit: 2
-lesson: 1
-xp: 10
+title: "if Statements"
+xp: 12
 
-example:
-  code: |
-    score = 72
-    if score >= 50:
-        print("Pass")
-  explanation: |
-    An if statement runs its indented block only when the condition is True.
-    Here, score >= 50 evaluates to True, so "Pass" is printed.
-    If score were 40 the condition would be False and nothing prints.
-  output: "Pass"
+exercises:
+  - type: concept
+    code: |
+      score = 85
+      if score >= 60:
+          print("You passed!")
+    output: "You passed!"
+    explanation: "The if statement runs a block only when the condition is True. The indented lines belong to the if block."
 
-code_starter: |
-  health = 80
-  # Write an if statement: if health is greater than 0, print "Alive"
-hints:
-  - "if health > 0:"
-  - "Indent the print() call by 4 spaces under the if"
-tests:
-  - code: "assert health == 80, 'do not change the value of health'"
-    message: "health should remain 80"
-  - code: "assert 'Alive' in _stdout"
-    message: "Should print 'Alive' when health > 0"
+  - type: mcq
+    question: "What does this print?"
+    code: "age = 10\nif age < 13:\n    print(\"child\")"
+    choices: ["child", "Nothing", "age", "True"]
+    correct: "child"
+    explanation: "10 < 13 is True, so the indented print runs."
 
-final_challenge:
-  code_starter: |
-    power = 100
-    # If power equals 100, print "Maximum power!"
-  hints:
-    - "Use == to check for equality: if power == 100:"
-    - "print(\"Maximum power!\") indented inside the if"
-  tests:
-    - code: "assert power == 100, 'do not change the value of power'"
-      message: "power should remain 100"
-    - code: "assert 'Maximum power!' in _stdout"
-      message: "Should print 'Maximum power!' when power == 100"
+  - type: fill_blank
+    before: "hp = 0\nif hp "
+    after: " 0:\n    print(\"game over\")"
+    choices: ["==", "=", "!=", ">="]
+    answer: "=="
+    explanation: "== checks equality. if hp == 0 runs when hp is exactly 0."
+
+  - type: arrange
+    instruction: "Build an if statement that prints 'win' when score > 100"
+    blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
+    correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
+    explanation: "The colon : ends the if condition. The print is indented inside the block."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 5\nif x > 10:\n    print(\"big\")\nprint(\"done\")"
+    choices: ["done", "big\ndone", "big", "Nothing"]
+    correct: "done"
+    explanation: "x > 10 is False (5 is not > 10), so the if block is skipped. But print('done') runs always."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "name = \"Alice\"\nif name == \"Alice\":\n    print(\"Hello, Alice!\")"
+    choices: ["Hello, Alice!", "Nothing", "name", "Alice"]
+    correct: "Hello, Alice!"
+    explanation: "name == 'Alice' is True, so the block executes."
+
+  - type: fill_blank
+    before: "level = 5\n"
+    after: " level >= 5:\n    print(\"unlocked\")"
+    choices: ["if", "for", "while", "def"]
+    answer: "if"
+    explanation: "if starts a conditional block. When level >= 5 is True, 'unlocked' prints."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
+    choices: ["even", "Nothing", "True", "0"]
+    correct: "even"
+    explanation: "4 % 2 == 0 is True (4 is divisible by 2). So 'even' prints."
+
+  - type: arrange
+    instruction: "Build code: if health is 0, print 'dead'"
+    blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
+    correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
+    explanation: "== checks if health equals 0. The colon ends the condition."
+
+  - type: mcq
+    question: "Which if statement correctly checks that a number n is positive?"
+    code: ""
+    choices: ["if n > 0:", "if n = 0:", "if n >= 0:", "if n == positive:"]
+    correct: "if n > 0:"
+    explanation: "n > 0 is True for any number greater than zero."
+
+  - type: mini_code
+    prompt: "Set temperature = 37. If it is greater than 36.5, print 'fever'."
+    starter: "temperature = 37\n"
+    tests:
+      - code: "'fever' in _stdout"
+        message: "37 > 36.5 so should print 'fever'"
+
+  - type: mini_code
+    prompt: "Set password = 'secret123'. If its length is at least 8, print 'strong password'."
+    starter: "password = 'secret123'\n"
+    tests:
+      - code: "'strong password' in _stdout"
+        message: "len('secret123') = 9 >= 8, so should print 'strong password'"
 
 worlds:
   fantasy:
     title: "The Gate of Truth"
-    setup: |
-      The ancient gate ahead glows with a silver rune. "Only those who speak the
-      truth pass," the guardian says. In Python, an if statement is that truth test —
-      it runs a block of code only when a condition is True.
-
-      health is already set to 80. Write an if statement: if health is greater than
-      0, print "Alive". The indented line beneath if only runs when the condition holds.
-    final_challenge_prompt: |
-      The power crystal reads 100 — maximum charge. Write an if statement so that
-      when power equals 100, the message "Maximum power!" is printed to the console.
   scifi:
-    title: "System Integrity Check"
-    setup: |
-      The ship's damage-control AI flashes a warning: hull integrity unknown.
-      An if statement in Python lets you run code only when a condition is True —
-      like a circuit that only closes when the signal is strong enough.
-
-      health is set to 80. Write an if statement: if health is greater than 0,
-      print "Alive". Only the indented block beneath the if keyword executes when
-      the condition passes.
-    final_challenge_prompt: |
-      The reactor's power gauge reads 100. Write an if statement so the console
-      prints "Maximum power!" only when power equals 100.
+    title: "System Checks"
   mystery:
-    title: "The Hidden Clue"
-    setup: |
-      Inspector Morgan drops a folder on your desk. "Some evidence only matters
-      under the right conditions." In Python, an if statement works the same way —
-      the indented code beneath it runs only when the condition is True.
-
-      health is set to 80. Write an if statement: if health is greater than 0,
-      print "Alive". The colon after the condition and the four-space indent are both required.
-    final_challenge_prompt: |
-      A vital clue is locked behind a power check. Write an if statement so that
-      when power equals 100, the message "Maximum power!" is printed.
+    title: "The First Clue"

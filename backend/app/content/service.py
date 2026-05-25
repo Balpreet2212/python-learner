@@ -1,9 +1,9 @@
-"""Load lesson and weekly challenge content from YAML files."""
+"""Load lesson and capstone content from YAML files."""
 
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 import yaml
 
@@ -18,32 +18,104 @@ class LessonTest:
     message: str
 
 
+# ── Exercise types ────────────────────────────────────────────────────────────
+
+
 @dataclass
-class ExampleContent:
+class ConceptExercise:
+    type: str
     code: str
-    explanation: str
     output: str
-
-
-@dataclass
-class FinalChallengeContent:
-    prompt: str
-    code_starter: str
-    hints: list[str]
-    tests: list[LessonTest]
-
-
-@dataclass
-class PredictCard:
-    code: str
     explanation: str
 
 
 @dataclass
-class BreakAndFixCard:
-    broken_code: str
-    hint: str
+class McqExercise:
+    type: str
+    question: str
+    code: str
+    choices: list[str]
+    correct: str
+    explanation: str
+
+
+@dataclass
+class ArrangeExercise:
+    type: str
+    instruction: str
+    blocks: list[str]
+    correct: list[str]
+    explanation: str
+
+
+@dataclass
+class FillBlankExercise:
+    type: str
+    before: str
+    after: str
+    choices: list[str]
+    answer: str
+    explanation: str
+
+
+@dataclass
+class MiniCodeExercise:
+    type: str
+    prompt: str
+    starter: str
     tests: list[LessonTest]
+
+
+Exercise = Union[ConceptExercise, McqExercise, ArrangeExercise, FillBlankExercise, MiniCodeExercise]
+
+
+def _parse_exercise(raw: dict[str, Any]) -> Exercise:
+    t = raw.get("type", "")
+    if t == "concept":
+        return ConceptExercise(
+            type="concept",
+            code=raw.get("code", "").rstrip(),
+            output=raw.get("output", "").strip(),
+            explanation=raw.get("explanation", "").strip(),
+        )
+    if t == "mcq":
+        return McqExercise(
+            type="mcq",
+            question=raw.get("question", "").strip(),
+            code=raw.get("code", "").rstrip(),
+            choices=raw.get("choices", []),
+            correct=str(raw.get("correct", "")),
+            explanation=raw.get("explanation", "").strip(),
+        )
+    if t == "arrange":
+        return ArrangeExercise(
+            type="arrange",
+            instruction=raw.get("instruction", "").strip(),
+            blocks=raw.get("blocks", []),
+            correct=raw.get("correct", []),
+            explanation=raw.get("explanation", "").strip(),
+        )
+    if t == "fill_blank":
+        return FillBlankExercise(
+            type="fill_blank",
+            before=raw.get("before", ""),
+            after=raw.get("after", ""),
+            choices=raw.get("choices", []),
+            answer=str(raw.get("answer", "")),
+            explanation=raw.get("explanation", "").strip(),
+        )
+    if t == "mini_code":
+        raw_tests: list[dict[str, str]] = raw.get("tests", [])
+        return MiniCodeExercise(
+            type="mini_code",
+            prompt=raw.get("prompt", "").strip(),
+            starter=raw.get("starter", "").rstrip(),
+            tests=[LessonTest(code=r["code"], message=r["message"]) for r in raw_tests],
+        )
+    raise ValueError(f"Unknown exercise type: {t!r}")
+
+
+# ── Lesson ────────────────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -51,16 +123,37 @@ class LessonContent:
     unit: int
     lesson: int
     title: str
-    setup: str
-    example: ExampleContent
-    code_starter: str
-    hints: list[str]
-    tests: list[LessonTest]
-    final_challenge: FinalChallengeContent
     xp: int
-    total_lessons: int = LESSONS_PER_UNIT
-    predict: PredictCard | None = field(default=None)
-    break_and_fix: BreakAndFixCard | None = field(default=None)
+    total_lessons: int
+    exercises: list[Exercise] = field(default_factory=list)
+
+
+def _resolve_world(data: dict[str, Any], world: str) -> dict[str, Any]:
+    worlds: dict[str, Any] = data.get("worlds", {})
+    return worlds.get(world) or worlds.get("fantasy") or {}
+
+
+def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
+    path = CONTENT_DIR / "units" / f"unit_{unit}" / f"lesson_{lesson}.yaml"
+    if not path.exists():
+        return None
+    data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
+    world_data = _resolve_world(data, world)
+
+    raw_exercises: list[dict[str, Any]] = data.get("exercises", [])
+    exercises = [_parse_exercise(e) for e in raw_exercises]
+
+    return LessonContent(
+        unit=unit,
+        lesson=lesson,
+        title=world_data.get("title", data.get("title", f"Unit {unit} · Lesson {lesson}")),
+        xp=data.get("xp", 10),
+        total_lessons=LESSONS_PER_UNIT,
+        exercises=exercises,
+    )
+
+
+# ── Capstone ──────────────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -74,24 +167,6 @@ class CapstoneContent:
     tests: list[LessonTest]
     plan_prompts: list[str]
     xp: int
-
-
-@dataclass
-class WeeklyChallengeContent:
-    challenge_index: int
-    week_key: str
-    title: str
-    description: str
-    code_starter: str
-    hints: list[str]
-    tests: list[LessonTest]
-    xp: int
-    difficulty: str
-
-
-def _resolve_world(data: dict[str, Any], world: str) -> dict[str, Any]:
-    worlds: dict[str, Any] = data.get("worlds", {})
-    return worlds.get(world) or worlds.get("fantasy") or {}
 
 
 def load_capstone(unit: int, world: str) -> CapstoneContent | None:
@@ -114,58 +189,20 @@ def load_capstone(unit: int, world: str) -> CapstoneContent | None:
     )
 
 
-def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
-    path = CONTENT_DIR / "units" / f"unit_{unit}" / f"lesson_{lesson}.yaml"
-    if not path.exists():
-        return None
-    data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
-    world_data = _resolve_world(data, world)
-    raw_example: dict[str, Any] = data.get("example", {})
-    raw_tests: list[dict[str, str]] = data.get("tests", [])
-    raw_fc: dict[str, Any] = data.get("final_challenge", {})
-    raw_fc_tests: list[dict[str, str]] = raw_fc.get("tests", [])
+# ── Weekly challenge ──────────────────────────────────────────────────────────
 
-    predict: PredictCard | None = None
-    raw_predict: dict[str, Any] | None = data.get("predict")
-    if raw_predict:
-        predict = PredictCard(
-            code=raw_predict.get("code", "").rstrip(),
-            explanation=raw_predict.get("explanation", "").strip(),
-        )
 
-    break_and_fix: BreakAndFixCard | None = None
-    raw_baf: dict[str, Any] | None = data.get("break_and_fix")
-    if raw_baf:
-        baf_tests: list[dict[str, str]] = raw_baf.get("tests", [])
-        break_and_fix = BreakAndFixCard(
-            broken_code=raw_baf.get("broken_code", "").rstrip(),
-            hint=raw_baf.get("hint", "").strip(),
-            tests=[LessonTest(code=t["code"], message=t["message"]) for t in baf_tests],
-        )
-
-    return LessonContent(
-        unit=unit,
-        lesson=lesson,
-        title=world_data.get("title", f"Unit {unit} · Lesson {lesson}"),
-        setup=world_data.get("setup", "").strip(),
-        example=ExampleContent(
-            code=raw_example.get("code", "").rstrip(),
-            explanation=raw_example.get("explanation", "").strip(),
-            output=raw_example.get("output", "").strip(),
-        ),
-        code_starter=data.get("code_starter", "").rstrip(),
-        hints=data.get("hints", []),
-        tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_tests],
-        final_challenge=FinalChallengeContent(
-            prompt=world_data.get("final_challenge_prompt", "").strip(),
-            code_starter=raw_fc.get("code_starter", "").rstrip(),
-            hints=raw_fc.get("hints", []),
-            tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_fc_tests],
-        ),
-        xp=data.get("xp", 10),
-        predict=predict,
-        break_and_fix=break_and_fix,
-    )
+@dataclass
+class WeeklyChallengeContent:
+    challenge_index: int
+    week_key: str
+    title: str
+    description: str
+    code_starter: str
+    hints: list[str]
+    tests: list[LessonTest]
+    xp: int
+    difficulty: str
 
 
 def _week_key(dt: datetime) -> str:

@@ -1,88 +1,95 @@
-unit: 3
-lesson: 3
-xp: 10
+title: "Multiple Parameters and Using Functions Together"
+xp: 12
 
-example:
-  code: |
-    def describe(name, age):
-        return f"{name} is {age} years old"
+exercises:
+  - type: concept
+    code: |
+      def area(width, height):
+          return width * height
 
-    print(describe("Aria", 25))
-    print(describe("Rex", 30))
-  explanation: |
-    Functions can accept multiple parameters — just separate them with commas.
-    When you call the function, you pass one argument per parameter, in the same order.
-    Inside the body, all parameters are available as variables.
-    This lets one function produce different results for different inputs.
-  output: "Aria is 25 years old\nRex is 30 years old"
+      def perimeter(width, height):
+          return 2 * (width + height)
 
-code_starter: |
-  # Define a function 'add' that takes two parameters a and b
-  # and returns their sum.
-  def add(a, b):
+      print(area(4, 5))
+      print(perimeter(4, 5))
+    output: "20\n18"
+    explanation: "Functions can have multiple parameters and you can call multiple functions, each doing one clear job."
 
-  total = add(15, 27)
-hints:
-  - "def add(a, b):  — two parameters separated by a comma"
-  - "return a + b"
-tests:
-  - code: "assert add(15, 27) == 42, f'add(15, 27) should be 42, got {add(15,27)}'"
-    message: "add(15, 27) should return 42"
-  - code: "assert add(0, 0) == 0"
-    message: "add(0, 0) should return 0"
-  - code: "assert total == 42"
-    message: "total should be 42"
+  - type: mcq
+    question: "What does this print?"
+    code: "def multiply(a, b, c):\n    return a * b * c\n\nprint(multiply(2, 3, 4))"
+    choices: ["24", "9", "234", "6"]
+    correct: "24"
+    explanation: "2 * 3 * 4 = 24."
 
-final_challenge:
-  code_starter: |
-    # Define a function that combines two combat stats
-  hints:
-    - "def combine_stats(attack, defense):  — two parameters"
-    - "    return attack + defense"
-    - "result = combine_stats(30, 20)  — should equal 50"
-  tests:
-    - code: "assert combine_stats(30, 20) == 50, f'combine_stats(30, 20) should be 50'"
-      message: "combine_stats(30, 20) should return 50"
-    - code: "assert combine_stats(0, 0) == 0"
-      message: "combine_stats(0, 0) should return 0"
-    - code: "assert combine_stats(100, 50) == 150"
-      message: "combine_stats(100, 50) should return 150"
+  - type: fill_blank
+    before: "def full_name(first, last):\n    return first "
+    after: " \" \" + last"
+    choices: ["+", "-", "*", "/"]
+    answer: "+"
+    explanation: "String concatenation joins first, a space, and last."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nprint(greet(\"Alice\"))"
+    choices: ["Hello, Alice!", "greeting, name!", "Alice, Hello!", "Error"]
+    correct: "Hello, Alice!"
+    explanation: "greeting has a default value 'Hello'. It's used when not provided."
+
+  - type: arrange
+    instruction: "Build a function tax(price, rate) that returns price * rate / 100"
+    blocks: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+    correct: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+    explanation: "Two parameters, one return expression."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def double(n):\n    return n * 2\n\ndef triple(n):\n    return n * 3\n\nprint(double(triple(4)))"
+    choices: ["24", "12", "8", "18"]
+    correct: "24"
+    explanation: "triple(4) = 12. double(12) = 24."
+
+  - type: fill_blank
+    before: "def discount(price, pct):\n    return price - (price "
+    after: " pct / 100)"
+    choices: ["*", "+", "-", "/"]
+    answer: "*"
+    explanation: "price * pct / 100 calculates the discount amount."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def add(a, b=10):\n    return a + b\n\nprint(add(5))\nprint(add(5, 20))"
+    choices: ["15\n25", "5\n5", "15\n10", "Error"]
+    correct: "15\n25"
+    explanation: "add(5) uses default b=10: 5+10=15. add(5,20) overrides to b=20: 5+20=25."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def bmi(weight, height):\n    return weight / (height ** 2)\n\nprint(round(bmi(70, 1.75), 1))"
+    choices: ["22.9", "40.0", "35.0", "1.75"]
+    correct: "22.9"
+    explanation: "70 / (1.75²) = 70 / 3.0625 ≈ 22.857, rounded to 22.9."
+
+  - type: mini_code
+    prompt: "Define max_of_three(a, b, c) that returns the largest of three numbers. Print max_of_three(4, 9, 2)."
+    starter: ""
+    tests:
+      - code: "_stdout.strip() == '9'"
+        message: "max_of_three(4, 9, 2) should return 9"
+
+  - type: mini_code
+    prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f). Convert 0°C to °F and 212°F to °C. Print both."
+    starter: ""
+    tests:
+      - code: "'32.0' in _stdout"
+        message: "0°C = 32.0°F"
+      - code: "'100.0' in _stdout"
+        message: "212°F = 100.0°C"
 
 worlds:
   fantasy:
     title: "The Combining Spell"
-    setup: |
-      Two power sources, combined into one. "Functions can accept multiple parameters
-      — just separate them with commas," Elara says. "Inside the body you can use
-      all of them."
-
-      Write 'add(a, b)' that returns a + b, then call it with 15 and 27 to get
-      'total'. The combining spell grows stronger with each value it merges.
-    final_challenge_prompt: |
-      A warrior's combat power is the sum of their attack and defense stats.
-      Define a function called combine_stats that takes attack and defense as
-      parameters and returns their sum. Verify: combine_stats(30, 20) == 50.
   scifi:
-    title: "Docking Procedure"
-    setup: |
-      Two fuel pods need to be combined before the jump. "Multiple parameters let
-      a function process several inputs at once," the AI explains. "List them with
-      commas inside the parentheses."
-
-      Write 'add(a, b)' returning a + b and call it with 15 and 27.
-    final_challenge_prompt: |
-      The ship's combat system calculates effective power as attack plus defense.
-      Define combine_stats(attack, defense) that returns attack + defense.
-      Test: combine_stats(30, 20) should equal 50.
+    title: "Module Chaining"
   mystery:
-    title: "Adding the Evidence"
-    setup: |
-      Two piles of case files — merge the totals. "A function with two parameters
-      takes two arguments when called," your mentor explains. "Separate parameters
-      with commas in both the definition and the call."
-
-      Write 'add(a, b)' that returns a + b and store add(15, 27) in 'total'.
-    final_challenge_prompt: |
-      An agent's effectiveness score is the sum of their street contacts and
-      technical skills. Define combine_stats(attack, defense) returning attack +
-      defense. combine_stats(30, 20) should equal 50.
+    title: "Combined Evidence"

@@ -1,7 +1,8 @@
-"""Lesson content and challenge submission routes (§8)."""
+"""Lesson content and challenge submission routes."""
 
 import json
 from datetime import UTC, datetime
+from typing import Annotated, Any, Literal, Union
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
@@ -10,7 +11,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.auth.dependencies import get_current_account, require_csrf
 from app.auth.schemas import LearnerProfileOut
 from app.auth.service import _profile_out
-from app.content.service import LESSONS_PER_UNIT, MAX_UNITS, load_capstone, load_lesson
+from app.content.service import (
+    LESSONS_PER_UNIT,
+    MAX_UNITS,
+    ArrangeExercise,
+    ConceptExercise,
+    FillBlankExercise,
+    McqExercise,
+    MiniCodeExercise,
+    load_capstone,
+    load_lesson,
+)
 from app.core.errors import bad_request, forbidden
 from app.core.sandbox import run_challenge
 from app.db.models import Account, ProgressEvent
@@ -21,46 +32,63 @@ router = APIRouter(prefix="/v1/learner", tags=["content"])
 BADGE_TEMPLATE = "unit_{unit}_complete"
 
 
-# ── Response schemas ──────────────────────────────────────────────────────────
+# ── Exercise output schemas ───────────────────────────────────────────────────
 
 
-class ExampleOut(BaseModel):
+class ConceptExOut(BaseModel):
+    type: Literal["concept"]
     code: str
-    explanation: str
     output: str
+    explanation: str
 
 
-class FinalChallengeOut(BaseModel):
-    prompt: str
-    code_starter: str
-    hints: list[str]
-    test_count: int
-
-
-class PredictCardOut(BaseModel):
+class McqExOut(BaseModel):
+    type: Literal["mcq"]
+    question: str
     code: str
+    choices: list[str]
+    correct: str
+    explanation: str
 
 
-class BreakAndFixOut(BaseModel):
-    broken_code: str
-    hint: str
+class ArrangeExOut(BaseModel):
+    type: Literal["arrange"]
+    instruction: str
+    blocks: list[str]
+    correct: list[str]
+    explanation: str
+
+
+class FillBlankExOut(BaseModel):
+    type: Literal["fill_blank"]
+    before: str
+    after: str
+    choices: list[str]
+    answer: str
+    explanation: str
+
+
+class MiniCodeExOut(BaseModel):
+    type: Literal["mini_code"]
+    prompt: str
+    starter: str
     test_count: int
+
+
+ExerciseOut = Union[ConceptExOut, McqExOut, ArrangeExOut, FillBlankExOut, MiniCodeExOut]
 
 
 class LessonOut(BaseModel):
     unit: int
     lesson: int
     title: str
-    setup: str
-    example: ExampleOut
-    code_starter: str
-    hints: list[str]
     xp: int
-    test_count: int
     total_lessons: int
-    final_challenge: FinalChallengeOut
-    predict: PredictCardOut | None = None
-    break_and_fix: BreakAndFixOut | None = None
+    exercise_count: int
+    exercises: list[ExerciseOut]
+
+
+# ── Shared schemas ────────────────────────────────────────────────────────────
 
 
 class TestResultOut(BaseModel):
@@ -79,14 +107,9 @@ class SubmitRequest(BaseModel):
     code: str
 
 
-class PredictCheckRequest(BaseModel):
-    answer: str
-
-
-class PredictCheckOut(BaseModel):
-    correct: bool
-    actual_output: str
-    explanation: str
+class ExerciseCodeRequest(BaseModel):
+    code: str
+    exercise_index: int
 
 
 class CapstonOut(BaseModel):
@@ -101,7 +124,44 @@ class CapstonOut(BaseModel):
     test_count: int
 
 
-# ── Endpoints ─────────────────────────────────────────────────────────────────
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+
+def _exercise_to_out(ex: Any) -> ExerciseOut:
+    if isinstance(ex, ConceptExercise):
+        return ConceptExOut(type="concept", code=ex.code, output=ex.output, explanation=ex.explanation)
+    if isinstance(ex, McqExercise):
+        return McqExOut(
+            type="mcq",
+            question=ex.question,
+            code=ex.code,
+            choices=ex.choices,
+            correct=ex.correct,
+            explanation=ex.explanation,
+        )
+    if isinstance(ex, ArrangeExercise):
+        return ArrangeExOut(
+            type="arrange",
+            instruction=ex.instruction,
+            blocks=ex.blocks,
+            correct=ex.correct,
+            explanation=ex.explanation,
+        )
+    if isinstance(ex, FillBlankExercise):
+        return FillBlankExOut(
+            type="fill_blank",
+            before=ex.before,
+            after=ex.after,
+            choices=ex.choices,
+            answer=ex.answer,
+            explanation=ex.explanation,
+        )
+    if isinstance(ex, MiniCodeExercise):
+        return MiniCodeExOut(type="mini_code", prompt=ex.prompt, starter=ex.starter, test_count=len(ex.tests))
+    raise ValueError(f"Unknown exercise type: {type(ex)}")
+
+
+# ── Lesson endpoints ──────────────────────────────────────────────────────────
 
 
 @router.get("/lesson")
@@ -127,74 +187,23 @@ async def get_lesson(
         unit=content.unit,
         lesson=content.lesson,
         title=content.title,
-        setup=content.setup,
-        example=ExampleOut(
-            code=content.example.code,
-            explanation=content.example.explanation,
-            output=content.example.output,
-        ),
-        code_starter=content.code_starter,
-        hints=content.hints,
         xp=content.xp,
-        test_count=len(content.tests),
         total_lessons=content.total_lessons,
-        final_challenge=FinalChallengeOut(
-            prompt=content.final_challenge.prompt,
-            code_starter=content.final_challenge.code_starter,
-            hints=content.final_challenge.hints,
-            test_count=len(content.final_challenge.tests),
-        ),
-        predict=PredictCardOut(code=content.predict.code) if content.predict else None,
-        break_and_fix=BreakAndFixOut(
-            broken_code=content.break_and_fix.broken_code,
-            hint=content.break_and_fix.hint,
-            test_count=len(content.break_and_fix.tests),
-        ) if content.break_and_fix else None,
+        exercise_count=len(content.exercises),
+        exercises=[_exercise_to_out(e) for e in content.exercises],
     )
 
 
-@router.post("/challenge/submit")
-async def submit_challenge(
-    body: SubmitRequest,
+@router.post("/exercise/code")
+async def check_exercise_code(
+    body: ExerciseCodeRequest,
     account: Account = Depends(get_current_account),
     db: AsyncSession = Depends(get_db),
     _csrf: None = Depends(require_csrf),
 ) -> SubmitOut:
+    """Validate a mini_code exercise answer server-side."""
     if account.role != "learner":
-        raise forbidden("Only learner accounts can submit challenges")
-    if len(body.code) > 10_000:
-        raise bad_request("Code submission too large")
-
-    profile = account.profile
-    if profile is None or not profile.track:
-        raise bad_request("Complete onboarding before submitting challenges")
-
-    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
-    if content is None:
-        raise bad_request("Lesson content not found")
-
-    tests = [{"code": t.code, "message": t.message} for t in content.tests]
-    result = run_challenge(body.code, tests)
-    return SubmitOut(
-        all_passed=result.all_passed,
-        exec_error=result.exec_error,
-        stdout=result.stdout,
-        tests=[
-            TestResultOut(passed=bool(t["passed"]), message=str(t["message"]))
-            for t in result.tests
-        ],
-    )
-
-
-@router.post("/final/submit")
-async def submit_final(
-    body: SubmitRequest,
-    account: Account = Depends(get_current_account),
-    db: AsyncSession = Depends(get_db),
-    _csrf: None = Depends(require_csrf),
-) -> SubmitOut:
-    if account.role != "learner":
-        raise forbidden("Only learner accounts can submit")
+        raise forbidden("Only learner accounts can submit code")
     if len(body.code) > 10_000:
         raise bad_request("Code submission too large")
 
@@ -206,68 +215,12 @@ async def submit_final(
     if content is None:
         raise bad_request("Lesson content not found")
 
-    tests = [{"code": t.code, "message": t.message} for t in content.final_challenge.tests]
-    result = run_challenge(body.code, tests)
-    return SubmitOut(
-        all_passed=result.all_passed,
-        exec_error=result.exec_error,
-        stdout=result.stdout,
-        tests=[
-            TestResultOut(passed=bool(t["passed"]), message=str(t["message"]))
-            for t in result.tests
-        ],
-    )
+    mini_code_exercises = [e for e in content.exercises if isinstance(e, MiniCodeExercise)]
+    if body.exercise_index < 0 or body.exercise_index >= len(mini_code_exercises):
+        raise bad_request("Invalid exercise index")
 
-
-@router.post("/predict/check")
-async def check_predict(
-    body: PredictCheckRequest,
-    account: Account = Depends(get_current_account),
-    db: AsyncSession = Depends(get_db),
-    _csrf: None = Depends(require_csrf),
-) -> PredictCheckOut:
-    if account.role != "learner":
-        raise forbidden("Only learner accounts can check predictions")
-
-    profile = account.profile
-    if profile is None or not profile.track:
-        raise bad_request("Complete onboarding before checking predictions")
-
-    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
-    if content is None or content.predict is None:
-        raise bad_request("No predict card for this lesson")
-
-    result = run_challenge(content.predict.code, [])
-    actual = result.stdout.strip()
-    correct = actual == body.answer.strip()
-    return PredictCheckOut(
-        correct=correct,
-        actual_output=actual,
-        explanation=content.predict.explanation,
-    )
-
-
-@router.post("/fix/submit")
-async def submit_fix(
-    body: SubmitRequest,
-    account: Account = Depends(get_current_account),
-    db: AsyncSession = Depends(get_db),
-    _csrf: None = Depends(require_csrf),
-) -> SubmitOut:
-    if account.role != "learner":
-        raise forbidden("Only learner accounts can submit fixes")
-    if len(body.code) > 10_000:
-        raise bad_request("Code submission too large")
-
-    profile = account.profile
-    if profile is None or not profile.track:
-        raise bad_request("Complete onboarding before submitting")
-
-    content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
-    if content is None or content.break_and_fix is None:
-        raise bad_request("No break-and-fix card for this lesson")
-
-    tests = [{"code": t.code, "message": t.message} for t in content.break_and_fix.tests]
+    exercise = mini_code_exercises[body.exercise_index]
+    tests = [{"code": t.code, "message": t.message} for t in exercise.tests]
     result = run_challenge(body.code, tests)
     return SubmitOut(
         all_passed=result.all_passed,
@@ -286,7 +239,6 @@ async def advance_lesson(
     db: AsyncSession = Depends(get_db),
     _csrf: None = Depends(require_csrf),
 ) -> LearnerProfileOut:
-    """Advance to the next lesson. Must complete the final challenge first."""
     if account.role != "learner":
         raise forbidden("Only learner accounts can advance lessons")
 
@@ -387,7 +339,6 @@ async def advance_capstone(
     db: AsyncSession = Depends(get_db),
     _csrf: None = Depends(require_csrf),
 ) -> LearnerProfileOut:
-    """Award unit badge and advance to the next unit after passing the capstone."""
     if account.role != "learner":
         raise forbidden("Only learner accounts can advance capstones")
 

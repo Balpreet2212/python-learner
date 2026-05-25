@@ -1,94 +1,99 @@
-unit: 3
-lesson: 4
-xp: 10
+title: "Functions Returning Booleans"
+xp: 12
 
-example:
-  code: |
-    def is_adult(age):
-        return age >= 18
+exercises:
+  - type: concept
+    code: |
+      def is_even(n):
+          return n % 2 == 0
 
-    print(is_adult(20))
-    print(is_adult(15))
-    print(type(is_adult(20)))
-  explanation: |
-    A predicate function is one that returns True or False.
-    The expression age >= 18 already evaluates to a boolean — you can return it directly.
-    There's no need to write if/else just to return True or False;
-    returning the comparison directly is cleaner and more Pythonic.
-  output: "True\nFalse\n<class 'bool'>"
+      print(is_even(4))
+      print(is_even(7))
+    output: "True\nFalse"
+    explanation: "Functions can return True or False. This makes your code more readable: if is_even(n) is clearer than if n % 2 == 0."
 
-code_starter: |
-  # Define a function 'is_even' that takes one parameter n
-  # and returns True if n is even, False otherwise.
-  def is_even(n):
+  - type: mcq
+    question: "What does this print?"
+    code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
+    choices: ["False", "True", "-3", "0"]
+    correct: "False"
+    explanation: "-3 > 0 is False. The function returns False."
 
-  check_four  = is_even(4)
-  check_seven = is_even(7)
-hints:
-  - "n % 2 == 0 is True when n is even (no remainder when divided by 2)"
-  - "return n % 2 == 0  — this expression already evaluates to True or False"
-tests:
-  - code: "assert is_even(4) is True, 'is_even(4) should be True'"
-    message: "is_even(4) should return True"
-  - code: "assert is_even(7) is False, 'is_even(7) should be False'"
-    message: "is_even(7) should return False"
-  - code: "assert is_even(0) is True"
-    message: "is_even(0) should return True"
+  - type: fill_blank
+    before: "def is_long(text):\n    return len(text) "
+    after: " 10"
+    choices: [">", "=", "+", "=="]
+    answer: ">"
+    explanation: "Returns True if the text has more than 10 characters."
 
-final_challenge:
-  code_starter: |
-    # Define a function that checks if a level qualifies as powerful
-  hints:
-    - "def is_powerful(level):  — one parameter"
-    - "    return level >= 10  — True if level is 10 or more"
-    - "is_powerful(10) should be True, is_powerful(5) should be False"
-  tests:
-    - code: "assert is_powerful(10) is True"
-      message: "is_powerful(10) should return True"
-    - code: "assert is_powerful(9) is False"
-      message: "is_powerful(9) should return False"
-    - code: "assert is_powerful(5) is False"
-      message: "is_powerful(5) should return False"
-    - code: "assert is_powerful(100) is True"
-      message: "is_powerful(100) should return True"
+  - type: mcq
+    question: "What does this print?"
+    code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
+    choices: ["allowed", "Nothing", "True", "20"]
+    correct: "allowed"
+    explanation: "is_adult(20) returns True (20 >= 18). The if block runs."
+
+  - type: arrange
+    instruction: "Build a function is_divisible(n, d) that returns True if n is divisible by d"
+    blocks: ["def", "is_divisible", "(", "n", ",", "d", ")", ":", "return", "n", "%", "d", "==", "0"]
+    correct: ["def", "is_divisible", "(", "n", ",", "d", ")", ":", "return", "n", "%", "d", "==", "0"]
+    explanation: "n % d == 0 is True when there is no remainder."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
+    choices: ["False", "True", "3", "-1"]
+    correct: "False"
+    explanation: "a > 0 is True but b > 0 is False. True and False = False."
+
+  - type: fill_blank
+    before: "def is_valid_score(s):\n    return s >= 0 "
+    after: " s <= 100"
+    choices: ["and", "or", "not", "if"]
+    answer: "and"
+    explanation: "Both conditions must hold: score >= 0 AND score <= 100."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"))"
+    choices: ["True\nFalse", "False\nTrue", "True\nTrue", "HELLO\nHello"]
+    correct: "True\nFalse"
+    explanation: "'HELLO' == 'HELLO' is True. 'Hello' == 'HELLO' is False."
+
+  - type: mcq
+    question: "Why use a boolean-returning function instead of writing the condition inline?"
+    code: ""
+    choices: [
+      "It gives the condition a meaningful name, making code more readable",
+      "It is faster",
+      "It is required by Python",
+      "It avoids using if"
+    ]
+    correct: "It gives the condition a meaningful name, making code more readable"
+    explanation: "is_valid_password(pw) explains the intent. len(pw) >= 8 and any(...) doesn't."
+
+  - type: mini_code
+    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards. Test with 'racecar' and 'hello'."
+    starter: ""
+    tests:
+      - code: "is_palindrome('racecar') == True"
+        message: "'racecar' is a palindrome"
+      - code: "is_palindrome('hello') == False"
+        message: "'hello' is not a palindrome"
+
+  - type: mini_code
+    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1). Test with 7 and 9."
+    starter: ""
+    tests:
+      - code: "is_prime(7) == True"
+        message: "7 is prime"
+      - code: "is_prime(9) == False"
+        message: "9 is not prime (3 × 3)"
 
 worlds:
   fantasy:
     title: "The Parity Oracle"
-    setup: |
-      The oracle must judge each number: balanced (even) or off-balance (odd).
-      "A function that returns True or False is called a predicate," Elara says.
-      "The modulus operator % gives the remainder after division — if n % 2 == 0,
-      the number divides evenly."
-
-      Write 'is_even(n)' that returns the boolean result directly. No if/else needed
-      — the comparison itself is already True or False.
-    final_challenge_prompt: |
-      The enchanted gate only opens for heroes of level 10 or above. Define a
-      function called is_powerful that takes a level parameter and returns True
-      if level >= 10, False otherwise. Return the comparison directly.
   scifi:
-    title: "Binary Parity Check"
-    setup: |
-      The ship's checksum system flags odd readings as anomalies. "Functions that
-      return booleans are common in real code," the AI notes. "The % operator gives
-      the remainder — n % 2 == 0 is already a boolean expression you can return
-      directly."
-
-      Write 'is_even(n)' returning True for even numbers.
-    final_challenge_prompt: |
-      The clearance system grants access only to crew members with a level of 10
-      or higher. Define is_powerful(level) that returns True when level >= 10 and
-      False otherwise. Return the comparison directly — no if needed.
+    title: "Diagnostic Checks"
   mystery:
-    title: "The Even-Odd Cipher"
-    setup: |
-      The coded message uses even numbers as signals. "A function that checks a
-      condition and returns a boolean is called a predicate," your mentor explains.
-      "n % 2 gives the remainder when dividing by 2 — if it's 0, the number is even."
-
-      Write 'is_even(n)' that returns the result of n % 2 == 0.
-    final_challenge_prompt: |
-      The security clearance check requires a threat level of 10 or above to
-      trigger the alarm. Define is_powerful(level) returning True if level >= 10.
-      The function should return the boolean comparison directly.
+    title: "Confirming Alibis"

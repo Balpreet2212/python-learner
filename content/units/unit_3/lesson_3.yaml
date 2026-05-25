@@ -1,90 +1,94 @@
-unit: 2
-lesson: 3
-xp: 10
+title: "elif Chains"
+xp: 12
 
-example:
-  code: |
-    grade = 78
-    if grade >= 90:
-        print("A")
-    elif grade >= 75:
-        print("B")
-    elif grade >= 60:
-        print("C")
-    else:
-        print("F")
-  explanation: |
-    elif (short for "else if") lets you check multiple conditions in sequence.
-    Python tests each condition top to bottom and runs the first block that is True.
-    All remaining branches are skipped. The final else catches everything else.
-    Here grade is 78, so the second branch (>= 75) matches and "B" prints.
-  output: "B"
+exercises:
+  - type: concept
+    code: |
+      score = 82
+      if score >= 90:
+          print("A")
+      elif score >= 75:
+          print("B")
+      elif score >= 60:
+          print("C")
+      else:
+          print("F")
+    output: "B"
+    explanation: "elif (else if) adds more conditions. Python checks each in order and runs only the first True branch."
 
-code_starter: |
-  speed = 85
-  # Print "Fast" if speed > 100, "Normal" if speed >= 60, else "Slow"
-hints:
-  - "if speed > 100:"
-  - "elif speed >= 60:"
-  - "else:"
-tests:
-  - code: "assert speed == 85"
-    message: "speed should remain 85"
-  - code: "assert 'Normal' in _stdout"
-    message: "Should print 'Normal' when speed is 85"
-  - code: "assert 'Fast' not in _stdout and 'Slow' not in _stdout"
-    message: "Only 'Normal' should print — not Fast or Slow"
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 50\nif x > 100:\n    print(\"big\")\nelif x > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
+    choices: ["medium", "big", "small", "big\nmedium"]
+    correct: "medium"
+    explanation: "x > 100 is False. x > 25 is True (50 > 25), so 'medium' prints."
 
-final_challenge:
-  code_starter: |
-    level = 12
-    # Print "Novice" if level < 5, "Apprentice" if level < 20, else "Master"
-  hints:
-    - "if level < 5:"
-    - "elif level < 20:"
-    - "else:  # covers level >= 20"
-  tests:
-    - code: "assert level == 12"
-      message: "level should remain 12"
-    - code: "assert 'Apprentice' in _stdout"
-      message: "Should print 'Apprentice' when level is 12"
-    - code: "assert 'Novice' not in _stdout and 'Master' not in _stdout"
-      message: "Only 'Apprentice' should print"
+  - type: fill_blank
+    before: "if speed > 120:\n    print(\"fast\")\n"
+    after: " speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
+    choices: ["elif", "else", "if", "then"]
+    answer: "elif"
+    explanation: "elif adds another condition to check if the first one was False."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "temp = 100\nif temp > 100:\n    print(\"boiling\")\nelif temp == 100:\n    print(\"at boiling point\")\nelse:\n    print(\"below\")"
+    choices: ["at boiling point", "boiling", "below", "boiling\nat boiling point"]
+    correct: "at boiling point"
+    explanation: "temp > 100 is False. temp == 100 is True, so the elif branch runs."
+
+  - type: arrange
+    instruction: "Build: if x > 10 print 'high', elif x > 5 print 'mid', else print 'low'"
+    blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
+    correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
+    explanation: "Python checks conditions in order and runs only the first True branch."
+
+  - type: mcq
+    question: "What does this print when score = 90?"
+    code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\")"
+    choices: ["A", "also A", "A\nalso A", "other"]
+    correct: "A"
+    explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs."
+
+  - type: fill_blank
+    before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
+    after: ":\n    status = \"critical\""
+    choices: ["else", "elif", "if", "then"]
+    answer: "else"
+    explanation: "else catches all remaining cases — when hp is 25 or below."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
+    choices: ["B", "A", "C", "B\nC"]
+    correct: "B"
+    explanation: "n > 5 is False. n > 3 is True, so 'B' prints. C is not reached."
+
+  - type: mcq
+    question: "How many elif branches can you have?"
+    code: ""
+    choices: ["As many as you need", "Exactly one", "Maximum 2", "None — use nested if instead"]
+    correct: "As many as you need"
+    explanation: "You can chain as many elif branches as needed, but only the first True one runs."
+
+  - type: mini_code
+    prompt: "Set score = 73. Print 'A' if >= 90, 'B' if >= 75, 'C' if >= 60, else 'F'."
+    starter: "score = 73\n"
+    tests:
+      - code: "_stdout.strip() == 'C'"
+        message: "73 is >= 60 but < 75, so grade is C"
+
+  - type: mini_code
+    prompt: "Set bmi = 22. Print 'underweight' if < 18.5, 'normal' if < 25, 'overweight' if < 30, else 'obese'."
+    starter: "bmi = 22\n"
+    tests:
+      - code: "'normal' in _stdout"
+        message: "22 is between 18.5 and 25, so 'normal'"
 
 worlds:
   fantasy:
     title: "The Rank Crystal"
-    setup: |
-      The Guild Hall's rank crystal glows a different colour for each tier.
-      In Python, elif lets you chain multiple conditions — Python checks each
-      one in order and runs the first that matches. All others are ignored.
-
-      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
-      "Normal", else print "Slow". Only one branch should run.
-    final_challenge_prompt: |
-      The Guild assigns ranks by level. level is 12. Print "Novice" if level < 5,
-      "Apprentice" if level < 20, and "Master" otherwise. Exactly one title prints.
   scifi:
-    title: "Threat Level Protocol"
-    setup: |
-      The security system classifies incoming ships by speed: intercept, shadow, or
-      let pass. Python's elif chain works the same way — each condition is tested
-      top to bottom, the first match wins, the rest are skipped.
-
-      speed is 85. Write the three-branch elif chain: Fast (> 100), Normal (>= 60),
-      Slow (everything else). Only one label prints.
-    final_challenge_prompt: |
-      The crew classification system uses level. level is 12. Print "Novice" for
-      level < 5, "Apprentice" for level < 20, "Master" for anything higher.
+    title: "Status Levels"
   mystery:
-    title: "Suspect Ranking"
-    setup: |
-      The case file rates suspects: prime, secondary, or cleared. More than two
-      categories means you need elif — Python's way of chaining multiple conditions,
-      testing each until one matches.
-
-      speed is 85. Write: if speed > 100 print "Fast", elif speed >= 60 print
-      "Normal", else print "Slow". One match, one output.
-    final_challenge_prompt: |
-      Detectives have rank. level is 12. Print "Novice" for level < 5,
-      "Apprentice" for level < 20, "Master" for level >= 20. One rank prints.
+    title: "Ranking Suspects"

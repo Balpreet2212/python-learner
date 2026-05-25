@@ -1,117 +1,95 @@
-unit: 2
-lesson: 3
-xp: 10
+title: "Comparison Operators"
+xp: 12
 
-example:
-  code: |
-    score = 85
-    print(score > 50)    # True
-    print(score >= 90)   # False
-    print(score == 85)   # True
-    print(score != 100)  # True
-    print(score < 0)     # False
-  explanation: |
-    Comparison operators compare two values and always return True or False.
-    == checks equality (two equals signs — not the assignment =).
-    != means "not equal". > >= < <= work as in maths.
-    The result is a boolean — the foundation of all decisions in Python.
-  output: "True\nFalse\nTrue\nTrue\nFalse"
+exercises:
+  - type: concept
+    code: |
+      x = 10
+      print(x > 5)
+      print(x == 10)
+      print(x != 3)
+    output: "True\nTrue\nTrue"
+    explanation: "Comparisons check a relationship and return True or False. == checks equality (not =, which assigns). != means 'not equal'."
 
-code_starter: |
-  health = 30
-  max_health = 100
-  # Is health critically low? (below 25)
-  is_critical =
-  # Is health at maximum?
-  is_full =
-hints:
-  - "Use < to check if health is below 25: is_critical = health < 25"
-  - "Use == to check equality: is_full = health == max_health"
+  - type: mcq
+    question: "What does this print?"
+    code: "print(7 > 3)"
+    choices: ["True", "False", "7", "3"]
+    correct: "True"
+    explanation: "7 is greater than 3, so the result is True."
 
-tests:
-  - code: "assert is_critical == False"
-    message: "is_critical should be False (30 is not below 25)"
-  - code: "assert is_full == False"
-    message: "is_full should be False (30 != 100)"
-  - code: "assert '<' in _code or '<=' in _code"
-    message: "use a comparison operator (< or <=) for is_critical"
-  - code: "assert '==' in _code"
-    message: "use == (not =) for is_full"
+  - type: fill_blank
+    before: "is_max = level "
+    after: " 10"
+    choices: ["==", "=", "!=", ">="]
+    answer: "=="
+    explanation: "== compares for equality. = would assign 10 to level instead."
 
-predict:
-  code: |
-    x = 7
-    print(x > 5)
-    print(x == 7)
-    print(x != 10)
-    print(x < 3)
-  explanation: "Comparisons return True or False. = assigns; == compares."
+  - type: mcq
+    question: "What does this print?"
+    code: "score = 60\nprint(score >= 60)"
+    choices: ["True", "False", "60", ">="]
+    correct: "True"
+    explanation: ">= means 'greater than or equal to'. 60 >= 60 is True."
 
-break_and_fix:
-  broken_code: |
-    level = 10
-    # Check if level equals 10
-    is_max = level = 10
-    print(is_max)
-  hint: "= assigns a value; == checks equality. Change = to == in the comparison."
-  tests:
-    - code: "assert is_max == True"
-      message: "is_max should be True (level equals 10)"
-    - code: "assert '==' in _code"
-      message: "use == not = for comparison"
+  - type: arrange
+    instruction: "Build a comparison to check if x is not equal to 5"
+    blocks: ["x", "!=", "5", "==", "print", "(", ")"]
+    correct: ["print", "(", "x", "!=", "5", ")"]
+    explanation: "!= is 'not equal to'. If x is not 5, this prints True."
 
-final_challenge:
-  code_starter: |
-    speed = 120
-    limit = 100
-    fuel = 0
-  hints:
-    - "is_speeding = speed > limit"
-    - "is_empty = fuel == 0"
-    - "is_safe_speed = speed <= limit"
-    - "print(is_speeding, is_empty, is_safe_speed)"
-  tests:
-    - code: "assert is_speeding == True"
-      message: "is_speeding should be True (120 > 100)"
-    - code: "assert is_empty == True"
-      message: "is_empty should be True (fuel == 0)"
-    - code: "assert is_safe_speed == False"
-      message: "is_safe_speed should be False (120 is not <= 100)"
+  - type: mcq
+    question: "What does this print?"
+    code: "a = 5\nb = 10\nprint(a < b)"
+    choices: ["True", "False", "5", "10"]
+    correct: "True"
+    explanation: "5 is less than 10, so a < b is True."
+
+  - type: fill_blank
+    before: "passed = score "
+    after: " 50"
+    choices: [">=", "==", "=", "<="]
+    answer: ">="
+    explanation: "score >= 50 is True when score is 50 or more — the passing threshold."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 5\nprint(x == 5)\nprint(x != 5)"
+    choices: ["True\nFalse", "False\nTrue", "True\nTrue", "5\n5"]
+    correct: "True\nFalse"
+    explanation: "x == 5 is True (x is 5). x != 5 is False (x is 5, so they ARE equal)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "name = \"Alice\"\nprint(name == \"alice\")"
+    choices: ["False", "True", "Alice", "alice"]
+    correct: "False"
+    explanation: "String comparison is case-sensitive. 'Alice' and 'alice' are different."
+
+  - type: arrange
+    instruction: "Check if hp is less than or equal to 0"
+    blocks: ["hp", "<=", "0", ">=", "print", "(", ")"]
+    correct: ["print", "(", "hp", "<=", "0", ")"]
+    explanation: "<= is 'less than or equal to'. True when hp is 0 or below."
+
+  - type: mini_code
+    prompt: "Set score = 75. Print whether score is greater than or equal to 60 (the pass mark)."
+    starter: "score = 75\n"
+    tests:
+      - code: "_stdout.strip() == 'True'"
+        message: "75 >= 60 should be True"
+
+  - type: mini_code
+    prompt: "Set a = 10 and b = 20. Print True if a is not equal to b, False otherwise."
+    starter: "a = 10\nb = 20\n"
+    tests:
+      - code: "_stdout.strip() == 'True'"
+        message: "10 != 20 should be True"
 
 worlds:
   fantasy:
     title: "The Truth Rune"
-    setup: |
-      "Numbers can be compared — and Python speaks the result as truth or
-      falsehood," Elara says. "== checks equality, != means not equal,
-      > >= < <= work as in mathematics. The result is always True or False."
-
-      A warrior has health = 30 out of max_health = 100.
-      Determine is_critical (below 25?) and is_full (at maximum?).
-    final_challenge_prompt: |
-      A carriage: speed = 120, limit = 100, fuel = 0.
-      Set is_speeding, is_empty, and is_safe_speed using comparisons.
-      Print all three.
   scifi:
-    title: "Sensor Calibration"
-    setup: |
-      "Sensor outputs are binary — True or False," the AI states.
-      "Comparison operators convert numbers into boolean readings.
-      == for equality, != for difference, > >= < <= for magnitude."
-
-      Hull integrity: health = 30 out of max_health = 100.
-      Set is_critical (below 25?) and is_full (at max?).
-    final_challenge_prompt: |
-      Spacecraft: speed = 120, limit = 100, fuel = 0.
-      Compute is_speeding, is_empty, and is_safe_speed. Print all three.
+    title: "Sensor Thresholds"
   mystery:
-    title: "Reading the Clues"
-    setup: |
-      "Facts either check out or they don't," your mentor says.
-      "Comparisons give you True or False — the raw truth."
-
-      Suspect's stamina: health = 30, max_health = 100.
-      Determine is_critical (below 25?) and is_full (at max?).
-    final_challenge_prompt: |
-      A vehicle: speed = 120, limit = 100, fuel = 0.
-      Determine is_speeding, is_empty, and is_safe_speed. Print all three.
+    title: "Comparing Evidence"

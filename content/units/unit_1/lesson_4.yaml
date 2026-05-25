@@ -1,96 +1,97 @@
-unit: 1
-lesson: 4
+title: "f-strings"
 xp: 10
 
-example:
-  code: |
-    hero = "Aria"
-    level = 7
-    message = f"{hero} has reached level {level}!"
-    print(message)
-  explanation: |
-    An f-string starts with the letter f immediately before the opening quote.
-    Inside the string, any variable name wrapped in curly braces {} is replaced
-    by that variable's actual value when the string is created.
-    This makes it easy to build sentences that include variable data.
-  output: "Aria has reached level 7!"
+exercises:
+  - type: concept
+    code: |
+      name = "Alice"
+      score = 95
+      print(f"Player {name} scored {score} points!")
+    output: "Player Alice scored 95 points!"
+    explanation: "f-strings embed variables directly in text. Put f before the quote and use {variable} inside. The value replaces the placeholder."
 
-code_starter: |
-  # Feel free to change this name
-  name = "Ada"
+  - type: mcq
+    question: "What does this print?"
+    code: "age = 12\nprint(f\"I am {age} years old\")"
+    choices: ["I am 12 years old", "I am age years old", "I am {age} years old", "12"]
+    correct: "I am 12 years old"
+    explanation: "{age} inside an f-string is replaced by the value 12."
 
-  # Build a greeting using an f-string.
-  # It should say: "Hello, Ada!" (substituting your name)
-  greeting =
-hints:
-  - 'f-strings start with f before the quote: f"Hello, {name}!"'
-  - "Curly braces {} inside the string are replaced with the variable's value"
-tests:
-  - code: "assert isinstance(greeting, str), 'greeting should be a string'"
-    message: "greeting should be a string"
-  - code: "assert greeting.startswith('Hello, '), 'greeting should start with Hello, '"
-    message: "greeting should start with 'Hello, '"
-  - code: "assert name in greeting, 'greeting should contain the value of name'"
-    message: "greeting should contain the name variable's value"
+  - type: fill_blank
+    before: "name = \"Bob\"\nprint("
+    after: "\"Hello, {name}!\")"
+    choices: ["f", "print", "str", "len"]
+    answer: "f"
+    explanation: "The f before the quote enables {variable} substitution inside strings."
 
-final_challenge:
-  code_starter: |
-    # Build a themed status line using an f-string
-    hero_name = "Aria"
-    unit_number = 7
-  hints:
-    - "status must be an f-string using hero_name and unit_number"
-    - 'status = f"{hero_name} is on unit {unit_number}"'
-    - "Check that both variables appear in the result"
-  tests:
-    - code: "assert isinstance(status, str)"
-      message: "status should be a string"
-    - code: "assert hero_name in status and str(unit_number) in status"
-      message: "status should contain the hero name and unit number"
-    - code: "assert '{hero_name}' in _code and '{unit_number}' in _code"
-      message: "use {hero_name} and {unit_number} inside the f-string, not hardcoded text"
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 7\nprint(f\"{x} times 2 is {x * 2}\")"
+    choices: ["7 times 2 is 14", "x times 2 is x * 2", "7 times 2 is x * 2", "14"]
+    correct: "7 times 2 is 14"
+    explanation: "Expressions like x * 2 can go inside {} and are evaluated before inserting."
+
+  - type: arrange
+    instruction: "Build code to print 'Score: 100' using an f-string (points = 100)"
+    blocks: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+    correct: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+    explanation: "First assign points = 100, then f\"Score: {points}\" embeds the value."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "a = 3\nb = 4\nprint(f\"{a} + {b} = {a + b}\")"
+    choices: ["3 + 4 = 7", "a + b = a + b", "3 + 4 = a + b", "7"]
+    correct: "3 + 4 = 7"
+    explanation: "{a}, {b}, and {a + b} are all replaced with their computed values."
+
+  - type: fill_blank
+    before: "city = \"London\"\nprint(f\"Welcome to "
+    after: "!\")"
+    choices: ["{city}", "city", "\"city\"", "(city)"]
+    answer: "{city}"
+    explanation: "{city} inside an f-string inserts the value of the city variable."
+
+  - type: mcq
+    question: "Which line correctly uses an f-string?"
+    code: ""
+    choices: ["print(f\"Hi {name}\")", "print(\"Hi {name}\")", "print(f Hi name)", "print(f'Hi name')"]
+    correct: "print(f\"Hi {name}\")"
+    explanation: "f-strings need f before the quote and curly braces around the variable."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "item = \"sword\"\ncost = 50\nprint(f\"The {item} costs {cost} gold\")"
+    choices: ["The sword costs 50 gold", "The item costs cost gold", "The {item} costs {cost} gold", "sword 50"]
+    correct: "The sword costs 50 gold"
+    explanation: "{item} and {cost} are replaced with their values."
+
+  - type: fill_blank
+    before: "hp = 80\nprint(f\"HP: "
+    after: " / 100\")"
+    choices: ["{hp}", "hp", "{HP}", "(hp)"]
+    answer: "{hp}"
+    explanation: "{hp} inserts the value 80, giving 'HP: 80 / 100'."
+
+  - type: mini_code
+    prompt: "Store \"Python\" in language and 1991 in year. Print: 'Python was created in 1991' using an f-string."
+    starter: ""
+    tests:
+      - code: "'Python was created in 1991' in _stdout"
+        message: "Should print 'Python was created in 1991'"
+
+  - type: mini_code
+    prompt: "Store your hero name in hero and 5 in level. Print 'Hero [name] is level [level]' using an f-string."
+    starter: ""
+    tests:
+      - code: "isinstance(hero, str) and len(hero) > 0"
+        message: "hero should be a non-empty string"
+      - code: "f'Hero {hero} is level {level}' in _stdout"
+        message: "Should print the correct f-string output"
 
 worlds:
   fantasy:
     title: "The Speaking Scroll"
-    setup: |
-      The enchanted scroll unfurls itself. "A great spell does not just store a
-      value — it weaves values together into a message," Elara says. "In Python,
-      an f-string lets you embed variables directly inside text."
-
-      She traces the rune: f"Hello, {name}!". "The letter f before the quote
-      activates the magic. Anything inside {} is replaced by the variable's value.
-      Craft a greeting with your name embedded in it — the scroll will speak it aloud."
-    final_challenge_prompt: |
-      The speaking scroll needs to announce your progress. Use hero_name = "Aria"
-      and unit_number = 7 (already provided). Build an f-string called status that
-      includes both — something like "Aria is on unit 1". The exact wording is up
-      to you, as long as both values appear.
   scifi:
-    title: "Comm Channel Open"
-    setup: |
-      The comms system crackles. "Personalised hails increase crew morale by 23%,"
-      the AI notes in its flat, statistical way. "To build a custom message, use
-      an f-string: put f before the opening quote, and wrap any variable name in
-      curly braces."
-
-      The result: the variable's value is injected directly into the text. Build a
-      'greeting' that says "Hello, " followed by your 'name'.
-    final_challenge_prompt: |
-      The ship's status panel shows a one-line summary for each crew member. Using
-      hero_name = "Aria" and unit_number = 7 (already provided), create status as
-      an f-string that mentions both. The display requires both values to appear.
+    title: "Mission Briefing"
   mystery:
-    title: "The Calling Card"
-    setup: |
-      Every detective leaves a calling card. Yours should be personalised. "Python's
-      f-strings let you embed a variable's value right inside a string," your partner
-      explains, sliding a printed card across the table.
-
-      "Write f before the opening quote, then put your variable name inside curly
-      braces — Python swaps it for the actual value at runtime." Create a 'greeting'
-      that begins with "Hello, " and includes your 'name'.
-    final_challenge_prompt: |
-      The case summary card must show the detective's name and the unit they're
-      assigned to. Using hero_name = "Aria" and unit_number = 7 (already provided),
-      create an f-string called status that contains both values.
+    title: "The Case File"

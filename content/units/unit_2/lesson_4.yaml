@@ -1,96 +1,96 @@
-unit: 2
-lesson: 4
-xp: 10
+title: "Booleans and bool()"
+xp: 12
 
-example:
-  code: |
-    print(bool(0))        # False
-    print(bool(42))       # True
-    print(bool(""))       # False
-    print(bool("hello"))  # True
-    active = True
-    print(type(active))
-  explanation: |
-    True and False are Python's boolean values — they express yes/no, on/off.
-    bool() reveals a value's truthiness: 0, "", None, and empty collections
-    are False. Everything else is True.
-    Boolean variable names read like facts: is_active, has_key, can_fly.
-  output: "False\nTrue\nFalse\nTrue\n<class 'bool'>"
+exercises:
+  - type: concept
+    code: |
+      print(bool(0))
+      print(bool(1))
+      print(bool(""))
+      print(bool("hello"))
+    output: "False\nTrue\nFalse\nTrue"
+    explanation: "bool() converts a value to True or False. 0, empty strings, and empty collections are False (falsy). Everything else is True (truthy)."
 
-code_starter: |
-  score = 0
-  name = "Alex"
-  # Convert score to a boolean — is it truthy?
-  has_score =
-  # Convert name to a boolean — is it truthy?
-  has_name =
-hints:
-  - "has_score = bool(score)  — 0 converts to False"
-  - "has_name = bool(name)  — a non-empty string converts to True"
+  - type: mcq
+    question: "What does bool(0) return?"
+    code: ""
+    choices: ["False", "True", "0", "None"]
+    correct: "False"
+    explanation: "0 is falsy in Python. bool(0) returns False."
 
-tests:
-  - code: "assert has_score == False"
-    message: "has_score should be False (bool(0) is False)"
-  - code: "assert has_name == True"
-    message: "has_name should be True (bool('Alex') is True)"
-  - code: "assert 'bool' in _code"
-    message: "use bool() to convert the values"
+  - type: mcq
+    question: "What does this print?"
+    code: "print(bool(\"hello\"))"
+    choices: ["True", "False", "hello", "None"]
+    correct: "True"
+    explanation: "A non-empty string is truthy. bool('hello') is True."
 
-final_challenge:
-  code_starter: |
-    items_in_bag = 0
-    player_name = "Hero"
-    lives_remaining = 3
-  hints:
-    - "bag_empty = not bool(items_in_bag)"
-    - "has_name = bool(player_name)"
-    - "is_alive = bool(lives_remaining)"
-    - "print(bag_empty, has_name, is_alive)"
-  tests:
-    - code: "assert bag_empty == True"
-      message: "bag_empty should be True (items_in_bag is 0)"
-    - code: "assert has_name == True"
-      message: "has_name should be True"
-    - code: "assert is_alive == True"
-      message: "is_alive should be True (lives_remaining is 3)"
+  - type: fill_blank
+    before: "is_alive = "
+    after: "(hp)"
+    choices: ["bool", "int", "str", "print"]
+    answer: "bool"
+    explanation: "bool(hp) converts hp to True (if hp > 0) or False (if hp == 0)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "print(bool([]))"
+    choices: ["False", "True", "[]", "None"]
+    correct: "False"
+    explanation: "An empty list [] is falsy. bool([]) returns False."
+
+  - type: arrange
+    instruction: "Build code to convert the number 5 to a boolean and print it"
+    blocks: ["print", "(", "bool", "(", "5", ")", ")"]
+    correct: ["print", "(", "bool", "(", "5", ")", ")"]
+    explanation: "bool(5) returns True because 5 is a non-zero number (truthy)."
+
+  - type: mcq
+    question: "Which values are falsy? (select the correct list)"
+    code: ""
+    choices: ["0, \"\", [], None", "0, 1, \"\", []", "False, None, 1", "0, False, True"]
+    correct: "0, \"\", [], None"
+    explanation: "Falsy values include: 0, empty string, empty list, None, and False."
+
+  - type: fill_blank
+    before: "has_ammo = "
+    after: "(ammo_count > 0)"
+    choices: ["bool", "int", "str", "not"]
+    answer: "bool"
+    explanation: "bool(ammo_count > 0) converts the comparison result to True or False."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "x = 0\nprint(bool(x))\nx = -5\nprint(bool(x))"
+    choices: ["False\nTrue", "False\nFalse", "True\nTrue", "0\n-5"]
+    correct: "False\nTrue"
+    explanation: "0 is falsy (False). -5 is non-zero, so it's truthy (True)."
+
+  - type: mcq
+    question: "What does this print?"
+    code: "name = \"\"\nprint(bool(name))"
+    choices: ["False", "True", "\"\"", "None"]
+    correct: "False"
+    explanation: "An empty string is falsy. bool('') returns False."
+
+  - type: mini_code
+    prompt: "hp = 0. Print the boolean value of hp. Then set hp = 50 and print its boolean value."
+    starter: "hp = 0\n"
+    tests:
+      - code: "'False' in _stdout and 'True' in _stdout"
+        message: "Should print False then True"
+
+  - type: mini_code
+    prompt: "Check whether the string 'Python' is truthy and the string '' is falsy. Print both results."
+    starter: ""
+    tests:
+      - code: "'True' in _stdout and 'False' in _stdout"
+        message: "Should print True for 'Python' and False for ''"
 
 worlds:
   fantasy:
     title: "The Truth Stone"
-    setup: |
-      The truth stone glows when something is real. "In Python every value
-      carries truthiness," Elara explains. "0, empty strings, and None are
-      falsy — everything else is truthy. bool() reveals this hidden truth."
-
-      A wizard has score = 0 and name = "Alex".
-      Use bool() to find has_score and has_name.
-    final_challenge_prompt: |
-      The party's state: items_in_bag = 0, player_name = "Hero",
-      lives_remaining = 3. Determine bag_empty (not bool of items),
-      has_name, and is_alive. Print all three.
   scifi:
-    title: "System Status Signals"
-    setup: |
-      "Every system state reduces to True or False," the AI explains.
-      "bool() converts any value: 0 and empty strings are False,
-      non-zero numbers and non-empty strings are True."
-
-      Readings: score = 0, name = "Alex".
-      Compute has_score and has_name.
-    final_challenge_prompt: |
-      System status: items_in_bag = 0, player_name = "Hero",
-      lives_remaining = 3. Compute bag_empty, has_name, and is_alive.
-      Print all three.
+    title: "Binary Sensor Readings"
   mystery:
-    title: "The Lie Detector"
-    setup: |
-      "Truth has a value in Python," your mentor says.
-      "bool() converts anything: 0 and empty strings return False,
-      everything else True."
-
-      Readings: score = 0, name = "Alex".
-      Evaluate has_score and has_name.
-    final_challenge_prompt: |
-      Evidence state: items_in_bag = 0, player_name = "Hero",
-      lives_remaining = 3. Evaluate bag_empty, has_name, and is_alive.
-      Print all three.
+    title: "True or False?"
