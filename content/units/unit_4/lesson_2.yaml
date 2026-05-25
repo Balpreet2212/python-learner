@@ -18,6 +18,7 @@ exercises:
     explanation: "The loop visits each element. print(n) shows each number on its own line."
 
   - type: fill_blank
+    prompt: "Give the loop variable a name that represents one element from the list."
     before: "items = [\"a\", \"b\", \"c\"]\nfor "
     after: " in items:\n    print(item)"
     choices: ["item", "items", "i", "x"]
@@ -38,6 +39,7 @@ exercises:
     explanation: ".upper() converts each word to uppercase inside the loop."
 
   - type: fill_blank
+    prompt: "Accumulate each score into the running total."
     before: "scores = [80, 90, 70]\ntotal = 0\nfor s in scores:\n    total = total "
     after: " s"
     choices: ["+", "-", "*", "/"]

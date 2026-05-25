@@ -26,6 +26,7 @@ exercises:
     explanation: "The if checks divisibility. else catches when n is odd."
 
   - type: fill_blank
+    prompt: "Handle the case when the user is not logged in."
     before: "if logged_in:\n    print(\"Welcome\")\n"
     after: ":\n    print(\"Please log in\")"
     choices: ["else", "elif", "if", "then"]
@@ -47,6 +48,7 @@ exercises:
     explanation: "An empty string is falsy. The else branch runs."
 
   - type: fill_blank
+    prompt: "Assign 'minor' status for everyone who doesn't meet the age condition."
     before: "if age >= 18:\n    status = \"adult\"\n"
     after: ":\n    status = \"minor\""
     choices: ["else", "elif", "if not", "then"]

@@ -29,6 +29,7 @@ exercises:
     explanation: "increment() adds 1 each call. After two calls, count = 2."
 
   - type: fill_blank
+    prompt: "Deduct the spent amount from the wallet's balance."
     before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n        self.balance "
     after: " amount\n\nw = Wallet(100)\nw.spend(30)\nprint(w.balance)"
     choices: ["-=", "+=", "=", "*="]
@@ -56,6 +57,7 @@ exercises:
     explanation: "toggle flips self.on. False → True → False. Two toggles return to start."
 
   - type: fill_blank
+    prompt: "Add the new item to the end of the internal items list."
     before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
     after: "(x)\n\nq = Queue()\nq.enqueue('a')\nprint(q.items)"
     choices: ["append", "pop", "remove", "insert"]

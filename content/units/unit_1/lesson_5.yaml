@@ -25,6 +25,7 @@ exercises:
     explanation: "int() converts a string to an integer. float() converts to a decimal. This is called type casting."
 
   - type: fill_blank
+    prompt: "Convert the user's text input into an integer so you can do maths with it."
     before: "text = input(\"Enter a number: \")\nnum = "
     after: "(text)"
     choices: ["int", "str", "print", "len"]
@@ -52,6 +53,7 @@ exercises:
     explanation: "int('7') gives 7. 7 * 3 = 21."
 
   - type: fill_blank
+    prompt: "Convert the price input into a decimal number for currency calculations."
     before: "price = "
     after: "(input(\"Price? \"))"
     choices: ["float", "int", "str", "len"]

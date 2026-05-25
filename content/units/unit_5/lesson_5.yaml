@@ -22,6 +22,7 @@ exercises:
     explanation: "double(3) = 6. double(6) = 12."
 
   - type: fill_blank
+    prompt: "Call the helper function to square a before adding it to the square of b."
     before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
     after: "(a) + square(b)"
     choices: ["square", "print", "double", "int"]
@@ -49,6 +50,7 @@ exercises:
     explanation: "2, 4, 6 are even. is_even() is called for each element."
 
   - type: fill_blank
+    prompt: "Use the negate helper to flip the even check into an odd check."
     before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
     after: "(n % 2 == 0)"
     choices: ["negate", "not", "bool", "int"]

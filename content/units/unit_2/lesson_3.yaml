@@ -19,6 +19,7 @@ exercises:
     explanation: "7 is greater than 3, so the result is True."
 
   - type: fill_blank
+    prompt: "Check whether level is exactly equal to 10."
     before: "is_max = level "
     after: " 10"
     choices: ["==", "=", "!=", ">="]
@@ -46,6 +47,7 @@ exercises:
     explanation: "5 is less than 10, so a < b is True."
 
   - type: fill_blank
+    prompt: "Check whether score meets or exceeds the passing threshold of 50."
     before: "passed = score "
     after: " 50"
     choices: [">=", "==", "=", "<="]

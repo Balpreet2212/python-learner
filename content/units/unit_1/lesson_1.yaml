@@ -23,6 +23,7 @@ exercises:
     explanation: "= assigns the value on the right to the variable on the left."
 
   - type: fill_blank
+    prompt: "Assign the value 100 to the variable score."
     before: "score "
     after: " 100"
     choices: ["=", "==", "!=", "+"]
@@ -50,6 +51,7 @@ exercises:
     explanation: "= assigns right to left. The string \"Alice\" goes in quotes. == compares, it does not assign."
 
   - type: fill_blank
+    prompt: "Choose a valid variable name to store the string \"hello\"."
     before: ""
     after: " = \"hello\""
     choices: ["message", "print", "def", "42"]

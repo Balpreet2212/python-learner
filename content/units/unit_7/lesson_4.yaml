@@ -26,6 +26,7 @@ exercises:
     explanation: "a.size = 10, b.size = 20. 10 + 20 = 30."
 
   - type: fill_blank
+    prompt: "Read the hp from Alice's instance specifically."
     before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice', 100)\np2 = Player('Bob', 80)\nprint("
     after: ".hp)"
     choices: ["p1", "p2", "Player", "self"]
@@ -53,6 +54,7 @@ exercises:
     explanation: "a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent objects."
 
   - type: fill_blank
+    prompt: "Compare whether s1 has more points than s2."
     before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\nprint(s1.points "
     after: " s2.points)"
     choices: [">", "<", "+", "=="]

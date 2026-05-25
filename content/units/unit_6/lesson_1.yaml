@@ -19,6 +19,7 @@ exercises:
     explanation: "Index 1 is the second item. nums[1] = 20."
 
   - type: fill_blank
+    prompt: "Print the first item in the fruits list."
     before: "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(fruits["
     after: "])"
     choices: ["0", "1", "3", "-1"]
@@ -46,6 +47,7 @@ exercises:
     explanation: "Index 2 is the third item. scores[2] = 72."
 
   - type: fill_blank
+    prompt: "Print how many items are in the words list."
     before: "words = [\"cat\", \"dog\", \"fish\"]\nprint("
     after: "(words))"
     choices: ["len", "str", "int", "print"]

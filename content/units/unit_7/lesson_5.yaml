@@ -35,6 +35,7 @@ exercises:
     explanation: "Car inherits Vehicle's __init__. c.speed = 120."
 
   - type: fill_blank
+    prompt: "Multiply side by itself to compute the square's area."
     before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side "
     after: " self.side\n\ns = Square(5)\nprint(s.area())"
     choices: ["*", "+", "-", "/"]
@@ -62,6 +63,7 @@ exercises:
     explanation: "B overrides hello() → 'B'. C does not override it, so it inherits A's hello() → 'A'."
 
   - type: fill_blank
+    prompt: "Inherit from Animal so Dog gets the name attribute automatically."
     before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
     after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
     choices: ["Animal", "Dog", "self", "object"]

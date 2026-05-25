@@ -20,6 +20,7 @@ exercises:
     explanation: "-3 > 0 is False. The function returns False."
 
   - type: fill_blank
+    prompt: "Return True if the text has more than 10 characters."
     before: "def is_long(text):\n    return len(text) "
     after: " 10"
     choices: [">", "=", "+", "=="]
@@ -47,6 +48,7 @@ exercises:
     explanation: "a > 0 is True but b > 0 is False. True and False = False."
 
   - type: fill_blank
+    prompt: "Ensure both conditions hold: score is non-negative and at most 100."
     before: "def is_valid_score(s):\n    return s >= 0 "
     after: " s <= 100"
     choices: ["and", "or", "not", "if"]

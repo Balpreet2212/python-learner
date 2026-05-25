@@ -23,6 +23,7 @@ exercises:
     explanation: "2 * 3 * 4 = 24."
 
   - type: fill_blank
+    prompt: "Combine the first name, a space, and the last name into one string."
     before: "def full_name(first, last):\n    return first "
     after: " \" \" + last"
     choices: ["+", "-", "*", "/"]
@@ -50,6 +51,7 @@ exercises:
     explanation: "triple(4) = 12. double(12) = 24."
 
   - type: fill_blank
+    prompt: "Multiply price by pct/100 to calculate how much to subtract as a discount."
     before: "def discount(price, pct):\n    return price - (price "
     after: " pct / 100)"
     choices: ["*", "+", "-", "/"]

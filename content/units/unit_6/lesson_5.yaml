@@ -20,6 +20,7 @@ exercises:
     explanation: "Each x is multiplied by 2. Result: [2, 4, 6, 8]."
 
   - type: fill_blank
+    prompt: "Pass each word to len() to build a list of character counts."
     before: "words = ['hi', 'hello', 'hey']\nlengths = [len("
     after: ") for w in words]\nprint(lengths)"
     choices: ["w", "words", "len", "x"]
@@ -47,6 +48,7 @@ exercises:
     explanation: ".upper() converts each name to uppercase. The result is a new list."
 
   - type: fill_blank
+    prompt: "Filter the list to keep only numbers greater than 5."
     before: "nums = [1, 2, 3, 4, 5, 6, 7, 8]\nbig = [n for n in nums if n "
     after: " 5]\nprint(big)"
     choices: [">", "<", "==", "!="]

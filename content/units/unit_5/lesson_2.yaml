@@ -20,6 +20,7 @@ exercises:
     explanation: "square(5) returns 5 * 5 = 25. print() shows that returned value."
 
   - type: fill_blank
+    prompt: "Send the computed value n * 2 back to whoever called this function."
     before: "def double(n):\n    "
     after: " n * 2"
     choices: ["return", "print", "def", "="]
@@ -47,6 +48,7 @@ exercises:
     explanation: "Functions without return give back None automatically."
 
   - type: fill_blank
+    prompt: "Use the remainder operator to check whether n divides evenly by 2."
     before: "def is_even(n):\n    return n "
     after: " 2 == 0"
     choices: ["%", "//", "/", "**"]

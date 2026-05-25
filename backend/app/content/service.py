@@ -51,6 +51,7 @@ class ArrangeExercise:
 @dataclass
 class FillBlankExercise:
     type: str
+    prompt: str
     before: str
     after: str
     choices: list[str]
@@ -98,6 +99,7 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
     if t == "fill_blank":
         return FillBlankExercise(
             type="fill_blank",
+            prompt=raw.get("prompt", "").strip(),
             before=raw.get("before", ""),
             after=raw.get("after", ""),
             choices=raw.get("choices", []),

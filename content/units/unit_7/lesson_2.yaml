@@ -28,6 +28,7 @@ exercises:
     explanation: "bark() returns self.name + ' says Woof!'. self.name is 'Rex'."
 
   - type: fill_blank
+    prompt: "Use the stored radius attribute in the area calculation."
     before: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
     after: " ** 2\n\nc = Circle(5)\nprint(c.area())"
     choices: ["radius", "area", "self", "r"]
@@ -55,6 +56,7 @@ exercises:
     explanation: "area() returns self.w * self.h = 4 * 5 = 20."
 
   - type: fill_blank
+    prompt: "Complete the Fahrenheit formula: multiply by 9/5 then add 32."
     before: "class Thermometer:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
     after: " 32\n\nt = Thermometer(100)\nprint(t.to_fahrenheit())"
     choices: ["+", "-", "*", "/"]

@@ -311,7 +311,7 @@ function FillBlankCard({
 
   return (
     <div className="space-y-5">
-      <p className={`text-sm ${style.muted}`}>Fill in the blank:</p>
+      <p className={`text-base font-semibold ${style.highlight}`}>{ex.prompt}</p>
 
       {/* Code line with blank */}
       <div className="rounded-xl bg-gray-950 px-5 py-4">

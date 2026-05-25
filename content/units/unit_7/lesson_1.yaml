@@ -23,6 +23,7 @@ exercises:
     explanation: "Car('Toyota') creates an instance. c.brand reads the stored attribute."
 
   - type: fill_blank
+    prompt: "Store the y value on the object using the instance reference."
     before: "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        "
     after: ".y = y\n\np = Point(3, 5)\nprint(p.x)"
     choices: ["self", "Point", "x", "y"]
@@ -50,6 +51,7 @@ exercises:
     explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
 
   - type: fill_blank
+    prompt: "Access the brightness attribute through the desk instance variable."
     before: "class Lamp:\n    def __init__(self, brightness):\n        self.brightness = brightness\n\ndesk = Lamp(80)\nprint("
     after: ".brightness)"
     choices: ["desk", "Lamp", "self", "brightness"]

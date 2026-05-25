@@ -26,6 +26,7 @@ exercises:
     explanation: "or only needs one side to be True. True or False = True."
 
   - type: fill_blank
+    prompt: "Require both conditions to be true before allowing entry."
     before: "can_enter = age >= 18 "
     after: " has_ticket"
     choices: ["and", "or", "not", "=="]
@@ -53,6 +54,7 @@ exercises:
     explanation: "x > 10 is True (15 > 10). not True = False."
 
   - type: fill_blank
+    prompt: "Flip the boolean so is_invalid is True when the score is negative."
     before: "is_invalid = "
     after: " (score >= 0)"
     choices: ["not", "and", "or", "bool"]

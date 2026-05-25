@@ -21,6 +21,7 @@ exercises:
     explanation: "The loop assigns each item to f in turn and prints it."
 
   - type: fill_blank
+    prompt: "Add each number to the running total inside the loop."
     before: "nums = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in nums:\n    total "
     after: " n\nprint(total)"
     choices: ["+=", "=", "-=", "*="]
@@ -48,6 +49,7 @@ exercises:
     explanation: "3, 4, 5 are greater than 2. Count = 3."
 
   - type: fill_blank
+    prompt: "Access the loop variable to print each name in uppercase."
     before: "names = [\"Alice\", \"Bob\", \"Carol\"]\nfor name in names:\n    print("
     after: ".upper())"
     choices: ["name", "names", "n", "item"]

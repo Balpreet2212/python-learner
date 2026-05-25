@@ -24,6 +24,7 @@ exercises:
     explanation: "x > 5 is True, so we enter the outer if. x > 8 is True (10 > 8), so 'big' prints."
 
   - type: fill_blank
+    prompt: "Add an inner check that only runs once we know the user is logged in."
     before: "if logged_in:\n    "
     after: " is_admin:\n        print(\"admin panel\")"
     choices: ["if", "elif", "else", "and"]
@@ -51,6 +52,7 @@ exercises:
     explanation: "score >= 60 is True. score >= 90 is False (70 < 90). So else inside runs: 'pass'."
 
   - type: fill_blank
+    prompt: "Handle the case where the weapon is equipped but ammo has run out."
     before: "if weapon_equipped:\n    if ammo > 0:\n        print(\"fire!\")\n    "
     after: ":\n        print(\"no ammo\")"
     choices: ["else", "elif", "if", "or"]

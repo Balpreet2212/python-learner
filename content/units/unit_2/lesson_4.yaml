@@ -26,6 +26,7 @@ exercises:
     explanation: "A non-empty string is truthy. bool('hello') is True."
 
   - type: fill_blank
+    prompt: "Convert hp into a True/False boolean — True if alive, False if at zero."
     before: "is_alive = "
     after: "(hp)"
     choices: ["bool", "int", "str", "print"]
@@ -53,6 +54,7 @@ exercises:
     explanation: "Falsy values include: 0, empty string, empty list, None, and False."
 
   - type: fill_blank
+    prompt: "Convert the comparison result into an explicit True or False value."
     before: "has_ammo = "
     after: "(ammo_count > 0)"
     choices: ["bool", "int", "str", "not"]

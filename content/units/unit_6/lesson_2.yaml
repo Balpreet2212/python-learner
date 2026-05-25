@@ -23,6 +23,7 @@ exercises:
     explanation: "append(4) adds 4 to the list. Length becomes 4."
 
   - type: fill_blank
+    prompt: "Delete the item 'b' from the list by value."
     before: "items = [\"a\", \"b\", \"c\"]\nitems."
     after: "(\"b\")\nprint(items)"
     choices: ["remove", "append", "pop", "delete"]
@@ -50,6 +51,7 @@ exercises:
     explanation: "remove('y') deletes 'y'. The list becomes ['x', 'z']."
 
   - type: fill_blank
+    prompt: "Remove and capture the last item from the list."
     before: "nums = [5, 10, 15]\nlast = nums."
     after: "()\nprint(last)"
     choices: ["pop", "remove", "append", "len"]

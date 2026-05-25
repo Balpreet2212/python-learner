@@ -30,6 +30,7 @@ export const ArrangeExSchema = z.object({
 
 export const FillBlankExSchema = z.object({
   type: z.literal("fill_blank"),
+  prompt: z.string(),
   before: z.string(),
   after: z.string(),
   choices: z.array(z.string()),

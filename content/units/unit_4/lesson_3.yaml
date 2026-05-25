@@ -17,6 +17,7 @@ exercises:
     explanation: "Start at 1, add 3 each time: 1, 4, 7. 10 is not reached (stop is exclusive)."
 
   - type: fill_blank
+    prompt: "Set the step so the loop counts down by 1 each iteration."
     before: "for i in range(10, 0, "
     after: "):\n    print(i)"
     choices: ["-1", "1", "-10", "0"]
@@ -44,6 +45,7 @@ exercises:
     explanation: "Counts from 0 down to -4 (stop -5 is exclusive)."
 
   - type: fill_blank
+    prompt: "Set the stop value so the countdown from 100 ends just before reaching 0."
     before: "for i in range(100, "
     after: ", -10):\n    print(i)"
     choices: ["0", "10", "-10", "100"]

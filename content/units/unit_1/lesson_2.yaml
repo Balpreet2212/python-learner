@@ -19,6 +19,7 @@ exercises:
     explanation: "10 - 3 = 7."
 
   - type: fill_blank
+    prompt: "Multiply 4 and 5, storing the result."
     before: "result = 4 "
     after: " 5"
     choices: ["*", "=", "+", "print"]
@@ -46,6 +47,7 @@ exercises:
     explanation: "/ always produces a float. 7 / 2 = 3.5."
 
   - type: fill_blank
+    prompt: "Add price and tax together to get the total."
     before: "total = price "
     after: " tax"
     choices: ["+", "=", "print", "*"]

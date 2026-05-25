@@ -18,6 +18,7 @@ exercises:
     explanation: "\"python\" has 6 characters: p-y-t-h-o-n."
 
   - type: fill_blank
+    prompt: "Convert Alice's name to uppercase before printing it."
     before: "name = \"Alice\"\nprint(name."
     after: "())"
     choices: ["upper", "print", "len", "int"]
@@ -45,6 +46,7 @@ exercises:
     explanation: "+ joins strings. We add a space \" \" between them."
 
   - type: fill_blank
+    prompt: "Join the two strings together into one."
     before: "result = \"hello\" "
     after: " \"world\""
     choices: ["+", "*", "-", "="]

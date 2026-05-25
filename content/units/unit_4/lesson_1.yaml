@@ -17,6 +17,7 @@ exercises:
     explanation: "range(3) produces 0, 1, 2. Three values starting from 0."
 
   - type: fill_blank
+    prompt: "Use the function that generates a sequence of numbers so the loop runs 4 times."
     before: "for i in "
     after: "(4):\n    print(\"hello\")"
     choices: ["range", "len", "loop", "print"]
@@ -44,6 +45,7 @@ exercises:
     explanation: "0 + 1 + 2 + 3 = 6. The loop adds each i to total."
 
   - type: fill_blank
+    prompt: "Print each loop index multiplied by 2."
     before: "for i in range(n):\n    print(i "
     after: " 2)"
     choices: ["*", "+", "//", "%"]

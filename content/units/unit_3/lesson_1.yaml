@@ -18,6 +18,7 @@ exercises:
     explanation: "10 < 13 is True, so the indented print runs."
 
   - type: fill_blank
+    prompt: "Trigger 'game over' only when hp has reached exactly zero."
     before: "hp = 0\nif hp "
     after: " 0:\n    print(\"game over\")"
     choices: ["==", "=", "!=", ">="]
@@ -45,6 +46,7 @@ exercises:
     explanation: "name == 'Alice' is True, so the block executes."
 
   - type: fill_blank
+    prompt: "Start a conditional block that checks whether the level requirement is met."
     before: "level = 5\n"
     after: " level >= 5:\n    print(\"unlocked\")"
     choices: ["if", "for", "while", "def"]

@@ -21,6 +21,7 @@ exercises:
     explanation: "Both x > 0 (True) and x < 10 (True) are True, so the if block runs."
 
   - type: fill_blank
+    prompt: "Require both conditions to be true to identify someone as a teenager."
     before: "if age >= 13 "
     after: " age <= 19:\n    print(\"teenager\")"
     choices: ["and", "or", "not", "=="]
@@ -48,6 +49,7 @@ exercises:
     explanation: "is_raining is True, not has_umbrella is True. True and True = True. not True = False. else runs."
 
   - type: fill_blank
+    prompt: "Grant access only when both username and password match."
     before: "if username == \"admin\" "
     after: " password == \"1234\":\n    print(\"access\")"
     choices: ["and", "or", "not", "if"]

@@ -24,6 +24,7 @@ exercises:
     explanation: "x > 100 is False. x > 25 is True (50 > 25), so 'medium' prints."
 
   - type: fill_blank
+    prompt: "Add a second speed check that only runs when the first condition was false."
     before: "if speed > 120:\n    print(\"fast\")\n"
     after: " speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
     choices: ["elif", "else", "if", "then"]
@@ -51,6 +52,7 @@ exercises:
     explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs."
 
   - type: fill_blank
+    prompt: "Catch all remaining cases where hp is 25 or below, marking them as critical."
     before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
     after: ":\n    status = \"critical\""
     choices: ["else", "elif", "if", "then"]

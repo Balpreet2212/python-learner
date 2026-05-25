@@ -17,6 +17,7 @@ exercises:
     explanation: "* has higher precedence. 3 * 4 = 12 first, then 2 + 12 = 14."
 
   - type: fill_blank
+    prompt: "Add a bracket so the addition happens before the multiplication."
     before: "result = "
     after: "2 + 3) * 4"
     choices: ["(", "[", "{", "\""]
@@ -44,6 +45,7 @@ exercises:
     explanation: "(10 - 3) = 7 first (brackets), then 7 ** 2 = 49."
 
   - type: fill_blank
+    prompt: "Divide the sum of a, b, and c by 3 to get their average."
     before: "average = (a + b + c) "
     after: " 3"
     choices: ["/", "//", "*", "+"]

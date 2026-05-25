@@ -19,6 +19,7 @@ exercises:
     explanation: "n starts at 3, decrements by 1 each time. Stops when n reaches 0 (condition n > 0 becomes False)."
 
   - type: fill_blank
+    prompt: "Keep doubling x as long as it has not yet exceeded 100."
     before: "x = 1\nwhile x "
     after: " 100:\n    x *= 2\nprint(x)"
     choices: ["<=", ">=", "==", "!="]
@@ -51,6 +52,7 @@ exercises:
     explanation: "for is best when you know the number of iterations. while is best when you loop until something changes."
 
   - type: fill_blank
+    prompt: "Reduce hp by 10 on each iteration of the loop."
     before: "hp = 100\nwhile hp > 0:\n    hp "
     after: "= 10"
     choices: ["-", "+", "*", "/"]

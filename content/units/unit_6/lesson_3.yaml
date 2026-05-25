@@ -21,6 +21,7 @@ exercises:
     explanation: "letters[1:4] starts at index 1, stops before index 4: b, c, d."
 
   - type: fill_blank
+    prompt: "Print only the first 3 items of the list."
     before: "items = [1, 2, 3, 4, 5]\nprint(items[:"
     after: "])"
     choices: ["3", "2", "4", "0"]
@@ -48,6 +49,7 @@ exercises:
     explanation: "scores[2:4] takes indices 2 and 3: 78 and 95."
 
   - type: fill_blank
+    prompt: "Check whether 'grape' is present in the fruits list."
     before: "fruits = ['apple', 'banana', 'cherry']\nprint('grape' "
     after: " fruits)"
     choices: ["in", "not", "==", "is"]

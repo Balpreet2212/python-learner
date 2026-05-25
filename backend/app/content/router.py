@@ -61,6 +61,7 @@ class ArrangeExOut(BaseModel):
 
 class FillBlankExOut(BaseModel):
     type: Literal["fill_blank"]
+    prompt: str
     before: str
     after: str
     choices: list[str]

@@ -20,6 +20,7 @@ exercises:
     explanation: "say_hi() calls the function. The indented block runs."
 
   - type: fill_blank
+    prompt: "Start a function definition with the correct keyword."
     before: ""
     after: " double(n):\n    print(n * 2)"
     choices: ["def", "for", "if", "class"]
@@ -40,6 +41,7 @@ exercises:
     explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10."
 
   - type: fill_blank
+    prompt: "Add the two parameters together inside the function body."
     before: "def add(a, b):\n    print(a "
     after: " b)\n\nadd(3, 4)"
     choices: ["+", "=", "*", "-"]
