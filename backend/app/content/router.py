@@ -151,6 +151,7 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
     if isinstance(ex, FillBlankExercise):
         return FillBlankExOut(
             type="fill_blank",
+            prompt=ex.prompt,
             before=ex.before,
             after=ex.after,
             choices=ex.choices,
