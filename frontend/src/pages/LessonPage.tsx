@@ -360,7 +360,6 @@ function MiniCodeCard({
     try {
       const res = await checkExerciseCode(code, exerciseIndex);
       setResult(res);
-      if (res.all_passed) onDone(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Submission failed.");
     } finally {
