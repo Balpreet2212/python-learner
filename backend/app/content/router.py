@@ -222,7 +222,7 @@ async def check_exercise_code(
         raise bad_request("Invalid exercise index")
 
     exercise = mini_code_exercises[body.exercise_index]
-    tests = [{"code": t.code, "message": t.message} for t in exercise.tests]
+    tests = [{"code": t.code, "message": t.message, "stdin": t.stdin or None} for t in exercise.tests]
     result = run_challenge(body.code, tests)
     return SubmitOut(
         all_passed=result.all_passed,
@@ -322,7 +322,7 @@ async def submit_capstone(
     if content is None:
         raise bad_request("Capstone content not found")
 
-    tests = [{"code": t.code, "message": t.message} for t in content.tests]
+    tests = [{"code": t.code, "message": t.message, "stdin": t.stdin or None} for t in content.tests]
     result = run_challenge(body.code, tests)
     return SubmitOut(
         all_passed=result.all_passed,

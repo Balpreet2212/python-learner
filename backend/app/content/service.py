@@ -16,6 +16,7 @@ MAX_UNITS = 7
 class LessonTest:
     code: str
     message: str
+    stdin: str = ""
 
 
 # ── Exercise types ────────────────────────────────────────────────────────────
@@ -112,7 +113,7 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             type="mini_code",
             prompt=raw.get("prompt", "").strip(),
             starter=raw.get("starter", "").rstrip(),
-            tests=[LessonTest(code=r["code"], message=r["message"]) for r in raw_tests],
+            tests=[LessonTest(code=r["code"], message=r["message"], stdin=r.get("stdin", "")) for r in raw_tests],
         )
     raise ValueError(f"Unknown exercise type: {t!r}")
 
@@ -185,7 +186,7 @@ def load_capstone(unit: int, world: str) -> CapstoneContent | None:
         story_beat=world_data.get("story_beat", "").strip(),
         code_starter=data.get("code_starter", "").rstrip(),
         hints=data.get("hints", []),
-        tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_tests],
+        tests=[LessonTest(code=t["code"], message=t["message"], stdin=t.get("stdin", "")) for t in raw_tests],
         plan_prompts=data.get("plan_prompts", []),
         xp=data.get("xp", 150),
     )
@@ -236,7 +237,7 @@ def load_weekly_challenge(world: str) -> WeeklyChallengeContent | None:
         description=world_data.get("description", data.get("description", "")).strip(),
         code_starter=data.get("code_starter", "").rstrip(),
         hints=data.get("hints", []),
-        tests=[LessonTest(code=t["code"], message=t["message"]) for t in raw_tests],
+        tests=[LessonTest(code=t["code"], message=t["message"], stdin=t.get("stdin", "")) for t in raw_tests],
         xp=data.get("xp", 50),
         difficulty=data.get("difficulty", "medium"),
     )

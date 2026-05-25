@@ -76,20 +76,32 @@ exercises:
     explanation: "Either the if block or the else block runs — never both, never neither."
 
   - type: mini_code
-    prompt: "Set n = 7. Print 'odd' if n is odd, 'even' if it is even."
-    starter: "n = 7\n"
+    prompt: "Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
+    starter: "n = int(input())\n"
     tests:
-      - code: "'odd' in _stdout"
+      - code: "_stdout.strip() == 'odd'"
+        stdin: "7"
         message: "7 is odd, should print 'odd'"
-      - code: "'even' not in _stdout"
-        message: "Should not print 'even'"
+      - code: "_stdout.strip() == 'even'"
+        stdin: "4"
+        message: "4 is even, should print 'even'"
+      - code: "_stdout.strip() == 'odd'"
+        stdin: "13"
+        message: "13 is odd, should print 'odd'"
 
   - type: mini_code
-    prompt: "Set speed = 120 and limit = 100. If speed > limit print 'speeding', else print 'ok'."
-    starter: "speed = 120\nlimit = 100\n"
+    prompt: "Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
+    starter: "speed = int(input())\nlimit = int(input())\n"
     tests:
-      - code: "'speeding' in _stdout"
-        message: "120 > 100, should print 'speeding'"
+      - code: "_stdout.strip() == 'speeding'"
+        stdin: "120\n100"
+        message: "speed 120, limit 100 — should print 'speeding'"
+      - code: "_stdout.strip() == 'ok'"
+        stdin: "80\n100"
+        message: "speed 80, limit 100 — should print 'ok'"
+      - code: "_stdout.strip() == 'ok'"
+        stdin: "100\n100"
+        message: "speed exactly equals limit — should print 'ok'"
 
 worlds:
   fantasy:
