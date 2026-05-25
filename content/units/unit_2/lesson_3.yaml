@@ -33,10 +33,10 @@ exercises:
     explanation: ">= means 'greater than or equal to'. 60 >= 60 is True."
 
   - type: arrange
-    instruction: "Build a comparison to check if x is not equal to 5"
+    instruction: "Print whether x is not equal to 5"
     blocks: ["x", "!=", "5", "==", "print", "(", ")"]
     correct: ["print", "(", "x", "!=", "5", ")"]
-    explanation: "!= is 'not equal to'. If x is not 5, this prints True."
+    explanation: "!= is 'not equal to'. print(x != 5) prints True if x is not 5."
 
   - type: mcq
     question: "What does this print?"
@@ -67,10 +67,10 @@ exercises:
     explanation: "String comparison is case-sensitive. 'Alice' and 'alice' are different."
 
   - type: arrange
-    instruction: "Check if hp is less than or equal to 0"
+    instruction: "Print whether hp is less than or equal to 0"
     blocks: ["hp", "<=", "0", ">=", "print", "(", ")"]
     correct: ["print", "(", "hp", "<=", "0", ")"]
-    explanation: "<= is 'less than or equal to'. True when hp is 0 or below."
+    explanation: "<= is 'less than or equal to'. print(hp <= 0) prints True when hp is 0 or below."
 
   - type: mini_code
     prompt: "Set score = 75. Print whether score is greater than or equal to 60 (the pass mark)."

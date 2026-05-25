@@ -128,14 +128,26 @@ function ConceptCard({
 
 function McqCard({
   ex, style, onDone,
-}: { ex: McqEx; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+}: { ex: McqEx; style: ReturnType<typeof getStyle>; onDone: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   function handleCheck() {
     if (!selected) return;
+    const correct = selected === ex.correct;
+    setIsCorrect(correct);
     setChecked(true);
-    onDone(selected === ex.correct);
+  }
+
+  function handleContinue() {
+    if (isCorrect) {
+      onDone();
+    } else {
+      setChecked(false);
+      setIsCorrect(false);
+      setSelected(null);
+    }
   }
 
   function choiceClass(c: string) {
@@ -168,11 +180,7 @@ function McqCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={!selected} className="w-full">Check</Button>
       ) : (
-        <Feedback
-          correct={selected === ex.correct}
-          explanation={ex.explanation}
-          onContinue={() => { onDone(selected === ex.correct); }}
-        />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
       )}
     </div>
   );
@@ -182,13 +190,12 @@ function McqCard({
 
 function ArrangeCard({
   ex, style, onDone,
-}: { ex: ArrangeEx; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+}: { ex: ArrangeEx; style: ReturnType<typeof getStyle>; onDone: () => void }) {
+  const initBank = () => [...ex.blocks].sort(() => Math.random() - 0.5).map((v, i) => ({ v, id: i }));
   const [placed, setPlaced] = useState<string[]>([]);
-  // Track bank as array of {value, id} so duplicate blocks are handled
-  const [bank, setBank] = useState<{ v: string; id: number }[]>(() =>
-    [...ex.blocks].sort(() => Math.random() - 0.5).map((v, i) => ({ v, id: i }))
-  );
+  const [bank, setBank] = useState<{ v: string; id: number }[]>(initBank);
   const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   function tapBank(id: number) {
     if (checked) return;
@@ -206,12 +213,21 @@ function ArrangeCard({
   }
 
   function handleCheck() {
-    setChecked(true);
     const correct = placed.length === ex.correct.length && placed.every((v, i) => v === ex.correct[i]);
-    onDone(correct);
+    setIsCorrect(correct);
+    setChecked(true);
   }
 
-  const isCorrect = placed.length === ex.correct.length && placed.every((v, i) => v === ex.correct[i]);
+  function handleContinue() {
+    if (isCorrect) {
+      onDone();
+    } else {
+      setChecked(false);
+      setIsCorrect(false);
+      setPlaced([]);
+      setBank(initBank());
+    }
+  }
 
   return (
     <div className="space-y-4">
@@ -251,11 +267,7 @@ function ArrangeCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={placed.length === 0} className="w-full">Check</Button>
       ) : (
-        <Feedback
-          correct={isCorrect}
-          explanation={ex.explanation}
-          onContinue={() => { onDone(isCorrect); }}
-        />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
       )}
     </div>
   );
@@ -265,14 +277,26 @@ function ArrangeCard({
 
 function FillBlankCard({
   ex, style, onDone,
-}: { ex: FillBlankEx; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+}: { ex: FillBlankEx; style: ReturnType<typeof getStyle>; onDone: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   function handleCheck() {
     if (!selected) return;
+    const correct = selected === ex.answer;
+    setIsCorrect(correct);
     setChecked(true);
-    onDone(selected === ex.answer);
+  }
+
+  function handleContinue() {
+    if (isCorrect) {
+      onDone();
+    } else {
+      setChecked(false);
+      setIsCorrect(false);
+      setSelected(null);
+    }
   }
 
   function choiceClass(c: string) {
@@ -293,7 +317,7 @@ function FillBlankCard({
       <div className="rounded-xl bg-gray-950 px-5 py-4">
         <span className="font-code text-sm text-gray-100">{ex.before}</span>
         <span className={`inline-block min-w-12 rounded border-b-2 px-2 font-code text-sm font-bold mx-1
-          ${checked && selected === ex.answer ? "border-green-500 text-green-300" : checked && selected !== ex.answer ? "border-red-500 text-red-300" : `${style.border} ${style.accent}`}`}>
+          ${checked && isCorrect ? "border-green-500 text-green-300" : checked && !isCorrect ? "border-red-500 text-red-300" : `${style.border} ${style.accent}`}`}>
           {selected ?? "____"}
         </span>
         <span className="font-code text-sm text-gray-100">{ex.after}</span>
@@ -311,11 +335,7 @@ function FillBlankCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={!selected} className="w-full">Check</Button>
       ) : (
-        <Feedback
-          correct={selected === ex.answer}
-          explanation={ex.explanation}
-          onContinue={() => { onDone(selected === ex.answer); }}
-        />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
       )}
     </div>
   );
@@ -541,13 +561,13 @@ export default function LessonPage() {
                 <ConceptCard ex={currentEx} style={style} onContinue={() => { handleExerciseDone(true); }} />
               )}
               {currentEx.type === "mcq" && (
-                <McqCard ex={currentEx} style={style} onDone={(c) => { if (c) handleExerciseDone(c); }} />
+                <McqCard ex={currentEx} style={style} onDone={() => { handleExerciseDone(true); }} />
               )}
               {currentEx.type === "arrange" && (
-                <ArrangeCard ex={currentEx} style={style} onDone={(c) => { if (c) handleExerciseDone(c); }} />
+                <ArrangeCard ex={currentEx} style={style} onDone={() => { handleExerciseDone(true); }} />
               )}
               {currentEx.type === "fill_blank" && (
-                <FillBlankCard ex={currentEx} style={style} onDone={(c) => { if (c) handleExerciseDone(c); }} />
+                <FillBlankCard ex={currentEx} style={style} onDone={() => { handleExerciseDone(true); }} />
               )}
               {currentEx.type === "mini_code" && (
                 <MiniCodeCard
