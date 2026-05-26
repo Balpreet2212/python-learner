@@ -23,7 +23,7 @@ plan_prompts:
   - "Walk through hp=85, mp=40, level=11 step by step — which branch does it reach?"
 
 tests:
-  - code: "_stdout.strip() == 'Elite'"
+  - code: "assert _stdout.strip() == 'Elite'"
     message: "hp=85, mp=40, level=11 — not defeated, not critical, level >= 10 and hp >= 80 → Elite"
 
 worlds:

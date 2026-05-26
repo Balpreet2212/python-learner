@@ -11,6 +11,13 @@ code_starter: |
   def grade(score):
       # Return the letter grade for a score out of 100:
       # A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60
+      #
+      # Your function will be tested with all of these:
+      #   grade(95) → "A",  grade(90) → "A"
+      #   grade(85) → "B",  grade(80) → "B"
+      #   grade(75) → "C",  grade(70) → "C"
+      #   grade(65) → "D",  grade(60) → "D"
+      #   grade(59) → "F",  grade(0)  → "F"
       pass
 
 hints:

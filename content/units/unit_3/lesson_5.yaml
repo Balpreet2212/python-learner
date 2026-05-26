@@ -79,18 +79,32 @@ exercises:
     explanation: "if a and b: ... is equivalent to if a: if b: ... when there's no inner else."
 
   - type: mini_code
-    prompt: "Set role = 'admin' and active = True. Use nested if to print 'admin active' only when both conditions are True."
-    starter: "role = 'admin'\nactive = True\n"
+    prompt: "Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is 'admin' AND active is True. Print nothing otherwise.\n\nTested with: admin/True (prints), admin/False (nothing), user/True (nothing)."
+    starter: "role = input()\nactive = input() == 'True'\n"
     tests:
-      - code: "'admin active' in _stdout"
-        message: "Both conditions True, should print 'admin active'"
+      - code: "assert 'admin active' in _stdout"
+        stdin: "admin\nTrue"
+        message: "role=admin, active=True: prints 'admin active'"
+      - code: "assert _stdout.strip() == ''"
+        stdin: "admin\nFalse"
+        message: "role=admin but active=False: prints nothing"
+      - code: "assert _stdout.strip() == ''"
+        stdin: "user\nTrue"
+        message: "role is not 'admin': prints nothing"
 
   - type: mini_code
-    prompt: "Set score = 85 and bonus = True. Print 'A+' if score >= 80 AND bonus. Print 'A' if score >= 80 but not bonus. Use nested if."
-    starter: "score = 85\nbonus = True\n"
+    prompt: "Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A' if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.\n\nTested with: score=85/bonus=True (A+), score=85/False (A), score=70/True (nothing)."
+    starter: "score = int(input())\nbonus = input() == 'True'\n"
     tests:
-      - code: "'A+' in _stdout"
-        message: "score >= 80 and bonus is True, so 'A+'"
+      - code: "assert _stdout.strip() == 'A+'"
+        stdin: "85\nTrue"
+        message: "score=85, bonus=True: prints 'A+'"
+      - code: "assert _stdout.strip() == 'A'"
+        stdin: "85\nFalse"
+        message: "score=85, bonus=False: prints 'A'"
+      - code: "assert _stdout.strip() == ''"
+        stdin: "70\nTrue"
+        message: "score=70 is below 80: prints nothing"
 
 worlds:
   fantasy:

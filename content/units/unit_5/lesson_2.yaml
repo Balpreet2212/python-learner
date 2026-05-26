@@ -70,18 +70,22 @@ exercises:
     explanation: "150 > 100, so the function returns high = 100."
 
   - type: mini_code
-    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32. Print the result for c = 100."
+    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32.\n\nTested with: celsius_to_fahrenheit(100) → 212.0 and celsius_to_fahrenheit(0) → 32.0."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '212.0'"
+      - code: "assert celsius_to_fahrenheit(100) == 212.0"
         message: "100°C = 212°F"
+      - code: "assert celsius_to_fahrenheit(0) == 32.0"
+        message: "0°C = 32°F"
 
   - type: mini_code
-    prompt: "Define a function power(base, exp) that returns base ** exp. Print power(2, 10)."
+    prompt: "Define a function power(base, exp) that returns base ** exp.\n\nTested with: power(2, 10) → 1024 and power(3, 3) → 27."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '1024'"
+      - code: "assert power(2, 10) == 1024"
         message: "2 ** 10 = 1024"
+      - code: "assert power(3, 3) == 27"
+        message: "3 ** 3 = 27"
 
 worlds:
   fantasy:

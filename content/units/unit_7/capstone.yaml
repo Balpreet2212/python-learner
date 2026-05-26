@@ -11,18 +11,24 @@ code_starter: |
   class Hero:
       def __init__(self, name, health):
           # Store name and health as instance attributes
+          # Tested: Hero("Aria", 100).name == "Aria" and .health == 100
           pass
 
       def take_damage(self, amount):
           # Reduce health by amount (health cannot go below 0)
+          # Tested: health=100, take_damage(30) → health becomes 70
+          # Tested: health=20,  take_damage(50) → health becomes 0 (not -30)
           pass
 
       def heal(self, amount):
           # Increase health by amount
+          # Tested: health=50, heal(25) → health becomes 75
           pass
 
       def is_alive(self):
           # Return True if health > 0, otherwise False
+          # Tested: health=100 → True; after take_damage(100) → False
+          # Tested: two Hero instances are independent (changing one doesn't affect the other)
           pass
 
 hints:

@@ -22,11 +22,11 @@ plan_prompts:
 tests:
   - code: |
       lines = _stdout.strip().split('\n')
-      lines[0].strip() == '95'
+      assert lines[0].strip() == '95'
     message: "First line should be the highest score: 95"
   - code: |
       lines = _stdout.strip().split('\n')
-      lines[1].strip() == '4'
+      assert lines[1].strip() == '4'
     message: "Second line should be the count of passing scores (>= 75): 4"
 
 worlds:

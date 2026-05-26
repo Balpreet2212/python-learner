@@ -73,19 +73,21 @@ exercises:
     explanation: "70 / (1.75²) = 70 / 3.0625 ≈ 22.857, rounded to 22.9."
 
   - type: mini_code
-    prompt: "Define max_of_three(a, b, c) that returns the largest of three numbers. Print max_of_three(4, 9, 2)."
+    prompt: "Define max_of_three(a, b, c) that returns the largest of three numbers.\n\nTested with: max_of_three(4, 9, 2) → 9 and max_of_three(1, 1, 5) → 5."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '9'"
+      - code: "assert max_of_three(4, 9, 2) == 9"
         message: "max_of_three(4, 9, 2) should return 9"
+      - code: "assert max_of_three(1, 1, 5) == 5"
+        message: "max_of_three(1, 1, 5) should return 5"
 
   - type: mini_code
-    prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f). Convert 0°C to °F and 212°F to °C. Print both."
+    prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f).\n\nTested with: celsius_to_fahrenheit(0) → 32.0 and fahrenheit_to_celsius(212) → 100.0."
     starter: ""
     tests:
-      - code: "'32.0' in _stdout"
+      - code: "assert celsius_to_fahrenheit(0) == 32.0"
         message: "0°C = 32.0°F"
-      - code: "'100.0' in _stdout"
+      - code: "assert fahrenheit_to_celsius(212) == 100.0"
         message: "212°F = 100.0°C"
 
 worlds:

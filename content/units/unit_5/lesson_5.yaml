@@ -77,22 +77,24 @@ exercises:
     explanation: "clamp(150, 0, 100) returns 100 because 150 > 100."
 
   - type: mini_code
-    prompt: "Define is_even(n) and is_odd(n) (odd calls is_even). Use them to print whether 7 is odd."
+    prompt: "Define is_even(n) and is_odd(n) where is_odd calls is_even.\n\nTested with: is_even(7) → False, is_odd(7) → True, is_even(4) → True."
     starter: ""
     tests:
-      - code: "is_even(7) == False"
+      - code: "assert is_even(7) == False"
         message: "7 is not even"
-      - code: "is_odd(7) == True"
+      - code: "assert is_odd(7) == True"
         message: "7 is odd"
-      - code: "'True' in _stdout"
-        message: "Should print True"
+      - code: "assert is_even(4) == True"
+        message: "4 is even"
 
   - type: mini_code
-    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1). Print factorial(5)."
+    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).\n\nTested with: factorial(5) → 120 and factorial(3) → 6."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '120'"
+      - code: "assert factorial(5) == 120"
         message: "5! = 120"
+      - code: "assert factorial(3) == 6"
+        message: "3! = 6"
 
 worlds:
   fantasy:

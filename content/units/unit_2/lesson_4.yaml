@@ -76,18 +76,26 @@ exercises:
     explanation: "An empty string is falsy. bool('') returns False."
 
   - type: mini_code
-    prompt: "hp = 0. Print the boolean value of hp. Then set hp = 50 and print its boolean value."
-    starter: "hp = 0\n"
+    prompt: "Read a number with input(). Print its boolean value using bool().\n\nTested with: 0 (False) and 50 (True)."
+    starter: "n = int(input())\n"
     tests:
-      - code: "'False' in _stdout and 'True' in _stdout"
-        message: "Should print False then True"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: "0"
+        message: "bool(0) is False"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "50"
+        message: "bool(50) is True"
 
   - type: mini_code
-    prompt: "Check whether the string 'Python' is truthy and the string '' is falsy. Print both results."
-    starter: ""
+    prompt: "Read a word with input(). Print its boolean value using bool(). Non-empty strings are True, empty strings are False.\n\nTested with: 'Python' and an empty string."
+    starter: "s = input()\n"
     tests:
-      - code: "'True' in _stdout and 'False' in _stdout"
-        message: "Should print True for 'Python' and False for ''"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "Python"
+        message: "bool('Python') is True"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: ""
+        message: "bool('') is False"
 
 worlds:
   fantasy:

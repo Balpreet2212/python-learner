@@ -78,22 +78,22 @@ exercises:
     explanation: "volume = 2 * 3 * 4 = 24."
 
   - type: mini_code
-    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height. Print the area of a Triangle(6, 4)."
+    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height.\n\nTested with: Triangle(6, 4).area() → 12.0 and Triangle(10, 3).area() → 15.0."
     starter: ""
     tests:
-      - code: "Triangle(6, 4).area() == 12.0"
-        message: "area() should return 12.0"
-      - code: "'12' in _stdout"
-        message: "Should print 12.0"
+      - code: "assert Triangle(6, 4).area() == 12.0"
+        message: "Triangle(6, 4).area() should return 12.0"
+      - code: "assert Triangle(10, 3).area() == 15.0"
+        message: "Triangle(10, 3).area() should return 15.0"
 
   - type: mini_code
-    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance < 0. Test with balance=50 and balance=-10."
+    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise.\n\nTested with: BankAccount(50).is_overdrawn() → False and BankAccount(-10).is_overdrawn() → True."
     starter: ""
     tests:
-      - code: "BankAccount(50).is_overdrawn() == False"
-        message: "50 is not overdrawn"
-      - code: "BankAccount(-10).is_overdrawn() == True"
-        message: "-10 is overdrawn"
+      - code: "assert BankAccount(50).is_overdrawn() == False"
+        message: "balance=50 is not overdrawn"
+      - code: "assert BankAccount(-10).is_overdrawn() == True"
+        message: "balance=-10 is overdrawn"
 
 worlds:
   fantasy:

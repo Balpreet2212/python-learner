@@ -74,18 +74,32 @@ exercises:
     explanation: "You can chain as many elif branches as needed, but only the first True one runs."
 
   - type: mini_code
-    prompt: "Set score = 73. Print 'A' if >= 90, 'B' if >= 75, 'C' if >= 60, else 'F'."
-    starter: "score = 73\n"
+    prompt: "Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'.\n\nTested with: 73 (C), 91 (A), and 50 (F)."
+    starter: "score = int(input())\n"
     tests:
-      - code: "_stdout.strip() == 'C'"
-        message: "73 is >= 60 but < 75, so grade is C"
+      - code: "assert _stdout.strip() == 'C'"
+        stdin: "73"
+        message: "73 is >= 60 but < 75, grade is C"
+      - code: "assert _stdout.strip() == 'A'"
+        stdin: "91"
+        message: "91 is >= 90, grade is A"
+      - code: "assert _stdout.strip() == 'F'"
+        stdin: "50"
+        message: "50 is below 60, grade is F"
 
   - type: mini_code
-    prompt: "Set bmi = 22. Print 'underweight' if < 18.5, 'normal' if < 25, 'overweight' if < 30, else 'obese'."
-    starter: "bmi = 22\n"
+    prompt: "Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'.\n\nTested with: 22 (normal), 17 (underweight), and 31 (obese)."
+    starter: "bmi = float(input())\n"
     tests:
-      - code: "'normal' in _stdout"
-        message: "22 is between 18.5 and 25, so 'normal'"
+      - code: "assert _stdout.strip() == 'normal'"
+        stdin: "22"
+        message: "22 is between 18.5 and 25, prints 'normal'"
+      - code: "assert _stdout.strip() == 'underweight'"
+        stdin: "17"
+        message: "17 is below 18.5, prints 'underweight'"
+      - code: "assert _stdout.strip() == 'obese'"
+        stdin: "31"
+        message: "31 is 30 or above, prints 'obese'"
 
 worlds:
   fantasy:

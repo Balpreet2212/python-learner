@@ -71,18 +71,32 @@ exercises:
     explanation: "hp > 20 is True and shield is True. True and True = True. 'safe' prints."
 
   - type: mini_code
-    prompt: "Set score = 55 and passed_exam = False. Print 'pass' if score >= 50 AND passed_exam is True, else print 'fail'."
-    starter: "score = 55\npassed_exam = False\n"
+    prompt: "Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam is True, else print 'fail'.\n\nTested with: score=55/passed_exam=False (fail), score=55/True (pass), and score=40/True (fail)."
+    starter: "score = int(input())\npassed_exam = input() == 'True'\n"
     tests:
-      - code: "'fail' in _stdout"
-        message: "passed_exam is False so result is 'fail'"
+      - code: "assert _stdout.strip() == 'fail'"
+        stdin: "55\nFalse"
+        message: "score=55, passed_exam=False: condition fails, prints 'fail'"
+      - code: "assert _stdout.strip() == 'pass'"
+        stdin: "55\nTrue"
+        message: "score=55, passed_exam=True: both met, prints 'pass'"
+      - code: "assert _stdout.strip() == 'fail'"
+        stdin: "40\nTrue"
+        message: "score=40 is below 50, prints 'fail'"
 
   - type: mini_code
-    prompt: "Set hour = 14. Print 'open' if hour >= 9 and hour <= 17, else print 'closed'."
-    starter: "hour = 14\n"
+    prompt: "Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.\n\nTested with: 14 (open), 7 (closed), and 18 (closed)."
+    starter: "hour = int(input())\n"
     tests:
-      - code: "'open' in _stdout"
-        message: "14 is between 9 and 17, so 'open'"
+      - code: "assert _stdout.strip() == 'open'"
+        stdin: "14"
+        message: "14 is between 9 and 17, prints 'open'"
+      - code: "assert _stdout.strip() == 'closed'"
+        stdin: "7"
+        message: "7 is before 9, prints 'closed'"
+      - code: "assert _stdout.strip() == 'closed'"
+        stdin: "18"
+        message: "18 is after 17, prints 'closed'"
 
 worlds:
   fantasy:

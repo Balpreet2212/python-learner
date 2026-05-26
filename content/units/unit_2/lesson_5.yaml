@@ -76,18 +76,29 @@ exercises:
     explanation: "Both conditions must hold: x must be >= 1 AND <= 10."
 
   - type: mini_code
-    prompt: "hp = 80, shield = True. Print True if hp > 50 AND shield is True, otherwise False."
-    starter: "hp = 80\nshield = True\n"
+    prompt: "Read hp then shield ('True'/'False') with input(). Print True if hp > 50 AND shield is True, otherwise print False.\n\nTested with: hp=80/shield=True, then hp=30/shield=True."
+    starter: "hp = int(input())\nshield = input() == 'True'\n"
     tests:
-      - code: "_stdout.strip() == 'True'"
-        message: "hp > 50 and shield should be True"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "80\nTrue"
+        message: "hp=80 and shield=True: both conditions met, prints True"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: "30\nTrue"
+        message: "hp=30 is not > 50, prints False"
 
   - type: mini_code
-    prompt: "age = 16. Print True if age < 13 OR age >= 18 (either a child or an adult), otherwise False."
-    starter: "age = 16\n"
+    prompt: "Read an age with input(). Print True if age is less than 13 OR 18 or above, otherwise print False.\n\nTested with: 16, 10, and 20."
+    starter: "age = int(input())\n"
     tests:
-      - code: "_stdout.strip() == 'False'"
-        message: "16 is neither < 13 nor >= 18, so result is False"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: "16"
+        message: "16 is not < 13 and not >= 18, prints False"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "10"
+        message: "10 is < 13, prints True"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "20"
+        message: "20 is >= 18, prints True"
 
 worlds:
   fantasy:

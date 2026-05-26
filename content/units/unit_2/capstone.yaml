@@ -26,7 +26,7 @@ plan_prompts:
   - "How do you combine all four conditions into one print statement using 'and' and 'or'?"
 
 tests:
-  - code: "_stdout.strip() == 'True'"
+  - code: "assert _stdout.strip() == 'True'"
     message: "All four conditions hold — should print True"
 
 worlds:

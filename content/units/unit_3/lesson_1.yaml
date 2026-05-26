@@ -74,18 +74,26 @@ exercises:
     explanation: "n > 0 is True for any number greater than zero."
 
   - type: mini_code
-    prompt: "Set temperature = 37. If it is greater than 36.5, print 'fever'."
-    starter: "temperature = 37\n"
+    prompt: "Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise.\n\nTested with: 37 (fever) and 36 (nothing)."
+    starter: "temperature = float(input())\n"
     tests:
-      - code: "'fever' in _stdout"
-        message: "37 > 36.5 so should print 'fever'"
+      - code: "assert 'fever' in _stdout"
+        stdin: "37"
+        message: "37 > 36.5, should print 'fever'"
+      - code: "assert _stdout.strip() == ''"
+        stdin: "36"
+        message: "36 is not > 36.5, should print nothing"
 
   - type: mini_code
-    prompt: "Set password = 'secret123'. If its length is at least 8, print 'strong password'."
-    starter: "password = 'secret123'\n"
+    prompt: "Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise.\n\nTested with: 'secret123' (strong) and 'hi' (nothing)."
+    starter: "password = input()\n"
     tests:
-      - code: "'strong password' in _stdout"
-        message: "len('secret123') = 9 >= 8, so should print 'strong password'"
+      - code: "assert 'strong password' in _stdout"
+        stdin: "secret123"
+        message: "len('secret123') = 9 >= 8, prints 'strong password'"
+      - code: "assert _stdout.strip() == ''"
+        stdin: "hi"
+        message: "len('hi') = 2 < 8, prints nothing"
 
 worlds:
   fantasy:

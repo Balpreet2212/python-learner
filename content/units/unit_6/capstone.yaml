@@ -11,6 +11,12 @@ code_starter: |
   def launch_sequence(n):
       # Return a list that counts down from n to 1, then ends with "Launch!"
       # Example: launch_sequence(3) -> [3, 2, 1, "Launch!"]
+      #
+      # Your function will be tested with all of these:
+      #   launch_sequence(3) → [3, 2, 1, "Launch!"]
+      #   launch_sequence(5) → [5, 4, 3, 2, 1, "Launch!"]
+      #   launch_sequence(1) → [1, "Launch!"]
+      #   launch_sequence(4) → length 5, last element is "Launch!"
       pass
 
 hints:

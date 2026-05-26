@@ -75,22 +75,26 @@ exercises:
     explanation: "is_valid_password(pw) explains the intent. len(pw) >= 8 and any(...) doesn't."
 
   - type: mini_code
-    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards. Test with 'racecar' and 'hello'."
+    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards.\n\nTested with: 'racecar' (True), 'hello' (False), and 'madam' (True)."
     starter: ""
     tests:
-      - code: "is_palindrome('racecar') == True"
+      - code: "assert is_palindrome('racecar') == True"
         message: "'racecar' is a palindrome"
-      - code: "is_palindrome('hello') == False"
+      - code: "assert is_palindrome('hello') == False"
         message: "'hello' is not a palindrome"
+      - code: "assert is_palindrome('madam') == True"
+        message: "'madam' is a palindrome"
 
   - type: mini_code
-    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1). Test with 7 and 9."
+    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).\n\nTested with: 7 (True), 9 (False), and 2 (True)."
     starter: ""
     tests:
-      - code: "is_prime(7) == True"
+      - code: "assert is_prime(7) == True"
         message: "7 is prime"
-      - code: "is_prime(9) == False"
-        message: "9 is not prime (3 × 3)"
+      - code: "assert is_prime(9) == False"
+        message: "9 is not prime (3 x 3)"
+      - code: "assert is_prime(2) == True"
+        message: "2 is prime"
 
 worlds:
   fantasy:

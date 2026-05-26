@@ -75,18 +75,26 @@ exercises:
     explanation: "<= is 'less than or equal to'. print(hp <= 0) prints True when hp is 0 or below."
 
   - type: mini_code
-    prompt: "Set score = 75. Print whether score is greater than or equal to 60 (the pass mark)."
-    starter: "score = 75\n"
+    prompt: "Read a number with input(). Print True if it is 60 or above, False if it is below 60.\n\nTested with: 75 and 40."
+    starter: "score = int(input())\n"
     tests:
-      - code: "_stdout.strip() == 'True'"
-        message: "75 >= 60 should be True"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "75"
+        message: "75 >= 60 should print True"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: "40"
+        message: "40 is below 60, should print False"
 
   - type: mini_code
-    prompt: "Set a = 10 and b = 20. Print True if a is not equal to b, False otherwise."
-    starter: "a = 10\nb = 20\n"
+    prompt: "Read two numbers with input(). Print True if they are not equal, False if they are equal.\n\nTested with: 10 and 20, then 5 and 5."
+    starter: "a = int(input())\nb = int(input())\n"
     tests:
-      - code: "_stdout.strip() == 'True'"
-        message: "10 != 20 should be True"
+      - code: "assert _stdout.strip() == 'True'"
+        stdin: "10\n20"
+        message: "10 != 20 should print True"
+      - code: "assert _stdout.strip() == 'False'"
+        stdin: "5\n5"
+        message: "5 == 5 so should print False"
 
 worlds:
   fantasy:
