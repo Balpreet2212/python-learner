@@ -75,7 +75,7 @@ exercises:
     explanation: "<= is 'less than or equal to'. print(hp <= 0) prints True when hp is 0 or below."
 
   - type: mini_code
-    prompt: "Read a number with input(). Print True if it is 60 or above, False if it is below 60.\n\nTested with: 75 and 40."
+    prompt: "Read a number with input(). Print True if it is 60 or above, False if it is below 60."
     starter: "score = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'True'"
@@ -86,7 +86,7 @@ exercises:
         message: "40 is below 60, should print False"
 
   - type: mini_code
-    prompt: "Read two numbers with input(). Print True if they are not equal, False if they are equal.\n\nTested with: 10 and 20, then 5 and 5."
+    prompt: "Read two numbers with input(). Print True if they are not equal, False if they are equal."
     starter: "a = int(input())\nb = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'True'"

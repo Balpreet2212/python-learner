@@ -71,7 +71,7 @@ exercises:
     tests:
       - code: "assert score == 42"
         message: "score should equal 42"
-      - code: "_stdout.strip() == '42'"
+      - code: "assert _stdout.strip() == '42'"
         message: "Should print 42"
 
   - type: mini_code
@@ -82,7 +82,7 @@ exercises:
         message: "language should be 'Python'"
       - code: "assert year == 1991"
         message: "year should be 1991"
-      - code: "'Python' in _stdout and '1991' in _stdout"
+      - code: "assert 'Python' in _stdout and '1991' in _stdout"
         message: "Should print both values"
 
 worlds:

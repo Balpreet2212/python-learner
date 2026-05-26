@@ -75,7 +75,7 @@ exercises:
     explanation: "is_valid_password(pw) explains the intent. len(pw) >= 8 and any(...) doesn't."
 
   - type: mini_code
-    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards.\n\nTested with: 'racecar' (True), 'hello' (False), and 'madam' (True)."
+    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards."
     starter: ""
     tests:
       - code: "assert is_palindrome('racecar') == True"
@@ -86,7 +86,7 @@ exercises:
         message: "'madam' is a palindrome"
 
   - type: mini_code
-    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).\n\nTested with: 7 (True), 9 (False), and 2 (True)."
+    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1)."
     starter: ""
     tests:
       - code: "assert is_prime(7) == True"

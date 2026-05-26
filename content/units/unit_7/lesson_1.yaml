@@ -81,17 +81,19 @@ exercises:
     prompt: "Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
     starter: ""
     tests:
-      - code: "r = Rectangle(4, 7); r.width == 4 and r.height == 7"
+      - code: "r = Rectangle(4, 7); assert r.width == 4 and r.height == 7"
         message: "Rectangle should store width=4 and height=7"
-      - code: "'4' in _stdout and '7' in _stdout"
+      - code: "assert '4' in _stdout and '7' in _stdout"
         message: "Should print 4 and 7"
 
   - type: mini_code
     prompt: "Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
     starter: ""
     tests:
-      - code: "s = Student('Test', 90); s.name == 'Test' and s.grade == 90"
+      - code: "s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90"
         message: "Student should have name and grade attributes"
+      - code: "assert len(_stdout.strip().split('\\n')) >= 2"
+        message: "Should print info for both students"
 
 worlds:
   fantasy:

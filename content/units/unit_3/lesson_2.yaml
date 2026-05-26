@@ -76,7 +76,7 @@ exercises:
     explanation: "Either the if block or the else block runs — never both, never neither."
 
   - type: mini_code
-    prompt: "Read a number with input(). Print 'odd' if it is odd, 'even' if it is even.\n\nTested with: 7, 4, and 13."
+    prompt: "Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
     starter: "n = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'odd'"
@@ -90,7 +90,7 @@ exercises:
         message: "13 is odd, should print 'odd'"
 
   - type: mini_code
-    prompt: "Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'.\n\nTested with: speed=120/limit=100, speed=80/limit=100, and speed=100/limit=100."
+    prompt: "Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
     starter: "speed = int(input())\nlimit = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'speeding'"

@@ -82,17 +82,19 @@ exercises:
     prompt: "Starting from 1, keep doubling until you exceed 1000. Print the final value."
     starter: "n = 1\n"
     tests:
-      - code: "_stdout.strip() == '1024'"
+      - code: "assert _stdout.strip() == '1024'"
         message: "Should print 1024 (first power of 2 > 1000)"
+      - code: "assert 'while' in _code"
+        message: "Should use a while loop"
 
   - type: mini_code
     prompt: "Print all multiples of 7 that are less than 50, using a while loop."
     starter: "n = 7\n"
     tests:
-      - code: "lines = _stdout.strip().split('\\n')"
-        message: "Parse output"
-      - code: "lines[0].strip() == '7' and lines[-1].strip() == '49'"
-        message: "Should print 7, 14, 21, 28, 35, 42, 49"
+      - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'"
+        message: "Should start at 7 and end at 49"
+      - code: "assert len(_stdout.strip().split('\\n')) == 7"
+        message: "Should print exactly 7 multiples of 7 below 50"
 
 worlds:
   fantasy:

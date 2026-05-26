@@ -74,15 +74,19 @@ exercises:
     prompt: "Create a list of 5 numbers. Use a loop to print only the numbers greater than 10."
     starter: ""
     tests:
-      - code: "all(int(x) > 10 for x in _stdout.strip().split('\\n') if x)"
+      - code: "assert all(int(x) > 10 for x in _stdout.strip().split('\\n') if x.strip())"
         message: "Should only print numbers greater than 10"
+      - code: "assert 'for' in _code"
+        message: "Should use a for loop"
 
   - type: mini_code
     prompt: "Create a list called temps with 4 temperatures. Find and print the maximum temperature without using max()."
     starter: ""
     tests:
-      - code: "str(max(temps)) in _stdout"
+      - code: "assert str(max(temps)) in _stdout"
         message: "Should print the maximum temperature"
+      - code: "assert 'max(' not in _code"
+        message: "Should find the maximum without using max()"
 
 worlds:
   fantasy:

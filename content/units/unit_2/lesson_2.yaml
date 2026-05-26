@@ -76,15 +76,19 @@ exercises:
     prompt: "Three scores are 70, 85, and 91. Calculate their average and print it."
     starter: "a = 70\nb = 85\nc = 91\n"
     tests:
-      - code: "abs(float(_stdout.strip()) - 82.0) < 0.01"
+      - code: "assert abs(float(_stdout.strip()) - 82.0) < 0.01"
         message: "Average should be 82.0"
+      - code: "assert '/' in _code"
+        message: "Should use / to divide by 3"
 
   - type: mini_code
     prompt: "Print the result of (12 + 8) * (5 - 3). Make sure you use parentheses to get the right answer."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '40'"
+      - code: "assert _stdout.strip() == '40'"
         message: "Should print 40: (20) * (2) = 40"
+      - code: "assert '(' in _code and ')' in _code"
+        message: "Should use parentheses to control order of operations"
 
 worlds:
   fantasy:

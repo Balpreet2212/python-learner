@@ -79,19 +79,19 @@ exercises:
     prompt: "Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '24'"
+      - code: "assert _stdout.strip() == '24'"
         message: "24 is the first multiple of both 6 and 8"
+      - code: "assert 'break' in _code"
+        message: "Should use break to stop after finding the first match"
 
   - type: mini_code
     prompt: "Print all numbers from 1 to 20 except those divisible by 3. Use continue."
     starter: ""
     tests:
-      - code: "lines = _stdout.strip().split('\\n')"
-        message: "Parse output"
-      - code: "'3' not in lines and '6' not in lines and '9' not in lines"
-        message: "Should not include 3, 6, 9, ..."
-      - code: "lines[0].strip() == '1' and lines[-1].strip() == '20'"
-        message: "Should go from 1 to 20 (skipping multiples of 3)"
+      - code: "nums = [int(l) for l in _stdout.strip().split('\\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)"
+        message: "Should not include any multiples of 3"
+      - code: "lines = [l.strip() for l in _stdout.strip().split('\\n') if l.strip()]; assert lines[0] == '1' and lines[-1] == '20'"
+        message: "Should go from 1 to 20"
 
 worlds:
   fantasy:

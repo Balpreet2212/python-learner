@@ -70,7 +70,7 @@ exercises:
     explanation: "150 > 100, so the function returns high = 100."
 
   - type: mini_code
-    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32.\n\nTested with: celsius_to_fahrenheit(100) → 212.0 and celsius_to_fahrenheit(0) → 32.0."
+    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32."
     starter: ""
     tests:
       - code: "assert celsius_to_fahrenheit(100) == 212.0"
@@ -79,7 +79,7 @@ exercises:
         message: "0°C = 32°F"
 
   - type: mini_code
-    prompt: "Define a function power(base, exp) that returns base ** exp.\n\nTested with: power(2, 10) → 1024 and power(3, 3) → 27."
+    prompt: "Define a function power(base, exp) that returns base ** exp."
     starter: ""
     tests:
       - code: "assert power(2, 10) == 1024"

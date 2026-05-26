@@ -86,7 +86,7 @@ function CodeEditor({
   );
 }
 
-function TestResults({ result, style }: { result: SubmitResult; style: ReturnType<typeof getStyle> }) {
+function TestResults({ result, style, hasEverFailed }: { result: SubmitResult; style: ReturnType<typeof getStyle>; hasEverFailed: boolean }) {
   return (
     <div className={`rounded-xl border ${style.border} overflow-hidden`}>
       {result.stdout && (
@@ -101,15 +101,17 @@ function TestResults({ result, style }: { result: SubmitResult; style: ReturnTyp
           <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
         </div>
       )}
-      <div className={`${style.surface} px-4 py-3 space-y-2`}>
-        <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
-        {result.tests.map((t, i) => (
-          <div key={i} className="flex items-start gap-2">
-            <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
-            <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
-          </div>
-        ))}
-      </div>
+      {hasEverFailed && (
+        <div className={`${style.surface} px-4 py-3 space-y-2`}>
+          <p className={`text-xs font-semibold uppercase tracking-wider ${style.muted}`}>Tests</p>
+          {result.tests.map((t, i) => (
+            <div key={i} className="flex items-start gap-2">
+              <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
+              <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -125,6 +127,7 @@ export default function WeeklyChallengePage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [hintIndex, setHintIndex] = useState(-1);
+  const [hasEverFailed, setHasEverFailed] = useState(false);
 
   const world = profile?.world ?? "fantasy";
   const style = getStyle(world);
@@ -147,6 +150,7 @@ export default function WeeklyChallengePage() {
     try {
       const res = await submitWeekly(code);
       setResult(res);
+      if (!res.all_passed) setHasEverFailed(true);
       if (res.all_passed) {
         setChallenge((prev) => prev ? { ...prev, already_passed: true } : prev);
       }
@@ -248,7 +252,7 @@ export default function WeeklyChallengePage() {
           </Button>
 
           {submitError && <p className="text-center text-sm text-red-400">{submitError}</p>}
-          {result && <TestResults result={result} style={style} />}
+          {result && <TestResults result={result} style={style} hasEverFailed={hasEverFailed} />}
 
           {passed && (
             <div className="rounded-xl border border-green-700/40 bg-green-950/20 px-5 py-4 text-center">

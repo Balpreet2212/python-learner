@@ -83,15 +83,19 @@ exercises:
     prompt: "Convert the string '25' to an integer, add 1, and print the result."
     starter: "age_str = '25'\n"
     tests:
-      - code: "_stdout.strip() == '26'"
+      - code: "assert _stdout.strip() == '26'"
         message: "Should print 26 (25 + 1)"
+      - code: "assert 'int(' in _code"
+        message: "Should use int() to convert the string"
 
   - type: mini_code
     prompt: "price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal places."
     starter: "price_str = '9.99'\n"
     tests:
-      - code: "abs(float(_stdout.strip()) - 1.0) < 0.01"
+      - code: "assert abs(float(_stdout.strip()) - 1.0) < 0.01"
         message: "Should print 1.0 (10% of 9.99 ≈ 1.0)"
+      - code: "assert 'float(' in _code"
+        message: "Should use float() to convert the price string"
 
 worlds:
   fantasy:

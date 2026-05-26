@@ -78,7 +78,7 @@ exercises:
     explanation: "volume = 2 * 3 * 4 = 24."
 
   - type: mini_code
-    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height.\n\nTested with: Triangle(6, 4).area() → 12.0 and Triangle(10, 3).area() → 15.0."
+    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height."
     starter: ""
     tests:
       - code: "assert Triangle(6, 4).area() == 12.0"
@@ -87,7 +87,7 @@ exercises:
         message: "Triangle(10, 3).area() should return 15.0"
 
   - type: mini_code
-    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise.\n\nTested with: BankAccount(50).is_overdrawn() → False and BankAccount(-10).is_overdrawn() → True."
+    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise."
     starter: ""
     tests:
       - code: "assert BankAccount(50).is_overdrawn() == False"

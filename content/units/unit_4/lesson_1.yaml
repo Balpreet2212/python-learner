@@ -76,17 +76,19 @@ exercises:
     prompt: "Print the first 5 multiples of 3 (3, 6, 9, 12, 15) using a for loop."
     starter: ""
     tests:
-      - code: "lines = _stdout.strip().split('\\n')"
+      - code: "assert len(_stdout.strip().split('\\n')) == 5"
         message: "Should have 5 lines of output"
-      - code: "lines[0].strip() == '3' and lines[4].strip() == '15'"
+      - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '3' and lines[-1].strip() == '15'"
         message: "Should start with 3 and end with 15"
 
   - type: mini_code
     prompt: "Use a for loop to calculate the sum of numbers from 1 to 10 (inclusive) and print it."
     starter: "total = 0\n"
     tests:
-      - code: "_stdout.strip() == '55'"
+      - code: "assert _stdout.strip() == '55'"
         message: "Sum of 1 to 10 is 55"
+      - code: "assert 'for' in _code"
+        message: "Should use a for loop"
 
 worlds:
   fantasy:

@@ -78,21 +78,21 @@ exercises:
     prompt: "Create a list called planets with three planet names. Print the second planet."
     starter: ""
     tests:
-      - code: "isinstance(planets, list)"
+      - code: "assert isinstance(planets, list)"
         message: "planets should be a list"
-      - code: "len(planets) == 3"
+      - code: "assert len(planets) == 3"
         message: "planets should have 3 items"
-      - code: "planets[1] in _stdout"
+      - code: "assert planets[1] in _stdout"
         message: "Should print the second planet"
 
   - type: mini_code
     prompt: "Create a list of 4 numbers. Print the list and its length."
     starter: ""
     tests:
-      - code: "isinstance(_code_result if False else eval('[' + ','.join(str(x) for x in __import__('re').findall(r'\\d+', _stdout.split('\\n')[0])) + ']'), list) or True"
-        message: "Should print a list"
-      - code: "'4' in _stdout"
-        message: "Should print the length 4"
+      - code: "assert '[' in _stdout and ']' in _stdout"
+        message: "Should print the list with square brackets"
+      - code: "assert '4' in _stdout"
+        message: "Should print the length: 4"
 
 worlds:
   fantasy:

@@ -76,7 +76,7 @@ exercises:
     explanation: "Both conditions must hold: x must be >= 1 AND <= 10."
 
   - type: mini_code
-    prompt: "Read hp then shield ('True'/'False') with input(). Print True if hp > 50 AND shield is True, otherwise print False.\n\nTested with: hp=80/shield=True, then hp=30/shield=True."
+    prompt: "Read hp then shield ('True'/'False') with input(). Print True if hp > 50 AND shield is True, otherwise print False."
     starter: "hp = int(input())\nshield = input() == 'True'\n"
     tests:
       - code: "assert _stdout.strip() == 'True'"
@@ -87,7 +87,7 @@ exercises:
         message: "hp=30 is not > 50, prints False"
 
   - type: mini_code
-    prompt: "Read an age with input(). Print True if age is less than 13 OR 18 or above, otherwise print False.\n\nTested with: 16, 10, and 20."
+    prompt: "Read an age with input(). Print True if age is less than 13 OR 18 or above, otherwise print False."
     starter: "age = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'False'"

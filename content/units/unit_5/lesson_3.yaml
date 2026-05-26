@@ -73,7 +73,7 @@ exercises:
     explanation: "70 / (1.75²) = 70 / 3.0625 ≈ 22.857, rounded to 22.9."
 
   - type: mini_code
-    prompt: "Define max_of_three(a, b, c) that returns the largest of three numbers.\n\nTested with: max_of_three(4, 9, 2) → 9 and max_of_three(1, 1, 5) → 5."
+    prompt: "Define max_of_three(a, b, c) that returns the largest of three numbers."
     starter: ""
     tests:
       - code: "assert max_of_three(4, 9, 2) == 9"
@@ -82,7 +82,7 @@ exercises:
         message: "max_of_three(1, 1, 5) should return 5"
 
   - type: mini_code
-    prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f).\n\nTested with: celsius_to_fahrenheit(0) → 32.0 and fahrenheit_to_celsius(212) → 100.0."
+    prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f)."
     starter: ""
     tests:
       - code: "assert celsius_to_fahrenheit(0) == 32.0"

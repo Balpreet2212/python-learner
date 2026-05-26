@@ -353,6 +353,7 @@ function MiniCodeCard({
   const [result, setResult] = useState<SubmitResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasEverFailed, setHasEverFailed] = useState(false);
 
   async function handleCheck() {
     setSubmitting(true);
@@ -360,6 +361,7 @@ function MiniCodeCard({
     try {
       const res = await checkExerciseCode(code, exerciseIndex);
       setResult(res);
+      if (!res.all_passed) setHasEverFailed(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Submission failed.");
     } finally {
@@ -404,14 +406,16 @@ function MiniCodeCard({
               <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
             </div>
           )}
-          <div className={`${style.surface} px-4 py-3 space-y-2`}>
-            {result.tests.map((t, i) => (
-              <div key={i} className="flex items-start gap-2">
-                <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
-                <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
-              </div>
-            ))}
-          </div>
+          {hasEverFailed && (
+            <div className={`${style.surface} px-4 py-3 space-y-2`}>
+              {result.tests.map((t, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
+                  <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

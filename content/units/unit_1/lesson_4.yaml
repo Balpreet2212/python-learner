@@ -79,16 +79,18 @@ exercises:
     prompt: "Store \"Python\" in language and 1991 in year. Print: 'Python was created in 1991' using an f-string."
     starter: ""
     tests:
-      - code: "'Python was created in 1991' in _stdout"
+      - code: "assert 'Python was created in 1991' in _stdout"
         message: "Should print 'Python was created in 1991'"
+      - code: "assert 'f\"' in _code or \"f'\" in _code"
+        message: "Should use an f-string"
 
   - type: mini_code
     prompt: "Store your hero name in hero and 5 in level. Print 'Hero [name] is level [level]' using an f-string."
     starter: ""
     tests:
-      - code: "isinstance(hero, str) and len(hero) > 0"
+      - code: "assert isinstance(hero, str) and len(hero) > 0"
         message: "hero should be a non-empty string"
-      - code: "f'Hero {hero} is level {level}' in _stdout"
+      - code: "assert f'Hero {hero} is level {level}' in _stdout"
         message: "Should print the correct f-string output"
 
 worlds:

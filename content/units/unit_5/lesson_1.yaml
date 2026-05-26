@@ -81,7 +81,7 @@ exercises:
     explanation: "name gets 'Alice' and age gets 25. The f-string combines them."
 
   - type: mini_code
-    prompt: "Define a function called double that takes a number n and prints n * 2. Call it with 7 and with 3.\n\nTested with: double(7) → 14 and double(3) → 6."
+    prompt: "Define a function called double that takes a number n and prints n * 2. Call it with 7 and with 3."
     starter: ""
     tests:
       - code: "assert '14' in _stdout"
@@ -90,7 +90,7 @@ exercises:
         message: "double(3) should print 6"
 
   - type: mini_code
-    prompt: "Define a function called greet that takes a name and prints 'Hello, [name]!'. Call it with 'World' and with 'Alice'.\n\nTested with: greet('World') and greet('Alice')."
+    prompt: "Define a function called greet that takes a name and prints 'Hello, [name]!'. Call it with 'World' and with 'Alice'."
     starter: ""
     tests:
       - code: "assert 'Hello, World!' in _stdout"

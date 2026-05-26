@@ -77,17 +77,19 @@ exercises:
     prompt: "Temperatures = [22, 19, 25, 18, 30]. Print each temperature that is above 20."
     starter: "temperatures = [22, 19, 25, 18, 30]\n"
     tests:
-      - code: "lines = [l.strip() for l in _stdout.strip().split('\\n')]"
-        message: "Parse output lines"
-      - code: "set(lines) == {'22', '25', '30'}"
-        message: "Should print 22, 25, 30"
+      - code: "assert '22' in _stdout and '25' in _stdout and '30' in _stdout"
+        message: "Should print 22, 25, and 30"
+      - code: "assert all(int(x) > 20 for x in [l.strip() for l in _stdout.strip().split('\\n') if l.strip()])"
+        message: "Should only print temperatures above 20"
 
   - type: mini_code
     prompt: "Given a list of numbers, calculate and print their average."
     starter: "numbers = [10, 20, 30, 40, 50]\ntotal = 0\n"
     tests:
-      - code: "_stdout.strip() == '30.0'"
+      - code: "assert _stdout.strip() == '30.0'"
         message: "Average of 10,20,30,40,50 is 30.0"
+      - code: "assert '/' in _code"
+        message: "Should divide by the list length to get the average"
 
 worlds:
   fantasy:

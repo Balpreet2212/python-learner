@@ -74,15 +74,19 @@ exercises:
     prompt: "Create a list of 5 numbers. Print a slice of the middle 3 items."
     starter: ""
     tests:
-      - code: "len(eval(_stdout.strip())) == 3"
-        message: "Should print exactly 3 items"
+      - code: "assert '[' in _stdout and ']' in _stdout"
+        message: "Should print the slice as a list"
+      - code: "assert _stdout.count(',') == 2"
+        message: "Slice of 3 items has 2 commas"
 
   - type: mini_code
     prompt: "Create a list called menu with 4 food items. Print True if 'pizza' is in menu, False if not. Then print the first 2 items."
     starter: ""
     tests:
-      - code: "'True' in _stdout or 'False' in _stdout"
+      - code: "assert 'True' in _stdout or 'False' in _stdout"
         message: "Should print True or False for the in check"
+      - code: "assert '[' in _stdout"
+        message: "Should also print the first 2 items as a list"
 
 worlds:
   fantasy:

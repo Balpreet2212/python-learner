@@ -74,7 +74,7 @@ exercises:
     explanation: "n > 0 is True for any number greater than zero."
 
   - type: mini_code
-    prompt: "Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise.\n\nTested with: 37 (fever) and 36 (nothing)."
+    prompt: "Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise."
     starter: "temperature = float(input())\n"
     tests:
       - code: "assert 'fever' in _stdout"
@@ -85,7 +85,7 @@ exercises:
         message: "36 is not > 36.5, should print nothing"
 
   - type: mini_code
-    prompt: "Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise.\n\nTested with: 'secret123' (strong) and 'hi' (nothing)."
+    prompt: "Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise."
     starter: "password = input()\n"
     tests:
       - code: "assert 'strong password' in _stdout"

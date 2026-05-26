@@ -76,7 +76,7 @@ exercises:
     explanation: "An empty string is falsy. bool('') returns False."
 
   - type: mini_code
-    prompt: "Read a number with input(). Print its boolean value using bool().\n\nTested with: 0 (False) and 50 (True)."
+    prompt: "Read a number with input(). Print its boolean value using bool()."
     starter: "n = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'False'"
@@ -87,7 +87,7 @@ exercises:
         message: "bool(50) is True"
 
   - type: mini_code
-    prompt: "Read a word with input(). Print its boolean value using bool(). Non-empty strings are True, empty strings are False.\n\nTested with: 'Python' and an empty string."
+    prompt: "Read a word with input(). Print its boolean value using bool(). Non-empty strings are True, empty strings are False."
     starter: "s = input()\n"
     tests:
       - code: "assert _stdout.strip() == 'True'"

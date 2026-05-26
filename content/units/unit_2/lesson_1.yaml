@@ -77,17 +77,19 @@ exercises:
     prompt: "50 players need to be split into teams of 8. Print how many full teams fit and how many players are left over."
     starter: "players = 50\nteam_size = 8\n"
     tests:
-      - code: "'6' in _stdout"
+      - code: "assert '6' in _stdout"
         message: "Should print 6 (full teams: 50 // 8)"
-      - code: "'2' in _stdout"
+      - code: "assert '2' in _stdout"
         message: "Should print 2 (leftover: 50 % 8)"
 
   - type: mini_code
     prompt: "Calculate 2 to the power of 16 and print it."
     starter: ""
     tests:
-      - code: "_stdout.strip() == '65536'"
+      - code: "assert _stdout.strip() == '65536'"
         message: "Should print 65536 (2 ** 16)"
+      - code: "assert '**' in _code"
+        message: "Should use ** for exponentiation"
 
 worlds:
   fantasy:

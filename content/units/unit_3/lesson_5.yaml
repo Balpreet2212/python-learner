@@ -79,7 +79,7 @@ exercises:
     explanation: "if a and b: ... is equivalent to if a: if b: ... when there's no inner else."
 
   - type: mini_code
-    prompt: "Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is 'admin' AND active is True. Print nothing otherwise.\n\nTested with: admin/True (prints), admin/False (nothing), user/True (nothing)."
+    prompt: "Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is 'admin' AND active is True. Print nothing otherwise."
     starter: "role = input()\nactive = input() == 'True'\n"
     tests:
       - code: "assert 'admin active' in _stdout"
@@ -93,7 +93,7 @@ exercises:
         message: "role is not 'admin': prints nothing"
 
   - type: mini_code
-    prompt: "Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A' if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.\n\nTested with: score=85/bonus=True (A+), score=85/False (A), score=70/True (nothing)."
+    prompt: "Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A' if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if."
     starter: "score = int(input())\nbonus = input() == 'True'\n"
     tests:
       - code: "assert _stdout.strip() == 'A+'"

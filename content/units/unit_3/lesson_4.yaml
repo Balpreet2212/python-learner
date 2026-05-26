@@ -71,7 +71,7 @@ exercises:
     explanation: "hp > 20 is True and shield is True. True and True = True. 'safe' prints."
 
   - type: mini_code
-    prompt: "Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam is True, else print 'fail'.\n\nTested with: score=55/passed_exam=False (fail), score=55/True (pass), and score=40/True (fail)."
+    prompt: "Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam is True, else print 'fail'."
     starter: "score = int(input())\npassed_exam = input() == 'True'\n"
     tests:
       - code: "assert _stdout.strip() == 'fail'"
@@ -85,7 +85,7 @@ exercises:
         message: "score=40 is below 50, prints 'fail'"
 
   - type: mini_code
-    prompt: "Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.\n\nTested with: 14 (open), 7 (closed), and 18 (closed)."
+    prompt: "Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'."
     starter: "hour = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'open'"

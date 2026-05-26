@@ -77,7 +77,7 @@ exercises:
     explanation: "clamp(150, 0, 100) returns 100 because 150 > 100."
 
   - type: mini_code
-    prompt: "Define is_even(n) and is_odd(n) where is_odd calls is_even.\n\nTested with: is_even(7) → False, is_odd(7) → True, is_even(4) → True."
+    prompt: "Define is_even(n) and is_odd(n) where is_odd calls is_even."
     starter: ""
     tests:
       - code: "assert is_even(7) == False"
@@ -88,7 +88,7 @@ exercises:
         message: "4 is even"
 
   - type: mini_code
-    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).\n\nTested with: factorial(5) → 120 and factorial(3) → 6."
+    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1)."
     starter: ""
     tests:
       - code: "assert factorial(5) == 120"

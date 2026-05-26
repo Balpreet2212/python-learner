@@ -74,7 +74,7 @@ exercises:
     explanation: "You can chain as many elif branches as needed, but only the first True one runs."
 
   - type: mini_code
-    prompt: "Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'.\n\nTested with: 73 (C), 91 (A), and 50 (F)."
+    prompt: "Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'."
     starter: "score = int(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'C'"
@@ -88,7 +88,7 @@ exercises:
         message: "50 is below 60, grade is F"
 
   - type: mini_code
-    prompt: "Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'.\n\nTested with: 22 (normal), 17 (underweight), and 31 (obese)."
+    prompt: "Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
     starter: "bmi = float(input())\n"
     tests:
       - code: "assert _stdout.strip() == 'normal'"

@@ -79,17 +79,19 @@ exercises:
     prompt: "Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to sides. Create a 6-sided and 20-sided die. Print one roll of each."
     starter: "import random"
     tests:
-      - code: "d6 = Dice(6); 1 <= d6.roll() <= 6"
+      - code: "d6 = Dice(6); assert 1 <= d6.roll() <= 6"
         message: "6-sided die should roll 1-6"
-      - code: "d20 = Dice(20); 1 <= d20.roll() <= 20"
+      - code: "d20 = Dice(20); assert 1 <= d20.roll() <= 20"
         message: "20-sided die should roll 1-20"
 
   - type: mini_code
     prompt: "Create 3 Student instances with different names and grades. Print the name of the student with the highest grade."
     starter: ""
     tests:
-      - code: "s = Student('Test', 95); s.name == 'Test' and s.grade == 95"
+      - code: "s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95"
         message: "Student class needs name and grade attributes"
+      - code: "assert _stdout.strip() != ''"
+        message: "Should print the name of the highest-graded student"
 
 worlds:
   fantasy:
