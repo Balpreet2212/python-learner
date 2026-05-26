@@ -39,7 +39,7 @@ exercises:
     explanation: "temp > 100 is False. temp == 100 is True, so the elif branch runs."
 
   - type: arrange
-    instruction: "Build: if x > 10 print 'high', elif x > 5 print 'mid', else print 'low'"
+    instruction: "Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise"
     blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
     correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
     explanation: "Python checks conditions in order and runs only the first True branch."
@@ -79,13 +79,16 @@ exercises:
     tests:
       - code: "assert _stdout.strip() == 'C'"
         stdin: "73"
-        message: "73 is >= 60 but < 75, grade is C"
+        message: "score 73 is between 60 and 74, grade is C"
       - code: "assert _stdout.strip() == 'A'"
         stdin: "91"
-        message: "91 is >= 90, grade is A"
+        message: "score 91 is 90 or above, grade is A"
+      - code: "assert _stdout.strip() == 'B'"
+        stdin: "80"
+        message: "score 80 is between 75 and 89, grade is B"
       - code: "assert _stdout.strip() == 'F'"
         stdin: "50"
-        message: "50 is below 60, grade is F"
+        message: "score 50 is below 60, grade is F"
 
   - type: mini_code
     prompt: "Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
@@ -97,6 +100,9 @@ exercises:
       - code: "assert _stdout.strip() == 'underweight'"
         stdin: "17"
         message: "17 is below 18.5, prints 'underweight'"
+      - code: "assert _stdout.strip() == 'overweight'"
+        stdin: "27"
+        message: "27 is between 25 and 30, prints 'overweight'"
       - code: "assert _stdout.strip() == 'obese'"
         stdin: "31"
         message: "31 is 30 or above, prints 'obese'"

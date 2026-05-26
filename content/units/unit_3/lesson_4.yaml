@@ -36,7 +36,7 @@ exercises:
     explanation: "score < 0 is False and score > 100 is False. False or False = False, so else runs."
 
   - type: arrange
-    instruction: "Build: if name is not empty AND score >= 50, print 'qualified'"
+    instruction: "Build code that prints 'qualified' when name is not empty and score is 50 or above"
     blocks: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
     correct: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
     explanation: "name is truthy when non-empty. Both conditions must hold."

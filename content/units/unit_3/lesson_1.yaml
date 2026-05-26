@@ -26,7 +26,7 @@ exercises:
     explanation: "== checks equality. if hp == 0 runs when hp is exactly 0."
 
   - type: arrange
-    instruction: "Build an if statement that prints 'win' when score > 100"
+    instruction: "Build an if statement that prints 'win' when score is greater than 100"
     blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
     correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
     explanation: "The colon : ends the if condition. The print is indented inside the block."
@@ -61,7 +61,7 @@ exercises:
     explanation: "4 % 2 == 0 is True (4 is divisible by 2). So 'even' prints."
 
   - type: arrange
-    instruction: "Build code: if health is 0, print 'dead'"
+    instruction: "Build code that prints 'dead' when health equals zero"
     blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
     correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
     explanation: "== checks if health equals 0. The colon ends the condition."

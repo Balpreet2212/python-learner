@@ -39,7 +39,7 @@ exercises:
     explanation: "a < 5 is True (3 < 5). b > 5 is True (7 > 5). 'both' prints."
 
   - type: arrange
-    instruction: "Build nested if: if active, and if level > 5, print 'veteran'"
+    instruction: "Build nested code that prints 'veteran' only when active is True and level is greater than 5"
     blocks: ["if", "active", ":", "if", "level", ">", "5", ":", "print", "(", "\"veteran\"", ")"]
     correct: ["if", "active", ":", "if", "level", ">", "5", ":", "print", "(", "\"veteran\"", ")"]
     explanation: "The inner if is indented inside the outer if block."

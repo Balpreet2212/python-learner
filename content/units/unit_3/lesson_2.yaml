@@ -20,7 +20,7 @@ exercises:
     explanation: "x > 5 is False (3 is not > 5), so the else branch runs."
 
   - type: arrange
-    instruction: "Build an if/else that prints 'even' when n % 2 == 0, else 'odd'"
+    instruction: "Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'"
     blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
     correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
     explanation: "The if checks divisibility. else catches when n is odd."
@@ -63,7 +63,7 @@ exercises:
     explanation: "0 is falsy, so the else branch runs."
 
   - type: arrange
-    instruction: "Build code: if hp > 0 print 'alive', else print 'dead'"
+    instruction: "Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise"
     blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
     correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
     explanation: "The else handles the hp == 0 case."
