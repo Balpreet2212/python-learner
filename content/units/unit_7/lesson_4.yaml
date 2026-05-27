@@ -1,102 +1,947 @@
-title: "Multiple Instances"
+title: Multiple Instances
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      class Coin:
-          def __init__(self, denomination):
-              self.denomination = denomination
+- type: concept
+  code: "class Coin:\n    def __init__(self, denomination):\n        self.denomination = denomination\n\npenny = Coin(1)\n\
+    quarter = Coin(25)\nloonie = Coin(100)\n\nprint(penny.denomination)\nprint(quarter.denomination)\nprint(loonie.denomination)\n"
+  output: '1
 
-      penny = Coin(1)
-      quarter = Coin(25)
-      loonie = Coin(100)
+    25
 
-      print(penny.denomination)
-      print(quarter.denomination)
-      print(loonie.denomination)
-    output: "1\n25\n100"
-    explanation: "Every call to Coin() creates a completely separate object with its own attributes. Changing one instance does not affect any other."
+    100'
+  explanation: Every call to Coin() creates a completely separate object with its own attributes. Changing one instance does
+    not affect any other.
+- type: mcq
+  question: What does this print?
+  code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size + b.size)"
+  choices:
+  - '30'
+  - '10'
+  - '20'
+  - '1020'
+  correct: '30'
+  explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+- type: fill_blank
+  prompt: Read the hp from Alice's instance specifically.
+  before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
+    \ 100)\np2 = Player('Bob', 80)\nprint("
+  after: .hp)
+  choices:
+  - p1
+  - p2
+  - Player
+  - self
+  answer: p1
+  explanation: p1.hp accesses Alice's hp, which is 100.
+- type: mcq
+  question: What does this print?
+  code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
+    \ = 'Max'\nprint(d1.name)\nprint(d2.name)"
+  choices:
+  - 'Max
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size + b.size)"
-    choices: ["30", "10", "20", "1020"]
-    correct: "30"
-    explanation: "a.size = 10, b.size = 20. 10 + 20 = 30."
+    Bella'
+  - 'Rex
 
-  - type: fill_blank
-    prompt: "Read the hp from Alice's instance specifically."
-    before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice', 100)\np2 = Player('Bob', 80)\nprint("
-    after: ".hp)"
-    choices: ["p1", "p2", "Player", "self"]
-    answer: "p1"
-    explanation: "p1.hp accesses Alice's hp, which is 100."
+    Bella'
+  - 'Max
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name = 'Max'\nprint(d1.name)\nprint(d2.name)"
-    choices: ["Max\nBella", "Rex\nBella", "Max\nMax", "Rex\nRex"]
-    correct: "Max\nBella"
-    explanation: "Changing d1.name only affects d1. d2.name stays 'Bella'."
+    Max'
+  - 'Rex
 
-  - type: arrange
-    instruction: "Create two Lamp instances with different brightness and print which is brighter"
-    blocks: ["class", "Lamp", ":", "def", "__init__", "(", "self", ",", "brightness", ")", ":", "self", ".", "brightness", "=", "brightness", "l1", "=", "Lamp", "(", "80", ")", "l2", "=", "Lamp", "(", "40", ")", "print", "(", "l1", ".", "brightness", ">", "l2", ".", "brightness", ")"]
-    correct: ["class", "Lamp", ":", "def", "__init__", "(", "self", ",", "brightness", ")", ":", "self", ".", "brightness", "=", "brightness", "l1", "=", "Lamp", "(", "80", ")", "l2", "=", "Lamp", "(", "40", ")", "print", "(", "l1", ".", "brightness", ">", "l2", ".", "brightness", ")"]
-    explanation: "l1.brightness = 80, l2.brightness = 40. 80 > 40 is True."
+    Rex'
+  correct: 'Max
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\nb = Counter()\na.inc()\na.inc()\nb.inc()\nprint(a.n)\nprint(b.n)"
-    choices: ["2\n1", "3\n3", "2\n2", "1\n1"]
-    correct: "2\n1"
-    explanation: "a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent objects."
+    Bella'
+  explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+- type: arrange
+  instruction: Create two Lamp instances with different brightness and print which is brighter
+  blocks:
+  - class
+  - Lamp
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - brightness
+  - )
+  - ':'
+  - self
+  - .
+  - brightness
+  - '='
+  - brightness
+  - l1
+  - '='
+  - Lamp
+  - (
+  - '80'
+  - )
+  - l2
+  - '='
+  - Lamp
+  - (
+  - '40'
+  - )
+  - print
+  - (
+  - l1
+  - .
+  - brightness
+  - '>'
+  - l2
+  - .
+  - brightness
+  - )
+  correct:
+  - class
+  - Lamp
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - brightness
+  - )
+  - ':'
+  - self
+  - .
+  - brightness
+  - '='
+  - brightness
+  - l1
+  - '='
+  - Lamp
+  - (
+  - '80'
+  - )
+  - l2
+  - '='
+  - Lamp
+  - (
+  - '40'
+  - )
+  - print
+  - (
+  - l1
+  - .
+  - brightness
+  - '>'
+  - l2
+  - .
+  - brightness
+  - )
+  explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+- type: mcq
+  question: What does this print?
+  code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
+    b = Counter()\na.inc()\na.inc()\nb.inc()\nprint(a.n)\nprint(b.n)"
+  choices:
+  - '2
 
-  - type: fill_blank
-    prompt: "Compare whether s1 has more points than s2."
-    before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\nprint(s1.points "
-    after: " s2.points)"
-    choices: [">", "<", "+", "=="]
-    answer: ">"
-    explanation: "s1.points > s2.points checks if 90 > 75, which is True."
+    1'
+  - '3
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\ncars = [Car('Toyota', 120), Car('BMW', 180), Car('Ford', 150)]\nfor c in cars:\n    print(c.brand)"
-    choices: ["Toyota\nBMW\nFord", "120\n180\n150", "Car\nCar\nCar", "Toyota BMW Ford"]
-    correct: "Toyota\nBMW\nFord"
-    explanation: "The loop iterates over the list of Car objects, printing each one's brand."
+    3'
+  - '2
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n    def fill(self, amount):\n        self.filled += amount\n\nj1 = Jar(10)\nj2 = Jar(10)\nj1.fill(5)\nprint(j1.filled)\nprint(j2.filled)"
-    choices: ["5\n0", "5\n5", "0\n5", "10\n10"]
-    correct: "5\n0"
-    explanation: "j1.fill(5) only changes j1.filled. j2 is untouched."
+    2'
+  - '1
 
-  - type: mini_code
-    prompt: "Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to sides. Create a 6-sided and 20-sided die. Print one roll of each."
-    starter: "import random"
-    tests:
-      - code: "d6 = Dice(6); assert 1 <= d6.roll() <= 6"
-        message: "6-sided die should roll 1-6"
-      - code: "d20 = Dice(20); assert 1 <= d20.roll() <= 20"
-        message: "20-sided die should roll 1-20"
+    1'
+  correct: '2
 
-  - type: mini_code
-    prompt: "Create 3 Student instances with different names and grades. Print the name of the student with the highest grade."
-    starter: ""
-    tests:
-      - code: "s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95"
-        message: "Student class needs name and grade attributes"
-      - code: "assert _stdout.strip() != ''"
-        message: "Should print the name of the highest-graded student"
+    1'
+  explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent objects.'
+- type: fill_blank
+  prompt: Compare whether s1 has more points than s2.
+  before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
+    print(s1.points "
+  after: ' s2.points)'
+  choices:
+  - '>'
+  - <
+  - +
+  - ==
+  answer: '>'
+  explanation: s1.points > s2.points checks if 90 > 75, which is True.
+- type: mcq
+  question: What does this print?
+  code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\ncars\
+    \ = [Car('Toyota', 120), Car('BMW', 180), Car('Ford', 150)]\nfor c in cars:\n    print(c.brand)"
+  choices:
+  - 'Toyota
 
+    BMW
+
+    Ford'
+  - '120
+
+    180
+
+    150'
+  - 'Car
+
+    Car
+
+    Car'
+  - Toyota BMW Ford
+  correct: 'Toyota
+
+    BMW
+
+    Ford'
+  explanation: The loop iterates over the list of Car objects, printing each one's brand.
+- type: mcq
+  question: What does this print?
+  code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n    def\
+    \ fill(self, amount):\n        self.filled += amount\n\nj1 = Jar(10)\nj2 = Jar(10)\nj1.fill(5)\nprint(j1.filled)\nprint(j2.filled)"
+  choices:
+  - '5
+
+    0'
+  - '5
+
+    5'
+  - '0
+
+    5'
+  - '10
+
+    10'
+  correct: '5
+
+    0'
+  explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+- type: mini_code
+  prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to sides.
+    Create a 6-sided and 20-sided die. Print one roll of each.
+  starter: import random
+  tests:
+  - code: d6 = Dice(6); assert 1 <= d6.roll() <= 6
+    message: 6-sided die should roll 1-6
+  - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
+    message: 20-sided die should roll 1-20
+- type: mini_code
+  prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
+  starter: ''
+  tests:
+  - code: s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95
+    message: Student class needs name and grade attributes
+  - code: assert _stdout.strip() != ''
+    message: Should print the name of the highest-graded student
 worlds:
   fantasy:
-    title: "Summoning Many Familiars"
+    title: Summoning Many Familiars
+    exercises:
+    - type: concept
+      code: "class Coin:\n    def __init__(self, denomination):\n        self.denomination = denomination\n\npenny = Coin(1)\n\
+        quarter = Coin(25)\nloonie = Coin(100)\n\nprint(penny.denomination)\nprint(quarter.denomination)\nprint(loonie.denomination)\n"
+      output: '1
+
+        25
+
+        100'
+      explanation: Elara summons three different familiars. Every call to Coin() creates a separate object with its own attributes.
+        Changing one does not affect any other.
+    - type: mcq
+      question: Two spell containers have different capacities. What does this print?
+      code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
+        \ + b.size)"
+      choices:
+      - '30'
+      - '10'
+      - '20'
+      - '1020'
+      correct: '30'
+      explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+    - type: fill_blank
+      prompt: Read the hp from the first wizard's instance specifically.
+      before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
+        \ 100)\np2 = Player('Bob', 80)\nprint("
+      after: .hp)
+      choices:
+      - p1
+      - p2
+      - Player
+      - self
+      answer: p1
+      explanation: p1.hp accesses Alice's hp, which is 100.
+    - type: mcq
+      question: Two familiars are renamed — only one changes. What does this print?
+      code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
+        \ = 'Max'\nprint(d1.name)\nprint(d2.name)"
+      choices:
+      - 'Max
+
+        Bella'
+      - 'Rex
+
+        Bella'
+      - 'Max
+
+        Max'
+      - 'Rex
+
+        Rex'
+      correct: 'Max
+
+        Bella'
+      explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+    - type: arrange
+      instruction: Create two Lamp instances with different brightness and print which is brighter
+      blocks:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      correct:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+    - type: mcq
+      question: Two familiars have their mana tracked independently. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
+        b = Counter()\na.inc()\na.inc()\nb.inc()\nprint(a.n)\nprint(b.n)"
+      choices:
+      - '2
+
+        1'
+      - '3
+
+        3'
+      - '2
+
+        2'
+      - '1
+
+        1'
+      correct: '2
+
+        1'
+      explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent familiars.'
+    - type: fill_blank
+      prompt: Compare whether the first wizard has more spell points than the second.
+      before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
+        print(s1.points "
+      after: ' s2.points)'
+      choices:
+      - '>'
+      - <
+      - +
+      - ==
+      answer: '>'
+      explanation: s1.points > s2.points checks if 90 > 75, which is True.
+    - type: mcq
+      question: Elara loops through a list of summoned creatures printing each brand. What does this print?
+      code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
+        cars = [Car('Toyota', 120), Car('BMW', 180), Car('Ford', 150)]\nfor c in cars:\n    print(c.brand)"
+      choices:
+      - 'Toyota
+
+        BMW
+
+        Ford'
+      - '120
+
+        180
+
+        150'
+      - 'Car
+
+        Car
+
+        Car'
+      - Toyota BMW Ford
+      correct: 'Toyota
+
+        BMW
+
+        Ford'
+      explanation: The loop iterates over the list of Car objects, printing each brand.
+    - type: mcq
+      question: Two magical jars — only one is filled. What does this print?
+      code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
+        \  def fill(self, amount):\n        self.filled += amount\n\nj1 = Jar(10)\nj2 = Jar(10)\nj1.fill(5)\nprint(j1.filled)\n\
+        print(j2.filled)"
+      choices:
+      - '5
+
+        0'
+      - '5
+
+        5'
+      - '0
+
+        5'
+      - '10
+
+        10'
+      correct: '5
+
+        0'
+      explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+    - type: mini_code
+      prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
+        sides. Create a 6-sided and 20-sided die. Print one roll of each.
+      starter: import random
+      tests:
+      - code: d6 = Dice(6); assert 1 <= d6.roll() <= 6
+        message: 6-sided die should roll 1-6
+      - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
+        message: 20-sided die should roll 1-20
+    - type: mini_code
+      prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95
+        message: Student class needs name and grade attributes
+      - code: assert _stdout.strip() != ''
+        message: Should print the name of the highest-graded student
   scifi:
-    title: "Deploying Multiple Units"
+    title: Deploying Multiple Units
+    exercises:
+    - type: concept
+      code: "class Coin:\n    def __init__(self, denomination):\n        self.denomination = denomination\n\npenny = Coin(1)\n\
+        quarter = Coin(25)\nloonie = Coin(100)\n\nprint(penny.denomination)\nprint(quarter.denomination)\nprint(loonie.denomination)\n"
+      output: '1
+
+        25
+
+        100'
+      explanation: Voss deploys three robot units. Every call to Coin() creates a separate object. Changing one instance does
+        not affect any other.
+    - type: mcq
+      question: Two cargo containers have different capacities. What does this print?
+      code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
+        \ + b.size)"
+      choices:
+      - '30'
+      - '10'
+      - '20'
+      - '1020'
+      correct: '30'
+      explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+    - type: fill_blank
+      prompt: Read the hp from the first crew member's instance specifically.
+      before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
+        \ 100)\np2 = Player('Bob', 80)\nprint("
+      after: .hp)
+      choices:
+      - p1
+      - p2
+      - Player
+      - self
+      answer: p1
+      explanation: p1.hp accesses Alice's hp, which is 100.
+    - type: mcq
+      question: Two units are renamed — only one changes. What does this print?
+      code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
+        \ = 'Max'\nprint(d1.name)\nprint(d2.name)"
+      choices:
+      - 'Max
+
+        Bella'
+      - 'Rex
+
+        Bella'
+      - 'Max
+
+        Max'
+      - 'Rex
+
+        Rex'
+      correct: 'Max
+
+        Bella'
+      explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+    - type: arrange
+      instruction: Create two Lamp instances with different brightness and print which is brighter
+      blocks:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      correct:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+    - type: mcq
+      question: Two units track their own mission counts independently. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
+        b = Counter()\na.inc()\na.inc()\nb.inc()\nprint(a.n)\nprint(b.n)"
+      choices:
+      - '2
+
+        1'
+      - '3
+
+        3'
+      - '2
+
+        2'
+      - '1
+
+        1'
+      correct: '2
+
+        1'
+      explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent units.'
+    - type: fill_blank
+      prompt: Compare whether unit 1 has a higher score than unit 2.
+      before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
+        print(s1.points "
+      after: ' s2.points)'
+      choices:
+      - '>'
+      - <
+      - +
+      - ==
+      answer: '>'
+      explanation: s1.points > s2.points checks if 90 > 75, which is True.
+    - type: mcq
+      question: Voss loops through a fleet and prints each vehicle brand. What does this print?
+      code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
+        cars = [Car('Toyota', 120), Car('BMW', 180), Car('Ford', 150)]\nfor c in cars:\n    print(c.brand)"
+      choices:
+      - 'Toyota
+
+        BMW
+
+        Ford'
+      - '120
+
+        180
+
+        150'
+      - 'Car
+
+        Car
+
+        Car'
+      - Toyota BMW Ford
+      correct: 'Toyota
+
+        BMW
+
+        Ford'
+      explanation: The loop iterates over the list of Car objects, printing each brand.
+    - type: mcq
+      question: Two fuel tanks — only one is filled. What does this print?
+      code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
+        \  def fill(self, amount):\n        self.filled += amount\n\nj1 = Jar(10)\nj2 = Jar(10)\nj1.fill(5)\nprint(j1.filled)\n\
+        print(j2.filled)"
+      choices:
+      - '5
+
+        0'
+      - '5
+
+        5'
+      - '0
+
+        5'
+      - '10
+
+        10'
+      correct: '5
+
+        0'
+      explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+    - type: mini_code
+      prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
+        sides. Create a 6-sided and 20-sided die. Print one roll of each.
+      starter: import random
+      tests:
+      - code: d6 = Dice(6); assert 1 <= d6.roll() <= 6
+        message: 6-sided die should roll 1-6
+      - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
+        message: 20-sided die should roll 1-20
+    - type: mini_code
+      prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95
+        message: Student class needs name and grade attributes
+      - code: assert _stdout.strip() != ''
+        message: Should print the name of the highest-graded student
   mystery:
-    title: "Multiple Witnesses"
+    title: Multiple Witnesses
+    exercises:
+    - type: concept
+      code: "class Coin:\n    def __init__(self, denomination):\n        self.denomination = denomination\n\npenny = Coin(1)\n\
+        quarter = Coin(25)\nloonie = Coin(100)\n\nprint(penny.denomination)\nprint(quarter.denomination)\nprint(loonie.denomination)\n"
+      output: '1
+
+        25
+
+        100'
+      explanation: Cole creates three separate witness profiles. Every call creates a separate object with its own attributes.
+        Changing one does not affect any other.
+    - type: mcq
+      question: Two evidence containers have different capacities. What does this print?
+      code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
+        \ + b.size)"
+      choices:
+      - '30'
+      - '10'
+      - '20'
+      - '1020'
+      correct: '30'
+      explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+    - type: fill_blank
+      prompt: Read the credibility score from the first witness's profile specifically.
+      before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
+        \ 100)\np2 = Player('Bob', 80)\nprint("
+      after: .hp)
+      choices:
+      - p1
+      - p2
+      - Player
+      - self
+      answer: p1
+      explanation: p1.hp accesses Alice's credibility score, which is 100.
+    - type: mcq
+      question: Two suspects are renamed — only one changes. What does this print?
+      code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
+        \ = 'Max'\nprint(d1.name)\nprint(d2.name)"
+      choices:
+      - 'Max
+
+        Bella'
+      - 'Rex
+
+        Bella'
+      - 'Max
+
+        Max'
+      - 'Rex
+
+        Rex'
+      correct: 'Max
+
+        Bella'
+      explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+    - type: arrange
+      instruction: Create two Lamp instances with different brightness and print which is brighter
+      blocks:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      correct:
+      - class
+      - Lamp
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - brightness
+      - )
+      - ':'
+      - self
+      - .
+      - brightness
+      - '='
+      - brightness
+      - l1
+      - '='
+      - Lamp
+      - (
+      - '80'
+      - )
+      - l2
+      - '='
+      - Lamp
+      - (
+      - '40'
+      - )
+      - print
+      - (
+      - l1
+      - .
+      - brightness
+      - '>'
+      - l2
+      - .
+      - brightness
+      - )
+      explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+    - type: mcq
+      question: Two witnesses each track their own interview counts. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
+        b = Counter()\na.inc()\na.inc()\nb.inc()\nprint(a.n)\nprint(b.n)"
+      choices:
+      - '2
+
+        1'
+      - '3
+
+        3'
+      - '2
+
+        2'
+      - '1
+
+        1'
+      correct: '2
+
+        1'
+      explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent witnesses.'
+    - type: fill_blank
+      prompt: Compare whether witness 1 has a higher credibility score than witness 2.
+      before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
+        print(s1.points "
+      after: ' s2.points)'
+      choices:
+      - '>'
+      - <
+      - +
+      - ==
+      answer: '>'
+      explanation: s1.points > s2.points checks if 90 > 75, which is True.
+    - type: mcq
+      question: Cole loops through a suspect list and prints each name. What does this print?
+      code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
+        cars = [Car('Toyota', 120), Car('BMW', 180), Car('Ford', 150)]\nfor c in cars:\n    print(c.brand)"
+      choices:
+      - 'Toyota
+
+        BMW
+
+        Ford'
+      - '120
+
+        180
+
+        150'
+      - 'Car
+
+        Car
+
+        Car'
+      - Toyota BMW Ford
+      correct: 'Toyota
+
+        BMW
+
+        Ford'
+      explanation: The loop iterates over the list of Car objects, printing each brand.
+    - type: mcq
+      question: Two evidence bags — only one is filled. What does this print?
+      code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
+        \  def fill(self, amount):\n        self.filled += amount\n\nj1 = Jar(10)\nj2 = Jar(10)\nj1.fill(5)\nprint(j1.filled)\n\
+        print(j2.filled)"
+      choices:
+      - '5
+
+        0'
+      - '5
+
+        5'
+      - '0
+
+        5'
+      - '10
+
+        10'
+      correct: '5
+
+        0'
+      explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+    - type: mini_code
+      prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
+        sides. Create a 6-sided and 20-sided die. Print one roll of each.
+      starter: import random
+      tests:
+      - code: d6 = Dice(6); assert 1 <= d6.roll() <= 6
+        message: 6-sided die should roll 1-6
+      - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
+        message: 20-sided die should roll 1-20
+    - type: mini_code
+      prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 95); assert s.name == 'Test' and s.grade == 95
+        message: Student class needs name and grade attributes
+      - code: assert _stdout.strip() != ''
+        message: Should print the name of the highest-graded student

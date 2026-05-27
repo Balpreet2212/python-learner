@@ -1,102 +1,829 @@
-title: "break and continue"
+title: break and continue
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      for i in range(10):
-          if i == 5:
-              break
-          print(i)
-    output: "0\n1\n2\n3\n4"
-    explanation: "break exits the loop immediately. continue skips the rest of the current iteration and goes to the next one."
+- type: concept
+  code: "for i in range(10):\n    if i == 5:\n        break\n    print(i)\n"
+  output: '0
 
-  - type: mcq
-    question: "What does this print?"
-    code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
-    choices: ["0\n1\n2", "0\n1\n2\n3", "0\n1\n2\n3\n4", "3"]
-    correct: "0\n1\n2"
-    explanation: "When i is 3, break exits. 0, 1, 2 are printed before reaching 3."
+    1
 
-  - type: concept
-    code: |
-      for i in range(5):
-          if i == 2:
-              continue
-          print(i)
-    output: "0\n1\n3\n4"
-    explanation: "continue skips the print when i is 2, then continues with i = 3. The number 2 is skipped."
+    2
 
-  - type: mcq
-    question: "What does this print?"
-    code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
-    choices: ["1\n3\n5", "0\n2\n4", "0\n1\n2\n3\n4\n5", "2\n4\n6"]
-    correct: "1\n3\n5"
-    explanation: "continue skips even numbers. Only odd numbers (1, 3, 5) are printed."
+    3
 
-  - type: fill_blank
-    prompt: "Stop the loop immediately when the 'exit' sentinel is found."
-    before: "for item in items:\n    if item == \"exit\":\n        "
-    after: "\n    print(item)"
-    choices: ["break", "continue", "return", "stop"]
-    answer: "break"
-    explanation: "break exits the loop when the 'exit' item is found."
+    4'
+  explanation: break exits the loop immediately. continue skips the rest of the current iteration and goes to the next one.
+- type: mcq
+  question: What does this print?
+  code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
+  choices:
+  - '0
 
-  - type: arrange
-    instruction: "Build a loop that prints numbers 0-9 but skips 5"
-    blocks: ["for", "i", "in", "range", "(", "10", ")", ":", "if", "i", "==", "5", ":", "continue", "print", "(", "i", ")"]
-    correct: ["for", "i", "in", "range", "(", "10", ")", ":", "if", "i", "==", "5", ":", "continue", "print", "(", "i", ")"]
-    explanation: "continue skips the print when i is 5 and moves to i = 6."
+    1
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
-    choices: ["1\n2\n3", "1\n2\n3\n4", "True", "Infinite loop"]
-    correct: "1\n2\n3"
-    explanation: "break exits when n > 3. Numbers 1, 2, 3 are printed before the break."
+    2'
+  - '0
 
-  - type: fill_blank
-    prompt: "Skip the print and move to the next iteration whenever i is less than 5."
-    before: "for i in range(10):\n    if i < 5:\n        "
-    after: "\n    print(i)"
-    choices: ["continue", "break", "pass", "return"]
-    answer: "continue"
-    explanation: "continue skips printing when i < 5. Only 5, 6, 7, 8, 9 are printed."
+    1
 
-  - type: mcq
-    question: "What is the difference between break and continue?"
-    code: ""
-    choices: [
-      "break exits the loop; continue skips to the next iteration",
-      "break skips one item; continue exits entirely",
-      "They do the same thing",
-      "break works in for; continue only in while"
-    ]
-    correct: "break exits the loop; continue skips to the next iteration"
-    explanation: "break stops the whole loop. continue just skips the current iteration and continues looping."
+    2
 
-  - type: mini_code
-    prompt: "Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it."
-    starter: ""
-    tests:
-      - code: "assert _stdout.strip() == '24'"
-        message: "24 is the first multiple of both 6 and 8"
-      - code: "assert 'break' in _code"
-        message: "Should use break to stop after finding the first match"
+    3'
+  - '0
 
-  - type: mini_code
-    prompt: "Print all numbers from 1 to 20 except those divisible by 3. Use continue."
-    starter: ""
-    tests:
-      - code: "nums = [int(l) for l in _stdout.strip().split('\\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)"
-        message: "Should not include any multiples of 3"
-      - code: "lines = [l.strip() for l in _stdout.strip().split('\\n') if l.strip()]; assert lines[0] == '1' and lines[-1] == '20'"
-        message: "Should go from 1 to 20"
+    1
 
+    2
+
+    3
+
+    4'
+  - '3'
+  correct: '0
+
+    1
+
+    2'
+  explanation: When i is 3, break exits. 0, 1, 2 are printed before reaching 3.
+- type: concept
+  code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
+  output: '0
+
+    1
+
+    3
+
+    4'
+  explanation: continue skips the print when i is 2, then continues with i = 3. The number 2 is skipped.
+- type: mcq
+  question: What does this print?
+  code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
+  choices:
+  - '1
+
+    3
+
+    5'
+  - '0
+
+    2
+
+    4'
+  - '0
+
+    1
+
+    2
+
+    3
+
+    4
+
+    5'
+  - '2
+
+    4
+
+    6'
+  correct: '1
+
+    3
+
+    5'
+  explanation: continue skips even numbers. Only odd numbers (1, 3, 5) are printed.
+- type: fill_blank
+  prompt: Stop the loop immediately when the 'exit' sentinel is found.
+  before: "for item in items:\n    if item == \"exit\":\n        "
+  after: "\n    print(item)"
+  choices:
+  - break
+  - continue
+  - return
+  - stop
+  answer: break
+  explanation: break exits the loop when the 'exit' item is found.
+- type: arrange
+  instruction: Build a loop that prints numbers 0-9 but skips 5
+  blocks:
+  - for
+  - i
+  - in
+  - range
+  - (
+  - '10'
+  - )
+  - ':'
+  - if
+  - i
+  - ==
+  - '5'
+  - ':'
+  - continue
+  - print
+  - (
+  - i
+  - )
+  correct:
+  - for
+  - i
+  - in
+  - range
+  - (
+  - '10'
+  - )
+  - ':'
+  - if
+  - i
+  - ==
+  - '5'
+  - ':'
+  - continue
+  - print
+  - (
+  - i
+  - )
+  explanation: continue skips the print when i is 5 and moves to i = 6.
+- type: mcq
+  question: What does this print?
+  code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
+  choices:
+  - '1
+
+    2
+
+    3'
+  - '1
+
+    2
+
+    3
+
+    4'
+  - 'True'
+  - Infinite loop
+  correct: '1
+
+    2
+
+    3'
+  explanation: break exits when n > 3. Numbers 1, 2, 3 are printed before the break.
+- type: fill_blank
+  prompt: Skip the print and move to the next iteration whenever i is less than 5.
+  before: "for i in range(10):\n    if i < 5:\n        "
+  after: "\n    print(i)"
+  choices:
+  - continue
+  - break
+  - pass
+  - return
+  answer: continue
+  explanation: continue skips printing when i < 5. Only 5, 6, 7, 8, 9 are printed.
+- type: mcq
+  question: What is the difference between break and continue?
+  code: ''
+  choices:
+  - break exits the loop; continue skips to the next iteration
+  - break skips one item; continue exits entirely
+  - They do the same thing
+  - break works in for; continue only in while
+  correct: break exits the loop; continue skips to the next iteration
+  explanation: break stops the whole loop. continue just skips the current iteration and continues looping.
+- type: mini_code
+  prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
+  starter: ''
+  tests:
+  - code: assert _stdout.strip() == '24'
+    message: 24 is the first multiple of both 6 and 8
+  - code: assert 'break' in _code
+    message: Should use break to stop after finding the first match
+- type: mini_code
+  prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
+  starter: ''
+  tests:
+  - code: nums = [int(l) for l in _stdout.strip().split('\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)
+    message: Should not include any multiples of 3
+  - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1] == '20'
+    message: Should go from 1 to 20
 worlds:
   fantasy:
-    title: "The Break Rune"
+    title: The Break Rune
+    exercises:
+    - type: concept
+      code: "for i in range(10):\n    if i == 5:\n        break\n    print(i)\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: Finn activates the Break Rune to stop the enchantment loop early. break exits the loop immediately. Without
+        it, the spell runs all 10 cycles.
+    - type: mcq
+      question: Finn runs through a cursed corridor and stops early. What does this print?
+      code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
+      choices:
+      - '0
+
+        1
+
+        2'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      - '3'
+      correct: '0
+
+        1
+
+        2'
+      explanation: When i is 3, break exits. Tiles 0, 1, 2 are passed before the rune activates.
+    - type: concept
+      code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
+      output: '0
+
+        1
+
+        3
+
+        4'
+      explanation: The Skip Charm bypasses cursed tile 2. continue jumps to the next iteration without printing tile 2.
+    - type: mcq
+      question: Finn skips every even-numbered cursed tile. What does this print?
+      code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
+      choices:
+      - '1
+
+        3
+
+        5'
+      - '0
+
+        2
+
+        4'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4
+
+        5'
+      - '2
+
+        4
+
+        6'
+      correct: '1
+
+        3
+
+        5'
+      explanation: continue skips even tiles. Only odd ones (1, 3, 5) are printed.
+    - type: fill_blank
+      prompt: Break the enchantment loop immediately when the exit rune is found.
+      before: "for item in items:\n    if item == \"exit\":\n        "
+      after: "\n    print(item)"
+      choices:
+      - break
+      - continue
+      - return
+      - stop
+      answer: break
+      explanation: break exits the loop when the exit rune item is found.
+    - type: arrange
+      instruction: Build a loop that passes through tiles 0-9 but skips tile 5
+      blocks:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      correct:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      explanation: continue skips tile 5 and moves to tile 6.
+    - type: mcq
+      question: Finn counts rounds until the Break Rune triggers. What does this print?
+      code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
+      choices:
+      - '1
+
+        2
+
+        3'
+      - '1
+
+        2
+
+        3
+
+        4'
+      - 'True'
+      - Infinite loop
+      correct: '1
+
+        2
+
+        3'
+      explanation: break exits when n > 3. Rounds 1, 2, 3 are printed before the rune fires.
+    - type: fill_blank
+      prompt: Skip all cursed tiles below position 5 and continue to the next.
+      before: "for i in range(10):\n    if i < 5:\n        "
+      after: "\n    print(i)"
+      choices:
+      - continue
+      - break
+      - pass
+      - return
+      answer: continue
+      explanation: continue skips positions below 5. Only 5, 6, 7, 8, 9 are printed.
+    - type: mcq
+      question: What is the difference between break and continue in Finn's path?
+      code: ''
+      choices:
+      - break exits the loop; continue skips to the next iteration
+      - break skips one item; continue exits entirely
+      - They do the same thing
+      - break works in for; continue only in while
+      correct: break exits the loop; continue skips to the next iteration
+      explanation: break stops all further iterations. continue skips only the current tile and continues.
+    - type: mini_code
+      prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '24'
+        message: 24 is the first multiple of both 6 and 8
+      - code: assert 'break' in _code
+        message: Should use break to stop after finding the first match
+    - type: mini_code
+      prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
+      starter: ''
+      tests:
+      - code: nums = [int(l) for l in _stdout.strip().split('\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)
+        message: Should not include any multiples of 3
+      - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
+          == '20'
+        message: Should go from 1 to 20
   scifi:
-    title: "Emergency Stop"
+    title: Emergency Stop
+    exercises:
+    - type: concept
+      code: "for i in range(10):\n    if i == 5:\n        break\n    print(i)\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: Voss triggers the emergency stop at module 5. break exits the scan immediately.
+    - type: mcq
+      question: Voss scans modules and halts at a critical fault. What does this print?
+      code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
+      choices:
+      - '0
+
+        1
+
+        2'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      - '3'
+      correct: '0
+
+        1
+
+        2'
+      explanation: When i is 3, break exits. Modules 0, 1, 2 are scanned before the fault triggers the stop.
+    - type: concept
+      code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
+      output: '0
+
+        1
+
+        3
+
+        4'
+      explanation: Voss skips the offline module at position 2. continue jumps to the next module without logging it.
+    - type: mcq
+      question: Voss skips every even-indexed damaged module. What does this print?
+      code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
+      choices:
+      - '1
+
+        3
+
+        5'
+      - '0
+
+        2
+
+        4'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4
+
+        5'
+      - '2
+
+        4
+
+        6'
+      correct: '1
+
+        3
+
+        5'
+      explanation: continue skips even modules. Only odd ones (1, 3, 5) are processed.
+    - type: fill_blank
+      prompt: Trigger emergency stop when the shutdown signal is received.
+      before: "for item in items:\n    if item == \"exit\":\n        "
+      after: "\n    print(item)"
+      choices:
+      - break
+      - continue
+      - return
+      - stop
+      answer: break
+      explanation: break exits the scan when the shutdown signal is found.
+    - type: arrange
+      instruction: Build a scan loop that processes modules 0-9 but skips module 5
+      blocks:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      correct:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      explanation: continue skips module 5 and continues with module 6.
+    - type: mcq
+      question: The emergency counter triggers a halt. What does this print?
+      code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
+      choices:
+      - '1
+
+        2
+
+        3'
+      - '1
+
+        2
+
+        3
+
+        4'
+      - 'True'
+      - Infinite loop
+      correct: '1
+
+        2
+
+        3'
+      explanation: break exits when n > 3. Modules 1, 2, 3 are logged before the halt.
+    - type: fill_blank
+      prompt: Skip all modules below level 5 and move to the next.
+      before: "for i in range(10):\n    if i < 5:\n        "
+      after: "\n    print(i)"
+      choices:
+      - continue
+      - break
+      - pass
+      - return
+      answer: continue
+      explanation: continue skips levels below 5. Only levels 5-9 are processed.
+    - type: mcq
+      question: What is the difference between break and continue in Voss's scan?
+      code: ''
+      choices:
+      - break exits the loop; continue skips to the next iteration
+      - break skips one item; continue exits entirely
+      - They do the same thing
+      - break works in for; continue only in while
+      correct: break exits the loop; continue skips to the next iteration
+      explanation: break halts all scanning. continue skips only the current module and continues.
+    - type: mini_code
+      prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '24'
+        message: 24 is the first multiple of both 6 and 8
+      - code: assert 'break' in _code
+        message: Should use break to stop after finding the first match
+    - type: mini_code
+      prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
+      starter: ''
+      tests:
+      - code: nums = [int(l) for l in _stdout.strip().split('\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)
+        message: Should not include any multiples of 3
+      - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
+          == '20'
+        message: Should go from 1 to 20
   mystery:
-    title: "Skipping Irrelevant Leads"
+    title: Skipping Irrelevant Leads
+    exercises:
+    - type: concept
+      code: "for i in range(10):\n    if i == 5:\n        break\n    print(i)\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: Cole stops reviewing leads when he reaches the key suspect at position 5. break exits the loop immediately.
+    - type: mcq
+      question: Cole reviews leads and stops at the key clue. What does this print?
+      code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
+      choices:
+      - '0
+
+        1
+
+        2'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      - '3'
+      correct: '0
+
+        1
+
+        2'
+      explanation: When i is 3, break exits. Leads 0, 1, 2 are reviewed before the key clue stops the search.
+    - type: concept
+      code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
+      output: '0
+
+        1
+
+        3
+
+        4'
+      explanation: Cole skips the irrelevant lead at index 2. continue skips to the next lead without logging it.
+    - type: mcq
+      question: Cole skips every even-indexed dead-end lead. What does this print?
+      code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
+      choices:
+      - '1
+
+        3
+
+        5'
+      - '0
+
+        2
+
+        4'
+      - '0
+
+        1
+
+        2
+
+        3
+
+        4
+
+        5'
+      - '2
+
+        4
+
+        6'
+      correct: '1
+
+        3
+
+        5'
+      explanation: continue skips even-indexed leads. Only odd ones (1, 3, 5) are logged.
+    - type: fill_blank
+      prompt: Close the investigation immediately when the case-closed signal is found.
+      before: "for item in items:\n    if item == \"exit\":\n        "
+      after: "\n    print(item)"
+      choices:
+      - break
+      - continue
+      - return
+      - stop
+      answer: break
+      explanation: break closes the investigation when the exit clue is found.
+    - type: arrange
+      instruction: Build a loop that reviews leads 0-9 but skips lead 5
+      blocks:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      correct:
+      - for
+      - i
+      - in
+      - range
+      - (
+      - '10'
+      - )
+      - ':'
+      - if
+      - i
+      - ==
+      - '5'
+      - ':'
+      - continue
+      - print
+      - (
+      - i
+      - )
+      explanation: continue skips lead 5 and moves to lead 6.
+    - type: mcq
+      question: Cole counts review sessions until he cracks the case. What does this print?
+      code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
+      choices:
+      - '1
+
+        2
+
+        3'
+      - '1
+
+        2
+
+        3
+
+        4'
+      - 'True'
+      - Infinite loop
+      correct: '1
+
+        2
+
+        3'
+      explanation: break exits when n > 3. Sessions 1, 2, 3 are logged before the case is closed.
+    - type: fill_blank
+      prompt: Skip all low-priority leads below index 5 and continue to the next.
+      before: "for i in range(10):\n    if i < 5:\n        "
+      after: "\n    print(i)"
+      choices:
+      - continue
+      - break
+      - pass
+      - return
+      answer: continue
+      explanation: continue skips low-priority leads. Only index 5-9 are reviewed.
+    - type: mcq
+      question: What is the difference between break and continue in Cole's investigation?
+      code: ''
+      choices:
+      - break exits the loop; continue skips to the next iteration
+      - break skips one item; continue exits entirely
+      - They do the same thing
+      - break works in for; continue only in while
+      correct: break exits the loop; continue skips to the next iteration
+      explanation: break closes the entire investigation. continue skips only the current lead and continues.
+    - type: mini_code
+      prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '24'
+        message: 24 is the first multiple of both 6 and 8
+      - code: assert 'break' in _code
+        message: Should use break to stop after finding the first match
+    - type: mini_code
+      prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
+      starter: ''
+      tests:
+      - code: nums = [int(l) for l in _stdout.strip().split('\n') if l.strip()]; assert all(n % 3 != 0 for n in nums)
+        message: Should not include any multiples of 3
+      - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
+          == '20'
+        message: Should go from 1 to 20

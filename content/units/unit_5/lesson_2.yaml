@@ -89,8 +89,265 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Amplification Rune"
+    title: "Bottling the Potion's Power"
+    exercises:
+      - type: concept
+        code: |
+          def combine(a, b):
+              return a + b
+
+          potency = combine(3, 4)
+          print(potency)
+        output: "7"
+        explanation: "return bottles up the result of the potion and sends it back to Master Theo. Without return, the recipe yields nothing (None)."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def amplify(n):\n    return n * n\n\nprint(amplify(5))"
+        choices: ["25", "5", "n * n", "None"]
+        correct: "25"
+        explanation: "amplify(5) returns 5 * 5 = 25. The bottled potency is then revealed by print()."
+
+      - type: fill_blank
+        prompt: "Bottle up the computed potency n * 2 and send it back from the recipe."
+        before: "def double_brew(n):\n    "
+        after: " n * 2"
+        choices: ["return", "print", "def", "="]
+        answer: "return"
+        explanation: "return bottles the value back to Master Theo. Without it, the recipe returns None."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def label_potion(name):\n    return f\"Hello, {name}!\"\n\nmsg = label_potion(\"Alice\")\nprint(msg)"
+        choices: ["Hello, Alice!", "None", "name", "msg"]
+        correct: "Hello, Alice!"
+        explanation: "The recipe bottles up the label string. It's stored in msg and then revealed."
+
+      - type: arrange
+        instruction: "Build a recipe that returns the stronger of two potions"
+        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        explanation: "If potion a is stronger than b, return a. Otherwise, return b as the fallback."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+        choices: ["None", "5", "x", "Error"]
+        correct: "None"
+        explanation: "A recipe without return yields nothing — Python gives back None automatically."
+
+      - type: fill_blank
+        prompt: "Use the remainder rune to check whether a potion quantity n divides evenly by 2."
+        before: "def is_even(n):\n    return n "
+        after: " 2 == 0"
+        choices: ["%", "//", "/", "**"]
+        answer: "%"
+        explanation: "n % 2 == 0 is True when n is even — the potion divides cleanly in two."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+        choices: ["18", "6", "2", "12"]
+        correct: "18"
+        explanation: "triple(2) brews a potency of 6. triple(6) amplifies it to 18."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
+        choices: ["100", "150", "0", "150"]
+        correct: "100"
+        explanation: "150 exceeds the safe limit of 100, so the stabilising rune returns 100."
+
+      - type: mini_code
+        prompt: "Define a potion conversion recipe celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — converting heat measurements for the cauldron."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(100) == 212.0"
+            message: "100°C = 212°F"
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32°F"
+
+      - type: mini_code
+        prompt: "Define a potency amplifier power(base, exp) that returns base ** exp — used to calculate magical exponential boosts."
+        starter: ""
+        tests:
+          - code: "assert power(2, 10) == 1024"
+            message: "2 ** 10 = 1024"
+          - code: "assert power(3, 3) == 27"
+            message: "3 ** 3 = 27"
+
   scifi:
-    title: "Function Output"
+    title: "Reading the Drone's Output"
+    exercises:
+      - type: concept
+        code: |
+          def combine(a, b):
+              return a + b
+
+          result = combine(3, 4)
+          print(result)
+        output: "7"
+        explanation: "return transmits the computed value back from a drone subroutine. The caller can store or use it. Without return, subroutines send back None."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def power_reading(n):\n    return n * n\n\nprint(power_reading(5))"
+        choices: ["25", "5", "n * n", "None"]
+        correct: "25"
+        explanation: "power_reading(5) returns 5 * 5 = 25. The drone transmits that sensor value."
+
+      - type: fill_blank
+        prompt: "Transmit the computed output n * 2 back from the drone subroutine."
+        before: "def boost(n):\n    "
+        after: " n * 2"
+        choices: ["return", "print", "def", "="]
+        answer: "return"
+        explanation: "return transmits the value back to the engineer. Without it, the subroutine sends None."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def system_label(name):\n    return f\"Hello, {name}!\"\n\nmsg = system_label(\"Alice\")\nprint(msg)"
+        choices: ["Hello, Alice!", "None", "name", "msg"]
+        correct: "Hello, Alice!"
+        explanation: "The subroutine returns the system label string. It's stored in msg and displayed on the console."
+
+      - type: arrange
+        instruction: "Build a subroutine that returns the higher of two power readings"
+        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        explanation: "If reading a is higher than b, transmit a. Otherwise, transmit b as the fallback."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+        choices: ["None", "5", "x", "Error"]
+        correct: "None"
+        explanation: "A subroutine without return transmits nothing — Python automatically sends None."
+
+      - type: fill_blank
+        prompt: "Use the modulo sensor to check whether a reading n divides evenly by 2."
+        before: "def is_even(n):\n    return n "
+        after: " 2 == 0"
+        choices: ["%", "//", "/", "**"]
+        answer: "%"
+        explanation: "n % 2 == 0 is True when n is even — the sensor reports a clean split."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+        choices: ["18", "6", "2", "12"]
+        correct: "18"
+        explanation: "triple(2) outputs 6. triple(6) amplifies to 18 — the drone boosts twice."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
+        choices: ["100", "150", "0", "150"]
+        correct: "100"
+        explanation: "150 exceeds the safe limit of 100, so the safety clamp subroutine returns 100."
+
+      - type: mini_code
+        prompt: "Define a conversion subroutine celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to calibrate the ship's heat sensors."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(100) == 212.0"
+            message: "100°C = 212°F"
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32°F"
+
+      - type: mini_code
+        prompt: "Define a power subroutine power(base, exp) that returns base ** exp — used to calculate exponential energy outputs."
+        starter: ""
+        tests:
+          - code: "assert power(2, 10) == 1024"
+            message: "2 ** 10 = 1024"
+          - code: "assert power(3, 3) == 27"
+            message: "3 ** 3 = 27"
+
   mystery:
-    title: "Returning Findings"
+    title: "Reporting the Findings"
+    exercises:
+      - type: concept
+        code: |
+          def combine(a, b):
+              return a + b
+
+          score = combine(3, 4)
+          print(score)
+        output: "7"
+        explanation: "return hands the finding back to Detective Cole. The caller can store or use it. Without return, tools give back None — an empty report."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def suspicion_score(n):\n    return n * n\n\nprint(suspicion_score(5))"
+        choices: ["25", "5", "n * n", "None"]
+        correct: "25"
+        explanation: "suspicion_score(5) returns 5 * 5 = 25. Cole receives that finding from the tool."
+
+      - type: fill_blank
+        prompt: "Hand back the computed suspicion rating n * 2 from the analysis tool."
+        before: "def amplify_clue(n):\n    "
+        after: " n * 2"
+        choices: ["return", "print", "def", "="]
+        answer: "return"
+        explanation: "return hands the value back to Cole. Without it, the tool returns None — no evidence."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def format_suspect(name):\n    return f\"Hello, {name}!\"\n\nmsg = format_suspect(\"Alice\")\nprint(msg)"
+        choices: ["Hello, Alice!", "None", "name", "msg"]
+        correct: "Hello, Alice!"
+        explanation: "The tool returns the formatted suspect label. It's stored in msg and printed to the case file."
+
+      - type: arrange
+        instruction: "Build a tool that returns the more suspicious of two clue scores"
+        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
+        explanation: "If clue a is more suspicious than b, return a. Otherwise, return b as the fallback."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+        choices: ["None", "5", "x", "Error"]
+        correct: "None"
+        explanation: "A tool without return hands back nothing — Python gives None automatically, an empty report."
+
+      - type: fill_blank
+        prompt: "Use the remainder check to see whether a clue number n divides evenly by 2."
+        before: "def is_even(n):\n    return n "
+        after: " 2 == 0"
+        choices: ["%", "//", "/", "**"]
+        answer: "%"
+        explanation: "n % 2 == 0 is True when n is even — the clue splits cleanly, a good sign."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+        choices: ["18", "6", "2", "12"]
+        correct: "18"
+        explanation: "triple(2) = 6. triple(6) = 18. Cole triples the suspicion score twice for emphasis."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
+        choices: ["100", "150", "0", "150"]
+        correct: "100"
+        explanation: "150 exceeds the maximum valid score of 100, so the bounding tool returns 100."
+
+      - type: mini_code
+        prompt: "Define a conversion tool celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to cross-check temperature readings from the crime scene."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(100) == 212.0"
+            message: "100°C = 212°F"
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32°F"
+
+      - type: mini_code
+        prompt: "Define a scoring tool power(base, exp) that returns base ** exp — used to calculate exponential suspicion ratings."
+        starter: ""
+        tests:
+          - code: "assert power(2, 10) == 1024"
+            message: "2 ** 10 = 1024"
+          - code: "assert power(3, 3) == 27"
+            message: "3 ** 3 = 27"

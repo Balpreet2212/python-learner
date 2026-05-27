@@ -1,116 +1,873 @@
-title: "Inheritance"
+title: Inheritance
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      class Animal:
-          def __init__(self, name):
-              self.name = name
+- type: concept
+  code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return \"\
+    ...\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow\"\n\nclass Dog(Animal):\n    def speak(self):\n\
+    \        return \"Woof\"\n\nc = Cat(\"Whiskers\")\nd = Dog(\"Rex\")\nprint(c.name)\nprint(c.speak())\nprint(d.speak())\n"
+  output: 'Whiskers
 
-          def speak(self):
-              return "..."
+    Meow
 
-      class Cat(Animal):
-          def speak(self):
-              return "Meow"
+    Woof'
+  explanation: class Child(Parent) inherits all attributes and methods. The child can override methods to change behaviour.
+    self.name comes from Animal.__init__.
+- type: mcq
+  question: What does this print?
+  code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\nc\
+    \ = Car(120)\nprint(c.speed)"
+  choices:
+  - '120'
+  - speed
+  - None
+  - Error
+  correct: '120'
+  explanation: Car inherits Vehicle's __init__. c.speed = 120.
+- type: fill_blank
+  prompt: Multiply side by itself to compute the square's area.
+  before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n  \
+    \      self.side = side\n    def area(self):\n        return self.side "
+  after: ' self.side
 
-      class Dog(Animal):
-          def speak(self):
-              return "Woof"
 
-      c = Cat("Whiskers")
-      d = Dog("Rex")
-      print(c.name)
-      print(c.speak())
-      print(d.speak())
-    output: "Whiskers\nMeow\nWoof"
-    explanation: "class Child(Parent) inherits all attributes and methods. The child can override methods to change behaviour. self.name comes from Animal.__init__."
+    s = Square(5)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\nc = Car(120)\nprint(c.speed)"
-    choices: ["120", "speed", "None", "Error"]
-    correct: "120"
-    explanation: "Car inherits Vehicle's __init__. c.speed = 120."
+    print(s.area())'
+  choices:
+  - '*'
+  - +
+  - '-'
+  - /
+  answer: '*'
+  explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+- type: mcq
+  question: What does this print?
+  code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return f'Hi,\
+    \ I am {self.name}'\n\nclass Manager(Employee):\n    pass\n\nm = Manager('Alice')\nprint(m.greet())"
+  choices:
+  - Hi, I am Alice
+  - Hi, I am Manager
+  - None
+  - Error
+  correct: Hi, I am Alice
+  explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+- type: arrange
+  instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
+  blocks:
+  - class
+  - Animal
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - name
+  - )
+  - ':'
+  - self
+  - .
+  - name
+  - '='
+  - name
+  - class
+  - Bird
+  - (
+  - Animal
+  - )
+  - ':'
+  - def
+  - speak
+  - (
+  - self
+  - )
+  - ':'
+  - return
+  - '"Tweet"'
+  - b
+  - '='
+  - Bird
+  - (
+  - '"Tweety"'
+  - )
+  - print
+  - (
+  - b
+  - .
+  - speak
+  - (
+  - )
+  - )
+  correct:
+  - class
+  - Animal
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - name
+  - )
+  - ':'
+  - self
+  - .
+  - name
+  - '='
+  - name
+  - class
+  - Bird
+  - (
+  - Animal
+  - )
+  - ':'
+  - def
+  - speak
+  - (
+  - self
+  - )
+  - ':'
+  - return
+  - '"Tweet"'
+  - b
+  - '='
+  - Bird
+  - (
+  - '"Tweety"'
+  - )
+  - print
+  - (
+  - b
+  - .
+  - speak
+  - (
+  - )
+  - )
+  explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+- type: mcq
+  question: What does this print?
+  code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\nclass\
+    \ C(A):\n    pass\n\nb = B()\nc = C()\nprint(b.hello())\nprint(c.hello())"
+  choices:
+  - 'B
 
-  - type: fill_blank
-    prompt: "Multiply side by itself to compute the square's area."
-    before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side "
-    after: " self.side\n\ns = Square(5)\nprint(s.area())"
-    choices: ["*", "+", "-", "/"]
-    answer: "*"
-    explanation: "Square overrides area(). self.side * self.side = 5 * 5 = 25."
+    A'
+  - 'A
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return f'Hi, I am {self.name}'\n\nclass Manager(Employee):\n    pass\n\nm = Manager('Alice')\nprint(m.greet())"
-    choices: ["Hi, I am Alice", "Hi, I am Manager", "None", "Error"]
-    correct: "Hi, I am Alice"
-    explanation: "Manager inherits greet() from Employee. self.name = 'Alice'."
+    A'
+  - 'B
 
-  - type: arrange
-    instruction: "Define a Bird class inheriting Animal, overriding speak to return 'Tweet'"
-    blocks: ["class", "Animal", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "class", "Bird", "(", "Animal", ")", ":", "def", "speak", "(", "self", ")", ":", "return", "\"Tweet\"", "b", "=", "Bird", "(", "\"Tweety\"", ")", "print", "(", "b", ".", "speak", "(", ")", ")"]
-    correct: ["class", "Animal", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "class", "Bird", "(", "Animal", ")", ":", "def", "speak", "(", "self", ")", ":", "return", "\"Tweet\"", "b", "=", "Bird", "(", "\"Tweety\"", ")", "print", "(", "b", ".", "speak", "(", ")", ")"]
-    explanation: "Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'."
+    B'
+  - 'A
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\nclass C(A):\n    pass\n\nb = B()\nc = C()\nprint(b.hello())\nprint(c.hello())"
-    choices: ["B\nA", "A\nA", "B\nB", "A\nB"]
-    correct: "B\nA"
-    explanation: "B overrides hello() → 'B'. C does not override it, so it inherits A's hello() → 'A'."
+    B'
+  correct: 'B
 
-  - type: fill_blank
-    prompt: "Inherit from Animal so Dog gets the name attribute automatically."
-    before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
-    after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
-    choices: ["Animal", "Dog", "self", "object"]
-    answer: "Animal"
-    explanation: "Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n        return f'Deals {self.damage} damage'\n\nclass Sword(Weapon):\n    def attack(self):\n        return f'Slash! {self.damage * 2} damage'\n\ns = Sword(10)\nprint(s.attack())"
-    choices: ["Slash! 20 damage", "Deals 10 damage", "Deals 20 damage", "Slash! 10 damage"]
-    correct: "Slash! 20 damage"
-    explanation: "Sword overrides attack(). self.damage = 10, 10 * 2 = 20."
-
-  - type: mcq
-    question: "What is the main benefit of inheritance?"
-    code: ""
-    choices: [
-      "You can reuse attributes and methods from a parent class without repeating code",
-      "It makes programs run faster",
-      "It is required for all Python classes",
-      "It lets you skip writing __init__"
-    ]
-    correct: "You can reuse attributes and methods from a parent class without repeating code"
-    explanation: "Inheritance lets child classes share a parent's logic and only override what's different."
-
-  - type: mini_code
-    prompt: "Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14 * radius ** 2. Print the area of Circle(5)."
-    starter: ""
-    tests:
-      - code: "abs(Circle(5).area() - 78.5) < 0.1"
-        message: "Circle area should be ~78.5"
-      - code: "'78' in _stdout"
-        message: "Should print ~78.5"
-
-  - type: mini_code
-    prompt: "Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning 'Beep!'. Create a Car and print its make and call honk()."
-    starter: ""
-    tests:
-      - code: "c = Car('Toyota', 120); c.make == 'Toyota' and c.speed == 120"
-        message: "Car should inherit make and speed from Vehicle"
-      - code: "Car('X', 0).honk() == 'Beep!'"
-        message: "honk() should return 'Beep!'"
-
+    A'
+  explanation: B overrides hello() → 'B'. C does not override it, so it inherits A's hello() → 'A'.
+- type: fill_blank
+  prompt: Inherit from Animal so Dog gets the name attribute automatically.
+  before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
+  after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
+  choices:
+  - Animal
+  - Dog
+  - self
+  - object
+  answer: Animal
+  explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+- type: mcq
+  question: What does this print?
+  code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n        return\
+    \ f'Deals {self.damage} damage'\n\nclass Sword(Weapon):\n    def attack(self):\n        return f'Slash! {self.damage *\
+    \ 2} damage'\n\ns = Sword(10)\nprint(s.attack())"
+  choices:
+  - Slash! 20 damage
+  - Deals 10 damage
+  - Deals 20 damage
+  - Slash! 10 damage
+  correct: Slash! 20 damage
+  explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+- type: mcq
+  question: What is the main benefit of inheritance?
+  code: ''
+  choices:
+  - You can reuse attributes and methods from a parent class without repeating code
+  - It makes programs run faster
+  - It is required for all Python classes
+  - It lets you skip writing __init__
+  correct: You can reuse attributes and methods from a parent class without repeating code
+  explanation: Inheritance lets child classes share a parent's logic and only override what's different.
+- type: mini_code
+  prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14 * radius
+    ** 2. Print the area of Circle(5).
+  starter: ''
+  tests:
+  - code: abs(Circle(5).area() - 78.5) < 0.1
+    message: Circle area should be ~78.5
+  - code: '''78'' in _stdout'
+    message: Should print ~78.5
+- type: mini_code
+  prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning 'Beep!'.
+    Create a Car and print its make and call honk().
+  starter: ''
+  tests:
+  - code: c = Car('Toyota', 120); c.make == 'Toyota' and c.speed == 120
+    message: Car should inherit make and speed from Vehicle
+  - code: Car('X', 0).honk() == 'Beep!'
+    message: honk() should return 'Beep!'
 worlds:
   fantasy:
-    title: "The Bloodline of Spells"
+    title: The Bloodline of Spells
+    exercises:
+    - type: concept
+      code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return\
+        \ \"...\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow\"\n\nclass Dog(Animal):\n    def speak(self):\n\
+        \        return \"Woof\"\n\nc = Cat(\"Whiskers\")\nd = Dog(\"Rex\")\nprint(c.name)\nprint(c.speak())\nprint(d.speak())\n"
+      output: 'Whiskers
+
+        Meow
+
+        Woof'
+      explanation: Child spell classes inherit from a base Spell class. class Child(Parent) inherits attributes and methods.
+        Children override speak() to define their own magic word.
+    - type: mcq
+      question: A sub-spell inherits the base spell's power attribute. What does this print?
+      code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
+        \nc = Car(120)\nprint(c.speed)"
+      choices:
+      - '120'
+      - speed
+      - None
+      - Error
+      correct: '120'
+      explanation: Car inherits Vehicle's __init__. c.speed = 120.
+    - type: fill_blank
+      prompt: Multiply side by itself to compute the rune square's area.
+      before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
+        \        self.side = side\n    def area(self):\n        return self.side "
+      after: ' self.side
+
+
+        s = Square(5)
+
+        print(s.area())'
+      choices:
+      - '*'
+      - +
+      - '-'
+      - /
+      answer: '*'
+      explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+    - type: mcq
+      question: A child spell class inherits the greeting method. What does this print?
+      code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
+        \ f'Hi, I am {self.name}'\n\nclass Manager(Employee):\n    pass\n\nm = Manager('Alice')\nprint(m.greet())"
+      choices:
+      - Hi, I am Alice
+      - Hi, I am Manager
+      - None
+      - Error
+      correct: Hi, I am Alice
+      explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+    - type: arrange
+      instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
+      blocks:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+    - type: mcq
+      question: Two spells — one overrides the chant, one inherits it. What does this print?
+      code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
+        \nclass C(A):\n    pass\n\nb = B()\nc = C()\nprint(b.hello())\nprint(c.hello())"
+      choices:
+      - 'B
+
+        A'
+      - 'A
+
+        A'
+      - 'B
+
+        B'
+      - 'A
+
+        B'
+      correct: 'B
+
+        A'
+      explanation: B overrides hello() → 'B'. C does not override it, inheriting A's hello() → 'A'.
+    - type: fill_blank
+      prompt: Inherit from Animal so the dragon familiar gets the name attribute automatically.
+      before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
+      after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
+      choices:
+      - Animal
+      - Dog
+      - self
+      - object
+      answer: Animal
+      explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+    - type: mcq
+      question: A child weapon class overrides the attack method. What does this print?
+      code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
+        \ return f'Deals {self.damage} damage'\n\nclass Sword(Weapon):\n    def attack(self):\n        return f'Slash! {self.damage\
+        \ * 2} damage'\n\ns = Sword(10)\nprint(s.attack())"
+      choices:
+      - Slash! 20 damage
+      - Deals 10 damage
+      - Deals 20 damage
+      - Slash! 10 damage
+      correct: Slash! 20 damage
+      explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+    - type: mcq
+      question: What is the main benefit of spell inheritance?
+      code: ''
+      choices:
+      - You can reuse attributes and methods from a parent class without repeating code
+      - It makes programs run faster
+      - It is required for all Python classes
+      - It lets you skip writing __init__
+      correct: You can reuse attributes and methods from a parent class without repeating code
+      explanation: Child spell classes share the parent's logic and only override what's different.
+    - type: mini_code
+      prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
+        * radius ** 2. Print the area of Circle(5).
+      starter: ''
+      tests:
+      - code: abs(Circle(5).area() - 78.5) < 0.1
+        message: Circle area should be ~78.5
+      - code: '''78'' in _stdout'
+        message: Should print ~78.5
+    - type: mini_code
+      prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
+        'Beep!'. Create a Car and print its make and call honk().
+      starter: ''
+      tests:
+      - code: c = Car('Toyota', 120); c.make == 'Toyota' and c.speed == 120
+        message: Car should inherit make and speed from Vehicle
+      - code: Car('X', 0).honk() == 'Beep!'
+        message: honk() should return 'Beep!'
   scifi:
-    title: "Subclass Modules"
+    title: Subclass Modules
+    exercises:
+    - type: concept
+      code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return\
+        \ \"...\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow\"\n\nclass Dog(Animal):\n    def speak(self):\n\
+        \        return \"Woof\"\n\nc = Cat(\"Whiskers\")\nd = Dog(\"Rex\")\nprint(c.name)\nprint(c.speak())\nprint(d.speak())\n"
+      output: 'Whiskers
+
+        Meow
+
+        Woof'
+      explanation: Voss deploys specialised ship modules. class Child(Parent) inherits all attributes and methods. Each module
+        overrides the base behaviour with its own output signal.
+    - type: mcq
+      question: A sub-module inherits the base module's speed rating. What does this print?
+      code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
+        \nc = Car(120)\nprint(c.speed)"
+      choices:
+      - '120'
+      - speed
+      - None
+      - Error
+      correct: '120'
+      explanation: Car inherits Vehicle's __init__. c.speed = 120.
+    - type: fill_blank
+      prompt: Multiply side by itself to compute the solar panel's area.
+      before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
+        \        self.side = side\n    def area(self):\n        return self.side "
+      after: ' self.side
+
+
+        s = Square(5)
+
+        print(s.area())'
+      choices:
+      - '*'
+      - +
+      - '-'
+      - /
+      answer: '*'
+      explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+    - type: mcq
+      question: A sub-module inherits the base module's greeting broadcast. What does this print?
+      code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
+        \ f'Hi, I am {self.name}'\n\nclass Manager(Employee):\n    pass\n\nm = Manager('Alice')\nprint(m.greet())"
+      choices:
+      - Hi, I am Alice
+      - Hi, I am Manager
+      - None
+      - Error
+      correct: Hi, I am Alice
+      explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+    - type: arrange
+      instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
+      blocks:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+    - type: mcq
+      question: Two modules — one overrides the signal, one inherits it. What does this print?
+      code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
+        \nclass C(A):\n    pass\n\nb = B()\nc = C()\nprint(b.hello())\nprint(c.hello())"
+      choices:
+      - 'B
+
+        A'
+      - 'A
+
+        A'
+      - 'B
+
+        B'
+      - 'A
+
+        B'
+      correct: 'B
+
+        A'
+      explanation: B overrides hello() → 'B'. C inherits A's hello() → 'A'.
+    - type: fill_blank
+      prompt: Inherit from Animal so the drone unit gets the name attribute automatically.
+      before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
+      after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
+      choices:
+      - Animal
+      - Dog
+      - self
+      - object
+      answer: Animal
+      explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+    - type: mcq
+      question: A specialised weapon module overrides the attack output. What does this print?
+      code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
+        \ return f'Deals {self.damage} damage'\n\nclass Sword(Weapon):\n    def attack(self):\n        return f'Slash! {self.damage\
+        \ * 2} damage'\n\ns = Sword(10)\nprint(s.attack())"
+      choices:
+      - Slash! 20 damage
+      - Deals 10 damage
+      - Deals 20 damage
+      - Slash! 10 damage
+      correct: Slash! 20 damage
+      explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+    - type: mcq
+      question: What is the main benefit of module inheritance?
+      code: ''
+      choices:
+      - You can reuse attributes and methods from a parent class without repeating code
+      - It makes programs run faster
+      - It is required for all Python classes
+      - It lets you skip writing __init__
+      correct: You can reuse attributes and methods from a parent class without repeating code
+      explanation: Child modules share the parent's logic and only override what's different.
+    - type: mini_code
+      prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
+        * radius ** 2. Print the area of Circle(5).
+      starter: ''
+      tests:
+      - code: abs(Circle(5).area() - 78.5) < 0.1
+        message: Circle area should be ~78.5
+      - code: '''78'' in _stdout'
+        message: Should print ~78.5
+    - type: mini_code
+      prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
+        'Beep!'. Create a Car and print its make and call honk().
+      starter: ''
+      tests:
+      - code: c = Car('Toyota', 120); c.make == 'Toyota' and c.speed == 120
+        message: Car should inherit make and speed from Vehicle
+      - code: Car('X', 0).honk() == 'Beep!'
+        message: honk() should return 'Beep!'
   mystery:
-    title: "Family Connections"
+    title: Family Connections
+    exercises:
+    - type: concept
+      code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return\
+        \ \"...\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow\"\n\nclass Dog(Animal):\n    def speak(self):\n\
+        \        return \"Woof\"\n\nc = Cat(\"Whiskers\")\nd = Dog(\"Rex\")\nprint(c.name)\nprint(c.speak())\nprint(d.speak())\n"
+      output: 'Whiskers
+
+        Meow
+
+        Woof'
+      explanation: Cole classifies criminal types that inherit from a base Suspect class. class Child(Parent) inherits all
+        attributes and methods. Each type overrides the motive method.
+    - type: mcq
+      question: A sub-suspect inherits the base class's speed attribute. What does this print?
+      code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
+        \nc = Car(120)\nprint(c.speed)"
+      choices:
+      - '120'
+      - speed
+      - None
+      - Error
+      correct: '120'
+      explanation: Car inherits Vehicle's __init__. c.speed = 120.
+    - type: fill_blank
+      prompt: Multiply side by itself to compute the crime scene area.
+      before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
+        \        self.side = side\n    def area(self):\n        return self.side "
+      after: ' self.side
+
+
+        s = Square(5)
+
+        print(s.area())'
+      choices:
+      - '*'
+      - +
+      - '-'
+      - /
+      answer: '*'
+      explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+    - type: mcq
+      question: A sub-suspect inherits the base greeting method. What does this print?
+      code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
+        \ f'Hi, I am {self.name}'\n\nclass Manager(Employee):\n    pass\n\nm = Manager('Alice')\nprint(m.greet())"
+      choices:
+      - Hi, I am Alice
+      - Hi, I am Manager
+      - None
+      - Error
+      correct: Hi, I am Alice
+      explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+    - type: arrange
+      instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
+      blocks:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Animal
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - class
+      - Bird
+      - (
+      - Animal
+      - )
+      - ':'
+      - def
+      - speak
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - '"Tweet"'
+      - b
+      - '='
+      - Bird
+      - (
+      - '"Tweety"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - speak
+      - (
+      - )
+      - )
+      explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+    - type: mcq
+      question: Two suspect types — one overrides the motive, one inherits it. What does this print?
+      code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
+        \nclass C(A):\n    pass\n\nb = B()\nc = C()\nprint(b.hello())\nprint(c.hello())"
+      choices:
+      - 'B
+
+        A'
+      - 'A
+
+        A'
+      - 'B
+
+        B'
+      - 'A
+
+        B'
+      correct: 'B
+
+        A'
+      explanation: B overrides hello() → 'B'. C inherits A's hello() → 'A'.
+    - type: fill_blank
+      prompt: Inherit from Animal so the accomplice profile gets the name attribute automatically.
+      before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
+      after: "):\n    def speak(self):\n        return 'Woof'\n\nd = Dog('Rex')\nprint(d.name)"
+      choices:
+      - Animal
+      - Dog
+      - self
+      - object
+      answer: Animal
+      explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+    - type: mcq
+      question: A specialised criminal class overrides the attack method. What does this print?
+      code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
+        \ return f'Deals {self.damage} damage'\n\nclass Sword(Weapon):\n    def attack(self):\n        return f'Slash! {self.damage\
+        \ * 2} damage'\n\ns = Sword(10)\nprint(s.attack())"
+      choices:
+      - Slash! 20 damage
+      - Deals 10 damage
+      - Deals 20 damage
+      - Slash! 10 damage
+      correct: Slash! 20 damage
+      explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+    - type: mcq
+      question: What is the main benefit of criminal profile inheritance?
+      code: ''
+      choices:
+      - You can reuse attributes and methods from a parent class without repeating code
+      - It makes programs run faster
+      - It is required for all Python classes
+      - It lets you skip writing __init__
+      correct: You can reuse attributes and methods from a parent class without repeating code
+      explanation: Child profiles share the parent's logic and only override what's different.
+    - type: mini_code
+      prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
+        * radius ** 2. Print the area of Circle(5).
+      starter: ''
+      tests:
+      - code: abs(Circle(5).area() - 78.5) < 0.1
+        message: Circle area should be ~78.5
+      - code: '''78'' in _stdout'
+        message: Should print ~78.5
+    - type: mini_code
+      prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
+        'Beep!'. Create a Car and print its make and call honk().
+      starter: ''
+      tests:
+      - code: c = Car('Toyota', 120); c.make == 'Toyota' and c.speed == 120
+        message: Car should inherit make and speed from Vehicle
+      - code: Car('X', 0).honk() == 'Beep!'
+        message: honk() should return 'Beep!'

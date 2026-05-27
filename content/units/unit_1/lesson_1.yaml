@@ -87,8 +87,259 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Sorcerer's Variables"
+    title: "Labelling the Ingredients"
+    exercises:
+      - type: concept
+        code: |
+          ingredient = "moonpetal"
+          print(ingredient)
+        output: "moonpetal"
+        explanation: "A variable is a labelled jar in Elara's workshop. Use = to store a value. print() reads the label aloud. Ingredient names (strings) go inside quotes."
+
+      - type: mcq
+        question: "Elara labels a cauldron with a potion name. What does this print?"
+        code: "potion = \"Starfire Brew\"\nprint(potion)"
+        choices: ["Starfire Brew", "potion", "\"Starfire Brew\"", "Nothing"]
+        correct: "Starfire Brew"
+        explanation: "potion holds the text \"Starfire Brew\". print(potion) shows the value stored in potion, not the variable name. The answer matches the original correct choice."
+
+      - type: arrange
+        instruction: "Build code to store the ingredient name \"moonpetal\" in a variable called ingredient"
+        blocks: ["name", "=", "\"Alice\"", "print", "(", ")"]
+        correct: ["name", "=", "\"Alice\""]
+        explanation: "= assigns the ingredient name on the right to the variable label on the left."
+
+      - type: fill_blank
+        prompt: "Assign the potion strength value 100 to the variable potion_strength."
+        before: "score "
+        after: " 100"
+        choices: ["=", "==", "!=", "+"]
+        answer: "="
+        explanation: "= stores a value in the variable. == is for comparing two values, not storing."
+
+      - type: mcq
+        question: "Elara updates the cauldron temperature. What does this print?"
+        code: "heat = 10\nheat = 20\nprint(heat)"
+        choices: ["20", "10", "10 20", "x"]
+        correct: "20"
+        explanation: "Variables can be reassigned. The second heat = 20 replaces the first value, so heat is 20."
+
+      - type: arrange
+        instruction: "Build code to print the value stored in potion_strength"
+        blocks: ["print", "(", "score", ")", "score", "="]
+        correct: ["print", "(", "score", ")"]
+        explanation: "print(potion_strength) reads the value from the workshop jar and displays it."
+
+      - type: mcq
+        question: "Which line correctly stores an ingredient name in a variable?"
+        code: ""
+        choices: ["name = \"Alice\"", "name == \"Alice\"", "name Alice", "\"Alice\" = name"]
+        correct: "name = \"Alice\""
+        explanation: "= assigns right to left. The ingredient name goes in quotes. == compares, it does not store."
+
+      - type: fill_blank
+        prompt: "Choose a valid variable name to store the spell word \"hello\"."
+        before: ""
+        after: " = \"hello\""
+        choices: ["message", "print", "def", "42"]
+        answer: "message"
+        explanation: "Variable names are plain labels (no quotes). message = \"hello\" stores the spell word."
+
+      - type: mcq
+        question: "Elara labels two ingredients. What does this print?"
+        code: "a = \"cat\"\nb = \"dog\"\nprint(a)\nprint(b)"
+        choices: ["cat\ndog", "a\nb", "cat dog", "dog\ncat"]
+        correct: "cat\ndog"
+        explanation: "Each print() call reads one ingredient label and displays its value on a new line."
+
+      - type: mini_code
+        prompt: "Create a variable called score and give it the value 42. Then print it."
+        starter: ""
+        tests:
+          - code: "assert score == 42"
+            message: "score should equal 42"
+          - code: "assert _stdout.strip() == '42'"
+            message: "Should print 42"
+
+      - type: mini_code
+        prompt: "Create two variables: language storing \"Python\" and year storing 1991. Print both on separate lines."
+        starter: ""
+        tests:
+          - code: "assert language == 'Python'"
+            message: "language should be 'Python'"
+          - code: "assert year == 1991"
+            message: "year should be 1991"
+          - code: "assert 'Python' in _stdout and '1991' in _stdout"
+            message: "Should print both values"
+
   scifi:
-    title: "Boot Sequence Alpha"
+    title: "Booting the Data Cores"
+    exercises:
+      - type: concept
+        code: |
+          system = "life_support"
+          print(system)
+        output: "life_support"
+        explanation: "A variable is a data register on the starship. Use = to store a reading. print() sends it to the display panel. System names (strings) go inside quotes."
+
+      - type: mcq
+        question: "Engineer Yara stores the ship's sector name. What does this print?"
+        code: "sector = \"Alpha-7\"\nprint(sector)"
+        choices: ["Alpha-7", "sector", "\"Alpha-7\"", "Nothing"]
+        correct: "Alpha-7"
+        explanation: "sector holds the text \"Alpha-7\". print(sector) shows the value in the register, not the register's label."
+
+      - type: arrange
+        instruction: "Build code to store the system label \"life_support\" in a variable called system"
+        blocks: ["name", "=", "\"Alice\"", "print", "(", ")"]
+        correct: ["name", "=", "\"Alice\""]
+        explanation: "= writes the system name on the right into the data register on the left."
+
+      - type: fill_blank
+        prompt: "Assign the hull integrity value 100 to the variable hull_rating."
+        before: "score "
+        after: " 100"
+        choices: ["=", "==", "!=", "+"]
+        answer: "="
+        explanation: "= stores a sensor reading in the register. == is for comparing two readings, not storing."
+
+      - type: mcq
+        question: "Yara updates the fuel level reading. What does this print?"
+        code: "fuel = 10\nfuel = 20\nprint(fuel)"
+        choices: ["20", "10", "10 20", "x"]
+        correct: "20"
+        explanation: "Registers can be overwritten. The second fuel = 20 replaces the first reading, so fuel reads 20."
+
+      - type: arrange
+        instruction: "Build code to print the value stored in hull_rating"
+        blocks: ["print", "(", "score", ")", "score", "="]
+        correct: ["print", "(", "score", ")"]
+        explanation: "print(hull_rating) sends the stored sensor value to the display panel."
+
+      - type: mcq
+        question: "Which line correctly stores a system name in a variable?"
+        code: ""
+        choices: ["name = \"Alice\"", "name == \"Alice\"", "name Alice", "\"Alice\" = name"]
+        correct: "name = \"Alice\""
+        explanation: "= assigns right to left. The system name goes in quotes. == compares registers, it does not store."
+
+      - type: fill_blank
+        prompt: "Choose a valid variable name to store the status code \"hello\"."
+        before: ""
+        after: " = \"hello\""
+        choices: ["message", "print", "def", "42"]
+        answer: "message"
+        explanation: "Register names are plain identifiers (no quotes). message = \"hello\" stores the status code."
+
+      - type: mcq
+        question: "Yara logs two system statuses. What does this print?"
+        code: "a = \"cat\"\nb = \"dog\"\nprint(a)\nprint(b)"
+        choices: ["cat\ndog", "a\nb", "cat dog", "dog\ncat"]
+        correct: "cat\ndog"
+        explanation: "Each print() call transmits one register's value to the console on a new line."
+
+      - type: mini_code
+        prompt: "Create a variable called score and give it the value 42. Then print it."
+        starter: ""
+        tests:
+          - code: "assert score == 42"
+            message: "score should equal 42"
+          - code: "assert _stdout.strip() == '42'"
+            message: "Should print 42"
+
+      - type: mini_code
+        prompt: "Create two variables: language storing \"Python\" and year storing 1991. Print both on separate lines."
+        starter: ""
+        tests:
+          - code: "assert language == 'Python'"
+            message: "language should be 'Python'"
+          - code: "assert year == 1991"
+            message: "year should be 1991"
+          - code: "assert 'Python' in _stdout and '1991' in _stdout"
+            message: "Should print both values"
+
   mystery:
-    title: "The Detective's Notebook"
+    title: "Cataloguing the Evidence"
+    exercises:
+      - type: concept
+        code: |
+          suspect = "Victor Crane"
+          print(suspect)
+        output: "Victor Crane"
+        explanation: "A variable is a labelled evidence bag. Use = to log a detail. print() reads it from the file. Suspect names (strings) go inside quotes."
+
+      - type: mcq
+        question: "Detective Cole logs a location. What does this print?"
+        code: "location = \"Dockside Warehouse\"\nprint(location)"
+        choices: ["Dockside Warehouse", "location", "\"Dockside Warehouse\"", "Nothing"]
+        correct: "Dockside Warehouse"
+        explanation: "location holds the text \"Dockside Warehouse\". print(location) shows the value in the evidence bag, not its label."
+
+      - type: arrange
+        instruction: "Build code to store the suspect name \"Victor Crane\" in a variable called suspect"
+        blocks: ["name", "=", "\"Alice\"", "print", "(", ")"]
+        correct: ["name", "=", "\"Alice\""]
+        explanation: "= logs the clue on the right into the evidence label on the left."
+
+      - type: fill_blank
+        prompt: "Assign the evidence count value 100 to the variable evidence_count."
+        before: "score "
+        after: " 100"
+        choices: ["=", "==", "!=", "+"]
+        answer: "="
+        explanation: "= records a value in the evidence file. == is for comparing two pieces of evidence, not storing."
+
+      - type: mcq
+        question: "Cole updates his suspect record. What does this print?"
+        code: "suspect_id = 10\nsuspect_id = 20\nprint(suspect_id)"
+        choices: ["20", "10", "10 20", "x"]
+        correct: "20"
+        explanation: "Evidence records can be updated. The second suspect_id = 20 replaces the earlier note, so suspect_id is 20."
+
+      - type: arrange
+        instruction: "Build code to print the value stored in evidence_count"
+        blocks: ["print", "(", "score", ")", "score", "="]
+        correct: ["print", "(", "score", ")"]
+        explanation: "print(evidence_count) reads the tally from the file and displays it."
+
+      - type: mcq
+        question: "Which line correctly stores a clue in a variable?"
+        code: ""
+        choices: ["name = \"Alice\"", "name == \"Alice\"", "name Alice", "\"Alice\" = name"]
+        correct: "name = \"Alice\""
+        explanation: "= assigns right to left. The clue text goes in quotes. == compares two clues, it does not record."
+
+      - type: fill_blank
+        prompt: "Choose a valid variable name to store the clue word \"hello\"."
+        before: ""
+        after: " = \"hello\""
+        choices: ["message", "print", "def", "42"]
+        answer: "message"
+        explanation: "Evidence label names are plain words (no quotes). message = \"hello\" stores the clue."
+
+      - type: mcq
+        question: "Cole logs two suspects. What does this print?"
+        code: "a = \"cat\"\nb = \"dog\"\nprint(a)\nprint(b)"
+        choices: ["cat\ndog", "a\nb", "cat dog", "dog\ncat"]
+        correct: "cat\ndog"
+        explanation: "Each print() call reads one evidence entry and displays its value on a new line."
+
+      - type: mini_code
+        prompt: "Create a variable called score and give it the value 42. Then print it."
+        starter: ""
+        tests:
+          - code: "assert score == 42"
+            message: "score should equal 42"
+          - code: "assert _stdout.strip() == '42'"
+            message: "Should print 42"
+
+      - type: mini_code
+        prompt: "Create two variables: language storing \"Python\" and year storing 1991. Print both on separate lines."
+        starter: ""
+        tests:
+          - code: "assert language == 'Python'"
+            message: "language should be 'Python'"
+          - code: "assert year == 1991"
+            message: "year should be 1991"
+          - code: "assert 'Python' in _stdout and '1991' in _stdout"
+            message: "Should print both values"

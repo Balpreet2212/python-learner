@@ -1,109 +1,720 @@
-title: "Logical Operators: and, or, not"
+title: 'Logical Operators: and, or, not'
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      x = 7
-      print(x > 0 and x < 10)
-      print(x < 0 or x > 5)
-      print(not x > 10)
-    output: "True\nTrue\nTrue"
-    explanation: "and: both sides must be True. or: at least one side must be True. not: flips True to False and vice versa."
+- type: concept
+  code: 'x = 7
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(True and False)"
-    choices: ["False", "True", "None", "Error"]
-    correct: "False"
-    explanation: "and requires both sides to be True. True and False = False."
+    print(x > 0 and x < 10)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(True or False)"
-    choices: ["True", "False", "None", "Error"]
-    correct: "True"
-    explanation: "or only needs one side to be True. True or False = True."
+    print(x < 0 or x > 5)
 
-  - type: fill_blank
-    prompt: "Require both conditions to be true before allowing entry."
-    before: "can_enter = age >= 18 "
-    after: " has_ticket"
-    choices: ["and", "or", "not", "=="]
-    answer: "and"
-    explanation: "and requires both conditions: age >= 18 AND has_ticket must both be True."
+    print(not x > 10)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "score = 45\nprint(score >= 60 or score < 50)"
-    choices: ["True", "False", "45", "None"]
-    correct: "True"
-    explanation: "score >= 60 is False, but score < 50 is True. False or True = True."
+    '
+  output: 'True
 
-  - type: arrange
-    instruction: "Build code to check: x is positive AND x is less than 100"
-    blocks: ["print", "(", "x", ">", "0", "and", "x", "<", "100", ")"]
-    correct: ["print", "(", "x", ">", "0", "and", "x", "<", "100", ")"]
-    explanation: "Both conditions must be True for and to return True."
+    True
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 15\nprint(not (x > 10))"
-    choices: ["False", "True", "15", "None"]
-    correct: "False"
-    explanation: "x > 10 is True (15 > 10). not True = False."
+    True'
+  explanation: 'and: both sides must be True. or: at least one side must be True. not: flips True to False and vice versa.'
+- type: mcq
+  question: What does this print?
+  code: print(True and False)
+  choices:
+  - 'False'
+  - 'True'
+  - None
+  - Error
+  correct: 'False'
+  explanation: and requires both sides to be True. True and False = False.
+- type: mcq
+  question: What does this print?
+  code: print(True or False)
+  choices:
+  - 'True'
+  - 'False'
+  - None
+  - Error
+  correct: 'True'
+  explanation: or only needs one side to be True. True or False = True.
+- type: fill_blank
+  prompt: Require both conditions to be true before allowing entry.
+  before: 'can_enter = age >= 18 '
+  after: ' has_ticket'
+  choices:
+  - and
+  - or
+  - not
+  - ==
+  answer: and
+  explanation: 'and requires both conditions: age >= 18 AND has_ticket must both be True.'
+- type: mcq
+  question: What does this print?
+  code: 'score = 45
 
-  - type: fill_blank
-    prompt: "Flip the boolean so is_invalid is True when the score is negative."
-    before: "is_invalid = "
-    after: " (score >= 0)"
-    choices: ["not", "and", "or", "bool"]
-    answer: "not"
-    explanation: "not flips the boolean. not True is False, not False is True."
+    print(score >= 60 or score < 50)'
+  choices:
+  - 'True'
+  - 'False'
+  - '45'
+  - None
+  correct: 'True'
+  explanation: score >= 60 is False, but score < 50 is True. False or True = True.
+- type: arrange
+  instruction: 'Build code to check: x is positive AND x is less than 100'
+  blocks:
+  - print
+  - (
+  - x
+  - '>'
+  - '0'
+  - and
+  - x
+  - <
+  - '100'
+  - )
+  correct:
+  - print
+  - (
+  - x
+  - '>'
+  - '0'
+  - and
+  - x
+  - <
+  - '100'
+  - )
+  explanation: Both conditions must be True for and to return True.
+- type: mcq
+  question: What does this print?
+  code: 'x = 15
 
-  - type: mcq
-    question: "What does this print?"
-    code: "a = True\nb = False\nprint(a and b)\nprint(a or b)"
-    choices: ["False\nTrue", "True\nTrue", "False\nFalse", "True\nFalse"]
-    correct: "False\nTrue"
-    explanation: "True and False = False. True or False = True."
+    print(not (x > 10))'
+  choices:
+  - 'False'
+  - 'True'
+  - '15'
+  - None
+  correct: 'False'
+  explanation: x > 10 is True (15 > 10). not True = False.
+- type: fill_blank
+  prompt: Flip the boolean so is_invalid is True when the score is negative.
+  before: 'is_invalid = '
+  after: ' (score >= 0)'
+  choices:
+  - not
+  - and
+  - or
+  - bool
+  answer: not
+  explanation: not flips the boolean. not True is False, not False is True.
+- type: mcq
+  question: What does this print?
+  code: 'a = True
 
-  - type: mcq
-    question: "Which expression is True when x is between 1 and 10 (inclusive)?"
-    code: ""
-    choices: ["x >= 1 and x <= 10", "x >= 1 or x <= 10", "not x >= 1 and x <= 10", "x > 1 and x < 10"]
-    correct: "x >= 1 and x <= 10"
-    explanation: "Both conditions must hold: x must be >= 1 AND <= 10."
+    b = False
 
-  - type: mini_code
-    prompt: "Read hp then shield ('True'/'False') with input(). Print True if hp > 50 AND shield is True, otherwise print False."
-    starter: "hp = int(input())\nshield = input() == 'True'\n"
-    tests:
-      - code: "assert _stdout.strip() == 'True'"
-        stdin: "80\nTrue"
-        message: "hp=80 and shield=True: both conditions met, prints True"
-      - code: "assert _stdout.strip() == 'False'"
-        stdin: "30\nTrue"
-        message: "hp=30 is not > 50, prints False"
+    print(a and b)
 
-  - type: mini_code
-    prompt: "Read an age with input(). Print True if age is less than 13 OR 18 or above, otherwise print False."
-    starter: "age = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'False'"
-        stdin: "16"
-        message: "16 is not < 13 and not >= 18, prints False"
-      - code: "assert _stdout.strip() == 'True'"
-        stdin: "10"
-        message: "10 is < 13, prints True"
-      - code: "assert _stdout.strip() == 'True'"
-        stdin: "20"
-        message: "20 is >= 18, prints True"
+    print(a or b)'
+  choices:
+  - 'False
 
+    True'
+  - 'True
+
+    True'
+  - 'False
+
+    False'
+  - 'True
+
+    False'
+  correct: 'False
+
+    True'
+  explanation: True and False = False. True or False = True.
+- type: mcq
+  question: Which expression is True when x is between 1 and 10 (inclusive)?
+  code: ''
+  choices:
+  - x >= 1 and x <= 10
+  - x >= 1 or x <= 10
+  - not x >= 1 and x <= 10
+  - x > 1 and x < 10
+  correct: x >= 1 and x <= 10
+  explanation: 'Both conditions must hold: x must be >= 1 AND <= 10.'
+- type: mini_code
+  prompt: Read hp then shield ('True'/'False') with input(). Print True if hp > 50 AND shield is True, otherwise print False.
+  starter: 'hp = int(input())
+
+    shield = input() == ''True''
+
+    '
+  tests:
+  - code: assert _stdout.strip() == 'True'
+    stdin: '80
+
+      True'
+    message: 'hp=80 and shield=True: both conditions met, prints True'
+  - code: assert _stdout.strip() == 'False'
+    stdin: '30
+
+      True'
+    message: hp=30 is not > 50, prints False
+- type: mini_code
+  prompt: Read an age with input(). Print True if age is less than 13 OR 18 or above, otherwise print False.
+  starter: 'age = int(input())
+
+    '
+  tests:
+  - code: assert _stdout.strip() == 'False'
+    stdin: '16'
+    message: 16 is not < 13 and not >= 18, prints False
+  - code: assert _stdout.strip() == 'True'
+    stdin: '10'
+    message: 10 is < 13, prints True
+  - code: assert _stdout.strip() == 'True'
+    stdin: '20'
+    message: 20 is >= 18, prints True
 worlds:
   fantasy:
-    title: "The Logic Gate"
+    title: Reading the Weather Logic
+    exercises:
+    - type: concept
+      code: 'altitude = 7
+
+        print(altitude > 0 and altitude < 10)
+
+        print(altitude < 0 or altitude > 5)
+
+        print(not altitude > 10)
+
+        '
+      output: 'True
+
+        True
+
+        True'
+      explanation: Finn checks the climb. and needs both True. or needs one. not flips the flag.
+    - type: mcq
+      question: Finn reads a storm flag. What does this print?
+      code: print(True and False)
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - Error
+      correct: 'False'
+      explanation: and requires both sides True. True and False = False. Storm cancels safe climbing.
+    - type: mcq
+      question: Two trail conditions are checked — only one needs to hold. What does this print?
+      code: print(True or False)
+      choices:
+      - 'True'
+      - 'False'
+      - None
+      - Error
+      correct: 'True'
+      explanation: or only needs one side True. The route is safe if either condition holds.
+    - type: fill_blank
+      prompt: Allow Finn to attempt the summit only when stamina is high enough AND he has a rope.
+      before: 'can_summit = stamina >= 50 '
+      after: ' has_rope'
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both must be True: stamina >= 50 AND has_rope must both hold.'
+    - type: mcq
+      question: Finn checks if stamina is outside the healthy range. What does this print?
+      code: 'stamina = 45
+
+        print(stamina >= 60 or stamina < 50)'
+      choices:
+      - 'True'
+      - 'False'
+      - '45'
+      - None
+      correct: 'True'
+      explanation: stamina >= 60 is False, but stamina < 50 is True. False or True = True.
+    - type: arrange
+      instruction: Build code that prints True when altitude is greater than zero AND less than 100
+      blocks:
+      - print
+      - (
+      - altitude
+      - '>'
+      - '0'
+      - and
+      - altitude
+      - <
+      - '100'
+      - )
+      correct:
+      - print
+      - (
+      - altitude
+      - '>'
+      - '0'
+      - and
+      - altitude
+      - <
+      - '100'
+      - )
+      explanation: Both altitude checks must be True for the safe climbing window.
+    - type: mcq
+      question: Finn flips a danger flag. What does this print?
+      code: 'altitude = 15
+
+        print(not (altitude > 10))'
+      choices:
+      - 'False'
+      - 'True'
+      - '15'
+      - None
+      correct: 'False'
+      explanation: altitude > 10 is True (15 > 10). not True = False.
+    - type: fill_blank
+      prompt: Mark the trail as unsafe when altitude is NOT in the safe range.
+      before: 'is_unsafe = '
+      after: ' (altitude >= 0)'
+      choices:
+      - not
+      - and
+      - or
+      - bool
+      answer: not
+      explanation: not flips the boolean. not True = False means safe.
+    - type: mcq
+      question: Finn logs two trail flags. What does this print?
+      code: 'a = True
+
+        b = False
+
+        print(a and b)
+
+        print(a or b)'
+      choices:
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'False
+
+        False'
+      - 'True
+
+        False'
+      correct: 'False
+
+        True'
+      explanation: True and False = False. True or False = True.
+    - type: mcq
+      question: Which expression is True when altitude is between 1 and 10 (inclusive)?
+      code: ''
+      choices:
+      - x >= 1 and x <= 10
+      - x >= 1 or x <= 10
+      - not x >= 1 and x <= 10
+      - x > 1 and x < 10
+      correct: x >= 1 and x <= 10
+      explanation: 'Both bounds must hold: altitude >= 1 AND <= 10.'
+    - type: mini_code
+      prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
+        print False.
+      starter: 'hp = int(input())
+
+        shield = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: '80
+
+          True'
+        message: 'stamina=80 and rope=True: both hold, summit attempt clear'
+      - code: assert _stdout.strip() == 'False'
+        stdin: '30
+
+          True'
+        message: stamina=30 is not above 50, cannot summit
+    - type: mini_code
+      prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
+      starter: 'age = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '16'
+        message: 16 is in the mid range, prints False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '10'
+        message: 10 is under 13, prints True
+      - code: assert _stdout.strip() == 'True'
+        stdin: '20'
+        message: 20 is 18 or above, prints True
   scifi:
-    title: "System Logic"
+    title: Proximity and Fuel Logic
+    exercises:
+    - type: concept
+      code: 'fuel = 7
+
+        print(fuel > 0 and fuel < 10)
+
+        print(fuel < 0 or fuel > 5)
+
+        print(not fuel > 10)
+
+        '
+      output: 'True
+
+        True
+
+        True'
+      explanation: Zara checks flight conditions. and needs both True. or needs one. not flips the flag.
+    - type: mcq
+      question: Zara reads a collision flag. What does this print?
+      code: print(True and False)
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - Error
+      correct: 'False'
+      explanation: and requires both sides True. True and False = False. Collision alert stays.
+    - type: mcq
+      question: Two navigation conditions are checked. What does this print?
+      code: print(True or False)
+      choices:
+      - 'True'
+      - 'False'
+      - None
+      - Error
+      correct: 'True'
+      explanation: or only needs one side True. A safe route exists if either sensor clears.
+    - type: fill_blank
+      prompt: Allow launch only when fuel is sufficient AND clearance is granted.
+      before: 'can_launch = fuel >= 20 '
+      after: ' clearance'
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both must be True: fuel >= 20 AND clearance must both hold for launch.'
+    - type: mcq
+      question: Zara checks if fuel is outside the normal range. What does this print?
+      code: 'fuel = 45
+
+        print(fuel >= 60 or fuel < 50)'
+      choices:
+      - 'True'
+      - 'False'
+      - '45'
+      - None
+      correct: 'True'
+      explanation: fuel >= 60 is False, but fuel < 50 is True. False or True = True.
+    - type: arrange
+      instruction: Build code that prints True when distance is greater than zero AND less than 100
+      blocks:
+      - print
+      - (
+      - distance
+      - '>'
+      - '0'
+      - and
+      - distance
+      - <
+      - '100'
+      - )
+      correct:
+      - print
+      - (
+      - distance
+      - '>'
+      - '0'
+      - and
+      - distance
+      - <
+      - '100'
+      - )
+      explanation: Both distance checks must be True for a safe flight corridor.
+    - type: mcq
+      question: Zara flips a proximity alert. What does this print?
+      code: 'distance = 15
+
+        print(not (distance > 10))'
+      choices:
+      - 'False'
+      - 'True'
+      - '15'
+      - None
+      correct: 'False'
+      explanation: distance > 10 is True. not True = False. No proximity alert.
+    - type: fill_blank
+      prompt: Mark the sector as unsafe when distance is NOT in the safe range.
+      before: 'is_unsafe = '
+      after: ' (distance >= 0)'
+      choices:
+      - not
+      - and
+      - or
+      - bool
+      answer: not
+      explanation: not flips the boolean. not True = False means the sector is clear.
+    - type: mcq
+      question: Zara logs two sensor flags. What does this print?
+      code: 'a = True
+
+        b = False
+
+        print(a and b)
+
+        print(a or b)'
+      choices:
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'False
+
+        False'
+      - 'True
+
+        False'
+      correct: 'False
+
+        True'
+      explanation: True and False = False. True or False = True. Sensor readings are mixed.
+    - type: mcq
+      question: Which expression is True when a reading is between 1 and 10 (inclusive)?
+      code: ''
+      choices:
+      - x >= 1 and x <= 10
+      - x >= 1 or x <= 10
+      - not x >= 1 and x <= 10
+      - x > 1 and x < 10
+      correct: x >= 1 and x <= 10
+      explanation: 'Both bounds must hold: reading >= 1 AND <= 10.'
+    - type: mini_code
+      prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
+        print False.
+      starter: 'hp = int(input())
+
+        shield = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: '80
+
+          True'
+        message: 'hull=80 and shields=True: all systems clear'
+      - code: assert _stdout.strip() == 'False'
+        stdin: '30
+
+          True'
+        message: hull=30 is not above 50, proximity alert active
+    - type: mini_code
+      prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
+      starter: 'age = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '16'
+        message: 16 is in the middle band, prints False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '10'
+        message: 10 is under 13, prints True
+      - code: assert _stdout.strip() == 'True'
+        stdin: '20'
+        message: 20 is 18 or above, prints True
   mystery:
-    title: "Deductive Reasoning"
+    title: Evaluating the Evidence Logic
+    exercises:
+    - type: concept
+      code: 'clue_count = 7
+
+        print(clue_count > 0 and clue_count < 10)
+
+        print(clue_count < 0 or clue_count > 5)
+
+        print(not clue_count > 10)
+
+        '
+      output: 'True
+
+        True
+
+        True'
+      explanation: Cole checks the evidence. and needs both True. or needs one. not flips the result.
+    - type: mcq
+      question: Cole tests an alibi flag. What does this print?
+      code: print(True and False)
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - Error
+      correct: 'False'
+      explanation: and requires both sides True. True and False = False. The alibi does not hold.
+    - type: mcq
+      question: Cole evaluates two witness statements. What does this print?
+      code: print(True or False)
+      choices:
+      - 'True'
+      - 'False'
+      - None
+      - Error
+      correct: 'True'
+      explanation: or only needs one side True. At least one statement checks out.
+    - type: fill_blank
+      prompt: Confirm a suspect only when motive is confirmed AND the alibi is broken.
+      before: 'is_suspect = motive_confirmed '
+      after: ' alibi_broken'
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both must be True: motive confirmed AND alibi broken.'
+    - type: mcq
+      question: Cole checks if an evidence count is outside the expected range. What does this print?
+      code: 'evidence = 45
+
+        print(evidence >= 60 or evidence < 50)'
+      choices:
+      - 'True'
+      - 'False'
+      - '45'
+      - None
+      correct: 'True'
+      explanation: evidence >= 60 is False, but evidence < 50 is True. False or True = True.
+    - type: arrange
+      instruction: Build code that prints True when evidence count is greater than zero AND less than 100
+      blocks:
+      - print
+      - (
+      - evidence
+      - '>'
+      - '0'
+      - and
+      - evidence
+      - <
+      - '100'
+      - )
+      correct:
+      - print
+      - (
+      - evidence
+      - '>'
+      - '0'
+      - and
+      - evidence
+      - <
+      - '100'
+      - )
+      explanation: Both bounds on the evidence count must hold.
+    - type: mcq
+      question: Cole flips an alibi status. What does this print?
+      code: 'alibis = 15
+
+        print(not (alibis > 10))'
+      choices:
+      - 'False'
+      - 'True'
+      - '15'
+      - None
+      correct: 'False'
+      explanation: alibis > 10 is True. not True = False.
+    - type: fill_blank
+      prompt: Flag a statement as unreliable when it is NOT within the valid range.
+      before: 'is_unreliable = '
+      after: ' (evidence >= 0)'
+      choices:
+      - not
+      - and
+      - or
+      - bool
+      answer: not
+      explanation: not flips the boolean. not True = False means valid.
+    - type: mcq
+      question: Cole logs two investigation flags. What does this print?
+      code: 'a = True
+
+        b = False
+
+        print(a and b)
+
+        print(a or b)'
+      choices:
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'False
+
+        False'
+      - 'True
+
+        False'
+      correct: 'False
+
+        True'
+      explanation: True and False = False. True or False = True.
+    - type: mcq
+      question: Which expression is True when a suspect score is between 1 and 10 (inclusive)?
+      code: ''
+      choices:
+      - x >= 1 and x <= 10
+      - x >= 1 or x <= 10
+      - not x >= 1 and x <= 10
+      - x > 1 and x < 10
+      correct: x >= 1 and x <= 10
+      explanation: Both bounds must hold.
+    - type: mini_code
+      prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
+        print False.
+      starter: 'hp = int(input())
+
+        shield = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: '80
+
+          True'
+        message: 'evidence=80 and alibi_broken=True: suspect confirmed'
+      - code: assert _stdout.strip() == 'False'
+        stdin: '30
+
+          True'
+        message: evidence=30 is not above 50, case incomplete
+    - type: mini_code
+      prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
+      starter: 'age = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '16'
+        message: 16 is in the mid range, prints False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '10'
+        message: 10 is under 13, prints True
+      - code: assert _stdout.strip() == 'True'
+        stdin: '20'
+        message: 20 is 18 or above, prints True

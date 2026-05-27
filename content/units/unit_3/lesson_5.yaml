@@ -1,115 +1,657 @@
-title: "Nested if"
+title: Nested if
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      role = "admin"
-      verified = True
-      if role == "admin":
-          if verified:
-              print("Full access")
-          else:
-              print("Verify first")
-      else:
-          print("No access")
-    output: "Full access"
-    explanation: "An if inside another if is called nested. Each inner block indents one more level. Both conditions must pass to reach the inner code."
+- type: concept
+  code: "role = \"admin\"\nverified = True\nif role == \"admin\":\n    if verified:\n        print(\"Full access\")\n    else:\n\
+    \        print(\"Verify first\")\nelse:\n    print(\"No access\")\n"
+  output: Full access
+  explanation: An if inside another if is called nested. Each inner block indents one more level. Both conditions must pass
+    to reach the inner code.
+- type: mcq
+  question: What does this print?
+  code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
+  choices:
+  - big
+  - medium
+  - Nothing
+  - 'big
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
-    choices: ["big", "medium", "Nothing", "big\nmedium"]
-    correct: "big"
-    explanation: "x > 5 is True, so we enter the outer if. x > 8 is True (10 > 8), so 'big' prints."
+    medium'
+  correct: big
+  explanation: x > 5 is True, so we enter the outer if. x > 8 is True (10 > 8), so 'big' prints.
+- type: fill_blank
+  prompt: Add an inner check that only runs once we know the user is logged in.
+  before: "if logged_in:\n    "
+  after: " is_admin:\n        print(\"admin panel\")"
+  choices:
+  - if
+  - elif
+  - else
+  - and
+  answer: if
+  explanation: A nested if inside the outer if adds an extra condition check.
+- type: mcq
+  question: What does this print?
+  code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
+  choices:
+  - both
+  - only a
+  - Nothing
+  - only b
+  correct: both
+  explanation: a < 5 is True (3 < 5). b > 5 is True (7 > 5). 'both' prints.
+- type: arrange
+  instruction: Build nested code that prints 'veteran' only when active is True and level is greater than 5
+  blocks:
+  - if
+  - active
+  - ':'
+  - if
+  - level
+  - '>'
+  - '5'
+  - ':'
+  - print
+  - (
+  - '"veteran"'
+  - )
+  correct:
+  - if
+  - active
+  - ':'
+  - if
+  - level
+  - '>'
+  - '5'
+  - ':'
+  - print
+  - (
+  - '"veteran"'
+  - )
+  explanation: The inner if is indented inside the outer if block.
+- type: mcq
+  question: What does this print?
+  code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\nelse:\n\
+    \    print(\"fail\")"
+  choices:
+  - pass
+  - A
+  - fail
+  - 'A
 
-  - type: fill_blank
-    prompt: "Add an inner check that only runs once we know the user is logged in."
-    before: "if logged_in:\n    "
-    after: " is_admin:\n        print(\"admin panel\")"
-    choices: ["if", "elif", "else", "and"]
-    answer: "if"
-    explanation: "A nested if inside the outer if adds an extra condition check."
+    pass'
+  correct: pass
+  explanation: 'score >= 60 is True. score >= 90 is False (70 < 90). So else inside runs: ''pass''.'
+- type: fill_blank
+  prompt: Handle the case where the weapon is equipped but ammo has run out.
+  before: "if weapon_equipped:\n    if ammo > 0:\n        print(\"fire!\")\n    "
+  after: ":\n        print(\"no ammo\")"
+  choices:
+  - else
+  - elif
+  - if
+  - or
+  answer: else
+  explanation: The inner else catches when ammo is 0 (while weapon is still equipped).
+- type: mcq
+  question: What does this print?
+  code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
+    mid\")\n    else:\n        print(\"low\")"
+  choices:
+  - mid
+  - deep
+  - low
+  - Nothing
+  correct: mid
+  explanation: 'x > 1: True. x > 2: True. x > 3: False. So innermost else runs: ''mid''.'
+- type: mcq
+  question: When can you replace nested if with a single if using and?
+  code: ''
+  choices:
+  - When both conditions must be True for the same action
+  - When they have different else branches
+  - Never — nested if is always clearer
+  - When the inner if has an elif
+  correct: When both conditions must be True for the same action
+  explanation: 'if a and b: ... is equivalent to if a: if b: ... when there''s no inner else.'
+- type: mini_code
+  prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is 'admin'
+    AND active is True. Print nothing otherwise.
+  starter: 'role = input()
 
-  - type: mcq
-    question: "What does this print?"
-    code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
-    choices: ["both", "only a", "Nothing", "only b"]
-    correct: "both"
-    explanation: "a < 5 is True (3 < 5). b > 5 is True (7 > 5). 'both' prints."
+    active = input() == ''True''
 
-  - type: arrange
-    instruction: "Build nested code that prints 'veteran' only when active is True and level is greater than 5"
-    blocks: ["if", "active", ":", "if", "level", ">", "5", ":", "print", "(", "\"veteran\"", ")"]
-    correct: ["if", "active", ":", "if", "level", ">", "5", ":", "print", "(", "\"veteran\"", ")"]
-    explanation: "The inner if is indented inside the outer if block."
+    '
+  tests:
+  - code: assert 'admin active' in _stdout
+    stdin: 'admin
 
-  - type: mcq
-    question: "What does this print?"
-    code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\nelse:\n    print(\"fail\")"
-    choices: ["pass", "A", "fail", "A\npass"]
-    correct: "pass"
-    explanation: "score >= 60 is True. score >= 90 is False (70 < 90). So else inside runs: 'pass'."
+      True'
+    message: 'role=admin, active=True: prints ''admin active'''
+  - code: assert _stdout.strip() == ''
+    stdin: 'admin
 
-  - type: fill_blank
-    prompt: "Handle the case where the weapon is equipped but ammo has run out."
-    before: "if weapon_equipped:\n    if ammo > 0:\n        print(\"fire!\")\n    "
-    after: ":\n        print(\"no ammo\")"
-    choices: ["else", "elif", "if", "or"]
-    answer: "else"
-    explanation: "The inner else catches when ammo is 0 (while weapon is still equipped)."
+      False'
+    message: 'role=admin but active=False: prints nothing'
+  - code: assert _stdout.strip() == ''
+    stdin: 'user
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"mid\")\n    else:\n        print(\"low\")"
-    choices: ["mid", "deep", "low", "Nothing"]
-    correct: "mid"
-    explanation: "x > 1: True. x > 2: True. x > 3: False. So innermost else runs: 'mid'."
+      True'
+    message: 'role is not ''admin'': prints nothing'
+- type: mini_code
+  prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A' if
+    score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
+  starter: 'score = int(input())
 
-  - type: mcq
-    question: "When can you replace nested if with a single if using and?"
-    code: ""
-    choices: [
-      "When both conditions must be True for the same action",
-      "When they have different else branches",
-      "Never — nested if is always clearer",
-      "When the inner if has an elif"
-    ]
-    correct: "When both conditions must be True for the same action"
-    explanation: "if a and b: ... is equivalent to if a: if b: ... when there's no inner else."
+    bonus = input() == ''True''
 
-  - type: mini_code
-    prompt: "Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is 'admin' AND active is True. Print nothing otherwise."
-    starter: "role = input()\nactive = input() == 'True'\n"
-    tests:
-      - code: "assert 'admin active' in _stdout"
-        stdin: "admin\nTrue"
-        message: "role=admin, active=True: prints 'admin active'"
-      - code: "assert _stdout.strip() == ''"
-        stdin: "admin\nFalse"
-        message: "role=admin but active=False: prints nothing"
-      - code: "assert _stdout.strip() == ''"
-        stdin: "user\nTrue"
-        message: "role is not 'admin': prints nothing"
+    '
+  tests:
+  - code: assert _stdout.strip() == 'A+'
+    stdin: '85
 
-  - type: mini_code
-    prompt: "Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A' if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if."
-    starter: "score = int(input())\nbonus = input() == 'True'\n"
-    tests:
-      - code: "assert _stdout.strip() == 'A+'"
-        stdin: "85\nTrue"
-        message: "score=85, bonus=True: prints 'A+'"
-      - code: "assert _stdout.strip() == 'A'"
-        stdin: "85\nFalse"
-        message: "score=85, bonus=False: prints 'A'"
-      - code: "assert _stdout.strip() == ''"
-        stdin: "70\nTrue"
-        message: "score=70 is below 80: prints nothing"
+      True'
+    message: 'score=85, bonus=True: prints ''A+'''
+  - code: assert _stdout.strip() == 'A'
+    stdin: '85
 
+      False'
+    message: 'score=85, bonus=False: prints ''A'''
+  - code: assert _stdout.strip() == ''
+    stdin: '70
+
+      True'
+    message: 'score=70 is below 80: prints nothing'
 worlds:
   fantasy:
-    title: "The Nested Gates"
+    title: Layered Battle Choices
+    exercises:
+    - type: concept
+      code: "beast_type = \"dragon\"\nbreath_weapon = True\nif beast_type == \"dragon\":\n    if breath_weapon:\n        print(\"\
+        Dodge and roll!\")\n    else:\n        print(\"Stand firm\")\nelse:\n    print(\"Observe and wait\")\n"
+      output: Dodge and roll!
+      explanation: Kira uses a nested if. The outer check identifies the dragon. The inner check confirms its breath weapon.
+        Both must pass to trigger the dodge.
+    - type: mcq
+      question: Kira checks creature size and threat. What does this print?
+      code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
+      choices:
+      - big
+      - medium
+      - Nothing
+      - 'big
+
+        medium'
+      correct: big
+      explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+    - type: fill_blank
+      prompt: Add an inner check that only runs once we know the creature is in sight.
+      before: "if in_sight:\n    "
+      after: " is_hostile:\n        print(\"attack\")"
+      choices:
+      - if
+      - elif
+      - else
+      - and
+      answer: if
+      explanation: A nested if inside the outer if adds an extra condition for hostility.
+    - type: mcq
+      question: Kira evaluates two creature stats. What does this print?
+      code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
+      choices:
+      - both
+      - only a
+      - Nothing
+      - only b
+      correct: both
+      explanation: a < 5 is True. b > 5 is True. "both" prints.
+    - type: arrange
+      instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
+      blocks:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      correct:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      explanation: The inner if is indented inside the outer if block.
+    - type: mcq
+      question: Kira assesses a creature threat level. What does this print?
+      code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
+        else:\n    print(\"fail\")"
+      choices:
+      - pass
+      - A
+      - fail
+      - 'A
+
+        pass'
+      correct: pass
+      explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+    - type: fill_blank
+      prompt: Handle the case where the bow is drawn but the quiver is empty.
+      before: "if bow_drawn:\n    if arrows > 0:\n        print(\"fire!\")\n    "
+      after: ":\n        print(\"no arrows\")"
+      choices:
+      - else
+      - elif
+      - if
+      - or
+      answer: else
+      explanation: The inner else catches when arrows = 0 while the bow is still drawn.
+    - type: mcq
+      question: Kira checks three layers of creature threat. What does this print?
+      code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
+        mid\")\n    else:\n        print(\"low\")"
+      choices:
+      - mid
+      - deep
+      - low
+      - Nothing
+      correct: mid
+      explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+    - type: mcq
+      question: When can you replace nested if with a single if using and?
+      code: ''
+      choices:
+      - When both conditions must be True for the same action
+      - When they have different else branches
+      - Never — nested if is always clearer
+      - When the inner if has an elif
+      correct: When both conditions must be True for the same action
+      explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+    - type: mini_code
+      prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
+        'admin' AND active is True. Print nothing otherwise.
+      starter: 'role = input()
+
+        active = input() == ''True''
+
+        '
+      tests:
+      - code: assert 'admin active' in _stdout
+        stdin: 'admin
+
+          True'
+        message: 'beast_type=dragon, active=True: Kira acts'
+      - code: assert _stdout.strip() == ''
+        stdin: 'admin
+
+          False'
+        message: 'beast_type=dragon but active=False: no action'
+      - code: assert _stdout.strip() == ''
+        stdin: 'user
+
+          True'
+        message: 'beast_type not dragon: no action'
+    - type: mini_code
+      prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
+        if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
+      starter: 'score = int(input())
+
+        bonus = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'A+'
+        stdin: '85
+
+          True'
+        message: 'threat=85, rare_relic=True: top rating'
+      - code: assert _stdout.strip() == 'A'
+        stdin: '85
+
+          False'
+        message: 'threat=85, no relic: standard rating'
+      - code: assert _stdout.strip() == ''
+        stdin: '70
+
+          True'
+        message: 'threat=70 is below 80: no rating'
   scifi:
-    title: "Multi-Level Access"
+    title: Multi-Level Launch Checks
+    exercises:
+    - type: concept
+      code: "access = \"captain\"\nverified = True\nif access == \"captain\":\n    if verified:\n        print(\"Full launch\
+        \ authority\")\n    else:\n        print(\"Verify identity first\")\nelse:\n    print(\"Access denied\")\n"
+      output: Full launch authority
+      explanation: Voss uses nested if. The outer check confirms captain rank. The inner check confirms identity. Both must
+        pass.
+    - type: mcq
+      question: Voss checks hull rating and fuel level. What does this print?
+      code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
+      choices:
+      - big
+      - medium
+      - Nothing
+      - 'big
+
+        medium'
+      correct: big
+      explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+    - type: fill_blank
+      prompt: Add an inner check that only runs once we know the crew is on board.
+      before: "if crew_aboard:\n    "
+      after: " systems_ready:\n        print(\"launch\")"
+      choices:
+      - if
+      - elif
+      - else
+      - and
+      answer: if
+      explanation: A nested if inside the outer if checks if systems are also ready.
+    - type: mcq
+      question: Voss evaluates two flight parameters. What does this print?
+      code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
+      choices:
+      - both
+      - only a
+      - Nothing
+      - only b
+      correct: both
+      explanation: a < 5 is True. b > 5 is True. "both" prints.
+    - type: arrange
+      instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
+      blocks:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      correct:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      explanation: The inner if is indented inside the outer if block.
+    - type: mcq
+      question: Voss rates hull integrity. What does this print?
+      code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
+        else:\n    print(\"fail\")"
+      choices:
+      - pass
+      - A
+      - fail
+      - 'A
+
+        pass'
+      correct: pass
+      explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+    - type: fill_blank
+      prompt: Handle the case where engines are armed but fuel has run out.
+      before: "if engines_armed:\n    if fuel > 0:\n        print(\"ignite!\")\n    "
+      after: ":\n        print(\"no fuel\")"
+      choices:
+      - else
+      - elif
+      - if
+      - or
+      answer: else
+      explanation: The inner else catches when fuel = 0 while engines are still armed.
+    - type: mcq
+      question: Voss checks three layers of launch readiness. What does this print?
+      code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
+        mid\")\n    else:\n        print(\"low\")"
+      choices:
+      - mid
+      - deep
+      - low
+      - Nothing
+      correct: mid
+      explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+    - type: mcq
+      question: When can you replace nested if with a single if using and?
+      code: ''
+      choices:
+      - When both conditions must be True for the same action
+      - When they have different else branches
+      - Never — nested if is always clearer
+      - When the inner if has an elif
+      correct: When both conditions must be True for the same action
+      explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+    - type: mini_code
+      prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
+        'admin' AND active is True. Print nothing otherwise.
+      starter: 'role = input()
+
+        active = input() == ''True''
+
+        '
+      tests:
+      - code: assert 'admin active' in _stdout
+        stdin: 'admin
+
+          True'
+        message: 'rank=captain, verified=True: full authority granted'
+      - code: assert _stdout.strip() == ''
+        stdin: 'admin
+
+          False'
+        message: 'rank=captain but not verified: denied'
+      - code: assert _stdout.strip() == ''
+        stdin: 'user
+
+          True'
+        message: 'rank is not captain: denied'
+    - type: mini_code
+      prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
+        if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
+      starter: 'score = int(input())
+
+        bonus = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'A+'
+        stdin: '85
+
+          True'
+        message: 'hull=85, turbo_boost=True: elite rating'
+      - code: assert _stdout.strip() == 'A'
+        stdin: '85
+
+          False'
+        message: 'hull=85, no boost: standard rating'
+      - code: assert _stdout.strip() == ''
+        stdin: '70
+
+          True'
+        message: 'hull=70 is below 80: no rating'
   mystery:
-    title: "Layered Clues"
+    title: Layered Clue Checks
+    exercises:
+    - type: concept
+      code: "rank = \"inspector\"\ncleared = True\nif rank == \"inspector\":\n    if cleared:\n        print(\"Full access\"\
+        )\n    else:\n        print(\"Verify clearance first\")\nelse:\n    print(\"No access\")\n"
+      output: Full access
+      explanation: Cole uses nested if. The outer check confirms inspector rank. The inner check confirms clearance. Both
+        must pass.
+    - type: mcq
+      question: Cole checks two layers of suspect data. What does this print?
+      code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
+      choices:
+      - big
+      - medium
+      - Nothing
+      - 'big
+
+        medium'
+      correct: big
+      explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+    - type: fill_blank
+      prompt: Add an inner check that only runs once we know the drawer is unlocked.
+      before: "if drawer_unlocked:\n    "
+      after: " key_matches:\n        print(\"evidence found\")"
+      choices:
+      - if
+      - elif
+      - else
+      - and
+      answer: if
+      explanation: A nested if inside the outer if checks if the key also matches.
+    - type: mcq
+      question: Cole checks two pieces of evidence. What does this print?
+      code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
+      choices:
+      - both
+      - only a
+      - Nothing
+      - only b
+      correct: both
+      explanation: a < 5 is True. b > 5 is True. "both" prints.
+    - type: arrange
+      instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
+      blocks:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      correct:
+      - if
+      - active
+      - ':'
+      - if
+      - level
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"veteran"'
+      - )
+      explanation: The inner if is indented inside the outer if.
+    - type: mcq
+      question: Cole rates a suspect credibility score. What does this print?
+      code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
+        else:\n    print(\"fail\")"
+      choices:
+      - pass
+      - A
+      - fail
+      - 'A
+
+        pass'
+      correct: pass
+      explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+    - type: fill_blank
+      prompt: Handle the case where the safe is open but the document has already been removed.
+      before: "if safe_open:\n    if documents > 0:\n        print(\"evidence secured!\")\n    "
+      after: ":\n        print(\"already taken\")"
+      choices:
+      - else
+      - elif
+      - if
+      - or
+      answer: else
+      explanation: The inner else catches when documents = 0 while the safe is open.
+    - type: mcq
+      question: Cole checks three levels of evidence quality. What does this print?
+      code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
+        mid\")\n    else:\n        print(\"low\")"
+      choices:
+      - mid
+      - deep
+      - low
+      - Nothing
+      correct: mid
+      explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+    - type: mcq
+      question: When can you replace nested if with a single if using and?
+      code: ''
+      choices:
+      - When both conditions must be True for the same action
+      - When they have different else branches
+      - Never — nested if is always clearer
+      - When the inner if has an elif
+      correct: When both conditions must be True for the same action
+      explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+    - type: mini_code
+      prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
+        'admin' AND active is True. Print nothing otherwise.
+      starter: 'role = input()
+
+        active = input() == ''True''
+
+        '
+      tests:
+      - code: assert 'admin active' in _stdout
+        stdin: 'admin
+
+          True'
+        message: 'rank=inspector, cleared=True: full access'
+      - code: assert _stdout.strip() == ''
+        stdin: 'admin
+
+          False'
+        message: 'rank=inspector but not cleared: denied'
+      - code: assert _stdout.strip() == ''
+        stdin: 'user
+
+          True'
+        message: 'rank is not inspector: denied'
+    - type: mini_code
+      prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
+        if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
+      starter: 'score = int(input())
+
+        bonus = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'A+'
+        stdin: '85
+
+          True'
+        message: 'evidence=85, key_witness=True: top grade'
+      - code: assert _stdout.strip() == 'A'
+        stdin: '85
+
+          False'
+        message: 'evidence=85, no key witness: standard grade'
+      - code: assert _stdout.strip() == ''
+        stdin: '70
+
+          True'
+        message: 'evidence=70 is below 80: insufficient'

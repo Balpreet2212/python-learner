@@ -143,7 +143,7 @@ def load_lesson(unit: int, lesson: int, world: str) -> LessonContent | None:
     data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
     world_data = _resolve_world(data, world)
 
-    raw_exercises: list[dict[str, Any]] = data.get("exercises", [])
+    raw_exercises: list[dict[str, Any]] = world_data.get("exercises") or data.get("exercises", [])
     exercises = [_parse_exercise(e) for e in raw_exercises]
 
     return LessonContent(

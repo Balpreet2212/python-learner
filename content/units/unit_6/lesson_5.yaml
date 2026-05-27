@@ -1,97 +1,709 @@
-title: "List Comprehensions"
+title: List Comprehensions
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      numbers = [1, 2, 3, 4, 5]
-      squares = [n * n for n in numbers]
-      evens = [n for n in numbers if n % 2 == 0]
-      print(squares)
-      print(evens)
-    output: "[1, 4, 9, 16, 25]\n[2, 4]"
-    explanation: "A list comprehension builds a new list in one line: [expression for item in list]. Add if condition to filter items."
+- type: concept
+  code: 'numbers = [1, 2, 3, 4, 5]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "nums = [1, 2, 3, 4]\ndoubled = [x * 2 for x in nums]\nprint(doubled)"
-    choices: ["[2, 4, 6, 8]", "[1, 2, 3, 4]", "[1, 4, 9, 16]", "[2, 4]"]
-    correct: "[2, 4, 6, 8]"
-    explanation: "Each x is multiplied by 2. Result: [2, 4, 6, 8]."
+    squares = [n * n for n in numbers]
 
-  - type: fill_blank
-    prompt: "Pass each word to len() to build a list of character counts."
-    before: "words = ['hi', 'hello', 'hey']\nlengths = [len("
-    after: ") for w in words]\nprint(lengths)"
-    choices: ["w", "words", "len", "x"]
-    answer: "w"
-    explanation: "len(w) computes the length of each word. Result: [2, 5, 3]."
+    evens = [n for n in numbers if n % 2 == 0]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "nums = [1, 2, 3, 4, 5, 6]\nodds = [n for n in nums if n % 2 != 0]\nprint(odds)"
-    choices: ["[1, 3, 5]", "[2, 4, 6]", "[1, 2, 3, 4, 5, 6]", "[1, 3, 5, 7]"]
-    correct: "[1, 3, 5]"
-    explanation: "n % 2 != 0 filters odd numbers: 1, 3, 5."
+    print(squares)
 
-  - type: arrange
-    instruction: "Build a list of squares of numbers from 1 to 5 using a comprehension"
-    blocks: ["squares", "=", "[", "n", "*", "n", "for", "n", "in", "range", "(", "1", ",", "6", ")", "]", "print", "(", "squares", ")"]
-    correct: ["squares", "=", "[", "n", "*", "n", "for", "n", "in", "range", "(", "1", ",", "6", ")", "]", "print", "(", "squares", ")"]
-    explanation: "range(1, 6) gives 1 through 5. n * n squares each one."
+    print(evens)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "names = ['alice', 'bob', 'carol']\nupper = [n.upper() for n in names]\nprint(upper)"
-    choices: ["['ALICE', 'BOB', 'CAROL']", "['alice', 'bob', 'carol']", "ALICE\nBOB\nCAROL", "['Alice', 'Bob', 'Carol']"]
-    correct: "['ALICE', 'BOB', 'CAROL']"
-    explanation: ".upper() converts each name to uppercase. The result is a new list."
+    '
+  output: '[1, 4, 9, 16, 25]
 
-  - type: fill_blank
-    prompt: "Filter the list to keep only numbers greater than 5."
-    before: "nums = [1, 2, 3, 4, 5, 6, 7, 8]\nbig = [n for n in nums if n "
-    after: " 5]\nprint(big)"
-    choices: [">", "<", "==", "!="]
-    answer: ">"
-    explanation: "n > 5 filters to numbers greater than 5: [6, 7, 8]."
+    [2, 4]'
+  explanation: 'A list comprehension builds a new list in one line: [expression for item in list]. Add if condition to filter
+    items.'
+- type: mcq
+  question: What does this print?
+  code: 'nums = [1, 2, 3, 4]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "prices = [10, 25, 5, 30, 15]\nunder_20 = [p for p in prices if p < 20]\nprint(len(under_20))"
-    choices: ["3", "2", "5", "4"]
-    correct: "3"
-    explanation: "10, 5, 15 are under 20. len([10, 5, 15]) = 3."
+    doubled = [x * 2 for x in nums]
 
-  - type: mcq
-    question: "What is the equivalent loop for [x**2 for x in range(4)]?"
-    code: ""
-    choices: [
-      "result = []\nfor x in range(4):\n    result.append(x**2)",
-      "for x in range(4):\n    x**2",
-      "result = x**2 for x in range(4)",
-      "result = [x**2 while x < 4]"
-    ]
-    correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
-    explanation: "A comprehension is shorthand for creating an empty list, looping, and appending."
+    print(doubled)'
+  choices:
+  - '[2, 4, 6, 8]'
+  - '[1, 2, 3, 4]'
+  - '[1, 4, 9, 16]'
+  - '[2, 4]'
+  correct: '[2, 4, 6, 8]'
+  explanation: 'Each x is multiplied by 2. Result: [2, 4, 6, 8].'
+- type: fill_blank
+  prompt: Pass each word to len() to build a list of character counts.
+  before: 'words = [''hi'', ''hello'', ''hey'']
 
-  - type: mini_code
-    prompt: "Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list."
-    starter: ""
-    tests:
-      - code: "eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]"
-        message: "Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]"
+    lengths = [len('
+  after: ') for w in words]
 
-  - type: mini_code
-    prompt: "Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it."
-    starter: "temps = [22, 35, 18, 41, 28, 15]"
-    tests:
-      - code: "eval(_stdout.strip()) == [35, 41, 28]"
-        message: "Should be [35, 41, 28]"
+    print(lengths)'
+  choices:
+  - w
+  - words
+  - len
+  - x
+  answer: w
+  explanation: 'len(w) computes the length of each word. Result: [2, 5, 3].'
+- type: mcq
+  question: What does this print?
+  code: 'nums = [1, 2, 3, 4, 5, 6]
 
+    odds = [n for n in nums if n % 2 != 0]
+
+    print(odds)'
+  choices:
+  - '[1, 3, 5]'
+  - '[2, 4, 6]'
+  - '[1, 2, 3, 4, 5, 6]'
+  - '[1, 3, 5, 7]'
+  correct: '[1, 3, 5]'
+  explanation: 'n % 2 != 0 filters odd numbers: 1, 3, 5.'
+- type: arrange
+  instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
+  blocks:
+  - squares
+  - '='
+  - '['
+  - n
+  - '*'
+  - n
+  - for
+  - n
+  - in
+  - range
+  - (
+  - '1'
+  - ','
+  - '6'
+  - )
+  - ']'
+  - print
+  - (
+  - squares
+  - )
+  correct:
+  - squares
+  - '='
+  - '['
+  - n
+  - '*'
+  - n
+  - for
+  - n
+  - in
+  - range
+  - (
+  - '1'
+  - ','
+  - '6'
+  - )
+  - ']'
+  - print
+  - (
+  - squares
+  - )
+  explanation: range(1, 6) gives 1 through 5. n * n squares each one.
+- type: mcq
+  question: What does this print?
+  code: 'names = [''alice'', ''bob'', ''carol'']
+
+    upper = [n.upper() for n in names]
+
+    print(upper)'
+  choices:
+  - '[''ALICE'', ''BOB'', ''CAROL'']'
+  - '[''alice'', ''bob'', ''carol'']'
+  - 'ALICE
+
+    BOB
+
+    CAROL'
+  - '[''Alice'', ''Bob'', ''Carol'']'
+  correct: '[''ALICE'', ''BOB'', ''CAROL'']'
+  explanation: .upper() converts each name to uppercase. The result is a new list.
+- type: fill_blank
+  prompt: Filter the list to keep only numbers greater than 5.
+  before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    big = [n for n in nums if n '
+  after: ' 5]
+
+    print(big)'
+  choices:
+  - '>'
+  - <
+  - ==
+  - '!='
+  answer: '>'
+  explanation: 'n > 5 filters to numbers greater than 5: [6, 7, 8].'
+- type: mcq
+  question: What does this print?
+  code: 'prices = [10, 25, 5, 30, 15]
+
+    under_20 = [p for p in prices if p < 20]
+
+    print(len(under_20))'
+  choices:
+  - '3'
+  - '2'
+  - '5'
+  - '4'
+  correct: '3'
+  explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+- type: mcq
+  question: What is the equivalent loop for [x**2 for x in range(4)]?
+  code: ''
+  choices:
+  - "result = []\nfor x in range(4):\n    result.append(x**2)"
+  - "for x in range(4):\n    x**2"
+  - result = x**2 for x in range(4)
+  - result = [x**2 while x < 4]
+  correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
+  explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+- type: mini_code
+  prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
+  starter: ''
+  tests:
+  - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+    message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+- type: mini_code
+  prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
+  starter: temps = [22, 35, 18, 41, 28, 15]
+  tests:
+  - code: eval(_stdout.strip()) == [35, 41, 28]
+    message: Should be [35, 41, 28]
 worlds:
   fantasy:
-    title: "The Enchanted Filter"
+    title: The Enchanted Filter
+    exercises:
+    - type: concept
+      code: 'numbers = [1, 2, 3, 4, 5]
+
+        squares = [n * n for n in numbers]
+
+        evens = [n for n in numbers if n % 2 == 0]
+
+        print(squares)
+
+        print(evens)
+
+        '
+      output: '[1, 4, 9, 16, 25]
+
+        [2, 4]'
+      explanation: 'Elara filters and transforms ingredients in one line. A comprehension builds a new list: [expression for
+        item in list]. Add if to filter.'
+    - type: mcq
+      question: Elara doubles each potion strength. What does this print?
+      code: 'nums = [1, 2, 3, 4]
+
+        doubled = [x * 2 for x in nums]
+
+        print(doubled)'
+      choices:
+      - '[2, 4, 6, 8]'
+      - '[1, 2, 3, 4]'
+      - '[1, 4, 9, 16]'
+      - '[2, 4]'
+      correct: '[2, 4, 6, 8]'
+      explanation: 'Each x is multiplied by 2. Result: [2, 4, 6, 8].'
+    - type: fill_blank
+      prompt: Pass each spell word to len() to build a list of character counts.
+      before: 'words = [''hi'', ''hello'', ''hey'']
+
+        lengths = [len('
+      after: ') for w in words]
+
+        print(lengths)'
+      choices:
+      - w
+      - words
+      - len
+      - x
+      answer: w
+      explanation: 'len(w) computes the length of each spell word. Result: [2, 5, 3].'
+    - type: mcq
+      question: Elara collects only the odd-numbered ingredient counts. What does this print?
+      code: 'nums = [1, 2, 3, 4, 5, 6]
+
+        odds = [n for n in nums if n % 2 != 0]
+
+        print(odds)'
+      choices:
+      - '[1, 3, 5]'
+      - '[2, 4, 6]'
+      - '[1, 2, 3, 4, 5, 6]'
+      - '[1, 3, 5, 7]'
+      correct: '[1, 3, 5]'
+      explanation: 'n % 2 != 0 filters odd numbers: 1, 3, 5.'
+    - type: arrange
+      instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
+      blocks:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      correct:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      explanation: range(1, 6) gives 1 through 5. n * n squares each ingredient count.
+    - type: mcq
+      question: Elara capitalises all ingredient names. What does this print?
+      code: 'names = [''alice'', ''bob'', ''carol'']
+
+        upper = [n.upper() for n in names]
+
+        print(upper)'
+      choices:
+      - '[''ALICE'', ''BOB'', ''CAROL'']'
+      - '[''alice'', ''bob'', ''carol'']'
+      - 'ALICE
+
+        BOB
+
+        CAROL'
+      - '[''Alice'', ''Bob'', ''Carol'']'
+      correct: '[''ALICE'', ''BOB'', ''CAROL'']'
+      explanation: .upper() converts each name to uppercase. The result is a new list.
+    - type: fill_blank
+      prompt: Filter the ingredient list to keep only values greater than 5.
+      before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        big = [n for n in nums if n '
+      after: ' 5]
+
+        print(big)'
+      choices:
+      - '>'
+      - <
+      - ==
+      - '!='
+      answer: '>'
+      explanation: 'n > 5 filters to numbers greater than 5: [6, 7, 8].'
+    - type: mcq
+      question: Elara counts potions priced below 20 gold. What does this print?
+      code: 'prices = [10, 25, 5, 30, 15]
+
+        under_20 = [p for p in prices if p < 20]
+
+        print(len(under_20))'
+      choices:
+      - '3'
+      - '2'
+      - '5'
+      - '4'
+      correct: '3'
+      explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+    - type: mcq
+      question: What is the equivalent loop for [x**2 for x in range(4)]?
+      code: ''
+      choices:
+      - "result = []\nfor x in range(4):\n    result.append(x**2)"
+      - "for x in range(4):\n    x**2"
+      - result = x**2 for x in range(4)
+      - result = [x**2 while x < 4]
+      correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
+      explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+    - type: mini_code
+      prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
+      starter: ''
+      tests:
+      - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+        message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+    - type: mini_code
+      prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
+      starter: temps = [22, 35, 18, 41, 28, 15]
+      tests:
+      - code: eval(_stdout.strip()) == [35, 41, 28]
+        message: Should be [35, 41, 28]
   scifi:
-    title: "Data Pipeline"
+    title: Data Pipeline
+    exercises:
+    - type: concept
+      code: 'numbers = [1, 2, 3, 4, 5]
+
+        squares = [n * n for n in numbers]
+
+        evens = [n for n in numbers if n % 2 == 0]
+
+        print(squares)
+
+        print(evens)
+
+        '
+      output: '[1, 4, 9, 16, 25]
+
+        [2, 4]'
+      explanation: 'Zara transforms and filters asteroid sensor readings in one line. A comprehension builds a new list: [expression
+        for item in list]. Add if to filter.'
+    - type: mcq
+      question: Zara doubles each sensor signal. What does this print?
+      code: 'nums = [1, 2, 3, 4]
+
+        doubled = [x * 2 for x in nums]
+
+        print(doubled)'
+      choices:
+      - '[2, 4, 6, 8]'
+      - '[1, 2, 3, 4]'
+      - '[1, 4, 9, 16]'
+      - '[2, 4]'
+      correct: '[2, 4, 6, 8]'
+      explanation: 'Each signal is multiplied by 2. Result: [2, 4, 6, 8].'
+    - type: fill_blank
+      prompt: Pass each sector code to len() to build a list of code lengths.
+      before: 'words = [''hi'', ''hello'', ''hey'']
+
+        lengths = [len('
+      after: ') for w in words]
+
+        print(lengths)'
+      choices:
+      - w
+      - words
+      - len
+      - x
+      answer: w
+      explanation: 'len(w) computes the length of each sector code. Result: [2, 5, 3].'
+    - type: mcq
+      question: Zara keeps only odd-indexed sensor readings. What does this print?
+      code: 'nums = [1, 2, 3, 4, 5, 6]
+
+        odds = [n for n in nums if n % 2 != 0]
+
+        print(odds)'
+      choices:
+      - '[1, 3, 5]'
+      - '[2, 4, 6]'
+      - '[1, 2, 3, 4, 5, 6]'
+      - '[1, 3, 5, 7]'
+      correct: '[1, 3, 5]'
+      explanation: 'n % 2 != 0 filters odd numbers: 1, 3, 5.'
+    - type: arrange
+      instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
+      blocks:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      correct:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      explanation: range(1, 6) gives 1 through 5. n * n squares each reading.
+    - type: mcq
+      question: Zara capitalises all sector names for the log. What does this print?
+      code: 'names = [''alice'', ''bob'', ''carol'']
+
+        upper = [n.upper() for n in names]
+
+        print(upper)'
+      choices:
+      - '[''ALICE'', ''BOB'', ''CAROL'']'
+      - '[''alice'', ''bob'', ''carol'']'
+      - 'ALICE
+
+        BOB
+
+        CAROL'
+      - '[''Alice'', ''Bob'', ''Carol'']'
+      correct: '[''ALICE'', ''BOB'', ''CAROL'']'
+      explanation: .upper() converts each name to uppercase. The result is a new list.
+    - type: fill_blank
+      prompt: Filter sensor readings to keep only values greater than 5.
+      before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        big = [n for n in nums if n '
+      after: ' 5]
+
+        print(big)'
+      choices:
+      - '>'
+      - <
+      - ==
+      - '!='
+      answer: '>'
+      explanation: 'n > 5 filters to readings greater than 5: [6, 7, 8].'
+    - type: mcq
+      question: Zara counts asteroids with a mass below 20. What does this print?
+      code: 'prices = [10, 25, 5, 30, 15]
+
+        under_20 = [p for p in prices if p < 20]
+
+        print(len(under_20))'
+      choices:
+      - '3'
+      - '2'
+      - '5'
+      - '4'
+      correct: '3'
+      explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+    - type: mcq
+      question: What is the equivalent loop for [x**2 for x in range(4)]?
+      code: ''
+      choices:
+      - "result = []\nfor x in range(4):\n    result.append(x**2)"
+      - "for x in range(4):\n    x**2"
+      - result = x**2 for x in range(4)
+      - result = [x**2 while x < 4]
+      correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
+      explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+    - type: mini_code
+      prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
+      starter: ''
+      tests:
+      - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+        message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+    - type: mini_code
+      prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
+      starter: temps = [22, 35, 18, 41, 28, 15]
+      tests:
+      - code: eval(_stdout.strip()) == [35, 41, 28]
+        message: Should be [35, 41, 28]
   mystery:
-    title: "Filtering Witnesses"
+    title: Filtering Witnesses
+    exercises:
+    - type: concept
+      code: 'numbers = [1, 2, 3, 4, 5]
+
+        squares = [n * n for n in numbers]
+
+        evens = [n for n in numbers if n % 2 == 0]
+
+        print(squares)
+
+        print(evens)
+
+        '
+      output: '[1, 4, 9, 16, 25]
+
+        [2, 4]'
+      explanation: 'Cole filters and scores witness statements in one line. A comprehension builds a new list: [expression
+        for item in list]. Add if to filter.'
+    - type: mcq
+      question: Cole doubles each witness credibility score. What does this print?
+      code: 'nums = [1, 2, 3, 4]
+
+        doubled = [x * 2 for x in nums]
+
+        print(doubled)'
+      choices:
+      - '[2, 4, 6, 8]'
+      - '[1, 2, 3, 4]'
+      - '[1, 4, 9, 16]'
+      - '[2, 4]'
+      correct: '[2, 4, 6, 8]'
+      explanation: 'Each score is multiplied by 2. Result: [2, 4, 6, 8].'
+    - type: fill_blank
+      prompt: Pass each witness statement to len() to build a list of statement lengths.
+      before: 'words = [''hi'', ''hello'', ''hey'']
+
+        lengths = [len('
+      after: ') for w in words]
+
+        print(lengths)'
+      choices:
+      - w
+      - words
+      - len
+      - x
+      answer: w
+      explanation: 'len(w) computes the length of each statement. Result: [2, 5, 3].'
+    - type: mcq
+      question: Cole keeps only odd-numbered witness IDs. What does this print?
+      code: 'nums = [1, 2, 3, 4, 5, 6]
+
+        odds = [n for n in nums if n % 2 != 0]
+
+        print(odds)'
+      choices:
+      - '[1, 3, 5]'
+      - '[2, 4, 6]'
+      - '[1, 2, 3, 4, 5, 6]'
+      - '[1, 3, 5, 7]'
+      correct: '[1, 3, 5]'
+      explanation: 'n % 2 != 0 filters odd IDs: 1, 3, 5.'
+    - type: arrange
+      instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
+      blocks:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      correct:
+      - squares
+      - '='
+      - '['
+      - n
+      - '*'
+      - n
+      - for
+      - n
+      - in
+      - range
+      - (
+      - '1'
+      - ','
+      - '6'
+      - )
+      - ']'
+      - print
+      - (
+      - squares
+      - )
+      explanation: range(1, 6) gives 1 through 5. n * n squares each score.
+    - type: mcq
+      question: Cole capitalises all suspect names for the report. What does this print?
+      code: 'names = [''alice'', ''bob'', ''carol'']
+
+        upper = [n.upper() for n in names]
+
+        print(upper)'
+      choices:
+      - '[''ALICE'', ''BOB'', ''CAROL'']'
+      - '[''alice'', ''bob'', ''carol'']'
+      - 'ALICE
+
+        BOB
+
+        CAROL'
+      - '[''Alice'', ''Bob'', ''Carol'']'
+      correct: '[''ALICE'', ''BOB'', ''CAROL'']'
+      explanation: .upper() converts each name to uppercase. The result is a new list.
+    - type: fill_blank
+      prompt: Filter witness scores to keep only those greater than 5.
+      before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        big = [n for n in nums if n '
+      after: ' 5]
+
+        print(big)'
+      choices:
+      - '>'
+      - <
+      - ==
+      - '!='
+      answer: '>'
+      explanation: 'n > 5 filters to scores greater than 5: [6, 7, 8].'
+    - type: mcq
+      question: Cole counts witnesses with a credibility score below 20. What does this print?
+      code: 'prices = [10, 25, 5, 30, 15]
+
+        under_20 = [p for p in prices if p < 20]
+
+        print(len(under_20))'
+      choices:
+      - '3'
+      - '2'
+      - '5'
+      - '4'
+      correct: '3'
+      explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+    - type: mcq
+      question: What is the equivalent loop for [x**2 for x in range(4)]?
+      code: ''
+      choices:
+      - "result = []\nfor x in range(4):\n    result.append(x**2)"
+      - "for x in range(4):\n    x**2"
+      - result = x**2 for x in range(4)
+      - result = [x**2 while x < 4]
+      correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
+      explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+    - type: mini_code
+      prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
+      starter: ''
+      tests:
+      - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+        message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+    - type: mini_code
+      prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
+      starter: temps = [22, 35, 18, 41, 28, 15]
+      tests:
+      - code: eval(_stdout.strip()) == [35, 41, 28]
+        message: Should be [35, 41, 28]

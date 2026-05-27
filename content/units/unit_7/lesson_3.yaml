@@ -1,107 +1,904 @@
-title: "Methods That Change State"
+title: Methods That Change State
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      class Battery:
-          def __init__(self, charge):
-              self.charge = charge
+- type: concept
+  code: "class Battery:\n    def __init__(self, charge):\n        self.charge = charge\n\n    def drain(self, amount):\n \
+    \       self.charge -= amount\n        if self.charge < 0:\n            self.charge = 0\n\nb = Battery(100)\nb.drain(30)\n\
+    print(b.charge)\nb.drain(80)\nprint(b.charge)\n"
+  output: '70
 
-          def drain(self, amount):
-              self.charge -= amount
-              if self.charge < 0:
-                  self.charge = 0
+    0'
+  explanation: Methods can modify self attributes. Each call changes the object's state permanently. The second drain clamps
+    to 0 because 70 - 80 < 0.
+- type: mcq
+  question: What does this print?
+  code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count +=\
+    \ 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)"
+  choices:
+  - '2'
+  - '0'
+  - '1'
+  - None
+  correct: '2'
+  explanation: increment() adds 1 each call. After two calls, count = 2.
+- type: fill_blank
+  prompt: Deduct the spent amount from the wallet's balance.
+  before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
+    \        self.balance "
+  after: ' amount
 
-      b = Battery(100)
-      b.drain(30)
-      print(b.charge)
-      b.drain(80)
-      print(b.charge)
-    output: "70\n0"
-    explanation: "Methods can modify self attributes. Each call changes the object's state permanently. The second drain clamps to 0 because 70 - 80 < 0."
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count += 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)"
-    choices: ["2", "0", "1", "None"]
-    correct: "2"
-    explanation: "increment() adds 1 each call. After two calls, count = 2."
+    w = Wallet(100)
 
-  - type: fill_blank
-    prompt: "Deduct the spent amount from the wallet's balance."
-    before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n        self.balance "
-    after: " amount\n\nw = Wallet(100)\nw.spend(30)\nprint(w.balance)"
-    choices: ["-=", "+=", "=", "*="]
-    answer: "-="
-    explanation: "-= subtracts amount from balance. 100 - 30 = 70."
+    w.spend(30)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.items)"
-    choices: ["[1, 2]", "[2, 1]", "[]", "1\n2"]
-    correct: "[1, 2]"
-    explanation: "push appends to self.items. After two pushes, items = [1, 2]."
+    print(w.balance)'
+  choices:
+  - -=
+  - +=
+  - '='
+  - '*='
+  answer: -=
+  explanation: -= subtracts amount from balance. 100 - 30 = 70.
+- type: mcq
+  question: What does this print?
+  code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
+    \ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.items)"
+  choices:
+  - '[1, 2]'
+  - '[2, 1]'
+  - '[]'
+  - '1
 
-  - type: arrange
-    instruction: "Add a deposit method to BankAccount that adds to self.balance"
-    blocks: ["class", "BankAccount", ":", "def", "__init__", "(", "self", ",", "balance", ")", ":", "self", ".", "balance", "=", "balance", "def", "deposit", "(", "self", ",", "amount", ")", ":", "self", ".", "balance", "+=", "amount", "acc", "=", "BankAccount", "(", "100", ")", "acc", ".", "deposit", "(", "50", ")", "print", "(", "acc", ".", "balance", ")"]
-    correct: ["class", "BankAccount", ":", "def", "__init__", "(", "self", ",", "balance", ")", ":", "self", ".", "balance", "=", "balance", "def", "deposit", "(", "self", ",", "amount", ")", ":", "self", ".", "balance", "+=", "amount", "acc", "=", "BankAccount", "(", "100", ")", "acc", ".", "deposit", "(", "50", ")", "print", "(", "acc", ".", "balance", ")"]
-    explanation: "deposit() takes self and amount. self.balance += amount modifies state. 100 + 50 = 150."
+    2'
+  correct: '[1, 2]'
+  explanation: push appends to self.items. After two pushes, items = [1, 2].
+- type: arrange
+  instruction: Add a deposit method to BankAccount that adds to self.balance
+  blocks:
+  - class
+  - BankAccount
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - balance
+  - )
+  - ':'
+  - self
+  - .
+  - balance
+  - '='
+  - balance
+  - def
+  - deposit
+  - (
+  - self
+  - ','
+  - amount
+  - )
+  - ':'
+  - self
+  - .
+  - balance
+  - +=
+  - amount
+  - acc
+  - '='
+  - BankAccount
+  - (
+  - '100'
+  - )
+  - acc
+  - .
+  - deposit
+  - (
+  - '50'
+  - )
+  - print
+  - (
+  - acc
+  - .
+  - balance
+  - )
+  correct:
+  - class
+  - BankAccount
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - balance
+  - )
+  - ':'
+  - self
+  - .
+  - balance
+  - '='
+  - balance
+  - def
+  - deposit
+  - (
+  - self
+  - ','
+  - amount
+  - )
+  - ':'
+  - self
+  - .
+  - balance
+  - +=
+  - amount
+  - acc
+  - '='
+  - BankAccount
+  - (
+  - '100'
+  - )
+  - acc
+  - .
+  - deposit
+  - (
+  - '50'
+  - )
+  - print
+  - (
+  - acc
+  - .
+  - balance
+  - )
+  explanation: deposit() takes self and amount. self.balance += amount modifies state. 100 + 50 = 150.
+- type: mcq
+  question: What does this print?
+  code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not self.on\n\
+    \nl = Light()\nl.toggle()\nl.toggle()\nprint(l.on)"
+  choices:
+  - 'False'
+  - 'True'
+  - None
+  - '0'
+  correct: 'False'
+  explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+- type: fill_blank
+  prompt: Add the new item to the end of the internal items list.
+  before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
+  after: '(x)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not self.on\n\nl = Light()\nl.toggle()\nl.toggle()\nprint(l.on)"
-    choices: ["False", "True", "None", "0"]
-    correct: "False"
-    explanation: "toggle flips self.on. False → True → False. Two toggles return to start."
 
-  - type: fill_blank
-    prompt: "Add the new item to the end of the internal items list."
-    before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
-    after: "(x)\n\nq = Queue()\nq.enqueue('a')\nprint(q.items)"
-    choices: ["append", "pop", "remove", "insert"]
-    answer: "append"
-    explanation: "append adds to the end of the list. items = ['a']."
+    q = Queue()
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n        self.fuel += amount\n    def use(self, amount):\n        self.fuel -= amount\n\nt = Tank(50)\nt.refuel(30)\nt.use(20)\nprint(t.fuel)"
-    choices: ["60", "50", "80", "30"]
-    correct: "60"
-    explanation: "50 + 30 = 80, then 80 - 20 = 60."
+    q.enqueue(''a'')
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points += n\n    def reset(self):\n        self.points = 0\n\ns = Score()\ns.add(10)\ns.add(5)\ns.reset()\nprint(s.points)"
-    choices: ["0", "15", "10", "5"]
-    correct: "0"
-    explanation: "reset() sets points back to 0 regardless of previous value."
-
-  - type: mini_code
-    prompt: "Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times and print seconds."
-    starter: ""
-    tests:
-      - code: "t = Timer(); [t.tick() for _ in range(5)]; t.seconds == 5"
-        message: "5 ticks should give seconds = 5"
-      - code: "_stdout.strip() == '5'"
-        message: "Should print 5"
-
-  - type: mini_code
-    prompt: "Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword' and 'shield', remove 'sword', print the list."
-    starter: ""
-    tests:
-      - code: "inv = Inventory(); inv.add_item('x'); 'x' in inv.items"
-        message: "add_item should add to the list"
-      - code: "inv2 = Inventory(); inv2.add_item('a'); inv2.remove_item('a'); 'a' not in inv2.items"
-        message: "remove_item should remove from the list"
-      - code: "\"['shield']\" in _stdout or \"['shield', ]\" in _stdout or _stdout.strip() == \"['shield']\""
-        message: "Should print ['shield']"
-
+    print(q.items)'
+  choices:
+  - append
+  - pop
+  - remove
+  - insert
+  answer: append
+  explanation: append adds to the end of the list. items = ['a'].
+- type: mcq
+  question: What does this print?
+  code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n        self.fuel\
+    \ += amount\n    def use(self, amount):\n        self.fuel -= amount\n\nt = Tank(50)\nt.refuel(30)\nt.use(20)\nprint(t.fuel)"
+  choices:
+  - '60'
+  - '50'
+  - '80'
+  - '30'
+  correct: '60'
+  explanation: 50 + 30 = 80, then 80 - 20 = 60.
+- type: mcq
+  question: What does this print?
+  code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points += n\n\
+    \    def reset(self):\n        self.points = 0\n\ns = Score()\ns.add(10)\ns.add(5)\ns.reset()\nprint(s.points)"
+  choices:
+  - '0'
+  - '15'
+  - '10'
+  - '5'
+  correct: '0'
+  explanation: reset() sets points back to 0 regardless of previous value.
+- type: mini_code
+  prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
+    and print seconds.
+  starter: ''
+  tests:
+  - code: t = Timer(); [t.tick() for _ in range(5)]; t.seconds == 5
+    message: 5 ticks should give seconds = 5
+  - code: _stdout.strip() == '5'
+    message: Should print 5
+- type: mini_code
+  prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
+    and 'shield', remove 'sword', print the list.
+  starter: ''
+  tests:
+  - code: inv = Inventory(); inv.add_item('x'); 'x' in inv.items
+    message: add_item should add to the list
+  - code: inv2 = Inventory(); inv2.add_item('a'); inv2.remove_item('a'); 'a' not in inv2.items
+    message: remove_item should remove from the list
+  - code: '"[''shield'']" in _stdout or "[''shield'', ]" in _stdout or _stdout.strip() == "[''shield'']"'
+    message: Should print ['shield']
 worlds:
   fantasy:
-    title: "Mutable Enchantments"
+    title: Mutable Enchantments
+    exercises:
+    - type: concept
+      code: "class Battery:\n    def __init__(self, charge):\n        self.charge = charge\n\n    def drain(self, amount):\n\
+        \        self.charge -= amount\n        if self.charge < 0:\n            self.charge = 0\n\nb = Battery(100)\nb.drain(30)\n\
+        print(b.charge)\nb.drain(80)\nprint(b.charge)\n"
+      output: '70
+
+        0'
+      explanation: Elara drains a magical battery. Methods can modify self attributes. Each call changes the object's state
+        permanently. The second drain clamps to 0 because 70 - 80 < 0.
+    - type: mcq
+      question: The enchantment counter is triggered twice. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
+        \ += 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)"
+      choices:
+      - '2'
+      - '0'
+      - '1'
+      - None
+      correct: '2'
+      explanation: increment() adds 1 each call. After two calls, count = 2.
+    - type: fill_blank
+      prompt: Deduct the spent mana from the wizard's mana pool.
+      before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
+        \        self.balance "
+      after: ' amount
+
+
+        w = Wallet(100)
+
+        w.spend(30)
+
+        print(w.balance)'
+      choices:
+      - -=
+      - +=
+      - '='
+      - '*='
+      answer: -=
+      explanation: -= subtracts the mana cost. 100 - 30 = 70 mana remaining.
+    - type: mcq
+      question: Elara pushes two spell scrolls onto the stack. What does this print?
+      code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
+        \ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.items)"
+      choices:
+      - '[1, 2]'
+      - '[2, 1]'
+      - '[]'
+      - '1
+
+        2'
+      correct: '[1, 2]'
+      explanation: push appends to self.items. After two pushes, items = [1, 2].
+    - type: arrange
+      instruction: Add a deposit method to BankAccount that adds to self.balance
+      blocks:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      correct:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      explanation: deposit() takes self and amount. self.balance += amount modifies state. 100 + 50 = 150.
+    - type: mcq
+      question: A magic torch is toggled twice. What does this print?
+      code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
+        \ self.on\n\nl = Light()\nl.toggle()\nl.toggle()\nprint(l.on)"
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - '0'
+      correct: 'False'
+      explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+    - type: fill_blank
+      prompt: Add a new ingredient to the end of the cauldron's ingredient list.
+      before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
+      after: '(x)
+
+
+        q = Queue()
+
+        q.enqueue(''a'')
+
+        print(q.items)'
+      choices:
+      - append
+      - pop
+      - remove
+      - insert
+      answer: append
+      explanation: append adds to the end of the list. items = ['a'].
+    - type: mcq
+      question: Elara refuels then uses a mana tank. What does this print?
+      code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
+        \ self.fuel += amount\n    def use(self, amount):\n        self.fuel -= amount\n\nt = Tank(50)\nt.refuel(30)\nt.use(20)\n\
+        print(t.fuel)"
+      choices:
+      - '60'
+      - '50'
+      - '80'
+      - '30'
+      correct: '60'
+      explanation: 50 + 30 = 80, then 80 - 20 = 60.
+    - type: mcq
+      question: A spell score tracker adds then resets. What does this print?
+      code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
+        \ n\n    def reset(self):\n        self.points = 0\n\ns = Score()\ns.add(10)\ns.add(5)\ns.reset()\nprint(s.points)"
+      choices:
+      - '0'
+      - '15'
+      - '10'
+      - '5'
+      correct: '0'
+      explanation: reset() sets points back to 0 regardless of previous value.
+    - type: mini_code
+      prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
+        and print seconds.
+      starter: ''
+      tests:
+      - code: t = Timer(); [t.tick() for _ in range(5)]; t.seconds == 5
+        message: 5 ticks should give seconds = 5
+      - code: _stdout.strip() == '5'
+        message: Should print 5
+    - type: mini_code
+      prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
+        and 'shield', remove 'sword', print the list.
+      starter: ''
+      tests:
+      - code: inv = Inventory(); inv.add_item('x'); 'x' in inv.items
+        message: add_item should add to the list
+      - code: inv2 = Inventory(); inv2.add_item('a'); inv2.remove_item('a'); 'a' not in inv2.items
+        message: remove_item should remove from the list
+      - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
+        message: Should print ['shield']
   scifi:
-    title: "System State Changes"
+    title: System State Changes
+    exercises:
+    - type: concept
+      code: "class Battery:\n    def __init__(self, charge):\n        self.charge = charge\n\n    def drain(self, amount):\n\
+        \        self.charge -= amount\n        if self.charge < 0:\n            self.charge = 0\n\nb = Battery(100)\nb.drain(30)\n\
+        print(b.charge)\nb.drain(80)\nprint(b.charge)\n"
+      output: '70
+
+        0'
+      explanation: Voss drains a ship's battery. Methods modify self attributes, changing state permanently. The second drain
+        clamps to 0 because 70 - 80 < 0.
+    - type: mcq
+      question: The system event counter triggers twice. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
+        \ += 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)"
+      choices:
+      - '2'
+      - '0'
+      - '1'
+      - None
+      correct: '2'
+      explanation: increment() adds 1 each call. After two calls, count = 2.
+    - type: fill_blank
+      prompt: Deduct the fuel cost from the ship's fuel reserve.
+      before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
+        \        self.balance "
+      after: ' amount
+
+
+        w = Wallet(100)
+
+        w.spend(30)
+
+        print(w.balance)'
+      choices:
+      - -=
+      - +=
+      - '='
+      - '*='
+      answer: -=
+      explanation: -= subtracts the fuel cost. 100 - 30 = 70 fuel remaining.
+    - type: mcq
+      question: Voss pushes two commands onto the command stack. What does this print?
+      code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
+        \ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.items)"
+      choices:
+      - '[1, 2]'
+      - '[2, 1]'
+      - '[]'
+      - '1
+
+        2'
+      correct: '[1, 2]'
+      explanation: push appends to self.items. After two pushes, items = [1, 2].
+    - type: arrange
+      instruction: Add a deposit method to BankAccount that adds to self.balance
+      blocks:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      correct:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      explanation: deposit() adds to self.balance. 100 + 50 = 150.
+    - type: mcq
+      question: A ship indicator light is toggled twice. What does this print?
+      code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
+        \ self.on\n\nl = Light()\nl.toggle()\nl.toggle()\nprint(l.on)"
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - '0'
+      correct: 'False'
+      explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+    - type: fill_blank
+      prompt: Add a new task to the end of the mission queue.
+      before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
+      after: '(x)
+
+
+        q = Queue()
+
+        q.enqueue(''a'')
+
+        print(q.items)'
+      choices:
+      - append
+      - pop
+      - remove
+      - insert
+      answer: append
+      explanation: append adds to the end of the queue. items = ['a'].
+    - type: mcq
+      question: Voss refuels then uses a fuel tank. What does this print?
+      code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
+        \ self.fuel += amount\n    def use(self, amount):\n        self.fuel -= amount\n\nt = Tank(50)\nt.refuel(30)\nt.use(20)\n\
+        print(t.fuel)"
+      choices:
+      - '60'
+      - '50'
+      - '80'
+      - '30'
+      correct: '60'
+      explanation: 50 + 30 = 80, then 80 - 20 = 60.
+    - type: mcq
+      question: A mission score tracker adds then resets. What does this print?
+      code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
+        \ n\n    def reset(self):\n        self.points = 0\n\ns = Score()\ns.add(10)\ns.add(5)\ns.reset()\nprint(s.points)"
+      choices:
+      - '0'
+      - '15'
+      - '10'
+      - '5'
+      correct: '0'
+      explanation: reset() sets points back to 0 regardless of previous value.
+    - type: mini_code
+      prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
+        and print seconds.
+      starter: ''
+      tests:
+      - code: t = Timer(); [t.tick() for _ in range(5)]; t.seconds == 5
+        message: 5 ticks should give seconds = 5
+      - code: _stdout.strip() == '5'
+        message: Should print 5
+    - type: mini_code
+      prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
+        and 'shield', remove 'sword', print the list.
+      starter: ''
+      tests:
+      - code: inv = Inventory(); inv.add_item('x'); 'x' in inv.items
+        message: add_item should add to the list
+      - code: inv2 = Inventory(); inv2.add_item('a'); inv2.remove_item('a'); 'a' not in inv2.items
+        message: remove_item should remove from the list
+      - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
+        message: Should print ['shield']
   mystery:
-    title: "Updating the Case File"
+    title: Updating the Case File
+    exercises:
+    - type: concept
+      code: "class Battery:\n    def __init__(self, charge):\n        self.charge = charge\n\n    def drain(self, amount):\n\
+        \        self.charge -= amount\n        if self.charge < 0:\n            self.charge = 0\n\nb = Battery(100)\nb.drain(30)\n\
+        print(b.charge)\nb.drain(80)\nprint(b.charge)\n"
+      output: '70
+
+        0'
+      explanation: Cole drains a suspect's credibility. Methods modify self attributes permanently. The second drain clamps
+        to 0 when credibility is exhausted.
+    - type: mcq
+      question: The evidence counter is updated twice. What does this print?
+      code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
+        \ += 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)"
+      choices:
+      - '2'
+      - '0'
+      - '1'
+      - None
+      correct: '2'
+      explanation: increment() adds 1 each call. After two calls, count = 2.
+    - type: fill_blank
+      prompt: Deduct the hours from the suspect's alibi window.
+      before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
+        \        self.balance "
+      after: ' amount
+
+
+        w = Wallet(100)
+
+        w.spend(30)
+
+        print(w.balance)'
+      choices:
+      - -=
+      - +=
+      - '='
+      - '*='
+      answer: -=
+      explanation: -= subtracts the hours. 100 - 30 = 70 hours remaining in the alibi.
+    - type: mcq
+      question: Cole pushes two clues onto the evidence stack. What does this print?
+      code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
+        \ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.items)"
+      choices:
+      - '[1, 2]'
+      - '[2, 1]'
+      - '[]'
+      - '1
+
+        2'
+      correct: '[1, 2]'
+      explanation: push appends to self.items. After two pushes, items = [1, 2].
+    - type: arrange
+      instruction: Add a deposit method to BankAccount that adds to self.balance
+      blocks:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      correct:
+      - class
+      - BankAccount
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - balance
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - '='
+      - balance
+      - def
+      - deposit
+      - (
+      - self
+      - ','
+      - amount
+      - )
+      - ':'
+      - self
+      - .
+      - balance
+      - +=
+      - amount
+      - acc
+      - '='
+      - BankAccount
+      - (
+      - '100'
+      - )
+      - acc
+      - .
+      - deposit
+      - (
+      - '50'
+      - )
+      - print
+      - (
+      - acc
+      - .
+      - balance
+      - )
+      explanation: deposit() adds to self.balance. 100 + 50 = 150.
+    - type: mcq
+      question: A case-open indicator is toggled twice. What does this print?
+      code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
+        \ self.on\n\nl = Light()\nl.toggle()\nl.toggle()\nprint(l.on)"
+      choices:
+      - 'False'
+      - 'True'
+      - None
+      - '0'
+      correct: 'False'
+      explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+    - type: fill_blank
+      prompt: Add a new clue to the end of the case file's evidence list.
+      before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
+      after: '(x)
+
+
+        q = Queue()
+
+        q.enqueue(''a'')
+
+        print(q.items)'
+      choices:
+      - append
+      - pop
+      - remove
+      - insert
+      answer: append
+      explanation: append adds to the end of the evidence list. items = ['a'].
+    - type: mcq
+      question: Cole adds then spends from an informant fund. What does this print?
+      code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
+        \ self.fuel += amount\n    def use(self, amount):\n        self.fuel -= amount\n\nt = Tank(50)\nt.refuel(30)\nt.use(20)\n\
+        print(t.fuel)"
+      choices:
+      - '60'
+      - '50'
+      - '80'
+      - '30'
+      correct: '60'
+      explanation: 50 + 30 = 80, then 80 - 20 = 60.
+    - type: mcq
+      question: A case score tracker adds then resets. What does this print?
+      code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
+        \ n\n    def reset(self):\n        self.points = 0\n\ns = Score()\ns.add(10)\ns.add(5)\ns.reset()\nprint(s.points)"
+      choices:
+      - '0'
+      - '15'
+      - '10'
+      - '5'
+      correct: '0'
+      explanation: reset() sets points back to 0 regardless of previous value.
+    - type: mini_code
+      prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
+        and print seconds.
+      starter: ''
+      tests:
+      - code: t = Timer(); [t.tick() for _ in range(5)]; t.seconds == 5
+        message: 5 ticks should give seconds = 5
+      - code: _stdout.strip() == '5'
+        message: Should print 5
+    - type: mini_code
+      prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
+        and 'shield', remove 'sword', print the list.
+      starter: ''
+      tests:
+      - code: inv = Inventory(); inv.add_item('x'); 'x' in inv.items
+        message: add_item should add to the list
+      - code: inv2 = Inventory(); inv2.add_item('a'); inv2.remove_item('a'); 'a' not in inv2.items
+        message: remove_item should remove from the list
+      - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
+        message: Should print ['shield']

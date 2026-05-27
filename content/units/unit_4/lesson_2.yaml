@@ -93,8 +93,277 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Duplication Spell"
+    title: "Sorting Through the Satchel"
+    exercises:
+      - type: concept
+        code: |
+          herbs = ["Moonleaf", "Thornroot", "Glowcap"]
+          for herb in herbs:
+              print(herb)
+        output: "Moonleaf\nThornroot\nGlowcap"
+        explanation: "Mira goes through each herb in her satchel one by one. The loop visits every item in the list in order."
+
+      - type: mcq
+        question: "What does this print as Mira checks her herb pouches?"
+        code: "pouches = [10, 20, 30]\nfor p in pouches:\n    print(p)"
+        choices: ["10\n20\n30", "pouches", "10 20 30", "3"]
+        correct: "10\n20\n30"
+        explanation: "The loop visits each pouch count. print(p) shows each number on its own line."
+
+      - type: fill_blank
+        prompt: "Give the loop variable a name that represents one herb from the list."
+        before: "herbs = [\"a\", \"b\", \"c\"]\nfor "
+        after: " in herbs:\n    print(herb)"
+        choices: ["item", "items", "i", "x"]
+        answer: "item"
+        explanation: "The loop variable (here item) takes the value of each herb in the satchel in turn."
+
+      - type: arrange
+        instruction: "Build a loop that prints each herb pouch weight doubled as Mira measures her haul"
+        blocks: ["for", "n", "in", "pouches", ":", "print", "(", "n", "*", "2", ")"]
+        correct: ["for", "n", "in", "pouches", ":", "print", "(", "n", "*", "2", ")"]
+        explanation: "n takes each weight in pouches, and n * 2 doubles it — Mira measures in pairs."
+
+      - type: mcq
+        question: "What does this print as Mira announces each herb loudly?"
+        code: "plants = [\"fern\", \"moss\"]\nfor p in plants:\n    print(p.upper())"
+        choices: ["FERN\nMOSS", "fern\nmoss", "fern\nMOSS", "plants"]
+        correct: "FERN\nMOSS"
+        explanation: ".upper() converts each plant name to uppercase — Mira calls them out in a booming voice."
+
+      - type: fill_blank
+        prompt: "Accumulate each herb's potency value into Mira's running total."
+        before: "potencies = [80, 90, 70]\ntotal = 0\nfor p in potencies:\n    total = total "
+        after: " p"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "total + p accumulates the running sum of all potency values Mira has collected."
+
+      - type: mcq
+        question: "What does this print as Mira totals her herb weights?"
+        code: "weights = [5, 10, 15]\ntotal = 0\nfor w in weights:\n    total += w\nprint(total)"
+        choices: ["30", "51015", "3", "0"]
+        correct: "30"
+        explanation: "+= adds each weight to total. 5 + 10 + 15 = 30 grams in Mira's satchel."
+
+      - type: arrange
+        instruction: "Build a loop that counts how many herbs Mira has collected using a counter"
+        blocks: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        correct: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        explanation: "count += 1 increments for each herb. After the loop, print shows Mira's total herb count."
+
+      - type: mcq
+        question: "What does this print as Mira searches for the most potent herb?"
+        code: "potencies = [3, 1, 4, 1, 5]\nbest = 0\nfor p in potencies:\n    if p > best:\n        best = p\nprint(best)"
+        choices: ["5", "3", "1", "14"]
+        correct: "5"
+        explanation: "The loop tracks the highest potency. After visiting all herbs, best is 5."
+
+      - type: mcq
+        question: "What does this print as Mira numbers each herb in her satchel?"
+        code: "plants = [\"a\", \"b\", \"c\"]\nfor i, plant in enumerate(plants):\n    print(i, plant)"
+        choices: ["0 a\n1 b\n2 c", "a\nb\nc", "0\n1\n2", "1 a\n2 b\n3 c"]
+        correct: "0 a\n1 b\n2 c"
+        explanation: "enumerate() gives both the slot number and the herb name. Mira labels each one in order."
+
+      - type: mini_code
+        prompt: "Mira checks warmth readings from 5 forest clearings. temperatures = [22, 19, 25, 18, 30]. Print each temperature that is above 20."
+        starter: "temperatures = [22, 19, 25, 18, 30]\n"
+        tests:
+          - code: "assert '22' in _stdout and '25' in _stdout and '30' in _stdout"
+            message: "Should print 22, 25, and 30"
+          - code: "assert all(int(x) > 20 for x in [l.strip() for l in _stdout.strip().split('\\n') if l.strip()])"
+            message: "Should only print temperatures above 20"
+
+      - type: mini_code
+        prompt: "Mira has a list of herb weights and wants to know the average weight. Given a list of numbers, calculate and print their average."
+        starter: "numbers = [10, 20, 30, 40, 50]\ntotal = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '30.0'"
+            message: "Average of 10,20,30,40,50 is 30.0"
+          - code: "assert '/' in _code"
+            message: "Should divide by the list length to get the average"
+
   scifi:
-    title: "Scanning Crew Members"
+    title: "Scanning the Crew Manifest"
+    exercises:
+      - type: concept
+        code: |
+          crew = ["Yara", "Enzo", "Priya"]
+          for member in crew:
+              print(member)
+        output: "Yara\nEnzo\nPriya"
+        explanation: "Lin scans each crew member on the manifest one by one. The loop visits every item in the list in order."
+
+      - type: mcq
+        question: "What does this print as Lin logs each probe reading?"
+        code: "readings = [10, 20, 30]\nfor r in readings:\n    print(r)"
+        choices: ["10\n20\n30", "readings", "10 20 30", "3"]
+        correct: "10\n20\n30"
+        explanation: "The loop visits each reading. print(r) shows each number on its own line."
+
+      - type: fill_blank
+        prompt: "Give the loop variable a name that represents one star from the list."
+        before: "stars = [\"a\", \"b\", \"c\"]\nfor "
+        after: " in stars:\n    print(item)"
+        choices: ["item", "items", "i", "x"]
+        answer: "item"
+        explanation: "The loop variable (here item) takes the value of each star in the survey list in turn."
+
+      - type: arrange
+        instruction: "Build a loop that prints each sensor reading doubled as Lin calibrates the instruments"
+        blocks: ["for", "n", "in", "readings", ":", "print", "(", "n", "*", "2", ")"]
+        correct: ["for", "n", "in", "readings", ":", "print", "(", "n", "*", "2", ")"]
+        explanation: "n takes each value in readings, and n * 2 doubles it — Lin amplifies the signal."
+
+      - type: mcq
+        question: "What does this print as Lin formats each planet code for transmission?"
+        code: "planets = [\"hi\", \"bye\"]\nfor pl in planets:\n    print(pl.upper())"
+        choices: ["HI\nBYE", "hi\nbye", "hi\nBYE", "planets"]
+        correct: "HI\nBYE"
+        explanation: ".upper() converts each planet code to uppercase for the transmission log."
+
+      - type: fill_blank
+        prompt: "Accumulate each probe's energy reading into Lin's running total."
+        before: "energy = [80, 90, 70]\ntotal = 0\nfor e in energy:\n    total = total "
+        after: " e"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "total + e accumulates the running sum of all energy readings Lin has logged."
+
+      - type: mcq
+        question: "What does this print as Lin totals the fuel cells?"
+        code: "fuel = [5, 10, 15]\ntotal = 0\nfor f in fuel:\n    total += f\nprint(total)"
+        choices: ["30", "51015", "3", "0"]
+        correct: "30"
+        explanation: "+= adds each fuel cell reading to total. 5 + 10 + 15 = 30 units of fuel."
+
+      - type: arrange
+        instruction: "Build a loop that counts how many probes Lin has deployed using a counter"
+        blocks: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        correct: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        explanation: "count += 1 increments for each probe. After the loop, print shows Lin's total deployment count."
+
+      - type: mcq
+        question: "What does this print as Lin searches for the strongest signal?"
+        code: "signals = [3, 1, 4, 1, 5]\nbest = 0\nfor s in signals:\n    if s > best:\n        best = s\nprint(best)"
+        choices: ["5", "3", "1", "14"]
+        correct: "5"
+        explanation: "The loop tracks the maximum signal. After visiting all sectors, best is 5."
+
+      - type: mcq
+        question: "What does this print as Lin indexes each sector in the survey log?"
+        code: "sectors = [\"a\", \"b\", \"c\"]\nfor i, sector in enumerate(sectors):\n    print(i, sector)"
+        choices: ["0 a\n1 b\n2 c", "a\nb\nc", "0\n1\n2", "1 a\n2 b\n3 c"]
+        correct: "0 a\n1 b\n2 c"
+        explanation: "enumerate() gives both the index and the sector ID. Lin logs position and sector together."
+
+      - type: mini_code
+        prompt: "Lin records temperatures from 5 planetary surfaces. temperatures = [22, 19, 25, 18, 30]. Print each temperature that is above 20."
+        starter: "temperatures = [22, 19, 25, 18, 30]\n"
+        tests:
+          - code: "assert '22' in _stdout and '25' in _stdout and '30' in _stdout"
+            message: "Should print 22, 25, and 30"
+          - code: "assert all(int(x) > 20 for x in [l.strip() for l in _stdout.strip().split('\\n') if l.strip()])"
+            message: "Should only print temperatures above 20"
+
+      - type: mini_code
+        prompt: "Lin wants to compute the average signal strength across all sectors. Given a list of numbers, calculate and print their average."
+        starter: "numbers = [10, 20, 30, 40, 50]\ntotal = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '30.0'"
+            message: "Average of 10,20,30,40,50 is 30.0"
+          - code: "assert '/' in _code"
+            message: "Should divide by the list length to get the average"
+
   mystery:
-    title: "Reviewing Evidence"
+    title: "Reading Through the Evidence List"
+    exercises:
+      - type: concept
+        code: |
+          witnesses = ["Nina", "Omar", "Petra"]
+          for witness in witnesses:
+              print(witness)
+        output: "Nina\nOmar\nPetra"
+        explanation: "Cole reads each witness name from the list one by one. The loop visits every entry in order."
+
+      - type: mcq
+        question: "What does this print as Cole checks each evidence tag?"
+        code: "tags = [10, 20, 30]\nfor t in tags:\n    print(t)"
+        choices: ["10\n20\n30", "tags", "10 20 30", "3"]
+        correct: "10\n20\n30"
+        explanation: "The loop visits each tag number. print(t) shows each number on its own line."
+
+      - type: fill_blank
+        prompt: "Give the loop variable a name that represents one piece of evidence from the list."
+        before: "clues = [\"a\", \"b\", \"c\"]\nfor "
+        after: " in clues:\n    print(item)"
+        choices: ["item", "items", "i", "x"]
+        answer: "item"
+        explanation: "The loop variable (here item) takes the value of each clue in the evidence list in turn."
+
+      - type: arrange
+        instruction: "Build a loop that prints each evidence tag number doubled as Cole cross-references entries"
+        blocks: ["for", "n", "in", "tags", ":", "print", "(", "n", "*", "2", ")"]
+        correct: ["for", "n", "in", "tags", ":", "print", "(", "n", "*", "2", ")"]
+        explanation: "n takes each value in tags, and n * 2 doubles it — Cole cross-references each entry."
+
+      - type: mcq
+        question: "What does this print as Cole stamps each keyword in all caps?"
+        code: "keywords = [\"hi\", \"bye\"]\nfor kw in keywords:\n    print(kw.upper())"
+        choices: ["HI\nBYE", "hi\nbye", "hi\nBYE", "keywords"]
+        correct: "HI\nBYE"
+        explanation: ".upper() converts each keyword to uppercase — Cole marks priority evidence in bold."
+
+      - type: fill_blank
+        prompt: "Accumulate each suspect's relevance score into Cole's running total."
+        before: "scores = [80, 90, 70]\ntotal = 0\nfor s in scores:\n    total = total "
+        after: " s"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "total + s accumulates the running sum of all relevance scores Cole has assessed."
+
+      - type: mcq
+        question: "What does this print as Cole totals up the evidence weights?"
+        code: "weights = [5, 10, 15]\ntotal = 0\nfor w in weights:\n    total += w\nprint(total)"
+        choices: ["30", "51015", "3", "0"]
+        correct: "30"
+        explanation: "+= adds each weight to total. 5 + 10 + 15 = 30 — the full weight of evidence."
+
+      - type: arrange
+        instruction: "Build a loop that counts how many case files Cole has reviewed using a counter"
+        blocks: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        correct: ["count", "=", "0", "for", "item", "in", "my_list", ":", "count", "+=", "1", "print", "(", "count", ")"]
+        explanation: "count += 1 increments for each file. After the loop, print shows Cole's total file count."
+
+      - type: mcq
+        question: "What does this print as Cole searches for the most damning piece of evidence?"
+        code: "evidence = [3, 1, 4, 1, 5]\nbest = 0\nfor e in evidence:\n    if e > best:\n        best = e\nprint(best)"
+        choices: ["5", "3", "1", "14"]
+        correct: "5"
+        explanation: "The loop tracks the strongest evidence. After reviewing all items, best is 5."
+
+      - type: mcq
+        question: "What does this print as Cole numbers each witness in the report?"
+        code: "witnesses = [\"a\", \"b\", \"c\"]\nfor i, witness in enumerate(witnesses):\n    print(i, witness)"
+        choices: ["0 a\n1 b\n2 c", "a\nb\nc", "0\n1\n2", "1 a\n2 b\n3 c"]
+        correct: "0 a\n1 b\n2 c"
+        explanation: "enumerate() gives both the position and the witness ID. Cole logs them together in the report."
+
+      - type: mini_code
+        prompt: "Cole records urgency levels from 5 witness interviews. temperatures = [22, 19, 25, 18, 30]. Print each temperature that is above 20."
+        starter: "temperatures = [22, 19, 25, 18, 30]\n"
+        tests:
+          - code: "assert '22' in _stdout and '25' in _stdout and '30' in _stdout"
+            message: "Should print 22, 25, and 30"
+          - code: "assert all(int(x) > 20 for x in [l.strip() for l in _stdout.strip().split('\\n') if l.strip()])"
+            message: "Should only print temperatures above 20"
+
+      - type: mini_code
+        prompt: "Cole wants to find the average relevance score across all leads. Given a list of numbers, calculate and print their average."
+        starter: "numbers = [10, 20, 30, 40, 50]\ntotal = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '30.0'"
+            message: "Average of 10,20,30,40,50 is 30.0"
+          - code: "assert '/' in _code"
+            message: "Should divide by the list length to get the average"

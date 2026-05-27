@@ -1,105 +1,583 @@
-title: "Functions Returning Booleans"
+title: Functions Returning Booleans
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      def is_even(n):
-          return n % 2 == 0
+- type: concept
+  code: "def is_even(n):\n    return n % 2 == 0\n\nprint(is_even(4))\nprint(is_even(7))\n"
+  output: 'True
 
-      print(is_even(4))
-      print(is_even(7))
-    output: "True\nFalse"
-    explanation: "Functions can return True or False. This makes your code more readable: if is_even(n) is clearer than if n % 2 == 0."
+    False'
+  explanation: 'Functions can return True or False. This makes your code more readable: if is_even(n) is clearer than if n
+    % 2 == 0.'
+- type: mcq
+  question: What does this print?
+  code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
+  choices:
+  - 'False'
+  - 'True'
+  - '-3'
+  - '0'
+  correct: 'False'
+  explanation: -3 > 0 is False. The function returns False.
+- type: fill_blank
+  prompt: Return True if the text has more than 10 characters.
+  before: "def is_long(text):\n    return len(text) "
+  after: ' 10'
+  choices:
+  - '>'
+  - '='
+  - +
+  - ==
+  answer: '>'
+  explanation: Returns True if the text has more than 10 characters.
+- type: mcq
+  question: What does this print?
+  code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
+  choices:
+  - allowed
+  - Nothing
+  - 'True'
+  - '20'
+  correct: allowed
+  explanation: is_adult(20) returns True (20 >= 18). The if block runs.
+- type: arrange
+  instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
+  blocks:
+  - def
+  - is_divisible
+  - (
+  - n
+  - ','
+  - d
+  - )
+  - ':'
+  - return
+  - n
+  - '%'
+  - d
+  - ==
+  - '0'
+  correct:
+  - def
+  - is_divisible
+  - (
+  - n
+  - ','
+  - d
+  - )
+  - ':'
+  - return
+  - n
+  - '%'
+  - d
+  - ==
+  - '0'
+  explanation: n % d == 0 is True when there is no remainder.
+- type: mcq
+  question: What does this print?
+  code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
+  choices:
+  - 'False'
+  - 'True'
+  - '3'
+  - '-1'
+  correct: 'False'
+  explanation: a > 0 is True but b > 0 is False. True and False = False.
+- type: fill_blank
+  prompt: 'Ensure both conditions hold: score is non-negative and at most 100.'
+  before: "def is_valid_score(s):\n    return s >= 0 "
+  after: ' s <= 100'
+  choices:
+  - and
+  - or
+  - not
+  - if
+  answer: and
+  explanation: 'Both conditions must hold: score >= 0 AND score <= 100.'
+- type: mcq
+  question: What does this print?
+  code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"))"
+  choices:
+  - 'True
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
-    choices: ["False", "True", "-3", "0"]
-    correct: "False"
-    explanation: "-3 > 0 is False. The function returns False."
+    False'
+  - 'False
 
-  - type: fill_blank
-    prompt: "Return True if the text has more than 10 characters."
-    before: "def is_long(text):\n    return len(text) "
-    after: " 10"
-    choices: [">", "=", "+", "=="]
-    answer: ">"
-    explanation: "Returns True if the text has more than 10 characters."
+    True'
+  - 'True
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
-    choices: ["allowed", "Nothing", "True", "20"]
-    correct: "allowed"
-    explanation: "is_adult(20) returns True (20 >= 18). The if block runs."
+    True'
+  - 'HELLO
 
-  - type: arrange
-    instruction: "Build a function is_divisible(n, d) that returns True if n is divisible by d"
-    blocks: ["def", "is_divisible", "(", "n", ",", "d", ")", ":", "return", "n", "%", "d", "==", "0"]
-    correct: ["def", "is_divisible", "(", "n", ",", "d", ")", ":", "return", "n", "%", "d", "==", "0"]
-    explanation: "n % d == 0 is True when there is no remainder."
+    Hello'
+  correct: 'True
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
-    choices: ["False", "True", "3", "-1"]
-    correct: "False"
-    explanation: "a > 0 is True but b > 0 is False. True and False = False."
-
-  - type: fill_blank
-    prompt: "Ensure both conditions hold: score is non-negative and at most 100."
-    before: "def is_valid_score(s):\n    return s >= 0 "
-    after: " s <= 100"
-    choices: ["and", "or", "not", "if"]
-    answer: "and"
-    explanation: "Both conditions must hold: score >= 0 AND score <= 100."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"))"
-    choices: ["True\nFalse", "False\nTrue", "True\nTrue", "HELLO\nHello"]
-    correct: "True\nFalse"
-    explanation: "'HELLO' == 'HELLO' is True. 'Hello' == 'HELLO' is False."
-
-  - type: mcq
-    question: "Why use a boolean-returning function instead of writing the condition inline?"
-    code: ""
-    choices: [
-      "It gives the condition a meaningful name, making code more readable",
-      "It is faster",
-      "It is required by Python",
-      "It avoids using if"
-    ]
-    correct: "It gives the condition a meaningful name, making code more readable"
-    explanation: "is_valid_password(pw) explains the intent. len(pw) >= 8 and any(...) doesn't."
-
-  - type: mini_code
-    prompt: "Define is_palindrome(s) that returns True if s reads the same forwards and backwards."
-    starter: ""
-    tests:
-      - code: "assert is_palindrome('racecar') == True"
-        message: "'racecar' is a palindrome"
-      - code: "assert is_palindrome('hello') == False"
-        message: "'hello' is not a palindrome"
-      - code: "assert is_palindrome('madam') == True"
-        message: "'madam' is a palindrome"
-
-  - type: mini_code
-    prompt: "Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1)."
-    starter: ""
-    tests:
-      - code: "assert is_prime(7) == True"
-        message: "7 is prime"
-      - code: "assert is_prime(9) == False"
-        message: "9 is not prime (3 x 3)"
-      - code: "assert is_prime(2) == True"
-        message: "2 is prime"
-
+    False'
+  explanation: '''HELLO'' == ''HELLO'' is True. ''Hello'' == ''HELLO'' is False.'
+- type: mcq
+  question: Why use a boolean-returning function instead of writing the condition inline?
+  code: ''
+  choices:
+  - It gives the condition a meaningful name, making code more readable
+  - It is faster
+  - It is required by Python
+  - It avoids using if
+  correct: It gives the condition a meaningful name, making code more readable
+  explanation: is_valid_password(pw) explains the intent. len(pw) >= 8 and any(...) doesn't.
+- type: mini_code
+  prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
+  starter: ''
+  tests:
+  - code: assert is_palindrome('racecar') == True
+    message: '''racecar'' is a palindrome'
+  - code: assert is_palindrome('hello') == False
+    message: '''hello'' is not a palindrome'
+  - code: assert is_palindrome('madam') == True
+    message: '''madam'' is a palindrome'
+- type: mini_code
+  prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
+  starter: ''
+  tests:
+  - code: assert is_prime(7) == True
+    message: 7 is prime
+  - code: assert is_prime(9) == False
+    message: 9 is not prime (3 x 3)
+  - code: assert is_prime(2) == True
+    message: 2 is prime
 worlds:
   fantasy:
-    title: "The Parity Oracle"
+    title: The Parity Oracle
+    exercises:
+    - type: concept
+      code: "def is_even(n):\n    return n % 2 == 0\n\nprint(is_even(4))\nprint(is_even(7))\n"
+      output: 'True
+
+        False'
+      explanation: The Oracle tests if an ingredient count is even. Functions can return True or False. if is_even(n) is clearer
+        than if n % 2 == 0.
+    - type: mcq
+      question: The Oracle tests if a potion amount is positive. What does this print?
+      code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
+      choices:
+      - 'False'
+      - 'True'
+      - '-3'
+      - '0'
+      correct: 'False'
+      explanation: -3 > 0 is False. The Oracle returns False — the ingredient amount is invalid.
+    - type: fill_blank
+      prompt: Return True if the spell name has more than 10 characters.
+      before: "def is_long(text):\n    return len(text) "
+      after: ' 10'
+      choices:
+      - '>'
+      - '='
+      - +
+      - ==
+      answer: '>'
+      explanation: Returns True if the spell name has more than 10 characters.
+    - type: mcq
+      question: The Oracle approves the apprentice's age. What does this print?
+      code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
+      choices:
+      - allowed
+      - Nothing
+      - 'True'
+      - '20'
+      correct: allowed
+      explanation: is_adult(20) returns True (20 >= 18). The if block runs and prints "allowed".
+    - type: arrange
+      instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
+      blocks:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      correct:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      explanation: n % d == 0 is True when there is no remainder — the ingredient divides evenly.
+    - type: mcq
+      question: The Oracle checks two ingredient amounts. What does this print?
+      code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
+      choices:
+      - 'False'
+      - 'True'
+      - '3'
+      - '-1'
+      correct: 'False'
+      explanation: a > 0 is True but b > 0 is False. True and False = False.
+    - type: fill_blank
+      prompt: Ensure a potion strength is non-negative and at most 100.
+      before: "def is_valid_score(s):\n    return s >= 0 "
+      after: ' s <= 100'
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: 'Both conditions must hold: strength >= 0 AND strength <= 100.'
+    - type: mcq
+      question: The Oracle checks if a spell word is all uppercase. What does this print?
+      code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
+        ))"
+      choices:
+      - 'True
+
+        False'
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'HELLO
+
+        Hello'
+      correct: 'True
+
+        False'
+      explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False.'
+    - type: mcq
+      question: Why use a boolean-returning function instead of writing the condition inline?
+      code: ''
+      choices:
+      - It gives the condition a meaningful name, making code more readable
+      - It is faster
+      - It is required by Python
+      - It avoids using if
+      correct: It gives the condition a meaningful name, making code more readable
+      explanation: is_valid_ingredient(x) explains the intent. The full condition inline does not.
+    - type: mini_code
+      prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
+      starter: ''
+      tests:
+      - code: assert is_palindrome('racecar') == True
+        message: '''racecar'' is a palindrome'
+      - code: assert is_palindrome('hello') == False
+        message: '''hello'' is not a palindrome'
+      - code: assert is_palindrome('madam') == True
+        message: '''madam'' is a palindrome'
+    - type: mini_code
+      prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
+      starter: ''
+      tests:
+      - code: assert is_prime(7) == True
+        message: 7 is prime
+      - code: assert is_prime(9) == False
+        message: 9 is not prime (3 x 3)
+      - code: assert is_prime(2) == True
+        message: 2 is prime
   scifi:
-    title: "Diagnostic Checks"
+    title: Diagnostic Checks
+    exercises:
+    - type: concept
+      code: "def is_even(n):\n    return n % 2 == 0\n\nprint(is_even(4))\nprint(is_even(7))\n"
+      output: 'True
+
+        False'
+      explanation: Voss runs a parity diagnostic on sensor readings. if is_even(n) is clearer than if n % 2 == 0.
+    - type: mcq
+      question: Voss checks if a sensor reading is positive. What does this print?
+      code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
+      choices:
+      - 'False'
+      - 'True'
+      - '-3'
+      - '0'
+      correct: 'False'
+      explanation: -3 > 0 is False. Sensor reading is invalid — below zero.
+    - type: fill_blank
+      prompt: Return True if the system log entry has more than 10 characters.
+      before: "def is_long(text):\n    return len(text) "
+      after: ' 10'
+      choices:
+      - '>'
+      - '='
+      - +
+      - ==
+      answer: '>'
+      explanation: Returns True if the log entry exceeds 10 characters.
+    - type: mcq
+      question: Voss checks if a crew member meets minimum age clearance. What does this print?
+      code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
+      choices:
+      - allowed
+      - Nothing
+      - 'True'
+      - '20'
+      correct: allowed
+      explanation: is_adult(20) returns True (20 >= 18). Crew member is cleared.
+    - type: arrange
+      instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
+      blocks:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      correct:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      explanation: n % d == 0 means the reading divides cleanly — no remainder.
+    - type: mcq
+      question: Voss checks if two hull readings are both positive. What does this print?
+      code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
+      choices:
+      - 'False'
+      - 'True'
+      - '3'
+      - '-1'
+      correct: 'False'
+      explanation: a > 0 is True but b > 0 is False. True and False = False.
+    - type: fill_blank
+      prompt: Ensure a hull integrity score is non-negative and at most 100.
+      before: "def is_valid_score(s):\n    return s >= 0 "
+      after: ' s <= 100'
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: 'Both conditions must hold: score >= 0 AND score <= 100.'
+    - type: mcq
+      question: Voss checks if a status code is all uppercase. What does this print?
+      code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
+        ))"
+      choices:
+      - 'True
+
+        False'
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'HELLO
+
+        Hello'
+      correct: 'True
+
+        False'
+      explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False. Protocol codes must be uppercase.'
+    - type: mcq
+      question: Why use a boolean-returning function instead of writing the condition inline?
+      code: ''
+      choices:
+      - It gives the condition a meaningful name, making code more readable
+      - It is faster
+      - It is required by Python
+      - It avoids using if
+      correct: It gives the condition a meaningful name, making code more readable
+      explanation: is_hull_safe(h) is clearer than h >= 0 and h <= 100 every time you check it.
+    - type: mini_code
+      prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
+      starter: ''
+      tests:
+      - code: assert is_palindrome('racecar') == True
+        message: '''racecar'' is a palindrome'
+      - code: assert is_palindrome('hello') == False
+        message: '''hello'' is not a palindrome'
+      - code: assert is_palindrome('madam') == True
+        message: '''madam'' is a palindrome'
+    - type: mini_code
+      prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
+      starter: ''
+      tests:
+      - code: assert is_prime(7) == True
+        message: 7 is prime
+      - code: assert is_prime(9) == False
+        message: 9 is not prime (3 x 3)
+      - code: assert is_prime(2) == True
+        message: 2 is prime
   mystery:
-    title: "Confirming Alibis"
+    title: Confirming Alibis
+    exercises:
+    - type: concept
+      code: "def is_even(n):\n    return n % 2 == 0\n\nprint(is_even(4))\nprint(is_even(7))\n"
+      output: 'True
+
+        False'
+      explanation: Cole writes a function to check if an alibi ID is even-numbered. Functions returning booleans make conditions
+        readable.
+    - type: mcq
+      question: Cole checks if a witness credibility score is positive. What does this print?
+      code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
+      choices:
+      - 'False'
+      - 'True'
+      - '-3'
+      - '0'
+      correct: 'False'
+      explanation: -3 > 0 is False. The credibility score is negative — alibi rejected.
+    - type: fill_blank
+      prompt: Return True if the alibi statement has more than 10 characters.
+      before: "def is_long(text):\n    return len(text) "
+      after: ' 10'
+      choices:
+      - '>'
+      - '='
+      - +
+      - ==
+      answer: '>'
+      explanation: Returns True if the alibi is detailed enough (more than 10 characters).
+    - type: mcq
+      question: Cole checks if a suspect meets the minimum age. What does this print?
+      code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
+      choices:
+      - allowed
+      - Nothing
+      - 'True'
+      - '20'
+      correct: allowed
+      explanation: is_adult(20) returns True (20 >= 18). Suspect is old enough — case proceeds.
+    - type: arrange
+      instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
+      blocks:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      correct:
+      - def
+      - is_divisible
+      - (
+      - n
+      - ','
+      - d
+      - )
+      - ':'
+      - return
+      - n
+      - '%'
+      - d
+      - ==
+      - '0'
+      explanation: n % d == 0 means the timeline divides evenly — no gaps in the alibi.
+    - type: mcq
+      question: Cole verifies two pieces of evidence are both positive. What does this print?
+      code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
+      choices:
+      - 'False'
+      - 'True'
+      - '3'
+      - '-1'
+      correct: 'False'
+      explanation: a > 0 is True but b > 0 is False. True and False = False. Both clues must hold.
+    - type: fill_blank
+      prompt: Ensure a suspect credibility score is non-negative and at most 100.
+      before: "def is_valid_score(s):\n    return s >= 0 "
+      after: ' s <= 100'
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: 'Both conditions must hold: score >= 0 AND score <= 100.'
+    - type: mcq
+      question: Cole checks if a suspect name is all uppercase. What does this print?
+      code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
+        ))"
+      choices:
+      - 'True
+
+        False'
+      - 'False
+
+        True'
+      - 'True
+
+        True'
+      - 'HELLO
+
+        Hello'
+      correct: 'True
+
+        False'
+      explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False.'
+    - type: mcq
+      question: Why use a boolean-returning function instead of writing the condition inline?
+      code: ''
+      choices:
+      - It gives the condition a meaningful name, making code more readable
+      - It is faster
+      - It is required by Python
+      - It avoids using if
+      correct: It gives the condition a meaningful name, making code more readable
+      explanation: is_alibi_valid(a) is clearer than checking all conditions inline every time.
+    - type: mini_code
+      prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
+      starter: ''
+      tests:
+      - code: assert is_palindrome('racecar') == True
+        message: '''racecar'' is a palindrome'
+      - code: assert is_palindrome('hello') == False
+        message: '''hello'' is not a palindrome'
+      - code: assert is_palindrome('madam') == True
+        message: '''madam'' is a palindrome'
+    - type: mini_code
+      prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
+      starter: ''
+      tests:
+      - code: assert is_prime(7) == True
+        message: 7 is prime
+      - code: assert is_prime(9) == False
+        message: 9 is not prime (3 x 3)
+      - code: assert is_prime(2) == True
+        message: 2 is prime

@@ -1,107 +1,596 @@
-title: "Conditions with and / or"
+title: Conditions with and / or
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      age = 17
-      has_ticket = True
-      if age >= 18 and has_ticket:
-          print("Enter")
-      else:
-          print("Denied")
-    output: "Denied"
-    explanation: "Combining comparisons in if conditions with and/or lets you check multiple things at once."
+- type: concept
+  code: "age = 17\nhas_ticket = True\nif age >= 18 and has_ticket:\n    print(\"Enter\")\nelse:\n    print(\"Denied\")\n"
+  output: Denied
+  explanation: Combining comparisons in if conditions with and/or lets you check multiple things at once.
+- type: mcq
+  question: What does this print?
+  code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
+  choices:
+  - in range
+  - Nothing
+  - 'True'
+  - x
+  correct: in range
+  explanation: Both x > 0 (True) and x < 10 (True) are True, so the if block runs.
+- type: fill_blank
+  prompt: Require both conditions to be true to identify someone as a teenager.
+  before: 'if age >= 13 '
+  after: " age <= 19:\n    print(\"teenager\")"
+  choices:
+  - and
+  - or
+  - not
+  - ==
+  answer: and
+  explanation: 'Both conditions must be True: age >= 13 AND age <= 19.'
+- type: mcq
+  question: What does this print?
+  code: "score = 45\nif score < 0 or score > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
+  choices:
+  - valid
+  - invalid
+  - '45'
+  - Nothing
+  correct: valid
+  explanation: score < 0 is False and score > 100 is False. False or False = False, so else runs.
+- type: arrange
+  instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
+  blocks:
+  - if
+  - name
+  - and
+  - score
+  - '>='
+  - '50'
+  - ':'
+  - print
+  - (
+  - '"qualified"'
+  - )
+  correct:
+  - if
+  - name
+  - and
+  - score
+  - '>='
+  - '50'
+  - ':'
+  - print
+  - (
+  - '"qualified"'
+  - )
+  explanation: name is truthy when non-empty. Both conditions must hold.
+- type: mcq
+  question: What does this print?
+  code: "is_raining = True\nhas_umbrella = False\nif not (is_raining and not has_umbrella):\n    print(\"go outside\")\nelse:\n\
+    \    print(\"stay inside\")"
+  choices:
+  - stay inside
+  - go outside
+  - 'True'
+  - 'False'
+  correct: stay inside
+  explanation: is_raining is True, not has_umbrella is True. True and True = True. not True = False. else runs.
+- type: fill_blank
+  prompt: Grant access only when both username and password match.
+  before: 'if username == "admin" '
+  after: " password == \"1234\":\n    print(\"access\")"
+  choices:
+  - and
+  - or
+  - not
+  - if
+  answer: and
+  explanation: Both username AND password must match to grant access.
+- type: mcq
+  question: Which condition is True when n is outside the range 1 to 100?
+  code: ''
+  choices:
+  - n < 1 or n > 100
+  - n < 1 and n > 100
+  - not n >= 1 and n <= 100
+  - n <= 0 and n >= 101
+  correct: n < 1 or n > 100
+  explanation: Outside the range means less than 1 OR greater than 100.
+- type: mcq
+  question: What does this print?
+  code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
+  choices:
+  - safe
+  - danger
+  - 'safe
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
-    choices: ["in range", "Nothing", "True", "x"]
-    correct: "in range"
-    explanation: "Both x > 0 (True) and x < 10 (True) are True, so the if block runs."
+    danger'
+  - 'True'
+  correct: safe
+  explanation: hp > 20 is True and shield is True. True and True = True. 'safe' prints.
+- type: mini_code
+  prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
+    is True, else print 'fail'.
+  starter: 'score = int(input())
 
-  - type: fill_blank
-    prompt: "Require both conditions to be true to identify someone as a teenager."
-    before: "if age >= 13 "
-    after: " age <= 19:\n    print(\"teenager\")"
-    choices: ["and", "or", "not", "=="]
-    answer: "and"
-    explanation: "Both conditions must be True: age >= 13 AND age <= 19."
+    passed_exam = input() == ''True''
 
-  - type: mcq
-    question: "What does this print?"
-    code: "score = 45\nif score < 0 or score > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
-    choices: ["valid", "invalid", "45", "Nothing"]
-    correct: "valid"
-    explanation: "score < 0 is False and score > 100 is False. False or False = False, so else runs."
+    '
+  tests:
+  - code: assert _stdout.strip() == 'fail'
+    stdin: '55
 
-  - type: arrange
-    instruction: "Build code that prints 'qualified' when name is not empty and score is 50 or above"
-    blocks: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
-    correct: ["if", "name", "and", "score", ">=", "50", ":", "print", "(", "\"qualified\"", ")"]
-    explanation: "name is truthy when non-empty. Both conditions must hold."
+      False'
+    message: 'score=55, passed_exam=False: condition fails, prints ''fail'''
+  - code: assert _stdout.strip() == 'pass'
+    stdin: '55
 
-  - type: mcq
-    question: "What does this print?"
-    code: "is_raining = True\nhas_umbrella = False\nif not (is_raining and not has_umbrella):\n    print(\"go outside\")\nelse:\n    print(\"stay inside\")"
-    choices: ["stay inside", "go outside", "True", "False"]
-    correct: "stay inside"
-    explanation: "is_raining is True, not has_umbrella is True. True and True = True. not True = False. else runs."
+      True'
+    message: 'score=55, passed_exam=True: both met, prints ''pass'''
+  - code: assert _stdout.strip() == 'fail'
+    stdin: '40
 
-  - type: fill_blank
-    prompt: "Grant access only when both username and password match."
-    before: "if username == \"admin\" "
-    after: " password == \"1234\":\n    print(\"access\")"
-    choices: ["and", "or", "not", "if"]
-    answer: "and"
-    explanation: "Both username AND password must match to grant access."
+      True'
+    message: score=40 is below 50, prints 'fail'
+- type: mini_code
+  prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
+  starter: 'hour = int(input())
 
-  - type: mcq
-    question: "Which condition is True when n is outside the range 1 to 100?"
-    code: ""
-    choices: ["n < 1 or n > 100", "n < 1 and n > 100", "not n >= 1 and n <= 100", "n <= 0 and n >= 101"]
-    correct: "n < 1 or n > 100"
-    explanation: "Outside the range means less than 1 OR greater than 100."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
-    choices: ["safe", "danger", "safe\ndanger", "True"]
-    correct: "safe"
-    explanation: "hp > 20 is True and shield is True. True and True = True. 'safe' prints."
-
-  - type: mini_code
-    prompt: "Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam is True, else print 'fail'."
-    starter: "score = int(input())\npassed_exam = input() == 'True'\n"
-    tests:
-      - code: "assert _stdout.strip() == 'fail'"
-        stdin: "55\nFalse"
-        message: "score=55, passed_exam=False: condition fails, prints 'fail'"
-      - code: "assert _stdout.strip() == 'pass'"
-        stdin: "55\nTrue"
-        message: "score=55, passed_exam=True: both met, prints 'pass'"
-      - code: "assert _stdout.strip() == 'fail'"
-        stdin: "40\nTrue"
-        message: "score=40 is below 50, prints 'fail'"
-
-  - type: mini_code
-    prompt: "Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'."
-    starter: "hour = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'open'"
-        stdin: "14"
-        message: "14 is between 9 and 17, prints 'open'"
-      - code: "assert _stdout.strip() == 'closed'"
-        stdin: "7"
-        message: "7 is before 9, prints 'closed'"
-      - code: "assert _stdout.strip() == 'closed'"
-        stdin: "18"
-        message: "18 is after 17, prints 'closed'"
-
+    '
+  tests:
+  - code: assert _stdout.strip() == 'open'
+    stdin: '14'
+    message: 14 is between 9 and 17, prints 'open'
+  - code: assert _stdout.strip() == 'closed'
+    stdin: '7'
+    message: 7 is before 9, prints 'closed'
+  - code: assert _stdout.strip() == 'closed'
+    stdin: '18'
+    message: 18 is after 17, prints 'closed'
 worlds:
   fantasy:
-    title: "The Enchanted Market"
+    title: Reading the Creature Signs
+    exercises:
+    - type: concept
+      code: "threat = 9\nhas_shield = True\nif threat >= 7 and has_shield:\n    print(\"Brace for impact!\")\nelse:\n    print(\"\
+        Stand down\")\n"
+      output: Brace for impact!
+      explanation: Kira checks two conditions at once. Both threat >= 7 AND has_shield must be True to brace.
+    - type: mcq
+      question: Kira checks if a creature is within striking range. What does this print?
+      code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
+      choices:
+      - in range
+      - Nothing
+      - 'True'
+      - x
+      correct: in range
+      explanation: Both x > 0 (True) and x < 10 (True) are True, so the creature is in range.
+    - type: fill_blank
+      prompt: Identify a creature as a juvenile only when size meets both the lower AND upper bounds.
+      before: 'if size >= 13 '
+      after: " size <= 19:\n    print(\"juvenile\")"
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both conditions must be True: size >= 13 AND size <= 19.'
+    - type: mcq
+      question: Kira checks if a threat level is out of the safe range. What does this print?
+      code: "threat = 45\nif threat < 0 or threat > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
+      choices:
+      - valid
+      - invalid
+      - '45'
+      - Nothing
+      correct: valid
+      explanation: threat < 0 is False and threat > 100 is False. False or False = False, so else runs.
+    - type: arrange
+      instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
+      blocks:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      correct:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      explanation: name is truthy when non-empty. Both conditions must hold to identify the creature.
+    - type: mcq
+      question: Kira evaluates complex storm and shield conditions. What does this print?
+      code: "is_storming = True\nhas_shelter = False\nif not (is_storming and not has_shelter):\n    print(\"go outside\"\
+        )\nelse:\n    print(\"stay inside\")"
+      choices:
+      - stay inside
+      - go outside
+      - 'True'
+      - 'False'
+      correct: stay inside
+      explanation: is_storming is True, not has_shelter is True. True and True = True. not True = False. else runs.
+    - type: fill_blank
+      prompt: Cast the spell only when the correct scroll name AND mana cost match.
+      before: 'if scroll_name == "Fireball" '
+      after: " mana_cost == 40:\n    print(\"cast\")"
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: Both scroll name AND mana cost must match to successfully cast.
+    - type: mcq
+      question: Which condition is True when a threat level is outside the range 1 to 100?
+      code: ''
+      choices:
+      - n < 1 or n > 100
+      - n < 1 and n > 100
+      - not n >= 1 and n <= 100
+      - n <= 0 and n >= 101
+      correct: n < 1 or n > 100
+      explanation: Outside the range means less than 1 OR greater than 100.
+    - type: mcq
+      question: Kira checks hp and shield status. What does this print?
+      code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
+      choices:
+      - safe
+      - danger
+      - 'safe
+
+        danger'
+      - 'True'
+      correct: safe
+      explanation: hp > 20 is True and shield is True. True and True = True.
+    - type: mini_code
+      prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
+        is True, else print 'fail'.
+      starter: 'score = int(input())
+
+        passed_exam = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '55
+
+          False'
+        message: 'threat=55 but relic=False: condition fails'
+      - code: assert _stdout.strip() == 'pass'
+        stdin: '55
+
+          True'
+        message: 'threat=55 and relic=True: both met, Kira advances'
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '40
+
+          True'
+        message: threat=40 is below 50, retreat
+    - type: mini_code
+      prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
+      starter: 'hour = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'open'
+        stdin: '14'
+        message: hour 14 is within the hunting window
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '7'
+        message: hour 7 is before dawn patrol
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '18'
+        message: hour 18 is after the patrol window
   scifi:
-    title: "Clearance Level Check"
+    title: Launch Window Conditions
+    exercises:
+    - type: concept
+      code: "fuel = 17\nshields_up = True\nif fuel >= 18 and shields_up:\n    print(\"Launch ready!\")\nelse:\n    print(\"\
+        Abort\")\n"
+      output: Abort
+      explanation: 'Voss checks two conditions. fuel >= 18 is False (17 < 18), so else runs: "Abort".'
+    - type: mcq
+      question: Voss checks if fuel is within the launch window. What does this print?
+      code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
+      choices:
+      - in range
+      - Nothing
+      - 'True'
+      - x
+      correct: in range
+      explanation: Both x > 0 (True) and x < 10 (True) are True, so fuel is in the launch window.
+    - type: fill_blank
+      prompt: Flag crew as junior cadets only when age is within both the lower AND upper limits.
+      before: 'if age >= 13 '
+      after: " age <= 19:\n    print(\"cadet\")"
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both conditions must be True: age >= 13 AND age <= 19.'
+    - type: mcq
+      question: Voss checks if hull integrity is out of the acceptable range. What does this print?
+      code: "hull = 45\nif hull < 0 or hull > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
+      choices:
+      - valid
+      - invalid
+      - '45'
+      - Nothing
+      correct: valid
+      explanation: hull < 0 is False and hull > 100 is False. False or False = False, so else runs.
+    - type: arrange
+      instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
+      blocks:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      correct:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      explanation: Both conditions must hold to qualify for launch crew.
+    - type: mcq
+      question: Voss evaluates complex storm and shelter conditions. What does this print?
+      code: "is_storming = True\nhas_shelter = False\nif not (is_storming and not has_shelter):\n    print(\"go outside\"\
+        )\nelse:\n    print(\"stay inside\")"
+      choices:
+      - stay inside
+      - go outside
+      - 'True'
+      - 'False'
+      correct: stay inside
+      explanation: is_storming True, not has_shelter True. True and True = True. not True = False. else runs.
+    - type: fill_blank
+      prompt: Unlock the escape pod only when both crew ID AND launch code match.
+      before: 'if crew_id == "admin" '
+      after: " launch_code == \"1234\":\n    print(\"access\")"
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: Both crew ID AND launch code must match to unlock the escape pod.
+    - type: mcq
+      question: Which condition is True when a fuel reading is outside the range 1 to 100?
+      code: ''
+      choices:
+      - n < 1 or n > 100
+      - n < 1 and n > 100
+      - not n >= 1 and n <= 100
+      - n <= 0 and n >= 101
+      correct: n < 1 or n > 100
+      explanation: Outside the range means less than 1 OR greater than 100.
+    - type: mcq
+      question: Voss checks hull integrity and shields. What does this print?
+      code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
+      choices:
+      - safe
+      - danger
+      - 'safe
+
+        danger'
+      - 'True'
+      correct: safe
+      explanation: hp > 20 is True and shield is True. True and True = True.
+    - type: mini_code
+      prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
+        is True, else print 'fail'.
+      starter: 'score = int(input())
+
+        passed_exam = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '55
+
+          False'
+        message: 'hull=55, clearance=False: launch fails'
+      - code: assert _stdout.strip() == 'pass'
+        stdin: '55
+
+          True'
+        message: 'hull=55, clearance=True: launch approved'
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '40
+
+          True'
+        message: hull=40 is below 50, abort
+    - type: mini_code
+      prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
+      starter: 'hour = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'open'
+        stdin: '14'
+        message: hour 14 is within the launch window
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '7'
+        message: hour 7 is before the window opens
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '18'
+        message: hour 18 is after the window closes
   mystery:
-    title: "Multi-Condition Evidence"
+    title: Ruling Out the Suspects
+    exercises:
+    - type: concept
+      code: "age = 17\nhas_badge = True\nif age >= 18 and has_badge:\n    print(\"Access granted\")\nelse:\n    print(\"Access\
+        \ denied\")\n"
+      output: Access denied
+      explanation: Cole checks two conditions. age >= 18 is False (17 < 18), so the else branch runs.
+    - type: mcq
+      question: Cole checks if a suspect score is within the investigation range. What does this print?
+      code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
+      choices:
+      - in range
+      - Nothing
+      - 'True'
+      - x
+      correct: in range
+      explanation: Both x > 0 (True) and x < 10 (True) are True, so the score is in range.
+    - type: fill_blank
+      prompt: Flag a suspect as a young adult only when age meets both the lower AND upper age limits.
+      before: 'if age >= 13 '
+      after: " age <= 19:\n    print(\"young adult\")"
+      choices:
+      - and
+      - or
+      - not
+      - ==
+      answer: and
+      explanation: 'Both conditions must be True: age >= 13 AND age <= 19.'
+    - type: mcq
+      question: Cole checks if a credibility score is out of range. What does this print?
+      code: "score = 45\nif score < 0 or score > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
+      choices:
+      - valid
+      - invalid
+      - '45'
+      - Nothing
+      correct: valid
+      explanation: score < 0 is False and score > 100 is False. False or False = False, so else runs.
+    - type: arrange
+      instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
+      blocks:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      correct:
+      - if
+      - name
+      - and
+      - score
+      - '>='
+      - '50'
+      - ':'
+      - print
+      - (
+      - '"qualified"'
+      - )
+      explanation: Both conditions must hold to qualify as a primary suspect.
+    - type: mcq
+      question: Cole evaluates weather and witness conditions. What does this print?
+      code: "is_raining = True\nhas_umbrella = False\nif not (is_raining and not has_umbrella):\n    print(\"go outside\"\
+        )\nelse:\n    print(\"stay inside\")"
+      choices:
+      - stay inside
+      - go outside
+      - 'True'
+      - 'False'
+      correct: stay inside
+      explanation: is_raining True, not has_umbrella True. True and True = True. not True = False. else runs.
+    - type: fill_blank
+      prompt: Access the locked room only when both the name AND the code match.
+      before: 'if suspect_name == "admin" '
+      after: " access_code == \"1234\":\n    print(\"access\")"
+      choices:
+      - and
+      - or
+      - not
+      - if
+      answer: and
+      explanation: Both the name AND the access code must match.
+    - type: mcq
+      question: Which condition is True when a suspect score is outside the range 1 to 100?
+      code: ''
+      choices:
+      - n < 1 or n > 100
+      - n < 1 and n > 100
+      - not n >= 1 and n <= 100
+      - n <= 0 and n >= 101
+      correct: n < 1 or n > 100
+      explanation: Outside the range means less than 1 OR greater than 100.
+    - type: mcq
+      question: Cole checks alibi strength and witness support. What does this print?
+      code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
+      choices:
+      - safe
+      - danger
+      - 'safe
+
+        danger'
+      - 'True'
+      correct: safe
+      explanation: hp > 20 is True and shield is True. True and True = True.
+    - type: mini_code
+      prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
+        is True, else print 'fail'.
+      starter: 'score = int(input())
+
+        passed_exam = input() == ''True''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '55
+
+          False'
+        message: 'evidence=55, alibi_broken=False: case fails'
+      - code: assert _stdout.strip() == 'pass'
+        stdin: '55
+
+          True'
+        message: 'evidence=55, alibi_broken=True: suspect confirmed'
+      - code: assert _stdout.strip() == 'fail'
+        stdin: '40
+
+          True'
+        message: evidence=40 is below 50, insufficient
+    - type: mini_code
+      prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
+      starter: 'hour = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'open'
+        stdin: '14'
+        message: hour 14 is within the interview window
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '7'
+        message: hour 7 is before the interview office opens
+      - code: assert _stdout.strip() == 'closed'
+        stdin: '18'
+        message: hour 18 is after the office closes

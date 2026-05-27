@@ -99,7 +99,291 @@ exercises:
 worlds:
   fantasy:
     title: "The Truth Rune"
+    exercises:
+      - type: concept
+        code: |
+          altitude = 10
+          print(altitude > 5)
+          print(altitude == 10)
+          print(altitude != 3)
+        output: "True\nTrue\nTrue"
+        explanation: "Finn uses Truth Runes to check conditions on Frostpeak. altitude > 5 checks whether he is above the danger zone. altitude == 10 confirms he reached the target altitude. altitude != 3 verifies he is not at the cursed marker. Each rune returns True or False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(7 > 3)"
+        choices: ["True", "False", "7", "3"]
+        correct: "True"
+        explanation: "Finn checks if his current altitude of 7 exceeds the storm threshold of 3. 7 is greater than 3, so the rune glows True."
+
+      - type: fill_blank
+        prompt: "Check whether Finn's altitude is exactly equal to the summit height of 10."
+        before: "at_summit = altitude "
+        after: " 10"
+        choices: ["==", "=", "!=", ">="]
+        answer: "=="
+        explanation: "== compares for equality. Using = would assign 10 to altitude instead of checking it."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "score = 60\nprint(score >= 60)"
+        choices: ["True", "False", "60", ">="]
+        correct: "True"
+        explanation: "Finn's stamina score of 60 meets the minimum threshold of 60 needed to continue climbing. 60 >= 60 is True."
+
+      - type: arrange
+        instruction: "Print whether altitude is not equal to 5"
+        blocks: ["altitude", "!=", "5", "==", "print", "(", ")"]
+        correct: ["print", "(", "altitude", "!=", "5", ")"]
+        explanation: "!= is 'not equal to'. print(altitude != 5) prints True if Finn is not at the cursed altitude of 5."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "a = 5\nb = 10\nprint(a < b)"
+        choices: ["True", "False", "5", "10"]
+        correct: "True"
+        explanation: "Finn's current stamina (a = 5) is less than the required stamina (b = 10). 5 < 10 is True — he needs to rest."
+
+      - type: fill_blank
+        prompt: "Check whether Finn's stamina meets or exceeds the minimum of 50 needed to cross the glacier."
+        before: "can_cross = stamina "
+        after: " 50"
+        choices: [">=", "==", "=", "<="]
+        answer: ">="
+        explanation: "stamina >= 50 is True when stamina is 50 or more — the minimum needed to safely cross the glacier."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x == 5)\nprint(x != 5)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "5\n5"]
+        correct: "True\nFalse"
+        explanation: "Finn's altitude (x = 5) exactly matches the checkpoint marker. x == 5 is True. x != 5 is False — they ARE equal, so 'not equal' is False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "name = \"Alice\"\nprint(name == \"alice\")"
+        choices: ["False", "True", "Alice", "alice"]
+        correct: "False"
+        explanation: "Finn checks a rune inscription. 'Alice' and 'alice' are different — rune matching is case-sensitive, so the comparison returns False."
+
+      - type: arrange
+        instruction: "Print whether stamina is less than or equal to 0"
+        blocks: ["stamina", "<=", "0", ">=", "print", "(", ")"]
+        correct: ["print", "(", "stamina", "<=", "0", ")"]
+        explanation: "print(stamina <= 0) prints True when Finn's stamina has reached zero or below — signalling he must stop climbing."
+
+      - type: mini_code
+        prompt: "Read Finn's stamina with input(). Print True if it is 60 or above, False if it is below 60."
+        starter: "score = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "75"
+            message: "75 >= 60 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "40"
+            message: "40 is below 60, should print False"
+
+      - type: mini_code
+        prompt: "Read two altitude readings with input(). Print True if they are different (not equal), False if they match."
+        starter: "a = int(input())\nb = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "10\n20"
+            message: "10 != 20 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "5\n5"
+            message: "5 == 5 so should print False"
+
   scifi:
     title: "Sensor Thresholds"
+    exercises:
+      - type: concept
+        code: |
+          shield_level = 10
+          print(shield_level > 5)
+          print(shield_level == 10)
+          print(shield_level != 3)
+        output: "True\nTrue\nTrue"
+        explanation: "Zara uses sensor comparisons to monitor her ship on approach. shield_level > 5 checks if shields are above the critical threshold. shield_level == 10 confirms maximum charge. shield_level != 3 verifies she is not at the dangerous minimum. Each comparison returns True or False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(7 > 3)"
+        choices: ["True", "False", "7", "3"]
+        correct: "True"
+        explanation: "Zara checks if 7 remaining fuel pods exceed the minimum threshold of 3 for safe navigation. 7 is greater than 3, so the sensor reads True."
+
+      - type: fill_blank
+        prompt: "Check whether the shield level is exactly equal to full charge at 10."
+        before: "fully_charged = shield_level "
+        after: " 10"
+        choices: ["==", "=", "!=", ">="]
+        answer: "=="
+        explanation: "== compares for equality. Using = would assign 10 to shield_level instead of checking it."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "score = 60\nprint(score >= 60)"
+        choices: ["True", "False", "60", ">="]
+        correct: "True"
+        explanation: "Zara's fuel efficiency score of 60 meets the minimum threshold of 60 required for safe asteroid navigation. 60 >= 60 is True."
+
+      - type: arrange
+        instruction: "Print whether fuel_level is not equal to 5"
+        blocks: ["fuel_level", "!=", "5", "==", "print", "(", ")"]
+        correct: ["print", "(", "fuel_level", "!=", "5", ")"]
+        explanation: "print(fuel_level != 5) prints True if Zara's fuel is not at the critical warning level of 5."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "a = 5\nb = 10\nprint(a < b)"
+        choices: ["True", "False", "5", "10"]
+        correct: "True"
+        explanation: "Zara's current shield power (a = 5) is less than the required power (b = 10) to pass through the dense asteroid cluster. 5 < 10 is True."
+
+      - type: fill_blank
+        prompt: "Check whether Zara's fuel reading meets or exceeds the minimum safe threshold of 50."
+        before: "safe_to_fly = fuel_reading "
+        after: " 50"
+        choices: [">=", "==", "=", "<="]
+        answer: ">="
+        explanation: "fuel_reading >= 50 is True when fuel is at 50 or above — the minimum safe level for continued flight."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x == 5)\nprint(x != 5)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "5\n5"]
+        correct: "True\nFalse"
+        explanation: "Zara's shield reading (x = 5) exactly matches the target level. x == 5 is True. x != 5 is False — they ARE equal, so 'not equal' is False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "name = \"Alice\"\nprint(name == \"alice\")"
+        choices: ["False", "True", "Alice", "alice"]
+        correct: "False"
+        explanation: "Zara checks a pilot ID code. 'Alice' and 'alice' are different — the ship's ID system is case-sensitive, so the comparison returns False."
+
+      - type: arrange
+        instruction: "Print whether hull_integrity is less than or equal to 0"
+        blocks: ["hull_integrity", "<=", "0", ">=", "print", "(", ")"]
+        correct: ["print", "(", "hull_integrity", "<=", "0", ")"]
+        explanation: "print(hull_integrity <= 0) prints True when Zara's hull has been fully compromised — the ship needs immediate repair."
+
+      - type: mini_code
+        prompt: "Read Zara's fuel reading with input(). Print True if it is 60 or above, False if it is below 60."
+        starter: "score = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "75"
+            message: "75 >= 60 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "40"
+            message: "40 is below 60, should print False"
+
+      - type: mini_code
+        prompt: "Read two sensor readings with input(). Print True if they are not equal, False if they match."
+        starter: "a = int(input())\nb = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "10\n20"
+            message: "10 != 20 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "5\n5"
+            message: "5 == 5 so should print False"
+
   mystery:
     title: "Comparing Evidence"
+    exercises:
+      - type: concept
+        code: |
+          suspect_time = 10
+          print(suspect_time > 5)
+          print(suspect_time == 10)
+          print(suspect_time != 3)
+        output: "True\nTrue\nTrue"
+        explanation: "Detective Cole uses comparison operators to cross-reference the suspect timeline. suspect_time > 5 checks if the arrival was after 5pm. suspect_time == 10 confirms it matches the sighting at 10pm. suspect_time != 3 rules out a 3pm alibi. Each comparison returns True or False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(7 > 3)"
+        choices: ["True", "False", "7", "3"]
+        correct: "True"
+        explanation: "Cole checks if 7 corroborating witnesses exceed the 3 needed to confirm a sighting. 7 is greater than 3, so the result is True."
+
+      - type: fill_blank
+        prompt: "Check whether the suspect's reported arrival time is exactly equal to the 10pm sighting."
+        before: "matches_sighting = arrival_time "
+        after: " 10"
+        choices: ["==", "=", "!=", ">="]
+        answer: "=="
+        explanation: "== compares for equality. Using = would overwrite arrival_time with 10 instead of checking it."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "score = 60\nprint(score >= 60)"
+        choices: ["True", "False", "60", ">="]
+        correct: "True"
+        explanation: "A credibility score of 60 meets Cole's minimum threshold of 60 to consider a witness statement reliable. 60 >= 60 is True."
+
+      - type: arrange
+        instruction: "Print whether suspect_time is not equal to 5"
+        blocks: ["suspect_time", "!=", "5", "==", "print", "(", ")"]
+        correct: ["print", "(", "suspect_time", "!=", "5", ")"]
+        explanation: "print(suspect_time != 5) prints True if the suspect was not at the scene at 5pm — clearing that particular alibi."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "a = 5\nb = 10\nprint(a < b)"
+        choices: ["True", "False", "5", "10"]
+        correct: "True"
+        explanation: "The suspect's alibi window (a = 5 minutes) is shorter than the crime window (b = 10 minutes). 5 < 10 is True — the alibi cannot cover the full crime."
+
+      - type: fill_blank
+        prompt: "Check whether the suspect's credibility score meets or exceeds Cole's reliability threshold of 50."
+        before: "is_reliable = credibility "
+        after: " 50"
+        choices: [">=", "==", "=", "<="]
+        answer: ">="
+        explanation: "credibility >= 50 is True when a witness scores 50 or above — Cole's threshold for treating testimony as reliable."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x == 5)\nprint(x != 5)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "5\n5"]
+        correct: "True\nFalse"
+        explanation: "The suspect's timestamp (x = 5) exactly matches the sighting log. x == 5 is True. x != 5 is False — they ARE equal, so 'not equal' is False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "name = \"Alice\"\nprint(name == \"alice\")"
+        choices: ["False", "True", "Alice", "alice"]
+        correct: "False"
+        explanation: "Cole compares two suspect name entries from different files. 'Alice' and 'alice' are different — the case system is case-sensitive, so they do not match. This could be a data entry error worth investigating."
+
+      - type: arrange
+        instruction: "Print whether credibility is less than or equal to 0"
+        blocks: ["credibility", "<=", "0", ">=", "print", "(", ")"]
+        correct: ["print", "(", "credibility", "<=", "0", ")"]
+        explanation: "print(credibility <= 0) prints True when a witness has zero or negative credibility — Cole dismisses their testimony entirely."
+
+      - type: mini_code
+        prompt: "Read a witness credibility score with input(). Print True if it is 60 or above, False if it is below 60."
+        starter: "score = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "75"
+            message: "75 >= 60 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "40"
+            message: "40 is below 60, should print False"
+
+      - type: mini_code
+        prompt: "Read two suspect timestamps with input(). Print True if they are not equal (conflicting reports), False if they match."
+        starter: "a = int(input())\nb = int(input())\n"
+        tests:
+          - code: "assert _stdout.strip() == 'True'"
+            stdin: "10\n20"
+            message: "10 != 20 should print True"
+          - code: "assert _stdout.strip() == 'False'"
+            stdin: "5\n5"
+            message: "5 == 5 so should print False"

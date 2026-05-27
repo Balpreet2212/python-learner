@@ -90,8 +90,268 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Spell Library"
+    title: "Searching the Supply Crate"
+    exercises:
+      - type: concept
+        code: |
+          supplies = [10, 20, 30, 40, 50]
+          print(supplies[1:3])
+          print(supplies[:2])
+          print(supplies[3:])
+          print(30 in supplies)
+          print(99 in supplies)
+        output: "[20, 30]\n[10, 20]\n[40, 50]\nTrue\nFalse"
+        explanation: "Brin slices the supply list to check sections of the pack. supplies[1:3] grabs the middle portion. in tells Brin whether a specific item weight is already packed."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "gear = ['a', 'b', 'c', 'd', 'e']\nprint(gear[1:4])"
+        choices: ["['b', 'c', 'd']", "['a', 'b', 'c']", "['c', 'd', 'e']", "['b', 'c', 'd', 'e']"]
+        correct: "['b', 'c', 'd']"
+        explanation: "Brin slices gear from index 1 up to (but not including) index 4: items b, c, d."
+
+      - type: fill_blank
+        prompt: "Brin wants to check only the first 3 supplies packed."
+        before: "supplies = [1, 2, 3, 4, 5]\nprint(supplies[:"
+        after: "])"
+        choices: ["3", "2", "4", "0"]
+        answer: "3"
+        explanation: "supplies[:3] gives Brin the first 3 items from the crate."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "pack = ['rope', 'lantern', 'bread']\nprint('lantern' in pack)"
+        choices: ["True", "False", "lantern", "1"]
+        correct: "True"
+        explanation: "'lantern' is in Brin's pack, so in returns True."
+
+      - type: arrange
+        instruction: "Print the last 2 items of nums = [10, 20, 30, 40, 50]"
+        blocks: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        correct: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        explanation: "nums[3:] slices from index 3 to the end, giving Brin the last two supply weights."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "weights = [85, 92, 78, 95, 88]\nprint(weights[2:4])"
+        choices: ["[78, 95]", "[92, 78]", "[78, 95, 88]", "[85, 92]"]
+        correct: "[78, 95]"
+        explanation: "Brin checks weights at indices 2 and 3: 78 and 95."
+
+      - type: fill_blank
+        prompt: "Brin checks whether 'torch' is already in the supplies."
+        before: "supplies = ['rope', 'lantern', 'bread']\nprint('torch' "
+        after: " supplies)"
+        choices: ["in", "not", "==", "is"]
+        answer: "in"
+        explanation: "'torch' in supplies checks if Brin already packed a torch. It is not there, so it prints False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "pack = [1, 2, 3, 4, 5]\nprint(pack[:3])"
+        choices: ["[1, 2, 3]", "[1, 2]", "[2, 3, 4]", "[3, 4, 5]"]
+        correct: "[1, 2, 3]"
+        explanation: "Brin slices the first three supply entries from the crate."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "heroes = ['Alice', 'Bob', 'Carol']\nprint('Bob' in heroes)\nprint('Dave' in heroes)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "False\nFalse"]
+        correct: "True\nFalse"
+        explanation: "'Bob' is on the expedition team (True). 'Dave' is not (False)."
+
+      - type: mini_code
+        prompt: "Create a pack list of 5 supply weights. Print a slice of the middle 3 items."
+        starter: ""
+        tests:
+          - code: "assert '[' in _stdout and ']' in _stdout"
+            message: "Should print the slice as a list"
+          - code: "assert _stdout.count(',') == 2"
+            message: "Slice of 3 items has 2 commas"
+
+      - type: mini_code
+        prompt: "Create a list called menu with 4 food items. Print True if 'pizza' is in menu, False if not. Then print the first 2 items."
+        starter: ""
+        tests:
+          - code: "assert 'True' in _stdout or 'False' in _stdout"
+            message: "Brin should print True or False to show if the item is packed"
+          - code: "assert '[' in _stdout"
+            message: "Should also print the first 2 supplies as a list"
+
   scifi:
-    title: "Database Queries"
+    title: "Scanning Asteroid Sectors"
+    exercises:
+      - type: concept
+        code: |
+          hazards = [10, 20, 30, 40, 50]
+          print(hazards[1:3])
+          print(hazards[:2])
+          print(hazards[3:])
+          print(30 in hazards)
+          print(99 in hazards)
+        output: "[20, 30]\n[10, 20]\n[40, 50]\nTrue\nFalse"
+        explanation: "Zev slices the hazard rating list to inspect sectors of the asteroid field. hazards[1:3] pulls the middle sector. in checks whether a specific rating has been recorded."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "sector = ['a', 'b', 'c', 'd', 'e']\nprint(sector[1:4])"
+        choices: ["['b', 'c', 'd']", "['a', 'b', 'c']", "['c', 'd', 'e']", "['b', 'c', 'd', 'e']"]
+        correct: "['b', 'c', 'd']"
+        explanation: "Zev scans sector from index 1 up to (not including) index 4: zones b, c, d."
+
+      - type: fill_blank
+        prompt: "Zev wants to check only the first 3 asteroid readings."
+        before: "readings = [1, 2, 3, 4, 5]\nprint(readings[:"
+        after: "])"
+        choices: ["3", "2", "4", "0"]
+        answer: "3"
+        explanation: "readings[:3] gives Zev the first 3 sensor readings from the field."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "field = ['alpha', 'beta', 'gamma']\nprint('beta' in field)"
+        choices: ["True", "False", "beta", "1"]
+        correct: "True"
+        explanation: "'beta' is in Zev's asteroid field list, so in returns True."
+
+      - type: arrange
+        instruction: "Print the last 2 items of nums = [10, 20, 30, 40, 50]"
+        blocks: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        correct: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        explanation: "nums[3:] slices from index 3 to the end, giving Zev the last two hazard readings."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "ratings = [85, 92, 78, 95, 88]\nprint(ratings[2:4])"
+        choices: ["[78, 95]", "[92, 78]", "[78, 95, 88]", "[85, 92]"]
+        correct: "[78, 95]"
+        explanation: "Zev pulls hazard ratings at indices 2 and 3: 78 and 95."
+
+      - type: fill_blank
+        prompt: "Zev checks whether asteroid 'X-99' has already been logged."
+        before: "asteroids = ['A-01', 'B-07', 'C-14']\nprint('X-99' "
+        after: " asteroids)"
+        choices: ["in", "not", "==", "is"]
+        answer: "in"
+        explanation: "'X-99' in asteroids checks if that rock is already on Zev's map. It is not, so it prints False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "field = [1, 2, 3, 4, 5]\nprint(field[:3])"
+        choices: ["[1, 2, 3]", "[1, 2]", "[2, 3, 4]", "[3, 4, 5]"]
+        correct: "[1, 2, 3]"
+        explanation: "Zev scans the first three hazard readings in the asteroid field."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "crew = ['Alice', 'Bob', 'Carol']\nprint('Bob' in crew)\nprint('Dave' in crew)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "False\nFalse"]
+        correct: "True\nFalse"
+        explanation: "'Bob' is on Zev's crew roster (True). 'Dave' is not (False)."
+
+      - type: mini_code
+        prompt: "Create a list of 5 hazard ratings. Print a slice of the middle 3 readings."
+        starter: ""
+        tests:
+          - code: "assert '[' in _stdout and ']' in _stdout"
+            message: "Should print the slice as a list"
+          - code: "assert _stdout.count(',') == 2"
+            message: "Slice of 3 items has 2 commas"
+
+      - type: mini_code
+        prompt: "Create a list called menu with 4 food items. Print True if 'pizza' is in menu, False if not. Then print the first 2 items."
+        starter: ""
+        tests:
+          - code: "assert 'True' in _stdout or 'False' in _stdout"
+            message: "Zev should print True or False for the membership check"
+          - code: "assert '[' in _stdout"
+            message: "Should also print the first 2 items as a list"
+
   mystery:
-    title: "Narrowing Suspects"
+    title: "Narrowing the Suspects"
+    exercises:
+      - type: concept
+        code: |
+          clues = [10, 20, 30, 40, 50]
+          print(clues[1:3])
+          print(clues[:2])
+          print(clues[3:])
+          print(30 in clues)
+          print(99 in clues)
+        output: "[20, 30]\n[10, 20]\n[40, 50]\nTrue\nFalse"
+        explanation: "Cole slices the clue log to focus on specific parts of the investigation. clues[1:3] pulls a subsection of evidence. in checks whether a particular clue ID has been recorded."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "suspects = ['a', 'b', 'c', 'd', 'e']\nprint(suspects[1:4])"
+        choices: ["['b', 'c', 'd']", "['a', 'b', 'c']", "['c', 'd', 'e']", "['b', 'c', 'd', 'e']"]
+        correct: "['b', 'c', 'd']"
+        explanation: "Cole narrows the suspect list from index 1 up to (not including) index 4: suspects b, c, d."
+
+      - type: fill_blank
+        prompt: "Cole wants to review only the first 3 pieces of evidence."
+        before: "evidence = [1, 2, 3, 4, 5]\nprint(evidence[:"
+        after: "])"
+        choices: ["3", "2", "4", "0"]
+        answer: "3"
+        explanation: "evidence[:3] gives Cole the first 3 clues logged in the case file."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "board = ['fingerprint', 'receipt', 'keycard']\nprint('receipt' in board)"
+        choices: ["True", "False", "receipt", "1"]
+        correct: "True"
+        explanation: "'receipt' is pinned to Cole's evidence board, so in returns True."
+
+      - type: arrange
+        instruction: "Print the last 2 items of nums = [10, 20, 30, 40, 50]"
+        blocks: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        correct: ["nums", "=", "[", "10", ",", "20", ",", "30", ",", "40", ",", "50", "]", "print", "(", "nums", "[", "3", ":", "]", ")"]
+        explanation: "nums[3:] slices from index 3 to the end, giving Cole the last two clue scores."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "relevance = [85, 92, 78, 95, 88]\nprint(relevance[2:4])"
+        choices: ["[78, 95]", "[92, 78]", "[78, 95, 88]", "[85, 92]"]
+        correct: "[78, 95]"
+        explanation: "Cole checks evidence relevance scores at indices 2 and 3: 78 and 95."
+
+      - type: fill_blank
+        prompt: "Cole checks whether 'alibi' is already in the evidence list."
+        before: "evidence = ['fingerprint', 'receipt', 'keycard']\nprint('alibi' "
+        after: " evidence)"
+        choices: ["in", "not", "==", "is"]
+        answer: "in"
+        explanation: "'alibi' in evidence checks if that clue was already logged. It is not, so it prints False."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "clues = [1, 2, 3, 4, 5]\nprint(clues[:3])"
+        choices: ["[1, 2, 3]", "[1, 2]", "[2, 3, 4]", "[3, 4, 5]"]
+        correct: "[1, 2, 3]"
+        explanation: "Cole reviews the first three clue entries in the case file."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "suspects = ['Alice', 'Bob', 'Carol']\nprint('Bob' in suspects)\nprint('Dave' in suspects)"
+        choices: ["True\nFalse", "False\nTrue", "True\nTrue", "False\nFalse"]
+        correct: "True\nFalse"
+        explanation: "'Bob' is on Cole's suspect board (True). 'Dave' has not been added yet (False)."
+
+      - type: mini_code
+        prompt: "Create a list of 5 clue relevance scores. Print a slice of the middle 3 scores."
+        starter: ""
+        tests:
+          - code: "assert '[' in _stdout and ']' in _stdout"
+            message: "Should print the slice as a list"
+          - code: "assert _stdout.count(',') == 2"
+            message: "Slice of 3 items has 2 commas"
+
+      - type: mini_code
+        prompt: "Create a list called menu with 4 food items. Print True if 'pizza' is in menu, False if not. Then print the first 2 items."
+        starter: ""
+        tests:
+          - code: "assert 'True' in _stdout or 'False' in _stdout"
+            message: "Cole should print True or False for the evidence check"
+          - code: "assert '[' in _stdout"
+            message: "Should also print the first 2 clues as a list"

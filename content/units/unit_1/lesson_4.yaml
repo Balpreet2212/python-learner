@@ -95,8 +95,283 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Speaking Scroll"
+    title: "Inscribing the Potion Labels"
+    exercises:
+      - type: concept
+        code: |
+          ingredient = "moonpetal"
+          potion_strength = 95
+          print(f"Ingredient {ingredient} adds {potion_strength} potency!")
+        output: "Ingredient moonpetal adds 95 potency!"
+        explanation: "f-strings let Elara write the ingredient name and strength directly into her potion label. Put f before the quote and use {variable} inside. The value is inscribed in place of the placeholder."
+
+      - type: mcq
+        question: "Elara records her apprentice age on a scroll. What does this print?"
+        code: "age = 12\nprint(f\"I am {age} years old\")"
+        choices: ["I am 12 years old", "I am age years old", "I am {age} years old", "12"]
+        correct: "I am 12 years old"
+        explanation: "{age} inside the f-string is replaced by the value 12 on the scroll."
+
+      - type: fill_blank
+        prompt: "Add the prefix that turns this into an f-string so the apprentice's name appears in the greeting scroll."
+        before: "name = \"Bob\"\nprint("
+        after: "\"Hello, {name}!\")"
+        choices: ["f", "print", "str", "len"]
+        answer: "f"
+        explanation: "The f before the quote activates {variable} substitution, inscribing the name into the greeting."
+
+      - type: mcq
+        question: "Elara calculates double the magic amplifier and writes it on a label. What does this print?"
+        code: "amplifier = 7\nprint(f\"{amplifier} times 2 is {amplifier * 2}\")"
+        choices: ["7 times 2 is 14", "x times 2 is x * 2", "7 times 2 is x * 2", "14"]
+        correct: "7 times 2 is 14"
+        explanation: "Expressions like amplifier * 2 can go inside {} and are computed before inscribing."
+
+      - type: arrange
+        instruction: "Build code to print 'Potency: 100' using an f-string where points equals 100"
+        blocks: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        correct: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        explanation: "First set points = 100, then f\"Score: {points}\" inscribes the value on the label."
+
+      - type: mcq
+        question: "Elara writes a recipe note combining two ingredient quantities. What does this print?"
+        code: "petals = 3\nroots = 4\nprint(f\"{petals} + {roots} = {petals + roots}\")"
+        choices: ["3 + 4 = 7", "a + b = a + b", "3 + 4 = a + b", "7"]
+        correct: "3 + 4 = 7"
+        explanation: "{petals}, {roots}, and {petals + roots} are all replaced with their computed values."
+
+      - type: fill_blank
+        prompt: "Embed the workshop location name inside the potion origin message."
+        before: "city = \"London\"\nprint(f\"Welcome to "
+        after: "!\")"
+        choices: ["{city}", "city", "\"city\"", "(city)"]
+        answer: "{city}"
+        explanation: "{city} inside the f-string inscribes the workshop location name into the message."
+
+      - type: mcq
+        question: "Which line correctly uses an f-string to greet an apprentice by name?"
+        code: ""
+        choices: ["print(f\"Hi {name}\")", "print(\"Hi {name}\")", "print(f Hi name)", "print(f'Hi name')"]
+        correct: "print(f\"Hi {name}\")"
+        explanation: "f-strings need f before the quote and curly braces around the variable name."
+
+      - type: mcq
+        question: "Elara labels a potion with its ingredient and price. What does this print?"
+        code: "ingredient = \"sword\"\ncost = 50\nprint(f\"The {ingredient} costs {cost} gold\")"
+        choices: ["The sword costs 50 gold", "The item costs cost gold", "The {ingredient} costs {cost} gold", "sword 50"]
+        correct: "The sword costs 50 gold"
+        explanation: "{ingredient} and {cost} are replaced with the values stored in those variables."
+
+      - type: fill_blank
+        prompt: "Insert the current potion_strength value into the health potion display label."
+        before: "hp = 80\nprint(f\"HP: "
+        after: " / 100\")"
+        choices: ["{hp}", "hp", "{HP}", "(hp)"]
+        answer: "{hp}"
+        explanation: "{hp} inscribes the value 80 into the label, giving 'HP: 80 / 100'."
+
+      - type: mini_code
+        prompt: "Store \"Python\" in language and 1991 in year. Print: 'Python was created in 1991' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert 'Python was created in 1991' in _stdout"
+            message: "Should print 'Python was created in 1991'"
+          - code: "assert 'f\"' in _code or \"f'\" in _code"
+            message: "Should use an f-string"
+
+      - type: mini_code
+        prompt: "Store your hero name in hero and 5 in level. Print 'Hero [name] is level [level]' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert isinstance(hero, str) and len(hero) > 0"
+            message: "hero should be a non-empty string"
+          - code: "assert f'Hero {hero} is level {level}' in _stdout"
+            message: "Should print the correct f-string output"
+
   scifi:
-    title: "Mission Briefing"
+    title: "Composing the Mission Briefing"
+    exercises:
+      - type: concept
+        code: |
+          system = "life_support"
+          hull_rating = 95
+          print(f"System {system} integrity is at {hull_rating} percent!")
+        output: "System life_support integrity is at 95 percent!"
+        explanation: "f-strings let Yara embed system names and readings directly into status messages. Put f before the quote and use {variable} inside. The value fills in the placeholder automatically."
+
+      - type: mcq
+        question: "Yara logs her crew member's age in the personnel file. What does this print?"
+        code: "age = 12\nprint(f\"I am {age} years old\")"
+        choices: ["I am 12 years old", "I am age years old", "I am {age} years old", "12"]
+        correct: "I am 12 years old"
+        explanation: "{age} inside the f-string is replaced by the value 12 in the personnel record."
+
+      - type: fill_blank
+        prompt: "Add the prefix that turns this into an f-string so the crew member's name appears in the greeting message."
+        before: "name = \"Bob\"\nprint("
+        after: "\"Hello, {name}!\")"
+        choices: ["f", "print", "str", "len"]
+        answer: "f"
+        explanation: "The f before the quote activates {variable} substitution, inserting the name into the transmission."
+
+      - type: mcq
+        question: "Yara doubles the sensor gain and writes it to the diagnostics log. What does this print?"
+        code: "gain = 7\nprint(f\"{gain} times 2 is {gain * 2}\")"
+        choices: ["7 times 2 is 14", "x times 2 is x * 2", "7 times 2 is x * 2", "14"]
+        correct: "7 times 2 is 14"
+        explanation: "Expressions like gain * 2 can go inside {} and are computed before the message is sent."
+
+      - type: arrange
+        instruction: "Build code to print 'Power: 100' using an f-string where points equals 100"
+        blocks: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        correct: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        explanation: "First set points = 100, then f\"Score: {points}\" inserts the reading into the status message."
+
+      - type: mcq
+        question: "Yara writes a power budget note combining two system draws. What does this print?"
+        code: "shields = 3\nengines = 4\nprint(f\"{shields} + {engines} = {shields + engines}\")"
+        choices: ["3 + 4 = 7", "a + b = a + b", "3 + 4 = a + b", "7"]
+        correct: "3 + 4 = 7"
+        explanation: "{shields}, {engines}, and {shields + engines} are all replaced with their computed values."
+
+      - type: fill_blank
+        prompt: "Embed the destination sector name inside the navigation briefing message."
+        before: "city = \"London\"\nprint(f\"Welcome to "
+        after: "!\")"
+        choices: ["{city}", "city", "\"city\"", "(city)"]
+        answer: "{city}"
+        explanation: "{city} inside the f-string inserts the sector name into the briefing."
+
+      - type: mcq
+        question: "Which line correctly uses an f-string to address a crew member by name?"
+        code: ""
+        choices: ["print(f\"Hi {name}\")", "print(\"Hi {name}\")", "print(f Hi name)", "print(f'Hi name')"]
+        correct: "print(f\"Hi {name}\")"
+        explanation: "f-strings need f before the quote and curly braces around the variable name."
+
+      - type: mcq
+        question: "Yara logs a component and its replacement cost. What does this print?"
+        code: "component = \"sword\"\ncost = 50\nprint(f\"The {component} costs {cost} gold\")"
+        choices: ["The sword costs 50 gold", "The item costs cost gold", "The {component} costs {cost} gold", "sword 50"]
+        correct: "The sword costs 50 gold"
+        explanation: "{component} and {cost} are replaced with the values in those registers."
+
+      - type: fill_blank
+        prompt: "Insert the current hull_rating value into the ship status display."
+        before: "hp = 80\nprint(f\"HP: "
+        after: " / 100\")"
+        choices: ["{hp}", "hp", "{HP}", "(hp)"]
+        answer: "{hp}"
+        explanation: "{hp} inserts the value 80 into the display, giving 'HP: 80 / 100'."
+
+      - type: mini_code
+        prompt: "Store \"Python\" in language and 1991 in year. Print: 'Python was created in 1991' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert 'Python was created in 1991' in _stdout"
+            message: "Should print 'Python was created in 1991'"
+          - code: "assert 'f\"' in _code or \"f'\" in _code"
+            message: "Should use an f-string"
+
+      - type: mini_code
+        prompt: "Store your hero name in hero and 5 in level. Print 'Hero [name] is level [level]' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert isinstance(hero, str) and len(hero) > 0"
+            message: "hero should be a non-empty string"
+          - code: "assert f'Hero {hero} is level {level}' in _stdout"
+            message: "Should print the correct f-string output"
+
   mystery:
-    title: "The Case File"
+    title: "Writing Up the Case File"
+    exercises:
+      - type: concept
+        code: |
+          suspect = "Victor Crane"
+          evidence_count = 95
+          print(f"Suspect {suspect} linked to {evidence_count} pieces of evidence!")
+        output: "Suspect Victor Crane linked to 95 pieces of evidence!"
+        explanation: "f-strings let Cole embed suspect names and evidence counts directly into case notes. Put f before the quote and use {variable} inside. The value replaces the placeholder in the report."
+
+      - type: mcq
+        question: "Cole records a witness's age in the case file. What does this print?"
+        code: "age = 12\nprint(f\"I am {age} years old\")"
+        choices: ["I am 12 years old", "I am age years old", "I am {age} years old", "12"]
+        correct: "I am 12 years old"
+        explanation: "{age} inside the f-string is replaced by the value 12 in the witness statement."
+
+      - type: fill_blank
+        prompt: "Add the prefix that turns this into an f-string so the informant's name appears in the report."
+        before: "name = \"Bob\"\nprint("
+        after: "\"Hello, {name}!\")"
+        choices: ["f", "print", "str", "len"]
+        answer: "f"
+        explanation: "The f before the quote activates {variable} substitution, inserting the name into the case note."
+
+      - type: mcq
+        question: "Cole calculates double the cipher shift and writes it in his notes. What does this print?"
+        code: "shift = 7\nprint(f\"{shift} times 2 is {shift * 2}\")"
+        choices: ["7 times 2 is 14", "x times 2 is x * 2", "7 times 2 is x * 2", "14"]
+        correct: "7 times 2 is 14"
+        explanation: "Expressions like shift * 2 can go inside {} and are evaluated before writing to the report."
+
+      - type: arrange
+        instruction: "Build code to print 'Clues: 100' using an f-string where points equals 100"
+        blocks: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        correct: ["points", "=", "100", "print", "(", "f", "\"Score: {points}\"", ")"]
+        explanation: "First set points = 100, then f\"Score: {points}\" writes the tally into the case report."
+
+      - type: mcq
+        question: "Cole totals up two batches of clues in his notebook. What does this print?"
+        code: "batch_a = 3\nbatch_b = 4\nprint(f\"{batch_a} + {batch_b} = {batch_a + batch_b}\")"
+        choices: ["3 + 4 = 7", "a + b = a + b", "3 + 4 = a + b", "7"]
+        correct: "3 + 4 = 7"
+        explanation: "{batch_a}, {batch_b}, and {batch_a + batch_b} are all replaced with their computed values."
+
+      - type: fill_blank
+        prompt: "Embed the crime scene location name inside the incident report message."
+        before: "city = \"London\"\nprint(f\"Welcome to "
+        after: "!\")"
+        choices: ["{city}", "city", "\"city\"", "(city)"]
+        answer: "{city}"
+        explanation: "{city} inside the f-string inserts the crime scene location name into the report."
+
+      - type: mcq
+        question: "Which line correctly uses an f-string to name a suspect in a report?"
+        code: ""
+        choices: ["print(f\"Hi {name}\")", "print(\"Hi {name}\")", "print(f Hi name)", "print(f'Hi name')"]
+        correct: "print(f\"Hi {name}\")"
+        explanation: "f-strings need f before the quote and curly braces around the variable name."
+
+      - type: mcq
+        question: "Cole logs an item of evidence and its value. What does this print?"
+        code: "item = \"sword\"\ncost = 50\nprint(f\"The {item} costs {cost} gold\")"
+        choices: ["The sword costs 50 gold", "The item costs cost gold", "The {item} costs {cost} gold", "sword 50"]
+        correct: "The sword costs 50 gold"
+        explanation: "{item} and {cost} are replaced with the values stored in the evidence log."
+
+      - type: fill_blank
+        prompt: "Insert the current clue_count value into the progress report."
+        before: "hp = 80\nprint(f\"HP: "
+        after: " / 100\")"
+        choices: ["{hp}", "hp", "{HP}", "(hp)"]
+        answer: "{hp}"
+        explanation: "{hp} inserts the value 80 into the progress display, giving 'HP: 80 / 100'."
+
+      - type: mini_code
+        prompt: "Store \"Python\" in language and 1991 in year. Print: 'Python was created in 1991' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert 'Python was created in 1991' in _stdout"
+            message: "Should print 'Python was created in 1991'"
+          - code: "assert 'f\"' in _code or \"f'\" in _code"
+            message: "Should use an f-string"
+
+      - type: mini_code
+        prompt: "Store your hero name in hero and 5 in level. Print 'Hero [name] is level [level]' using an f-string."
+        starter: ""
+        tests:
+          - code: "assert isinstance(hero, str) and len(hero) > 0"
+            message: "hero should be a non-empty string"
+          - code: "assert f'Hero {hero} is level {level}' in _stdout"
+            message: "Should print the correct f-string output"

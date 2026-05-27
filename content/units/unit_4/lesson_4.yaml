@@ -1,105 +1,661 @@
-title: "while Loops"
+title: while Loops
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      count = 0
-      while count < 5:
-          print(count)
-          count += 1
-    output: "0\n1\n2\n3\n4"
-    explanation: "while repeats as long as the condition stays True. You must update the variable inside the loop, otherwise it runs forever."
+- type: concept
+  code: "count = 0\nwhile count < 5:\n    print(count)\n    count += 1\n"
+  output: '0
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
-    choices: ["3\n2\n1", "3\n2\n1\n0", "0\n1\n2\n3", "3"]
-    correct: "3\n2\n1"
-    explanation: "n starts at 3, decrements by 1 each time. Stops when n reaches 0 (condition n > 0 becomes False)."
+    1
 
-  - type: fill_blank
-    prompt: "Keep doubling x as long as it has not yet exceeded 100."
-    before: "x = 1\nwhile x "
-    after: " 100:\n    x *= 2\nprint(x)"
-    choices: ["<=", ">=", "==", "!="]
-    answer: "<="
-    explanation: "x <= 100 keeps doubling while x is at most 100. When x exceeds 100 the loop stops."
+    2
 
-  - type: mcq
-    question: "What does this print?"
-    code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
-    choices: ["10", "4", "0", "1"]
-    correct: "10"
-    explanation: "1 + 2 + 3 + 4 = 10."
+    3
 
-  - type: arrange
-    instruction: "Build a while loop that prints 1, 2, 3 then stops"
-    blocks: ["i", "=", "1", "while", "i", "<=", "3", ":", "print", "(", "i", ")", "i", "+=", "1"]
-    correct: ["i", "=", "1", "while", "i", "<=", "3", ":", "print", "(", "i", ")", "i", "+=", "1"]
-    explanation: "Set i = 1 before the loop, print i, increment i each iteration."
+    4'
+  explanation: while repeats as long as the condition stays True. You must update the variable inside the loop, otherwise
+    it runs forever.
+- type: mcq
+  question: What does this print?
+  code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
+  choices:
+  - '3
 
-  - type: mcq
-    question: "What is the key difference between for and while?"
-    code: ""
-    choices: [
-      "while runs while a condition is True; for iterates over a sequence",
-      "while is faster; for is safer",
-      "while can only count; for can do anything",
-      "They are identical"
-    ]
-    correct: "while runs while a condition is True; for iterates over a sequence"
-    explanation: "for is best when you know the number of iterations. while is best when you loop until something changes."
+    2
 
-  - type: fill_blank
-    prompt: "Reduce hp by 10 on each iteration of the loop."
-    before: "hp = 100\nwhile hp > 0:\n    hp "
-    after: "= 10"
-    choices: ["-", "+", "*", "/"]
-    answer: "-"
-    explanation: "hp -= 10 reduces hp by 10 each iteration until hp reaches 0 or below."
+    1'
+  - '3
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
-    choices: ["32", "64", "16", "31"]
-    correct: "32"
-    explanation: "n doubles: 1, 2, 4, 8, 16, 32. When n = 32, the condition n < 32 is False. Loop ends."
+    2
 
-  - type: mcq
-    question: "What is an infinite loop?"
-    code: ""
-    choices: [
-      "A while loop whose condition never becomes False",
-      "A for loop with a very large range",
-      "A loop that runs exactly once",
-      "A loop inside another loop"
-    ]
-    correct: "A while loop whose condition never becomes False"
-    explanation: "If the condition stays True forever, the loop never ends. Always make sure something changes the condition."
+    1
 
-  - type: mini_code
-    prompt: "Starting from 1, keep doubling until you exceed 1000. Print the final value."
-    starter: "n = 1\n"
-    tests:
-      - code: "assert _stdout.strip() == '1024'"
-        message: "Should print 1024 (first power of 2 > 1000)"
-      - code: "assert 'while' in _code"
-        message: "Should use a while loop"
+    0'
+  - '0
 
-  - type: mini_code
-    prompt: "Print all multiples of 7 that are less than 50, using a while loop."
-    starter: "n = 7\n"
-    tests:
-      - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'"
-        message: "Should start at 7 and end at 49"
-      - code: "assert len(_stdout.strip().split('\\n')) == 7"
-        message: "Should print exactly 7 multiples of 7 below 50"
+    1
 
+    2
+
+    3'
+  - '3'
+  correct: '3
+
+    2
+
+    1'
+  explanation: n starts at 3, decrements by 1 each time. Stops when n reaches 0 (condition n > 0 becomes False).
+- type: fill_blank
+  prompt: Keep doubling x as long as it has not yet exceeded 100.
+  before: 'x = 1
+
+    while x '
+  after: " 100:\n    x *= 2\nprint(x)"
+  choices:
+  - <=
+  - '>='
+  - ==
+  - '!='
+  answer: <=
+  explanation: x <= 100 keeps doubling while x is at most 100. When x exceeds 100 the loop stops.
+- type: mcq
+  question: What does this print?
+  code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
+  choices:
+  - '10'
+  - '4'
+  - '0'
+  - '1'
+  correct: '10'
+  explanation: 1 + 2 + 3 + 4 = 10.
+- type: arrange
+  instruction: Build a while loop that prints 1, 2, 3 then stops
+  blocks:
+  - i
+  - '='
+  - '1'
+  - while
+  - i
+  - <=
+  - '3'
+  - ':'
+  - print
+  - (
+  - i
+  - )
+  - i
+  - +=
+  - '1'
+  correct:
+  - i
+  - '='
+  - '1'
+  - while
+  - i
+  - <=
+  - '3'
+  - ':'
+  - print
+  - (
+  - i
+  - )
+  - i
+  - +=
+  - '1'
+  explanation: Set i = 1 before the loop, print i, increment i each iteration.
+- type: mcq
+  question: What is the key difference between for and while?
+  code: ''
+  choices:
+  - while runs while a condition is True; for iterates over a sequence
+  - while is faster; for is safer
+  - while can only count; for can do anything
+  - They are identical
+  correct: while runs while a condition is True; for iterates over a sequence
+  explanation: for is best when you know the number of iterations. while is best when you loop until something changes.
+- type: fill_blank
+  prompt: Reduce hp by 10 on each iteration of the loop.
+  before: "hp = 100\nwhile hp > 0:\n    hp "
+  after: = 10
+  choices:
+  - '-'
+  - +
+  - '*'
+  - /
+  answer: '-'
+  explanation: hp -= 10 reduces hp by 10 each iteration until hp reaches 0 or below.
+- type: mcq
+  question: What does this print?
+  code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
+  choices:
+  - '32'
+  - '64'
+  - '16'
+  - '31'
+  correct: '32'
+  explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, the condition n < 32 is False. Loop ends.'
+- type: mcq
+  question: What is an infinite loop?
+  code: ''
+  choices:
+  - A while loop whose condition never becomes False
+  - A for loop with a very large range
+  - A loop that runs exactly once
+  - A loop inside another loop
+  correct: A while loop whose condition never becomes False
+  explanation: If the condition stays True forever, the loop never ends. Always make sure something changes the condition.
+- type: mini_code
+  prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
+  starter: 'n = 1
+
+    '
+  tests:
+  - code: assert _stdout.strip() == '1024'
+    message: Should print 1024 (first power of 2 > 1000)
+  - code: assert 'while' in _code
+    message: Should use a while loop
+- type: mini_code
+  prompt: Print all multiples of 7 that are less than 50, using a while loop.
+  starter: 'n = 7
+
+    '
+  tests:
+  - code: lines = _stdout.strip().split('\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'
+    message: Should start at 7 and end at 49
+  - code: assert len(_stdout.strip().split('\n')) == 7
+    message: Should print exactly 7 multiples of 7 below 50
 worlds:
   fantasy:
-    title: "The Champion's Trial"
+    title: The Champion's Trial
+    exercises:
+    - type: concept
+      code: "steps = 0\nwhile steps < 5:\n    print(steps)\n    steps += 1\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: The champion tracks training steps. while repeats as long as the condition is True. steps must increase
+        each loop or it runs forever.
+    - type: mcq
+      question: The champion counts down to battle. What does this print?
+      code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
+      choices:
+      - '3
+
+        2
+
+        1'
+      - '3
+
+        2
+
+        1
+
+        0'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '3'
+      correct: '3
+
+        2
+
+        1'
+      explanation: n starts at 3, decrements each round. Stops when n reaches 0.
+    - type: fill_blank
+      prompt: Keep doubling training intensity while it has not yet exceeded 100.
+      before: 'x = 1
+
+        while x '
+      after: " 100:\n    x *= 2\nprint(x)"
+      choices:
+      - <=
+      - '>='
+      - ==
+      - '!='
+      answer: <=
+      explanation: x <= 100 keeps doubling while intensity is at most 100. When x exceeds 100 the trial ends.
+    - type: mcq
+      question: The champion tallies strike points round by round. What does this print?
+      code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
+      choices:
+      - '10'
+      - '4'
+      - '0'
+      - '1'
+      correct: '10'
+      explanation: 1 + 2 + 3 + 4 = 10 total strike points.
+    - type: arrange
+      instruction: Build a while loop that counts victory rounds 1, 2, 3 then stops
+      blocks:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      correct:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      explanation: Set i = 1 before the loop, print i, increment i each round.
+    - type: mcq
+      question: What is the key difference between for and while in the champion's training?
+      code: ''
+      choices:
+      - while runs while a condition is True; for iterates over a sequence
+      - while is faster; for is safer
+      - while can only count; for can do anything
+      - They are identical
+      correct: while runs while a condition is True; for iterates over a sequence
+      explanation: for is best for a fixed number of rounds. while is best when the champion trains until a goal is met.
+    - type: fill_blank
+      prompt: Reduce the champion's hp by 10 each training round.
+      before: "hp = 100\nwhile hp > 0:\n    hp "
+      after: = 10
+      choices:
+      - '-'
+      - +
+      - '*'
+      - /
+      answer: '-'
+      explanation: hp -= 10 reduces hp by 10 each round until the champion falls.
+    - type: mcq
+      question: The champion's power keeps doubling. What does this print?
+      code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
+      choices:
+      - '32'
+      - '64'
+      - '16'
+      - '31'
+      correct: '32'
+      explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False. Loop ends.'
+    - type: mcq
+      question: What is an infinite loop in the champion's trial?
+      code: ''
+      choices:
+      - A while loop whose condition never becomes False
+      - A for loop with a very large range
+      - A loop that runs exactly once
+      - A loop inside another loop
+      correct: A while loop whose condition never becomes False
+      explanation: If the condition never becomes False, the trial never ends. Always update the condition variable.
+    - type: mini_code
+      prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
+      starter: 'n = 1
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '1024'
+        message: Should print 1024 (first power of 2 > 1000)
+      - code: assert 'while' in _code
+        message: Should use a while loop
+    - type: mini_code
+      prompt: Print all multiples of 7 that are less than 50, using a while loop.
+      starter: 'n = 7
+
+        '
+      tests:
+      - code: lines = _stdout.strip().split('\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'
+        message: Should start at 7 and end at 49
+      - code: assert len(_stdout.strip().split('\n')) == 7
+        message: Should print exactly 7 multiples of 7 below 50
   scifi:
-    title: "Power Build-Up"
+    title: Power Build-Up
+    exercises:
+    - type: concept
+      code: "charge = 0\nwhile charge < 5:\n    print(charge)\n    charge += 1\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: The engineer charges the power cell step by step. while repeats as long as charge is below 5. charge must
+        increase or it loops forever.
+    - type: mcq
+      question: The reactor counts down to ignition. What does this print?
+      code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
+      choices:
+      - '3
+
+        2
+
+        1'
+      - '3
+
+        2
+
+        1
+
+        0'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '3'
+      correct: '3
+
+        2
+
+        1'
+      explanation: n starts at 3, decrements each cycle. Stops at 0.
+    - type: fill_blank
+      prompt: Keep doubling reactor output while it has not yet exceeded 100.
+      before: 'x = 1
+
+        while x '
+      after: " 100:\n    x *= 2\nprint(x)"
+      choices:
+      - <=
+      - '>='
+      - ==
+      - '!='
+      answer: <=
+      explanation: x <= 100 keeps doubling while output is within safe limits.
+    - type: mcq
+      question: The engineer sums power readings cycle by cycle. What does this print?
+      code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
+      choices:
+      - '10'
+      - '4'
+      - '0'
+      - '1'
+      correct: '10'
+      explanation: 1 + 2 + 3 + 4 = 10 total power units.
+    - type: arrange
+      instruction: Build a while loop that logs power levels 1, 2, 3 then stops
+      blocks:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      correct:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      explanation: Set i = 1, print each level, increment i each cycle.
+    - type: mcq
+      question: What is the key difference between for and while in the power build-up?
+      code: ''
+      choices:
+      - while runs while a condition is True; for iterates over a sequence
+      - while is faster; for is safer
+      - while can only count; for can do anything
+      - They are identical
+      correct: while runs while a condition is True; for iterates over a sequence
+      explanation: for is best when cycles are known. while is best when the engineer runs until a power threshold is reached.
+    - type: fill_blank
+      prompt: Drain the ship's energy by 10 units each cycle.
+      before: "hp = 100\nwhile hp > 0:\n    hp "
+      after: = 10
+      choices:
+      - '-'
+      - +
+      - '*'
+      - /
+      answer: '-'
+      explanation: hp -= 10 drains 10 units of energy each cycle.
+    - type: mcq
+      question: Power output keeps doubling. What does this print?
+      code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
+      choices:
+      - '32'
+      - '64'
+      - '16'
+      - '31'
+      correct: '32'
+      explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False.'
+    - type: mcq
+      question: What is an infinite loop in the power build-up?
+      code: ''
+      choices:
+      - A while loop whose condition never becomes False
+      - A for loop with a very large range
+      - A loop that runs exactly once
+      - A loop inside another loop
+      correct: A while loop whose condition never becomes False
+      explanation: If the power condition never stops being True, the reactor runs forever.
+    - type: mini_code
+      prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
+      starter: 'n = 1
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '1024'
+        message: Should print 1024 (first power of 2 > 1000)
+      - code: assert 'while' in _code
+        message: Should use a while loop
+    - type: mini_code
+      prompt: Print all multiples of 7 that are less than 50, using a while loop.
+      starter: 'n = 7
+
+        '
+      tests:
+      - code: lines = _stdout.strip().split('\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'
+        message: Should start at 7 and end at 49
+      - code: assert len(_stdout.strip().split('\n')) == 7
+        message: Should print exactly 7 multiples of 7 below 50
   mystery:
-    title: "Repeating the Search"
+    title: Repeating the Search
+    exercises:
+    - type: concept
+      code: "room = 0\nwhile room < 5:\n    print(room)\n    room += 1\n"
+      output: '0
+
+        1
+
+        2
+
+        3
+
+        4'
+      explanation: Cole searches rooms one by one. while repeats as long as the room number is below 5. room must increase
+        each pass or the search loops forever.
+    - type: mcq
+      question: Cole counts down before cracking the safe. What does this print?
+      code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
+      choices:
+      - '3
+
+        2
+
+        1'
+      - '3
+
+        2
+
+        1
+
+        0'
+      - '0
+
+        1
+
+        2
+
+        3'
+      - '3'
+      correct: '3
+
+        2
+
+        1'
+      explanation: n starts at 3 and decrements each step. Stops when n reaches 0.
+    - type: fill_blank
+      prompt: Keep expanding the search radius while it has not yet exceeded 100.
+      before: 'x = 1
+
+        while x '
+      after: " 100:\n    x *= 2\nprint(x)"
+      choices:
+      - <=
+      - '>='
+      - ==
+      - '!='
+      answer: <=
+      explanation: x <= 100 keeps expanding the search while within range.
+    - type: mcq
+      question: Cole tallies clue scores from each room. What does this print?
+      code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
+      choices:
+      - '10'
+      - '4'
+      - '0'
+      - '1'
+      correct: '10'
+      explanation: 1 + 2 + 3 + 4 = 10 total clue points.
+    - type: arrange
+      instruction: Build a while loop that searches rooms 1, 2, 3 then stops
+      blocks:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      correct:
+      - i
+      - '='
+      - '1'
+      - while
+      - i
+      - <=
+      - '3'
+      - ':'
+      - print
+      - (
+      - i
+      - )
+      - i
+      - +=
+      - '1'
+      explanation: Set i = 1, print each room number, increment i each pass.
+    - type: mcq
+      question: What is the key difference between for and while in Cole's search?
+      code: ''
+      choices:
+      - while runs while a condition is True; for iterates over a sequence
+      - while is faster; for is safer
+      - while can only count; for can do anything
+      - They are identical
+      correct: while runs while a condition is True; for iterates over a sequence
+      explanation: for is best when rooms are listed. while is best when Cole searches until a condition is met.
+    - type: fill_blank
+      prompt: Reduce the detective's stamina by 10 each room searched.
+      before: "hp = 100\nwhile hp > 0:\n    hp "
+      after: = 10
+      choices:
+      - '-'
+      - +
+      - '*'
+      - /
+      answer: '-'
+      explanation: hp -= 10 costs 10 stamina per room. Stops when stamina is gone.
+    - type: mcq
+      question: The number of leads keeps doubling. What does this print?
+      code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
+      choices:
+      - '32'
+      - '64'
+      - '16'
+      - '31'
+      correct: '32'
+      explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False.'
+    - type: mcq
+      question: What is an infinite loop in the detective's search?
+      code: ''
+      choices:
+      - A while loop whose condition never becomes False
+      - A for loop with a very large range
+      - A loop that runs exactly once
+      - A loop inside another loop
+      correct: A while loop whose condition never becomes False
+      explanation: If the clue condition never becomes False, the search never ends.
+    - type: mini_code
+      prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
+      starter: 'n = 1
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '1024'
+        message: Should print 1024 (first power of 2 > 1000)
+      - code: assert 'while' in _code
+        message: Should use a while loop
+    - type: mini_code
+      prompt: Print all multiples of 7 that are less than 50, using a while loop.
+      starter: 'n = 7
+
+        '
+      tests:
+      - code: lines = _stdout.strip().split('\n'); assert lines[0].strip() == '7' and lines[-1].strip() == '49'
+        message: Should start at 7 and end at 49
+      - code: assert len(_stdout.strip().split('\n')) == 7
+        message: Should print exactly 7 multiples of 7 below 50

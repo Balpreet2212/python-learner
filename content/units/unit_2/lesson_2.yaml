@@ -93,7 +93,273 @@ exercises:
 worlds:
   fantasy:
     title: "The Spell Formula"
+    exercises:
+      - type: concept
+        code: |
+          print(3 + 4 * 2)
+          print((3 + 4) * 2)
+        output: "11\n14"
+        explanation: "Finn is calculating spell damage on Frostpeak. Multiplying first (4 * 2 = 8) then adding 3 gives 11. Wrapping the addition in brackets makes it happen first: (3 + 4) = 7, then 7 * 2 = 14. Parentheses change the entire outcome of the spell."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(2 + 3 * 4)"
+        choices: ["14", "20", "2", "24"]
+        correct: "14"
+        explanation: "Finn's frost spell multiplies 3 ice shards by a power factor of 4 first: 3 * 4 = 12. Then 2 base damage is added: 2 + 12 = 14."
+
+      - type: fill_blank
+        prompt: "Finn wants the spell to add stamina first, then multiply by power. Add a bracket to make the addition happen before the multiplication."
+        before: "spell_power = "
+        after: "2 + 3) * 4"
+        choices: ["(", "[", "{", "\""]
+        answer: "("
+        explanation: "Parentheses force the addition first: (2 + 3) = 5 stamina, then 5 * 4 = 20 total spell power."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(10 - 2 * 3)"
+        choices: ["4", "24", "10", "1"]
+        correct: "4"
+        explanation: "Finn's altitude drops by 2 metres per storm, sustained for 3 storms: 2 * 3 = 6. Starting at 10, he loses 6, ending at altitude 4."
+
+      - type: arrange
+        instruction: "Build code to compute the average of 6, 8, and 10 correctly"
+        blocks: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        correct: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        explanation: "Finn averages stamina readings from 3 checkpoints. Without parentheses, only 10 / 3 runs first. Brackets group the full sum before dividing."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print((10 - 3) ** 2)"
+        choices: ["49", "7", "94", "100"]
+        correct: "49"
+        explanation: "Finn calculates frost pressure: altitude 10 minus 3 safe zones = 7 (brackets first), then 7 squared = 49 pressure units."
+
+      - type: fill_blank
+        prompt: "Average the stamina readings from three camp stops to find Finn's mean energy level."
+        before: "mean_stamina = (camp_a + camp_b + camp_c) "
+        after: " 3"
+        choices: ["/", "//", "*", "+"]
+        answer: "/"
+        explanation: "After summing the three stamina readings, divide by 3 to get the average energy level across the camps."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x * 2 + 1)"
+        choices: ["11", "15", "12", "25"]
+        correct: "11"
+        explanation: "Finn doubles his speed boost (x * 2 = 10) then adds 1 bonus from a rune. 10 + 1 = 11."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(8 / 2 + 6 / 3)"
+        choices: ["6.0", "4.0", "8.0", "2.0"]
+        correct: "6.0"
+        explanation: "Finn splits 8 ration bars between 2 scouts (= 4.0 each) and 6 torches between 3 caves (= 2.0 each). Total supplies per zone: 4.0 + 2.0 = 6.0."
+
+      - type: arrange
+        instruction: "Fix the average calculation by adding parentheses around a + b"
+        blocks: ["(", "a", "+", "b", ")", "/", "2", "a", "+", "b", "/"]
+        correct: ["(", "a", "+", "b", ")", "/", "2"]
+        explanation: "Finn averages two altitude measurements a and b. (a + b) / 2 adds them first, then halves the total — the correct midpoint."
+
+      - type: mini_code
+        prompt: "Finn's stamina readings at three checkpoints are 70, 85, and 91. Calculate his average stamina and print it."
+        starter: "a = 70\nb = 85\nc = 91\n"
+        tests:
+          - code: "assert abs(float(_stdout.strip()) - 82.0) < 0.01"
+            message: "Average should be 82.0"
+          - code: "assert '/' in _code"
+            message: "Should use / to divide by 3"
+
+      - type: mini_code
+        prompt: "Finn's spell formula is (12 + 8) * (5 - 3). Print the result. Make sure you use parentheses to get the right answer."
+        starter: ""
+        tests:
+          - code: "assert _stdout.strip() == '40'"
+            message: "Should print 40: (20) * (2) = 40"
+          - code: "assert '(' in _code and ')' in _code"
+            message: "Should use parentheses to control order of operations"
+
   scifi:
     title: "Trajectory Calculation"
+    exercises:
+      - type: concept
+        code: |
+          print(3 + 4 * 2)
+          print((3 + 4) * 2)
+        output: "11\n14"
+        explanation: "Zara is computing trajectory corrections. Without brackets, 4 * 2 = 8 runs first, then 3 + 8 = 11. Adding brackets makes the addition go first: (3 + 4) = 7, then 7 * 2 = 14. The order of operations changes the ship's entire course."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(2 + 3 * 4)"
+        choices: ["14", "20", "2", "24"]
+        correct: "14"
+        explanation: "Zara's thruster output multiplies 3 burst units by power factor 4 first: 3 * 4 = 12. Then 2 baseline thrust is added: 2 + 12 = 14."
+
+      - type: fill_blank
+        prompt: "Zara needs the sensor sum to be calculated before multiplying by the range factor. Add a bracket to make the addition happen before the multiplication."
+        before: "scan_range = "
+        after: "2 + 3) * 4"
+        choices: ["(", "[", "{", "\""]
+        answer: "("
+        explanation: "Parentheses force the addition first: (2 + 3) = 5 sensor units, then 5 * 4 = 20 total scan range."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(10 - 2 * 3)"
+        choices: ["4", "24", "10", "1"]
+        correct: "4"
+        explanation: "Zara's fuel drops by 2 units per asteroid collision, hitting 3 asteroids: 2 * 3 = 6 fuel lost. Starting with 10, she has 4 units remaining."
+
+      - type: arrange
+        instruction: "Build code to compute the average of 6, 8, and 10 correctly"
+        blocks: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        correct: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        explanation: "Zara averages velocity readings from 3 sensor buoys. Without parentheses, only 10 / 3 runs first. Brackets group the total before dividing."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print((10 - 3) ** 2)"
+        choices: ["49", "7", "94", "100"]
+        correct: "49"
+        explanation: "Zara computes collision force: distance 10 minus 3 safe zones = 7 (brackets first), then 7 squared = 49 impact units."
+
+      - type: fill_blank
+        prompt: "Average the fuel readings from three waypoints to find Zara's mean fuel level."
+        before: "mean_fuel = (waypoint_a + waypoint_b + waypoint_c) "
+        after: " 3"
+        choices: ["/", "//", "*", "+"]
+        answer: "/"
+        explanation: "After summing the three fuel readings, divide by 3 to get the mean fuel level across all waypoints."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x * 2 + 1)"
+        choices: ["11", "15", "12", "25"]
+        correct: "11"
+        explanation: "Zara doubles her thruster output (x * 2 = 10) then adds 1 emergency boost unit. 10 + 1 = 11."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(8 / 2 + 6 / 3)"
+        choices: ["6.0", "4.0", "8.0", "2.0"]
+        correct: "6.0"
+        explanation: "Zara distributes 8 oxygen canisters across 2 airlocks (= 4.0 each) and 6 power cells across 3 systems (= 2.0 each). Total resources per zone: 4.0 + 2.0 = 6.0."
+
+      - type: arrange
+        instruction: "Fix the average calculation by adding parentheses around a + b"
+        blocks: ["(", "a", "+", "b", ")", "/", "2", "a", "+", "b", "/"]
+        correct: ["(", "a", "+", "b", ")", "/", "2"]
+        explanation: "Zara averages two thrust readings a and b. (a + b) / 2 adds them first, then halves the result — the correct midpoint velocity."
+
+      - type: mini_code
+        prompt: "Zara's fuel readings at three waypoints are 70, 85, and 91. Calculate the average fuel level and print it."
+        starter: "a = 70\nb = 85\nc = 91\n"
+        tests:
+          - code: "assert abs(float(_stdout.strip()) - 82.0) < 0.01"
+            message: "Average should be 82.0"
+          - code: "assert '/' in _code"
+            message: "Should use / to divide by 3"
+
+      - type: mini_code
+        prompt: "Zara's trajectory formula is (12 + 8) * (5 - 3). Print the result. Make sure you use parentheses to get the right answer."
+        starter: ""
+        tests:
+          - code: "assert _stdout.strip() == '40'"
+            message: "Should print 40: (20) * (2) = 40"
+          - code: "assert '(' in _code and ')' in _code"
+            message: "Should use parentheses to control order of operations"
+
   mystery:
     title: "Calculating Evidence"
+    exercises:
+      - type: concept
+        code: |
+          print(3 + 4 * 2)
+          print((3 + 4) * 2)
+        output: "11\n14"
+        explanation: "Detective Cole is cross-referencing timestamps. Without brackets, 4 * 2 = 8 runs first, then 3 + 8 = 11. Adding brackets changes the order: (3 + 4) = 7, then 7 * 2 = 14. Getting the order right is as critical in Python as it is in a timeline."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(2 + 3 * 4)"
+        choices: ["14", "20", "2", "24"]
+        correct: "14"
+        explanation: "Cole multiplies 3 witness sightings by a credibility factor of 4 first: 3 * 4 = 12. Then 2 confirmed clues are added: 2 + 12 = 14 total evidence points."
+
+      - type: fill_blank
+        prompt: "Cole wants to add two clue scores before scaling them by a reliability factor. Add a bracket to make the addition happen before the multiplication."
+        before: "evidence_weight = "
+        after: "2 + 3) * 4"
+        choices: ["(", "[", "{", "\""]
+        answer: "("
+        explanation: "Parentheses force the addition first: (2 + 3) = 5 combined clue points, then 5 * 4 = 20 total evidence weight."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(10 - 2 * 3)"
+        choices: ["4", "24", "10", "1"]
+        correct: "4"
+        explanation: "Each false alibi costs Cole 2 credibility points, and there are 3 false alibis: 2 * 3 = 6 lost. Starting with 10 certainty points, Cole has 4 remaining."
+
+      - type: arrange
+        instruction: "Build code to compute the average of 6, 8, and 10 correctly"
+        blocks: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        correct: ["print", "(", "(", "6", "+", "8", "+", "10", ")", "/", "3", ")"]
+        explanation: "Cole averages credibility scores from 3 witnesses. Without parentheses, only 10 / 3 runs first. Brackets group the full sum before dividing."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print((10 - 3) ** 2)"
+        choices: ["49", "7", "94", "100"]
+        correct: "49"
+        explanation: "Cole calculates alibi discrepancy: 10 reported minutes minus 3 verified minutes = 7 (brackets first), then 7 squared = 49 inconsistency points."
+
+      - type: fill_blank
+        prompt: "Average the credibility scores from three witnesses to find the mean trustworthiness rating."
+        before: "mean_credibility = (witness_a + witness_b + witness_c) "
+        after: " 3"
+        choices: ["/", "//", "*", "+"]
+        answer: "/"
+        explanation: "After summing the three credibility scores, divide by 3 to calculate the mean trustworthiness across all witnesses."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "x = 5\nprint(x * 2 + 1)"
+        choices: ["11", "15", "12", "25"]
+        correct: "11"
+        explanation: "Cole doubles the number of suspect sightings (x * 2 = 10) and adds 1 confirmed lead. 10 + 1 = 11 total clues on record."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "print(8 / 2 + 6 / 3)"
+        choices: ["6.0", "4.0", "8.0", "2.0"]
+        correct: "6.0"
+        explanation: "Cole divides 8 hours of footage between 2 detectives (= 4.0 hours each) and 6 case files between 3 officers (= 2.0 files each). Total workload per person: 4.0 + 2.0 = 6.0."
+
+      - type: arrange
+        instruction: "Fix the average calculation by adding parentheses around a + b"
+        blocks: ["(", "a", "+", "b", ")", "/", "2", "a", "+", "b", "/"]
+        correct: ["(", "a", "+", "b", ")", "/", "2"]
+        explanation: "Cole averages two alibi timestamps a and b. (a + b) / 2 adds them first, then halves the total — the correct midpoint time."
+
+      - type: mini_code
+        prompt: "Cole's credibility scores for three witnesses are 70, 85, and 91. Calculate the average credibility and print it."
+        starter: "a = 70\nb = 85\nc = 91\n"
+        tests:
+          - code: "assert abs(float(_stdout.strip()) - 82.0) < 0.01"
+            message: "Average should be 82.0"
+          - code: "assert '/' in _code"
+            message: "Should use / to divide by 3"
+
+      - type: mini_code
+        prompt: "Cole's evidence formula is (12 + 8) * (5 - 3). Print the result. Make sure you use parentheses to get the right answer."
+        starter: ""
+        tests:
+          - code: "assert _stdout.strip() == '40'"
+            message: "Should print 40: (20) * (2) = 40"
+          - code: "assert '(' in _code and ')' in _code"
+            message: "Should use parentheses to control order of operations"

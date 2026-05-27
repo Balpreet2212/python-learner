@@ -1,105 +1,680 @@
-title: "Functions Calling Functions"
+title: Functions Calling Functions
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      def celsius_to_kelvin(c):
-          return c + 273.15
-
-      def is_absolute_zero(c):
-          return celsius_to_kelvin(c) == 0
-
-      print(is_absolute_zero(-273.15))
-    output: "True"
-    explanation: "Functions can call other functions. This lets you build complex behaviour from simple, tested pieces."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
-    choices: ["12", "6", "24", "9"]
-    correct: "12"
-    explanation: "double(3) = 6. double(6) = 12."
-
-  - type: fill_blank
-    prompt: "Call the helper function to square a before adding it to the square of b."
-    before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
-    after: "(a) + square(b)"
-    choices: ["square", "print", "double", "int"]
-    answer: "square"
-    explanation: "sum_of_squares calls square twice, once for each argument."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
-    choices: ["6", "3", "123", "12"]
-    correct: "6"
-    explanation: "add(1, 2) = 3. add(3, 3) = 6."
-
-  - type: arrange
-    instruction: "Build a function hypotenuse(a, b) that uses square and computes the square root"
-    blocks: ["def", "square", "(", "n", ")", ":", "return", "n", "*", "n", "def", "hypotenuse", "(", "a", ",", "b", ")", ":", "return", "(", "square", "(", "a", ")", "+", "square", "(", "b", ")", ")", "**", "0.5"]
-    correct: ["def", "square", "(", "n", ")", ":", "return", "n", "*", "n", "def", "hypotenuse", "(", "a", ",", "b", ")", ":", "return", "(", "square", "(", "a", ")", "+", "square", "(", "b", ")", ")", "**", "0.5"]
-    explanation: "** 0.5 computes the square root. Hypotenuse = sqrt(a² + b²)."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if is_even(n):\n            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
-    choices: ["3", "6", "2", "4"]
-    correct: "3"
-    explanation: "2, 4, 6 are even. is_even() is called for each element."
-
-  - type: fill_blank
-    prompt: "Use the negate helper to flip the even check into an odd check."
-    before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
-    after: "(n % 2 == 0)"
-    choices: ["negate", "not", "bool", "int"]
-    answer: "negate"
-    explanation: "negate(True) returns False. negate(n % 2 == 0) flips even to odd."
-
-  - type: mcq
-    question: "What is the main benefit of calling a function from another function?"
-    code: ""
-    choices: [
-      "Code reuse — you don't repeat logic, just call what you wrote",
-      "It is faster than writing code directly",
-      "Python requires it for large programs",
-      "It avoids using loops"
-    ]
-    correct: "Code reuse — you don't repeat logic, just call what you wrote"
-    explanation: "Functions compose: each does one thing, and you combine them to build complex behaviour."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\ndef normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
-    choices: ["100", "150", "0", "50"]
-    correct: "100"
-    explanation: "clamp(150, 0, 100) returns 100 because 150 > 100."
-
-  - type: mini_code
-    prompt: "Define is_even(n) and is_odd(n) where is_odd calls is_even."
-    starter: ""
-    tests:
-      - code: "assert is_even(7) == False"
-        message: "7 is not even"
-      - code: "assert is_odd(7) == True"
-        message: "7 is odd"
-      - code: "assert is_even(4) == True"
-        message: "4 is even"
-
-  - type: mini_code
-    prompt: "Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1)."
-    starter: ""
-    tests:
-      - code: "assert factorial(5) == 120"
-        message: "5! = 120"
-      - code: "assert factorial(3) == 6"
-        message: "3! = 6"
-
+- type: concept
+  code: "def celsius_to_kelvin(c):\n    return c + 273.15\n\ndef is_absolute_zero(c):\n    return celsius_to_kelvin(c) ==\
+    \ 0\n\nprint(is_absolute_zero(-273.15))\n"
+  output: 'True'
+  explanation: Functions can call other functions. This lets you build complex behaviour from simple, tested pieces.
+- type: mcq
+  question: What does this print?
+  code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
+  choices:
+  - '12'
+  - '6'
+  - '24'
+  - '9'
+  correct: '12'
+  explanation: double(3) = 6. double(6) = 12.
+- type: fill_blank
+  prompt: Call the helper function to square a before adding it to the square of b.
+  before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
+  after: (a) + square(b)
+  choices:
+  - square
+  - print
+  - double
+  - int
+  answer: square
+  explanation: sum_of_squares calls square twice, once for each argument.
+- type: mcq
+  question: What does this print?
+  code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
+  choices:
+  - '6'
+  - '3'
+  - '123'
+  - '12'
+  correct: '6'
+  explanation: add(1, 2) = 3. add(3, 3) = 6.
+- type: arrange
+  instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
+  blocks:
+  - def
+  - square
+  - (
+  - n
+  - )
+  - ':'
+  - return
+  - n
+  - '*'
+  - n
+  - def
+  - hypotenuse
+  - (
+  - a
+  - ','
+  - b
+  - )
+  - ':'
+  - return
+  - (
+  - square
+  - (
+  - a
+  - )
+  - +
+  - square
+  - (
+  - b
+  - )
+  - )
+  - '**'
+  - '0.5'
+  correct:
+  - def
+  - square
+  - (
+  - n
+  - )
+  - ':'
+  - return
+  - n
+  - '*'
+  - n
+  - def
+  - hypotenuse
+  - (
+  - a
+  - ','
+  - b
+  - )
+  - ':'
+  - return
+  - (
+  - square
+  - (
+  - a
+  - )
+  - +
+  - square
+  - (
+  - b
+  - )
+  - )
+  - '**'
+  - '0.5'
+  explanation: '** 0.5 computes the square root. Hypotenuse = sqrt(a² + b²).'
+- type: mcq
+  question: What does this print?
+  code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if is_even(n):\n\
+    \            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
+  choices:
+  - '3'
+  - '6'
+  - '2'
+  - '4'
+  correct: '3'
+  explanation: 2, 4, 6 are even. is_even() is called for each element.
+- type: fill_blank
+  prompt: Use the negate helper to flip the even check into an odd check.
+  before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
+  after: (n % 2 == 0)
+  choices:
+  - negate
+  - not
+  - bool
+  - int
+  answer: negate
+  explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+- type: mcq
+  question: What is the main benefit of calling a function from another function?
+  code: ''
+  choices:
+  - Code reuse — you don't repeat logic, just call what you wrote
+  - It is faster than writing code directly
+  - Python requires it for large programs
+  - It avoids using loops
+  correct: Code reuse — you don't repeat logic, just call what you wrote
+  explanation: 'Functions compose: each does one thing, and you combine them to build complex behaviour.'
+- type: mcq
+  question: What does this print?
+  code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\ndef\
+    \ normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
+  choices:
+  - '100'
+  - '150'
+  - '0'
+  - '50'
+  correct: '100'
+  explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+- type: mini_code
+  prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
+  starter: ''
+  tests:
+  - code: assert is_even(7) == False
+    message: 7 is not even
+  - code: assert is_odd(7) == True
+    message: 7 is odd
+  - code: assert is_even(4) == True
+    message: 4 is even
+- type: mini_code
+  prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
+  starter: ''
+  tests:
+  - code: assert factorial(5) == 120
+    message: 5! = 120
+  - code: assert factorial(3) == 6
+    message: 3! = 6
 worlds:
   fantasy:
-    title: "Spells Within Spells"
+    title: Spells Within Spells
+    exercises:
+    - type: concept
+      code: "def celsius_to_kelvin(c):\n    return c + 273.15\n\ndef is_absolute_zero(c):\n    return celsius_to_kelvin(c)\
+        \ == 0\n\nprint(is_absolute_zero(-273.15))\n"
+      output: 'True'
+      explanation: Elara's compound spell calls a helper incantation. Functions can call other functions. This builds complex
+        spells from simple, tested pieces.
+    - type: mcq
+      question: A spell is doubled twice to quadruple its power. What does this print?
+      code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
+      choices:
+      - '12'
+      - '6'
+      - '24'
+      - '9'
+      correct: '12'
+      explanation: double(3) = 6. double(6) = 12.
+    - type: fill_blank
+      prompt: Call the helper spell to square each ingredient amount before summing.
+      before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
+      after: (a) + square(b)
+      choices:
+      - square
+      - print
+      - double
+      - int
+      answer: square
+      explanation: sum_of_squares calls square twice, once for each ingredient.
+    - type: mcq
+      question: Three potion ingredients are combined. What does this print?
+      code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
+      choices:
+      - '6'
+      - '3'
+      - '123'
+      - '12'
+      correct: '6'
+      explanation: add(1, 2) = 3. add(3, 3) = 6.
+    - type: arrange
+      instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
+      blocks:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      correct:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      explanation: '** 0.5 computes the square root. The compound spell calls the simpler square helper.'
+    - type: mcq
+      question: Elara counts even-numbered spell slots. What does this print?
+      code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
+        \ is_even(n):\n            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
+      choices:
+      - '3'
+      - '6'
+      - '2'
+      - '4'
+      correct: '3'
+      explanation: 2, 4, 6 are even. is_even() is called for each slot.
+    - type: fill_blank
+      prompt: Use the negate helper to flip the even check into an odd check.
+      before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
+      after: (n % 2 == 0)
+      choices:
+      - negate
+      - not
+      - bool
+      - int
+      answer: negate
+      explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+    - type: mcq
+      question: What is the main benefit of casting a spell from inside another spell?
+      code: ''
+      choices:
+      - Code reuse — you don't repeat logic, just call what you wrote
+      - It is faster than writing code directly
+      - Python requires it for large programs
+      - It avoids using loops
+      correct: Code reuse — you don't repeat logic, just call what you wrote
+      explanation: 'Spells compose: each does one thing, and you combine them to build complex enchantments.'
+    - type: mcq
+      question: Elara clamps a spell power to a safe range. What does this print?
+      code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
+        def normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '50'
+      correct: '100'
+      explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+    - type: mini_code
+      prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
+      starter: ''
+      tests:
+      - code: assert is_even(7) == False
+        message: 7 is not even
+      - code: assert is_odd(7) == True
+        message: 7 is odd
+      - code: assert is_even(4) == True
+        message: 4 is even
+    - type: mini_code
+      prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
+      starter: ''
+      tests:
+      - code: assert factorial(5) == 120
+        message: 5! = 120
+      - code: assert factorial(3) == 6
+        message: 3! = 6
   scifi:
-    title: "Nested Subroutines"
+    title: Nested Subroutines
+    exercises:
+    - type: concept
+      code: "def celsius_to_kelvin(c):\n    return c + 273.15\n\ndef is_absolute_zero(c):\n    return celsius_to_kelvin(c)\
+        \ == 0\n\nprint(is_absolute_zero(-273.15))\n"
+      output: 'True'
+      explanation: Voss calls a conversion subroutine from inside a check subroutine. Functions can call other functions.
+        This builds complex behaviour from simple, tested pieces.
+    - type: mcq
+      question: A subsystem doubles its output twice. What does this print?
+      code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
+      choices:
+      - '12'
+      - '6'
+      - '24'
+      - '9'
+      correct: '12'
+      explanation: double(3) = 6. double(6) = 12.
+    - type: fill_blank
+      prompt: Call the helper subroutine to square each sensor reading before summing.
+      before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
+      after: (a) + square(b)
+      choices:
+      - square
+      - print
+      - double
+      - int
+      answer: square
+      explanation: sum_of_squares calls square twice, once for each sensor reading.
+    - type: mcq
+      question: Three subsystem outputs are combined. What does this print?
+      code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
+      choices:
+      - '6'
+      - '3'
+      - '123'
+      - '12'
+      correct: '6'
+      explanation: add(1, 2) = 3. add(3, 3) = 6.
+    - type: arrange
+      instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
+      blocks:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      correct:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      explanation: '** 0.5 computes the square root. The nav subroutine calls the simpler square helper.'
+    - type: mcq
+      question: Voss counts even-numbered active modules. What does this print?
+      code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
+        \ is_even(n):\n            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
+      choices:
+      - '3'
+      - '6'
+      - '2'
+      - '4'
+      correct: '3'
+      explanation: 2, 4, 6 are even-numbered modules. is_even() is called for each.
+    - type: fill_blank
+      prompt: Use the negate helper to flip the even check into an odd check.
+      before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
+      after: (n % 2 == 0)
+      choices:
+      - negate
+      - not
+      - bool
+      - int
+      answer: negate
+      explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+    - type: mcq
+      question: What is the main benefit of calling a subroutine from another subroutine?
+      code: ''
+      choices:
+      - Code reuse — you don't repeat logic, just call what you wrote
+      - It is faster than writing code directly
+      - Python requires it for large programs
+      - It avoids using loops
+      correct: Code reuse — you don't repeat logic, just call what you wrote
+      explanation: 'Subroutines compose: each does one thing, and you combine them to build complex ship functions.'
+    - type: mcq
+      question: Voss clamps a power reading to a valid range. What does this print?
+      code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
+        def normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '50'
+      correct: '100'
+      explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+    - type: mini_code
+      prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
+      starter: ''
+      tests:
+      - code: assert is_even(7) == False
+        message: 7 is not even
+      - code: assert is_odd(7) == True
+        message: 7 is odd
+      - code: assert is_even(4) == True
+        message: 4 is even
+    - type: mini_code
+      prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
+      starter: ''
+      tests:
+      - code: assert factorial(5) == 120
+        message: 5! = 120
+      - code: assert factorial(3) == 6
+        message: 3! = 6
   mystery:
-    title: "Building the Case"
+    title: Building the Case
+    exercises:
+    - type: concept
+      code: "def celsius_to_kelvin(c):\n    return c + 273.15\n\ndef is_absolute_zero(c):\n    return celsius_to_kelvin(c)\
+        \ == 0\n\nprint(is_absolute_zero(-273.15))\n"
+      output: 'True'
+      explanation: Cole uses a helper function inside a larger deduction. Functions can call other functions. This builds
+        complex reasoning from simple, tested steps.
+    - type: mcq
+      question: A lead's strength is doubled twice. What does this print?
+      code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
+      choices:
+      - '12'
+      - '6'
+      - '24'
+      - '9'
+      correct: '12'
+      explanation: double(3) = 6. double(6) = 12.
+    - type: fill_blank
+      prompt: Call the helper function to square each clue weight before summing.
+      before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
+      after: (a) + square(b)
+      choices:
+      - square
+      - print
+      - double
+      - int
+      answer: square
+      explanation: sum_of_squares calls square twice, once per clue weight.
+    - type: mcq
+      question: Three witness scores are combined. What does this print?
+      code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
+      choices:
+      - '6'
+      - '3'
+      - '123'
+      - '12'
+      correct: '6'
+      explanation: add(1, 2) = 3. add(3, 3) = 6.
+    - type: arrange
+      instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
+      blocks:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      correct:
+      - def
+      - square
+      - (
+      - n
+      - )
+      - ':'
+      - return
+      - n
+      - '*'
+      - n
+      - def
+      - hypotenuse
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - return
+      - (
+      - square
+      - (
+      - a
+      - )
+      - +
+      - square
+      - (
+      - b
+      - )
+      - )
+      - '**'
+      - '0.5'
+      explanation: '** 0.5 computes the square root. The deduction calls the simpler square helper.'
+    - type: mcq
+      question: Cole counts even-numbered evidence items. What does this print?
+      code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
+        \ is_even(n):\n            count += 1\n    return count\n\nprint(count_even([1,2,3,4,5,6]))"
+      choices:
+      - '3'
+      - '6'
+      - '2'
+      - '4'
+      correct: '3'
+      explanation: 2, 4, 6 are even-numbered items. is_even() is called for each.
+    - type: fill_blank
+      prompt: Use the negate helper to flip the even check into an odd check.
+      before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
+      after: (n % 2 == 0)
+      choices:
+      - negate
+      - not
+      - bool
+      - int
+      answer: negate
+      explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+    - type: mcq
+      question: What is the main benefit of building deductions from smaller functions?
+      code: ''
+      choices:
+      - Code reuse — you don't repeat logic, just call what you wrote
+      - It is faster than writing code directly
+      - Python requires it for large programs
+      - It avoids using loops
+      correct: Code reuse — you don't repeat logic, just call what you wrote
+      explanation: Smaller helpers compose into complex deductions without repeating code.
+    - type: mcq
+      question: Cole clamps a suspect score to a valid range. What does this print?
+      code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
+        def normalize(n):\n    return clamp(n, 0, 100)\n\nprint(normalize(150))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '50'
+      correct: '100'
+      explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+    - type: mini_code
+      prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
+      starter: ''
+      tests:
+      - code: assert is_even(7) == False
+        message: 7 is not even
+      - code: assert is_odd(7) == True
+        message: 7 is odd
+      - code: assert is_even(4) == True
+        message: 4 is even
+    - type: mini_code
+      prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
+      starter: ''
+      tests:
+      - code: assert factorial(5) == 120
+        message: 5! = 120
+      - code: assert factorial(3) == 6
+        message: 3! = 6

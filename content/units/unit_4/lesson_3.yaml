@@ -86,8 +86,256 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Countdown Incantation"
+    title: "Skipping Through the Forest in Strides"
+    exercises:
+      - type: concept
+        code: |
+          for herb in range(0, 10, 2):
+              print(herb)
+        output: "0\n2\n4\n6\n8"
+        explanation: "Mira leaps to every second patch in the forest. range(0, 10, 2) visits patch 0, 2, 4, 6, 8 — skipping one each time."
+
+      - type: mcq
+        question: "Which patches does Mira visit as she strides through the grove?"
+        code: "for herb in range(1, 10, 3):\n    print(herb)"
+        choices: ["1\n4\n7", "1\n3\n6\n9", "0\n3\n6\n9", "1\n10\n3"]
+        correct: "1\n4\n7"
+        explanation: "Starting at patch 1 and jumping 3 each time: 1, 4, 7. Patch 10 is not reached."
+
+      - type: fill_blank
+        prompt: "Set the step so Mira retreats one patch at a time back through the forest."
+        before: "for herb in range(10, 0, "
+        after: "):\n    print(herb)"
+        choices: ["-1", "1", "-10", "0"]
+        answer: "-1"
+        explanation: "A step of -1 sends Mira back one patch each time: 10, 9, 8, ..., 1."
+
+      - type: mcq
+        question: "What does this print as Mira backtracks from patch 5 to patch 1?"
+        code: "for herb in range(5, 0, -1):\n    print(herb)"
+        choices: ["5\n4\n3\n2\n1", "5\n4\n3\n2\n1\n0", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4"]
+        correct: "5\n4\n3\n2\n1"
+        explanation: "Mira retreats from patch 5 down to patch 1, stopping before patch 0."
+
+      - type: arrange
+        instruction: "Build a loop that prints every second patch number starting from 2 up to 10"
+        blocks: ["for", "herb", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "herb", ")"]
+        correct: ["for", "herb", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "herb", ")"]
+        explanation: "range(2, 11, 2) starts at patch 2 and jumps by 2 each time until patch 10."
+
+      - type: mcq
+        question: "What does this print as Mira counts back from the forest edge?"
+        code: "for herb in range(0, -5, -1):\n    print(herb)"
+        choices: ["0\n-1\n-2\n-3\n-4", "0\n-1\n-2\n-3\n-4\n-5", "-5\n-4\n-3\n-2\n-1\n0", "Nothing"]
+        correct: "0\n-1\n-2\n-3\n-4"
+        explanation: "Mira counts back from 0 to -4, stopping before -5."
+
+      - type: fill_blank
+        prompt: "Set the stop value so Mira's retreat from the deepest grove ends just before the forest entrance."
+        before: "for herb in range(100, "
+        after: ", -10):\n    print(herb)"
+        choices: ["0", "10", "-10", "100"]
+        answer: "0"
+        explanation: "range(100, 0, -10) retreats from patch 100 to patch 10, stopping before 0."
+
+      - type: mcq
+        question: "How many herb patches does Mira visit with this striding pattern?"
+        code: ""
+        choices: ["4", "5", "20", "3"]
+        correct: "4"
+        explanation: "Patches 0, 5, 10, 15 — four patches. Patch 20 is excluded from the stride."
+
+      - type: mcq
+        question: "What does this print as Mira squares the potency of each herb in patches 1 through 5?"
+        code: "s = 0\nfor herb in range(1, 6):\n    s += herb * herb\nprint(s)"
+        choices: ["55", "15", "225", "30"]
+        correct: "55"
+        explanation: "1² + 2² + 3² + 4² + 5² = 1 + 4 + 9 + 16 + 25 = 55 total potency."
+
+      - type: mini_code
+        prompt: "Mira counts down from her deepest forest patch back to patch 1. Print a countdown from 10 to 1 (inclusive) using range."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Should have 10 lines"
+          - code: "lines[0].strip() == '10' and lines[-1].strip() == '1'"
+            message: "Should start at 10, end at 1"
+
+      - type: mini_code
+        prompt: "Mira only visits odd-numbered patches deep in the forest. Print all odd numbers from 1 to 19 using range with a step."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Parse output"
+          - code: "lines[0].strip() == '1' and lines[-1].strip() == '19' and len(lines) == 10"
+            message: "Should print 1, 3, 5, ..., 19 (10 numbers)"
+
   scifi:
-    title: "Launch Sequence"
+    title: "Calibrating the Probe Sequence"
+    exercises:
+      - type: concept
+        code: |
+          for sector in range(0, 10, 2):
+              print(sector)
+        output: "0\n2\n4\n6\n8"
+        explanation: "Lin pings every other sector. range(0, 10, 2) visits sectors 0, 2, 4, 6, 8 — skipping one each time."
+
+      - type: mcq
+        question: "Which sectors does Lin's probe log on this sweep?"
+        code: "for sector in range(1, 10, 3):\n    print(sector)"
+        choices: ["1\n4\n7", "1\n3\n6\n9", "0\n3\n6\n9", "1\n10\n3"]
+        correct: "1\n4\n7"
+        explanation: "Starting at sector 1 and jumping 3 each time: 1, 4, 7. Sector 10 is not reached."
+
+      - type: fill_blank
+        prompt: "Set the step so Lin's probe retreats one sector at a time back to base."
+        before: "for sector in range(10, 0, "
+        after: "):\n    print(sector)"
+        choices: ["-1", "1", "-10", "0"]
+        answer: "-1"
+        explanation: "A step of -1 pulls the probe back one sector each time: 10, 9, 8, ..., 1."
+
+      - type: mcq
+        question: "What does this print as Lin recalls the probe from sector 5 back to sector 1?"
+        code: "for sector in range(5, 0, -1):\n    print(sector)"
+        choices: ["5\n4\n3\n2\n1", "5\n4\n3\n2\n1\n0", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4"]
+        correct: "5\n4\n3\n2\n1"
+        explanation: "The probe counts down from sector 5 to sector 1, stopping before sector 0."
+
+      - type: arrange
+        instruction: "Build a loop that pings every second sector starting from sector 2 up to sector 10"
+        blocks: ["for", "sector", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "sector", ")"]
+        correct: ["for", "sector", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "sector", ")"]
+        explanation: "range(2, 11, 2) starts at sector 2 and jumps by 2 each time until sector 10."
+
+      - type: mcq
+        question: "What does this print as Lin's probe dips into negative sectors?"
+        code: "for sector in range(0, -5, -1):\n    print(sector)"
+        choices: ["0\n-1\n-2\n-3\n-4", "0\n-1\n-2\n-3\n-4\n-5", "-5\n-4\n-3\n-2\n-1\n0", "Nothing"]
+        correct: "0\n-1\n-2\n-3\n-4"
+        explanation: "The probe counts from sector 0 down to sector -4, stopping before -5."
+
+      - type: fill_blank
+        prompt: "Set the stop value so Lin's long-range retreat from sector 100 ends just before returning to sector 0."
+        before: "for sector in range(100, "
+        after: ", -10):\n    print(sector)"
+        choices: ["0", "10", "-10", "100"]
+        answer: "0"
+        explanation: "range(100, 0, -10) retreats from sector 100 to sector 10, stopping before 0."
+
+      - type: mcq
+        question: "How many sectors does Lin's probe ping with this step pattern?"
+        code: ""
+        choices: ["4", "5", "20", "3"]
+        correct: "4"
+        explanation: "Sectors 0, 5, 10, 15 — four pings. Sector 20 is excluded."
+
+      - type: mcq
+        question: "What does this print as Lin sums the squared signal values from sectors 1 through 5?"
+        code: "s = 0\nfor sector in range(1, 6):\n    s += sector * sector\nprint(s)"
+        choices: ["55", "15", "225", "30"]
+        correct: "55"
+        explanation: "1² + 2² + 3² + 4² + 5² = 1 + 4 + 9 + 16 + 25 = 55 total signal power."
+
+      - type: mini_code
+        prompt: "Lin runs a recall sequence pulling the probe back from sector 10 to sector 1. Print a countdown from 10 to 1 (inclusive) using range."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Should have 10 lines"
+          - code: "lines[0].strip() == '10' and lines[-1].strip() == '1'"
+            message: "Should start at 10, end at 1"
+
+      - type: mini_code
+        prompt: "Lin's probe only samples odd-numbered sectors. Print all odd numbers from 1 to 19 using range with a step."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Parse output"
+          - code: "lines[0].strip() == '1' and lines[-1].strip() == '19' and len(lines) == 10"
+            message: "Should print 1, 3, 5, ..., 19 (10 numbers)"
+
   mystery:
-    title: "Narrowing the Range"
+    title: "Skipping Through the Evidence at Intervals"
+    exercises:
+      - type: concept
+        code: |
+          for file_num in range(0, 10, 2):
+              print(file_num)
+        output: "0\n2\n4\n6\n8"
+        explanation: "Cole reads every other file. range(0, 10, 2) visits files 0, 2, 4, 6, 8 — skipping one each time."
+
+      - type: mcq
+        question: "Which files does Cole flag on this pass through the archive?"
+        code: "for file_num in range(1, 10, 3):\n    print(file_num)"
+        choices: ["1\n4\n7", "1\n3\n6\n9", "0\n3\n6\n9", "1\n10\n3"]
+        correct: "1\n4\n7"
+        explanation: "Starting at file 1 and jumping 3 each time: 1, 4, 7. File 10 is not reached."
+
+      - type: fill_blank
+        prompt: "Set the step so Cole works backwards through the files one at a time."
+        before: "for file_num in range(10, 0, "
+        after: "):\n    print(file_num)"
+        choices: ["-1", "1", "-10", "0"]
+        answer: "-1"
+        explanation: "A step of -1 has Cole move back one file each time: 10, 9, 8, ..., 1."
+
+      - type: mcq
+        question: "What does this print as Cole re-reads files from 5 back to 1?"
+        code: "for file_num in range(5, 0, -1):\n    print(file_num)"
+        choices: ["5\n4\n3\n2\n1", "5\n4\n3\n2\n1\n0", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4"]
+        correct: "5\n4\n3\n2\n1"
+        explanation: "Cole counts down from file 5 to file 1, stopping before file 0."
+
+      - type: arrange
+        instruction: "Build a loop that prints every second file number starting from file 2 up to file 10"
+        blocks: ["for", "file_num", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "file_num", ")"]
+        correct: ["for", "file_num", "in", "range", "(", "2", ",", "11", ",", "2", ")", ":", "print", "(", "file_num", ")"]
+        explanation: "range(2, 11, 2) starts at file 2 and jumps by 2 each time until file 10."
+
+      - type: mcq
+        question: "What does this print as Cole digs into archived files with negative reference numbers?"
+        code: "for file_num in range(0, -5, -1):\n    print(file_num)"
+        choices: ["0\n-1\n-2\n-3\n-4", "0\n-1\n-2\n-3\n-4\n-5", "-5\n-4\n-3\n-2\n-1\n0", "Nothing"]
+        correct: "0\n-1\n-2\n-3\n-4"
+        explanation: "Cole reads from file 0 down to file -4, stopping before -5."
+
+      - type: fill_blank
+        prompt: "Set the stop value so Cole's backward sweep from file 100 ends just before reaching file 0."
+        before: "for file_num in range(100, "
+        after: ", -10):\n    print(file_num)"
+        choices: ["0", "10", "-10", "100"]
+        answer: "0"
+        explanation: "range(100, 0, -10) steps back from file 100 to file 10, stopping before 0."
+
+      - type: mcq
+        question: "How many case files does Cole check with this interval pattern?"
+        code: ""
+        choices: ["4", "5", "20", "3"]
+        correct: "4"
+        explanation: "Files 0, 5, 10, 15 — four files. File 20 is excluded."
+
+      - type: mcq
+        question: "What does this print as Cole squares the relevance score of each file from 1 to 5?"
+        code: "s = 0\nfor file_num in range(1, 6):\n    s += file_num * file_num\nprint(s)"
+        choices: ["55", "15", "225", "30"]
+        correct: "55"
+        explanation: "1² + 2² + 3² + 4² + 5² = 1 + 4 + 9 + 16 + 25 = 55 total relevance points."
+
+      - type: mini_code
+        prompt: "Cole re-reads the files in reverse from file 10 back to file 1. Print a countdown from 10 to 1 (inclusive) using range."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Should have 10 lines"
+          - code: "lines[0].strip() == '10' and lines[-1].strip() == '1'"
+            message: "Should start at 10, end at 1"
+
+      - type: mini_code
+        prompt: "Cole only flags odd-numbered files as priority leads. Print all odd numbers from 1 to 19 using range with a step."
+        starter: ""
+        tests:
+          - code: "lines = _stdout.strip().split('\\n')"
+            message: "Parse output"
+          - code: "lines[0].strip() == '1' and lines[-1].strip() == '19' and len(lines) == 10"
+            message: "Should print 1, 3, 5, ..., 19 (10 numbers)"

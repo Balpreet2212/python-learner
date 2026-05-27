@@ -92,8 +92,274 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Summoning Loop"
+    title: "Picking Herbs by the Row"
+    exercises:
+      - type: concept
+        code: |
+          for herb in range(5):
+              print(herb)
+        output: "0\n1\n2\n3\n4"
+        explanation: "Mira picks herbs one by one. range(5) gives patch numbers 0 through 4 — she visits each patch in order."
+
+      - type: mcq
+        question: "Mira forages 3 patches. What does this print?"
+        code: "for herb in range(3):\n    print(herb)"
+        choices: ["0\n1\n2", "1\n2\n3", "0\n1\n2\n3", "3"]
+        correct: "0\n1\n2"
+        explanation: "range(3) gives patch numbers 0, 1, 2. Mira visits three patches starting from patch 0."
+
+      - type: fill_blank
+        prompt: "Use the function that generates a sequence so Mira's loop visits 4 herb patches."
+        before: "for herb in "
+        after: "(4):\n    print(\"hello\")"
+        choices: ["range", "len", "loop", "print"]
+        answer: "range"
+        explanation: "range(4) generates 0, 1, 2, 3 — four patch numbers for Mira to forage."
+
+      - type: mcq
+        question: "How many herb patches does Mira visit?"
+        code: "for herb in range(7):\n    print(\"picking\")"
+        choices: ["7", "6", "8", "0"]
+        correct: "7"
+        explanation: "range(7) produces 7 values (0 through 6), so Mira visits 7 patches."
+
+      - type: arrange
+        instruction: "Build a loop that prints patch numbers 0, 1, 2, 3, 4 as Mira forages"
+        blocks: ["for", "herb", "in", "range", "(", "5", ")", ":", "print", "(", "herb", ")"]
+        correct: ["for", "herb", "in", "range", "(", "5", ")", ":", "print", "(", "herb", ")"]
+        explanation: "range(5) gives patches 0-4. print(herb) shows each patch number Mira visits."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "satchel = 0\nfor herb in range(4):\n    satchel = satchel + herb\nprint(satchel)"
+        choices: ["6", "10", "4", "0"]
+        correct: "6"
+        explanation: "0 + 1 + 2 + 3 = 6. Mira tallies up each herb number to track her total haul."
+
+      - type: fill_blank
+        prompt: "Print each patch number doubled to count how many leaves Mira collects from each spot."
+        before: "for herb in range(n):\n    print(herb "
+        after: " 2)"
+        choices: ["*", "+", "//", "%"]
+        answer: "*"
+        explanation: "herb * 2 doubles each patch number: 0, 2, 4, ... Mira collects two leaves per patch."
+
+      - type: mcq
+        question: "What does range(1, 5) produce for Mira's foraging route?"
+        code: "for herb in range(1, 5):\n    print(herb)"
+        choices: ["1\n2\n3\n4", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4", "1\n5"]
+        correct: "1\n2\n3\n4"
+        explanation: "range(1, 5) starts at patch 1 and stops before patch 5 — Mira visits patches 1, 2, 3, 4."
+
+      - type: arrange
+        instruction: "Build a loop that prints patch numbers 1 through 5 as Mira goes deeper into the forest"
+        blocks: ["for", "herb", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "herb", ")"]
+        correct: ["for", "herb", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "herb", ")"]
+        explanation: "range(1, 6) starts at patch 1 and ends at patch 5 (not including 6)."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "potency = 1\nfor herb in range(1, 5):\n    potency = potency * herb\nprint(potency)"
+        choices: ["24", "10", "4", "120"]
+        correct: "24"
+        explanation: "1 * 1 * 2 * 3 * 4 = 24. Mira multiplies the potency of each herb she collects."
+
+      - type: mini_code
+        prompt: "Mira collects herbs in batches of 3. Print the first 5 multiples of 3 (3, 6, 9, 12, 15) using a for loop."
+        starter: ""
+        tests:
+          - code: "assert len(_stdout.strip().split('\\n')) == 5"
+            message: "Should have 5 lines of output"
+          - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '3' and lines[-1].strip() == '15'"
+            message: "Should start with 3 and end with 15"
+
+      - type: mini_code
+        prompt: "Mira wants to know the total number of herbs she collected from patches 1 to 10. Use a for loop to calculate the sum of numbers from 1 to 10 (inclusive) and print it."
+        starter: "total = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '55'"
+            message: "Sum of 1 to 10 is 55"
+          - code: "assert 'for' in _code"
+            message: "Should use a for loop"
+
   scifi:
-    title: "Repeating Thrusters"
+    title: "Running the Sector Scan"
+    exercises:
+      - type: concept
+        code: |
+          for sector in range(5):
+              print(sector)
+        output: "0\n1\n2\n3\n4"
+        explanation: "Lin scans sectors one by one. range(5) gives sector IDs 0 through 4 — she logs each in order."
+
+      - type: mcq
+        question: "Lin scans 3 sectors. What does this print?"
+        code: "for sector in range(3):\n    print(sector)"
+        choices: ["0\n1\n2", "1\n2\n3", "0\n1\n2\n3", "3"]
+        correct: "0\n1\n2"
+        explanation: "range(3) gives sector IDs 0, 1, 2. Lin logs three sectors starting from sector 0."
+
+      - type: fill_blank
+        prompt: "Use the function that generates a sequence so Lin's probe visits 4 sectors."
+        before: "for sector in "
+        after: "(4):\n    print(\"hello\")"
+        choices: ["range", "len", "loop", "print"]
+        answer: "range"
+        explanation: "range(4) generates sector IDs 0, 1, 2, 3 — four sectors for Lin to scan."
+
+      - type: mcq
+        question: "How many sectors does Lin scan?"
+        code: "for sector in range(7):\n    print(\"scanning\")"
+        choices: ["7", "6", "8", "0"]
+        correct: "7"
+        explanation: "range(7) produces 7 values (0 through 6), so Lin scans 7 sectors."
+
+      - type: arrange
+        instruction: "Build a loop that prints sector IDs 0, 1, 2, 3, 4 as Lin surveys deep space"
+        blocks: ["for", "sector", "in", "range", "(", "5", ")", ":", "print", "(", "sector", ")"]
+        correct: ["for", "sector", "in", "range", "(", "5", ")", ":", "print", "(", "sector", ")"]
+        explanation: "range(5) gives sectors 0-4. print(sector) logs each sector ID Lin records."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "star_count = 0\nfor sector in range(4):\n    star_count = star_count + sector\nprint(star_count)"
+        choices: ["6", "10", "4", "0"]
+        correct: "6"
+        explanation: "0 + 1 + 2 + 3 = 6. Lin tallies up the star readings from each sector."
+
+      - type: fill_blank
+        prompt: "Print each sector ID doubled to show the probe signal strength for that sector."
+        before: "for sector in range(n):\n    print(sector "
+        after: " 2)"
+        choices: ["*", "+", "//", "%"]
+        answer: "*"
+        explanation: "sector * 2 doubles each sector ID: 0, 2, 4, ... Lin records signal strength per sector."
+
+      - type: mcq
+        question: "What does range(1, 5) produce for Lin's scan route?"
+        code: "for sector in range(1, 5):\n    print(sector)"
+        choices: ["1\n2\n3\n4", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4", "1\n5"]
+        correct: "1\n2\n3\n4"
+        explanation: "range(1, 5) starts at sector 1 and stops before sector 5 — Lin scans sectors 1, 2, 3, 4."
+
+      - type: arrange
+        instruction: "Build a loop that prints sector IDs 1 through 5 as Lin maps deeper into the galaxy"
+        blocks: ["for", "sector", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "sector", ")"]
+        correct: ["for", "sector", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "sector", ")"]
+        explanation: "range(1, 6) starts at sector 1 and ends at sector 5 (not including 6)."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "signal = 1\nfor sector in range(1, 5):\n    signal = signal * sector\nprint(signal)"
+        choices: ["24", "10", "4", "120"]
+        correct: "24"
+        explanation: "1 * 1 * 2 * 3 * 4 = 24. Lin multiplies sector readings to compute cumulative signal strength."
+
+      - type: mini_code
+        prompt: "Lin's probe pings every 3rd unit of distance. Print the first 5 multiples of 3 (3, 6, 9, 12, 15) using a for loop."
+        starter: ""
+        tests:
+          - code: "assert len(_stdout.strip().split('\\n')) == 5"
+            message: "Should have 5 lines of output"
+          - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '3' and lines[-1].strip() == '15'"
+            message: "Should start with 3 and end with 15"
+
+      - type: mini_code
+        prompt: "Lin wants to know the total star count across sectors 1 to 10. Use a for loop to calculate the sum of numbers from 1 to 10 (inclusive) and print it."
+        starter: "total = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '55'"
+            message: "Sum of 1 to 10 is 55"
+          - code: "assert 'for' in _code"
+            message: "Should use a for loop"
+
   mystery:
-    title: "Counting Evidence"
+    title: "Reading Each File in Order"
+    exercises:
+      - type: concept
+        code: |
+          for file_num in range(5):
+              print(file_num)
+        output: "0\n1\n2\n3\n4"
+        explanation: "Cole reads case files one by one. range(5) gives file numbers 0 through 4 — he reviews each in order."
+
+      - type: mcq
+        question: "Cole reviews 3 case files. What does this print?"
+        code: "for file_num in range(3):\n    print(file_num)"
+        choices: ["0\n1\n2", "1\n2\n3", "0\n1\n2\n3", "3"]
+        correct: "0\n1\n2"
+        explanation: "range(3) gives file numbers 0, 1, 2. Cole reads three files starting from file 0."
+
+      - type: fill_blank
+        prompt: "Use the function that generates a sequence so Cole's loop reads through 4 case files."
+        before: "for file_num in "
+        after: "(4):\n    print(\"hello\")"
+        choices: ["range", "len", "loop", "print"]
+        answer: "range"
+        explanation: "range(4) generates file numbers 0, 1, 2, 3 — four files for Cole to review."
+
+      - type: mcq
+        question: "How many case files does Cole read through?"
+        code: "for file_num in range(7):\n    print(\"reading\")"
+        choices: ["7", "6", "8", "0"]
+        correct: "7"
+        explanation: "range(7) produces 7 values (0 through 6), so Cole reads through 7 case files."
+
+      - type: arrange
+        instruction: "Build a loop that prints file numbers 0, 1, 2, 3, 4 as Cole works through the case"
+        blocks: ["for", "file_num", "in", "range", "(", "5", ")", ":", "print", "(", "file_num", ")"]
+        correct: ["for", "file_num", "in", "range", "(", "5", ")", ":", "print", "(", "file_num", ")"]
+        explanation: "range(5) gives files 0-4. print(file_num) logs each file number Cole reviews."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "clues = 0\nfor file_num in range(4):\n    clues = clues + file_num\nprint(clues)"
+        choices: ["6", "10", "4", "0"]
+        correct: "6"
+        explanation: "0 + 1 + 2 + 3 = 6. Cole tallies up the clue count from each file he reads."
+
+      - type: fill_blank
+        prompt: "Print each file number doubled to count how many pages Cole must read from each file."
+        before: "for file_num in range(n):\n    print(file_num "
+        after: " 2)"
+        choices: ["*", "+", "//", "%"]
+        answer: "*"
+        explanation: "file_num * 2 doubles each file number: 0, 2, 4, ... Each file has two pages Cole must review."
+
+      - type: mcq
+        question: "What does range(1, 5) produce for Cole's reading list?"
+        code: "for file_num in range(1, 5):\n    print(file_num)"
+        choices: ["1\n2\n3\n4", "1\n2\n3\n4\n5", "0\n1\n2\n3\n4", "1\n5"]
+        correct: "1\n2\n3\n4"
+        explanation: "range(1, 5) starts at file 1 and stops before file 5 — Cole reads files 1, 2, 3, 4."
+
+      - type: arrange
+        instruction: "Build a loop that prints file numbers 1 through 5 as Cole digs deeper into the case"
+        blocks: ["for", "file_num", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "file_num", ")"]
+        correct: ["for", "file_num", "in", "range", "(", "1", ",", "6", ")", ":", "print", "(", "file_num", ")"]
+        explanation: "range(1, 6) starts at file 1 and ends at file 5 (not including 6)."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "leads = 1\nfor file_num in range(1, 5):\n    leads = leads * file_num\nprint(leads)"
+        choices: ["24", "10", "4", "120"]
+        correct: "24"
+        explanation: "1 * 1 * 2 * 3 * 4 = 24. Cole multiplies lead weights from each file to compute case strength."
+
+      - type: mini_code
+        prompt: "Cole flags every 3rd piece of evidence. Print the first 5 multiples of 3 (3, 6, 9, 12, 15) using a for loop."
+        starter: ""
+        tests:
+          - code: "assert len(_stdout.strip().split('\\n')) == 5"
+            message: "Should have 5 lines of output"
+          - code: "lines = _stdout.strip().split('\\n'); assert lines[0].strip() == '3' and lines[-1].strip() == '15'"
+            message: "Should start with 3 and end with 15"
+
+      - type: mini_code
+        prompt: "Cole wants to total up all the evidence tags from files 1 to 10. Use a for loop to calculate the sum of numbers from 1 to 10 (inclusive) and print it."
+        starter: "total = 0\n"
+        tests:
+          - code: "assert _stdout.strip() == '55'"
+            message: "Sum of 1 to 10 is 55"
+          - code: "assert 'for' in _code"
+            message: "Should use a for loop"

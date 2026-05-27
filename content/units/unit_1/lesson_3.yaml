@@ -95,8 +95,284 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Truth Crystal"
+    title: "Reading the Spell Scrolls"
+    exercises:
+      - type: concept
+        code: |
+          incantation = "By moonlight and ember!"
+          print(len(incantation))
+          print(incantation.upper())
+        output: "22\nBY MOONLIGHT AND EMBER!"
+        explanation: "Spell words are strings stored in quotes. len() counts every character in the incantation. .upper() shouts it in capital letters. Call string methods with a dot."
+
+      - type: mcq
+        question: "Elara checks how long an ingredient name is. What does this print?"
+        code: "ingredient = \"potion\"
+print(len(ingredient))"
+        choices: ["6", "7", "word", "\"python\""]
+        correct: "6"
+        explanation: "\"potion\" has 6 characters: p-o-t-i-o-n. len() counts them all."
+
+      - type: fill_blank
+        prompt: "Shout the ingredient name in uppercase before adding it to the cauldron log."
+        before: "ingredient = \"moonpetal\"\nprint(ingredient."
+        after: "())"
+        choices: ["upper", "print", "len", "int"]
+        answer: "upper"
+        explanation: ".upper() returns the ingredient name in all capitals: 'MOONPETAL'."
+
+      - type: mcq
+        question: "Elara whispers the potion name in lowercase. What does this print?"
+        code: "potion = \"Starfire\"\nprint(potion.lower())"
+        choices: ["starfire", "STARFIRE", "Starfire", "8"]
+        correct: "starfire"
+        explanation: ".lower() converts every character to lowercase. \"Starfire\" becomes \"starfire\"."
+
+      - type: arrange
+        instruction: "Build code to get the length of the ingredient name 'ash'"
+        blocks: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        correct: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        explanation: "len('ash') counts 3 characters. print wraps the whole call to display the result."
+
+      - type: mcq
+        question: "Elara joins a spell prefix and suffix into one word. What does this print?"
+        code: "prefix = \"hello\"\nsuffix = \"world\"\nprint(prefix + \" \" + suffix)"
+        choices: ["hello world", "helloworld", "a b", "hello\nworld"]
+        correct: "hello world"
+        explanation: "+ joins the spell parts. A space \" \" is woven between them."
+
+      - type: fill_blank
+        prompt: "Join the herb name and the potion name into one combined label."
+        before: "result = \"hello\" "
+        after: " \"world\""
+        choices: ["+", "*", "-", "="]
+        answer: "+"
+        explanation: "+ concatenates (joins) the two parts of the label into one string."
+
+      - type: mcq
+        question: "Elara reads the first rune of a spell word. What does this print?"
+        code: "spell = \"Phoenix\"\nprint(spell[0])"
+        choices: ["P", "y", "Python", "0"]
+        correct: "P"
+        explanation: "[0] reads the first character. Python uses 0-based indexing, so [0] is 'P'."
+
+      - type: arrange
+        instruction: "Build code to print the spell word 'ember' in uppercase"
+        blocks: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        correct: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        explanation: ".upper() is called on the spell string with dot notation to shout it aloud."
+
+      - type: mcq
+        question: "Elara strips extra parchment dust from a scanned ingredient name. What does this print?"
+        code: "ingredient = \"  moonpetal  \"\nprint(ingredient.strip())"
+        choices: ["moonpetal", "  moonpetal  ", "moonpetal  ", "MOONPETAL"]
+        correct: "moonpetal"
+        explanation: ".strip() removes leading and trailing spaces, leaving \"moonpetal\"."
+
+      - type: mini_code
+        prompt: "Store an ingredient name in a variable called name and print it in uppercase."
+        starter: ""
+        tests:
+          - code: "assert isinstance(name, str) and len(name) > 0"
+            message: "name should be a non-empty string"
+          - code: "name.upper() in _stdout"
+            message: "Should print name in uppercase"
+
+      - type: mini_code
+        prompt: "Store \"Hello\" in greeting and \"World\" in target. Print them joined with a space."
+        starter: ""
+        tests:
+          - code: "assert greeting == 'Hello'"
+            message: "greeting should be 'Hello'"
+          - code: "assert target == 'World'"
+            message: "target should be 'World'"
+          - code: "'Hello World' in _stdout"
+            message: "Should print 'Hello World'"
+
   scifi:
-    title: "Starship Comms"
+    title: "Parsing the Comm Signals"
+    exercises:
+      - type: concept
+        code: |
+          transmission = "Hull breach on deck 7!"
+          print(len(transmission))
+          print(transmission.upper())
+        output: "22\nHULL BREACH ON DECK 7!"
+        explanation: "Comm signals are strings stored in quotes. len() counts every character in the message. .upper() puts it in alert mode. Call string methods with a dot."
+
+      - type: mcq
+        question: "Yara measures the length of a system status code. What does this print?"
+        code: "status_code = \"online\"\nprint(len(status_code))"
+        choices: ["6", "7", "word", "\"python\""]
+        correct: "6"
+        explanation: "\"online\" has 6 characters: o-n-l-i-n-e. len() counts them all."
+
+      - type: fill_blank
+        prompt: "Broadcast the system status in uppercase for an emergency alert."
+        before: "status = \"critical\"\nprint(status."
+        after: "())"
+        choices: ["upper", "print", "len", "int"]
+        answer: "upper"
+        explanation: ".upper() returns the status in all capitals: 'CRITICAL'."
+
+      - type: mcq
+        question: "Yara sets a comm signal to quiet mode. What does this print?"
+        code: "signal = \"WARNING\"\nprint(signal.lower())"
+        choices: ["warning", "WARNING", "Warning", "7"]
+        correct: "warning"
+        explanation: ".lower() converts the alert to lowercase. \"WARNING\" becomes \"warning\"."
+
+      - type: arrange
+        instruction: "Build code to get the length of the error code 'err'"
+        blocks: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        correct: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        explanation: "len('err') counts 3 characters. print wraps the whole call."
+
+      - type: mcq
+        question: "Yara combines a ship prefix and sector name into one identifier. What does this print?"
+        code: "prefix = \"hello\"\nsector = \"world\"\nprint(prefix + \" \" + sector)"
+        choices: ["hello world", "helloworld", "a b", "hello\nworld"]
+        correct: "hello world"
+        explanation: "+ joins the identifiers. A space \" \" separates prefix from sector name."
+
+      - type: fill_blank
+        prompt: "Concatenate the ship name and the mission code into one full identifier."
+        before: "result = \"hello\" "
+        after: " \"world\""
+        choices: ["+", "*", "-", "="]
+        answer: "+"
+        explanation: "+ concatenates the two strings into one full mission identifier."
+
+      - type: mcq
+        question: "Yara reads the first character of a system code. What does this print?"
+        code: "system_code = \"Propulsion\"\nprint(system_code[0])"
+        choices: ["P", "y", "Python", "0"]
+        correct: "P"
+        explanation: "[0] reads the first character. Python uses 0-based indexing, so [0] is 'P'."
+
+      - type: arrange
+        instruction: "Build code to print the alert code 'mayday' in uppercase"
+        blocks: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        correct: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        explanation: ".upper() is called on the comm string with dot notation to trigger the alert."
+
+      - type: mcq
+        question: "Yara cleans up a sensor reading that has padding spaces. What does this print?"
+        code: "reading = \"  online  \"\nprint(reading.strip())"
+        choices: ["online", "  online  ", "online  ", "ONLINE"]
+        correct: "online"
+        explanation: ".strip() removes the extra spaces, leaving \"online\"."
+
+      - type: mini_code
+        prompt: "Store a crew member's name in a variable called name and print it in uppercase."
+        starter: ""
+        tests:
+          - code: "assert isinstance(name, str) and len(name) > 0"
+            message: "name should be a non-empty string"
+          - code: "name.upper() in _stdout"
+            message: "Should print name in uppercase"
+
+      - type: mini_code
+        prompt: "Store \"Hello\" in greeting and \"World\" in target. Print them joined with a space."
+        starter: ""
+        tests:
+          - code: "assert greeting == 'Hello'"
+            message: "greeting should be 'Hello'"
+          - code: "assert target == 'World'"
+            message: "target should be 'World'"
+          - code: "'Hello World' in _stdout"
+            message: "Should print 'Hello World'"
+
   mystery:
-    title: "Decoding Messages"
+    title: "Analysing the Cipher Notes"
+    exercises:
+      - type: concept
+        code: |
+          cipher_note = "Meet at the old mill!"
+          print(len(cipher_note))
+          print(cipher_note.upper())
+        output: "22\nMEET AT THE OLD MILL!"
+        explanation: "Clue notes are strings stored in quotes. len() counts every character in the message. .upper() makes it easier to compare codes. Call string methods with a dot."
+
+      - type: mcq
+        question: "Cole checks how many characters are in a suspect's alias. What does this print?"
+        code: "alias = \"shadow\"\nprint(len(alias))"
+        choices: ["6", "7", "word", "\"python\""]
+        correct: "6"
+        explanation: "\"shadow\" has 6 characters: s-h-a-d-o-w. len() counts every one."
+
+      - type: fill_blank
+        prompt: "Convert the suspect's alias to uppercase for the wanted poster."
+        before: "alias = \"shadow\"\nprint(alias."
+        after: "())"
+        choices: ["upper", "print", "len", "int"]
+        answer: "upper"
+        explanation: ".upper() returns the alias in all capitals: 'SHADOW'."
+
+      - type: mcq
+        question: "Cole normalises a cipher word to lowercase for comparison. What does this print?"
+        code: "cipher_word = \"DAGGER\"\nprint(cipher_word.lower())"
+        choices: ["dagger", "DAGGER", "Dagger", "6"]
+        correct: "dagger"
+        explanation: ".lower() converts the cipher word to lowercase. \"DAGGER\" becomes \"dagger\"."
+
+      - type: arrange
+        instruction: "Build code to count the characters in the code word 'key'"
+        blocks: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        correct: ["print", "(", "len", "(", "\"cat\"", ")", ")"]
+        explanation: "len('key') counts 3 characters. print wraps the call to show the result."
+
+      - type: mcq
+        question: "Cole joins a suspect's first and last name into one entry. What does this print?"
+        code: "first = \"hello\"\nlast = \"world\"\nprint(first + \" \" + last)"
+        choices: ["hello world", "helloworld", "a b", "hello\nworld"]
+        correct: "hello world"
+        explanation: "+ joins the name parts. A space \" \" sits between first and last name."
+
+      - type: fill_blank
+        prompt: "Join the location name and the time stamp into one clue entry."
+        before: "result = \"hello\" "
+        after: " \"world\""
+        choices: ["+", "*", "-", "="]
+        answer: "+"
+        explanation: "+ concatenates the location and timestamp into one evidence string."
+
+      - type: mcq
+        question: "Cole reads the first letter of a coded word to find its category. What does this print?"
+        code: "clue_word = \"Phantom\"\nprint(clue_word[0])"
+        choices: ["P", "y", "Python", "0"]
+        correct: "P"
+        explanation: "[0] reads the first character. Python uses 0-based indexing, so [0] is 'P'."
+
+      - type: arrange
+        instruction: "Build code to print the cipher word 'clue' in uppercase"
+        blocks: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        correct: ["print", "(", "\"hello\"", ".", "upper", "(", ")", ")"]
+        explanation: ".upper() is called on the cipher string with dot notation."
+
+      - type: mcq
+        question: "Cole strips the whitespace from a scanned note. What does this print?"
+        code: "note = \"  alibi  \"\nprint(note.strip())"
+        choices: ["alibi", "  alibi  ", "alibi  ", "ALIBI"]
+        correct: "alibi"
+        explanation: ".strip() removes leading and trailing spaces, giving \"alibi\"."
+
+      - type: mini_code
+        prompt: "Store a suspect's name in a variable called name and print it in uppercase."
+        starter: ""
+        tests:
+          - code: "assert isinstance(name, str) and len(name) > 0"
+            message: "name should be a non-empty string"
+          - code: "name.upper() in _stdout"
+            message: "Should print name in uppercase"
+
+      - type: mini_code
+        prompt: "Store \"Hello\" in greeting and \"World\" in target. Print them joined with a space."
+        starter: ""
+        tests:
+          - code: "assert greeting == 'Hello'"
+            message: "greeting should be 'Hello'"
+          - code: "assert target == 'World'"
+            message: "target should be 'World'"
+          - code: "'Hello World' in _stdout"
+            message: "Should print 'Hello World'"

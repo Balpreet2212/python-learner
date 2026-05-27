@@ -92,8 +92,274 @@ exercises:
 
 worlds:
   fantasy:
-    title: "The Combining Spell"
+    title: "Blending Complex Brews"
+    exercises:
+      - type: concept
+        code: |
+          def brew_strength(base, amplifier):
+              return base * amplifier
+
+          def brew_cost(base, amplifier):
+              return 2 * (base + amplifier)
+
+          print(brew_strength(4, 5))
+          print(brew_cost(4, 5))
+        output: "20\n18"
+        explanation: "Recipes can take multiple ingredients as parameters, and Master Theo can chain recipes — each doing one clear magical job."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def multiply(a, b, c):\n    return a * b * c\n\nprint(multiply(2, 3, 4))"
+        choices: ["24", "9", "234", "6"]
+        correct: "24"
+        explanation: "Mixing three ingredients: 2 * 3 * 4 = 24 units of combined potency."
+
+      - type: fill_blank
+        prompt: "Combine the potion name, a space, and the variant label into one string."
+        before: "def full_name(first, last):\n    return first "
+        after: " \" \" + last"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "String concatenation joins the potion name, a space, and the variant label."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nprint(greet(\"Alice\"))"
+        choices: ["Hello, Alice!", "greeting, name!", "Alice, Hello!", "Error"]
+        correct: "Hello, Alice!"
+        explanation: "greeting has a default value 'Hello'. Master Theo's standard incantation is used when no greeting is specified."
+
+      - type: arrange
+        instruction: "Build a recipe tax(price, rate) that returns price * rate / 100"
+        blocks: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        correct: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        explanation: "Two ingredient parameters, one returned cost expression — the potion shop's tax formula."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def double(n):\n    return n * 2\n\ndef triple(n):\n    return n * 3\n\nprint(double(triple(4)))"
+        choices: ["24", "12", "8", "18"]
+        correct: "24"
+        explanation: "triple(4) brews a potency of 12. double(12) amplifies it to 24."
+
+      - type: fill_blank
+        prompt: "Multiply the potion price by the discount rate divided by 100 to find the reduction."
+        before: "def discount(price, pct):\n    return price - (price "
+        after: " pct / 100)"
+        choices: ["*", "+", "-", "/"]
+        answer: "*"
+        explanation: "price * pct / 100 calculates the gold coins to deduct from the potion price."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def add(a, b=10):\n    return a + b\n\nprint(add(5))\nprint(add(5, 20))"
+        choices: ["15\n25", "5\n5", "15\n10", "Error"]
+        correct: "15\n25"
+        explanation: "add(5) uses default amplifier b=10: 5+10=15. add(5,20) overrides to b=20: 5+20=25."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def bmi(weight, height):\n    return weight / (height ** 2)\n\nprint(round(bmi(70, 1.75), 1))"
+        choices: ["22.9", "40.0", "35.0", "1.75"]
+        correct: "22.9"
+        explanation: "70 / (1.75²) = 70 / 3.0625 ≈ 22.857, rounded to 22.9 — a potion density formula."
+
+      - type: mini_code
+        prompt: "Define a recipe strongest_brew(a, b, c) that returns the greatest potency of three ingredient amounts."
+        starter: ""
+        tests:
+          - code: "assert max_of_three(4, 9, 2) == 9"
+            message: "max_of_three(4, 9, 2) should return 9"
+          - code: "assert max_of_three(1, 1, 5) == 5"
+            message: "max_of_three(1, 1, 5) should return 5"
+
+      - type: mini_code
+        prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f) — Master Theo needs both for calibrating cauldron temperatures."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32.0°F"
+          - code: "assert fahrenheit_to_celsius(212) == 100.0"
+            message: "212°F = 100.0°C"
+
   scifi:
-    title: "Module Chaining"
+    title: "Chaining Drone Modules"
+    exercises:
+      - type: concept
+        code: |
+          def scan_area(width, height):
+              return width * height
+
+          def scan_perimeter(width, height):
+              return 2 * (width + height)
+
+          print(scan_area(4, 5))
+          print(scan_perimeter(4, 5))
+        output: "20\n18"
+        explanation: "Drone subroutines can take multiple parameters, and Sana can chain modules — each doing one clear engineering job."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def multiply(a, b, c):\n    return a * b * c\n\nprint(multiply(2, 3, 4))"
+        choices: ["24", "9", "234", "6"]
+        correct: "24"
+        explanation: "Multiplying three power levels: 2 * 3 * 4 = 24 combined output units."
+
+      - type: fill_blank
+        prompt: "Combine the system name, a space, and the module label into one string."
+        before: "def full_name(first, last):\n    return first "
+        after: " \" \" + last"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "String concatenation joins the system name, a space, and the module label."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nprint(greet(\"Alice\"))"
+        choices: ["Hello, Alice!", "greeting, name!", "Alice, Hello!", "Error"]
+        correct: "Hello, Alice!"
+        explanation: "greeting has a default value 'Hello'. The drone uses the standard boot message when no custom one is given."
+
+      - type: arrange
+        instruction: "Build a subroutine tax(price, rate) that returns price * rate / 100"
+        blocks: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        correct: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        explanation: "Two parameters, one return expression — the ship's resource cost calculator."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def double(n):\n    return n * 2\n\ndef triple(n):\n    return n * 3\n\nprint(double(triple(4)))"
+        choices: ["24", "12", "8", "18"]
+        correct: "24"
+        explanation: "triple(4) outputs 12. double(12) amplifies to 24 — two chained drone modules."
+
+      - type: fill_blank
+        prompt: "Multiply the repair cost by the efficiency rate divided by 100 to find the savings."
+        before: "def discount(price, pct):\n    return price - (price "
+        after: " pct / 100)"
+        choices: ["*", "+", "-", "/"]
+        answer: "*"
+        explanation: "price * pct / 100 calculates how many energy credits to subtract from the repair cost."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def add(a, b=10):\n    return a + b\n\nprint(add(5))\nprint(add(5, 20))"
+        choices: ["15\n25", "5\n5", "15\n10", "Error"]
+        correct: "15\n25"
+        explanation: "add(5) uses default b=10: 5+10=15. add(5,20) overrides to b=20: 5+20=25."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def bmi(weight, height):\n    return weight / (height ** 2)\n\nprint(round(bmi(70, 1.75), 1))"
+        choices: ["22.9", "40.0", "35.0", "1.75"]
+        correct: "22.9"
+        explanation: "70 / (1.75²) ≈ 22.857, rounded to 22.9 — the drone uses this formula for structural load calculations."
+
+      - type: mini_code
+        prompt: "Define a subroutine max_of_three(a, b, c) that returns the highest of three power readings."
+        starter: ""
+        tests:
+          - code: "assert max_of_three(4, 9, 2) == 9"
+            message: "max_of_three(4, 9, 2) should return 9"
+          - code: "assert max_of_three(1, 1, 5) == 5"
+            message: "max_of_three(1, 1, 5) should return 5"
+
+      - type: mini_code
+        prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f) — Sana needs both to calibrate the ship's thermal sensors."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32.0°F"
+          - code: "assert fahrenheit_to_celsius(212) == 100.0"
+            message: "212°F = 100.0°C"
+
   mystery:
-    title: "Combined Evidence"
+    title: "Combining the Evidence"
+    exercises:
+      - type: concept
+        code: |
+          def clue_weight(count, severity):
+              return count * severity
+
+          def case_score(count, severity):
+              return 2 * (count + severity)
+
+          print(clue_weight(4, 5))
+          print(case_score(4, 5))
+        output: "20\n18"
+        explanation: "Analysis tools can accept multiple clue parameters, and Cole can chain tools — each handling one clear investigative step."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def multiply(a, b, c):\n    return a * b * c\n\nprint(multiply(2, 3, 4))"
+        choices: ["24", "9", "234", "6"]
+        correct: "24"
+        explanation: "Combining three clue weights: 2 * 3 * 4 = 24 total suspicion points."
+
+      - type: fill_blank
+        prompt: "Combine the suspect's first name, a space, and last name into one string for the case file."
+        before: "def full_name(first, last):\n    return first "
+        after: " \" \" + last"
+        choices: ["+", "-", "*", "/"]
+        answer: "+"
+        explanation: "String concatenation joins the first name, a space, and the last name for the report."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def greet(name, greeting=\"Hello\"):\n    return f\"{greeting}, {name}!\"\n\nprint(greet(\"Alice\"))"
+        choices: ["Hello, Alice!", "greeting, name!", "Alice, Hello!", "Error"]
+        correct: "Hello, Alice!"
+        explanation: "greeting has a default value 'Hello'. Cole's standard case-file greeting is used when no custom one is provided."
+
+      - type: arrange
+        instruction: "Build a tool tax(price, rate) that returns price * rate / 100"
+        blocks: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        correct: ["def", "tax", "(", "price", ",", "rate", ")", ":", "return", "price", "*", "rate", "/", "100"]
+        explanation: "Two parameters, one return expression — used to calculate informant fee percentages."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def double(n):\n    return n * 2\n\ndef triple(n):\n    return n * 3\n\nprint(double(triple(4)))"
+        choices: ["24", "12", "8", "18"]
+        correct: "24"
+        explanation: "triple(4) = 12 suspicion points. double(12) = 24 — Cole amplifies the evidence twice."
+
+      - type: fill_blank
+        prompt: "Multiply the reward amount by the tip rate divided by 100 to find the informant's cut."
+        before: "def discount(price, pct):\n    return price - (price "
+        after: " pct / 100)"
+        choices: ["*", "+", "-", "/"]
+        answer: "*"
+        explanation: "price * pct / 100 calculates the amount deducted — in this case, the informant's percentage."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def add(a, b=10):\n    return a + b\n\nprint(add(5))\nprint(add(5, 20))"
+        choices: ["15\n25", "5\n5", "15\n10", "Error"]
+        correct: "15\n25"
+        explanation: "add(5) uses default b=10: 5+10=15. add(5,20) overrides to b=20: 5+20=25."
+
+      - type: mcq
+        question: "What does this print?"
+        code: "def bmi(weight, height):\n    return weight / (height ** 2)\n\nprint(round(bmi(70, 1.75), 1))"
+        choices: ["22.9", "40.0", "35.0", "1.75"]
+        correct: "22.9"
+        explanation: "70 / (1.75²) ≈ 22.857, rounded to 22.9 — Cole uses this formula to model suspect physical profiles."
+
+      - type: mini_code
+        prompt: "Define a tool max_of_three(a, b, c) that returns the highest of three clue scores — helping Cole rank the most damning evidence."
+        starter: ""
+        tests:
+          - code: "assert max_of_three(4, 9, 2) == 9"
+            message: "max_of_three(4, 9, 2) should return 9"
+          - code: "assert max_of_three(1, 1, 5) == 5"
+            message: "max_of_three(1, 1, 5) should return 5"
+
+      - type: mini_code
+        prompt: "Define celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f) — Cole needs both to cross-check temperature evidence from the crime scene."
+        starter: ""
+        tests:
+          - code: "assert celsius_to_fahrenheit(0) == 32.0"
+            message: "0°C = 32.0°F"
+          - code: "assert fahrenheit_to_celsius(212) == 100.0"
+            message: "212°F = 100.0°C"
