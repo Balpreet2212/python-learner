@@ -1,0 +1,70 @@
+title: "The Access Checker"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function can_enter(has_key, is_daylight) that returns True if the
+  visitor has a key OR it is daytime, and False otherwise.
+
+  Use a boolean expression with the or operator.
+
+  Examples:
+    can_enter(True, False)  returns True  (has key)
+    can_enter(False, True)  returns True  (daytime)
+    can_enter(False, False) returns False (neither condition met)
+
+code_starter: |
+  def can_enter(has_key, is_daylight):
+      # return True if has_key OR is_daylight
+
+hints:
+  - "The or operator returns True when at least one side is True"
+  - "return has_key or is_daylight is the entire body"
+
+tests:
+  - code: "assert can_enter(True, False) == True"
+    message: "has_key is True so access is granted"
+  - code: "assert can_enter(False, True) == True"
+    message: "is_daylight is True so access is granted"
+  - code: "assert can_enter(False, False) == False"
+    message: "neither condition is True, access denied"
+
+worlds:
+  fantasy:
+    title: "The Castle Gate Rule"
+    description: |
+      The castle gate opens for anyone holding a key, or for anyone arriving
+      during daylight hours when the portcullis is raised by default.
+
+      Write a function can_enter(has_key, is_daylight) that returns True if
+      has_key is True or is_daylight is True, and False if both are False.
+
+      Examples:
+        can_enter(True, False) returns True
+        can_enter(False, False) returns False
+
+  scifi:
+    title: "Airlock Clearance Protocol"
+    description: |
+      The airlock grants entry to anyone carrying a valid access card, or
+      during standard station hours when the lock is set to open mode.
+
+      Write a function can_enter(has_key, is_daylight) that returns True if
+      has_key is True or is_daylight is True, and False if both are False.
+
+      Examples:
+        can_enter(True, False) returns True
+        can_enter(False, False) returns False
+
+  mystery:
+    title: "The Warehouse Door"
+    description: |
+      The detective's suspect could have entered the warehouse if they had
+      a key — or if they arrived while the doors were unlocked during the
+      day shift.
+
+      Write a function can_enter(has_key, is_daylight) that returns True if
+      has_key is True or is_daylight is True, and False if both are False.
+
+      Examples:
+        can_enter(True, False) returns True
+        can_enter(False, False) returns False

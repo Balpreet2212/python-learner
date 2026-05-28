@@ -14,6 +14,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ProgressPage from "./pages/ProgressPage";
 import ChallengesPage from "./pages/ChallengesPage";
 import WeeklyChallengePage from "./pages/WeeklyChallengePage";
+import DailyChallengePage from "./pages/DailyChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
 import SignupPage from "./pages/auth/SignupPage";
 import VerifyEmailPendingPage from "./pages/auth/VerifyEmailPendingPage";
@@ -143,6 +144,18 @@ export default function App() {
           <RequireAuth>
             <AppLayout>
               <ChallengesPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+
+      {/* Daily challenge */}
+      <Route
+        path="/daily"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <DailyChallengePage />
             </AppLayout>
           </RequireAuth>
         }

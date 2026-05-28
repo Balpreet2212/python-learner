@@ -1,0 +1,63 @@
+title: "The String Cleaner"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function clean_name(name) that takes a string with possible extra
+  whitespace and mixed casing, and returns it trimmed and converted to
+  uppercase.
+
+  Use strip() to remove leading and trailing whitespace, then upper() to
+  convert every character to uppercase.
+
+  Example: clean_name("  merlin ") returns "MERLIN"
+
+code_starter: |
+  def clean_name(name):
+      # strip whitespace then convert to uppercase
+
+hints:
+  - "name.strip() removes leading and trailing spaces"
+  - "chain .upper() after .strip() to convert case"
+
+tests:
+  - code: "assert clean_name('  merlin ') == 'MERLIN'"
+    message: "strip removes spaces, upper converts to capitals"
+  - code: "assert clean_name('alice') == 'ALICE'"
+    message: "no extra spaces, but still needs upper()"
+  - code: "assert clean_name('  Bob  ') == 'BOB'"
+    message: "mixed-case name with surrounding spaces"
+
+worlds:
+  fantasy:
+    title: "The Enchanter's Name Seal"
+    description: |
+      The royal herald must engrave every wizard's name onto their seal in
+      perfect capitals with no stray spaces — sloppy input causes enchantment
+      failures.
+
+      Write a function clean_name(name) that strips leading and trailing
+      whitespace from name, then returns it fully uppercased.
+
+      Example: clean_name("  merlin ") returns "MERLIN"
+
+  scifi:
+    title: "Crew Manifest Formatter"
+    description: |
+      The ship's personnel database rejects records with inconsistent casing
+      or padding. All crew names must be stored as clean, uppercase strings.
+
+      Write a function clean_name(name) that strips any leading or trailing
+      whitespace from name, then returns it in uppercase.
+
+      Example: clean_name("  merlin ") returns "MERLIN"
+
+  mystery:
+    title: "The Witness Register"
+    description: |
+      The detective's case file system flags duplicate names when spacing or
+      casing differs. Every witness name must be normalised before entry.
+
+      Write a function clean_name(name) that strips any leading or trailing
+      whitespace from name, then returns it in uppercase.
+
+      Example: clean_name("  merlin ") returns "MERLIN"

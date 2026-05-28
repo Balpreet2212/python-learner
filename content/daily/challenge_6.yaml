@@ -1,0 +1,69 @@
+title: "The Status Label"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function health_status(hp) that takes an integer hp and returns
+  a string label based on the value:
+
+    hp greater than 75  → "healthy"
+    hp between 26 and 75 (inclusive on both ends) → "wounded"
+    hp 25 or below → "critical"
+
+  Use if / elif / else and check the conditions in order from highest to
+  lowest.
+
+  Example: health_status(80) returns "healthy"
+
+code_starter: |
+  def health_status(hp):
+      # check hp and return the correct label
+
+hints:
+  - "Start with: if hp > 75:"
+  - "Use elif hp >= 26: for the middle range"
+  - "The final else covers 25 and below"
+
+tests:
+  - code: "assert health_status(100) == 'healthy'"
+    message: "100 is above 75, so healthy"
+  - code: "assert health_status(50) == 'wounded'"
+    message: "50 is between 26 and 75, so wounded"
+  - code: "assert health_status(10) == 'critical'"
+    message: "10 is 25 or below, so critical"
+
+worlds:
+  fantasy:
+    title: "The Battle Medic's Report"
+    description: |
+      After each skirmish the court medic must log each warrior's condition
+      so healers know who to treat first. The system uses three status labels.
+
+      Write a function health_status(hp) that returns "healthy" when hp is
+      above 75, "wounded" when hp is between 26 and 75 inclusive, and
+      "critical" when hp is 25 or below.
+
+      Example: health_status(80) returns "healthy"
+
+  scifi:
+    title: "Crew Vitals Monitor"
+    description: |
+      The ship's med-bay display shows each crew member's condition in plain
+      text so the medic can triage at a glance during an emergency.
+
+      Write a function health_status(hp) that returns "healthy" when hp is
+      above 75, "wounded" when hp is between 26 and 75 inclusive, and
+      "critical" when hp is 25 or below.
+
+      Example: health_status(80) returns "healthy"
+
+  mystery:
+    title: "The Victim's Condition Report"
+    description: |
+      The detective's report must classify each victim's condition at the
+      time of discovery using standard medical terminology for the file.
+
+      Write a function health_status(hp) that returns "healthy" when hp is
+      above 75, "wounded" when hp is between 26 and 75 inclusive, and
+      "critical" when hp is 25 or below.
+
+      Example: health_status(80) returns "healthy"

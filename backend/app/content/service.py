@@ -236,6 +236,56 @@ def load_capstone(unit: int, world: str) -> CapstoneContent | None:
     )
 
 
+# ── Daily challenge ───────────────────────────────────────────────────────────
+
+
+@dataclass
+class DailyChallengeContent:
+    challenge_index: int
+    date_key: str
+    title: str
+    description: str
+    code_starter: str
+    hints: list[str]
+    tests: list[LessonTest]
+    xp: int
+    difficulty: str
+
+
+def _date_key(dt: datetime) -> str:
+    return dt.strftime("%Y-%m-%d")
+
+
+def _current_daily_index() -> int:
+    files = sorted((CONTENT_DIR / "daily").glob("challenge_*.yaml"))
+    total = len(files)
+    if total == 0:
+        return 1
+    day_ordinal = datetime.now(UTC).toordinal()
+    return (day_ordinal - 1) % total + 1
+
+
+def load_daily_challenge(world: str) -> DailyChallengeContent | None:
+    idx = _current_daily_index()
+    path = CONTENT_DIR / "daily" / f"challenge_{idx}.yaml"
+    if not path.exists():
+        return None
+    data: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
+    world_data = _resolve_world(data, world)
+    raw_tests: list[dict[str, str]] = data.get("tests", [])
+    return DailyChallengeContent(
+        challenge_index=idx,
+        date_key=_date_key(datetime.now(UTC)),
+        title=world_data.get("title", data.get("title", "Daily Challenge")),
+        description=world_data.get("description", data.get("description", "")).strip(),
+        code_starter=data.get("code_starter", "").rstrip(),
+        hints=data.get("hints", []),
+        tests=[LessonTest(code=t["code"], message=t["message"], stdin=t.get("stdin")) for t in raw_tests],
+        xp=data.get("xp", 25),
+        difficulty=data.get("difficulty", "easy"),
+    )
+
+
 # ── Weekly challenge ──────────────────────────────────────────────────────────
 
 

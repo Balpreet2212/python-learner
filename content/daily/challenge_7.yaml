@@ -1,0 +1,68 @@
+title: "The Profile Lookup"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function get_role(profiles, name) where profiles is a dictionary
+  mapping names to roles. Return the role for name if it exists, or the
+  string "unknown" if it does not.
+
+  Use dict.get() with a default value so you do not need an if statement.
+
+  Example: get_role({'Alice': 'knight', 'Bob': 'mage'}, 'Alice')
+    returns 'knight'
+  Example: get_role({'Alice': 'knight'}, 'Zara')
+    returns 'unknown'
+
+code_starter: |
+  def get_role(profiles, name):
+      # return the role for name, or 'unknown' if not found
+
+hints:
+  - "dict.get(key) returns None if the key is missing"
+  - "dict.get(key, default) returns default instead of None"
+  - "return profiles.get(name, 'unknown')"
+
+tests:
+  - code: "assert get_role({'Alice': 'knight', 'Bob': 'mage'}, 'Alice') == 'knight'"
+    message: "Alice is in the dictionary, return her role"
+  - code: "assert get_role({'Alice': 'knight', 'Bob': 'mage'}, 'Zara') == 'unknown'"
+    message: "Zara is not in the dictionary, return 'unknown'"
+  - code: "assert get_role({}, 'Alice') == 'unknown'"
+    message: "empty dictionary always returns 'unknown'"
+
+worlds:
+  fantasy:
+    title: "The Guild Registry"
+    description: |
+      The Adventurers Guild keeps a registry of members and their class.
+      When the gate guard checks a name, they need the class or a clear
+      "unknown" if the person is not registered.
+
+      Write a function get_role(profiles, name) that returns the value for
+      name in the profiles dictionary, or 'unknown' if name is not a key.
+
+      Example: get_role({'Alice': 'knight'}, 'Alice') returns 'knight'
+
+  scifi:
+    title: "Crew Clearance Database"
+    description: |
+      The station's security system maps each crew member to their
+      clearance role. An unrecognised ID must return 'unknown' to trigger
+      a secondary scan rather than raising an error.
+
+      Write a function get_role(profiles, name) that returns the value for
+      name in the profiles dictionary, or 'unknown' if name is not a key.
+
+      Example: get_role({'Alice': 'knight'}, 'Alice') returns 'knight'
+
+  mystery:
+    title: "The Suspect Dossier"
+    description: |
+      The detective's dossier maps each suspect's name to their known
+      occupation. If a name appears in a lead but not the dossier, the
+      system should flag them as 'unknown' rather than crash.
+
+      Write a function get_role(profiles, name) that returns the value for
+      name in the profiles dictionary, or 'unknown' if name is not a key.
+
+      Example: get_role({'Alice': 'knight'}, 'Alice') returns 'knight'

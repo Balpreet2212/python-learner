@@ -54,23 +54,20 @@ export default function ChallengesPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-4">
-          {/* Daily — stub */}
-          <div
-            className={`flex items-center gap-6 rounded-2xl border border-gray-700/40 bg-gray-800/30 p-8 opacity-60 cursor-not-allowed select-none`}
+          {/* Daily */}
+          <button
+            onClick={() => { navigate("/daily"); }}
+            className={`flex items-center gap-6 rounded-2xl border ${theme.border} ${theme.surface} p-8 text-left transition-all hover:brightness-110 active:scale-[0.98]`}
           >
             <span className="text-5xl leading-none">📅</span>
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-3">
-                <p className="text-xl font-bold text-gray-400">Daily Challenge</p>
-                <span className="rounded-full bg-gray-700 px-2.5 py-0.5 text-xs font-semibold text-gray-400">
-                  Coming soon
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">
-                A new logic puzzle every day. Streaks, hints, and leaderboards.
+              <p className={`text-xl font-bold ${theme.highlight}`}>Daily Challenge</p>
+              <p className={`mt-1 text-sm ${theme.muted}`}>
+                A fresh coding puzzle every day. Earn bonus XP for completing it.
               </p>
             </div>
-          </div>
+            <span className={`shrink-0 text-2xl ${theme.accent}`}>›</span>
+          </button>
 
           {/* Weekly */}
           <button

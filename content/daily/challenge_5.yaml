@@ -1,0 +1,67 @@
+title: "The Score Totaller"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function total_score(scores) that takes a list of numbers and
+  returns their sum using a for loop with an accumulator variable.
+
+  Start with a variable set to 0, loop over each value in scores, and add
+  each value to the accumulator. Return the final total.
+
+  Example: total_score([10, 5, 20]) returns 35
+
+code_starter: |
+  def total_score(scores):
+      total = 0
+      # loop over scores and add each one to total
+
+hints:
+  - "Use: for score in scores:"
+  - "Inside the loop: total = total + score  (or total += score)"
+  - "Return total after the loop finishes"
+
+tests:
+  - code: "assert total_score([10, 5, 20]) == 35"
+    message: "10 + 5 + 20 = 35"
+  - code: "assert total_score([0, 0, 0]) == 0"
+    message: "all zeros sum to 0"
+  - code: "assert total_score([7]) == 7"
+    message: "single element list returns that element"
+
+worlds:
+  fantasy:
+    title: "The Tournament Score Board"
+    description: |
+      At the end of each round, the tournament keeper adds up every
+      contestant's point tally to find the grand total for the day.
+
+      Write a function total_score(scores) that uses a for loop to add
+      every number in scores to an accumulator starting at 0, then returns
+      the total.
+
+      Example: total_score([10, 5, 20]) returns 35
+
+  scifi:
+    title: "Mission Points Aggregator"
+    description: |
+      After each mission phase the ship logs a point value. The mission
+      computer needs to tally all phase scores into one final result.
+
+      Write a function total_score(scores) that uses a for loop to add
+      every number in scores to an accumulator starting at 0, then returns
+      the total.
+
+      Example: total_score([10, 5, 20]) returns 35
+
+  mystery:
+    title: "The Clue Tally"
+    description: |
+      The detective assigns a weight to each clue found at the scene. At
+      the end of the investigation, all weights are summed into a single
+      suspicion score.
+
+      Write a function total_score(scores) that uses a for loop to add
+      every number in scores to an accumulator starting at 0, then returns
+      the total.
+
+      Example: total_score([10, 5, 20]) returns 35

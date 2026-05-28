@@ -1,0 +1,60 @@
+title: "The List Builder"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function add_item(items, new_item) that appends new_item to the
+  list items and returns the length of the updated list.
+
+  Use list.append() to add the item in place, then return len(items).
+
+  Example: add_item(['sword', 'shield'], 'potion') returns 3
+
+code_starter: |
+  def add_item(items, new_item):
+      # append new_item to items, then return the new length
+
+hints:
+  - "items.append(new_item) adds the item to the end of the list"
+  - "len(items) returns the number of elements after appending"
+
+tests:
+  - code: "assert add_item(['sword', 'shield'], 'potion') == 3"
+    message: "list had 2 items, after append it has 3"
+  - code: "assert add_item([], 'map') == 1"
+    message: "empty list becomes length 1 after one append"
+  - code: "assert add_item(['a', 'b', 'c'], 'd') == 4"
+    message: "list had 3 items, append gives length 4"
+
+worlds:
+  fantasy:
+    title: "The Adventurer's Pack"
+    description: |
+      Every hero keeps an inventory list. When they pick up a new item, it
+      must be added and the total count reported back to the party.
+
+      Write a function add_item(items, new_item) that appends new_item to
+      the list items and returns the new length of the list.
+
+      Example: add_item(['sword', 'shield'], 'potion') returns 3
+
+  scifi:
+    title: "Cargo Bay Loader"
+    description: |
+      The cargo management system logs each unit loaded onto the ship and
+      reports back how many items are now in the bay.
+
+      Write a function add_item(items, new_item) that appends new_item to
+      the list items and returns the new length of the list.
+
+      Example: add_item(['sword', 'shield'], 'potion') returns 3
+
+  mystery:
+    title: "The Evidence Log"
+    description: |
+      The detective adds each new piece of evidence to the case list and
+      needs to know the updated count for the report.
+
+      Write a function add_item(items, new_item) that appends new_item to
+      the list items and returns the new length of the list.
+
+      Example: add_item(['sword', 'shield'], 'potion') returns 3

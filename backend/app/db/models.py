@@ -177,3 +177,18 @@ class WeeklyAttempt(Base):
     week_key: Mapped[str] = mapped_column(String(10), nullable=False)  # e.g. "2026-W21"
     passed: Mapped[bool] = mapped_column(Boolean, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+
+class DailyAttempt(Base):
+    """Records a learner's daily challenge completion."""
+
+    __tablename__ = "daily_attempt"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    account_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("account.id", ondelete="CASCADE"), nullable=False
+    )
+    challenge_index: Mapped[int] = mapped_column(nullable=False)
+    date_key: Mapped[str] = mapped_column(String(10), nullable=False)  # e.g. "2026-05-28"
+    passed: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)

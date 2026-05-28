@@ -1,0 +1,72 @@
+title: "The Coin Converter"
+xp: 25
+difficulty: "easy"
+description: |
+  Write a function coins_to_gold(copper, silver_rate, gold_rate) that
+  converts a number of copper coins to gold and returns the result as a
+  float.
+
+  silver_rate is how many copper make one silver.
+  gold_rate is how many silver make one gold.
+
+  Convert copper to silver by dividing by silver_rate, then convert silver
+  to gold by dividing by gold_rate. Return the result as a float.
+
+  Example: coins_to_gold(200, 10, 5) — 200 copper / 10 = 20 silver,
+    20 silver / 5 = 4.0 gold.
+
+code_starter: |
+  def coins_to_gold(copper, silver_rate, gold_rate):
+      # convert copper -> silver -> gold
+
+hints:
+  - "silver = copper / silver_rate"
+  - "gold = silver / gold_rate"
+  - "division with / always returns a float in Python 3"
+
+tests:
+  - code: "assert coins_to_gold(200, 10, 5) == 4.0"
+    message: "200 / 10 = 20 silver, 20 / 5 = 4.0 gold"
+  - code: "assert coins_to_gold(100, 10, 2) == 5.0"
+    message: "100 / 10 = 10 silver, 10 / 2 = 5.0 gold"
+  - code: "assert coins_to_gold(60, 6, 5) == 2.0"
+    message: "60 / 6 = 10 silver, 10 / 5 = 2.0 gold"
+
+worlds:
+  fantasy:
+    title: "The Moneychanger's Table"
+    description: |
+      The kingdom uses a three-tier currency. Travellers arriving at the
+      city gates must convert their loose copper into gold before trading.
+
+      Write a function coins_to_gold(copper, silver_rate, gold_rate) that
+      divides copper by silver_rate to get silver, then divides silver by
+      gold_rate to get gold, and returns the result as a float.
+
+      Example: coins_to_gold(200, 10, 5) returns 4.0
+
+  scifi:
+    title: "Credit Unit Converter"
+    description: |
+      The station's economy runs on three-tier credits. The exchange kiosk
+      needs a function to convert the smallest denomination up to standard
+      gold-tier credits for interstellar trade.
+
+      Write a function coins_to_gold(copper, silver_rate, gold_rate) that
+      divides copper by silver_rate to get silver, then divides silver by
+      gold_rate to get gold, and returns the result as a float.
+
+      Example: coins_to_gold(200, 10, 5) returns 4.0
+
+  mystery:
+    title: "The Informant's Fee"
+    description: |
+      The detective pays informants in small coins then reconciles the
+      books in gold. The accountant needs a formula to do the conversion
+      automatically.
+
+      Write a function coins_to_gold(copper, silver_rate, gold_rate) that
+      divides copper by silver_rate to get silver, then divides silver by
+      gold_rate to get gold, and returns the result as a float.
+
+      Example: coins_to_gold(200, 10, 5) returns 4.0
