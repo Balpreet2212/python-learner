@@ -305,6 +305,18 @@ worlds:
       story_before: Elara needs a potency amplifier recipe that raises a base ingredient to an exponential power and returns
         the result.
       story_after: 1024 and 27 returned correctly — Elara's amplifier recipe is ready to supercharge any brew in the workshop.
+    - type: break_fix
+      story_before: Elara's doubling spell computes how many flasks a doubled batch will fill, but she forgets to bottle up
+        the result and send it back — the cauldron prints None instead of the answer.
+      story_after: With the return statement in place, 10 appears on the scroll and Elara's potion count is confirmed.
+      prompt: Fix the code so double(5) returns the computed value and prints 10.
+      broken_code: "def double(n):\n    result = n * 2\n\nprint(double(5))"
+      hint: Look for the missing return statement — the function computes result but never sends it back.
+      explanation: Without a return statement the function implicitly returns None, so print(double(5)) prints None. Adding
+        return result (or return n * 2) sends the computed value back and prints 10.
+      tests:
+      - code: assert _stdout.strip() == '10'
+        message: Should print 10
   scifi:
     title: Reading the Drone's Output
     exercises:
@@ -474,6 +486,18 @@ worlds:
         simulations.
       story_after: 1024 and 27 returned correctly — the energy subroutine is validated and cleared for use in the reactor
         model.
+    - type: break_fix
+      story_before: Yara's power-output function does the multiplication correctly, but the result is never transmitted back
+        to the caller and the console reads None instead of 10.
+      story_after: 10 units of power register on the console — the subroutine now sends its answer back correctly.
+      prompt: Fix the code so double(5) returns the computed value and prints 10.
+      broken_code: "def double(n):\n    result = n * 2\n\nprint(double(5))"
+      hint: Look for the missing return statement — the function computes result but never sends it back.
+      explanation: Without a return statement the function implicitly returns None, so print(double(5)) prints None. Adding
+        return result (or return n * 2) sends the computed value back and prints 10.
+      tests:
+      - code: assert _stdout.strip() == '10'
+        message: Should print 10
   mystery:
     title: Reporting the Findings
     exercises:
@@ -638,3 +662,15 @@ worlds:
         message: 3 ** 3 = 27
       story_before: Cole needs an exponential scoring tool to calculate compounding suspicion ratings across multiple clues.
       story_after: 1024 and 27 returned correctly — the scoring tool is ready, and Cole's analytical toolkit is growing fast.
+    - type: break_fix
+      story_before: Cole's evidence-multiplier doubles the clue count internally, but the doubled value never leaves the function
+        and the case file records None instead of 10.
+      story_after: 10 is written to the case file and Cole's doubled clue count is properly recorded.
+      prompt: Fix the code so double(5) returns the computed value and prints 10.
+      broken_code: "def double(n):\n    result = n * 2\n\nprint(double(5))"
+      hint: Look for the missing return statement — the function computes result but never sends it back.
+      explanation: Without a return statement the function implicitly returns None, so print(double(5)) prints None. Adding
+        return result (or return n * 2) sends the computed value back and prints 10.
+      tests:
+      - code: assert _stdout.strip() == '10'
+        message: Should print 10

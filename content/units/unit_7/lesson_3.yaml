@@ -476,6 +476,21 @@ worlds:
       story_before: Ash's spell inventory needs add_item and remove_item methods — the sword must be removable from the shield.
       story_after: 'The inventory updates cleanly: sword gone, shield remains; Ash''s mutable collection pattern is complete
         and ready for Lesson 4.'
+    - type: break_fix
+      story_before: Elara writes a level_up() spell on her Hero class to advance its power, but after calling it the hero's
+        level refuses to budge — it still reads 3.
+      story_after: Elara assigns the result to self.level instead of a bare local variable and the hero advances to level
+        4.
+      prompt: Elara's level_up() method calculates the new level but the hero's attribute never changes. Find where the result
+        is being lost and fix it so the attribute is actually updated.
+      broken_code: "class Hero:\n    def __init__(self, level):\n        self.level = level\n    def level_up(self):\n   \
+        \     level = self.level + 1\n\nh = Hero(3)\nh.level_up()\nprint(h.level)"
+      hint: Assigning to a bare variable inside a method creates a local variable — use self.attribute to update the instance.
+      explanation: level = self.level + 1 stores the new value in a temporary local variable that disappears when the method
+        returns. Writing self.level = self.level + 1 saves the updated value back onto the instance.
+      tests:
+      - code: assert _stdout.strip() == '4'
+        message: h.level should be 4 after calling level_up()
   scifi:
     title: System State Changes
     exercises:
@@ -728,6 +743,20 @@ worlds:
       story_before: The ship's Inventory needs add_item and remove_item methods to manage cargo — 'sword' must be removable.
       story_after: 'The cargo list updates correctly: sword offloaded, shield retained; Rex''s mutable inventory system is
         operational for Lesson 4.'
+    - type: break_fix
+      story_before: Yara programs an upgrade() method to raise a module's operational level on the Helix, but the console
+        still shows level 3 after the upgrade completes.
+      story_after: Yara routes the result to self.level and the module's level ticks up to 4 as expected.
+      prompt: Yara's Hero module has a level_up() method that computes the new level but never saves it. Fix the assignment
+        so the updated level persists on the instance.
+      broken_code: "class Hero:\n    def __init__(self, level):\n        self.level = level\n    def level_up(self):\n   \
+        \     level = self.level + 1\n\nh = Hero(3)\nh.level_up()\nprint(h.level)"
+      hint: Assigning to a bare variable inside a method creates a local variable — use self.attribute to update the instance.
+      explanation: level = self.level + 1 creates a local variable inside the method; when the method exits, that value is
+        discarded. Replacing it with self.level = self.level + 1 writes the new value directly onto the object.
+      tests:
+      - code: assert _stdout.strip() == '4'
+        message: h.level should be 4 after calling level_up()
   mystery:
     title: Updating the Case File
     exercises:
@@ -985,3 +1014,17 @@ worlds:
         'shield'.
       story_after: 'The evidence list updates cleanly: sword gone, shield on record; Cole''s mutable case file is ready for
         Lesson 4.'
+    - type: break_fix
+      story_before: Cole writes a rank_up() method to promote a suspect's threat ranking in the case file, but after calling
+        it the rank still shows 3 — the update vanished without a trace.
+      story_after: Cole writes the result to self.level and the ranking correctly advances to 4.
+      prompt: Cole's Hero class has a level_up() method that silently discards the new level. Fix the single assignment line
+        so the change is stored on the instance.
+      broken_code: "class Hero:\n    def __init__(self, level):\n        self.level = level\n    def level_up(self):\n   \
+        \     level = self.level + 1\n\nh = Hero(3)\nh.level_up()\nprint(h.level)"
+      hint: Assigning to a bare variable inside a method creates a local variable — use self.attribute to update the instance.
+      explanation: The line level = self.level + 1 stores the result in a local variable that Python throws away at the end
+        of the method. Using self.level = self.level + 1 persists the value on the instance so it is visible after the call.
+      tests:
+      - code: assert _stdout.strip() == '4'
+        message: h.level should be 4 after calling level_up()

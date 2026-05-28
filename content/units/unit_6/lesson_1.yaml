@@ -418,6 +418,20 @@ worlds:
       story_before: 'The final task: pack four expedition supplies into a list, then report the full contents and the total
         count to the wizard.'
       story_after: The crate is inventoried and sealed — Brin's list is complete and the expedition can begin.
+    - type: break_fix
+      story_before: Elara is packing the supply crate for the expedition and needs to call out the third item — potion, scroll,
+        key — but her index spell reaches one slot too far and the crate cracks with an error.
+      story_after: The correct index illuminates the rune and 'key' appears on the crate's label — the expedition can depart.
+      prompt: Fix the code so it prints the third item in the list without causing an IndexError.
+      broken_code: 'items = ["potion", "scroll", "key"]
+
+        print(items[3])'
+      hint: A list with three items has valid indices 0, 1, and 2 — index 3 is out of range.
+      explanation: Python lists are zero-indexed, so a three-item list has positions 0, 1, and 2. items[3] is one past the
+        end and raises an IndexError; items[2] correctly retrieves the third item, 'key'.
+      tests:
+      - code: assert _stdout.strip() == 'key'
+        message: Should print key (items[2])
   scifi:
     title: Logging the First Asteroids
     exercises:
@@ -640,6 +654,20 @@ worlds:
         message: 'Should print the length: 4'
       story_before: 'Final system check: log four asteroid IDs in a list and report both the full list and its length to Command.'
       story_after: Four asteroids logged and count verified — the sensor array is fully operational for the mission.
+    - type: break_fix
+      story_before: Yara is querying the ship manifest to read the third system status — the list holds three entries — but
+        her query uses an out-of-range index and the console throws an error.
+      story_after: '''key'' appears on the status panel and Yara confirms all three systems are accounted for.'
+      prompt: Fix the code so it prints the third item in the list without causing an IndexError.
+      broken_code: 'items = ["potion", "scroll", "key"]
+
+        print(items[3])'
+      hint: A list with three items has valid indices 0, 1, and 2 — index 3 is out of range.
+      explanation: Python lists are zero-indexed, so a three-item list has positions 0, 1, and 2. items[3] is one past the
+        end and raises an IndexError; items[2] correctly retrieves the third entry, 'key'.
+      tests:
+      - code: assert _stdout.strip() == 'key'
+        message: Should print key (items[2])
   mystery:
     title: Pinning Suspects to the Board
     exercises:
@@ -862,3 +890,17 @@ worlds:
         message: 'Should print the length: 4'
       story_before: 'Final board update: record four suspect names in a list and report the full list and count to the chief.'
       story_after: The suspect list is filed and the count confirmed — Cole's board is organised and the case can proceed.
+    - type: break_fix
+      story_before: Detective Cole is reading the third piece of evidence from the evidence box — potion, scroll, key — but
+        he uses index 3 instead of 2 and the program crashes before he can read it.
+      story_after: '''key'' prints to the terminal and Cole pins it to the board as the crucial third clue.'
+      prompt: Fix the code so it prints the third item in the list without causing an IndexError.
+      broken_code: 'items = ["potion", "scroll", "key"]
+
+        print(items[3])'
+      hint: A list with three items has valid indices 0, 1, and 2 — index 3 is out of range.
+      explanation: Python lists are zero-indexed, so a three-item list has positions 0, 1, and 2. items[3] is one past the
+        end and raises an IndexError; items[2] correctly retrieves the third piece of evidence, 'key'.
+      tests:
+      - code: assert _stdout.strip() == 'key'
+        message: Should print key (items[2])

@@ -368,6 +368,21 @@ worlds:
         for lower scores — Kira programs the nested logic.
       story_after: The nested if is complete; the crystal now awards precisely the right rating for every combination of score
         and relic status.
+    - type: break_fix
+      story_before: Elara's battle-strategy spell is supposed to order an attack when a warrior is armed AND has strength
+        above 5, but it keeps retreating even from powerful fighters. The inner strength check has the comparison backwards.
+      story_after: Once the comparison is corrected, the spell correctly commands an attack for armed warriors whose strength
+        exceeds 5.
+      prompt: The code should print 'attack' when armed is True and strength is 8. Fix the inner if condition so it attacks
+        when strength is greater than 5.
+      broken_code: "armed = True\nstrength = 8\nif armed:\n    if strength < 5:\n        print(\"attack\")\n    else:\n  \
+        \      print(\"retreat\")"
+      hint: Check the inner if condition — is the comparison operator pointing in the right direction?
+      explanation: The inner condition `strength < 5` was backwards. With strength = 8, this is False so the code printed
+        'retreat'. Changing it to `strength > 5` makes the condition True and prints 'attack'.
+      tests:
+      - code: assert _stdout.strip() == 'attack'
+        message: Should print 'attack' when armed and strength is 8
   scifi:
     title: Multi-Level Launch Checks
     exercises:
@@ -572,6 +587,21 @@ worlds:
         the threshold — Voss programs the nested logic.
       story_after: The nested if is complete; every crew evaluation will now receive exactly the right rating based on both
         score and boost status.
+    - type: break_fix
+      story_before: Yara's nested weapons-authorisation script should fire the cannons when the ship is armed AND power exceeds
+        5, but the Helix keeps standing down even at full power. The power threshold comparison is inverted.
+      story_after: After flipping the comparison, the authorisation system correctly clears weapons fire when power is high
+        enough.
+      prompt: The code should print 'attack' when armed is True and strength is 8. Fix the inner if condition so it attacks
+        when strength is greater than 5.
+      broken_code: "armed = True\nstrength = 8\nif armed:\n    if strength < 5:\n        print(\"attack\")\n    else:\n  \
+        \      print(\"retreat\")"
+      hint: Check the inner if condition — is the comparison operator pointing in the right direction?
+      explanation: The inner condition `strength < 5` was backwards. With strength = 8, this is False so the code printed
+        'retreat'. Changing it to `strength > 5` makes the condition True and prints 'attack'.
+      tests:
+      - code: assert _stdout.strip() == 'attack'
+        message: Should print 'attack' when armed and strength is 8
   mystery:
     title: Layered Clue Checks
     exercises:
@@ -778,3 +808,18 @@ worlds:
         the threshold earns nothing — he programs the nested logic.'
       story_after: The nested if is complete; every piece of evidence will now receive exactly the right grade based on both
         its score and its witness backing.
+    - type: break_fix
+      story_before: Cole's interrogation-decision script should press the suspect hard when they are present AND their resistance
+        score is above 5, but a resistance of 8 is somehow triggering a retreat. The inner comparison is backwards.
+      story_after: With the corrected comparison, the script correctly decides to press the interrogation when resistance
+        is high.
+      prompt: The code should print 'attack' when armed is True and strength is 8. Fix the inner if condition so it attacks
+        when strength is greater than 5.
+      broken_code: "armed = True\nstrength = 8\nif armed:\n    if strength < 5:\n        print(\"attack\")\n    else:\n  \
+        \      print(\"retreat\")"
+      hint: Check the inner if condition — is the comparison operator pointing in the right direction?
+      explanation: The inner condition `strength < 5` was backwards. With strength = 8, this is False so the code printed
+        'retreat'. Changing it to `strength > 5` makes the condition True and prints 'attack'.
+      tests:
+      - code: assert _stdout.strip() == 'attack'
+        message: Should print 'attack' when armed and strength is 8

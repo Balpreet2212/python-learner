@@ -472,6 +472,21 @@ worlds:
         child need defining.
       story_after: The Car inherits cleanly and honk() returns 'Beep!'; Ash's inheritance mastery is sealed — the entire unit's
         arc is complete.
+    - type: break_fix
+      story_before: Elara crafts a Dog spell bloodline that inherits from Animal, but when she calls describe() on her Labrador
+        familiar an AttributeError erupts — the lineage cannot read its own kind.
+      story_after: Elara corrects the typo to self.breed and the familiar proudly announces 'Rex is a Labrador'.
+      prompt: Elara's Dog subclass stores the breed correctly but describe() crashes with an AttributeError. Find the misspelled
+        attribute name and fix it.
+      broken_code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog(Animal):\n    def\
+        \ __init__(self, name, breed):\n        super().__init__(name)\n        self.breed = breed\n    def describe(self):\n\
+        \        print(self.name + \" is a \" + self.bread)\n\nd = Dog(\"Rex\", \"Labrador\")\nd.describe()"
+      hint: Read the attribute name used in describe() very carefully and compare it to the name set in __init__.
+      explanation: self.bread is a typo — the attribute is stored as self.breed in __init__. Correcting the spelling to self.breed
+        in describe() resolves the AttributeError.
+      tests:
+      - code: assert _stdout.strip() == 'Rex is a Labrador'
+        message: describe() should print 'Rex is a Labrador'
   scifi:
     title: Subclass Modules
     exercises:
@@ -730,6 +745,21 @@ worlds:
         need defining.
       story_after: The Car inherits cleanly and honk() returns 'Beep!'; Voss's inheritance module is fully operational — Unit
         7 complete.
+    - type: break_fix
+      story_before: Yara builds a Dog submodule that inherits from Animal and adds a specialisation type, but calling describe()
+        on the Labrador unit crashes the subsystem with an AttributeError.
+      story_after: Yara corrects self.bread to self.breed and the unit's identification string prints correctly.
+      prompt: Yara's Dog class sets self.breed in __init__ but describe() refers to a differently spelled attribute. Fix the
+        typo so the method can access the correct attribute.
+      broken_code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog(Animal):\n    def\
+        \ __init__(self, name, breed):\n        super().__init__(name)\n        self.breed = breed\n    def describe(self):\n\
+        \        print(self.name + \" is a \" + self.bread)\n\nd = Dog(\"Rex\", \"Labrador\")\nd.describe()"
+      hint: Read the attribute name used in describe() very carefully and compare it to the name set in __init__.
+      explanation: The method accesses self.bread, but the attribute was stored under self.breed. Python raises an AttributeError
+        because self.bread does not exist. Fixing the spelling resolves it.
+      tests:
+      - code: assert _stdout.strip() == 'Rex is a Labrador'
+        message: describe() should print 'Rex is a Labrador'
   mystery:
     title: Family Connections
     exercises:
@@ -986,3 +1016,18 @@ worlds:
         writing.
       story_after: The Car inherits cleanly and honk() returns 'Beep!'; Cole's case is closed — Unit 7's class hierarchy stands
         complete.
+    - type: break_fix
+      story_before: Cole builds a Dog subclass to extend the Animal profile with a breed field, but describe() throws an AttributeError
+        when Cole tries to print the suspect's background.
+      story_after: Cole spots the typo, fixes self.bread to self.breed, and the profile reads 'Rex is a Labrador'.
+      prompt: Cole's Dog class inherits from Animal and stores breed in __init__, but describe() cannot find the attribute.
+        Spot the misspelling and correct it.
+      broken_code: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog(Animal):\n    def\
+        \ __init__(self, name, breed):\n        super().__init__(name)\n        self.breed = breed\n    def describe(self):\n\
+        \        print(self.name + \" is a \" + self.bread)\n\nd = Dog(\"Rex\", \"Labrador\")\nd.describe()"
+      hint: Read the attribute name used in describe() very carefully and compare it to the name set in __init__.
+      explanation: self.bread in describe() does not match self.breed set in __init__. The one-letter typo ('a' instead of
+        'e') causes an AttributeError. Correcting the spelling fixes the access.
+      tests:
+      - code: assert _stdout.strip() == 'Rex is a Labrador'
+        message: describe() should print 'Rex is a Labrador'

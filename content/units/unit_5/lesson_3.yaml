@@ -306,6 +306,19 @@ worlds:
         direction.
       story_after: 32.0 and 100.0 confirmed — both conversion recipes work perfectly and the workshop can now translate temperatures
         freely.
+    - type: break_fix
+      story_before: Elara's description spell expects an ingredient name first and its potency second, but she passes them
+        in the wrong order and the scroll displays gibberish instead of the correct label.
+      story_after: The arguments swapped into the right order, 'hero is level 5' appears on the scroll and the brew is correctly
+        labelled.
+      prompt: Fix the call so the name comes first and the level comes second, printing 'hero is level 5'.
+      broken_code: "def describe(name, level):\n    print(name + \" is level \" + str(level))\n\ndescribe(5, \"hero\")"
+      hint: Look at the order of the arguments in the call — name should come before level.
+      explanation: describe(5, "hero") passes 5 as name and "hero" as level, causing a TypeError when str(level) is concatenated.
+        Swapping to describe("hero", 5) puts name and level in the correct positions and prints 'hero is level 5'.
+      tests:
+      - code: assert _stdout.strip() == 'hero is level 5'
+        message: Should print hero is level 5
   scifi:
     title: Chaining Drone Modules
     exercises:
@@ -474,6 +487,18 @@ worlds:
         scale.
       story_after: 32.0 and 100.0 confirmed — both conversion subroutines are calibrated and the Helix thermal system is now
         fully functional.
+    - type: break_fix
+      story_before: Yara's crew-profile subroutine takes a crew member's name first and their rank level second, but the arguments
+        are passed in reverse and the ship's log shows an error.
+      story_after: With the arguments in the right order the log reads 'hero is level 5' and the crew profile is confirmed.
+      prompt: Fix the call so the name comes first and the level comes second, printing 'hero is level 5'.
+      broken_code: "def describe(name, level):\n    print(name + \" is level \" + str(level))\n\ndescribe(5, \"hero\")"
+      hint: Look at the order of the arguments in the call — name should come before level.
+      explanation: describe(5, "hero") passes 5 as name and "hero" as level, causing a TypeError when str(level) is concatenated.
+        Swapping to describe("hero", 5) puts name and level in the correct positions and prints 'hero is level 5'.
+      tests:
+      - code: assert _stdout.strip() == 'hero is level 5'
+        message: Should print hero is level 5
   mystery:
     title: Combining the Evidence
     exercises:
@@ -648,3 +673,15 @@ worlds:
         in either direction.
       story_after: 32.0 and 100.0 confirmed — both tools check out and Cole can now cross-reference any temperature reading
         on the case.
+    - type: break_fix
+      story_before: Cole's suspect-description tool expects a name first and a threat level second, but the arguments are
+        swapped and the precinct terminal throws an error when it tries to build the profile.
+      story_after: Arguments corrected, 'hero is level 5' prints cleanly and the suspect profile is filed successfully.
+      prompt: Fix the call so the name comes first and the level comes second, printing 'hero is level 5'.
+      broken_code: "def describe(name, level):\n    print(name + \" is level \" + str(level))\n\ndescribe(5, \"hero\")"
+      hint: Look at the order of the arguments in the call — name should come before level.
+      explanation: describe(5, "hero") passes 5 as name and "hero" as level, causing a TypeError when str(level) is concatenated.
+        Swapping to describe("hero", 5) puts name and level in the correct positions and prints 'hero is level 5'.
+      tests:
+      - code: assert _stdout.strip() == 'hero is level 5'
+        message: Should print hero is level 5

@@ -423,6 +423,22 @@ worlds:
         what remains.'
       story_after: Only two items remain in the crate — Brin has mastered adding and removing supplies, and the expedition
         roster is locked in.
+    - type: break_fix
+      story_before: Elara is repacking the supply crate and tries to add a key to her ingredient list using the wrong spell
+        — .add() does not exist for lists and the workshop fills with a crackling AttributeError.
+      story_after: The list expands correctly and the crate now shows all three supplies ready for departure.
+      prompt: Fix the code so the key is added to the list and the full list is printed.
+      broken_code: 'items = ["potion", "scroll"]
+
+        items.add("key")
+
+        print(items)'
+      hint: Lists do not have an .add() method — look for the correct method to add an item to the end.
+      explanation: .add() is a set method, not a list method. To add an item to the end of a list, use .append(); items.append('key')
+        gives ['potion', 'scroll', 'key'].
+      tests:
+      - code: assert _stdout.strip() == "['potion', 'scroll', 'key']"
+        message: Should print ['potion', 'scroll', 'key']
   scifi:
     title: Cargo Bay Operations
     exercises:
@@ -647,6 +663,22 @@ worlds:
         message: Should be [1, 2]
       story_before: 'Final drill: reduce a five-unit stack to two by popping, then display what remains in the bay.'
       story_after: Two units remain — Zev has mastered cargo operations and the Helix is cleared for departure.
+    - type: break_fix
+      story_before: Yara is updating the ship manifest and tries to add a new crew member to the list using the wrong method
+        — .add() triggers an AttributeError and the manifest update fails.
+      story_after: The manifest updates correctly and all three entries are confirmed on the bridge display.
+      prompt: Fix the code so the key is added to the list and the full list is printed.
+      broken_code: 'items = ["potion", "scroll"]
+
+        items.add("key")
+
+        print(items)'
+      hint: Lists do not have an .add() method — look for the correct method to add an item to the end.
+      explanation: .add() is a set method, not a list method. To add an item to the end of a list, use .append(); items.append('key')
+        gives ['potion', 'scroll', 'key'].
+      tests:
+      - code: assert _stdout.strip() == "['potion', 'scroll', 'key']"
+        message: Should print ['potion', 'scroll', 'key']
   mystery:
     title: Evidence Locker Updates
     exercises:
@@ -871,3 +903,19 @@ worlds:
         message: Should be [1, 2]
       story_before: 'Final test: whittle a five-item evidence stack down to two by popping, then show what remains.'
       story_after: Two core clues remain — Cole has mastered the evidence locker, and the case file is airtight.
+    - type: break_fix
+      story_before: Detective Cole is logging a new clue to the evidence list but uses the wrong method name — .add() raises
+        an AttributeError and the evidence board stays incomplete.
+      story_after: The clue is logged and the full evidence list prints — Cole's board is up to date.
+      prompt: Fix the code so the key is added to the list and the full list is printed.
+      broken_code: 'items = ["potion", "scroll"]
+
+        items.add("key")
+
+        print(items)'
+      hint: Lists do not have an .add() method — look for the correct method to add an item to the end.
+      explanation: .add() is a set method, not a list method. To add an item to the end of a list, use .append(); items.append('key')
+        gives ['potion', 'scroll', 'key'].
+      tests:
+      - code: assert _stdout.strip() == "['potion', 'scroll', 'key']"
+        message: Should print ['potion', 'scroll', 'key']

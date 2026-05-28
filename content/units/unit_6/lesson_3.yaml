@@ -404,6 +404,20 @@ worlds:
       story_before: 'Final check: build a four-item menu list, verify if ''pizza'' is packed, then display the first two items
         for the cook.'
       story_after: The membership check is done and the first two items noted — Brin's supply search skills are fully forged.
+    - type: break_fix
+      story_before: Elara's slice spell is meant to grab the second and third items from the supply crate — but her slice
+        window ends one position too early and only a single item comes back.
+      story_after: Both 'b' and 'c' appear together and Elara's supply check is complete.
+      prompt: Fix the slice so it returns both items at index 1 and 2 and prints ['b', 'c'].
+      broken_code: 'items = ["a", "b", "c", "d"]
+
+        print(items[1:2])'
+      hint: A slice [start:stop] excludes the stop index — extend the stop by one to include both items.
+      explanation: 'items[1:2] includes only index 1, giving [''b'']. To include both index 1 and 2, the stop must be 3: items[1:3]
+        returns [''b'', ''c''].'
+      tests:
+      - code: assert _stdout.strip() == "['b', 'c']"
+        message: Should print ['b', 'c']
   scifi:
     title: Scanning Asteroid Sectors
     exercises:
@@ -619,6 +633,20 @@ worlds:
       story_before: 'Final drill: build a four-item menu list, check for ''pizza'', then display the first two items for the
         galley log.'
       story_after: The membership check is done and the galley slice is recorded — Zev's search and slice skills are mission-ready.
+    - type: break_fix
+      story_before: Yara's sensor scan window is supposed to read two consecutive sectors but the slice is one position too
+        narrow — only one sector reading comes back and the safety report is incomplete.
+      story_after: Both sectors print and Yara files the complete sensor report before the jump.
+      prompt: Fix the slice so it returns both items at index 1 and 2 and prints ['b', 'c'].
+      broken_code: 'items = ["a", "b", "c", "d"]
+
+        print(items[1:2])'
+      hint: A slice [start:stop] excludes the stop index — extend the stop by one to include both items.
+      explanation: 'items[1:2] includes only index 1, giving [''b'']. To include both index 1 and 2, the stop must be 3: items[1:3]
+        returns [''b'', ''c''].'
+      tests:
+      - code: assert _stdout.strip() == "['b', 'c']"
+        message: Should print ['b', 'c']
   mystery:
     title: Narrowing the Suspects
     exercises:
@@ -834,3 +862,17 @@ worlds:
       story_before: 'Final exercise: build a four-item menu list, check if ''pizza'' is present, and display the first two
         items for the alibi log.'
       story_after: The check is done and the slice is recorded — Cole's slicing and searching skills are case-ready.
+    - type: break_fix
+      story_before: Cole's evidence slice is supposed to pull two consecutive items from the evidence log — but the range
+        ends one position short and the last item in the range is silently missed.
+      story_after: Both pieces of evidence appear and Cole can cross-reference the full range on the board.
+      prompt: Fix the slice so it returns both items at index 1 and 2 and prints ['b', 'c'].
+      broken_code: 'items = ["a", "b", "c", "d"]
+
+        print(items[1:2])'
+      hint: A slice [start:stop] excludes the stop index — extend the stop by one to include both items.
+      explanation: 'items[1:2] includes only index 1, giving [''b'']. To include both index 1 and 2, the stop must be 3: items[1:3]
+        returns [''b'', ''c''].'
+      tests:
+      - code: assert _stdout.strip() == "['b', 'c']"
+        message: Should print ['b', 'c']

@@ -15,6 +15,7 @@ from app.content.service import (
     LESSONS_PER_UNIT,
     MAX_UNITS,
     ArrangeExercise,
+    BreakFixExercise,
     ConceptExercise,
     FillBlankExercise,
     McqExercise,
@@ -86,7 +87,18 @@ class MiniCodeExOut(BaseModel):
     story_after: str | None = None
 
 
-ExerciseOut = Union[ConceptExOut, McqExOut, ArrangeExOut, FillBlankExOut, MiniCodeExOut]
+class BreakFixExOut(BaseModel):
+    type: Literal["break_fix"]
+    prompt: str
+    broken_code: str
+    hint: str
+    test_count: int
+    explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
+
+
+ExerciseOut = Union[ConceptExOut, McqExOut, ArrangeExOut, FillBlankExOut, MiniCodeExOut, BreakFixExOut]
 
 
 class LessonOut(BaseModel):
@@ -182,6 +194,12 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
             type="mini_code", prompt=ex.prompt, starter=ex.starter, test_count=len(ex.tests),
             story_before=ex.story_before, story_after=ex.story_after,
         )
+    if isinstance(ex, BreakFixExercise):
+        return BreakFixExOut(
+            type="break_fix", prompt=ex.prompt, broken_code=ex.broken_code, hint=ex.hint,
+            test_count=len(ex.tests), explanation=ex.explanation,
+            story_before=ex.story_before, story_after=ex.story_after,
+        )
     raise ValueError(f"Unknown exercise type: {type(ex)}")
 
 
@@ -239,11 +257,11 @@ async def check_exercise_code(
     if content is None:
         raise bad_request("Lesson content not found")
 
-    mini_code_exercises = [e for e in content.exercises if isinstance(e, MiniCodeExercise)]
-    if body.exercise_index < 0 or body.exercise_index >= len(mini_code_exercises):
+    code_exercises = [e for e in content.exercises if isinstance(e, (MiniCodeExercise, BreakFixExercise))]
+    if body.exercise_index < 0 or body.exercise_index >= len(code_exercises):
         raise bad_request("Invalid exercise index")
 
-    exercise = mini_code_exercises[body.exercise_index]
+    exercise = code_exercises[body.exercise_index]
     tests = [{"code": t.code, "message": t.message, "stdin": t.stdin} for t in exercise.tests]
     result = run_challenge(body.code, tests)
     return SubmitOut(

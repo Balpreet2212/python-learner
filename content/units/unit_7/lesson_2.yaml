@@ -430,6 +430,21 @@ worlds:
       story_before: A wizard's gold pouch needs an is_overdrawn() check — Ash must build a BankAccount class with that method.
       story_after: The pouch reports correctly whether gold is positive or spent; Ash is ready to move on to state-changing
         methods.
+    - type: break_fix
+      story_before: Elara adds a cast() method to her Spell class, but the moment she tries to use it on a Fireball instance
+        Python throws a TypeError and the spell fizzles.
+      story_after: Elara adds self as the first parameter to cast() and the Fireball blazes into life.
+      prompt: Elara's Spell class has a cast() method that crashes with a TypeError when called on an instance. Find the missing
+        parameter and fix the method signature.
+      broken_code: "class Spell:\n    def __init__(self, name):\n        self.name = name\n    def cast():\n        print(\"\
+        Casting!\")\n\ns = Spell(\"Fireball\")\ns.cast()"
+      hint: Every instance method must have self as its first parameter so Python can pass the object automatically.
+      explanation: When you call s.cast(), Python automatically passes the instance as the first argument. Without self in
+        the definition, Python sees too many arguments and raises a TypeError. Adding self as the first parameter fixes the
+        signature.
+      tests:
+      - code: assert _stdout.strip() == 'Casting!'
+        message: cast() should print 'Casting!'
   scifi:
     title: Unit Functions
     exercises:
@@ -661,6 +676,21 @@ worlds:
         method.
       story_after: The reserve monitor reports accurately; Rex is primed to tackle methods that actively change an object's
         state.
+    - type: break_fix
+      story_before: Yara writes a diagnostic() method for the Helix's Spell module, but invoking it on a live instance immediately
+        raises a TypeError and halts the diagnostic run.
+      story_after: Yara inserts self into the method signature and the diagnostic completes successfully.
+      prompt: Yara's Spell class defines cast() without the required first parameter and crashes on call. Fix the method definition
+        so it can be called on an instance.
+      broken_code: "class Spell:\n    def __init__(self, name):\n        self.name = name\n    def cast():\n        print(\"\
+        Casting!\")\n\ns = Spell(\"Fireball\")\ns.cast()"
+      hint: Every instance method must have self as its first parameter so Python can pass the object automatically.
+      explanation: 'Python passes the calling instance as the first argument automatically. cast() declares no parameters,
+        so Python sees one unexpected argument and raises a TypeError. Declaring def cast(self): gives Python the slot it
+        needs.'
+      tests:
+      - code: assert _stdout.strip() == 'Casting!'
+        message: cast() should print 'Casting!'
   mystery:
     title: Detective Techniques
     exercises:
@@ -893,3 +923,17 @@ worlds:
         that method.
       story_after: The fund monitor works correctly; Cole is ready to move on to methods that actually change an object's
         state.
+    - type: break_fix
+      story_before: Cole builds an investigate() method on his Spell class so suspects can be questioned through the object,
+        but calling it on an instance raises a TypeError that closes the interrogation room.
+      story_after: Cole adds self to the method definition and the interrogation method runs without complaint.
+      prompt: Cole's Spell class has a cast() method that fails with a TypeError the moment it is called on an instance. Add
+        the missing parameter to the method signature to fix it.
+      broken_code: "class Spell:\n    def __init__(self, name):\n        self.name = name\n    def cast():\n        print(\"\
+        Casting!\")\n\ns = Spell(\"Fireball\")\ns.cast()"
+      hint: Every instance method must have self as its first parameter so Python can pass the object automatically.
+      explanation: 'Calling s.cast() makes Python inject the instance as the first argument. Because cast() has no parameters,
+        Python sees an unexpected extra argument and raises a TypeError. Writing def cast(self): provides the required slot.'
+      tests:
+      - code: assert _stdout.strip() == 'Casting!'
+        message: cast() should print 'Casting!'

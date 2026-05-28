@@ -436,6 +436,19 @@ worlds:
         message: Should divide by the list length to get the average
       story_before: Before restocking the workshop Mira needs the average herb weight from her list of five measurements.
       story_after: 'Average weight: 30.0 — Mira''s satchel analysis is done and the herbs are ready for the master.'
+    - type: break_fix
+      story_before: Elara's inventory spell is supposed to announce each item in her satchel one at a time, but every incantation
+        recites the entire satchel instead of a single item.
+      story_after: Switching from the list name to the loop variable fixes the spell — each item is announced on its own line.
+      prompt: Elara's loop should print each item from her satchel individually, but it prints the whole list every time.
+        Fix the print statement to use the loop variable.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor item in items:\n    print(items)"
+      hint: Check what you are passing to print — it should be the single loop variable, not the whole list.
+      explanation: print(items) outputs the entire list object on every iteration. Changing it to print(item) uses the loop
+        variable, which holds one element at a time.
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: 'Should print each item on its own line: potion, scroll, key'
   scifi:
     title: Scanning the Crew Manifest
     exercises:
@@ -668,6 +681,19 @@ worlds:
       story_before: Before submitting the mission report Yara needs the average signal strength from the five-sector data
         set.
       story_after: 'Average signal: 30.0 — data filed; Yara''s crew manifest and sensor analysis are complete.'
+    - type: break_fix
+      story_before: Yara's crew-manifest printer is meant to display each crew member's name in turn, but every line of output
+        shows the full crew list instead of one name.
+      story_after: Using the loop variable instead of the list name fixes the manifest — each crew member is listed separately.
+      prompt: Yara's loop should print one crew member per line, but it prints the entire list on every iteration. Fix the
+        print statement.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor item in items:\n    print(items)"
+      hint: The print call should reference the loop variable that holds one item, not the list itself.
+      explanation: print(items) dumps the whole list each iteration. Replacing it with print(item) correctly prints the current
+        crew member's name.
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: 'Should print each item on its own line: potion, scroll, key'
   mystery:
     title: Reading Through the Evidence List
     exercises:
@@ -899,3 +925,16 @@ worlds:
         message: Should divide by the list length to get the average
       story_before: Before presenting to the captain Cole calculates the average relevance score from his five key leads.
       story_after: 'Average score: 30.0 — the report is filed and Cole''s evidence loop is closed.'
+    - type: break_fix
+      story_before: Detective Cole's evidence logger should record each piece of evidence separately, but the log shows the
+        complete evidence list printed over and over instead.
+      story_after: Fixing the print to use the loop variable logs each piece of evidence on its own line, as required.
+      prompt: Cole's loop should print each evidence item individually, but it prints the full list every time. Fix the print
+        statement to use the loop variable.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor item in items:\n    print(items)"
+      hint: Look at the variable name inside the for statement — that is what print should receive.
+      explanation: print(items) outputs the list object on every pass. Changing it to print(item) prints the individual element
+        the loop variable currently holds.
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: 'Should print each item on its own line: potion, scroll, key'

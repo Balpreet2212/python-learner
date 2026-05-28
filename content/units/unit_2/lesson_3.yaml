@@ -393,6 +393,20 @@ worlds:
       story_before: Finn takes two altitude readings and needs to print True if they differ, False if they match.
       story_after: With both comparison tools in hand, Finn can verify any condition on the mountain — his Truth Rune toolkit
         is complete.
+    - type: break_fix
+      story_before: Elara's Truth Rune should confirm that a potion strength of exactly 5 meets the minimum threshold of 5
+        — but the wrong comparison operator means the rune returns False instead of True.
+      story_after: The rune glows True and Elara's mentor confirms the potion passes the threshold check.
+      prompt: Fix the code so that a strength of 5 compared to a minimum of 5 prints True.
+      broken_code: 'strength = 5
+
+        print(strength > 5)'
+      hint: Look for the wrong comparison operator — the boundary value should be included.
+      explanation: '> means strictly greater than, so 5 > 5 is False. Changing it to >= (greater than or equal to) makes 5
+        >= 5 evaluate to True.'
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (5 >= 5)
   scifi:
     title: Sensor Thresholds
     exercises:
@@ -607,6 +621,20 @@ worlds:
       story_before: Two sensor readings come in and Zara must print True if they differ, False if they match.
       story_after: Sensor comparison complete — Zara has a full set of threshold checks and the Helix is ready for the next
         mission.
+    - type: break_fix
+      story_before: Zara's hull integrity sensor should confirm that a reading of exactly 5 meets the safe minimum of 5 —
+        but the wrong operator makes the check return False and trigger a false alarm.
+      story_after: True prints and the false alarm clears — hull integrity is confirmed at the safe minimum.
+      prompt: Fix the code so that a hull integrity of 5 compared to a minimum of 5 prints True.
+      broken_code: 'hull_integrity = 5
+
+        print(hull_integrity > 5)'
+      hint: Look for the wrong comparison operator — the boundary value should be included.
+      explanation: '> means strictly greater than, so 5 > 5 is False. Changing it to >= (greater than or equal to) makes 5
+        >= 5 evaluate to True.'
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (5 >= 5)
   mystery:
     title: Comparing Evidence
     exercises:
@@ -823,3 +851,17 @@ worlds:
         message: 5 == 5 so should print False
       story_before: Cole reads two suspect timestamps and must print True if they conflict, False if they match.
       story_after: Conflict detection is live — Cole's comparison toolkit is complete and the case is finally taking shape.
+    - type: break_fix
+      story_before: Cole's analysis script should flag that a clue count of exactly 5 meets the required threshold of 5 —
+        but the wrong comparison operator causes it to return False and the lead gets dropped.
+      story_after: True prints and the lead is correctly flagged — the clue count meets the threshold.
+      prompt: Fix the code so that a clue count of 5 compared to a threshold of 5 prints True.
+      broken_code: 'clue_count = 5
+
+        print(clue_count > 5)'
+      hint: Look for the wrong comparison operator — the boundary value should be included.
+      explanation: '> means strictly greater than, so 5 > 5 is False. Changing it to >= (greater than or equal to) makes 5
+        >= 5 evaluate to True.'
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (5 >= 5)

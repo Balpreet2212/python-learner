@@ -336,6 +336,19 @@ worlds:
         16 doublings and print it.
       story_after: 65536 — the number blazes on the rune stone, and Finn knows he will need every spell in the book to survive
         the peak.
+    - type: break_fix
+      story_before: Elara needs to calculate how many potion flasks a batch formula will produce — the recipe calls for 2
+        to the power of 8, but she has used the wrong operator.
+      story_after: The corrected formula blazes 256 on the cauldron's rune display, and Elara's mentor nods with approval.
+      prompt: Fix the code so it correctly calculates 2 to the power of 8 and prints 256.
+      broken_code: 'result = 2 ^ 8
+
+        print(result)'
+      hint: Look for the wrong operator — Python uses ** for exponentiation, not ^.
+      explanation: ^ is bitwise XOR in Python, not exponentiation. 2 ^ 8 evaluates to 10, but 2 ** 8 correctly gives 256.
+      tests:
+      - code: assert _stdout.strip() == '256'
+        message: Should print 256 (2 ** 8)
   scifi:
     title: Calculating Fuel Cuts
     exercises:
@@ -525,6 +538,19 @@ worlds:
       story_before: Each jump doubles the ship's speed multiplier; Zara needs to calculate and print the multiplier after
         16 jumps.
       story_after: 65536 — the Helix shudders as Zara punches the number into the nav computer and initiates the jump sequence.
+    - type: break_fix
+      story_before: Zara is calculating the Helix's power output for a jump sequence — the formula requires 2 to the power
+        of 8, but the wrong operator has crept into the code.
+      story_after: 256 units of power flood the display and the jump drive spools up correctly.
+      prompt: Fix the code so it correctly calculates 2 to the power of 8 and prints 256.
+      broken_code: 'result = 2 ^ 8
+
+        print(result)'
+      hint: Look for the wrong operator — Python uses ** for exponentiation, not ^.
+      explanation: ^ is bitwise XOR in Python, not exponentiation. 2 ^ 8 evaluates to 10, but 2 ** 8 correctly gives 256.
+      tests:
+      - code: assert _stdout.strip() == '256'
+        message: Should print 256 (2 ** 8)
   mystery:
     title: Splitting the Evidence Batches
     exercises:
@@ -716,3 +742,16 @@ worlds:
       story_before: Each branch of the case doubles the number of leads; Cole needs to calculate and print the total leads
         after 16 branches.
       story_after: 65536 leads — Cole stares at the number, then pins a single name at the centre of the board.
+    - type: break_fix
+      story_before: Detective Cole is computing the cipher key strength for a coded message — the formula needs 2 to the power
+        of 8, but a wrong operator is producing a garbage result.
+      story_after: 256 prints cleanly and Cole confirms the cipher key strength, unlocking the next stage of the investigation.
+      prompt: Fix the code so it correctly calculates 2 to the power of 8 and prints 256.
+      broken_code: 'result = 2 ^ 8
+
+        print(result)'
+      hint: Look for the wrong operator — Python uses ** for exponentiation, not ^.
+      explanation: ^ is bitwise XOR in Python, not exponentiation. 2 ^ 8 evaluates to 10, but 2 ** 8 correctly gives 256.
+      tests:
+      - code: assert _stdout.strip() == '256'
+        message: Should print 256 (2 ** 8)

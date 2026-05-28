@@ -12,6 +12,7 @@ import {
   type ArrangeEx,
   type FillBlankEx,
   type MiniCodeEx,
+  type BreakFixEx,
   type SubmitResult,
 } from "../api/content";
 import { ApiError } from "../api/client";
@@ -447,6 +448,113 @@ function MiniCodeCard({
   );
 }
 
+// ── Break and fix card ────────────────────────────────────────────────────────
+
+function BreakFixCard({
+  ex,
+  exerciseIndex,
+  style,
+  onDone,
+}: { ex: BreakFixEx; exerciseIndex: number; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+  const [code, setCode] = useState(ex.broken_code);
+  const [result, setResult] = useState<SubmitResult | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasEverFailed, setHasEverFailed] = useState(false);
+
+  async function handleCheck() {
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await checkExerciseCode(code, exerciseIndex);
+      setResult(res);
+      if (!res.all_passed) setHasEverFailed(true);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Submission failed.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  const passed = result?.all_passed ?? false;
+
+  return (
+    <div className="space-y-4">
+      <p className={`text-sm leading-relaxed ${style.text}`}>{ex.prompt}</p>
+
+      {/* Broken code editor */}
+      <div className="rounded-xl border border-red-700/50 overflow-hidden">
+        <div className={`flex items-center justify-between px-4 py-2 bg-red-950/30 border-b border-red-700/50`}>
+          <span className="text-xs font-semibold text-red-400 uppercase tracking-wider">⚠ Broken Code — find the bug</span>
+          {result && (
+            <span className={`text-xs font-semibold ${passed ? "text-green-400" : "text-red-400"}`}>
+              {passed ? "Fixed ✓" : "Still broken"}
+            </span>
+          )}
+        </div>
+        <CodeEditor
+          value={code}
+          onChange={(v) => { setCode(v); if (result) setResult(null); }}
+          rows={6}
+          disabled={passed}
+        />
+      </div>
+
+      {/* Hint */}
+      {!passed && (
+        <p className={`text-xs ${style.muted} italic`}>Hint: {ex.hint}</p>
+      )}
+
+      {/* Test output */}
+      {result && (
+        <div className={`rounded-xl border ${style.border} overflow-hidden`}>
+          {result.stdout && (
+            <div className="border-b border-gray-800 bg-gray-950 px-4 py-3">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">Output</p>
+              <pre className="font-code text-sm text-gray-300 whitespace-pre-wrap">{result.stdout}</pre>
+            </div>
+          )}
+          {result.exec_error && (
+            <div className="border-b border-gray-800 bg-red-950/30 px-4 py-3">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-red-400">Error</p>
+              <pre className="font-code text-sm text-red-300 whitespace-pre-wrap">{result.exec_error}</pre>
+            </div>
+          )}
+          {hasEverFailed && (
+            <div className={`${style.surface} px-4 py-3 space-y-2`}>
+              {result.tests.map((t, i) => (
+                <div key={i} className="flex items-start gap-2">
+                  <span className={t.passed ? "text-green-400" : "text-red-400"}>{t.passed ? "✓" : "✗"}</span>
+                  <span className={`text-sm ${t.passed ? style.text : "text-red-300"}`}>{t.message}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {error && <p className="text-center text-sm text-red-400">{error}</p>}
+
+      {passed ? (
+        <div className="rounded-xl border border-green-700/50 bg-green-950/30 p-4 space-y-3">
+          <p className="font-semibold text-green-400">Bug fixed!</p>
+          <p className="text-sm text-gray-300">{ex.explanation}</p>
+          {ex.story_after && (
+            <p className="text-sm italic text-amber-300/90 border-l-2 border-amber-500/40 pl-3">{ex.story_after}</p>
+          )}
+          <Button onClick={() => { onDone(true); }} className="w-full bg-green-700 hover:bg-green-600">
+            Continue
+          </Button>
+        </div>
+      ) : (
+        <Button onClick={() => void handleCheck()} loading={submitting} disabled={!code.trim()} className="w-full">
+          Check Fix
+        </Button>
+      )}
+    </div>
+  );
+}
+
 // ── Main lesson page ──────────────────────────────────────────────────────────
 
 export default function LessonPage() {
@@ -512,10 +620,11 @@ export default function LessonPage() {
 
   const progress = done ? 1 : currentIndex / lesson.exercises.length;
 
-  // Count mini_code exercises seen so far to pass correct index to server
-  let miniCodeIndex = 0;
+  // Count code exercises (mini_code + break_fix) seen so far to pass correct index to server
+  let codeExerciseIndex = 0;
   for (let i = 0; i < currentIndex; i++) {
-    if (lesson.exercises[i].type === "mini_code") miniCodeIndex++;
+    const t = lesson.exercises[i].type;
+    if (t === "mini_code" || t === "break_fix") codeExerciseIndex++;
   }
 
   const currentEx: Exercise | undefined = lesson.exercises[currentIndex];
@@ -593,7 +702,15 @@ export default function LessonPage() {
               {currentEx.type === "mini_code" && (
                 <MiniCodeCard
                   ex={currentEx}
-                  exerciseIndex={miniCodeIndex}
+                  exerciseIndex={codeExerciseIndex}
+                  style={style}
+                  onDone={(c) => { if (c) handleExerciseDone(c); }}
+                />
+              )}
+              {currentEx.type === "break_fix" && (
+                <BreakFixCard
+                  ex={currentEx}
+                  exerciseIndex={codeExerciseIndex}
                   style={style}
                   onDone={(c) => { if (c) handleExerciseDone(c); }}
                 />

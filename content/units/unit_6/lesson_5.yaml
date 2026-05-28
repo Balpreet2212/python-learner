@@ -381,6 +381,22 @@ worlds:
         values should fuel the forge.'
       story_after: The high temperatures are extracted in one line — the forge is stoked to perfect intensity and Elara's
         list mastery is complete.
+    - type: break_fix
+      story_before: Elara's filter rune is meant to keep every score that meets the minimum threshold of 5 — but the strict
+        greater-than condition silently drops the boundary value and 5 is excluded from the result.
+      story_after: The rune glows and [5, 7, 9] appears — all three passing scores are through, including the borderline 5.
+      prompt: Fix the comprehension so scores of 5 and above are included and it prints [5, 7, 9].
+      broken_code: 'scores = [3, 5, 7, 9]
+
+        passing = [s for s in scores if s > 5]
+
+        print(passing)'
+      hint: The boundary value 5 should pass — change the condition to include values equal to the threshold.
+      explanation: s > 5 is strictly greater than, so 5 itself is excluded, giving [7, 9]. Changing to s >= 5 includes the
+        boundary value and correctly produces [5, 7, 9].
+      tests:
+      - code: assert _stdout.strip() == '[5, 7, 9]'
+        message: Should print [5, 7, 9]
   scifi:
     title: Data Pipeline
     exercises:
@@ -586,6 +602,23 @@ worlds:
         heat signatures matter for the reactor alert.'
       story_after: Critical temperatures extracted in one line — the reactor alert is calibrated and the Helix's data systems
         are fully mission-ready.
+    - type: break_fix
+      story_before: Yara's data pipeline filter is supposed to pass any reading at or above 5 — but the strict greater-than
+        condition drops the boundary reading of 5 and the report comes out short.
+      story_after: '[5, 7, 9] prints on the console and Yara''s pipeline passes all qualifying readings, including the borderline
+        one.'
+      prompt: Fix the comprehension so scores of 5 and above are included and it prints [5, 7, 9].
+      broken_code: 'scores = [3, 5, 7, 9]
+
+        passing = [s for s in scores if s > 5]
+
+        print(passing)'
+      hint: The boundary value 5 should pass — change the condition to include values equal to the threshold.
+      explanation: s > 5 is strictly greater than, so 5 itself is excluded, giving [7, 9]. Changing to s >= 5 includes the
+        boundary value and correctly produces [5, 7, 9].
+      tests:
+      - code: assert _stdout.strip() == '[5, 7, 9]'
+        message: Should print [5, 7, 9]
   mystery:
     title: Filtering Witnesses
     exercises:
@@ -793,3 +826,20 @@ worlds:
         moments correspond to the time of the crime.'
       story_after: The critical readings are extracted in a single line — the timeline is confirmed, the case is closed, and
         Cole reaches for his coat.
+    - type: break_fix
+      story_before: Detective Cole is filtering witness credibility scores and needs everyone at 5 or above — but the strict
+        greater-than drops the borderline witness with a score of exactly 5, weakening the case.
+      story_after: '[5, 7, 9] appears in the case file and Cole''s witness list is complete — the borderline witness is back
+        in.'
+      prompt: Fix the comprehension so scores of 5 and above are included and it prints [5, 7, 9].
+      broken_code: 'scores = [3, 5, 7, 9]
+
+        passing = [s for s in scores if s > 5]
+
+        print(passing)'
+      hint: The boundary value 5 should pass — change the condition to include values equal to the threshold.
+      explanation: s > 5 is strictly greater than, so 5 itself is excluded, giving [7, 9]. Changing to s >= 5 includes the
+        boundary value and correctly produces [5, 7, 9].
+      tests:
+      - code: assert _stdout.strip() == '[5, 7, 9]'
+        message: Should print [5, 7, 9]

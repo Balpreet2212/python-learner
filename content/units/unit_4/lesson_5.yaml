@@ -438,6 +438,20 @@ worlds:
         message: Should go from 1 to 20
       story_before: Every third tile crumbles underfoot — Finn uses the Skip Charm to continue past them and print the rest.
       story_after: All safe tiles from 1 to 20 printed; Finn emerges from the corridor triumphant, runes mastered.
+    - type: break_fix
+      story_before: Elara's gem-finder is enchanted to stop the moment it touches a gem and keep everything before it, but
+        the spell skips right past the gem and keeps printing — 'rock' and 'dirt' both appear in the output.
+      story_after: Replacing continue with break makes the loop halt the instant it finds the gem, so only 'rock' is printed.
+      prompt: The loop should print every item before the gem and then stop when it finds 'gem'. Right now it skips 'gem'
+        with continue and keeps going. Replace continue with break.
+      broken_code: "items = [\"rock\", \"gem\", \"dirt\"]\nfor item in items:\n    if item == \"gem\":\n        continue\n\
+        \    print(item)"
+      hint: continue skips to the next iteration; to stop the whole loop you need the other keyword.
+      explanation: continue skips only the current iteration, so 'dirt' still gets printed after 'gem' is skipped. break exits
+        the loop immediately when 'gem' is found, leaving 'rock' as the only printed value.
+      tests:
+      - code: assert _stdout.strip() == 'rock'
+        message: Should print only 'rock' — the loop must stop when it hits 'gem'
   scifi:
     title: Emergency Stop
     exercises:
@@ -671,6 +685,21 @@ worlds:
       story_before: Every third module is undergoing maintenance and must be skipped — Yara continues past them and logs the
         rest.
       story_after: All active modules from 1 to 20 logged; the Helix's emergency scan protocol is fully validated.
+    - type: break_fix
+      story_before: Yara's emergency-stop protocol is supposed to halt the scan the moment the target reading is detected,
+        but the scanner skips past it with continue and keeps logging — the halt never happens.
+      story_after: Swapping continue for break triggers an immediate halt when 'gem' is detected, leaving only 'rock' in the
+        log.
+      prompt: The scan loop should log everything before 'gem' and then stop. It currently uses continue, which skips 'gem'
+        but keeps scanning. Replace continue with break.
+      broken_code: "items = [\"rock\", \"gem\", \"dirt\"]\nfor item in items:\n    if item == \"gem\":\n        continue\n\
+        \    print(item)"
+      hint: You need the keyword that exits the loop entirely, not the one that skips a single iteration.
+      explanation: continue causes the loop to move on to 'dirt' after skipping 'gem', so both 'rock' and 'dirt' are printed.
+        Using break instead stops the loop at 'gem', so only 'rock' is logged.
+      tests:
+      - code: assert _stdout.strip() == 'rock'
+        message: Should print only 'rock' — the scan must halt when 'gem' is reached
   mystery:
     title: Skipping Irrelevant Leads
     exercises:
@@ -906,3 +935,17 @@ worlds:
       story_before: Every third lead is a planted distraction — Cole uses continue to skip them and logs only the genuine
         ones.
       story_after: Genuine leads from 1 to 20 logged; Cole closes the casebook — the investigation is solved.
+    - type: break_fix
+      story_before: Cole's search is meant to stop the moment it hits the key clue — everything before it is noted and then
+        the case closes, but the loop skips the clue with continue and logs 'dirt' as well, contaminating the findings.
+      story_after: Using break instead of continue stops the search at the key clue, so only 'rock' appears in Cole's notes.
+      prompt: Cole's loop should print items before 'gem' and stop when it finds 'gem'. It currently uses continue, which
+        skips 'gem' but keeps going. Replace continue with break.
+      broken_code: "items = [\"rock\", \"gem\", \"dirt\"]\nfor item in items:\n    if item == \"gem\":\n        continue\n\
+        \    print(item)"
+      hint: One keyword skips the rest of this iteration; the other ends the entire loop — pick the one that ends it.
+      explanation: With continue, the loop skips 'gem' but proceeds to print 'dirt', giving two lines of output. Replacing
+        continue with break exits the loop when 'gem' is found, so only 'rock' is printed.
+      tests:
+      - code: assert _stdout.strip() == 'rock'
+        message: Should print only 'rock' — the loop must stop at 'gem'

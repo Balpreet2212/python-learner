@@ -394,6 +394,18 @@ worlds:
         calibration depends on it.'
       story_after: The peak temperature is found manually — Elara calibrates the furnace and the workshop is ready for the
         next brew.
+    - type: break_fix
+      story_before: Elara's enchanted inventory loop moves through each item correctly — but then tries to use the item name
+        itself as a numeric index into the list, crashing with a TypeError.
+      story_after: Each item name prints on its own line and the inventory scroll is complete.
+      prompt: Fix the loop so each item in the list is printed directly, one per line.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor i in items:\n    print(items[i])"
+      hint: When you loop with 'for i in items', i is already the item value — you do not need to index into the list again.
+      explanation: 'for i in items: assigns each element (a string) to i, not its integer position. Using items[i] tries to
+        use a string as an index, causing a TypeError. Replacing items[i] with just i prints each item directly.'
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: Should print potion, scroll, key each on its own line
   scifi:
     title: Sensor Array Processing
     exercises:
@@ -605,6 +617,18 @@ worlds:
       story_before: 'Final calibration: loop through four temperature readings from the reactor and find the peak value without
         using max().'
       story_after: The peak reactor temperature is found — Zara adjusts the cooling system and the Helix is fully operational.
+    - type: break_fix
+      story_before: Yara's processing loop iterates through the sensor array correctly — but then uses each item value as
+        a list index by mistake, and the console throws a TypeError.
+      story_after: Each system name scrolls across the display in order and the processing log is complete.
+      prompt: Fix the loop so each item in the list is printed directly, one per line.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor i in items:\n    print(items[i])"
+      hint: When you loop with 'for i in items', i is already the item value — you do not need to index into the list again.
+      explanation: 'for i in items: assigns each element (a string) to i, not its integer position. Using items[i] tries to
+        use a string as an index, causing a TypeError. Replacing items[i] with just i prints each item directly.'
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: Should print potion, scroll, key each on its own line
   mystery:
     title: Reviewing All Clues
     exercises:
@@ -815,3 +839,15 @@ worlds:
       story_before: 'Final drill: loop through four credibility readings and find the highest without using max() — the top
         suspect must be identified manually.'
       story_after: The highest score is found — Cole circles the suspect's name and the case moves to its final chapter.
+    - type: break_fix
+      story_before: Detective Cole's clue-review loop walks the evidence list item by item — but then mistakenly uses each
+        clue string as a list index, triggering a TypeError before a single clue is read.
+      story_after: Each clue name appears on its own line and Cole can finally review the full evidence list.
+      prompt: Fix the loop so each item in the list is printed directly, one per line.
+      broken_code: "items = [\"potion\", \"scroll\", \"key\"]\nfor i in items:\n    print(items[i])"
+      hint: When you loop with 'for i in items', i is already the item value — you do not need to index into the list again.
+      explanation: 'for i in items: assigns each element (a string) to i, not its integer position. Using items[i] tries to
+        use a string as an index, causing a TypeError. Replacing items[i] with just i prints each item directly.'
+      tests:
+      - code: assert _stdout.strip() == 'potion\nscroll\nkey'
+        message: Should print potion, scroll, key each on its own line

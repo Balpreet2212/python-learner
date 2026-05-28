@@ -407,6 +407,20 @@ worlds:
       story_before: Two creatures need separate entries — Ash must build a Student-style class and produce records for both.
       story_after: Both creature records are written and printed; Ash's bestiary grows one blueprint at a time, ready for
         Lesson 2.
+    - type: break_fix
+      story_before: Elara finishes writing her Creature class and proudly calls describe() on her Dragon — but instead of
+        the creature's name, a NameError erupts from the workshop cauldron.
+      story_after: Elara adds self. before name in describe(), and the Dragon announces itself correctly.
+      prompt: Elara's Creature class stores the name correctly in __init__, but describe() crashes with a NameError. Find
+        the missing prefix and fix it so the creature can introduce itself.
+      broken_code: "class Creature:\n    def __init__(self, name):\n        self.name = name\n    def describe(self):\n  \
+        \      print(\"Creature: \" + name)\n\nc = Creature(\"Dragon\")\nc.describe()"
+      hint: Inside a method, instance attributes must be accessed through self, not as bare variable names.
+      explanation: The describe() method uses the bare name name, which does not exist as a local variable. Changing it to
+        self.name tells Python to look up the attribute stored on the instance.
+      tests:
+      - code: 'assert _stdout.strip() == ''Creature: Dragon'''
+        message: 'describe() should print ''Creature: Dragon'''
   scifi:
     title: Designing the Ship Blueprint
     exercises:
@@ -630,6 +644,20 @@ worlds:
       story_before: Two crew members need separate entries — Rex must produce a Student-style class and log both to the manifest.
       story_after: Both crew records transmit to the manifest; Rex has a working blueprint pattern ready to carry into Lesson
         2.
+    - type: break_fix
+      story_before: Yara writes a SystemModule class for the Helix's diagnostics panel, but calling describe() triggers a
+        NameError that shuts down the entire readout.
+      story_after: Yara prefixes name with self. and the system name prints cleanly to the diagnostic feed.
+      prompt: Yara's SystemModule stores the name in __init__, but describe() fails with a NameError. Fix the attribute reference
+        so the module can report its own name.
+      broken_code: "class Creature:\n    def __init__(self, name):\n        self.name = name\n    def describe(self):\n  \
+        \      print(\"Creature: \" + name)\n\nc = Creature(\"Dragon\")\nc.describe()"
+      hint: Inside a method, instance attributes must be accessed through self, not as bare variable names.
+      explanation: The describe() method refers to name as a bare variable, but name is stored as self.name. Replacing name
+        with self.name gives Python the correct reference to the instance attribute.
+      tests:
+      - code: 'assert _stdout.strip() == ''Creature: Dragon'''
+        message: 'describe() should print ''Creature: Dragon'''
   mystery:
     title: Building a Suspect Profile
     exercises:
@@ -850,3 +878,17 @@ worlds:
       story_before: Two suspects need separate profile entries — Cole must produce a Student-style class and print both records.
       story_after: Both profiles print cleanly to the case file; Cole has a repeatable template ready to carry into Lesson
         2.
+    - type: break_fix
+      story_before: Cole programs a Suspect profile class so each person of interest can state their own name, but the first
+        test call throws a NameError straight back at him.
+      story_after: Cole fixes the attribute reference with self.name and the suspect profile prints without error.
+      prompt: Cole's Creature class sets up name in __init__ correctly, but describe() crashes. Spot where self. is missing
+        and add it so the profile can announce itself.
+      broken_code: "class Creature:\n    def __init__(self, name):\n        self.name = name\n    def describe(self):\n  \
+        \      print(\"Creature: \" + name)\n\nc = Creature(\"Dragon\")\nc.describe()"
+      hint: Inside a method, instance attributes must be accessed through self, not as bare variable names.
+      explanation: describe() writes name instead of self.name. Because name is not a local variable inside the method, Python
+        raises a NameError. Prefixing it with self. resolves the lookup to the instance attribute set in __init__.
+      tests:
+      - code: 'assert _stdout.strip() == ''Creature: Dragon'''
+        message: 'describe() should print ''Creature: Dragon'''

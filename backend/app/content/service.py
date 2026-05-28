@@ -78,7 +78,19 @@ class MiniCodeExercise:
     story_after: str | None = None
 
 
-Exercise = Union[ConceptExercise, McqExercise, ArrangeExercise, FillBlankExercise, MiniCodeExercise]
+@dataclass
+class BreakFixExercise:
+    type: str
+    prompt: str
+    broken_code: str
+    hint: str
+    tests: list[LessonTest]
+    explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
+
+
+Exercise = Union[ConceptExercise, McqExercise, ArrangeExercise, FillBlankExercise, MiniCodeExercise, BreakFixExercise]
 
 
 def _parse_exercise(raw: dict[str, Any]) -> Exercise:
@@ -132,6 +144,18 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             prompt=raw.get("prompt", "").strip(),
             starter=raw.get("starter", "").rstrip(),
             tests=[LessonTest(code=r["code"], message=r["message"], stdin=r.get("stdin")) for r in raw_tests],
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
+        )
+    if t == "break_fix":
+        raw_tests2: list[dict[str, str]] = raw.get("tests", [])
+        return BreakFixExercise(
+            type="break_fix",
+            prompt=raw.get("prompt", "").strip(),
+            broken_code=raw.get("broken_code", "").rstrip(),
+            hint=raw.get("hint", "").strip(),
+            tests=[LessonTest(code=r["code"], message=r["message"], stdin=r.get("stdin")) for r in raw_tests2],
+            explanation=raw.get("explanation", "").strip(),
             story_before=raw.get("story_before") or None,
             story_after=raw.get("story_after") or None,
         )

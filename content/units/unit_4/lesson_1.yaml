@@ -459,6 +459,19 @@ worlds:
         message: Should use a for loop
       story_before: After the harvest Mira wants one grand total — the sum of every patch number from one to ten.
       story_after: Fifty-five herbs tallied — the master nods in approval, and Mira's foraging loop is complete.
+    - type: break_fix
+      story_before: Elara's enchanted herb picker is supposed to harvest every row from 1 to 5, but the master's basket keeps
+        coming back with only four bundles — row 5 is always bare.
+      story_after: With the range corrected to include row 5, all five bundles fill the basket and the master nods with satisfaction.
+      prompt: Elara's harvesting spell loops through herb rows 1 to 5, but it stops one row too early. Fix the range so that
+        row 5 is included and all five row numbers are printed.
+      broken_code: "for i in range(1, 5):\n    print(i)"
+      hint: Check the stop value of range() — Python stops before it, so you may need to go one higher.
+      explanation: range(1, 5) produces 1, 2, 3, 4 — it stops before 5. Changing it to range(1, 6) includes 5, printing all
+        five row numbers.
+      tests:
+      - code: assert _stdout.strip() == '1\n2\n3\n4\n5'
+        message: Should print 1 through 5, one number per line
   scifi:
     title: Running the Sector Scan
     exercises:
@@ -700,6 +713,19 @@ worlds:
         message: Should use a for loop
       story_before: Before filing the report Yara needs the grand total of star counts across sectors 1 through 10.
       story_after: Fifty-five stars logged in the manifest — the sector scan is complete and mission data is filed.
+    - type: break_fix
+      story_before: Yara's sector scanner is programmed to sweep sectors 1 through 5, but the mission log shows only four
+        sectors scanned — the final sector is never reached.
+      story_after: With the range fixed to stop after sector 5, all five sector IDs appear in the log and the sweep is complete.
+      prompt: Yara's scanner loop is supposed to log sectors 1 to 5, but it misses the last one. Fix the range so sector 5
+        is included and all five sector numbers are printed.
+      broken_code: "for i in range(1, 5):\n    print(i)"
+      hint: Python's range() stops before its second argument — raise the stop value by 1.
+      explanation: range(1, 5) yields 1, 2, 3, 4 because Python stops before the end value. Changing it to range(1, 6) adds
+        sector 5 to the sequence.
+      tests:
+      - code: assert _stdout.strip() == '1\n2\n3\n4\n5'
+        message: Should print 1 through 5, one number per line
   mystery:
     title: Reading Each File in Order
     exercises:
@@ -942,3 +968,16 @@ worlds:
         message: Should use a for loop
       story_before: Before closing the file Cole needs the total of all evidence tag numbers from files 1 through 10.
       story_after: Fifty-five — every tag accounted for; the case log is sealed and filed.
+    - type: break_fix
+      story_before: Detective Cole's file-review program is meant to open case files numbered 1 through 5, but file 5 is never
+        opened — the loop quits one number too soon.
+      story_after: Correcting the range to include 5 ensures all five files are reviewed and no evidence is overlooked.
+      prompt: Cole's loop should review file numbers 1 to 5, but it stops at 4. Fix the range so file 5 is included and all
+        five file numbers are printed.
+      broken_code: "for i in range(1, 5):\n    print(i)"
+      hint: The stop value in range() is exclusive — increment it by 1 to include the last file.
+      explanation: range(1, 5) generates 1, 2, 3, 4 only. Using range(1, 6) extends the sequence to include 5, so all five
+        file numbers are printed.
+      tests:
+      - code: assert _stdout.strip() == '1\n2\n3\n4\n5'
+        message: Should print 1 through 5, one number per line

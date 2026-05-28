@@ -321,6 +321,18 @@ worlds:
       story_before: Master Theo needs a prime Oracle to identify which ingredient potencies have no magical divisors.
       story_after: 7 and 2 are prime, 9 is not — the prime Oracle is complete, and Elara's boolean spell library is now a
         powerful toolkit.
+    - type: break_fix
+      story_before: Elara's parity oracle should declare a potion that scores exactly 50 as passing, but the boundary is set
+        incorrectly and the oracle rejects a perfectly adequate brew.
+      story_after: The oracle now returns True for a score of exactly 50 and Elara's potion earns its seal of approval.
+      prompt: Fix the comparison so that a score of exactly 50 is considered passing and prints True.
+      broken_code: "def is_passing(score):\n    return score > 50\n\nprint(is_passing(50))"
+      hint: Look at the comparison operator — the boundary value of 50 should be included as passing.
+      explanation: score > 50 is strictly greater than, so is_passing(50) returns False. Changing it to score >= 50 includes
+        the boundary and returns True.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (50 is a passing score)
   scifi:
     title: Diagnostic Checks
     exercises:
@@ -497,6 +509,18 @@ worlds:
       story_before: Voss needs a prime-number diagnostic to identify prime-frequency channels for encrypted communications.
       story_after: 7 and 2 are prime, 9 is not — the frequency diagnostic is complete, and Yara's boolean subroutine library
         is ready for deployment.
+    - type: break_fix
+      story_before: Yara's diagnostic checker should mark a system as passing when it reaches exactly the minimum threshold
+        of 50, but the strict comparison incorrectly fails the system at that exact reading.
+      story_after: True prints on the diagnostic panel — the system at exactly 50 is correctly cleared as passing.
+      prompt: Fix the comparison so that a score of exactly 50 is considered passing and prints True.
+      broken_code: "def is_passing(score):\n    return score > 50\n\nprint(is_passing(50))"
+      hint: Look at the comparison operator — the boundary value of 50 should be included as passing.
+      explanation: score > 50 is strictly greater than, so is_passing(50) returns False. Changing it to score >= 50 includes
+        the boundary and returns True.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (50 is a passing score)
   mystery:
     title: Confirming Alibis
     exercises:
@@ -674,3 +698,15 @@ worlds:
       story_before: The suspect used prime-numbered lockers to hide evidence; Cole writes a prime tool to identify them all.
       story_after: 7 and 2 are prime, 9 is not — the prime tool is ready, and Cole's boolean toolkit can now answer almost
         any yes-or-no question the case throws at him.
+    - type: break_fix
+      story_before: Cole's evidence-checker should confirm that exactly 50 clues is sufficient to proceed, but the strict
+        comparison wrongly rejects that exact count and the lead is abandoned.
+      story_after: True prints in the case file — 50 clues is now correctly recognised as sufficient evidence.
+      prompt: Fix the comparison so that a score of exactly 50 is considered passing and prints True.
+      broken_code: "def is_passing(score):\n    return score > 50\n\nprint(is_passing(50))"
+      hint: Look at the comparison operator — the boundary value of 50 should be included as passing.
+      explanation: score > 50 is strictly greater than, so is_passing(50) returns False. Changing it to score >= 50 includes
+        the boundary and returns True.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (50 is a passing score)

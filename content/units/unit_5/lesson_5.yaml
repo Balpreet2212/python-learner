@@ -369,6 +369,19 @@ worlds:
         growing potency.
       story_after: 120 and 6 confirmed — the recursive factorial spell works perfectly, and Elara has mastered the deepest
         form of spell composition.
+    - type: break_fix
+      story_before: Elara's outer enhancement spell calls an inner bonus spell to amplify the result, but she throws away
+        what the inner spell returns and hands back the original unenhanced value.
+      story_after: 50 glows on the rune display — the outer spell now passes through the enhanced result from the inner one.
+      prompt: Fix the outer function so it returns the value produced by add_bonus and prints 50.
+      broken_code: "def add_bonus(score):\n    return score + 10\n\ndef final_score(score):\n    add_bonus(score)\n    return\
+        \ score\n\nprint(final_score(40))"
+      hint: Look at the line that calls add_bonus — the returned value is being discarded instead of passed back.
+      explanation: add_bonus(score) is called but its return value is ignored, so final_score returns the original score of
+        40. Changing the line to return add_bonus(score) passes the enhanced value of 50 back to the caller.
+      tests:
+      - code: assert _stdout.strip() == '50'
+        message: Should print 50
   scifi:
     title: Nested Subroutines
     exercises:
@@ -571,6 +584,19 @@ worlds:
         itself.
       story_after: 120 and 6 confirmed — the recursive subroutine works, and Yara has unlocked the most powerful form of subroutine
         composition on the Helix.
+    - type: break_fix
+      story_before: Yara's outer subroutine invokes a power-boost sub to increase the score, but the boosted value is silently
+        discarded and the caller receives the original unboosted number.
+      story_after: 50 transmits to the console — the chained subroutines now pass the boosted value all the way through.
+      prompt: Fix the outer function so it returns the value produced by add_bonus and prints 50.
+      broken_code: "def add_bonus(score):\n    return score + 10\n\ndef final_score(score):\n    add_bonus(score)\n    return\
+        \ score\n\nprint(final_score(40))"
+      hint: Look at the line that calls add_bonus — the returned value is being discarded instead of passed back.
+      explanation: add_bonus(score) is called but its return value is ignored, so final_score returns the original score of
+        40. Changing the line to return add_bonus(score) passes the enhanced value of 50 back to the caller.
+      tests:
+      - code: assert _stdout.strip() == '50'
+        message: Should print 50
   mystery:
     title: Building the Case
     exercises:
@@ -779,3 +805,16 @@ worlds:
         them.
       story_after: 120 and 6 confirmed — the recursive factorial tool works, and Cole has cracked the code sequence, closing
         the final gap in the case.
+    - type: break_fix
+      story_before: Cole's outer deduction function calls a clue-weighing sub to strengthen the score, but the weighted result
+        is never used and the final deduction reports the original unweighted value.
+      story_after: 50 appears in the case file — the chained deductions now carry the weighted score all the way to the output.
+      prompt: Fix the outer function so it returns the value produced by add_bonus and prints 50.
+      broken_code: "def add_bonus(score):\n    return score + 10\n\ndef final_score(score):\n    add_bonus(score)\n    return\
+        \ score\n\nprint(final_score(40))"
+      hint: Look at the line that calls add_bonus — the returned value is being discarded instead of passed back.
+      explanation: add_bonus(score) is called but its return value is ignored, so final_score returns the original score of
+        40. Changing the line to return add_bonus(score) passes the enhanced value of 50 back to the caller.
+      tests:
+      - code: assert _stdout.strip() == '50'
+        message: Should print 50

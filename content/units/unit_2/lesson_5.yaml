@@ -389,6 +389,18 @@ worlds:
       story_before: Finn reads an age value and must print True if it falls outside the mid-range, False if it is in between.
       story_after: or captures both extremes in one expression — Finn's logical toolkit is complete and the summit is within
         reach.
+    - type: break_fix
+      story_before: Elara's gate spell should open the door when it is NOT locked — but the condition checks the wrong direction
+        and the gate stays shut even though it is unlocked.
+      story_after: Open prints and the gate swings wide — Elara's mentor smiles as the not operator does its job.
+      prompt: Fix the code so the gate prints 'Open' when locked is False.
+      broken_code: "locked = False\nif locked:\n    print(\"Open\")\nelse:\n    print(\"Locked\")"
+      hint: Look for the missing not — the gate should open when it is NOT locked.
+      explanation: 'if locked: is True only when locked is True, so with locked = False the else branch runs and prints ''Locked''.
+        Changing the condition to if not locked: flips the logic so the gate opens correctly.'
+      tests:
+      - code: assert _stdout.strip() == 'Open'
+        message: Should print Open (gate is not locked)
   scifi:
     title: Proximity and Fuel Logic
     exercises:
@@ -599,6 +611,18 @@ worlds:
       story_before: Zara reads a crew age value and must print True if it falls outside the mid-range, False if it is in the
         middle.
       story_after: or captures both ends of the range in one expression — Zara's logical sensor suite is fully operational.
+    - type: break_fix
+      story_before: Zara's airlock should open when it is NOT sealed — but the check is inverted and the airlock reports itself
+        as locked even though the seal is disengaged.
+      story_after: Open prints on the airlock panel and Zara steps through without delay.
+      prompt: Fix the code so the airlock prints 'Open' when locked is False.
+      broken_code: "locked = False\nif locked:\n    print(\"Open\")\nelse:\n    print(\"Locked\")"
+      hint: Look for the missing not — the airlock should open when it is NOT sealed.
+      explanation: 'if locked: is True only when locked is True, so with locked = False the else branch runs and prints ''Locked''.
+        Changing the condition to if not locked: flips the logic so the airlock opens correctly.'
+      tests:
+      - code: assert _stdout.strip() == 'Open'
+        message: Should print Open (airlock is not sealed)
   mystery:
     title: Evaluating the Evidence Logic
     exercises:
@@ -810,3 +834,15 @@ worlds:
       story_before: Cole reads a value and must print True if it falls outside the mid-range, False if it is in between.
       story_after: or handles both extremes in one expression — Cole's logical evidence engine is fully built, and the case
         is ready for court.
+    - type: break_fix
+      story_before: Cole's evidence safe should open when it is NOT secured — but the condition is backwards and the safe
+        reports itself as locked even though it has been disarmed.
+      story_after: Open prints and Cole retrieves the key evidence, finally getting the break the case needed.
+      prompt: Fix the code so the safe prints 'Open' when locked is False.
+      broken_code: "locked = False\nif locked:\n    print(\"Open\")\nelse:\n    print(\"Locked\")"
+      hint: Look for the missing not — the safe should open when it is NOT secured.
+      explanation: 'if locked: is True only when locked is True, so with locked = False the else branch runs and prints ''Locked''.
+        Changing the condition to if not locked: flips the logic so the safe opens correctly.'
+      tests:
+      - code: assert _stdout.strip() == 'Open'
+        message: Should print Open (safe is not secured)

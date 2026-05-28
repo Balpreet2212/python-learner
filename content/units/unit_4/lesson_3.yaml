@@ -510,6 +510,19 @@ worlds:
       story_before: Mira needs to chart only the odd-numbered forest patches for her foraging map — she must use a step in
         range to skip the even ones.
       story_after: All odd patches from 1 to 19 are mapped; the foraging chart is complete and ready for the guild.
+    - type: break_fix
+      story_before: Elara's path-tracer is supposed to mark every other stepping stone through the forest, but it is stamping
+        every single stone — the trail looks nothing like the pattern on the map.
+      story_after: Changing the step from 1 to 2 makes the tracer skip alternate stones, matching the map's dotted path exactly.
+      prompt: Elara's loop should print every other number from 0 to 8 (0, 2, 4, 6, 8), but the step value is wrong so it
+        prints every number. Fix the step in range().
+      broken_code: "for i in range(0, 10, 1):\n    print(i)"
+      hint: The third argument to range() is the step — change it so the loop skips every other value.
+      explanation: range(0, 10, 1) steps by 1, producing 0 through 9. Changing the step to 2 gives range(0, 10, 2), which
+        yields 0, 2, 4, 6, 8.
+      tests:
+      - code: assert _stdout.strip() == '0\n2\n4\n6\n8'
+        message: Should print 0, 2, 4, 6, 8 — every other number
   scifi:
     title: Calibrating the Probe Sequence
     exercises:
@@ -776,6 +789,19 @@ worlds:
       story_before: The probe is programmed to sample only odd-numbered sectors to avoid interference — Lin sets range to
         step by 2.
       story_after: Odd sectors 1 through 19 sampled; the probe transmits the full dataset and the scan mission is accomplished.
+    - type: break_fix
+      story_before: Yara's scanner is configured to sample every other sector to conserve power, but the diagnostic log shows
+        every sector being scanned — the power budget is blown.
+      story_after: Setting the step to 2 makes the scanner skip alternate sectors, restoring the efficient alternating pattern.
+      prompt: Yara's scan loop should hit sectors 0, 2, 4, 6, 8 only, but it is scanning every sector because the step is
+        wrong. Fix the step in range().
+      broken_code: "for i in range(0, 10, 1):\n    print(i)"
+      hint: Increase the step argument in range() so the probe jumps two sectors at a time.
+      explanation: A step of 1 visits every value from 0 to 9. Changing it to 2 produces range(0, 10, 2), sampling only the
+        even-numbered sectors.
+      tests:
+      - code: assert _stdout.strip() == '0\n2\n4\n6\n8'
+        message: Should print 0, 2, 4, 6, 8 — every other sector
   mystery:
     title: Skipping Through the Evidence at Intervals
     exercises:
@@ -1045,3 +1071,17 @@ worlds:
         to list them.
       story_after: Priority leads in files 1, 3, 5 through 19 are all flagged; the investigation has a clear set of targets
         to pursue.
+    - type: break_fix
+      story_before: Cole's pattern checker is meant to flag every other file for a targeted review, but it is opening every
+        single file — the pattern the captain described is completely ignored.
+      story_after: With the step corrected to 2, the checker flags files 0, 2, 4, 6, 8 — exactly the alternating pattern Cole
+        needs.
+      prompt: Cole's loop should check every other file, printing 0, 2, 4, 6, 8, but it checks every file because the step
+        is set to 1. Fix the step in range().
+      broken_code: "for i in range(0, 10, 1):\n    print(i)"
+      hint: The third argument to range() controls how many values are skipped — set it to skip one file each time.
+      explanation: range(0, 10, 1) produces every integer from 0 to 9. Using a step of 2 changes it to range(0, 10, 2), giving
+        only the even-indexed files.
+      tests:
+      - code: assert _stdout.strip() == '0\n2\n4\n6\n8'
+        message: Should print 0, 2, 4, 6, 8 — every other file

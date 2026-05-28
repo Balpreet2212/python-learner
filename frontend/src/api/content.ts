@@ -55,12 +55,23 @@ export const MiniCodeExSchema = z.object({
   ...storyBeats,
 });
 
+export const BreakFixExSchema = z.object({
+  type: z.literal("break_fix"),
+  prompt: z.string(),
+  broken_code: z.string(),
+  hint: z.string(),
+  test_count: z.number().int(),
+  explanation: z.string(),
+  ...storyBeats,
+});
+
 export const ExerciseSchema = z.discriminatedUnion("type", [
   ConceptExSchema,
   McqExSchema,
   ArrangeExSchema,
   FillBlankExSchema,
   MiniCodeExSchema,
+  BreakFixExSchema,
 ]);
 
 export type ConceptEx = z.infer<typeof ConceptExSchema>;
@@ -68,6 +79,7 @@ export type McqEx = z.infer<typeof McqExSchema>;
 export type ArrangeEx = z.infer<typeof ArrangeExSchema>;
 export type FillBlankEx = z.infer<typeof FillBlankExSchema>;
 export type MiniCodeEx = z.infer<typeof MiniCodeExSchema>;
+export type BreakFixEx = z.infer<typeof BreakFixExSchema>;
 export type Exercise = z.infer<typeof ExerciseSchema>;
 
 export const LessonSchema = z.object({

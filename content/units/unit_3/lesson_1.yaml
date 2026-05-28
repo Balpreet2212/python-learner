@@ -355,6 +355,19 @@ worlds:
         only eight or more characters will do.
       story_after: The camp ward hums to life, rejecting short passwords and accepting strong ones; Kira's party can rest
         safely tonight.
+    - type: break_fix
+      story_before: Elara's spell detector is almost ready, but the enchantment refuses to activate. She realises the incantation
+        line is missing the colon that seals the condition.
+      story_after: With the colon restored, the detector flares to life and correctly reports the creature's vitality.
+      prompt: The code should print 'alive' when hp is greater than 0. Fix the syntax error on the if line so the spell can
+        compile.
+      broken_code: "hp = 10\nif hp > 0\n    print(\"alive\")"
+      hint: Check the end of the if line — Python needs a specific punctuation mark there.
+      explanation: 'The if statement was missing its colon. Python requires a colon at the end of every if line: `if hp >
+        0:`.'
+      tests:
+      - code: assert _stdout.strip() == 'alive'
+        message: Should print 'alive' when hp is 10
   scifi:
     title: Triggering the Alert System
     exercises:
@@ -556,6 +569,19 @@ worlds:
         minimum.
       story_after: The door's logic is locked in; short codes bounce off, strong codes slide it open, and the engine room
         stays secure.
+    - type: break_fix
+      story_before: Yara's hull-status diagnostic script refuses to run, throwing a compile error before a single sensor reading
+        appears. She traces the fault to the condition line.
+      story_after: After adding the missing colon, the diagnostic runs cleanly and reports the hull is intact.
+      prompt: The code should print 'alive' when hp is greater than 0. Fix the syntax error on the if line so the diagnostic
+        can execute.
+      broken_code: "hp = 10\nif hp > 0\n    print(\"alive\")"
+      hint: Check the end of the if line — Python needs a specific punctuation mark there.
+      explanation: 'The if statement was missing its colon. Python requires a colon at the end of every if line: `if hp >
+        0:`.'
+      tests:
+      - code: assert _stdout.strip() == 'alive'
+        message: Should print 'alive' when hp is 10
   mystery:
     title: Acting on the First Clue
     exercises:
@@ -754,3 +780,16 @@ worlds:
         strong enough to have kept the killer out.
       story_after: The combination check is written; short codes get rejected, and Cole now knows whether the killer had inside
         knowledge.
+    - type: break_fix
+      story_before: Detective Cole's witness-filter script crashes before it can process a single name, leaving the case board
+        empty. He spots a syntax error right on the condition line.
+      story_after: With the colon in place, the script runs and correctly flags the witness as present.
+      prompt: The code should print 'alive' when hp is greater than 0. Fix the syntax error on the if line so the filter can
+        run.
+      broken_code: "hp = 10\nif hp > 0\n    print(\"alive\")"
+      hint: Check the end of the if line — Python needs a specific punctuation mark there.
+      explanation: 'The if statement was missing its colon. Python requires a colon at the end of every if line: `if hp >
+        0:`.'
+      tests:
+      - code: assert _stdout.strip() == 'alive'
+        message: Should print 'alive' when hp is 10

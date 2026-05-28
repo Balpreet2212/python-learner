@@ -333,6 +333,21 @@ worlds:
         whether the hour falls within the window.
       story_after: The window check is in place; the gate will stay closed before dawn and after dusk, opening only during
         the permitted hours.
+    - type: break_fix
+      story_before: Elara's vault requires BOTH a key AND the password to open, but her guardian spell is letting in anyone
+        who has only one of the two. The spell is using OR instead of AND.
+      story_after: With the logical operator corrected, the vault stays sealed unless the visitor possesses both the key and
+        the password.
+      prompt: The code should print 'denied' when has_key is True but knows_password is False. Fix the condition so BOTH requirements
+        must be met.
+      broken_code: "has_key = True\nknows_password = False\nif has_key or knows_password:\n    print(\"enter\")\nelse:\n \
+        \   print(\"denied\")"
+      hint: Check the logical operator in the if condition — should it be 'and' or 'or'?
+      explanation: Using `or` allows entry when either condition is true. Changing it to `and` ensures both has_key and knows_password
+        must be True before entry is granted.
+      tests:
+      - code: assert _stdout.strip() == 'denied'
+        message: Should print 'denied' when only one condition is met
   scifi:
     title: Launch Window Conditions
     exercises:
@@ -517,6 +532,20 @@ worlds:
         hour is inside the window.
       story_after: The window check is live; any launch attempt outside the hours will be blocked automatically by the new
         condition.
+    - type: break_fix
+      story_before: Yara's airlock safety protocol demands BOTH a keycard AND an authorisation code, but the script is cycling
+        open for anyone who swipes a keycard alone. The logical operator is wrong.
+      story_after: After changing the operator, the airlock correctly stays sealed until both credentials are presented.
+      prompt: The code should print 'denied' when has_key is True but knows_password is False. Fix the condition so BOTH requirements
+        must be met.
+      broken_code: "has_key = True\nknows_password = False\nif has_key or knows_password:\n    print(\"enter\")\nelse:\n \
+        \   print(\"denied\")"
+      hint: Check the logical operator in the if condition — should it be 'and' or 'or'?
+      explanation: Using `or` allows entry when either condition is true. Changing it to `and` ensures both has_key and knows_password
+        must be True before entry is granted.
+      tests:
+      - code: assert _stdout.strip() == 'denied'
+        message: Should print 'denied' when only one condition is met
   mystery:
     title: Ruling Out the Suspects
     exercises:
@@ -703,3 +732,17 @@ worlds:
         whether he can still get in.
       story_after: The window check is live; any visit outside the hours will print 'closed' and Cole will have to come back
         tomorrow.
+    - type: break_fix
+      story_before: Cole's restricted archive should only open for someone with BOTH a badge AND a PIN, but the access script
+        is granting entry to badge holders who don't know the PIN. The gate logic is using OR.
+      story_after: With the operator fixed, the archive correctly turns away anyone who cannot provide both credentials.
+      prompt: The code should print 'denied' when has_key is True but knows_password is False. Fix the condition so BOTH requirements
+        must be met.
+      broken_code: "has_key = True\nknows_password = False\nif has_key or knows_password:\n    print(\"enter\")\nelse:\n \
+        \   print(\"denied\")"
+      hint: Check the logical operator in the if condition — should it be 'and' or 'or'?
+      explanation: Using `or` allows entry when either condition is true. Changing it to `and` ensures both has_key and knows_password
+        must be True before entry is granted.
+      tests:
+      - code: assert _stdout.strip() == 'denied'
+        message: Should print 'denied' when only one condition is met

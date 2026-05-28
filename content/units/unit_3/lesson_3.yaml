@@ -401,6 +401,20 @@ worlds:
         reading into a weight category.
       story_after: The mass-index chain is complete; Kira can now classify any creature with a single scan, from underweight
         waif to heavy-set brute.
+    - type: break_fix
+      story_before: Elara's rank-display spell crashes the moment it tries to evaluate the second crystal tier. She discovers
+        a faulty elif that uses a single equals sign instead of the comparison operator.
+      story_after: With the comparison corrected, the crystal glows Silver for rank 2 just as the ancient texts describe.
+      prompt: The code should print 'Silver' when rank is 2. Fix the elif condition so it compares rank to 2 instead of assigning
+        it.
+      broken_code: "rank = 2\nif rank == 1:\n    print(\"Bronze\")\nelif rank = 2:\n    print(\"Silver\")\nelse:\n    print(\"\
+        Gold\")"
+      hint: Check the elif line — is it using the right operator to compare rank to 2?
+      explanation: The elif used `=` (assignment) instead of `==` (equality check). The fix is `elif rank == 2:` so Python
+        compares rather than assigns.
+      tests:
+      - code: assert _stdout.strip() == 'Silver'
+        message: Should print 'Silver' when rank is 2
   scifi:
     title: Status Levels
     exercises:
@@ -621,6 +635,20 @@ worlds:
       story_before: The med-bay scanner needs a body-mass classifier — Voss builds the elif chain that maps a float reading
         to a health category.
       story_after: The classifier is deployed; every crew member scanned will now receive an instant, unambiguous health category.
+    - type: break_fix
+      story_before: Yara's crew-rank display script throws a SyntaxError when the Helix tries to categorise a rank-2 engineer.
+        The second branch of the rating system is broken by a mistyped operator.
+      story_after: Once the operator is corrected, the display correctly shows 'Silver' for rank-2 crew members.
+      prompt: The code should print 'Silver' when rank is 2. Fix the elif condition so it compares rank to 2 instead of assigning
+        it.
+      broken_code: "rank = 2\nif rank == 1:\n    print(\"Bronze\")\nelif rank = 2:\n    print(\"Silver\")\nelse:\n    print(\"\
+        Gold\")"
+      hint: Check the elif line — is it using the right operator to compare rank to 2?
+      explanation: The elif used `=` (assignment) instead of `==` (equality check). The fix is `elif rank == 2:` so Python
+        compares rather than assigns.
+      tests:
+      - code: assert _stdout.strip() == 'Silver'
+        message: Should print 'Silver' when rank is 2
   mystery:
     title: Ranking Suspects
     exercises:
@@ -844,3 +872,17 @@ worlds:
         reading to a physical category.
       story_after: The classifier is deployed; every sample the scanner reads will now snap into one of four density categories
         instantly.
+    - type: break_fix
+      story_before: Detective Cole's suspect-tier classifier crashes on the second tier, leaving mid-level suspects unclassified.
+        A single character error in the elif condition is to blame.
+      story_after: After fixing the comparison operator, the classifier correctly identifies rank-2 suspects as 'Silver' tier.
+      prompt: The code should print 'Silver' when rank is 2. Fix the elif condition so it compares rank to 2 instead of assigning
+        it.
+      broken_code: "rank = 2\nif rank == 1:\n    print(\"Bronze\")\nelif rank = 2:\n    print(\"Silver\")\nelse:\n    print(\"\
+        Gold\")"
+      hint: Check the elif line — is it using the right operator to compare rank to 2?
+      explanation: The elif used `=` (assignment) instead of `==` (equality check). The fix is `elif rank == 2:` so Python
+        compares rather than assigns.
+      tests:
+      - code: assert _stdout.strip() == 'Silver'
+        message: Should print 'Silver' when rank is 2

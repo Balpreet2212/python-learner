@@ -501,6 +501,20 @@ worlds:
         performer.
       story_after: The highest-scoring apprentice's name is announced; Elara's roster system is complete and ready for Lesson
         5.
+    - type: break_fix
+      story_before: Elara summons two familiars — Luna and Rex — and tries to announce both of them, but the enchantment recites
+        Luna's name twice and Rex is never introduced.
+      story_after: Elara changes the second print to b.name and both familiars are announced in order.
+      prompt: Elara's code creates two Pet familiars but prints the first one's name twice. Fix the second print statement
+        so each familiar is announced correctly.
+      broken_code: "class Pet:\n    def __init__(self, name):\n        self.name = name\n\na = Pet(\"Luna\")\nb = Pet(\"Rex\"\
+        )\nprint(a.name)\nprint(a.name)"
+      hint: Check which instance variable is used in each print call — the second print should reference the second instance.
+      explanation: Both print statements use a.name, so Luna appears twice and Rex is never printed. Changing the second print
+        to b.name points it at the Rex instance and produces the correct output.
+      tests:
+      - code: assert _stdout.strip() == 'Luna\nRex'
+        message: Should print 'Luna' then 'Rex' on separate lines
   scifi:
     title: Deploying Multiple Units
     exercises:
@@ -766,6 +780,20 @@ worlds:
         member.
       story_after: The highest-graded crew member's name prints correctly; Voss is ready to extend the class hierarchy in
         Lesson 5.
+    - type: break_fix
+      story_before: Yara deploys two drone units — Luna and Rex — and attempts to log both unit IDs to the mission console,
+        but the log shows Luna's identifier for both entries.
+      story_after: Yara corrects the second log line to b.name and both drone IDs appear on the manifest.
+      prompt: Yara's code registers two Pet drones but reads the first unit's name for both print calls. Fix the second print
+        so each drone's ID is logged correctly.
+      broken_code: "class Pet:\n    def __init__(self, name):\n        self.name = name\n\na = Pet(\"Luna\")\nb = Pet(\"Rex\"\
+        )\nprint(a.name)\nprint(a.name)"
+      hint: Check which instance variable is used in each print call — the second print should reference the second instance.
+      explanation: The second print(a.name) reads from the first instance again instead of the second. Replacing a.name with
+        b.name in the second print outputs Rex as intended.
+      tests:
+      - code: assert _stdout.strip() == 'Luna\nRex'
+        message: Should print 'Luna' then 'Rex' on separate lines
   mystery:
     title: Multiple Witnesses
     exercises:
@@ -1033,3 +1061,17 @@ worlds:
         reliable one.
       story_after: The top-ranked informant's name prints; Cole's multi-instance roster is complete and ready for the inheritance
         lesson.
+    - type: break_fix
+      story_before: Cole logs two witnesses — Luna and Rex — into the case system and asks it to print both names, but the
+        report lists Luna twice and Rex's entry is completely missing.
+      story_after: Cole updates the second print to b.name and the witness log correctly lists both names.
+      prompt: Cole's code creates two Pet witnesses but the second print statement names the wrong instance. Correct it so
+        the report prints each witness's name once.
+      broken_code: "class Pet:\n    def __init__(self, name):\n        self.name = name\n\na = Pet(\"Luna\")\nb = Pet(\"Rex\"\
+        )\nprint(a.name)\nprint(a.name)"
+      hint: Check which instance variable is used in each print call — the second print should reference the second instance.
+      explanation: print(a.name) is called twice, so 'Luna' appears twice and 'Rex' is never printed. Changing the second
+        call to print(b.name) directs it to the Rex instance and fixes the report.
+      tests:
+      - code: assert _stdout.strip() == 'Luna\nRex'
+        message: Should print 'Luna' then 'Rex' on separate lines

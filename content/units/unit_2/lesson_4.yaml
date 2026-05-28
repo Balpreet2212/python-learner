@@ -365,6 +365,25 @@ worlds:
         message: bool('') is False
       story_before: Finn reads a rune inscription and needs to print True if it is non-empty, False if the tablet is blank.
       story_after: The Truth Stone's logic is now encoded in Finn's spellbook — he can test any value on the mountain.
+    - type: break_fix
+      story_before: Elara's Truth Stone should light up when a score is high enough OR a bonus meets its target — but the
+        code uses and instead of or, so the stone stays dark even when one condition is true.
+      story_after: The Truth Stone glows True and Elara's mentor confirms the logical gate is now correct.
+      prompt: Fix the code so is_valid is True when score >= 50 OR bonus >= 10, and print it. With score = 80 and bonus =
+        5 the result should be True.
+      broken_code: 'score = 80
+
+        bonus = 5
+
+        is_valid = (score >= 50) and (bonus >= 10)
+
+        print(is_valid)'
+      hint: Look for the wrong logical operator — only one condition needs to be true here.
+      explanation: and requires both conditions to be True, so True and False gives False. Changing and to or means True or
+        False gives True, which is the intended behaviour.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (score >= 50 OR bonus >= 10)
   scifi:
     title: Binary Sensor Readings
     exercises:
@@ -567,6 +586,25 @@ worlds:
         message: bool('') is False
       story_before: Zara reads a transmission signal and needs to print True if it contains data, False if it is empty.
       story_after: Binary sensor logic is fully operational — the Helix now processes every reading as a clean True or False.
+    - type: break_fix
+      story_before: Zara's status flag should read True when power is sufficient OR the bonus reserve meets its minimum —
+        but the code uses and instead of or, so the flag stays False even when power is fine.
+      story_after: True prints on the status panel and Zara clears the ship for the next manoeuvre.
+      prompt: Fix the code so is_valid is True when score >= 50 OR bonus >= 10, and print it. With score = 80 and bonus =
+        5 the result should be True.
+      broken_code: 'score = 80
+
+        bonus = 5
+
+        is_valid = (score >= 50) and (bonus >= 10)
+
+        print(is_valid)'
+      hint: Look for the wrong logical operator — only one condition needs to be true here.
+      explanation: and requires both conditions to be True, so True and False gives False. Changing and to or means True or
+        False gives True, which is the intended behaviour.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (score >= 50 OR bonus >= 10)
   mystery:
     title: True or False?
     exercises:
@@ -770,3 +808,22 @@ worlds:
         message: bool('') is False
       story_before: Cole reads a witness statement and needs to print True if it is non-empty, False if it is blank.
       story_after: Every piece of evidence is now classified True or False — Cole's investigation engine is fully operational.
+    - type: break_fix
+      story_before: Cole's profile flag should be set True when a suspect score is high enough OR a bonus indicator meets
+        its bar — but the code uses and instead of or, and the flag returns False even when the score alone qualifies.
+      story_after: True prints in the case file and Cole adds the suspect to the active list.
+      prompt: Fix the code so is_valid is True when score >= 50 OR bonus >= 10, and print it. With score = 80 and bonus =
+        5 the result should be True.
+      broken_code: 'score = 80
+
+        bonus = 5
+
+        is_valid = (score >= 50) and (bonus >= 10)
+
+        print(is_valid)'
+      hint: Look for the wrong logical operator — only one condition needs to be true here.
+      explanation: and requires both conditions to be True, so True and False gives False. Changing and to or means True or
+        False gives True, which is the intended behaviour.
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        message: Should print True (score >= 50 OR bonus >= 10)

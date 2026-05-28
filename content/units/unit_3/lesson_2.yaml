@@ -436,6 +436,20 @@ worlds:
         exceeding the safe approach limit.
       story_after: The check is in place; any charge beyond the limit will flag 'speeding' and give Kira time to raise the
         alarm.
+    - type: break_fix
+      story_before: Elara's path-chooser spell is supposed to guide travellers who score 50 or higher down the safe road,
+        but adventurers are being sent the wrong way entirely. The messages in the two branches have been swapped.
+      story_after: Once the messages are corrected, the spell sends high-scorers down the right path and the forest is safe
+        again.
+      prompt: The code should print 'Pass' when score is 75 (>= 50) and 'Fail' otherwise. Swap the print strings so each branch
+        shows the correct message.
+      broken_code: "score = 75\nif score >= 50:\n    print(\"Fail\")\nelse:\n    print(\"Pass\")"
+      hint: Look at what each branch prints — are 'Pass' and 'Fail' in the right branches?
+      explanation: The print strings were swapped. When score >= 50 the code should print 'Pass', and the else branch should
+        print 'Fail'.
+      tests:
+      - code: assert _stdout.strip() == 'Pass'
+        message: Should print 'Pass' when score is 75
   scifi:
     title: Mission Go / No Go
     exercises:
@@ -675,6 +689,19 @@ worlds:
         safe approach limit.
       story_after: The check is live; any object exceeding the limit will trigger 'speeding' and auto-engage the deflector
         array.
+    - type: break_fix
+      story_before: 'Yara''s launch-readiness checker is displaying the wrong status: a perfectly safe score of 75 is triggering
+        a ''Fail'' alarm while an actual failure would show ''Pass''. The branch messages are reversed.'
+      story_after: With the messages corrected, the launch checker gives the crew accurate go/no-go readings.
+      prompt: The code should print 'Pass' when score is 75 (>= 50) and 'Fail' otherwise. Swap the print strings so each branch
+        shows the correct message.
+      broken_code: "score = 75\nif score >= 50:\n    print(\"Fail\")\nelse:\n    print(\"Pass\")"
+      hint: Look at what each branch prints — are 'Pass' and 'Fail' in the right branches?
+      explanation: The print strings were swapped. When score >= 50 the code should print 'Pass', and the else branch should
+        print 'Fail'.
+      tests:
+      - code: assert _stdout.strip() == 'Pass'
+        message: Should print 'Pass' when score is 75
   mystery:
     title: Suspect or Witness?
     exercises:
@@ -913,3 +940,17 @@ worlds:
       story_before: Cole clocks a fleeing car — he writes the script that decides whether its speed exceeds the legal limit,
         making it a lead worth chasing.
       story_after: The check is live; any vehicle over the limit prints 'speeding' and Cole has grounds to call in the pursuit.
+    - type: break_fix
+      story_before: Detective Cole's verdict printer is embarrassing the precinct — a suspect with plenty of evidence against
+        them is being printed as 'Pass' while the innocent are labelled 'Fail'. Someone swapped the branch messages.
+      story_after: After fixing the messages, the verdict printer correctly labels each outcome and Cole can proceed with
+        confidence.
+      prompt: The code should print 'Pass' when score is 75 (>= 50) and 'Fail' otherwise. Swap the print strings so each branch
+        shows the correct message.
+      broken_code: "score = 75\nif score >= 50:\n    print(\"Fail\")\nelse:\n    print(\"Pass\")"
+      hint: Look at what each branch prints — are 'Pass' and 'Fail' in the right branches?
+      explanation: The print strings were swapped. When score >= 50 the code should print 'Pass', and the else branch should
+        print 'Fail'.
+      tests:
+      - code: assert _stdout.strip() == 'Pass'
+        message: Should print 'Pass' when score is 75

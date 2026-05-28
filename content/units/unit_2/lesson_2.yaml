@@ -364,6 +364,20 @@ worlds:
         message: Should use parentheses to control order of operations
       story_before: Finn's final spell formula is (12 + 8) * (5 - 3) — he needs to print the correct result using parentheses.
       story_after: 40 — the spell formula checks out, and Finn commits it to memory for the summit battle.
+    - type: break_fix
+      story_before: Elara's spell formula should add two ingredient counts together first, then multiply by the batch size
+        — but without parentheses the multiplication runs first and the result is wrong.
+      story_after: With the brackets in place the spell formula returns 20, and the batch size is correct.
+      prompt: Fix the code so the addition happens before the multiplication and it prints 20.
+      broken_code: 'result = 2 + 3 * 4
+
+        print(result)'
+      hint: Look for missing parentheses — addition needs to happen before multiplication here.
+      explanation: Without parentheses Python evaluates 3 * 4 = 12 first, then adds 2, giving 14. Wrapping the addition in
+        brackets, (2 + 3) * 4, forces it to run first and gives 20.
+      tests:
+      - code: assert _stdout.strip() == '20'
+        message: Should print 20 ((2 + 3) * 4)
   scifi:
     title: Trajectory Calculation
     exercises:
@@ -568,6 +582,20 @@ worlds:
       story_before: Zara's trajectory formula is (12 + 8) * (5 - 3) — she must print the correct result using parentheses.
       story_after: 40 — the formula checks out; Zara fires the manoeuvring thrusters and the Helix slides onto the correct
         course.
+    - type: break_fix
+      story_before: Zara's power formula adds two energy sources and then multiplies by the boost factor — but the missing
+        parentheses mean the multiplication runs first and the output is wrong.
+      story_after: The corrected formula prints 20 and the Helix's boost calculation is accurate.
+      prompt: Fix the code so the addition happens before the multiplication and it prints 20.
+      broken_code: 'result = 2 + 3 * 4
+
+        print(result)'
+      hint: Look for missing parentheses — addition needs to happen before multiplication here.
+      explanation: Without parentheses Python evaluates 3 * 4 = 12 first, then adds 2, giving 14. Wrapping the addition in
+        brackets, (2 + 3) * 4, forces it to run first and gives 20.
+      tests:
+      - code: assert _stdout.strip() == '20'
+        message: Should print 20 ((2 + 3) * 4)
   mystery:
     title: Calculating Evidence
     exercises:
@@ -778,3 +806,17 @@ worlds:
         message: Should use parentheses to control order of operations
       story_before: Cole's evidence formula is (12 + 8) * (5 - 3) — he must print the correct result using parentheses.
       story_after: 40 — the formula confirms the suspect's opportunity window, and Cole closes the casebook with quiet certainty.
+    - type: break_fix
+      story_before: Cole's scoring formula combines two clue groups and scales them by the case weight — but without parentheses
+        the multiplication runs first and the score comes out wrong.
+      story_after: The corrected formula prints 20 and Cole's evidence weight is properly calculated.
+      prompt: Fix the code so the addition happens before the multiplication and it prints 20.
+      broken_code: 'result = 2 + 3 * 4
+
+        print(result)'
+      hint: Look for missing parentheses — addition needs to happen before multiplication here.
+      explanation: Without parentheses Python evaluates 3 * 4 = 12 first, then adds 2, giving 14. Wrapping the addition in
+        brackets, (2 + 3) * 4, forces it to run first and gives 20.
+      tests:
+      - code: assert _stdout.strip() == '20'
+        message: Should print 20 ((2 + 3) * 4)

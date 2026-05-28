@@ -358,6 +358,18 @@ worlds:
       story_before: Master Theo asks Elara to craft a greeting recipe that welcomes any ingredient by name.
       story_after: The workshop echoes with 'Hello, World!' and 'Hello, Alice!' — Elara's recipe library has its first two
         spells.
+    - type: break_fix
+      story_before: Elara carefully inscribes her first potion recipe as a spell named greet, but when she tries to cast it
+        she calls it by the wrong name and the cauldron explodes with an error.
+      story_after: With the spell name corrected, the cauldron chimes 'hello' and Elara's first successful recipe is complete.
+      prompt: Fix the code so the function greet is called by its correct name and prints 'hello'.
+      broken_code: "def greet():\n    print(\"hello\")\n\ngreat()"
+      hint: Look for the misspelled function name in the call — the function is defined as greet, not great.
+      explanation: great() raises a NameError because no function called great exists. Changing the call to greet() matches
+        the definition and prints 'hello'.
+      tests:
+      - code: assert _stdout.strip() == 'hello'
+        message: Should print hello
   scifi:
     title: Programming the First Drone
     exercises:
@@ -553,6 +565,18 @@ worlds:
         message: Should print 'Hello, Alice!'
       story_before: Sana needs a generic greeting subroutine for the ship's comm system; Yara writes it now.
       story_after: Hello, World! and Hello, Alice! broadcast successfully — the comm subroutine is ready for any crew member.
+    - type: break_fix
+      story_before: Yara programs a diagnostic routine on the Helix called greet, but her launch command contains a typo and
+        the ship's console throws a NameError.
+      story_after: The corrected command fires the routine and 'hello' confirms the diagnostic subroutine is online.
+      prompt: Fix the code so the function greet is called by its correct name and prints 'hello'.
+      broken_code: "def greet():\n    print(\"hello\")\n\ngreat()"
+      hint: Look for the misspelled function name in the call — the function is defined as greet, not great.
+      explanation: great() raises a NameError because no function called great exists. Changing the call to greet() matches
+        the definition and prints 'hello'.
+      tests:
+      - code: assert _stdout.strip() == 'hello'
+        message: Should print hello
   mystery:
     title: Creating the First Tool
     exercises:
@@ -749,3 +773,15 @@ worlds:
       story_before: Cole needs a greeting tool that introduces suspects by name; he writes it and tests it twice.
       story_after: Hello, World! and Hello, Alice! — the greeting tool works, and Cole's procedural toolkit is beginning to
         take shape.
+    - type: break_fix
+      story_before: Detective Cole writes a search function called greet to kick off his investigation, but when he runs it
+        he misspells the name and the precinct terminal crashes with a NameError.
+      story_after: The corrected call runs without error and 'hello' appears on the terminal — Cole's first tool is operational.
+      prompt: Fix the code so the function greet is called by its correct name and prints 'hello'.
+      broken_code: "def greet():\n    print(\"hello\")\n\ngreat()"
+      hint: Look for the misspelled function name in the call — the function is defined as greet, not great.
+      explanation: great() raises a NameError because no function called great exists. Changing the call to greet() matches
+        the definition and prints 'hello'.
+      tests:
+      - code: assert _stdout.strip() == 'hello'
+        message: Should print hello

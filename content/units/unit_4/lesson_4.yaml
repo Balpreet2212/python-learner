@@ -353,6 +353,20 @@ worlds:
         message: Should print exactly 7 multiples of 7 below 50
       story_before: The champion earns a milestone banner every 7 rounds — she must print all multiples of 7 below 50.
       story_after: Banners raised at 7, 14, 21 … 49 — the champion's trial is complete and she is proclaimed worthy.
+    - type: break_fix
+      story_before: Elara's training counter is supposed to put the hero through three rounds of drills before declaring them
+        done, but the champion never trains at all — the counter sits idle and only 'done' appears.
+      story_after: Flipping the condition to count < 3 lets the loop run three rounds, printing 0, 1, and 2 before the champion
+        declares 'done'.
+      prompt: The training loop should print 0, 1, 2 then print 'done', but the while condition is wrong so the loop never
+        executes. Fix the condition.
+      broken_code: "count = 0\nwhile count > 0:\n    print(count)\n    count += 1\nprint(\"done\")"
+      hint: Think about whether the condition is True when count starts at 0 — you may need to flip the comparison.
+      explanation: count starts at 0, so count > 0 is immediately False and the loop body never runs. Changing the condition
+        to count < 3 makes it True at the start and runs the loop for counts 0, 1, and 2.
+      tests:
+      - code: assert _stdout.strip() == '0\n1\n2\ndone'
+        message: Should print 0, 1, 2 then done
   scifi:
     title: Power Build-Up
     exercises:
@@ -541,6 +555,20 @@ worlds:
         message: Should print exactly 7 multiples of 7 below 50
       story_before: Maintenance windows occur at every 7th power unit — Yara prints all multiples of 7 below 50.
       story_after: Maintenance points logged at 7, 14 … 49 — the power build-up sequence is complete.
+    - type: break_fix
+      story_before: Yara's boot-cycle sequence is supposed to tick through three initialisation stages before the ship comes
+        online, but the reactor console skips straight to the 'done' message — no cycles ever run.
+      story_after: Correcting the condition to count < 3 triggers all three boot cycles, logging 0, 1, and 2 before the system
+        prints 'done'.
+      prompt: The boot-cycle loop should print 0, 1, 2 then print 'done', but the while condition prevents the loop from ever
+        starting. Fix the condition.
+      broken_code: "count = 0\nwhile count > 0:\n    print(count)\n    count += 1\nprint(\"done\")"
+      hint: Check the direction of the comparison — with count at 0, is count > 0 ever True at the start?
+      explanation: Because count is initialised to 0, the condition count > 0 is False immediately and the loop is skipped.
+        Using count < 3 makes the condition True at launch, running the loop for values 0, 1, and 2.
+      tests:
+      - code: assert _stdout.strip() == '0\n1\n2\ndone'
+        message: Should print 0, 1, 2 then done
   mystery:
     title: Repeating the Search
     exercises:
@@ -728,3 +756,17 @@ worlds:
         message: Should print exactly 7 multiples of 7 below 50
       story_before: Every 7th clue gets a priority flag — Cole prints all multiples of 7 below 50.
       story_after: Priority clues flagged at 7, 14 … 49 — the investigation loop is closed and the case moves forward.
+    - type: break_fix
+      story_before: Cole's evidence-review loop should cycle through three passes before closing the file, but the review
+        never starts — the program jumps straight to 'done' without examining anything.
+      story_after: Changing the condition to count < 3 allows the loop to run three review passes, printing 0, 1, and 2 before
+        Cole writes 'done' in the case log.
+      prompt: Cole's review loop should print 0, 1, 2 then print 'done', but the while condition is wrong so the loop never
+        runs. Fix the condition.
+      broken_code: "count = 0\nwhile count > 0:\n    print(count)\n    count += 1\nprint(\"done\")"
+      hint: count starts at 0 — evaluate whether count > 0 is True or False at that point.
+      explanation: count > 0 evaluates to False when count is 0, so the loop body is skipped entirely. The fix is to use count
+        < 3, which is True for 0, 1, and 2 before becoming False at 3.
+      tests:
+      - code: assert _stdout.strip() == '0\n1\n2\ndone'
+        message: Should print 0, 1, 2 then done
