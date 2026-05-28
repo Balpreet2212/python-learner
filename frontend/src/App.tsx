@@ -11,6 +11,7 @@ import SettingsPage from "./pages/SettingsPage";
 import BillingPage from "./pages/BillingPage";
 import AccountPage from "./pages/AccountPage";
 import DashboardPage from "./pages/DashboardPage";
+import ProgressPage from "./pages/ProgressPage";
 import ChallengesPage from "./pages/ChallengesPage";
 import WeeklyChallengePage from "./pages/WeeklyChallengePage";
 import LoginPage from "./pages/auth/LoginPage";
@@ -125,6 +126,7 @@ export default function App() {
       >
         <Route index element={<Navigate to="/dashboard/account" replace />} />
         <Route path="account" element={<AccountPage />} />
+        <Route path="progress" element={<ProgressPage />} />
         <Route path="billing" element={<BillingPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
