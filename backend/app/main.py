@@ -1,8 +1,6 @@
 import logging
 from pathlib import Path
 
-from alembic import command
-from alembic.config import Config
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -17,13 +15,6 @@ from app.parent.router import router as parent_router
 from app.progress.router import router as progress_router
 from app.daily.router import router as daily_router
 from app.weekly.router import router as weekly_router
-
-def _run_migrations() -> None:
-    cfg = Config(Path(__file__).parents[1] / "alembic.ini")
-    cfg.set_main_option("script_location", str(Path(__file__).parents[1] / "alembic"))
-    command.upgrade(cfg, "head")
-
-_run_migrations()
 
 logging.basicConfig(
     level=logging.INFO,
