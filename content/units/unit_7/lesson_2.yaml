@@ -1,385 +1,895 @@
-title: "Methods"
+title: Methods
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      class Lamp:
-          def __init__(self, brightness):
-              self.brightness = brightness
+- type: concept
+  code: "class Lamp:\n    def __init__(self, brightness):\n        self.brightness = brightness\n\n    def is_bright(self):\n\
+    \        return self.brightness >= 50\n\n    def describe(self):\n        return f\"Lamp at {self.brightness}%\"\n\ndesk\
+    \ = Lamp(70)\nprint(desk.is_bright())\nprint(desk.describe())\n"
+  output: 'True
 
-          def is_bright(self):
-              return self.brightness >= 50
+    Lamp at 70%'
+  explanation: Methods are functions inside a class. They always take self as their first parameter to access the object's
+    attributes.
+- type: mcq
+  question: What does this print?
+  code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return self.name\
+    \ + ' says Woof!'\n\nd = Dog('Rex')\nprint(d.bark())"
+  choices:
+  - Rex says Woof!
+  - Woof!
+  - name says Woof!
+  - self.name
+  correct: Rex says Woof!
+  explanation: bark() returns self.name + ' says Woof!'. self.name is 'Rex'.
+- type: fill_blank
+  prompt: Use the stored radius attribute in the area calculation.
+  before: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return\
+    \ 3.14 * self."
+  after: ' ** 2
 
-          def describe(self):
-              return f"Lamp at {self.brightness}%"
 
-      desk = Lamp(70)
-      print(desk.is_bright())
-      print(desk.describe())
-    output: "True\nLamp at 70%"
-    explanation: "Methods are functions inside a class. They always take self as their first parameter to access the object's attributes."
+    c = Circle(5)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return self.name + ' says Woof!'\n\nd = Dog('Rex')\nprint(d.bark())"
-    choices: ["Rex says Woof!", "Woof!", "name says Woof!", "self.name"]
-    correct: "Rex says Woof!"
-    explanation: "bark() returns self.name + ' says Woof!'. self.name is 'Rex'."
+    print(c.area())'
+  choices:
+  - radius
+  - area
+  - self
+  - r
+  answer: radius
+  explanation: self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5.
+- type: mcq
+  question: What does this print?
+  code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\
+    \nc = Counter()\nprint(c.value())"
+  choices:
+  - '0'
+  - None
+  - count
+  - self.count
+  correct: '0'
+  explanation: count starts at 0 in __init__. value() returns self.count which is 0.
+- type: arrange
+  instruction: Add a method greet() to Person that returns 'Hi, I am [name]'
+  blocks:
+  - class
+  - Person
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - name
+  - )
+  - ':'
+  - self
+  - .
+  - name
+  - '='
+  - name
+  - def
+  - greet
+  - (
+  - self
+  - )
+  - ':'
+  - return
+  - f"Hi, I am {self.name}"
+  - p
+  - '='
+  - Person
+  - (
+  - '"Alice"'
+  - )
+  - print
+  - (
+  - p
+  - .
+  - greet
+  - (
+  - )
+  - )
+  correct:
+  - class
+  - Person
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - name
+  - )
+  - ':'
+  - self
+  - .
+  - name
+  - '='
+  - name
+  - def
+  - greet
+  - (
+  - self
+  - )
+  - ':'
+  - return
+  - f"Hi, I am {self.name}"
+  - p
+  - '='
+  - Person
+  - (
+  - '"Alice"'
+  - )
+  - print
+  - (
+  - p
+  - .
+  - greet
+  - (
+  - )
+  - )
+  explanation: Define greet with (self) parameter, return an f-string using self.name. Call with p.greet().
+- type: mcq
+  question: What does this print?
+  code: "class Rectangle:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n  \
+    \      return self.w * self.h\n\nr = Rectangle(4, 5)\nprint(r.area())"
+  choices:
+  - '20'
+  - '9'
+  - '4'
+  - '5'
+  correct: '20'
+  explanation: area() returns self.w * self.h = 4 * 5 = 20.
+- type: fill_blank
+  prompt: 'Complete the Fahrenheit formula: multiply by 9/5 then add 32.'
+  before: "class Thermometer:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n\
+    \        return self.celsius * 9/5 "
+  after: ' 32
 
-  - type: fill_blank
-    prompt: "Use the stored radius attribute in the area calculation."
-    before: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
-    after: " ** 2\n\nc = Circle(5)\nprint(c.area())"
-    choices: ["radius", "area", "self", "r"]
-    answer: "radius"
-    explanation: "self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5."
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\nc = Counter()\nprint(c.value())"
-    choices: ["0", "None", "count", "self.count"]
-    correct: "0"
-    explanation: "count starts at 0 in __init__. value() returns self.count which is 0."
+    t = Thermometer(100)
 
-  - type: arrange
-    instruction: "Add a method greet() to Person that returns 'Hi, I am [name]'"
-    blocks: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-    correct: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-    explanation: "Define greet with (self) parameter, return an f-string using self.name. Call with p.greet()."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Rectangle:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = Rectangle(4, 5)\nprint(r.area())"
-    choices: ["20", "9", "4", "5"]
-    correct: "20"
-    explanation: "area() returns self.w * self.h = 4 * 5 = 20."
-
-  - type: fill_blank
-    prompt: "Complete the Fahrenheit formula: multiply by 9/5 then add 32."
-    before: "class Thermometer:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
-    after: " 32\n\nt = Thermometer(100)\nprint(t.to_fahrenheit())"
-    choices: ["+", "-", "*", "/"]
-    answer: "+"
-    explanation: "Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Password:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw) >= 8\n\np = Password('abc123')\nprint(p.is_strong())"
-    choices: ["False", "True", "6", "8"]
-    correct: "False"
-    explanation: "'abc123' has 6 characters. len >= 8 is False."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Box:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n        return self.l * self.w * self.h\n\nb = Box(2, 3, 4)\nprint(b.volume())"
-    choices: ["24", "9", "6", "12"]
-    correct: "24"
-    explanation: "volume = 2 * 3 * 4 = 24."
-
-  - type: mini_code
-    prompt: "Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height."
-    starter: ""
-    tests:
-      - code: "assert Triangle(6, 4).area() == 12.0"
-        message: "Triangle(6, 4).area() should return 12.0"
-      - code: "assert Triangle(10, 3).area() == 15.0"
-        message: "Triangle(10, 3).area() should return 15.0"
-
-  - type: mini_code
-    prompt: "Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise."
-    starter: ""
-    tests:
-      - code: "assert BankAccount(50).is_overdrawn() == False"
-        message: "balance=50 is not overdrawn"
-      - code: "assert BankAccount(-10).is_overdrawn() == True"
-        message: "balance=-10 is overdrawn"
-
+    print(t.to_fahrenheit())'
+  choices:
+  - +
+  - '-'
+  - '*'
+  - /
+  answer: +
+  explanation: Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F.
+- type: mcq
+  question: What does this print?
+  code: "class Password:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw)\
+    \ >= 8\n\np = Password('abc123')\nprint(p.is_strong())"
+  choices:
+  - 'False'
+  - 'True'
+  - '6'
+  - '8'
+  correct: 'False'
+  explanation: '''abc123'' has 6 characters. len >= 8 is False.'
+- type: mcq
+  question: What does this print?
+  code: "class Box:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n\
+    \        return self.l * self.w * self.h\n\nb = Box(2, 3, 4)\nprint(b.volume())"
+  choices:
+  - '24'
+  - '9'
+  - '6'
+  - '12'
+  correct: '24'
+  explanation: volume = 2 * 3 * 4 = 24.
+- type: mini_code
+  prompt: Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height.
+  starter: ''
+  tests:
+  - code: assert Triangle(6, 4).area() == 12.0
+    message: Triangle(6, 4).area() should return 12.0
+  - code: assert Triangle(10, 3).area() == 15.0
+    message: Triangle(10, 3).area() should return 15.0
+- type: mini_code
+  prompt: Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is
+    below 0, False otherwise.
+  starter: ''
+  tests:
+  - code: assert BankAccount(50).is_overdrawn() == False
+    message: balance=50 is not overdrawn
+  - code: assert BankAccount(-10).is_overdrawn() == True
+    message: balance=-10 is overdrawn
 worlds:
   fantasy:
-    title: "Spellbook Methods"
+    title: Spellbook Methods
     exercises:
-      - type: concept
-        code: |
-          class Creature:
-              def __init__(self, power):
-                  self.power = power
+    - type: concept
+      code: "class Creature:\n    def __init__(self, power):\n        self.power = power\n\n    def is_dangerous(self):\n\
+        \        return self.power >= 50\n\n    def describe(self):\n        return f\"Creature at {self.power}% power\"\n\
+        \nwyvern = Creature(70)\nprint(wyvern.is_dangerous())\nprint(wyvern.describe())\n"
+      output: 'True
 
-              def is_dangerous(self):
-                  return self.power >= 50
+        Creature at 70% power'
+      explanation: Methods are functions inside a Creature class. Scholar Ash calls them to learn about each beast. They always
+        take self as their first parameter to access the creature's attributes.
+      story_before: Ash's Creature blueprints now hold data, but the bestiary needs behaviours too — methods that can speak
+        for each beast.
+      story_after: The Creature gains is_dangerous and describe methods; Ash can now interrogate any beast through its own
+        built-in actions.
+    - type: mcq
+      question: What does this print?
+      code: "class Dragon:\n    def __init__(self, name):\n        self.name = name\n    def roar(self):\n        return self.name\
+        \ + ' says Woof!'\n\nd = Dragon('Rex')\nprint(d.roar())"
+      choices:
+      - Rex says Woof!
+      - Woof!
+      - name says Woof!
+      - self.name
+      correct: Rex says Woof!
+      explanation: roar() returns self.name + ' says Woof!'. self.name is 'Rex'.
+      story_before: A Dragon's roar() method is defined — Ash must predict what the dragon announces when called.
+      story_after: The roar returns 'Rex says Woof!' as written; Ash confirms that methods reach into self.name to build their
+        output.
+    - type: fill_blank
+      prompt: Use the stored radius attribute in the magic circle area calculation.
+      before: "class MagicCircle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n  \
+        \      return 3.14 * self."
+      after: ' ** 2
 
-              def describe(self):
-                  return f"Creature at {self.power}% power"
 
-          wyvern = Creature(70)
-          print(wyvern.is_dangerous())
-          print(wyvern.describe())
-        output: "True\nCreature at 70% power"
-        explanation: "Methods are functions inside a Creature class. Scholar Ash calls them to learn about each beast. They always take self as their first parameter to access the creature's attributes."
+        c = MagicCircle(5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Dragon:\n    def __init__(self, name):\n        self.name = name\n    def roar(self):\n        return self.name + ' says Woof!'\n\nd = Dragon('Rex')\nprint(d.roar())"
-        choices: ["Rex says Woof!", "Woof!", "name says Woof!", "self.name"]
-        correct: "Rex says Woof!"
-        explanation: "roar() returns self.name + ' says Woof!'. self.name is 'Rex'."
+        print(c.area())'
+      choices:
+      - radius
+      - area
+      - self
+      - r
+      answer: radius
+      explanation: self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5.
+      story_before: A MagicCircle needs an area() method, but the correct attribute name must be supplied inside the formula.
+      story_after: With self.radius in place, the circle's area computes correctly — the spell diagram is accurately measured.
+    - type: mcq
+      question: What does this print?
+      code: "class SpellSlot:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\
+        \nc = SpellSlot()\nprint(c.value())"
+      choices:
+      - '0'
+      - None
+      - count
+      - self.count
+      correct: '0'
+      explanation: count starts at 0 in __init__. value() returns self.count which is 0.
+      story_before: A SpellSlot tracker starts empty — Ash must follow value() to see what it returns before any spell is
+        cast.
+      story_after: Zero returns, as expected; Ash sees that a method simply reads back whatever state the object currently
+        holds.
+    - type: arrange
+      instruction: Add a method introduce() to Mage that returns 'Hi, I am [name]'
+      blocks:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      explanation: Ash defines introduce with (self) parameter, return an f-string using self.name. Call with p.greet().
+      story_before: Ash wants to give a Mage an introduce() method that announces its name — the pieces need arranging.
+      story_after: The introduce method slots into the Mage blueprint; the wizard can now speak its own name without external
+        help.
+    - type: mcq
+      question: What does this print?
+      code: "class Altar:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n  \
+        \      return self.w * self.h\n\nr = Altar(4, 5)\nprint(r.area())"
+      choices:
+      - '20'
+      - '9'
+      - '4'
+      - '5'
+      correct: '20'
+      explanation: area() returns self.w * self.h = 4 * 5 = 20.
+      story_before: An Altar's area() multiplies its two dimensions — Ash must verify the result for width 4, height 5.
+      story_after: Area 20 is returned; Ash sees how a method can take stored attributes and combine them into a useful result.
+    - type: fill_blank
+      prompt: 'Complete the heat formula: multiply by 9/5 then add 32 to convert the dragon''s flame temperature.'
+      before: "class FlameGauge:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n\
+        \        return self.celsius * 9/5 "
+      after: ' 32
 
-      - type: fill_blank
-        prompt: "Use the stored radius attribute in the magic circle area calculation."
-        before: "class MagicCircle:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
-        after: " ** 2\n\nc = MagicCircle(5)\nprint(c.area())"
-        choices: ["radius", "area", "self", "r"]
-        answer: "radius"
-        explanation: "self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5."
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class SpellSlot:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\nc = SpellSlot()\nprint(c.value())"
-        choices: ["0", "None", "count", "self.count"]
-        correct: "0"
-        explanation: "count starts at 0 in __init__. value() returns self.count which is 0."
+        t = FlameGauge(100)
 
-      - type: arrange
-        instruction: "Add a method introduce() to Mage that returns 'Hi, I am [name]'"
-        blocks: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        correct: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        explanation: "Ash defines introduce with (self) parameter, return an f-string using self.name. Call with p.greet()."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Altar:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = Altar(4, 5)\nprint(r.area())"
-        choices: ["20", "9", "4", "5"]
-        correct: "20"
-        explanation: "area() returns self.w * self.h = 4 * 5 = 20."
-
-      - type: fill_blank
-        prompt: "Complete the heat formula: multiply by 9/5 then add 32 to convert the dragon's flame temperature."
-        before: "class FlameGauge:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
-        after: " 32\n\nt = FlameGauge(100)\nprint(t.to_fahrenheit())"
-        choices: ["+", "-", "*", "/"]
-        answer: "+"
-        explanation: "Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Rune:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw) >= 8\n\np = Rune('abc123')\nprint(p.is_strong())"
-        choices: ["False", "True", "6", "8"]
-        correct: "False"
-        explanation: "'abc123' has 6 characters. len >= 8 is False."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Chest:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n        return self.l * self.w * self.h\n\nb = Chest(2, 3, 4)\nprint(b.volume())"
-        choices: ["24", "9", "6", "12"]
-        correct: "24"
-        explanation: "volume = 2 * 3 * 4 = 24."
-
-      - type: mini_code
-        prompt: "Ash records the area of a creature's territory. Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height."
-        starter: ""
-        tests:
-          - code: "assert Triangle(6, 4).area() == 12.0"
-            message: "Triangle(6, 4).area() should return 12.0"
-          - code: "assert Triangle(10, 3).area() == 15.0"
-            message: "Triangle(10, 3).area() should return 15.0"
-
-      - type: mini_code
-        prompt: "Ash needs to track a wizard's gold pouch. Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise."
-        starter: ""
-        tests:
-          - code: "assert BankAccount(50).is_overdrawn() == False"
-            message: "balance=50 is not overdrawn"
-          - code: "assert BankAccount(-10).is_overdrawn() == True"
-            message: "balance=-10 is overdrawn"
-
+        print(t.to_fahrenheit())'
+      choices:
+      - +
+      - '-'
+      - '*'
+      - /
+      answer: +
+      explanation: Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F.
+      story_before: A FlameGauge measures dragon-fire in Celsius, but Ash needs to complete the formula that converts it to
+        Fahrenheit.
+      story_after: The + operator completes the conversion; 100 degrees Celsius becomes 212 Fahrenheit, and the gauge is calibrated.
+    - type: mcq
+      question: What does this print?
+      code: "class Rune:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw)\
+        \ >= 8\n\np = Rune('abc123')\nprint(p.is_strong())"
+      choices:
+      - 'False'
+      - 'True'
+      - '6'
+      - '8'
+      correct: 'False'
+      explanation: '''abc123'' has 6 characters. len >= 8 is False.'
+      story_before: A Rune's is_strong() method checks whether its inscription is long enough — Ash must decide the outcome
+        for 'abc123'.
+      story_after: False is returned — six characters fall short of eight; Ash now knows how methods can enforce thresholds.
+    - type: mcq
+      question: What does this print?
+      code: "class Chest:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n\
+        \        return self.l * self.w * self.h\n\nb = Chest(2, 3, 4)\nprint(b.volume())"
+      choices:
+      - '24'
+      - '9'
+      - '6'
+      - '12'
+      correct: '24'
+      explanation: volume = 2 * 3 * 4 = 24.
+      story_before: A treasure Chest needs its volume calculated — Ash traces volume() for dimensions 2, 3, 4.
+      story_after: Volume 24 is confirmed; Ash sees that three stored attributes can be multiplied inside a single method
+        call.
+    - type: mini_code
+      prompt: Ash records the area of a creature's territory. Define a class Triangle with base and height. Add a method area()
+        that returns 0.5 * base * height.
+      starter: ''
+      tests:
+      - code: assert Triangle(6, 4).area() == 12.0
+        message: Triangle(6, 4).area() should return 12.0
+      - code: assert Triangle(10, 3).area() == 15.0
+        message: Triangle(10, 3).area() should return 15.0
+      story_before: Ash must map a triangular creature territory — a Triangle class with an area() method is required.
+      story_after: The territory area computes perfectly; Ash's bestiary now includes methods that derive useful measurements.
+    - type: mini_code
+      prompt: Ash needs to track a wizard's gold pouch. Define a class BankAccount with a balance attribute. Add a method
+        is_overdrawn() that returns True if balance is below 0, False otherwise.
+      starter: ''
+      tests:
+      - code: assert BankAccount(50).is_overdrawn() == False
+        message: balance=50 is not overdrawn
+      - code: assert BankAccount(-10).is_overdrawn() == True
+        message: balance=-10 is overdrawn
+      story_before: A wizard's gold pouch needs an is_overdrawn() check — Ash must build a BankAccount class with that method.
+      story_after: The pouch reports correctly whether gold is positive or spent; Ash is ready to move on to state-changing
+        methods.
   scifi:
-    title: "Unit Functions"
+    title: Unit Functions
     exercises:
-      - type: concept
-        code: |
-          class Engine:
-              def __init__(self, thrust):
-                  self.thrust = thrust
+    - type: concept
+      code: "class Engine:\n    def __init__(self, thrust):\n        self.thrust = thrust\n\n    def is_powerful(self):\n\
+        \        return self.thrust >= 50\n\n    def describe(self):\n        return f\"Engine at {self.thrust}% thrust\"\n\
+        \nmain_drive = Engine(70)\nprint(main_drive.is_powerful())\nprint(main_drive.describe())\n"
+      output: 'True
 
-              def is_powerful(self):
-                  return self.thrust >= 50
+        Engine at 70% thrust'
+      explanation: Methods are functions inside an Engine class. Engineer Rex calls them to inspect each ship component. They
+        always take self as their first parameter to access the unit's attributes.
+      story_before: Rex's Ship blueprints store data, but the fleet needs active behaviours — methods that can query and describe
+        each unit.
+      story_after: The Engine gains is_powerful and describe methods; Rex can now run diagnostics on any component through
+        its own interface.
+    - type: mcq
+      question: What does this print?
+      code: "class Drone:\n    def __init__(self, name):\n        self.name = name\n    def signal(self):\n        return\
+        \ self.name + ' says Woof!'\n\nd = Drone('Rex')\nprint(d.signal())"
+      choices:
+      - Rex says Woof!
+      - Woof!
+      - name says Woof!
+      - self.name
+      correct: Rex says Woof!
+      explanation: signal() returns self.name + ' says Woof!'. self.name is 'Rex'.
+      story_before: A Drone's signal() method is defined — Rex must predict what it broadcasts when called.
+      story_after: The signal prints 'Rex says Woof!' as coded; Rex confirms methods compose output from self.name without
+        extra input.
+    - type: fill_blank
+      prompt: Use the stored radius attribute in the thruster area calculation.
+      before: "class Thruster:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n     \
+        \   return 3.14 * self."
+      after: ' ** 2
 
-              def describe(self):
-                  return f"Engine at {self.thrust}% thrust"
 
-          main_drive = Engine(70)
-          print(main_drive.is_powerful())
-          print(main_drive.describe())
-        output: "True\nEngine at 70% thrust"
-        explanation: "Methods are functions inside an Engine class. Engineer Rex calls them to inspect each ship component. They always take self as their first parameter to access the unit's attributes."
+        c = Thruster(5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Drone:\n    def __init__(self, name):\n        self.name = name\n    def signal(self):\n        return self.name + ' says Woof!'\n\nd = Drone('Rex')\nprint(d.signal())"
-        choices: ["Rex says Woof!", "Woof!", "name says Woof!", "self.name"]
-        correct: "Rex says Woof!"
-        explanation: "signal() returns self.name + ' says Woof!'. self.name is 'Rex'."
+        print(c.area())'
+      choices:
+      - radius
+      - area
+      - self
+      - r
+      answer: radius
+      explanation: self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5.
+      story_before: A Thruster's area() method needs the correct attribute name to complete its cross-section calculation.
+      story_after: With self.radius supplied, the thruster's cross-section computes — the engineering schematic is verified.
+    - type: mcq
+      question: What does this print?
+      code: "class PowerCell:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\
+        \nc = PowerCell()\nprint(c.value())"
+      choices:
+      - '0'
+      - None
+      - count
+      - self.count
+      correct: '0'
+      explanation: count starts at 0 in __init__. value() returns self.count which is 0.
+      story_before: A PowerCell tracker starts at zero — Rex must follow value() to confirm what it returns before any charge
+        is added.
+      story_after: Zero returns as expected; Rex notes that a method is just a query — it reports the object's current state.
+    - type: arrange
+      instruction: Add a method transmit() to Pilot that returns 'Hi, I am [name]'
+      blocks:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      explanation: Rex defines transmit with (self) parameter, return an f-string using self.name. Call with p.greet().
+      story_before: Rex needs a Pilot class with a transmit() method that broadcasts the pilot's name — the code needs ordering.
+      story_after: The transmit method is wired into the Pilot blueprint; the crew member can now self-identify on the comms
+        channel.
+    - type: mcq
+      question: What does this print?
+      code: "class ShieldPanel:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n\
+        \        return self.w * self.h\n\nr = ShieldPanel(4, 5)\nprint(r.area())"
+      choices:
+      - '20'
+      - '9'
+      - '4'
+      - '5'
+      correct: '20'
+      explanation: area() returns self.w * self.h = 4 * 5 = 20.
+      story_before: A ShieldPanel's area() multiplies width by height — Rex traces the output for dimensions 4 and 5.
+      story_after: Area 20 confirmed on the readout; Rex sees how methods turn raw attribute data into actionable results.
+    - type: fill_blank
+      prompt: 'Complete the heat shield formula: multiply by 9/5 then add 32 to convert the reactor temperature.'
+      before: "class HeatSensor:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n\
+        \        return self.celsius * 9/5 "
+      after: ' 32
 
-      - type: fill_blank
-        prompt: "Use the stored radius attribute in the thruster area calculation."
-        before: "class Thruster:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
-        after: " ** 2\n\nc = Thruster(5)\nprint(c.area())"
-        choices: ["radius", "area", "self", "r"]
-        answer: "radius"
-        explanation: "self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5."
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class PowerCell:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\nc = PowerCell()\nprint(c.value())"
-        choices: ["0", "None", "count", "self.count"]
-        correct: "0"
-        explanation: "count starts at 0 in __init__. value() returns self.count which is 0."
+        t = HeatSensor(100)
 
-      - type: arrange
-        instruction: "Add a method transmit() to Pilot that returns 'Hi, I am [name]'"
-        blocks: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        correct: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        explanation: "Rex defines transmit with (self) parameter, return an f-string using self.name. Call with p.greet()."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class ShieldPanel:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = ShieldPanel(4, 5)\nprint(r.area())"
-        choices: ["20", "9", "4", "5"]
-        correct: "20"
-        explanation: "area() returns self.w * self.h = 4 * 5 = 20."
-
-      - type: fill_blank
-        prompt: "Complete the heat shield formula: multiply by 9/5 then add 32 to convert the reactor temperature."
-        before: "class HeatSensor:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
-        after: " 32\n\nt = HeatSensor(100)\nprint(t.to_fahrenheit())"
-        choices: ["+", "-", "*", "/"]
-        answer: "+"
-        explanation: "Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class AccessCode:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw) >= 8\n\np = AccessCode('abc123')\nprint(p.is_strong())"
-        choices: ["False", "True", "6", "8"]
-        correct: "False"
-        explanation: "'abc123' has 6 characters. len >= 8 is False."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class CargoHold:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n        return self.l * self.w * self.h\n\nb = CargoHold(2, 3, 4)\nprint(b.volume())"
-        choices: ["24", "9", "6", "12"]
-        correct: "24"
-        explanation: "volume = 2 * 3 * 4 = 24."
-
-      - type: mini_code
-        prompt: "Rex calculates the cross-section of a delta-wing fighter. Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height."
-        starter: ""
-        tests:
-          - code: "assert Triangle(6, 4).area() == 12.0"
-            message: "Triangle(6, 4).area() should return 12.0"
-          - code: "assert Triangle(10, 3).area() == 15.0"
-            message: "Triangle(10, 3).area() should return 15.0"
-
-      - type: mini_code
-        prompt: "Rex tracks the ship's credit reserves. Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise."
-        starter: ""
-        tests:
-          - code: "assert BankAccount(50).is_overdrawn() == False"
-            message: "balance=50 is not overdrawn"
-          - code: "assert BankAccount(-10).is_overdrawn() == True"
-            message: "balance=-10 is overdrawn"
-
+        print(t.to_fahrenheit())'
+      choices:
+      - +
+      - '-'
+      - '*'
+      - /
+      answer: +
+      explanation: Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F.
+      story_before: A HeatSensor tracks reactor temperatures in Celsius, but the Fahrenheit conversion formula needs its final
+        operator.
+      story_after: The + closes the formula; 100 Celsius becomes 212 Fahrenheit, and the heat shield is cleared for re-entry.
+    - type: mcq
+      question: What does this print?
+      code: "class AccessCode:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return\
+        \ len(self.pw) >= 8\n\np = AccessCode('abc123')\nprint(p.is_strong())"
+      choices:
+      - 'False'
+      - 'True'
+      - '6'
+      - '8'
+      correct: 'False'
+      explanation: '''abc123'' has 6 characters. len >= 8 is False.'
+      story_before: An AccessCode's is_strong() check determines whether 'abc123' is long enough to secure the airlock.
+      story_after: False is returned — six characters fall below the threshold of eight; Rex upgrades the access policy.
+    - type: mcq
+      question: What does this print?
+      code: "class CargoHold:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n\
+        \        return self.l * self.w * self.h\n\nb = CargoHold(2, 3, 4)\nprint(b.volume())"
+      choices:
+      - '24'
+      - '9'
+      - '6'
+      - '12'
+      correct: '24'
+      explanation: volume = 2 * 3 * 4 = 24.
+      story_before: A CargoHold's volume() method is on the schematic — Rex traces the output for dimensions 2, 3, 4.
+      story_after: Volume 24 is confirmed; Rex sees how three attributes multiply together cleanly inside a single method.
+    - type: mini_code
+      prompt: Rex calculates the cross-section of a delta-wing fighter. Define a class Triangle with base and height. Add
+        a method area() that returns 0.5 * base * height.
+      starter: ''
+      tests:
+      - code: assert Triangle(6, 4).area() == 12.0
+        message: Triangle(6, 4).area() should return 12.0
+      - code: assert Triangle(10, 3).area() == 15.0
+        message: Triangle(10, 3).area() should return 15.0
+      story_before: Rex needs the cross-section of a delta-wing fighter — a Triangle class with an area() method is required.
+      story_after: The wing area calculates correctly; Rex's design suite now has methods that derive geometric results on
+        demand.
+    - type: mini_code
+      prompt: Rex tracks the ship's credit reserves. Define a class BankAccount with a balance attribute. Add a method is_overdrawn()
+        that returns True if balance is below 0, False otherwise.
+      starter: ''
+      tests:
+      - code: assert BankAccount(50).is_overdrawn() == False
+        message: balance=50 is not overdrawn
+      - code: assert BankAccount(-10).is_overdrawn() == True
+        message: balance=-10 is overdrawn
+      story_before: The ship's credit reserves need an is_overdrawn() monitor — Rex must build a BankAccount class with that
+        method.
+      story_after: The reserve monitor reports accurately; Rex is primed to tackle methods that actively change an object's
+        state.
   mystery:
-    title: "Detective Techniques"
+    title: Detective Techniques
     exercises:
-      - type: concept
-        code: |
-          class Suspect:
-              def __init__(self, suspicion):
-                  self.suspicion = suspicion
+    - type: concept
+      code: "class Suspect:\n    def __init__(self, suspicion):\n        self.suspicion = suspicion\n\n    def is_dangerous(self):\n\
+        \        return self.suspicion >= 50\n\n    def describe(self):\n        return f\"Suspect at {self.suspicion}% suspicion\"\
+        \n\nprime = Suspect(70)\nprint(prime.is_dangerous())\nprint(prime.describe())\n"
+      output: 'True
 
-              def is_dangerous(self):
-                  return self.suspicion >= 50
+        Suspect at 70% suspicion'
+      explanation: Methods are functions inside a Suspect class. Profiler Sam calls them to analyse each person of interest.
+        They always take self as their first parameter to access the suspect's attributes.
+      story_before: Cole's Suspect profiles hold data, but the investigation needs active techniques — methods that can assess
+        and describe each person of interest.
+      story_after: The Suspect gains is_dangerous and describe methods; Cole can now run assessments on any profile through
+        its own built-in logic.
+    - type: mcq
+      question: What does this print?
+      code: "class Witness:\n    def __init__(self, name):\n        self.name = name\n    def testify(self):\n        return\
+        \ self.name + ' says Woof!'\n\nd = Witness('Rex')\nprint(d.testify())"
+      choices:
+      - Rex says Woof!
+      - Woof!
+      - name says Woof!
+      - self.name
+      correct: Rex says Woof!
+      explanation: testify() returns self.name + ' says Woof!'. self.name is 'Rex'.
+      story_before: A Witness has a testify() method — Cole must predict what the witness says when called to the stand.
+      story_after: The testimony prints 'Rex says Woof!' as coded; Cole sees that methods reach into self.name to form their
+        output.
+    - type: fill_blank
+      prompt: Use the stored radius attribute in the crime scene perimeter calculation.
+      before: "class CrimeScene:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n   \
+        \     return 3.14 * self."
+      after: ' ** 2
 
-              def describe(self):
-                  return f"Suspect at {self.suspicion}% suspicion"
 
-          prime = Suspect(70)
-          print(prime.is_dangerous())
-          print(prime.describe())
-        output: "True\nSuspect at 70% suspicion"
-        explanation: "Methods are functions inside a Suspect class. Profiler Sam calls them to analyse each person of interest. They always take self as their first parameter to access the suspect's attributes."
+        c = CrimeScene(5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Witness:\n    def __init__(self, name):\n        self.name = name\n    def testify(self):\n        return self.name + ' says Woof!'\n\nd = Witness('Rex')\nprint(d.testify())"
-        choices: ["Rex says Woof!", "Woof!", "name says Woof!", "self.name"]
-        correct: "Rex says Woof!"
-        explanation: "testify() returns self.name + ' says Woof!'. self.name is 'Rex'."
+        print(c.area())'
+      choices:
+      - radius
+      - area
+      - self
+      - r
+      answer: radius
+      explanation: self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5.
+      story_before: A CrimeScene needs its area() calculated, but the correct attribute must be referenced inside the formula.
+      story_after: With self.radius in place, the perimeter area computes — the scene is measured and logged in the case file.
+    - type: mcq
+      question: What does this print?
+      code: "class EvidenceLog:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\
+        \nc = EvidenceLog()\nprint(c.value())"
+      choices:
+      - '0'
+      - None
+      - count
+      - self.count
+      correct: '0'
+      explanation: count starts at 0 in __init__. value() returns self.count which is 0.
+      story_before: An EvidenceLog starts empty — Cole must follow value() to confirm what it returns before any evidence
+        is entered.
+      story_after: Zero returns as expected; Cole notes that a read-only method simply reports whatever state the object currently
+        holds.
+    - type: arrange
+      instruction: Add a method introduce() to Profiler that returns 'Hi, I am [name]'
+      blocks:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      correct:
+      - class
+      - Person
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - name
+      - )
+      - ':'
+      - self
+      - .
+      - name
+      - '='
+      - name
+      - def
+      - greet
+      - (
+      - self
+      - )
+      - ':'
+      - return
+      - f"Hi, I am {self.name}"
+      - p
+      - '='
+      - Person
+      - (
+      - '"Alice"'
+      - )
+      - print
+      - (
+      - p
+      - .
+      - greet
+      - (
+      - )
+      - )
+      explanation: Sam defines introduce with (self) parameter, return an f-string using self.name. Call with p.greet().
+      story_before: Cole needs a Profiler class with an introduce() method that states its name — the code blocks need ordering.
+      story_after: The introduce method is filed into the Profiler blueprint; the investigator can now announce its identity
+        on record.
+    - type: mcq
+      question: What does this print?
+      code: "class SafeRoom:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n\
+        \        return self.w * self.h\n\nr = SafeRoom(4, 5)\nprint(r.area())"
+      choices:
+      - '20'
+      - '9'
+      - '4'
+      - '5'
+      correct: '20'
+      explanation: area() returns self.w * self.h = 4 * 5 = 20.
+      story_before: A SafeRoom's area() multiplies its dimensions — Cole traces the output for width 4, height 5.
+      story_after: Area 20 confirmed; Cole sees how a method converts stored measurements into a useful investigative result.
+    - type: fill_blank
+      prompt: 'Complete the lab formula: multiply by 9/5 then add 32 to convert the forensic sample temperature.'
+      before: "class ForensicLab:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n\
+        \        return self.celsius * 9/5 "
+      after: ' 32
 
-      - type: fill_blank
-        prompt: "Use the stored radius attribute in the crime scene perimeter calculation."
-        before: "class CrimeScene:\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self."
-        after: " ** 2\n\nc = CrimeScene(5)\nprint(c.area())"
-        choices: ["radius", "area", "self", "r"]
-        answer: "radius"
-        explanation: "self.radius accesses the radius attribute. area = 3.14 * 5² = 78.5."
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class EvidenceLog:\n    def __init__(self):\n        self.count = 0\n    def value(self):\n        return self.count\n\nc = EvidenceLog()\nprint(c.value())"
-        choices: ["0", "None", "count", "self.count"]
-        correct: "0"
-        explanation: "count starts at 0 in __init__. value() returns self.count which is 0."
+        t = ForensicLab(100)
 
-      - type: arrange
-        instruction: "Add a method introduce() to Profiler that returns 'Hi, I am [name]'"
-        blocks: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        correct: ["class", "Person", ":", "def", "__init__", "(", "self", ",", "name", ")", ":", "self", ".", "name", "=", "name", "def", "greet", "(", "self", ")", ":", "return", "f\"Hi, I am {self.name}\"", "p", "=", "Person", "(", "\"Alice\"", ")", "print", "(", "p", ".", "greet", "(", ")", ")"]
-        explanation: "Sam defines introduce with (self) parameter, return an f-string using self.name. Call with p.greet()."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class SafeRoom:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = SafeRoom(4, 5)\nprint(r.area())"
-        choices: ["20", "9", "4", "5"]
-        correct: "20"
-        explanation: "area() returns self.w * self.h = 4 * 5 = 20."
-
-      - type: fill_blank
-        prompt: "Complete the lab formula: multiply by 9/5 then add 32 to convert the forensic sample temperature."
-        before: "class ForensicLab:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 "
-        after: " 32\n\nt = ForensicLab(100)\nprint(t.to_fahrenheit())"
-        choices: ["+", "-", "*", "/"]
-        answer: "+"
-        explanation: "Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class SafeCode:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return len(self.pw) >= 8\n\np = SafeCode('abc123')\nprint(p.is_strong())"
-        choices: ["False", "True", "6", "8"]
-        correct: "False"
-        explanation: "'abc123' has 6 characters. len >= 8 is False."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Vault:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n        return self.l * self.w * self.h\n\nb = Vault(2, 3, 4)\nprint(b.volume())"
-        choices: ["24", "9", "6", "12"]
-        correct: "24"
-        explanation: "volume = 2 * 3 * 4 = 24."
-
-      - type: mini_code
-        prompt: "Sam maps the triangular crime scene footprint. Define a class Triangle with base and height. Add a method area() that returns 0.5 * base * height."
-        starter: ""
-        tests:
-          - code: "assert Triangle(6, 4).area() == 12.0"
-            message: "Triangle(6, 4).area() should return 12.0"
-          - code: "assert Triangle(10, 3).area() == 15.0"
-            message: "Triangle(10, 3).area() should return 15.0"
-
-      - type: mini_code
-        prompt: "Sam tracks the department's evidence fund. Define a class BankAccount with a balance attribute. Add a method is_overdrawn() that returns True if balance is below 0, False otherwise."
-        starter: ""
-        tests:
-          - code: "assert BankAccount(50).is_overdrawn() == False"
-            message: "balance=50 is not overdrawn"
-          - code: "assert BankAccount(-10).is_overdrawn() == True"
-            message: "balance=-10 is overdrawn"
+        print(t.to_fahrenheit())'
+      choices:
+      - +
+      - '-'
+      - '*'
+      - /
+      answer: +
+      explanation: Fahrenheit = Celsius * 9/5 + 32. 100°C = 212°F.
+      story_before: A ForensicLab thermometer tracks sample temperatures in Celsius — Cole must complete the Fahrenheit conversion
+        formula.
+      story_after: The + operator closes the conversion; the sample temperature is correctly calibrated for the lab report.
+    - type: mcq
+      question: What does this print?
+      code: "class SafeCode:\n    def __init__(self, pw):\n        self.pw = pw\n    def is_strong(self):\n        return\
+        \ len(self.pw) >= 8\n\np = SafeCode('abc123')\nprint(p.is_strong())"
+      choices:
+      - 'False'
+      - 'True'
+      - '6'
+      - '8'
+      correct: 'False'
+      explanation: '''abc123'' has 6 characters. len >= 8 is False.'
+      story_before: A SafeCode's is_strong() check assesses whether 'abc123' is long enough for the vault combination.
+      story_after: False is returned — six characters miss the eight-character minimum; Cole flags the code as weak evidence.
+    - type: mcq
+      question: What does this print?
+      code: "class Vault:\n    def __init__(self, l, w, h):\n        self.l = l; self.w = w; self.h = h\n    def volume(self):\n\
+        \        return self.l * self.w * self.h\n\nb = Vault(2, 3, 4)\nprint(b.volume())"
+      choices:
+      - '24'
+      - '9'
+      - '6'
+      - '12'
+      correct: '24'
+      explanation: volume = 2 * 3 * 4 = 24.
+      story_before: A Vault's volume() method is on file — Cole traces the result for dimensions 2, 3, 4.
+      story_after: Volume 24 confirmed; Cole notes that three attributes can be multiplied cleanly inside a single method.
+    - type: mini_code
+      prompt: Sam maps the triangular crime scene footprint. Define a class Triangle with base and height. Add a method area()
+        that returns 0.5 * base * height.
+      starter: ''
+      tests:
+      - code: assert Triangle(6, 4).area() == 12.0
+        message: Triangle(6, 4).area() should return 12.0
+      - code: assert Triangle(10, 3).area() == 15.0
+        message: Triangle(10, 3).area() should return 15.0
+      story_before: Cole must map a triangular crime scene footprint — a Triangle class with an area() method is required.
+      story_after: The footprint area calculates correctly; Cole's forensic toolkit now includes geometry methods for scene
+        analysis.
+    - type: mini_code
+      prompt: Sam tracks the department's evidence fund. Define a class BankAccount with a balance attribute. Add a method
+        is_overdrawn() that returns True if balance is below 0, False otherwise.
+      starter: ''
+      tests:
+      - code: assert BankAccount(50).is_overdrawn() == False
+        message: balance=50 is not overdrawn
+      - code: assert BankAccount(-10).is_overdrawn() == True
+        message: balance=-10 is overdrawn
+      story_before: The department's evidence fund needs an is_overdrawn() check — Cole must build a BankAccount class with
+        that method.
+      story_after: The fund monitor works correctly; Cole is ready to move on to methods that actually change an object's
+        state.

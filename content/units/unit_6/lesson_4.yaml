@@ -194,6 +194,9 @@ worlds:
         79.0'
       explanation: Elara totals her expedition pack weights. for loops over every item. Combine with len() to compute the
         average load.
+      story_before: The supply list is organised — but Brin must now walk through every item one by one to calculate the total
+        expedition load.
+      story_after: The running total is complete — Brin knows the exact weight and average load for the journey ahead.
     - type: mcq
       question: Elara reads aloud each ingredient in the list. What does this print?
       code: "fruits = ['apple', 'banana', 'cherry']\nfor f in fruits:\n    print(f)"
@@ -220,6 +223,8 @@ worlds:
 
         cherry'
       explanation: The loop assigns each item to f in turn and prints it.
+      story_before: Elara reads each ingredient aloud from the list so the wizard can record them in the spell tome.
+      story_after: Every ingredient is spoken in turn — the wizard's quill catches them all and the tome is updated.
     - type: fill_blank
       prompt: Add each potion strength value to the running total inside the loop.
       before: "nums = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in nums:\n    total "
@@ -233,6 +238,8 @@ worlds:
       - '*='
       answer: +=
       explanation: += adds each n to total. After the loop total = 15.
+      story_before: Elara must add each potion strength value to a running total inside the loop.
+      story_after: The total is accumulated correctly — Elara presents the final strength figure to the master alchemist.
     - type: mcq
       question: Elara measures the length of each spell word. What does this print?
       code: "words = ['hi', 'hello', 'hey']\nfor w in words:\n    print(len(w))"
@@ -263,6 +270,8 @@ worlds:
 
         3'
       explanation: len('hi')=2, len('hello')=5, len('hey')=3.
+      story_before: Elara measures the length of each spell word to ensure none exceed the chant limit.
+      story_after: The character counts are printed in order — Elara marks the overlong words for revision.
     - type: arrange
       instruction: Print each item in prices = [9.99, 4.99, 14.99] doubled
       blocks:
@@ -308,6 +317,8 @@ worlds:
       - '2'
       - )
       explanation: Iterate with for, multiply each price by 2, and print it.
+      story_before: The guild treasurer wants each supply cost printed at double rate for the insurance ledger.
+      story_after: Each doubled price is printed — the treasurer copies them into the ledger without complaint.
     - type: mcq
       question: Elara counts ingredients heavier than 2. What does this print?
       code: "nums = [3, 1, 4, 1, 5]\ncount = 0\nfor n in nums:\n    if n > 2:\n        count += 1\nprint(count)"
@@ -318,6 +329,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 3, 4, 5 are greater than 2. Count = 3.
+      story_before: Elara counts how many ingredient weights exceed the threshold of two to filter heavy components.
+      story_after: Three heavy ingredients identified — Elara sets them aside for the high-potency batch.
     - type: fill_blank
       prompt: Access the loop variable to print each ingredient name in uppercase.
       before: "names = [\"Alice\", \"Bob\", \"Carol\"]\nfor name in names:\n    print("
@@ -329,6 +342,8 @@ worlds:
       - item
       answer: name
       explanation: name is the loop variable. .upper() converts each to uppercase.
+      story_before: Elara loops through a roster and must print each adventurer's name in uppercase for the proclamation scroll.
+      story_after: Every name blazes in capitals across the scroll — the proclamation is ready to be read at the gates.
     - type: mcq
       question: Elara doubles each potion value and collects the results. What does this print?
       code: "items = [10, 20, 30]\nnew = []\nfor x in items:\n    new.append(x * 2)\nprint(new)"
@@ -339,6 +354,8 @@ worlds:
       - '[10, 20, 30, 20, 40, 60]'
       correct: '[20, 40, 60]'
       explanation: 'Each item is doubled and appended to new. Result: [20, 40, 60].'
+      story_before: Elara doubles each potion value and collects the results into a new list for the shop display.
+      story_after: The doubled list is built — Elara pins it to the shop board and the customers take notice.
     - type: mcq
       question: Elara stitches spell letters together. What does this print?
       code: "letters = ['a', 'b', 'c']\nresult = ''\nfor l in letters:\n    result += l\nprint(result)"
@@ -353,6 +370,8 @@ worlds:
       - cba
       correct: abc
       explanation: 'Each letter is concatenated onto result. Final result: ''abc''.'
+      story_before: Elara stitches together the spell letters one by one to form the incantation word.
+      story_after: The letters are joined — the full incantation is ready and Elara whispers it with confidence.
     - type: mini_code
       prompt: Create a list of 5 numbers. Use a loop to print only the numbers greater than 10.
       starter: ''
@@ -361,6 +380,8 @@ worlds:
         message: Should only print numbers greater than 10
       - code: assert 'for' in _code
         message: Should use a for loop
+      story_before: Elara needs to loop through five enchanted numbers and print only those greater than ten.
+      story_after: Only the qualifying values are printed — the spell filter works and the potion is correctly dosed.
     - type: mini_code
       prompt: Create a list called temps with 4 temperatures. Find and print the maximum temperature without using max().
       starter: ''
@@ -369,6 +390,10 @@ worlds:
         message: Should print the maximum temperature
       - code: assert 'max(' not in _code
         message: Should find the maximum without using max()
+      story_before: 'Final task: loop through four temperature readings and find the highest without using max() — the furnace
+        calibration depends on it.'
+      story_after: The peak temperature is found manually — Elara calibrates the furnace and the workshop is ready for the
+        next brew.
   scifi:
     title: Sensor Array Processing
     exercises:
@@ -379,6 +404,10 @@ worlds:
         79.0'
       explanation: Zara totals asteroid sensor readings. for loops over every reading. Combine with len() to compute the average
         signal strength.
+      story_before: The sensor array has a full list of readings — Zara must now loop through every value to compute the total
+        signal strength.
+      story_after: The total is tallied and the average calculated — Zara files the report and the navigation crew adjusts
+        course.
     - type: mcq
       question: Zara transmits each asteroid sector name. What does this print?
       code: "fruits = ['apple', 'banana', 'cherry']\nfor f in fruits:\n    print(f)"
@@ -405,6 +434,8 @@ worlds:
 
         cherry'
       explanation: The loop assigns each item to f in turn and prints it.
+      story_before: Zara transmits each asteroid sector name from the log one by one so they appear on the bridge display.
+      story_after: Every sector name scrolls across the display in sequence — the bridge crew notes them all.
     - type: fill_blank
       prompt: Add each sensor reading to the running total inside the loop.
       before: "nums = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in nums:\n    total "
@@ -418,6 +449,8 @@ worlds:
       - '*='
       answer: +=
       explanation: += adds each reading to total. After the loop total = 15.
+      story_before: Zara accumulates each sensor reading into a running total inside the loop.
+      story_after: The total is correct — Zara submits the aggregate signal strength to the science officer.
     - type: mcq
       question: Zara measures the length of each sector code. What does this print?
       code: "words = ['hi', 'hello', 'hey']\nfor w in words:\n    print(len(w))"
@@ -448,6 +481,8 @@ worlds:
 
         3'
       explanation: len('hi')=2, len('hello')=5, len('hey')=3.
+      story_before: Zara measures the length of each sector code to verify they all fit the transmission format.
+      story_after: Character counts logged — Zara flags any overlong codes for the comms team to shorten.
     - type: arrange
       instruction: Print each item in prices = [9.99, 4.99, 14.99] doubled
       blocks:
@@ -493,6 +528,8 @@ worlds:
       - '2'
       - )
       explanation: Iterate with for, multiply each reading by 2, and print it.
+      story_before: Engineering needs each fuel cost doubled and printed to model emergency rationing.
+      story_after: Every doubled cost is printed — engineering uses the figures to plan the contingency reserves.
     - type: mcq
       question: Zara counts asteroids with a signal above 2. What does this print?
       code: "nums = [3, 1, 4, 1, 5]\ncount = 0\nfor n in nums:\n    if n > 2:\n        count += 1\nprint(count)"
@@ -503,6 +540,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 3, 4, 5 are greater than 2. Count = 3.
+      story_before: Zara counts how many asteroids have a signal strength above two to prioritise further scanning.
+      story_after: Three high-signal asteroids identified — Zara queues probes toward those targets immediately.
     - type: fill_blank
       prompt: Access the loop variable to transmit each sector name in uppercase.
       before: "names = [\"Alice\", \"Bob\", \"Carol\"]\nfor name in names:\n    print("
@@ -514,6 +553,8 @@ worlds:
       - item
       answer: name
       explanation: name is the loop variable. .upper() converts each to uppercase.
+      story_before: Zara loops through the crew roster and prints each name in uppercase for the official mission log.
+      story_after: Every name is capitalised and logged — the mission roster is formatted and ready for Command.
     - type: mcq
       question: Zara doubles each signal value and logs the results. What does this print?
       code: "items = [10, 20, 30]\nnew = []\nfor x in items:\n    new.append(x * 2)\nprint(new)"
@@ -524,6 +565,8 @@ worlds:
       - '[10, 20, 30, 20, 40, 60]'
       correct: '[20, 40, 60]'
       explanation: 'Each signal is doubled and appended to new. Result: [20, 40, 60].'
+      story_before: Zara doubles each sensor signal and appends the result to a new list for the amplified readings report.
+      story_after: The amplified readings list is ready — Zara transmits it to the science station for analysis.
     - type: mcq
       question: Zara concatenates sector codes into a single string. What does this print?
       code: "letters = ['a', 'b', 'c']\nresult = ''\nfor l in letters:\n    result += l\nprint(result)"
@@ -538,6 +581,8 @@ worlds:
       - cba
       correct: abc
       explanation: 'Each letter is concatenated onto result. Final result: ''abc''.'
+      story_before: Zara concatenates sector codes into a single string for the compressed transmission packet.
+      story_after: The codes are joined into one string — the compressed packet is queued for the next data burst.
     - type: mini_code
       prompt: Create a list of 5 numbers. Use a loop to print only the numbers greater than 10.
       starter: ''
@@ -546,6 +591,9 @@ worlds:
         message: Should only print numbers greater than 10
       - code: assert 'for' in _code
         message: Should use a for loop
+      story_before: Zara loops through five signal values and prints only those above ten — weak signals are noise and must
+        be filtered.
+      story_after: Only the strong signals are printed — the noise is gone and the map is cleaner.
     - type: mini_code
       prompt: Create a list called temps with 4 temperatures. Find and print the maximum temperature without using max().
       starter: ''
@@ -554,6 +602,9 @@ worlds:
         message: Should print the maximum temperature
       - code: assert 'max(' not in _code
         message: Should find the maximum without using max()
+      story_before: 'Final calibration: loop through four temperature readings from the reactor and find the peak value without
+        using max().'
+      story_after: The peak reactor temperature is found — Zara adjusts the cooling system and the Helix is fully operational.
   mystery:
     title: Reviewing All Clues
     exercises:
@@ -564,6 +615,9 @@ worlds:
         79.0'
       explanation: Cole totals suspect credibility scores. for loops over every entry on the board. Combine with len() to
         compute the average score.
+      story_before: The suspect board is set — Cole must now go through every credibility score one by one to compute the
+        average and identify the strongest leads.
+      story_after: The total and average are in hand — Cole highlights the top-scoring suspects and prepares for interrogation.
     - type: mcq
       question: Cole reads aloud each suspect name from the board. What does this print?
       code: "fruits = ['apple', 'banana', 'cherry']\nfor f in fruits:\n    print(f)"
@@ -590,6 +644,8 @@ worlds:
 
         cherry'
       explanation: The loop assigns each item to f in turn and prints it.
+      story_before: Cole reads each suspect name aloud from the board so the court stenographer can record them.
+      story_after: Every name is spoken in turn — the stenographer types them up and the official record is complete.
     - type: fill_blank
       prompt: Add each clue weight to the running total inside the loop.
       before: "nums = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in nums:\n    total "
@@ -603,6 +659,8 @@ worlds:
       - '*='
       answer: +=
       explanation: += adds each clue weight to total. After the loop total = 15.
+      story_before: Cole adds each clue weight to a running total inside the loop to gauge the overall case strength.
+      story_after: The total clue weight is tallied — Cole knows the case is solid enough to proceed.
     - type: mcq
       question: Cole measures the length of each clue phrase. What does this print?
       code: "words = ['hi', 'hello', 'hey']\nfor w in words:\n    print(len(w))"
@@ -633,6 +691,8 @@ worlds:
 
         3'
       explanation: len('hi')=2, len('hello')=5, len('hey')=3.
+      story_before: Cole measures the length of each clue phrase to identify verbose statements that may be fabricated.
+      story_after: Character counts logged for each phrase — Cole flags the unusually long ones for closer scrutiny.
     - type: arrange
       instruction: Print each item in prices = [9.99, 4.99, 14.99] doubled
       blocks:
@@ -678,6 +738,8 @@ worlds:
       - '2'
       - )
       explanation: Iterate with for, multiply each value by 2, and print it.
+      story_before: The accountant needs each financial figure doubled and printed to model the laundering amounts.
+      story_after: Every doubled figure is on paper — the accountant forwards them to the financial crimes unit.
     - type: mcq
       question: Cole counts suspects with a credibility score above 2. What does this print?
       code: "nums = [3, 1, 4, 1, 5]\ncount = 0\nfor n in nums:\n    if n > 2:\n        count += 1\nprint(count)"
@@ -688,6 +750,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 3, 4, 5 are greater than 2. Count = 3.
+      story_before: Cole counts how many suspects have a credibility score above two to narrow the active lead pool.
+      story_after: Three high-credibility suspects identified — Cole updates the board and schedules their interviews.
     - type: fill_blank
       prompt: Access the loop variable to print each suspect name in uppercase.
       before: "names = [\"Alice\", \"Bob\", \"Carol\"]\nfor name in names:\n    print("
@@ -699,6 +763,8 @@ worlds:
       - item
       answer: name
       explanation: name is the loop variable. .upper() converts each to uppercase.
+      story_before: Cole loops through the suspect list and prints each name in uppercase for the formal arrest warrant.
+      story_after: Every name is in capitals on the warrant — the judge signs it and the arrests are authorised.
     - type: mcq
       question: Cole doubles each evidence weight and records the results. What does this print?
       code: "items = [10, 20, 30]\nnew = []\nfor x in items:\n    new.append(x * 2)\nprint(new)"
@@ -709,6 +775,8 @@ worlds:
       - '[10, 20, 30, 20, 40, 60]'
       correct: '[20, 40, 60]'
       explanation: 'Each weight is doubled and appended to new. Result: [20, 40, 60].'
+      story_before: Cole doubles each evidence weight and records the adjusted values in a new list for the forensics report.
+      story_after: The doubled weights are compiled — Cole attaches the list to the forensics report and closes the envelope.
     - type: mcq
       question: Cole joins alibi initials into a string. What does this print?
       code: "letters = ['a', 'b', 'c']\nresult = ''\nfor l in letters:\n    result += l\nprint(result)"
@@ -723,6 +791,8 @@ worlds:
       - cba
       correct: abc
       explanation: 'Each letter is concatenated onto result. Final result: ''abc''.'
+      story_before: Cole joins each initial from the alibi list into a single string to create a coded identifier.
+      story_after: The initials are stitched together — the identifier matches the monogram on the suspect's briefcase.
     - type: mini_code
       prompt: Create a list of 5 numbers. Use a loop to print only the numbers greater than 10.
       starter: ''
@@ -731,6 +801,9 @@ worlds:
         message: Should only print numbers greater than 10
       - code: assert 'for' in _code
         message: Should use a for loop
+      story_before: Cole loops through five clue values and prints only those above ten — low-weight clues are circumstantial
+        and not worth pursuing.
+      story_after: Only the substantial clues are printed — Cole focuses the investigation on the strongest evidence.
     - type: mini_code
       prompt: Create a list called temps with 4 temperatures. Find and print the maximum temperature without using max().
       starter: ''
@@ -739,3 +812,6 @@ worlds:
         message: Should print the maximum temperature
       - code: assert 'max(' not in _code
         message: Should find the maximum without using max()
+      story_before: 'Final drill: loop through four credibility readings and find the highest without using max() — the top
+        suspect must be identified manually.'
+      story_after: The highest score is found — Cole circles the suspect's name and the case moves to its final chapter.

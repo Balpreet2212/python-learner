@@ -247,6 +247,10 @@ worlds:
         100'
       explanation: Elara summons three different familiars. Every call to Coin() creates a separate object with its own attributes.
         Changing one does not affect any other.
+      story_before: Elara can now craft a single Creature, but the workshop must be able to summon many separate familiars
+        — each fully independent.
+      story_after: Three familiars spring to life from the same blueprint, each with its own attributes; changing one leaves
+        the others untouched.
     - type: mcq
       question: Two spell containers have different capacities. What does this print?
       code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
@@ -258,6 +262,9 @@ worlds:
       - '1020'
       correct: '30'
       explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+      story_before: Two spell containers hold different capacities — Elara must add their sizes together.
+      story_after: The combined capacity is 30; Elara sees that separate instances each carry their own data and can be combined
+        freely.
     - type: fill_blank
       prompt: Read the hp from the first wizard's instance specifically.
       before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
@@ -270,6 +277,8 @@ worlds:
       - self
       answer: p1
       explanation: p1.hp accesses Alice's hp, which is 100.
+      story_before: Two wizards are registered, but the spell must read the hp from Alice's instance specifically.
+      story_after: Accessing p1.hp, Elara reads Alice's health correctly — the second wizard's data remains untouched.
     - type: mcq
       question: Two familiars are renamed — only one changes. What does this print?
       code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
@@ -291,6 +300,8 @@ worlds:
 
         Bella'
       explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+      story_before: Two familiars share the same blueprint, but only one is renamed — Elara must verify which names print.
+      story_after: d1 prints 'Max' and d2 stays 'Bella'; renaming one familiar never bleeds into another.
     - type: arrange
       instruction: Create two Lamp instances with different brightness and print which is brighter
       blocks:
@@ -372,6 +383,9 @@ worlds:
       - brightness
       - )
       explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+      story_before: Elara wants two Lantern instances with different glow levels and needs to compare which burns brighter.
+      story_after: The brighter lantern is identified correctly; Elara can now pit two instances against each other using
+        attribute comparisons.
     - type: mcq
       question: Two familiars have their mana tracked independently. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
@@ -393,6 +407,8 @@ worlds:
 
         1'
       explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent familiars.'
+      story_before: Two familiars each track their own mana with independent counters — Elara must predict both final values.
+      story_after: a.n is 2, b.n is 1; the familiars prove entirely independent — one's mana changes nothing in the other.
     - type: fill_blank
       prompt: Compare whether the first wizard has more spell points than the second.
       before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
@@ -405,6 +421,8 @@ worlds:
       - ==
       answer: '>'
       explanation: s1.points > s2.points checks if 90 > 75, which is True.
+      story_before: Two wizards' spell-point scores are on record — Elara must determine whether the first outscores the second.
+      story_after: The > comparison returns True; Elara can now rank any two instances by their attributes.
     - type: mcq
       question: Elara loops through a list of summoned creatures printing each brand. What does this print?
       code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
@@ -432,6 +450,9 @@ worlds:
 
         Ford'
       explanation: The loop iterates over the list of Car objects, printing each brand.
+      story_before: Elara loops through a list of summoned creatures and prints each one's brand attribute.
+      story_after: Toyota, BMW, Ford print in order; Elara sees that a list of instances can be iterated just like a list
+        of strings.
     - type: mcq
       question: Two magical jars — only one is filled. What does this print?
       code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
@@ -454,6 +475,8 @@ worlds:
 
         0'
       explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+      story_before: Two magical jars share the same blueprint, but only one is filled — Elara must check both filled values.
+      story_after: j1.filled is 5, j2.filled is 0; filling one jar never touches the other, confirming true independence.
     - type: mini_code
       prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
         sides. Create a 6-sided and 20-sided die. Print one roll of each.
@@ -463,6 +486,9 @@ worlds:
         message: 6-sided die should roll 1-6
       - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
         message: 20-sided die should roll 1-20
+      story_before: Elara needs two different magical dice — a 6-sided and a 20-sided — each capable of producing its own
+        random roll.
+      story_after: Both dice roll within their correct ranges; Elara's randomised familiar-challenge system is ready.
     - type: mini_code
       prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
       starter: ''
@@ -471,6 +497,10 @@ worlds:
         message: Student class needs name and grade attributes
       - code: assert _stdout.strip() != ''
         message: Should print the name of the highest-graded student
+      story_before: Three apprentices compete for the highest score — Elara must build Student instances and find the top
+        performer.
+      story_after: The highest-scoring apprentice's name is announced; Elara's roster system is complete and ready for Lesson
+        5.
   scifi:
     title: Deploying Multiple Units
     exercises:
@@ -484,6 +514,10 @@ worlds:
         100'
       explanation: Voss deploys three robot units. Every call to Coin() creates a separate object. Changing one instance does
         not affect any other.
+      story_before: Voss has one working unit blueprint, but the mission calls for a whole fleet — each vessel must be independent
+        of the others.
+      story_after: Three units deploy from the same schematic, each with its own data; modifying one leaves the rest of the
+        fleet unchanged.
     - type: mcq
       question: Two cargo containers have different capacities. What does this print?
       code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
@@ -495,6 +529,9 @@ worlds:
       - '1020'
       correct: '30'
       explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+      story_before: Two cargo containers report different capacities — Voss must add both sizes to plan total storage.
+      story_after: Combined capacity is 30; Voss confirms that two separate instances can contribute their data to a shared
+        calculation.
     - type: fill_blank
       prompt: Read the hp from the first crew member's instance specifically.
       before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
@@ -507,6 +544,8 @@ worlds:
       - self
       answer: p1
       explanation: p1.hp accesses Alice's hp, which is 100.
+      story_before: Two crew members are registered, but the system must pull the hp reading from Alice's record specifically.
+      story_after: p1.hp returns Alice's health correctly — p2's data stays isolated on its own record.
     - type: mcq
       question: Two units are renamed — only one changes. What does this print?
       code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
@@ -528,6 +567,8 @@ worlds:
 
         Bella'
       explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+      story_before: Two units share the same class, but only one is renamed in the field — Voss checks both unit IDs.
+      story_after: d1 prints 'Max', d2 stays 'Bella'; renaming one unit has zero effect on the other.
     - type: arrange
       instruction: Create two Lamp instances with different brightness and print which is brighter
       blocks:
@@ -609,6 +650,8 @@ worlds:
       - brightness
       - )
       explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+      story_before: Voss wants two Lamp units at different power levels and needs to identify the brighter one.
+      story_after: The brighter unit is identified correctly; Voss can now compare any two instances by their attribute values.
     - type: mcq
       question: Two units track their own mission counts independently. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
@@ -630,6 +673,8 @@ worlds:
 
         1'
       explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent units.'
+      story_before: Two units each track their own mission count independently — Voss must predict both final counts.
+      story_after: a.n is 2, b.n is 1; the units are fully independent — one's mission count never changes the other.
     - type: fill_blank
       prompt: Compare whether unit 1 has a higher score than unit 2.
       before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
@@ -642,6 +687,8 @@ worlds:
       - ==
       answer: '>'
       explanation: s1.points > s2.points checks if 90 > 75, which is True.
+      story_before: Two units' performance scores are on record — Voss must determine whether unit 1 outscores unit 2.
+      story_after: The > comparison returns True; Voss can now rank any two units by their stored scores.
     - type: mcq
       question: Voss loops through a fleet and prints each vehicle brand. What does this print?
       code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
@@ -669,6 +716,9 @@ worlds:
 
         Ford'
       explanation: The loop iterates over the list of Car objects, printing each brand.
+      story_before: Voss iterates through the fleet and prints each vehicle's brand identifier.
+      story_after: Toyota, BMW, Ford print in sequence; Voss confirms that a list of objects can be looped over just like
+        any other list.
     - type: mcq
       question: Two fuel tanks — only one is filled. What does this print?
       code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
@@ -691,6 +741,8 @@ worlds:
 
         0'
       explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+      story_before: Two fuel tanks share the same blueprint, but only one receives a fill — Voss checks both fuel readings.
+      story_after: j1.filled is 5, j2.filled is 0; filling one tank never touches the other, confirming complete independence.
     - type: mini_code
       prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
         sides. Create a 6-sided and 20-sided die. Print one roll of each.
@@ -700,6 +752,8 @@ worlds:
         message: 6-sided die should roll 1-6
       - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
         message: 20-sided die should roll 1-20
+      story_before: Voss needs a 6-sided and a 20-sided Dice unit, each able to return its own random roll result.
+      story_after: Both dice produce rolls within their correct ranges; Voss's randomised mission-assignment module is operational.
     - type: mini_code
       prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
       starter: ''
@@ -708,6 +762,10 @@ worlds:
         message: Student class needs name and grade attributes
       - code: assert _stdout.strip() != ''
         message: Should print the name of the highest-graded student
+      story_before: Three crew candidates compete on grade — Voss must build Student instances and surface the top-scoring
+        member.
+      story_after: The highest-graded crew member's name prints correctly; Voss is ready to extend the class hierarchy in
+        Lesson 5.
   mystery:
     title: Multiple Witnesses
     exercises:
@@ -721,6 +779,10 @@ worlds:
         100'
       explanation: Cole creates three separate witness profiles. Every call creates a separate object with its own attributes.
         Changing one does not affect any other.
+      story_before: Cole has one Suspect profile template, but the case has multiple witnesses — each must be tracked as a
+        fully independent object.
+      story_after: Three separate witness profiles are created from the same class; changing one record leaves the others
+        exactly as filed.
     - type: mcq
       question: Two evidence containers have different capacities. What does this print?
       code: "class Box:\n    def __init__(self, size):\n        self.size = size\n\na = Box(10)\nb = Box(20)\nprint(a.size\
@@ -732,6 +794,8 @@ worlds:
       - '1020'
       correct: '30'
       explanation: a.size = 10, b.size = 20. 10 + 20 = 30.
+      story_before: Two evidence containers have different capacities — Cole must add both to plan total storage space.
+      story_after: Combined capacity is 30; Cole confirms that separate instances each hold their own data without interference.
     - type: fill_blank
       prompt: Read the credibility score from the first witness's profile specifically.
       before: "class Player:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\np1 = Player('Alice',\
@@ -744,6 +808,8 @@ worlds:
       - self
       answer: p1
       explanation: p1.hp accesses Alice's credibility score, which is 100.
+      story_before: Two witnesses are on file, but the read must pull the credibility score from Alice's record specifically.
+      story_after: p1.hp returns Alice's score correctly — Bob's record is untouched.
     - type: mcq
       question: Two suspects are renamed — only one changes. What does this print?
       code: "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd1 = Dog('Rex')\nd2 = Dog('Bella')\nd1.name\
@@ -765,6 +831,9 @@ worlds:
 
         Bella'
       explanation: Changing d1.name only affects d1. d2.name stays 'Bella'.
+      story_before: Two suspects are registered under the same class, but only one is renamed during the investigation — Cole
+        checks both.
+      story_after: d1 prints 'Max', d2 stays 'Bella'; updating one suspect's alias has no effect on any other profile.
     - type: arrange
       instruction: Create two Lamp instances with different brightness and print which is brighter
       blocks:
@@ -846,6 +915,8 @@ worlds:
       - brightness
       - )
       explanation: l1.brightness = 80, l2.brightness = 40. 80 > 40 is True.
+      story_before: Cole wants two Lamp instances at different brightness levels and needs to determine which shines brighter.
+      story_after: The brighter lamp is identified correctly; Cole can now compare any two instances head-to-head by attribute.
     - type: mcq
       question: Two witnesses each track their own interview counts. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1\n\na = Counter()\n\
@@ -867,6 +938,8 @@ worlds:
 
         1'
       explanation: 'a.inc() called twice: a.n = 2. b.inc() called once: b.n = 1. Independent witnesses.'
+      story_before: Two witnesses each track their own interview count — Cole must predict both final tallies.
+      story_after: a.n is 2, b.n is 1; the witnesses keep completely separate counts — one's interviews never affect the other.
     - type: fill_blank
       prompt: Compare whether witness 1 has a higher credibility score than witness 2.
       before: "class Score:\n    def __init__(self, points):\n        self.points = points\n\ns1 = Score(90)\ns2 = Score(75)\n\
@@ -879,6 +952,9 @@ worlds:
       - ==
       answer: '>'
       explanation: s1.points > s2.points checks if 90 > 75, which is True.
+      story_before: Two witnesses have credibility scores on file — Cole must determine whether witness 1 outranks witness
+        2.
+      story_after: The > comparison returns True; Cole can now rank any two profiles by their stored scores.
     - type: mcq
       question: Cole loops through a suspect list and prints each name. What does this print?
       code: "class Car:\n    def __init__(self, brand, speed):\n        self.brand = brand\n        self.speed = speed\n\n\
@@ -906,6 +982,9 @@ worlds:
 
         Ford'
       explanation: The loop iterates over the list of Car objects, printing each brand.
+      story_before: Cole iterates through a suspect list and prints each person's name.
+      story_after: Toyota, BMW, Ford print in sequence; Cole confirms that a list of profile objects can be looped through
+        like any other list.
     - type: mcq
       question: Two evidence bags — only one is filled. What does this print?
       code: "class Jar:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.filled = 0\n  \
@@ -928,6 +1007,8 @@ worlds:
 
         0'
       explanation: j1.fill(5) only changes j1.filled. j2 is untouched.
+      story_before: Two evidence bags share the same class, but only one receives contents — Cole checks both filled readings.
+      story_after: j1.filled is 5, j2.filled is 0; filling one bag never touches the other, proving full independence.
     - type: mini_code
       prompt: Create a class called Dice with a sides attribute. Add a roll() method that returns a random number from 1 to
         sides. Create a 6-sided and 20-sided die. Print one roll of each.
@@ -937,6 +1018,9 @@ worlds:
         message: 6-sided die should roll 1-6
       - code: d20 = Dice(20); assert 1 <= d20.roll() <= 20
         message: 20-sided die should roll 1-20
+      story_before: Cole needs a 6-sided and a 20-sided Dice object to randomise case assignment — each must roll within its
+        own range.
+      story_after: Both dice roll correctly within their ranges; Cole's randomised case-selection tool is on record.
     - type: mini_code
       prompt: Create 3 Student instances with different names and grades. Print the name of the student with the highest grade.
       starter: ''
@@ -945,3 +1029,7 @@ worlds:
         message: Student class needs name and grade attributes
       - code: assert _stdout.strip() != ''
         message: Should print the name of the highest-graded student
+      story_before: Three informants are ranked by reliability grade — Cole must build Student instances and surface the most
+        reliable one.
+      story_after: The top-ranked informant's name prints; Cole's multi-instance roster is complete and ready for the inheritance
+        lesson.

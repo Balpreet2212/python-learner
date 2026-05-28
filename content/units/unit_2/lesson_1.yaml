@@ -1,369 +1,718 @@
-title: "Floor Division, Modulo, Exponents"
+title: Floor Division, Modulo, Exponents
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      print(10 // 3)
-      print(10 % 3)
-      print(2 ** 8)
-    output: "3\n1\n256"
-    explanation: "// is floor division (result rounded down). % is modulo (the remainder). ** is exponentiation (power)."
+- type: concept
+  code: 'print(10 // 3)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(7 // 2)"
-    choices: ["3", "3.5", "4", "2"]
-    correct: "3"
-    explanation: "7 ÷ 2 = 3.5, but // floors it down to 3."
+    print(10 % 3)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(10 % 3)"
-    choices: ["1", "3", "0", "3.33"]
-    correct: "1"
-    explanation: "10 = 3×3 + 1. The remainder is 1."
+    print(2 ** 8)
 
-  - type: arrange
-    instruction: "Build the expression for floor division of 15 by 4"
-    blocks: ["15", "//", "4", "%", "**", "print"]
-    correct: ["print", "(", "15", "//", "4", ")"]
-    explanation: "15 // 4 = 3 (15 ÷ 4 = 3.75, floored to 3)."
+    '
+  output: '3
 
-  - type: fill_blank
-    prompt: "Find the remainder when 17 is divided by 5."
-    before: "remainder = 17 "
-    after: " 5"
-    choices: ["%", "//", "/", "**"]
-    answer: "%"
-    explanation: "% gives the remainder. 17 % 5 = 2."
+    1
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(2 ** 10)"
-    choices: ["1024", "20", "210", "1000"]
-    correct: "1024"
-    explanation: "2 ** 10 = 2 raised to the power 10 = 1024."
+    256'
+  explanation: // is floor division (result rounded down). % is modulo (the remainder). ** is exponentiation (power).
+- type: mcq
+  question: What does this print?
+  code: print(7 // 2)
+  choices:
+  - '3'
+  - '3.5'
+  - '4'
+  - '2'
+  correct: '3'
+  explanation: 7 ÷ 2 = 3.5, but // floors it down to 3.
+- type: mcq
+  question: What does this print?
+  code: print(10 % 3)
+  choices:
+  - '1'
+  - '3'
+  - '0'
+  - '3.33'
+  correct: '1'
+  explanation: 10 = 3×3 + 1. The remainder is 1.
+- type: arrange
+  instruction: Build the expression for floor division of 15 by 4
+  blocks:
+  - '15'
+  - //
+  - '4'
+  - '%'
+  - '**'
+  - print
+  correct:
+  - print
+  - (
+  - '15'
+  - //
+  - '4'
+  - )
+  explanation: 15 // 4 = 3 (15 ÷ 4 = 3.75, floored to 3).
+- type: fill_blank
+  prompt: Find the remainder when 17 is divided by 5.
+  before: 'remainder = 17 '
+  after: ' 5'
+  choices:
+  - '%'
+  - //
+  - /
+  - '**'
+  answer: '%'
+  explanation: '% gives the remainder. 17 % 5 = 2.'
+- type: mcq
+  question: What does this print?
+  code: print(2 ** 10)
+  choices:
+  - '1024'
+  - '20'
+  - '210'
+  - '1000'
+  correct: '1024'
+  explanation: 2 ** 10 = 2 raised to the power 10 = 1024.
+- type: arrange
+  instruction: Build code to compute 3 to the power of 4
+  blocks:
+  - print
+  - (
+  - '3'
+  - '**'
+  - '4'
+  - '%'
+  - )
+  correct:
+  - print
+  - (
+  - '3'
+  - '**'
+  - '4'
+  - )
+  explanation: 3 ** 4 = 3 × 3 × 3 × 3 = 81.
+- type: mcq
+  question: What does this print?
+  code: 'n = 100
 
-  - type: arrange
-    instruction: "Build code to compute 3 to the power of 4"
-    blocks: ["print", "(", "3", "**", "4", "%", ")"]
-    correct: ["print", "(", "3", "**", "4", ")"]
-    explanation: "3 ** 4 = 3 × 3 × 3 × 3 = 81."
+    print(n % 7)'
+  choices:
+  - '2'
+  - '14'
+  - '7'
+  - '1'
+  correct: '2'
+  explanation: 100 = 7×14 + 2. The remainder is 2.
+- type: fill_blank
+  prompt: Raise 5 to the power of 2.
+  before: 'squared = 5 '
+  after: ' 2'
+  choices:
+  - '**'
+  - '*'
+  - //
+  - '%'
+  answer: '**'
+  explanation: '** is the power operator. 5 ** 2 = 25.'
+- type: mcq
+  question: How do you check if a number n is even?
+  code: ''
+  choices:
+  - n % 2 == 0
+  - n // 2 == 0
+  - n ** 2 == 0
+  - n / 2 == 0
+  correct: n % 2 == 0
+  explanation: An even number has no remainder when divided by 2, so n % 2 == 0 is True.
+- type: mini_code
+  prompt: 50 players need to be split into teams of 8. Print how many full teams fit and how many players are left over.
+  starter: 'players = 50
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 100\nprint(n % 7)"
-    choices: ["2", "14", "7", "1"]
-    correct: "2"
-    explanation: "100 = 7×14 + 2. The remainder is 2."
+    team_size = 8
 
-  - type: fill_blank
-    prompt: "Raise 5 to the power of 2."
-    before: "squared = 5 "
-    after: " 2"
-    choices: ["**", "*", "//", "%"]
-    answer: "**"
-    explanation: "** is the power operator. 5 ** 2 = 25."
-
-  - type: mcq
-    question: "How do you check if a number n is even?"
-    code: ""
-    choices: ["n % 2 == 0", "n // 2 == 0", "n ** 2 == 0", "n / 2 == 0"]
-    correct: "n % 2 == 0"
-    explanation: "An even number has no remainder when divided by 2, so n % 2 == 0 is True."
-
-  - type: mini_code
-    prompt: "50 players need to be split into teams of 8. Print how many full teams fit and how many players are left over."
-    starter: "players = 50\nteam_size = 8\n"
-    tests:
-      - code: "assert '6' in _stdout"
-        message: "Should print 6 (full teams: 50 // 8)"
-      - code: "assert '2' in _stdout"
-        message: "Should print 2 (leftover: 50 % 8)"
-
-  - type: mini_code
-    prompt: "Calculate 2 to the power of 16 and print it."
-    starter: ""
-    tests:
-      - code: "assert _stdout.strip() == '65536'"
-        message: "Should print 65536 (2 ** 16)"
-      - code: "assert '**' in _code"
-        message: "Should use ** for exponentiation"
-
+    '
+  tests:
+  - code: assert '6' in _stdout
+    message: 'Should print 6 (full teams: 50 // 8)'
+  - code: assert '2' in _stdout
+    message: 'Should print 2 (leftover: 50 % 8)'
+- type: mini_code
+  prompt: Calculate 2 to the power of 16 and print it.
+  starter: ''
+  tests:
+  - code: assert _stdout.strip() == '65536'
+    message: Should print 65536 (2 ** 16)
+  - code: assert '**' in _code
+    message: Should use ** for exponentiation
 worlds:
   fantasy:
-    title: "Rationing Supplies"
+    title: Rationing Supplies
     exercises:
-      - type: concept
-        code: |
-          print(43 // 8)
-          print(43 % 8)
-          print(2 ** 6)
-        output: "5\n3\n64"
-        explanation: "Finn has 43 ration bars to split into pouches of 8. // gives 5 full pouches (floor division). % gives 3 bars left over (the remainder). ** calculates how many snowflakes form in 2 to the power of 6 crystal layers — 64."
+    - type: concept
+      code: 'print(43 // 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(7 // 2)"
-        choices: ["3", "3.5", "4", "2"]
-        correct: "3"
-        explanation: "Finn can fill 3 full supply pouches with 7 food packs split into groups of 2 — the half pack doesn't count, so // floors it to 3."
+        print(43 % 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(10 % 3)"
-        choices: ["1", "3", "0", "3.33"]
-        correct: "1"
-        explanation: "Finn divides 10 torches into groups of 3. Three groups of 3 use 9 torches, leaving 1 behind — that's the modulo remainder."
+        print(2 ** 6)
 
-      - type: arrange
-        instruction: "Build the expression for floor division of 15 by 4"
-        blocks: ["15", "//", "4", "%", "**", "print"]
-        correct: ["print", "(", "15", "//", "4", ")"]
-        explanation: "Finn splits 15 stamina potions into packs of 4. 15 floor divided by 4 = 3 full packs."
+        '
+      output: '5
 
-      - type: fill_blank
-        prompt: "Find how many stamina points Finn has left after distributing them into groups of 5."
-        before: "leftover_stamina = 17 "
-        after: " 5"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "% gives the remainder. Finn has 17 stamina points — after filling groups of 5, he has 17 % 5 = 2 points left."
+        3
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(2 ** 10)"
-        choices: ["1024", "20", "210", "1000"]
-        correct: "1024"
-        explanation: "Each altitude checkpoint doubles the frost intensity. Starting from 1, after 10 doublings Finn faces 2 ** 10 = 1024 frost units."
+        64'
+      explanation: Finn has 43 ration bars to split into pouches of 8. // gives 5 full pouches (floor division). % gives 3
+        bars left over (the remainder). ** calculates how many snowflakes form in 2 to the power of 6 crystal layers — 64.
+      story_before: Finn must split 43 ration bars into pouches and calculate the power of a frost crystal — he needs three
+        new operators to do it.
+      story_after: Finn now understands floor division, modulo, and exponents — the tools that will carry him through every
+        supply calculation on the mountain.
+    - type: mcq
+      question: What does this print?
+      code: print(7 // 2)
+      choices:
+      - '3'
+      - '3.5'
+      - '4'
+      - '2'
+      correct: '3'
+      explanation: Finn can fill 3 full supply pouches with 7 food packs split into groups of 2 — the half pack doesn't count,
+        so // floors it to 3.
+      story_before: Finn has 7 food packs and wants to fill pouches that each hold 2 — he needs to know how many complete
+        pouches he can make.
+      story_after: Three full pouches packed and ready; the leftover half-pack stays behind at camp.
+    - type: mcq
+      question: What does this print?
+      code: print(10 % 3)
+      choices:
+      - '1'
+      - '3'
+      - '0'
+      - '3.33'
+      correct: '1'
+      explanation: Finn divides 10 torches into groups of 3. Three groups of 3 use 9 torches, leaving 1 behind — that's the
+        modulo remainder.
+      story_before: Finn counts 10 torches and wants to group them in threes — he needs to know how many will be left over.
+      story_after: One stray torch remains after the groups are formed, and Finn tucks it into his belt.
+    - type: arrange
+      instruction: Build the expression for floor division of 15 by 4
+      blocks:
+      - '15'
+      - //
+      - '4'
+      - '%'
+      - '**'
+      - print
+      correct:
+      - print
+      - (
+      - '15'
+      - //
+      - '4'
+      - )
+      explanation: Finn splits 15 stamina potions into packs of 4. 15 floor divided by 4 = 3 full packs.
+      story_before: Finn has 15 stamina potions to pack into crates of 4 — he needs to build the expression that tells him
+        how many full crates he gets.
+      story_after: Three full crates are loaded onto the sled; the remaining potions go into Finn's pack.
+    - type: fill_blank
+      prompt: Find how many stamina points Finn has left after distributing them into groups of 5.
+      before: 'leftover_stamina = 17 '
+      after: ' 5'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: '% gives the remainder. Finn has 17 stamina points — after filling groups of 5, he has 17 % 5 = 2 points
+        left.'
+      story_before: Finn wants to find out how many stamina points remain after distributing them into groups of 5 — he needs
+        the right operator.
+      story_after: Two points left over — just enough for one last burst up the icy slope.
+    - type: mcq
+      question: What does this print?
+      code: print(2 ** 10)
+      choices:
+      - '1024'
+      - '20'
+      - '210'
+      - '1000'
+      correct: '1024'
+      explanation: Each altitude checkpoint doubles the frost intensity. Starting from 1, after 10 doublings Finn faces 2
+        ** 10 = 1024 frost units.
+      story_before: Each altitude checkpoint doubles the frost intensity, and Finn needs to know how fierce it gets after
+        10 doublings.
+      story_after: 1024 frost units — Finn layers on every warming rune he has before pushing higher.
+    - type: arrange
+      instruction: Build code to compute 3 to the power of 4
+      blocks:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - '%'
+      - )
+      correct:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - )
+      explanation: The storm triples in strength each of 4 stages. 3 ** 4 = 81 is the final storm intensity Finn must endure.
+      story_before: The storm triples in strength each stage, and Finn must build the expression that calculates its final
+        intensity after 4 stages.
+      story_after: 81 — Finn braces himself and pulls his hood tight against the howling wind.
+    - type: mcq
+      question: What does this print?
+      code: 'n = 100
 
-      - type: arrange
-        instruction: "Build code to compute 3 to the power of 4"
-        blocks: ["print", "(", "3", "**", "4", "%", ")"]
-        correct: ["print", "(", "3", "**", "4", ")"]
-        explanation: "The storm triples in strength each of 4 stages. 3 ** 4 = 81 is the final storm intensity Finn must endure."
+        print(n % 7)'
+      choices:
+      - '2'
+      - '14'
+      - '7'
+      - '1'
+      correct: '2'
+      explanation: Finn has 100 altitude metres to climb in 7-metre rope sections. 14 full sections cover 98 metres, leaving
+        a remainder of 2.
+      story_before: Finn has 100 metres of rope to cut into 7-metre sections — he needs to find out how many metres will be
+        left over at the end.
+      story_after: 2 metres of rope left — not enough for another section, but Finn coils it up anyway.
+    - type: fill_blank
+      prompt: Calculate the strength of Finn's frost shield, which is his defence stat raised to the power of 2.
+      before: 'shield_power = defence '
+      after: ' 2'
+      choices:
+      - '**'
+      - '*'
+      - //
+      - '%'
+      answer: '**'
+      explanation: '** is the power operator. defence ** 2 squares the defence stat to get the frost shield''s full power.'
+      story_before: Finn's frost shield strength is his defence stat squared — he needs the right operator to calculate it.
+      story_after: The shield crackles to life, its power locked in by the exponent Finn just applied.
+    - type: mcq
+      question: How do you check if a number n is even?
+      code: ''
+      choices:
+      - n % 2 == 0
+      - n // 2 == 0
+      - n ** 2 == 0
+      - n / 2 == 0
+      correct: n % 2 == 0
+      explanation: Finn checks if he can pair up his supply bundles evenly. An even number leaves no remainder when divided
+        by 2, so n % 2 == 0 is True.
+      story_before: Finn wants to check whether he can pair up his supply bundles evenly before distributing them — he needs
+        to know which expression tests for that.
+      story_after: Modulo by 2 — the simplest test on the mountain, and now Finn's bundles sort themselves in seconds.
+    - type: mini_code
+      prompt: Finn has 50 ration bars to pack into pouches of 8. Print how many full pouches he can make and how many bars
+        are left over.
+      starter: 'players = 50
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 100\nprint(n % 7)"
-        choices: ["2", "14", "7", "1"]
-        correct: "2"
-        explanation: "Finn has 100 altitude metres to climb in 7-metre rope sections. 14 full sections cover 98 metres, leaving a remainder of 2."
+        team_size = 8
 
-      - type: fill_blank
-        prompt: "Calculate the strength of Finn's frost shield, which is his defence stat raised to the power of 2."
-        before: "shield_power = defence "
-        after: " 2"
-        choices: ["**", "*", "//", "%"]
-        answer: "**"
-        explanation: "** is the power operator. defence ** 2 squares the defence stat to get the frost shield's full power."
-
-      - type: mcq
-        question: "How do you check if a number n is even?"
-        code: ""
-        choices: ["n % 2 == 0", "n // 2 == 0", "n ** 2 == 0", "n / 2 == 0"]
-        correct: "n % 2 == 0"
-        explanation: "Finn checks if he can pair up his supply bundles evenly. An even number leaves no remainder when divided by 2, so n % 2 == 0 is True."
-
-      - type: mini_code
-        prompt: "Finn has 50 ration bars to pack into pouches of 8. Print how many full pouches he can make and how many bars are left over."
-        starter: "players = 50\nteam_size = 8\n"
-        tests:
-          - code: "assert '6' in _stdout"
-            message: "Should print 6 (full teams: 50 // 8)"
-          - code: "assert '2' in _stdout"
-            message: "Should print 2 (leftover: 50 % 8)"
-
-      - type: mini_code
-        prompt: "The frost doubles every level. Calculate how strong it gets after 16 doublings (2 to the power of 16) and print it."
-        starter: ""
-        tests:
-          - code: "assert _stdout.strip() == '65536'"
-            message: "Should print 65536 (2 ** 16)"
-          - code: "assert '**' in _code"
-            message: "Should use ** for exponentiation"
-
+        '
+      tests:
+      - code: assert '6' in _stdout
+        message: 'Should print 6 (full teams: 50 // 8)'
+      - code: assert '2' in _stdout
+        message: 'Should print 2 (leftover: 50 % 8)'
+      story_before: Finn has 50 ration bars and pouches that hold 8 each — he needs to print both how many full pouches he
+        can fill and how many bars are left over.
+      story_after: 6 full pouches packed, 2 bars tucked aside — Finn shoulders the load and heads for the next checkpoint.
+    - type: mini_code
+      prompt: The frost doubles every level. Calculate how strong it gets after 16 doublings (2 to the power of 16) and print
+        it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '65536'
+        message: Should print 65536 (2 ** 16)
+      - code: assert '**' in _code
+        message: Should use ** for exponentiation
+      story_before: The frost doubles every level of the summit; Finn needs to calculate exactly how powerful it becomes after
+        16 doublings and print it.
+      story_after: 65536 — the number blazes on the rune stone, and Finn knows he will need every spell in the book to survive
+        the peak.
   scifi:
-    title: "Calculating Fuel Cuts"
+    title: Calculating Fuel Cuts
     exercises:
-      - type: concept
-        code: |
-          print(43 // 8)
-          print(43 % 8)
-          print(2 ** 6)
-        output: "5\n3\n64"
-        explanation: "Zara has 43 fuel cells to split into thruster banks of 8. // gives 5 full banks (floor division). % gives 3 cells left over (the remainder). ** calculates sensor range — 2 to the power of 6 = 64 scan units."
+    - type: concept
+      code: 'print(43 // 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(7 // 2)"
-        choices: ["3", "3.5", "4", "2"]
-        correct: "3"
-        explanation: "Zara splits 7 fuel rods between 2 thruster pods. Floor division gives 3 full rods each — the half-rod can't be split, so it's discarded."
+        print(43 % 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(10 % 3)"
-        choices: ["1", "3", "0", "3.33"]
-        correct: "1"
-        explanation: "10 asteroid scan pulses are grouped into bursts of 3. Three full bursts use 9 pulses, leaving 1 remaining — that's the modulo remainder."
+        print(2 ** 6)
 
-      - type: arrange
-        instruction: "Build the expression for floor division of 15 by 4"
-        blocks: ["15", "//", "4", "%", "**", "print"]
-        correct: ["print", "(", "15", "//", "4", ")"]
-        explanation: "Zara divides 15 cargo units across 4 storage bays using floor division. 15 // 4 = 3 full bays loaded."
+        '
+      output: '5
 
-      - type: fill_blank
-        prompt: "Find how many fuel units remain after filling thruster tanks in batches of 5."
-        before: "leftover_fuel = 17 "
-        after: " 5"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "% gives the remainder. Zara has 17 fuel units — after filling batches of 5, she has 17 % 5 = 2 units left."
+        3
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(2 ** 10)"
-        choices: ["1024", "20", "210", "1000"]
-        correct: "1024"
-        explanation: "Each relay booster doubles the signal strength. After 10 doublings the signal reaches 2 ** 10 = 1024 units — enough to punch through the asteroid field."
+        64'
+      explanation: Zara has 43 fuel cells to split into thruster banks of 8. // gives 5 full banks (floor division). % gives
+        3 cells left over (the remainder). ** calculates sensor range — 2 to the power of 6 = 64 scan units.
+      story_before: Zara needs to split 43 fuel cells across thruster banks and calculate exponential sensor range — three
+        new operators will handle it all.
+      story_after: Floor division, modulo, and exponentiation are now in Zara's engineering toolkit, ready for every allocation
+        problem the Helix throws at her.
+    - type: mcq
+      question: What does this print?
+      code: print(7 // 2)
+      choices:
+      - '3'
+      - '3.5'
+      - '4'
+      - '2'
+      correct: '3'
+      explanation: Zara splits 7 fuel rods between 2 thruster pods. Floor division gives 3 full rods each — the half-rod can't
+        be split, so it's discarded.
+      story_before: Zara has 7 fuel rods to distribute equally between 2 thruster pods — she needs to know how many complete
+        rods each pod gets.
+      story_after: Three rods per pod loaded; the partial rod is logged as waste and vented.
+    - type: mcq
+      question: What does this print?
+      code: print(10 % 3)
+      choices:
+      - '1'
+      - '3'
+      - '0'
+      - '3.33'
+      correct: '1'
+      explanation: 10 asteroid scan pulses are grouped into bursts of 3. Three full bursts use 9 pulses, leaving 1 remaining
+        — that's the modulo remainder.
+      story_before: 10 scan pulses are being grouped into bursts of 3 — Zara needs to know how many pulses remain after the
+        last full burst.
+      story_after: One pulse left over; Zara queues it for the next burst cycle.
+    - type: arrange
+      instruction: Build the expression for floor division of 15 by 4
+      blocks:
+      - '15'
+      - //
+      - '4'
+      - '%'
+      - '**'
+      - print
+      correct:
+      - print
+      - (
+      - '15'
+      - //
+      - '4'
+      - )
+      explanation: Zara divides 15 cargo units across 4 storage bays using floor division. 15 // 4 = 3 full bays loaded.
+      story_before: Zara has 15 cargo units to load across 4 storage bays using floor division — she needs to build that expression
+        now.
+      story_after: Three units per bay loaded and sealed; Zara marks the manifest and moves on.
+    - type: fill_blank
+      prompt: Find how many fuel units remain after filling thruster tanks in batches of 5.
+      before: 'leftover_fuel = 17 '
+      after: ' 5'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: '% gives the remainder. Zara has 17 fuel units — after filling batches of 5, she has 17 % 5 = 2 units left.'
+      story_before: After filling thruster tanks in batches of 5, Zara needs the right operator to find how many fuel units
+        remain.
+      story_after: 2 units remain — Zara logs them as reserve and sets the batch timer for the next refuel cycle.
+    - type: mcq
+      question: What does this print?
+      code: print(2 ** 10)
+      choices:
+      - '1024'
+      - '20'
+      - '210'
+      - '1000'
+      correct: '1024'
+      explanation: Each relay booster doubles the signal strength. After 10 doublings the signal reaches 2 ** 10 = 1024 units
+        — enough to punch through the asteroid field.
+      story_before: Each relay booster doubles the signal strength; Zara needs to know the total reach after 10 doublings.
+      story_after: 1024 units — strong enough to punch through the asteroid field, and Zara opens the comms channel.
+    - type: arrange
+      instruction: Build code to compute 3 to the power of 4
+      blocks:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - '%'
+      - )
+      correct:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - )
+      explanation: Asteroid density triples every sector. After 4 sectors the density is 3 ** 4 = 81 — Zara needs full shields.
+      story_before: Asteroid density triples every sector, and Zara needs to build the code that calculates the density after
+        4 sectors.
+      story_after: 81 — shields to maximum; Zara punches the thruster and threads through the debris.
+    - type: mcq
+      question: What does this print?
+      code: 'n = 100
 
-      - type: arrange
-        instruction: "Build code to compute 3 to the power of 4"
-        blocks: ["print", "(", "3", "**", "4", "%", ")"]
-        correct: ["print", "(", "3", "**", "4", ")"]
-        explanation: "Asteroid density triples every sector. After 4 sectors the density is 3 ** 4 = 81 — Zara needs full shields."
+        print(n % 7)'
+      choices:
+      - '2'
+      - '14'
+      - '7'
+      - '1'
+      correct: '2'
+      explanation: Zara has 100 metres of cable to cut into 7-metre segments. 14 full segments use 98 metres, leaving a remainder
+        of 2 metres.
+      story_before: Zara has 100 metres of cable to cut into 7-metre segments — she needs to know how many metres will be
+        left over.
+      story_after: 2 metres of cable left; Zara labels the offcut and stows it in the emergency kit.
+    - type: fill_blank
+      prompt: Calculate shield strength, which is Zara's hull rating raised to the power of 2.
+      before: 'shield_power = hull_rating '
+      after: ' 2'
+      choices:
+      - '**'
+      - '*'
+      - //
+      - '%'
+      answer: '**'
+      explanation: '** is the power operator. hull_rating ** 2 squares the hull rating to calculate shield output.'
+      story_before: Shield strength is the hull rating squared — Zara needs the right operator to compute it.
+      story_after: The shield matrix locks in at full output, its power calculated and confirmed.
+    - type: mcq
+      question: How do you check if a number n is even?
+      code: ''
+      choices:
+      - n % 2 == 0
+      - n // 2 == 0
+      - n ** 2 == 0
+      - n / 2 == 0
+      correct: n % 2 == 0
+      explanation: Zara checks whether she can pair thrusters evenly. A number with no remainder when divided by 2 is even,
+        so n % 2 == 0 is True.
+      story_before: Zara needs to check whether she can pair thrusters evenly before a symmetric burn — she needs to know
+        which expression tests for that.
+      story_after: Modulo 2 returns the answer instantly; Zara pairs the thrusters and initiates the burn sequence.
+    - type: mini_code
+      prompt: Zara has 50 fuel cells to load into thruster banks of 8. Print how many full banks she can fill and how many
+        cells are left over.
+      starter: 'players = 50
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 100\nprint(n % 7)"
-        choices: ["2", "14", "7", "1"]
-        correct: "2"
-        explanation: "Zara has 100 metres of cable to cut into 7-metre segments. 14 full segments use 98 metres, leaving a remainder of 2 metres."
+        team_size = 8
 
-      - type: fill_blank
-        prompt: "Calculate shield strength, which is Zara's hull rating raised to the power of 2."
-        before: "shield_power = hull_rating "
-        after: " 2"
-        choices: ["**", "*", "//", "%"]
-        answer: "**"
-        explanation: "** is the power operator. hull_rating ** 2 squares the hull rating to calculate shield output."
-
-      - type: mcq
-        question: "How do you check if a number n is even?"
-        code: ""
-        choices: ["n % 2 == 0", "n // 2 == 0", "n ** 2 == 0", "n / 2 == 0"]
-        correct: "n % 2 == 0"
-        explanation: "Zara checks whether she can pair thrusters evenly. A number with no remainder when divided by 2 is even, so n % 2 == 0 is True."
-
-      - type: mini_code
-        prompt: "Zara has 50 fuel cells to load into thruster banks of 8. Print how many full banks she can fill and how many cells are left over."
-        starter: "players = 50\nteam_size = 8\n"
-        tests:
-          - code: "assert '6' in _stdout"
-            message: "Should print 6 (full teams: 50 // 8)"
-          - code: "assert '2' in _stdout"
-            message: "Should print 2 (leftover: 50 % 8)"
-
-      - type: mini_code
-        prompt: "Each jump doubles the ship's speed. Calculate the speed multiplier after 16 jumps (2 to the power of 16) and print it."
-        starter: ""
-        tests:
-          - code: "assert _stdout.strip() == '65536'"
-            message: "Should print 65536 (2 ** 16)"
-          - code: "assert '**' in _code"
-            message: "Should use ** for exponentiation"
-
+        '
+      tests:
+      - code: assert '6' in _stdout
+        message: 'Should print 6 (full teams: 50 // 8)'
+      - code: assert '2' in _stdout
+        message: 'Should print 2 (leftover: 50 % 8)'
+      story_before: Zara has 50 fuel cells to load into thruster banks of 8 — she needs to print both how many full banks
+        she fills and how many cells are left over.
+      story_after: 6 banks filled, 2 cells reserved — Zara seals the bays and reports ready for departure.
+    - type: mini_code
+      prompt: Each jump doubles the ship's speed. Calculate the speed multiplier after 16 jumps (2 to the power of 16) and
+        print it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '65536'
+        message: Should print 65536 (2 ** 16)
+      - code: assert '**' in _code
+        message: Should use ** for exponentiation
+      story_before: Each jump doubles the ship's speed multiplier; Zara needs to calculate and print the multiplier after
+        16 jumps.
+      story_after: 65536 — the Helix shudders as Zara punches the number into the nav computer and initiates the jump sequence.
   mystery:
-    title: "Splitting the Evidence Batches"
+    title: Splitting the Evidence Batches
     exercises:
-      - type: concept
-        code: |
-          print(43 // 8)
-          print(43 % 8)
-          print(2 ** 6)
-        output: "5\n3\n64"
-        explanation: "Detective Cole has 43 evidence photos to file in folders of 8. // gives 5 full folders (floor division). % gives 3 photos left unfiled (the remainder). ** calculates how many case combinations grow from 2 sources over 6 branches — 64."
+    - type: concept
+      code: 'print(43 // 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(7 // 2)"
-        choices: ["3", "3.5", "4", "2"]
-        correct: "3"
-        explanation: "Cole splits 7 witness statements between 2 detectives. Floor division gives 3 full statements each — the leftover half-statement can't be split, so it's dropped."
+        print(43 % 8)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(10 % 3)"
-        choices: ["1", "3", "0", "3.33"]
-        correct: "1"
-        explanation: "Cole groups 10 alibi entries into batches of 3 for review. Three full batches cover 9 entries, leaving 1 unchecked — that's the modulo remainder."
+        print(2 ** 6)
 
-      - type: arrange
-        instruction: "Build the expression for floor division of 15 by 4"
-        blocks: ["15", "//", "4", "%", "**", "print"]
-        correct: ["print", "(", "15", "//", "4", ")"]
-        explanation: "Cole divides 15 case files across 4 detectives using floor division. 15 // 4 = 3 full files assigned to each."
+        '
+      output: '5
 
-      - type: fill_blank
-        prompt: "Find how many suspect leads remain after grouping them into batches of 5."
-        before: "remaining_leads = 17 "
-        after: " 5"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "% gives the remainder. Cole has 17 leads — after grouping in fives, 17 % 5 = 2 leads are still unassigned."
+        3
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(2 ** 10)"
-        choices: ["1024", "20", "210", "1000"]
-        correct: "1024"
-        explanation: "Each additional witness doubles the number of possible alibi combinations. After 10 witnesses there are 2 ** 10 = 1024 possible alibi chains to check."
+        64'
+      explanation: Detective Cole has 43 evidence photos to file in folders of 8. // gives 5 full folders (floor division).
+        % gives 3 photos left unfiled (the remainder). ** calculates how many case combinations grow from 2 sources over 6
+        branches — 64.
+      story_before: Cole has 43 evidence photos to file and needs to count branches of a case tree — three operators will
+        handle the math.
+      story_after: Floor division, modulo, and exponents — Cole adds them to his analytical toolkit and starts sorting the
+        evidence room.
+    - type: mcq
+      question: What does this print?
+      code: print(7 // 2)
+      choices:
+      - '3'
+      - '3.5'
+      - '4'
+      - '2'
+      correct: '3'
+      explanation: Cole splits 7 witness statements between 2 detectives. Floor division gives 3 full statements each — the
+        leftover half-statement can't be split, so it's dropped.
+      story_before: Cole is splitting 7 witness statements between 2 detectives and needs to know how many complete statements
+        each gets.
+      story_after: Three statements per detective assigned; the remaining statement is held for a joint review.
+    - type: mcq
+      question: What does this print?
+      code: print(10 % 3)
+      choices:
+      - '1'
+      - '3'
+      - '0'
+      - '3.33'
+      correct: '1'
+      explanation: Cole groups 10 alibi entries into batches of 3 for review. Three full batches cover 9 entries, leaving
+        1 unchecked — that's the modulo remainder.
+      story_before: Cole groups 10 alibi entries into batches of 3 for review and needs to find out how many entries are left
+        unchecked.
+      story_after: One entry left over — Cole circles it in red and flags it for a second look.
+    - type: arrange
+      instruction: Build the expression for floor division of 15 by 4
+      blocks:
+      - '15'
+      - //
+      - '4'
+      - '%'
+      - '**'
+      - print
+      correct:
+      - print
+      - (
+      - '15'
+      - //
+      - '4'
+      - )
+      explanation: Cole divides 15 case files across 4 detectives using floor division. 15 // 4 = 3 full files assigned to
+        each.
+      story_before: Cole needs to distribute 15 case files across 4 detectives using floor division — he builds the expression
+        now.
+      story_after: Three files each; the remaining files land on Cole's own desk, as usual.
+    - type: fill_blank
+      prompt: Find how many suspect leads remain after grouping them into batches of 5.
+      before: 'remaining_leads = 17 '
+      after: ' 5'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: '% gives the remainder. Cole has 17 leads — after grouping in fives, 17 % 5 = 2 leads are still unassigned.'
+      story_before: Cole has 17 suspect leads to group in fives and needs the right operator to find how many are left unassigned.
+      story_after: 2 leads left without a detective — Cole pins them to the board and makes a note to follow up personally.
+    - type: mcq
+      question: What does this print?
+      code: print(2 ** 10)
+      choices:
+      - '1024'
+      - '20'
+      - '210'
+      - '1000'
+      correct: '1024'
+      explanation: Each additional witness doubles the number of possible alibi combinations. After 10 witnesses there are
+        2 ** 10 = 1024 possible alibi chains to check.
+      story_before: Each new witness doubles the possible alibi combinations; Cole needs to know the total after 10 witnesses.
+      story_after: 1024 combinations — Cole mutters under his breath and pours another coffee.
+    - type: arrange
+      instruction: Build code to compute 3 to the power of 4
+      blocks:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - '%'
+      - )
+      correct:
+      - print
+      - (
+      - '3'
+      - '**'
+      - '4'
+      - )
+      explanation: Each lead branches into 3 sub-leads. After 4 levels of investigation there are 3 ** 4 = 81 possible trails
+        Cole must verify.
+      story_before: Each lead branches into 3 sub-leads; Cole must build the expression to count how many trails exist after
+        4 levels.
+      story_after: 81 trails — Cole draws the tree on the whiteboard and circles the ones that point back to the same suspect.
+    - type: mcq
+      question: What does this print?
+      code: 'n = 100
 
-      - type: arrange
-        instruction: "Build code to compute 3 to the power of 4"
-        blocks: ["print", "(", "3", "**", "4", "%", ")"]
-        correct: ["print", "(", "3", "**", "4", ")"]
-        explanation: "Each lead branches into 3 sub-leads. After 4 levels of investigation there are 3 ** 4 = 81 possible trails Cole must verify."
+        print(n % 7)'
+      choices:
+      - '2'
+      - '14'
+      - '7'
+      - '1'
+      correct: '2'
+      explanation: Cole has 100 minutes of surveillance footage divided into 7-minute review slots. After 14 full slots (98
+        minutes), 2 minutes of footage are left unreviewed.
+      story_before: Cole has 100 minutes of surveillance footage divided into 7-minute review slots — he needs to find out
+        how many minutes remain after the last full slot.
+      story_after: 2 minutes of footage left unreviewed — Cole rewinds the tape and watches it one more time.
+    - type: fill_blank
+      prompt: Calculate the credibility score, which is a witness rating raised to the power of 2.
+      before: 'credibility = witness_rating '
+      after: ' 2'
+      choices:
+      - '**'
+      - '*'
+      - //
+      - '%'
+      answer: '**'
+      explanation: '** is the power operator. witness_rating ** 2 squares the rating to determine overall credibility.'
+      story_before: A witness's credibility score is their rating squared — Cole needs the right operator to compute it.
+      story_after: The credibility score is locked in; Cole logs it next to the witness's name in the casebook.
+    - type: mcq
+      question: How do you check if a number n is even?
+      code: ''
+      choices:
+      - n % 2 == 0
+      - n // 2 == 0
+      - n ** 2 == 0
+      - n / 2 == 0
+      correct: n % 2 == 0
+      explanation: Cole checks whether a case number can be split evenly between two detectives. A number with no remainder
+        when divided by 2 is even — n % 2 == 0 is True.
+      story_before: Cole wants to check whether a case number splits evenly between two detectives — he needs to know which
+        expression tests for that.
+      story_after: Modulo 2 — Cole pairs the cases in seconds and hands out the assignments.
+    - type: mini_code
+      prompt: Cole has 50 evidence photos to file in folders of 8. Print how many full folders are complete and how many photos
+        are left unfiled.
+      starter: 'players = 50
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 100\nprint(n % 7)"
-        choices: ["2", "14", "7", "1"]
-        correct: "2"
-        explanation: "Cole has 100 minutes of surveillance footage divided into 7-minute review slots. After 14 full slots (98 minutes), 2 minutes of footage are left unreviewed."
+        team_size = 8
 
-      - type: fill_blank
-        prompt: "Calculate the credibility score, which is a witness rating raised to the power of 2."
-        before: "credibility = witness_rating "
-        after: " 2"
-        choices: ["**", "*", "//", "%"]
-        answer: "**"
-        explanation: "** is the power operator. witness_rating ** 2 squares the rating to determine overall credibility."
-
-      - type: mcq
-        question: "How do you check if a number n is even?"
-        code: ""
-        choices: ["n % 2 == 0", "n // 2 == 0", "n ** 2 == 0", "n / 2 == 0"]
-        correct: "n % 2 == 0"
-        explanation: "Cole checks whether a case number can be split evenly between two detectives. A number with no remainder when divided by 2 is even — n % 2 == 0 is True."
-
-      - type: mini_code
-        prompt: "Cole has 50 evidence photos to file in folders of 8. Print how many full folders are complete and how many photos are left unfiled."
-        starter: "players = 50\nteam_size = 8\n"
-        tests:
-          - code: "assert '6' in _stdout"
-            message: "Should print 6 (full teams: 50 // 8)"
-          - code: "assert '2' in _stdout"
-            message: "Should print 2 (leftover: 50 % 8)"
-
-      - type: mini_code
-        prompt: "Each branch of the case doubles the number of leads. Calculate the total leads after 16 branches (2 to the power of 16) and print it."
-        starter: ""
-        tests:
-          - code: "assert _stdout.strip() == '65536'"
-            message: "Should print 65536 (2 ** 16)"
-          - code: "assert '**' in _code"
-            message: "Should use ** for exponentiation"
+        '
+      tests:
+      - code: assert '6' in _stdout
+        message: 'Should print 6 (full teams: 50 // 8)'
+      - code: assert '2' in _stdout
+        message: 'Should print 2 (leftover: 50 % 8)'
+      story_before: Cole has 50 evidence photos to file in folders of 8 — he needs to print both how many full folders are
+        complete and how many photos are left over.
+      story_after: 6 full folders filed, 2 photos left on the desk — Cole slips them into a new folder marked 'overflow'.
+    - type: mini_code
+      prompt: Each branch of the case doubles the number of leads. Calculate the total leads after 16 branches (2 to the power
+        of 16) and print it.
+      starter: ''
+      tests:
+      - code: assert _stdout.strip() == '65536'
+        message: Should print 65536 (2 ** 16)
+      - code: assert '**' in _code
+        message: Should use ** for exponentiation
+      story_before: Each branch of the case doubles the number of leads; Cole needs to calculate and print the total leads
+        after 16 branches.
+      story_after: 65536 leads — Cole stares at the number, then pins a single name at the centre of the board.

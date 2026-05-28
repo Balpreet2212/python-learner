@@ -154,6 +154,10 @@ worlds:
         False'
       explanation: The Oracle tests if an ingredient count is even. Functions can return True or False. if is_even(n) is clearer
         than if n % 2 == 0.
+      story_before: Elara needs a way for her recipes to give a yes-or-no verdict — Master Theo introduces the Parity Oracle,
+        a spell that returns True or False.
+      story_after: True then False — the Oracle judges even and odd ingredient counts clearly, and Elara sees that functions
+        can return truth itself.
     - type: mcq
       question: The Oracle tests if a potion amount is positive. What does this print?
       code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
@@ -164,6 +168,9 @@ worlds:
       - '0'
       correct: 'False'
       explanation: -3 > 0 is False. The Oracle returns False — the ingredient amount is invalid.
+      story_before: The Oracle tests whether a potion amount is above zero; Elara traces its verdict for a negative value.
+      story_after: False — a negative amount means the ingredient is invalid, and the Oracle's boolean verdict makes that
+        instantly clear.
     - type: fill_blank
       prompt: Return True if the spell name has more than 10 characters.
       before: "def is_long(text):\n    return len(text) "
@@ -175,6 +182,9 @@ worlds:
       - ==
       answer: '>'
       explanation: Returns True if the spell name has more than 10 characters.
+      story_before: Elara must choose the right comparison rune so the Oracle returns True only for spell names longer than
+        ten characters.
+      story_after: The greater-than rune is inscribed; the Oracle now correctly judges long spell names from short ones.
     - type: mcq
       question: The Oracle approves the apprentice's age. What does this print?
       code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
@@ -185,6 +195,9 @@ worlds:
       - '20'
       correct: allowed
       explanation: is_adult(20) returns True (20 >= 18). The if block runs and prints "allowed".
+      story_before: The Oracle approves apprentices who meet the minimum age; Elara traces what prints when the verdict is
+        True.
+      story_after: allowed — the Oracle returned True and the if block ran, letting the apprentice proceed.
     - type: arrange
       instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
       blocks:
@@ -218,6 +231,8 @@ worlds:
       - ==
       - '0'
       explanation: n % d == 0 is True when there is no remainder — the ingredient divides evenly.
+      story_before: Elara assembles an Oracle that tells her whether one ingredient quantity divides evenly into another.
+      story_after: The divisibility Oracle is complete — Elara can now check any ingredient ratio with a single call.
     - type: mcq
       question: The Oracle checks two ingredient amounts. What does this print?
       code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
@@ -228,6 +243,9 @@ worlds:
       - '-1'
       correct: 'False'
       explanation: a > 0 is True but b > 0 is False. True and False = False.
+      story_before: The Oracle checks two ingredient amounts at once; Elara traces its verdict when one of them is negative.
+      story_after: False — both conditions must be True for the Oracle to approve, and one negative amount is enough to reject
+        the brew.
     - type: fill_blank
       prompt: Ensure a potion strength is non-negative and at most 100.
       before: "def is_valid_score(s):\n    return s >= 0 "
@@ -239,6 +257,10 @@ worlds:
       - if
       answer: and
       explanation: 'Both conditions must hold: strength >= 0 AND strength <= 100.'
+      story_before: Elara must combine two conditions so the Oracle only returns True when a potion strength is within the
+        safe range.
+      story_after: The and rune binds both conditions — the Oracle now correctly validates any strength value between 0 and
+        100.
     - type: mcq
       question: The Oracle checks if a spell word is all uppercase. What does this print?
       code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
@@ -260,6 +282,8 @@ worlds:
 
         False'
       explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False.'
+      story_before: The Oracle checks whether a spell word is shouted in all capital letters; Elara traces two verdicts.
+      story_after: True then False — the Oracle tells Elara exactly which spell words meet the all-caps requirement.
     - type: mcq
       question: Why use a boolean-returning function instead of writing the condition inline?
       code: ''
@@ -270,6 +294,8 @@ worlds:
       - It avoids using if
       correct: It gives the condition a meaningful name, making code more readable
       explanation: is_valid_ingredient(x) explains the intent. The full condition inline does not.
+      story_before: Master Theo asks Elara why naming a condition as a function is better than writing it inline every time.
+      story_after: A named Oracle like is_valid_ingredient makes the intent clear at a glance — Elara is convinced.
     - type: mini_code
       prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
       starter: ''
@@ -280,6 +306,8 @@ worlds:
         message: '''hello'' is not a palindrome'
       - code: assert is_palindrome('madam') == True
         message: '''madam'' is a palindrome'
+      story_before: Elara writes a palindrome Oracle that tells her whether a spell word reads the same forwards and backwards.
+      story_after: racecar and madam pass; hello fails — the palindrome Oracle is ready to screen any spell name.
     - type: mini_code
       prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
       starter: ''
@@ -290,6 +318,9 @@ worlds:
         message: 9 is not prime (3 x 3)
       - code: assert is_prime(2) == True
         message: 2 is prime
+      story_before: Master Theo needs a prime Oracle to identify which ingredient potencies have no magical divisors.
+      story_after: 7 and 2 are prime, 9 is not — the prime Oracle is complete, and Elara's boolean spell library is now a
+        powerful toolkit.
   scifi:
     title: Diagnostic Checks
     exercises:
@@ -299,6 +330,10 @@ worlds:
 
         False'
       explanation: Voss runs a parity diagnostic on sensor readings. if is_even(n) is clearer than if n % 2 == 0.
+      story_before: Voss needs diagnostic checks that return a clear pass/fail signal rather than a number; she introduces
+        Yara to boolean-returning subroutines.
+      story_after: True then False — the parity diagnostic works on both even and odd sensor values, giving Yara a clean yes-or-no
+        readout.
     - type: mcq
       question: Voss checks if a sensor reading is positive. What does this print?
       code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
@@ -309,6 +344,9 @@ worlds:
       - '0'
       correct: 'False'
       explanation: -3 > 0 is False. Sensor reading is invalid — below zero.
+      story_before: Yara traces a positivity check on a sensor reading of -3 to see what the subroutine reports.
+      story_after: False — a negative reading is flagged immediately by the diagnostic, and Yara appreciates how readable
+        the boolean result is.
     - type: fill_blank
       prompt: Return True if the system log entry has more than 10 characters.
       before: "def is_long(text):\n    return len(text) "
@@ -320,6 +358,8 @@ worlds:
       - ==
       answer: '>'
       explanation: Returns True if the log entry exceeds 10 characters.
+      story_before: Yara wires in the correct comparison operator so the subroutine flags log entries that are too long.
+      story_after: The greater-than operator is in place; the log-length diagnostic now correctly identifies oversized entries.
     - type: mcq
       question: Voss checks if a crew member meets minimum age clearance. What does this print?
       code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
@@ -330,6 +370,8 @@ worlds:
       - '20'
       correct: allowed
       explanation: is_adult(20) returns True (20 >= 18). Crew member is cleared.
+      story_before: A crew-clearance check returns True for age 20; Yara traces whether the access block runs.
+      story_after: allowed — the diagnostic returned True and the if block executed, granting the crew member access.
     - type: arrange
       instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
       blocks:
@@ -363,6 +405,9 @@ worlds:
       - ==
       - '0'
       explanation: n % d == 0 means the reading divides cleanly — no remainder.
+      story_before: Yara assembles a divisibility check to determine whether a sensor reading divides cleanly by a given interval.
+      story_after: The divisibility subroutine is operational — Yara can now check any reading against any interval with one
+        call.
     - type: mcq
       question: Voss checks if two hull readings are both positive. What does this print?
       code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
@@ -373,6 +418,9 @@ worlds:
       - '-1'
       correct: 'False'
       explanation: a > 0 is True but b > 0 is False. True and False = False.
+      story_before: Voss runs a dual-hull check; Yara traces the result when one of the two readings is negative.
+      story_after: False — both readings must be positive for hull integrity to pass, and one bad reading fails the whole
+        check.
     - type: fill_blank
       prompt: Ensure a hull integrity score is non-negative and at most 100.
       before: "def is_valid_score(s):\n    return s >= 0 "
@@ -384,6 +432,9 @@ worlds:
       - if
       answer: and
       explanation: 'Both conditions must hold: score >= 0 AND score <= 100.'
+      story_before: Yara combines two conditions with the right keyword so a hull-integrity score is only valid within bounds.
+      story_after: The and operator ties both conditions together — the integrity check now correctly validates any score
+        from 0 to 100.
     - type: mcq
       question: Voss checks if a status code is all uppercase. What does this print?
       code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
@@ -405,6 +456,8 @@ worlds:
 
         False'
       explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False. Protocol codes must be uppercase.'
+      story_before: Voss checks whether status codes are formatted in all-uppercase protocol; Yara traces two results.
+      story_after: True then False — HELLO passes protocol, Hello does not; Yara now knows which status strings need reformatting.
     - type: mcq
       question: Why use a boolean-returning function instead of writing the condition inline?
       code: ''
@@ -415,6 +468,9 @@ worlds:
       - It avoids using if
       correct: It gives the condition a meaningful name, making code more readable
       explanation: is_hull_safe(h) is clearer than h >= 0 and h <= 100 every time you check it.
+      story_before: Voss asks Yara why wrapping a condition in a named subroutine is better than writing it inline every time.
+      story_after: is_hull_safe(h) communicates intent far better than the raw condition — Yara agrees and commits to the
+        pattern.
     - type: mini_code
       prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
       starter: ''
@@ -425,6 +481,9 @@ worlds:
         message: '''hello'' is not a palindrome'
       - code: assert is_palindrome('madam') == True
         message: '''madam'' is a palindrome'
+      story_before: Yara writes a palindrome check that will be used to validate symmetric command codes.
+      story_after: racecar and madam pass; hello fails — the palindrome subroutine is validated and ready for the command-code
+        system.
     - type: mini_code
       prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
       starter: ''
@@ -435,6 +494,9 @@ worlds:
         message: 9 is not prime (3 x 3)
       - code: assert is_prime(2) == True
         message: 2 is prime
+      story_before: Voss needs a prime-number diagnostic to identify prime-frequency channels for encrypted communications.
+      story_after: 7 and 2 are prime, 9 is not — the frequency diagnostic is complete, and Yara's boolean subroutine library
+        is ready for deployment.
   mystery:
     title: Confirming Alibis
     exercises:
@@ -445,6 +507,10 @@ worlds:
         False'
       explanation: Cole writes a function to check if an alibi ID is even-numbered. Functions returning booleans make conditions
         readable.
+      story_before: Cole realises that instead of scattering raw conditions through his deduction code, he can write tools
+        that simply answer True or False.
+      story_after: True then False — the alibi-ID checker gives Cole a clear verdict at a glance, and he immediately sees
+        the value of boolean tools.
     - type: mcq
       question: Cole checks if a witness credibility score is positive. What does this print?
       code: "def is_positive(n):\n    return n > 0\n\nprint(is_positive(-3))"
@@ -455,6 +521,8 @@ worlds:
       - '0'
       correct: 'False'
       explanation: -3 > 0 is False. The credibility score is negative — alibi rejected.
+      story_before: Cole runs a credibility-score tool on a witness with a negative score and traces the verdict.
+      story_after: False — the negative score is rejected outright, and the boolean verdict keeps Cole's reasoning clean.
     - type: fill_blank
       prompt: Return True if the alibi statement has more than 10 characters.
       before: "def is_long(text):\n    return len(text) "
@@ -466,6 +534,9 @@ worlds:
       - ==
       answer: '>'
       explanation: Returns True if the alibi is detailed enough (more than 10 characters).
+      story_before: Cole must choose the right comparison so the tool returns True only when an alibi statement is detailed
+        enough.
+      story_after: The greater-than operator is set — the tool now correctly flags short alibis that need more detail.
     - type: mcq
       question: Cole checks if a suspect meets the minimum age. What does this print?
       code: "def is_adult(age):\n    return age >= 18\n\nif is_adult(20):\n    print(\"allowed\")"
@@ -476,6 +547,10 @@ worlds:
       - '20'
       correct: allowed
       explanation: is_adult(20) returns True (20 >= 18). Suspect is old enough — case proceeds.
+      story_before: A minimum-age check returns True for a 20-year-old suspect; Cole traces whether the case-proceeds block
+        runs.
+      story_after: allowed — the check returned True and the case moves forward; Cole notes the elegance of if plus a boolean
+        tool.
     - type: arrange
       instruction: Build a function is_divisible(n, d) that returns True if n is divisible by d
       blocks:
@@ -509,6 +584,9 @@ worlds:
       - ==
       - '0'
       explanation: n % d == 0 means the timeline divides evenly — no gaps in the alibi.
+      story_before: Cole assembles a timeline-divisibility tool to detect whether a suspect's schedule has evenly-spaced gaps.
+      story_after: The divisibility tool is ready — Cole can now flag any timeline with regular intervals that might hint
+        at a pattern.
     - type: mcq
       question: Cole verifies two pieces of evidence are both positive. What does this print?
       code: "def both_positive(a, b):\n    return a > 0 and b > 0\n\nprint(both_positive(3, -1))"
@@ -519,6 +597,8 @@ worlds:
       - '-1'
       correct: 'False'
       explanation: a > 0 is True but b > 0 is False. True and False = False. Both clues must hold.
+      story_before: Cole verifies two pieces of evidence simultaneously; he traces the result when one clue score is negative.
+      story_after: False — both clues must be positive for the evidence to hold, and one bad number sinks the whole argument.
     - type: fill_blank
       prompt: Ensure a suspect credibility score is non-negative and at most 100.
       before: "def is_valid_score(s):\n    return s >= 0 "
@@ -530,6 +610,8 @@ worlds:
       - if
       answer: and
       explanation: 'Both conditions must hold: score >= 0 AND score <= 100.'
+      story_before: Cole combines two conditions so his credibility tool only approves scores within the valid range.
+      story_after: The and operator binds both bounds — the tool now correctly validates any credibility score from 0 to 100.
     - type: mcq
       question: Cole checks if a suspect name is all uppercase. What does this print?
       code: "def is_uppercase(s):\n    return s == s.upper()\n\nprint(is_uppercase(\"HELLO\"))\nprint(is_uppercase(\"Hello\"\
@@ -551,6 +633,8 @@ worlds:
 
         False'
       explanation: '"HELLO" == "HELLO" is True. "Hello" == "HELLO" is False.'
+      story_before: Cole checks whether a suspect's name has been entered in all-uppercase as required by the case-file format.
+      story_after: True then False — HELLO is properly formatted, Hello is not; Cole flags the inconsistency in the file.
     - type: mcq
       question: Why use a boolean-returning function instead of writing the condition inline?
       code: ''
@@ -561,6 +645,9 @@ worlds:
       - It avoids using if
       correct: It gives the condition a meaningful name, making code more readable
       explanation: is_alibi_valid(a) is clearer than checking all conditions inline every time.
+      story_before: Cole reflects on why naming a condition as a tool is clearer than writing the raw comparison every time.
+      story_after: is_alibi_valid(a) reads like a question you'd ask in an interview — Cole adopts the pattern for every future
+        check.
     - type: mini_code
       prompt: Define is_palindrome(s) that returns True if s reads the same forwards and backwards.
       starter: ''
@@ -571,6 +658,9 @@ worlds:
         message: '''hello'' is not a palindrome'
       - code: assert is_palindrome('madam') == True
         message: '''madam'' is a palindrome'
+      story_before: Cole notices the killer's code phrases may be palindromes; he writes a tool to test any string instantly.
+      story_after: racecar and madam are flagged; hello is clear — the palindrome tool is in Cole's kit and could crack the
+        next message.
     - type: mini_code
       prompt: Define is_prime(n) that returns True if n is a prime number (not divisible by any number from 2 to n-1).
       starter: ''
@@ -581,3 +671,6 @@ worlds:
         message: 9 is not prime (3 x 3)
       - code: assert is_prime(2) == True
         message: 2 is prime
+      story_before: The suspect used prime-numbered lockers to hide evidence; Cole writes a prime tool to identify them all.
+      story_after: 7 and 2 are prime, 9 is not — the prime tool is ready, and Cole's boolean toolkit can now answer almost
+        any yes-or-no question the case throws at him.

@@ -172,6 +172,10 @@ worlds:
       output: Dodge and roll!
       explanation: Kira uses a nested if. The outer check identifies the dragon. The inner check confirms its breath weapon.
         Both must pass to trigger the dodge.
+      story_before: 'Kira spots a dragon and needs to know two things in sequence: is it a dragon, and does it have its breath
+        weapon ready?'
+      story_after: Both layers pass; 'Dodge and roll!' echoes through the glade — nested checks let Kira react to exactly
+        the right combination of facts.
     - type: mcq
       question: Kira checks creature size and threat. What does this print?
       code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
@@ -184,6 +188,9 @@ worlds:
         medium'
       correct: big
       explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+      story_before: Kira measures a creature in two stages — she traces the nested if to see what label prints when both thresholds
+        are cleared.
+      story_after: Both ifs are True; 'big' prints and Kira gives the creature a wide berth.
     - type: fill_blank
       prompt: Add an inner check that only runs once we know the creature is in sight.
       before: "if in_sight:\n    "
@@ -195,6 +202,10 @@ worlds:
       - and
       answer: if
       explanation: A nested if inside the outer if adds an extra condition for hostility.
+      story_before: Kira only needs to check hostility once she can actually see the creature — she adds the inner if that
+        runs inside the outer sight check.
+      story_after: The nested if is in place; hostility is now only tested when the creature is visible, avoiding false alarms
+        in the dark.
     - type: mcq
       question: Kira evaluates two creature stats. What does this print?
       code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
@@ -205,6 +216,10 @@ worlds:
       - only b
       correct: both
       explanation: a < 5 is True. b > 5 is True. "both" prints.
+      story_before: Kira reads two creature stats at once — she traces the nested if to confirm what prints when both inner
+        and outer conditions are True.
+      story_after: Both are True; 'both' prints and Kira knows the creature meets the dual threshold for her rarest bestiary
+        entry.
     - type: arrange
       instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
       blocks:
@@ -234,6 +249,10 @@ worlds:
       - '"veteran"'
       - )
       explanation: The inner if is indented inside the outer if block.
+      story_before: Kira needs a veteran label that only appears when the ranger is active and their level clears five — she
+        assembles the nested structure.
+      story_after: The nested if is assembled; 'veteran' will now only print for active rangers who have truly earned the
+        rank.
     - type: mcq
       question: Kira assesses a creature threat level. What does this print?
       code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
@@ -247,6 +266,9 @@ worlds:
         pass'
       correct: pass
       explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+      story_before: A creature score of 70 enters the nested check — Kira traces which inner branch fires when the outer passes
+        but the inner top-tier fails.
+      story_after: Outer True, inner False; the inner else runs and 'pass' prints — a solid showing, not an elite one.
     - type: fill_blank
       prompt: Handle the case where the bow is drawn but the quiver is empty.
       before: "if bow_drawn:\n    if arrows > 0:\n        print(\"fire!\")\n    "
@@ -258,6 +280,9 @@ worlds:
       - or
       answer: else
       explanation: The inner else catches when arrows = 0 while the bow is still drawn.
+      story_before: Kira has her bow drawn but her quiver is empty — she adds the inner else that handles the no-arrows case
+        inside the outer bow check.
+      story_after: The inner else is in; Kira's script now covers both fire and no-ammo outcomes whenever the bow is drawn.
     - type: mcq
       question: Kira checks three layers of creature threat. What does this print?
       code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
@@ -269,6 +294,10 @@ worlds:
       - Nothing
       correct: mid
       explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+      story_before: Three layers of creature threat — Kira traces the triple-nested if to find which branch ultimately fires
+        for a value of 3.
+      story_after: x > 1 and x > 2 are True, x > 3 is False; the innermost else runs and 'mid' marks the creature at a middle
+        danger level.
     - type: mcq
       question: When can you replace nested if with a single if using and?
       code: ''
@@ -279,6 +308,10 @@ worlds:
       - When the inner if has an elif
       correct: When both conditions must be True for the same action
       explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+      story_before: Kira wonders whether she can simplify a nested if into a single and condition — she recalls the rule for
+        when that's valid.
+      story_after: When both conditions lead to the same action with no inner else; Kira rewrites the simpler cases and keeps
+        nested for the complex ones.
     - type: mini_code
       prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
         'admin' AND active is True. Print nothing otherwise.
@@ -303,6 +336,10 @@ worlds:
 
           True'
         message: 'beast_type not dragon: no action'
+      story_before: Kira must grant camp access only when the ranger's role is 'admin' and they are marked active — she uses
+        nested if to enforce both gates in order.
+      story_after: The nested check is live; only active admins will see 'admin active', keeping the camp roster properly
+        gated.
     - type: mini_code
       prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
         if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
@@ -327,6 +364,10 @@ worlds:
 
           True'
         message: 'threat=70 is below 80: no rating'
+      story_before: The Rank Crystal awards A+ for an elite score with a rare relic, plain A for elite without it, and nothing
+        for lower scores — Kira programs the nested logic.
+      story_after: The nested if is complete; the crystal now awards precisely the right rating for every combination of score
+        and relic status.
   scifi:
     title: Multi-Level Launch Checks
     exercises:
@@ -336,6 +377,9 @@ worlds:
       output: Full launch authority
       explanation: Voss uses nested if. The outer check confirms captain rank. The inner check confirms identity. Both must
         pass.
+      story_before: 'Voss must clear two gates in sequence: confirm captain rank, then verify identity — only then can the
+        launch authority be granted.'
+      story_after: Both layers pass; 'Full launch authority' lights up the console and the countdown can begin.
     - type: mcq
       question: Voss checks hull rating and fuel level. What does this print?
       code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
@@ -348,6 +392,9 @@ worlds:
         medium'
       correct: big
       explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+      story_before: The hull diagnostic runs two threshold checks in sequence — Voss traces the nested if to see which output
+        a reading of 10 produces.
+      story_after: Both ifs are True; 'big' prints and Voss logs the reading as well above nominal.
     - type: fill_blank
       prompt: Add an inner check that only runs once we know the crew is on board.
       before: "if crew_aboard:\n    "
@@ -359,6 +406,10 @@ worlds:
       - and
       answer: if
       explanation: A nested if inside the outer if checks if systems are also ready.
+      story_before: Systems should only be checked for readiness once the crew is confirmed aboard — Voss adds the inner if
+        that enforces that order.
+      story_after: The nested if is in place; systems readiness is now only checked after crew presence is confirmed, preventing
+        premature ignition.
     - type: mcq
       question: Voss evaluates two flight parameters. What does this print?
       code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
@@ -369,6 +420,9 @@ worlds:
       - only b
       correct: both
       explanation: a < 5 is True. b > 5 is True. "both" prints.
+      story_before: Voss evaluates two flight parameters in a nested check — he traces what prints when both the outer and
+        inner conditions are True.
+      story_after: Both are True; 'both' prints and Voss logs the dual-parameter pass in the pre-flight checklist.
     - type: arrange
       instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
       blocks:
@@ -398,6 +452,10 @@ worlds:
       - '"veteran"'
       - )
       explanation: The inner if is indented inside the outer if block.
+      story_before: The crew ranking system gives the veteran label only to active members whose level exceeds five — Voss
+        assembles the nested condition.
+      story_after: The nested if is assembled; the veteran tag will now only appear for the right combination of active status
+        and experience level.
     - type: mcq
       question: Voss rates hull integrity. What does this print?
       code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
@@ -411,6 +469,9 @@ worlds:
         pass'
       correct: pass
       explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+      story_before: A hull integrity score of 70 enters the nested rating chain — Voss traces which inner branch fires when
+        the outer passes but the elite tier doesn't.
+      story_after: Outer True, inner False; the inner else runs and 'pass' prints — the hull is acceptable, not outstanding.
     - type: fill_blank
       prompt: Handle the case where engines are armed but fuel has run out.
       before: "if engines_armed:\n    if fuel > 0:\n        print(\"ignite!\")\n    "
@@ -422,6 +483,10 @@ worlds:
       - or
       answer: else
       explanation: The inner else catches when fuel = 0 while engines are still armed.
+      story_before: The engines are armed but the fuel tank is empty — Voss adds the inner else that handles the no-fuel case
+        inside the armed-engines check.
+      story_after: The inner else is in; the script now outputs the correct message whether fuel is present or not, whenever
+        engines are armed.
     - type: mcq
       question: Voss checks three layers of launch readiness. What does this print?
       code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
@@ -433,6 +498,10 @@ worlds:
       - Nothing
       correct: mid
       explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+      story_before: Three layers of launch-readiness checks run in sequence — Voss traces the triple-nested if to find which
+        branch fires for a value of 3.
+      story_after: First two ifs pass, the third fails; the innermost else runs and 'mid' marks the system at a moderate readiness
+        level.
     - type: mcq
       question: When can you replace nested if with a single if using and?
       code: ''
@@ -443,6 +512,10 @@ worlds:
       - When the inner if has an elif
       correct: When both conditions must be True for the same action
       explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+      story_before: Voss considers collapsing a nested if into a single and — he recalls the rule that governs when that refactor
+        is safe.
+      story_after: When both conditions must be True for the same action with no inner else; Voss simplifies the checklist
+        entries that qualify.
     - type: mini_code
       prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
         'admin' AND active is True. Print nothing otherwise.
@@ -467,6 +540,10 @@ worlds:
 
           True'
         message: 'rank is not captain: denied'
+      story_before: 'Voss gates the command console: captain rank must be confirmed first, then active status checked inside
+        — he writes the nested if now.'
+      story_after: The nested check is live; only active captains will see 'admin active' on the console, keeping the bridge
+        secure.
     - type: mini_code
       prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
         if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
@@ -491,6 +568,10 @@ worlds:
 
           True'
         message: 'hull=70 is below 80: no rating'
+      story_before: The performance log gives elite crew an A+ with a turbo boost flag, plain A without it, and nothing below
+        the threshold — Voss programs the nested logic.
+      story_after: The nested if is complete; every crew evaluation will now receive exactly the right rating based on both
+        score and boost status.
   mystery:
     title: Layered Clue Checks
     exercises:
@@ -500,6 +581,10 @@ worlds:
       output: Full access
       explanation: Cole uses nested if. The outer check confirms inspector rank. The inner check confirms clearance. Both
         must pass.
+      story_before: 'Cole must pass two checkpoints in order: confirm inspector rank, then verify clearance — only then does
+        the evidence room open.'
+      story_after: Both layers clear; 'Full access' is granted and Cole steps into the evidence room, the nested if keeping
+        lesser ranks out.
     - type: mcq
       question: Cole checks two layers of suspect data. What does this print?
       code: "x = 10\nif x > 5:\n    if x > 8:\n        print(\"big\")\n    else:\n        print(\"medium\")"
@@ -512,6 +597,9 @@ worlds:
         medium'
       correct: big
       explanation: x > 5 is True. x > 8 is True (10 > 8), so "big" prints.
+      story_before: Cole runs two layers of suspect-data checks in sequence — he traces the nested if to see which label a
+        value of 10 earns.
+      story_after: Both ifs are True; 'big' prints and Cole marks the data point as high-significance in his notes.
     - type: fill_blank
       prompt: Add an inner check that only runs once we know the drawer is unlocked.
       before: "if drawer_unlocked:\n    "
@@ -523,6 +611,10 @@ worlds:
       - and
       answer: if
       explanation: A nested if inside the outer if checks if the key also matches.
+      story_before: Cole can only check whether the key matches once the drawer is confirmed unlocked — he adds the inner
+        if that enforces that sequence.
+      story_after: The nested if is in; the key-match test now only runs after the drawer-unlocked check passes, preventing
+        wasted effort.
     - type: mcq
       question: Cole checks two pieces of evidence. What does this print?
       code: "a = 3\nb = 7\nif a < 5:\n    if b > 5:\n        print(\"both\")\n    else:\n        print(\"only a\")"
@@ -533,6 +625,9 @@ worlds:
       - only b
       correct: both
       explanation: a < 5 is True. b > 5 is True. "both" prints.
+      story_before: Cole examines two pieces of evidence with a nested check — he traces what prints when both the outer and
+        inner conditions are True.
+      story_after: Both are True; 'both' prints and Cole notes that two independent clues point to the same conclusion.
     - type: arrange
       instruction: Build nested code that prints "veteran" only when active is True and level is greater than 5
       blocks:
@@ -562,6 +657,10 @@ worlds:
       - '"veteran"'
       - )
       explanation: The inner if is indented inside the outer if.
+      story_before: Cole's informant database tags veterans only when an informant is active and their reliability level exceeds
+        five — he assembles the nested check.
+      story_after: The nested if is assembled; the veteran tag will only appear for informants who are both active and proven
+        reliable.
     - type: mcq
       question: Cole rates a suspect credibility score. What does this print?
       code: "score = 70\nif score >= 60:\n    if score >= 90:\n        print(\"A\")\n    else:\n        print(\"pass\")\n\
@@ -575,6 +674,10 @@ worlds:
         pass'
       correct: pass
       explanation: 'score >= 60 is True. score >= 90 is False. Inner else runs: "pass".'
+      story_before: A suspect credibility score of 70 enters the nested rating chain — Cole traces which inner branch fires
+        when the outer passes but the elite tier doesn't.
+      story_after: Outer True, inner False; 'pass' prints and Cole marks the suspect as credible enough to keep on the list,
+        not enough to lead it.
     - type: fill_blank
       prompt: Handle the case where the safe is open but the document has already been removed.
       before: "if safe_open:\n    if documents > 0:\n        print(\"evidence secured!\")\n    "
@@ -586,6 +689,10 @@ worlds:
       - or
       answer: else
       explanation: The inner else catches when documents = 0 while the safe is open.
+      story_before: The safe is open but the documents may already be gone — Cole adds the inner else that handles the empty-safe
+        case inside the open-safe check.
+      story_after: The inner else is in; Cole's script now distinguishes between finding evidence and finding an empty safe,
+        both with the safe open.
     - type: mcq
       question: Cole checks three levels of evidence quality. What does this print?
       code: "x = 3\nif x > 1:\n    if x > 2:\n        if x > 3:\n            print(\"deep\")\n        else:\n            print(\"\
@@ -597,6 +704,10 @@ worlds:
       - Nothing
       correct: mid
       explanation: 'x > 1: True. x > 2: True. x > 3: False. Innermost else runs: "mid".'
+      story_before: Three layers of evidence-quality checks — Cole traces the triple-nested if to find which branch fires
+        for a quality value of 3.
+      story_after: First two ifs pass, the third fails; the innermost else runs and 'mid' grades the evidence at a moderate
+        quality level.
     - type: mcq
       question: When can you replace nested if with a single if using and?
       code: ''
@@ -607,6 +718,10 @@ worlds:
       - When the inner if has an elif
       correct: When both conditions must be True for the same action
       explanation: 'if a and b: ... is equivalent to if a: if b: ... when there is no inner else.'
+      story_before: Cole wonders when he can simplify a nested if into a single and condition — he recalls the rule that makes
+        the refactor valid.
+      story_after: When both conditions lead to the same single action with no inner else; Cole rewrites the simple cases
+        and keeps nested for the branching ones.
     - type: mini_code
       prompt: Read role then active ('True'/'False') with input(). Use nested if to print 'admin active' only when role is
         'admin' AND active is True. Print nothing otherwise.
@@ -631,6 +746,10 @@ worlds:
 
           True'
         message: 'rank is not inspector: denied'
+      story_before: 'Cole gates the case file: inspector rank must be confirmed first, then active clearance checked inside
+        — he writes the nested if now.'
+      story_after: The nested check is live; only active inspectors will see 'admin active' in the file, keeping sensitive
+        case data protected.
     - type: mini_code
       prompt: Read score then bonus ('True'/'False') with input(). Print 'A+' if score is 80 or above AND bonus. Print 'A'
         if score is 80 or above but not bonus. Print nothing if score is below 80. Use nested if.
@@ -655,3 +774,7 @@ worlds:
 
           True'
         message: 'evidence=70 is below 80: insufficient'
+      story_before: 'Cole grades evidence: top-tier with a key witness earns A+, top-tier without earns A, and anything below
+        the threshold earns nothing — he programs the nested logic.'
+      story_after: The nested if is complete; every piece of evidence will now receive exactly the right grade based on both
+        its score and its witness backing.

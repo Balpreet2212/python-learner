@@ -231,6 +231,10 @@ worlds:
         Woof'
       explanation: Child spell classes inherit from a base Spell class. class Child(Parent) inherits attributes and methods.
         Children override speak() to define their own magic word.
+      story_before: Ash's workshop holds many creature types, and writing a full blueprint for each from scratch would fill
+        every scroll — a shared ancestry is the answer.
+      story_after: 'Cat and Dog both inherit from Animal: name flows down automatically, and each child overrides speak()
+        with its own magic word.'
     - type: mcq
       question: A sub-spell inherits the base spell's power attribute. What does this print?
       code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
@@ -242,6 +246,10 @@ worlds:
       - Error
       correct: '120'
       explanation: Car inherits Vehicle's __init__. c.speed = 120.
+      story_before: A child spell class inherits the base spell's power attribute — Ash must verify it is accessible without
+        redefinition.
+      story_after: The inherited attribute prints cleanly at 120; Ash confirms that child classes own everything the parent
+        declared.
     - type: fill_blank
       prompt: Multiply side by itself to compute the rune square's area.
       before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
@@ -259,6 +267,9 @@ worlds:
       - /
       answer: '*'
       explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+      story_before: A Square rune inherits from Shape and overrides area() — Ash must supply the operator that squares the
+        side.
+      story_after: 'Multiply closes the formula: 5 * 5 = 25; the rune''s area is correct and the override is complete.'
     - type: mcq
       question: A child spell class inherits the greeting method. What does this print?
       code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
@@ -270,6 +281,10 @@ worlds:
       - Error
       correct: Hi, I am Alice
       explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+      story_before: A child Mage class inherits greet() from its parent — Ash checks whether it can call the method without
+        defining it again.
+      story_after: '''Hi, I am Alice'' prints correctly; Ash sees that inherited methods work on child instances without any
+        extra code.'
     - type: arrange
       instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
       blocks:
@@ -363,6 +378,9 @@ worlds:
       - )
       - )
       explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+      story_before: A Bird familiar must inherit from Animal and override speak() to return 'Tweet' — the blocks need ordering.
+      story_after: Bird(Animal) is assembled; the familiar chirps 'Tweet' while still carrying its name from the parent's
+        __init__.
     - type: mcq
       question: Two spells — one overrides the chant, one inherits it. What does this print?
       code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
@@ -384,6 +402,9 @@ worlds:
 
         A'
       explanation: B overrides hello() → 'B'. C does not override it, inheriting A's hello() → 'A'.
+      story_before: 'Two child spell classes: one overrides the chant, one inherits it — Ash must predict what each prints.'
+      story_after: B prints 'B' and C prints 'A'; Ash sees that overriding is optional — children that stay silent inherit
+        the parent's voice.
     - type: fill_blank
       prompt: Inherit from Animal so the dragon familiar gets the name attribute automatically.
       before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
@@ -395,6 +416,9 @@ worlds:
       - object
       answer: Animal
       explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+      story_before: A dragon familiar class needs to inherit from Animal automatically — Ash must name the parent inside the
+        parentheses.
+      story_after: Animal is placed in the brackets; the dragon inherits name from __init__ without any extra setup.
     - type: mcq
       question: A child weapon class overrides the attack method. What does this print?
       code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
@@ -407,6 +431,8 @@ worlds:
       - Slash! 10 damage
       correct: Slash! 20 damage
       explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+      story_before: A child Sword class overrides the attack method to deal double damage — Ash traces the output.
+      story_after: '''Slash! 20 damage'' is the result; Ash understands that overriding replaces the parent''s behaviour entirely.'
     - type: mcq
       question: What is the main benefit of spell inheritance?
       code: ''
@@ -417,6 +443,9 @@ worlds:
       - It lets you skip writing __init__
       correct: You can reuse attributes and methods from a parent class without repeating code
       explanation: Child spell classes share the parent's logic and only override what's different.
+      story_before: 'Ash pauses to consider: what is the core benefit of giving spell classes a shared bloodline through inheritance?'
+      story_after: Reuse without repetition — child spells inherit the parent's logic and only override what makes them unique,
+        keeping the spellbook lean.
     - type: mini_code
       prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
         * radius ** 2. Print the area of Circle(5).
@@ -426,6 +455,10 @@ worlds:
         message: Circle area should be ~78.5
       - code: '''78'' in _stdout'
         message: Should print ~78.5
+      story_before: Ash needs a Circle that inherits from Shape and overrides area() — the blueprint and the override both
+        need writing.
+      story_after: Circle(Shape) computes the area as ~78.5; Ash's shape hierarchy is complete and every subclass can specialise
+        at will.
     - type: mini_code
       prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
         'Beep!'. Create a Car and print its make and call honk().
@@ -435,6 +468,10 @@ worlds:
         message: Car should inherit make and speed from Vehicle
       - code: Car('X', 0).honk() == 'Beep!'
         message: honk() should return 'Beep!'
+      story_before: A Car must inherit make and speed from Vehicle and add its own honk() method — both the parent and the
+        child need defining.
+      story_after: The Car inherits cleanly and honk() returns 'Beep!'; Ash's inheritance mastery is sealed — the entire unit's
+        arc is complete.
   scifi:
     title: Subclass Modules
     exercises:
@@ -449,6 +486,10 @@ worlds:
         Woof'
       explanation: Voss deploys specialised ship modules. class Child(Parent) inherits all attributes and methods. Each module
         overrides the base behaviour with its own output signal.
+      story_before: Voss needs specialised ship modules, but rewriting every shared attribute from scratch for each one would
+        blow the build schedule — a base module class is the solution.
+      story_after: 'Cat and Dog module variants inherit from Animal: the name registers automatically, and each child overrides
+        its output signal independently.'
     - type: mcq
       question: A sub-module inherits the base module's speed rating. What does this print?
       code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
@@ -460,6 +501,10 @@ worlds:
       - Error
       correct: '120'
       explanation: Car inherits Vehicle's __init__. c.speed = 120.
+      story_before: A sub-module inherits its speed rating from the base module — Voss must confirm the attribute is accessible
+        without redeclaring it.
+      story_after: Speed prints at 120 without any extra code in Car; Voss confirms inherited attributes are fully owned by
+        child classes.
     - type: fill_blank
       prompt: Multiply side by itself to compute the solar panel's area.
       before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
@@ -477,6 +522,9 @@ worlds:
       - /
       answer: '*'
       explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+      story_before: A Square solar panel inherits from Shape and overrides area() — Voss must supply the operator that squares
+        the side length.
+      story_after: 'Multiply locks in: 5 * 5 = 25; the panel''s area is verified and the override is complete.'
     - type: mcq
       question: A sub-module inherits the base module's greeting broadcast. What does this print?
       code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
@@ -488,6 +536,10 @@ worlds:
       - Error
       correct: Hi, I am Alice
       explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+      story_before: A sub-module inherits the greet broadcast from its parent — Voss checks whether it transmits without being
+        redefined.
+      story_after: '''Hi, I am Alice'' transmits correctly; Voss sees that inherited methods fire on child instances with
+        zero additional code.'
     - type: arrange
       instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
       blocks:
@@ -581,6 +633,10 @@ worlds:
       - )
       - )
       explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+      story_before: A Bird drone unit must inherit from Animal and override speak() to broadcast 'Tweet' — the code needs
+        assembling.
+      story_after: Bird(Animal) is wired up; the drone broadcasts 'Tweet' while still registering its name from the parent's
+        __init__.
     - type: mcq
       question: Two modules — one overrides the signal, one inherits it. What does this print?
       code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
@@ -602,6 +658,9 @@ worlds:
 
         A'
       explanation: B overrides hello() → 'B'. C inherits A's hello() → 'A'.
+      story_before: 'Two sub-modules: one overrides the hello signal, one inherits it — Voss must predict each module''s output.'
+      story_after: B outputs 'B', C outputs 'A'; Voss sees that silence in a child class means inheriting the parent's default
+        signal.
     - type: fill_blank
       prompt: Inherit from Animal so the drone unit gets the name attribute automatically.
       before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
@@ -613,6 +672,9 @@ worlds:
       - object
       answer: Animal
       explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+      story_before: A drone sub-class needs to inherit from Animal — Voss must specify the parent module inside the parentheses.
+      story_after: Animal is placed in the brackets; the drone inherits the name attribute automatically from the base module's
+        __init__.
     - type: mcq
       question: A specialised weapon module overrides the attack output. What does this print?
       code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
@@ -625,6 +687,10 @@ worlds:
       - Slash! 10 damage
       correct: Slash! 20 damage
       explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+      story_before: A specialised Sword weapon module overrides attack() to deal double the base damage — Voss traces the
+        output.
+      story_after: '''Slash! 20 damage'' is confirmed; overriding replaces the parent''s output entirely with the child''s
+        specialised behaviour.'
     - type: mcq
       question: What is the main benefit of module inheritance?
       code: ''
@@ -635,6 +701,10 @@ worlds:
       - It lets you skip writing __init__
       correct: You can reuse attributes and methods from a parent class without repeating code
       explanation: Child modules share the parent's logic and only override what's different.
+      story_before: 'Voss pauses to consider: what is the primary engineering benefit of building child modules from a parent
+        class?'
+      story_after: Code reuse without duplication — child modules share the parent's logic and override only their unique
+        behaviour, keeping the codebase lean.
     - type: mini_code
       prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
         * radius ** 2. Print the area of Circle(5).
@@ -644,6 +714,9 @@ worlds:
         message: Circle area should be ~78.5
       - code: '''78'' in _stdout'
         message: Should print ~78.5
+      story_before: Voss needs a Circle module that inherits from Shape and overrides area() to compute the cross-section.
+      story_after: Circle(Shape) returns ~78.5; the module hierarchy is complete and any future shape can be slotted in as
+        a child.
     - type: mini_code
       prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
         'Beep!'. Create a Car and print its make and call honk().
@@ -653,6 +726,10 @@ worlds:
         message: Car should inherit make and speed from Vehicle
       - code: Car('X', 0).honk() == 'Beep!'
         message: honk() should return 'Beep!'
+      story_before: A Car class must inherit make and speed from Vehicle and add a honk() method — both the parent and child
+        need defining.
+      story_after: The Car inherits cleanly and honk() returns 'Beep!'; Voss's inheritance module is fully operational — Unit
+        7 complete.
   mystery:
     title: Family Connections
     exercises:
@@ -667,6 +744,10 @@ worlds:
         Woof'
       explanation: Cole classifies criminal types that inherit from a base Suspect class. class Child(Parent) inherits all
         attributes and methods. Each type overrides the motive method.
+      story_before: Cole's investigation reveals categories of criminal that share common traits — rewriting a full profile
+        for each type would bury the department in paperwork.
+      story_after: 'Cat and Dog criminal types inherit from Animal: the name is logged automatically, and each type overrides
+        its own motive method.'
     - type: mcq
       question: A sub-suspect inherits the base class's speed attribute. What does this print?
       code: "class Vehicle:\n    def __init__(self, speed):\n        self.speed = speed\n\nclass Car(Vehicle):\n    pass\n\
@@ -678,6 +759,10 @@ worlds:
       - Error
       correct: '120'
       explanation: Car inherits Vehicle's __init__. c.speed = 120.
+      story_before: A sub-suspect inherits the base suspect's speed attribute — Cole must verify it is available without redeclaring
+        it.
+      story_after: Speed reads at 120 from the child class alone; Cole confirms that inherited data is fully accessible to
+        every child profile.
     - type: fill_blank
       prompt: Multiply side by itself to compute the crime scene area.
       before: "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n\
@@ -695,6 +780,9 @@ worlds:
       - /
       answer: '*'
       explanation: Square overrides area(). self.side * self.side = 5 * 5 = 25.
+      story_before: A Square crime scene area is computed by a child class overriding the base — Cole must supply the correct
+        operator.
+      story_after: 'Multiply is the answer: 5 * 5 = 25; the scene''s area is on file and the override is verified.'
     - type: mcq
       question: A sub-suspect inherits the base greeting method. What does this print?
       code: "class Employee:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        return\
@@ -706,6 +794,10 @@ worlds:
       - Error
       correct: Hi, I am Alice
       explanation: Manager inherits greet() from Employee. self.name = 'Alice'.
+      story_before: A sub-suspect profile inherits the greeting method — Cole checks whether it can be called without redefining
+        it.
+      story_after: '''Hi, I am Alice'' is returned; Cole sees that inherited methods work on child instances without any extra
+        code.'
     - type: arrange
       instruction: Define a Bird class inheriting Animal, overriding speak to return 'Tweet'
       blocks:
@@ -799,6 +891,10 @@ worlds:
       - )
       - )
       explanation: Bird(Animal) inherits __init__. speak() is overridden to return 'Tweet'.
+      story_before: An accomplice profile must inherit from Animal and override speak() to return 'Tweet' — the blocks need
+        ordering.
+      story_after: Bird(Animal) is assembled; the accomplice profile inherits its name automatically and announces its own
+        call sign.
     - type: mcq
       question: Two suspect types — one overrides the motive, one inherits it. What does this print?
       code: "class A:\n    def hello(self):\n        return 'A'\n\nclass B(A):\n    def hello(self):\n        return 'B'\n\
@@ -820,6 +916,9 @@ worlds:
 
         A'
       explanation: B overrides hello() → 'B'. C inherits A's hello() → 'A'.
+      story_before: 'Two criminal sub-types: one overrides the motive, one inherits it — Cole must predict what each returns.'
+      story_after: B returns 'B', C returns 'A'; Cole understands that a child class that stays silent inherits the parent's
+        default motive.
     - type: fill_blank
       prompt: Inherit from Animal so the accomplice profile gets the name attribute automatically.
       before: "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nclass Dog("
@@ -831,6 +930,9 @@ worlds:
       - object
       answer: Animal
       explanation: Dog(Animal) means Dog inherits from Animal. d.name = 'Rex' comes from Animal.__init__.
+      story_before: An accomplice class needs to inherit from Animal — Cole must name the parent class inside the parentheses.
+      story_after: Animal is entered; the accomplice profile inherits its name attribute automatically from the base class's
+        __init__.
     - type: mcq
       question: A specialised criminal class overrides the attack method. What does this print?
       code: "class Weapon:\n    def __init__(self, damage):\n        self.damage = damage\n    def attack(self):\n       \
@@ -843,6 +945,9 @@ worlds:
       - Slash! 10 damage
       correct: Slash! 20 damage
       explanation: Sword overrides attack(). self.damage = 10, 10 * 2 = 20.
+      story_before: A specialised criminal class overrides the attack method for greater impact — Cole traces the output.
+      story_after: '''Slash! 20 damage'' is the result; Cole sees that overriding replaces the parent''s behaviour with the
+        child''s own logic.'
     - type: mcq
       question: What is the main benefit of criminal profile inheritance?
       code: ''
@@ -853,6 +958,9 @@ worlds:
       - It lets you skip writing __init__
       correct: You can reuse attributes and methods from a parent class without repeating code
       explanation: Child profiles share the parent's logic and only override what's different.
+      story_before: 'Cole reflects: what is the core investigative value of building criminal profiles through inheritance?'
+      story_after: Shared logic, specialised details — child profiles reuse the parent's foundation and only define what makes
+        each type distinct.
     - type: mini_code
       prompt: Define a Shape class with a method area() that returns 0. Define Circle(Shape) that overrides area() as 3.14
         * radius ** 2. Print the area of Circle(5).
@@ -862,6 +970,9 @@ worlds:
         message: Circle area should be ~78.5
       - code: '''78'' in _stdout'
         message: Should print ~78.5
+      story_before: Cole needs a Circle scene-boundary class that inherits from Shape and overrides area() for circular perimeters.
+      story_after: Circle(Shape) computes ~78.5; the scene-boundary hierarchy is complete and any shape can now be profiled
+        as a child class.
     - type: mini_code
       prompt: Define a Vehicle class with make and speed attributes. Define Car(Vehicle) that adds a honk() method returning
         'Beep!'. Create a Car and print its make and call honk().
@@ -871,3 +982,7 @@ worlds:
         message: Car should inherit make and speed from Vehicle
       - code: Car('X', 0).honk() == 'Beep!'
         message: honk() should return 'Beep!'
+      story_before: A Car class must inherit make and speed from Vehicle and add a honk() method — both parent and child need
+        writing.
+      story_after: The Car inherits cleanly and honk() returns 'Beep!'; Cole's case is closed — Unit 7's class hierarchy stands
+        complete.

@@ -4,11 +4,17 @@ import { LearnerProfileSchema, type LearnerProfile } from "./auth";
 
 // ── Exercise schemas ───────────────────────────────────────────────────────────
 
+const storyBeats = {
+  story_before: z.string().nullable().optional(),
+  story_after: z.string().nullable().optional(),
+};
+
 export const ConceptExSchema = z.object({
   type: z.literal("concept"),
   code: z.string(),
   output: z.string(),
   explanation: z.string(),
+  ...storyBeats,
 });
 
 export const McqExSchema = z.object({
@@ -18,6 +24,7 @@ export const McqExSchema = z.object({
   choices: z.array(z.string()),
   correct: z.string(),
   explanation: z.string(),
+  ...storyBeats,
 });
 
 export const ArrangeExSchema = z.object({
@@ -26,6 +33,7 @@ export const ArrangeExSchema = z.object({
   blocks: z.array(z.string()),
   correct: z.array(z.string()),
   explanation: z.string(),
+  ...storyBeats,
 });
 
 export const FillBlankExSchema = z.object({
@@ -36,6 +44,7 @@ export const FillBlankExSchema = z.object({
   choices: z.array(z.string()),
   answer: z.string(),
   explanation: z.string(),
+  ...storyBeats,
 });
 
 export const MiniCodeExSchema = z.object({
@@ -43,6 +52,7 @@ export const MiniCodeExSchema = z.object({
   prompt: z.string(),
   starter: z.string(),
   test_count: z.number().int(),
+  ...storyBeats,
 });
 
 export const ExerciseSchema = z.discriminatedUnion("type", [

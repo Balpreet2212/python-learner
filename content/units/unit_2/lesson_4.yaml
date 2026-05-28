@@ -1,393 +1,772 @@
-title: "Booleans and bool()"
+title: Booleans and bool()
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      print(bool(0))
-      print(bool(1))
-      print(bool(""))
-      print(bool("hello"))
-    output: "False\nTrue\nFalse\nTrue"
-    explanation: "bool() converts a value to True or False. 0, empty strings, and empty collections are False (falsy). Everything else is True (truthy)."
+- type: concept
+  code: 'print(bool(0))
 
-  - type: mcq
-    question: "What does bool(0) return?"
-    code: ""
-    choices: ["False", "True", "0", "None"]
-    correct: "False"
-    explanation: "0 is falsy in Python. bool(0) returns False."
+    print(bool(1))
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(bool(\"hello\"))"
-    choices: ["True", "False", "hello", "None"]
-    correct: "True"
-    explanation: "A non-empty string is truthy. bool('hello') is True."
+    print(bool(""))
 
-  - type: fill_blank
-    prompt: "Convert hp into a True/False boolean — True if alive, False if at zero."
-    before: "is_alive = "
-    after: "(hp)"
-    choices: ["bool", "int", "str", "print"]
-    answer: "bool"
-    explanation: "bool(hp) converts hp to True (if hp > 0) or False (if hp == 0)."
+    print(bool("hello"))
 
-  - type: mcq
-    question: "What does this print?"
-    code: "print(bool([]))"
-    choices: ["False", "True", "[]", "None"]
-    correct: "False"
-    explanation: "An empty list [] is falsy. bool([]) returns False."
+    '
+  output: 'False
 
-  - type: arrange
-    instruction: "Build code to convert the number 5 to a boolean and print it"
-    blocks: ["print", "(", "bool", "(", "5", ")", ")"]
-    correct: ["print", "(", "bool", "(", "5", ")", ")"]
-    explanation: "bool(5) returns True because 5 is a non-zero number (truthy)."
+    True
 
-  - type: mcq
-    question: "Which values are falsy? (select the correct list)"
-    code: ""
-    choices: ["0, \"\", [], None", "0, 1, \"\", []", "False, None, 1", "0, False, True"]
-    correct: "0, \"\", [], None"
-    explanation: "Falsy values include: 0, empty string, empty list, None, and False."
+    False
 
-  - type: fill_blank
-    prompt: "Convert the comparison result into an explicit True or False value."
-    before: "has_ammo = "
-    after: "(ammo_count > 0)"
-    choices: ["bool", "int", "str", "not"]
-    answer: "bool"
-    explanation: "bool(ammo_count > 0) converts the comparison result to True or False."
+    True'
+  explanation: bool() converts a value to True or False. 0, empty strings, and empty collections are False (falsy). Everything
+    else is True (truthy).
+- type: mcq
+  question: What does bool(0) return?
+  code: ''
+  choices:
+  - 'False'
+  - 'True'
+  - '0'
+  - None
+  correct: 'False'
+  explanation: 0 is falsy in Python. bool(0) returns False.
+- type: mcq
+  question: What does this print?
+  code: print(bool("hello"))
+  choices:
+  - 'True'
+  - 'False'
+  - hello
+  - None
+  correct: 'True'
+  explanation: A non-empty string is truthy. bool('hello') is True.
+- type: fill_blank
+  prompt: Convert hp into a True/False boolean — True if alive, False if at zero.
+  before: 'is_alive = '
+  after: (hp)
+  choices:
+  - bool
+  - int
+  - str
+  - print
+  answer: bool
+  explanation: bool(hp) converts hp to True (if hp > 0) or False (if hp == 0).
+- type: mcq
+  question: What does this print?
+  code: print(bool([]))
+  choices:
+  - 'False'
+  - 'True'
+  - '[]'
+  - None
+  correct: 'False'
+  explanation: An empty list [] is falsy. bool([]) returns False.
+- type: arrange
+  instruction: Build code to convert the number 5 to a boolean and print it
+  blocks:
+  - print
+  - (
+  - bool
+  - (
+  - '5'
+  - )
+  - )
+  correct:
+  - print
+  - (
+  - bool
+  - (
+  - '5'
+  - )
+  - )
+  explanation: bool(5) returns True because 5 is a non-zero number (truthy).
+- type: mcq
+  question: Which values are falsy? (select the correct list)
+  code: ''
+  choices:
+  - 0, "", [], None
+  - 0, 1, "", []
+  - False, None, 1
+  - 0, False, True
+  correct: 0, "", [], None
+  explanation: 'Falsy values include: 0, empty string, empty list, None, and False.'
+- type: fill_blank
+  prompt: Convert the comparison result into an explicit True or False value.
+  before: 'has_ammo = '
+  after: (ammo_count > 0)
+  choices:
+  - bool
+  - int
+  - str
+  - not
+  answer: bool
+  explanation: bool(ammo_count > 0) converts the comparison result to True or False.
+- type: mcq
+  question: What does this print?
+  code: 'x = 0
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 0\nprint(bool(x))\nx = -5\nprint(bool(x))"
-    choices: ["False\nTrue", "False\nFalse", "True\nTrue", "0\n-5"]
-    correct: "False\nTrue"
-    explanation: "0 is falsy (False). -5 is non-zero, so it's truthy (True)."
+    print(bool(x))
 
-  - type: mcq
-    question: "What does this print?"
-    code: "name = \"\"\nprint(bool(name))"
-    choices: ["False", "True", "\"\"", "None"]
-    correct: "False"
-    explanation: "An empty string is falsy. bool('') returns False."
+    x = -5
 
-  - type: mini_code
-    prompt: "Read a number with input(). Print its boolean value using bool()."
-    starter: "n = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'False'"
-        stdin: "0"
-        message: "bool(0) is False"
-      - code: "assert _stdout.strip() == 'True'"
-        stdin: "50"
-        message: "bool(50) is True"
+    print(bool(x))'
+  choices:
+  - 'False
 
-  - type: mini_code
-    prompt: "Read a word with input(). Print its boolean value using bool(). Non-empty strings are True, empty strings are False."
-    starter: "s = input()\n"
-    tests:
-      - code: "assert _stdout.strip() == 'True'"
-        stdin: "Python"
-        message: "bool('Python') is True"
-      - code: "assert _stdout.strip() == 'False'"
-        stdin: ""
-        message: "bool('') is False"
+    True'
+  - 'False
 
+    False'
+  - 'True
+
+    True'
+  - '0
+
+    -5'
+  correct: 'False
+
+    True'
+  explanation: 0 is falsy (False). -5 is non-zero, so it's truthy (True).
+- type: mcq
+  question: What does this print?
+  code: 'name = ""
+
+    print(bool(name))'
+  choices:
+  - 'False'
+  - 'True'
+  - '""'
+  - None
+  correct: 'False'
+  explanation: An empty string is falsy. bool('') returns False.
+- type: mini_code
+  prompt: Read a number with input(). Print its boolean value using bool().
+  starter: 'n = int(input())
+
+    '
+  tests:
+  - code: assert _stdout.strip() == 'False'
+    stdin: '0'
+    message: bool(0) is False
+  - code: assert _stdout.strip() == 'True'
+    stdin: '50'
+    message: bool(50) is True
+- type: mini_code
+  prompt: Read a word with input(). Print its boolean value using bool(). Non-empty strings are True, empty strings are False.
+  starter: 's = input()
+
+    '
+  tests:
+  - code: assert _stdout.strip() == 'True'
+    stdin: Python
+    message: bool('Python') is True
+  - code: assert _stdout.strip() == 'False'
+    stdin: ''
+    message: bool('') is False
 worlds:
   fantasy:
-    title: "The Truth Stone"
+    title: The Truth Stone
     exercises:
-      - type: concept
-        code: |
-          print(bool(0))
-          print(bool(1))
-          print(bool(""))
-          print(bool("hello"))
-        output: "False\nTrue\nFalse\nTrue"
-        explanation: "Finn holds the Truth Stone up to each object on Frostpeak to test whether it carries any power. An empty value — stamina of 0, a blank rune inscription — glows False. Any real value glows True. The stone never lies."
+    - type: concept
+      code: 'print(bool(0))
 
-      - type: mcq
-        question: "What does bool(0) return?"
-        code: ""
-        choices: ["False", "True", "0", "None"]
-        correct: "False"
-        explanation: "Finn's stamina reaching 0 means he has no power left. The Truth Stone reads 0 as False — he must rest before continuing the climb."
+        print(bool(1))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool(\"hello\"))"
-        choices: ["True", "False", "hello", "None"]
-        correct: "True"
-        explanation: "A non-empty rune inscription means something is carved there. The Truth Stone returns True for any non-empty string."
+        print(bool(""))
 
-      - type: fill_blank
-        prompt: "Convert Finn's stamina into a True or False value — True if he has any stamina left, False if it is at zero."
-        before: "is_alive = "
-        after: "(stamina)"
-        choices: ["bool", "int", "str", "print"]
-        answer: "bool"
-        explanation: "bool(stamina) converts stamina to True if it is greater than 0, or False if it is 0 — telling Finn whether he can still move."
+        print(bool("hello"))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool([]))"
-        choices: ["False", "True", "[]", "None"]
-        correct: "False"
-        explanation: "An empty supply pack holds nothing. The Truth Stone reads an empty list as False — Finn needs to restock before climbing further."
+        '
+      output: 'False
 
-      - type: arrange
-        instruction: "Build code to convert the number 5 to a boolean and print it"
-        blocks: ["print", "(", "bool", "(", "5", ")", ")"]
-        correct: ["print", "(", "bool", "(", "5", ")", ")"]
-        explanation: "Finn tests a stamina potion count of 5. bool(5) returns True — he has potions and is ready to climb."
+        True
 
-      - type: mcq
-        question: "Which values are falsy? (select the correct list)"
-        code: ""
-        choices: ["0, \"\", [], None", "0, 1, \"\", []", "False, None, 1", "0, False, True"]
-        correct: "0, \"\", [], None"
-        explanation: "On Frostpeak, a reading of 0 stamina, a blank rune, an empty pack, or no value at all (None) are all falsy — they offer Finn nothing to work with."
+        False
 
-      - type: fill_blank
-        prompt: "Convert whether Finn's torch count is above zero into an explicit True or False value."
-        before: "has_light = "
-        after: "(torch_count > 0)"
-        choices: ["bool", "int", "str", "not"]
-        answer: "bool"
-        explanation: "bool(torch_count > 0) converts the comparison to True if Finn has at least one torch, or False if he has none."
+        True'
+      explanation: Finn holds the Truth Stone up to each object on Frostpeak to test whether it carries any power. An empty
+        value — stamina of 0, a blank rune inscription — glows False. Any real value glows True. The stone never lies.
+      story_before: Finn finds a Truth Stone at the mountain's base — a crystal that converts any value into a clear True
+        or False signal.
+      story_after: Empty means False, anything real means True — the stone never wavers, and Finn trusts it completely.
+    - type: mcq
+      question: What does bool(0) return?
+      code: ''
+      choices:
+      - 'False'
+      - 'True'
+      - '0'
+      - None
+      correct: 'False'
+      explanation: Finn's stamina reaching 0 means he has no power left. The Truth Stone reads 0 as False — he must rest before
+        continuing the climb.
+      story_before: Finn holds the stone against a stamina reading of 0 — he needs to know what it returns.
+      story_after: False — the stone dims; Finn rests at camp before the next attempt.
+    - type: mcq
+      question: What does this print?
+      code: print(bool("hello"))
+      choices:
+      - 'True'
+      - 'False'
+      - hello
+      - None
+      correct: 'True'
+      explanation: A non-empty rune inscription means something is carved there. The Truth Stone returns True for any non-empty
+        string.
+      story_before: Finn tests a rune tablet with an inscription — will the Truth Stone glow for a non-empty string?
+      story_after: True — the stone pulses; the inscription is real and worth reading.
+    - type: fill_blank
+      prompt: Convert Finn's stamina into a True or False value — True if he has any stamina left, False if it is at zero.
+      before: 'is_alive = '
+      after: (stamina)
+      choices:
+      - bool
+      - int
+      - str
+      - print
+      answer: bool
+      explanation: bool(stamina) converts stamina to True if it is greater than 0, or False if it is 0 — telling Finn whether
+        he can still move.
+      story_before: Finn wants to convert his stamina value directly into a True or False signal — he needs the right function.
+      story_after: bool(stamina) returns the answer; Finn now knows at a glance whether he can keep moving.
+    - type: mcq
+      question: What does this print?
+      code: print(bool([]))
+      choices:
+      - 'False'
+      - 'True'
+      - '[]'
+      - None
+      correct: 'False'
+      explanation: An empty supply pack holds nothing. The Truth Stone reads an empty list as False — Finn needs to restock
+        before climbing further.
+      story_before: Finn holds the stone over an empty supply pack — what does it return for an empty list?
+      story_after: False — nothing in the pack; Finn returns to base camp to restock before continuing.
+    - type: arrange
+      instruction: Build code to convert the number 5 to a boolean and print it
+      blocks:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      correct:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      explanation: Finn tests a stamina potion count of 5. bool(5) returns True — he has potions and is ready to climb.
+      story_before: Finn wants to test a potion count of 5 through the Truth Stone — he builds the code to do it.
+      story_after: True — five potions is plenty; the stone glows and Finn heads for the next ledge.
+    - type: mcq
+      question: Which values are falsy? (select the correct list)
+      code: ''
+      choices:
+      - 0, "", [], None
+      - 0, 1, "", []
+      - False, None, 1
+      - 0, False, True
+      correct: 0, "", [], None
+      explanation: On Frostpeak, a reading of 0 stamina, a blank rune, an empty pack, or no value at all (None) are all falsy
+        — they offer Finn nothing to work with.
+      story_before: Finn needs to memorise which values the Truth Stone calls False — the stone's rules are strict.
+      story_after: 0, empty string, empty list, None — Finn carves the list into his waystone so he never forgets.
+    - type: fill_blank
+      prompt: Convert whether Finn's torch count is above zero into an explicit True or False value.
+      before: 'has_light = '
+      after: (torch_count > 0)
+      choices:
+      - bool
+      - int
+      - str
+      - not
+      answer: bool
+      explanation: bool(torch_count > 0) converts the comparison to True if Finn has at least one torch, or False if he has
+        none.
+      story_before: Finn wants an explicit True or False signal for whether he has any torches — he wraps the comparison in
+        the right function.
+      story_after: The stone returns True or False cleanly; Finn always knows whether he can light the path ahead.
+    - type: mcq
+      question: What does this print?
+      code: 'x = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "x = 0\nprint(bool(x))\nx = -5\nprint(bool(x))"
-        choices: ["False\nTrue", "False\nFalse", "True\nTrue", "0\n-5"]
-        correct: "False\nTrue"
-        explanation: "Finn's temperature reading starts at 0 — the Truth Stone returns False. After entering a cursed zone, the reading drops to -5. Any non-zero value is truthy, so the stone returns True."
+        print(bool(x))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nprint(bool(name))"
-        choices: ["False", "True", "\"\"", "None"]
-        correct: "False"
-        explanation: "Finn finds a rune tablet with no inscription — an empty string. The Truth Stone returns False because there is nothing written on it."
+        x = -5
 
-      - type: mini_code
-        prompt: "Read Finn's stamina level with input(). Print its boolean value using bool() — True if he has any stamina, False if he is exhausted."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: "0"
-            message: "bool(0) is False"
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "50"
-            message: "bool(50) is True"
+        print(bool(x))'
+      choices:
+      - 'False
 
-      - type: mini_code
-        prompt: "Read a rune inscription with input(). Print its boolean value using bool(). A non-empty inscription is True, a blank tablet is False."
-        starter: "s = input()\n"
-        tests:
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "Python"
-            message: "bool('Python') is True"
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: ""
-            message: "bool('') is False"
+        True'
+      - 'False
 
+        False'
+      - 'True
+
+        True'
+      - '0
+
+        -5'
+      correct: 'False
+
+        True'
+      explanation: Finn's temperature reading starts at 0 — the Truth Stone returns False. After entering a cursed zone, the
+        reading drops to -5. Any non-zero value is truthy, so the stone returns True.
+      story_before: 'The stone tests two readings: first 0, then -5 — Finn needs to predict both results.'
+      story_after: False then True — even negative values are truthy; the stone glows on anything non-zero.
+    - type: mcq
+      question: What does this print?
+      code: 'name = ""
+
+        print(bool(name))'
+      choices:
+      - 'False'
+      - 'True'
+      - '""'
+      - None
+      correct: 'False'
+      explanation: Finn finds a rune tablet with no inscription — an empty string. The Truth Stone returns False because there
+        is nothing written on it.
+      story_before: Finn finds a blank rune tablet — what does the Truth Stone say about an empty string?
+      story_after: False — nothing written; Finn sets the blank tablet aside and searches for an inscribed one.
+    - type: mini_code
+      prompt: Read Finn's stamina level with input(). Print its boolean value using bool() — True if he has any stamina, False
+        if he is exhausted.
+      starter: 'n = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '0'
+        message: bool(0) is False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '50'
+        message: bool(50) is True
+      story_before: Finn reads his stamina from a sensor and needs to print its boolean value using bool().
+      story_after: The result prints correctly — Finn's stamina check is now a single line of reliable code.
+    - type: mini_code
+      prompt: Read a rune inscription with input(). Print its boolean value using bool(). A non-empty inscription is True,
+        a blank tablet is False.
+      starter: 's = input()
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: Python
+        message: bool('Python') is True
+      - code: assert _stdout.strip() == 'False'
+        stdin: ''
+        message: bool('') is False
+      story_before: Finn reads a rune inscription and needs to print True if it is non-empty, False if the tablet is blank.
+      story_after: The Truth Stone's logic is now encoded in Finn's spellbook — he can test any value on the mountain.
   scifi:
-    title: "Binary Sensor Readings"
+    title: Binary Sensor Readings
     exercises:
-      - type: concept
-        code: |
-          print(bool(0))
-          print(bool(1))
-          print(bool(""))
-          print(bool("hello"))
-        output: "False\nTrue\nFalse\nTrue"
-        explanation: "Zara's ship sensors convert all readings to binary True or False signals. A reading of 0 or an empty signal returns False — the system reports nothing detected. Any non-zero reading or non-empty signal returns True — something is out there."
+    - type: concept
+      code: 'print(bool(0))
 
-      - type: mcq
-        question: "What does bool(0) return?"
-        code: ""
-        choices: ["False", "True", "0", "None"]
-        correct: "False"
-        explanation: "A fuel reading of 0 means the tank is empty. Zara's sensor converts it to False — the ship cannot fly."
+        print(bool(1))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool(\"hello\"))"
-        choices: ["True", "False", "hello", "None"]
-        correct: "True"
-        explanation: "A non-empty transmission signal means data was received. Zara's sensor returns True for any non-empty string."
+        print(bool(""))
 
-      - type: fill_blank
-        prompt: "Convert Zara's shield reading into a True or False value — True if shields are active, False if they are offline."
-        before: "shields_active = "
-        after: "(shield_level)"
-        choices: ["bool", "int", "str", "print"]
-        answer: "bool"
-        explanation: "bool(shield_level) converts the shield reading to True if it is above 0 (shields up) or False if it is 0 (shields offline)."
+        print(bool("hello"))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool([]))"
-        choices: ["False", "True", "[]", "None"]
-        correct: "False"
-        explanation: "An empty asteroid detection list means nothing is in range. Zara's sensor reads an empty list as False — the path ahead is clear."
+        '
+      output: 'False
 
-      - type: arrange
-        instruction: "Build code to convert the number 5 to a boolean and print it"
-        blocks: ["print", "(", "bool", "(", "5", ")", ")"]
-        correct: ["print", "(", "bool", "(", "5", ")", ")"]
-        explanation: "Zara checks a thruster power reading of 5. bool(5) returns True — the thrusters have power and are ready to fire."
+        True
 
-      - type: mcq
-        question: "Which values are falsy? (select the correct list)"
-        code: ""
-        choices: ["0, \"\", [], None", "0, 1, \"\", []", "False, None, 1", "0, False, True"]
-        correct: "0, \"\", [], None"
-        explanation: "Zara's ship treats these as offline signals: 0 power, an empty data string, an empty sensor list, or a None reading — all return False."
+        False
 
-      - type: fill_blank
-        prompt: "Convert whether Zara's ammo count is above zero into an explicit True or False value."
-        before: "has_ammo = "
-        after: "(ammo_count > 0)"
-        choices: ["bool", "int", "str", "not"]
-        answer: "bool"
-        explanation: "bool(ammo_count > 0) converts the comparison to True if Zara has at least one round loaded, or False if she is out of ammo."
+        True'
+      explanation: Zara's ship sensors convert all readings to binary True or False signals. A reading of 0 or an empty signal
+        returns False — the system reports nothing detected. Any non-zero reading or non-empty signal returns True — something
+        is out there.
+      story_before: Zara reconfigures her ship's sensors to output binary True or False signals — no more ambiguous readings
+        mid-flight.
+      story_after: Zero and empty return False; everything else returns True — the sensors are now unambiguous.
+    - type: mcq
+      question: What does bool(0) return?
+      code: ''
+      choices:
+      - 'False'
+      - 'True'
+      - '0'
+      - None
+      correct: 'False'
+      explanation: A fuel reading of 0 means the tank is empty. Zara's sensor converts it to False — the ship cannot fly.
+      story_before: A fuel reading of 0 comes in — Zara needs to know what bool() returns for it.
+      story_after: False — tanks empty; Zara hits the emergency reserve switch and diverts to the nearest depot.
+    - type: mcq
+      question: What does this print?
+      code: print(bool("hello"))
+      choices:
+      - 'True'
+      - 'False'
+      - hello
+      - None
+      correct: 'True'
+      explanation: A non-empty transmission signal means data was received. Zara's sensor returns True for any non-empty string.
+      story_before: A non-empty transmission arrives — Zara checks whether bool() returns True for a non-empty string.
+      story_after: True — data received; Zara opens the message and reads the incoming coordinates.
+    - type: fill_blank
+      prompt: Convert Zara's shield reading into a True or False value — True if shields are active, False if they are offline.
+      before: 'shields_active = '
+      after: (shield_level)
+      choices:
+      - bool
+      - int
+      - str
+      - print
+      answer: bool
+      explanation: bool(shield_level) converts the shield reading to True if it is above 0 (shields up) or False if it is
+        0 (shields offline).
+      story_before: Zara wants to convert her shield level directly into a True or False status signal.
+      story_after: The shield status reads True or False instantly — Zara wires it into the bridge display.
+    - type: mcq
+      question: What does this print?
+      code: print(bool([]))
+      choices:
+      - 'False'
+      - 'True'
+      - '[]'
+      - None
+      correct: 'False'
+      explanation: An empty asteroid detection list means nothing is in range. Zara's sensor reads an empty list as False
+        — the path ahead is clear.
+      story_before: The asteroid detection list comes back empty — Zara checks what bool() returns for an empty list.
+      story_after: False — nothing detected; Zara confirms the path ahead is clear and increases speed.
+    - type: arrange
+      instruction: Build code to convert the number 5 to a boolean and print it
+      blocks:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      correct:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      explanation: Zara checks a thruster power reading of 5. bool(5) returns True — the thrusters have power and are ready
+        to fire.
+      story_before: Zara tests a thruster power reading of 5 through the boolean converter — she builds the code.
+      story_after: True — thrusters are live; Zara fires the manoeuvring burn and adjusts heading.
+    - type: mcq
+      question: Which values are falsy? (select the correct list)
+      code: ''
+      choices:
+      - 0, "", [], None
+      - 0, 1, "", []
+      - False, None, 1
+      - 0, False, True
+      correct: 0, "", [], None
+      explanation: 'Zara''s ship treats these as offline signals: 0 power, an empty data string, an empty sensor list, or
+        a None reading — all return False.'
+      story_before: Zara needs to know which values her sensor system treats as offline — she checks the full list of falsy
+        values.
+      story_after: 0, empty string, empty list, None — Zara adds all four to the sensor calibration checklist.
+    - type: fill_blank
+      prompt: Convert whether Zara's ammo count is above zero into an explicit True or False value.
+      before: 'has_ammo = '
+      after: (ammo_count > 0)
+      choices:
+      - bool
+      - int
+      - str
+      - not
+      answer: bool
+      explanation: bool(ammo_count > 0) converts the comparison to True if Zara has at least one round loaded, or False if
+        she is out of ammo.
+      story_before: Zara wants an explicit True or False for whether she has any ammo loaded — she wraps the comparison in
+        bool().
+      story_after: The weapons system now outputs a clear status signal; Zara patches it into the combat readiness panel.
+    - type: mcq
+      question: What does this print?
+      code: 'x = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "x = 0\nprint(bool(x))\nx = -5\nprint(bool(x))"
-        choices: ["False\nTrue", "False\nFalse", "True\nTrue", "0\n-5"]
-        correct: "False\nTrue"
-        explanation: "Zara's oxygen reading starts at 0 — the sensor returns False (none detected). After entering a pressurised zone it reads -5 (a pressure differential). Any non-zero value is truthy, so the sensor returns True."
+        print(bool(x))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nprint(bool(name))"
-        choices: ["False", "True", "\"\"", "None"]
-        correct: "False"
-        explanation: "Zara receives an empty transmission — a string with no data. The sensor returns False because no information was received."
+        x = -5
 
-      - type: mini_code
-        prompt: "Read Zara's shield level with input(). Print its boolean value using bool() — True if shields are active, False if offline."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: "0"
-            message: "bool(0) is False"
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "50"
-            message: "bool(50) is True"
+        print(bool(x))'
+      choices:
+      - 'False
 
-      - type: mini_code
-        prompt: "Read a transmission signal with input(). Print its boolean value using bool(). A non-empty signal is True, an empty signal is False."
-        starter: "s = input()\n"
-        tests:
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "Python"
-            message: "bool('Python') is True"
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: ""
-            message: "bool('') is False"
+        True'
+      - 'False
 
+        False'
+      - 'True
+
+        True'
+      - '0
+
+        -5'
+      correct: 'False
+
+        True'
+      explanation: Zara's oxygen reading starts at 0 — the sensor returns False (none detected). After entering a pressurised
+        zone it reads -5 (a pressure differential). Any non-zero value is truthy, so the sensor returns True.
+      story_before: Two readings come through the sensor — first 0, then -5 — Zara predicts what bool() returns for each.
+      story_after: False then True — a pressure differential of -5 is non-zero and truthy; the sensor flags it.
+    - type: mcq
+      question: What does this print?
+      code: 'name = ""
+
+        print(bool(name))'
+      choices:
+      - 'False'
+      - 'True'
+      - '""'
+      - None
+      correct: 'False'
+      explanation: Zara receives an empty transmission — a string with no data. The sensor returns False because no information
+        was received.
+      story_before: An empty transmission string arrives — Zara checks what bool() returns for it.
+      story_after: False — no data in the signal; Zara requests a retransmission from the relay buoy.
+    - type: mini_code
+      prompt: Read Zara's shield level with input(). Print its boolean value using bool() — True if shields are active, False
+        if offline.
+      starter: 'n = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '0'
+        message: bool(0) is False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '50'
+        message: bool(50) is True
+      story_before: Zara reads a shield level and needs to print its boolean value using bool().
+      story_after: The shield status prints correctly — Zara integrates the check into the automated pre-jump checklist.
+    - type: mini_code
+      prompt: Read a transmission signal with input(). Print its boolean value using bool(). A non-empty signal is True, an
+        empty signal is False.
+      starter: 's = input()
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: Python
+        message: bool('Python') is True
+      - code: assert _stdout.strip() == 'False'
+        stdin: ''
+        message: bool('') is False
+      story_before: Zara reads a transmission signal and needs to print True if it contains data, False if it is empty.
+      story_after: Binary sensor logic is fully operational — the Helix now processes every reading as a clean True or False.
   mystery:
-    title: "True or False?"
+    title: True or False?
     exercises:
-      - type: concept
-        code: |
-          print(bool(0))
-          print(bool(1))
-          print(bool(""))
-          print(bool("hello"))
-        output: "False\nTrue\nFalse\nTrue"
-        explanation: "Detective Cole uses bool() to classify every piece of evidence as valid or worthless. A count of 0 or a blank entry is False — the lead goes nowhere. Any real value is True — worth following up. No grey areas in Cole's casebook."
+    - type: concept
+      code: 'print(bool(0))
 
-      - type: mcq
-        question: "What does bool(0) return?"
-        code: ""
-        choices: ["False", "True", "0", "None"]
-        correct: "False"
-        explanation: "A witness who saw nothing — 0 sightings — gives Cole nothing to work with. bool(0) returns False."
+        print(bool(1))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool(\"hello\"))"
-        choices: ["True", "False", "hello", "None"]
-        correct: "True"
-        explanation: "A non-empty testimony means the witness said something. Cole's analyser returns True for any non-empty string — it is worth recording."
+        print(bool(""))
 
-      - type: fill_blank
-        prompt: "Convert the suspect's motive strength into a True or False value — True if they have any motive, False if there is none."
-        before: "has_motive = "
-        after: "(motive_strength)"
-        choices: ["bool", "int", "str", "print"]
-        answer: "bool"
-        explanation: "bool(motive_strength) converts the score to True if it is above 0 (motive exists) or False if it is 0 (no motive detected)."
+        print(bool("hello"))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "print(bool([]))"
-        choices: ["False", "True", "[]", "None"]
-        correct: "False"
-        explanation: "An empty evidence list means Cole found nothing at the scene. bool([]) returns False — no physical evidence to go on."
+        '
+      output: 'False
 
-      - type: arrange
-        instruction: "Build code to convert the number 5 to a boolean and print it"
-        blocks: ["print", "(", "bool", "(", "5", ")", ")"]
-        correct: ["print", "(", "bool", "(", "5", ")", ")"]
-        explanation: "Cole has 5 corroborating witnesses. bool(5) returns True — that is solid support for the testimony."
+        True
 
-      - type: mcq
-        question: "Which values are falsy? (select the correct list)"
-        code: ""
-        choices: ["0, \"\", [], None", "0, 1, \"\", []", "False, None, 1", "0, False, True"]
-        correct: "0, \"\", [], None"
-        explanation: "Cole marks these as dead ends: 0 witnesses, a blank statement, an empty evidence list, or a None value — all are False and lead nowhere."
+        False
 
-      - type: fill_blank
-        prompt: "Convert whether the suspect's alibi time is greater than zero into an explicit True or False value."
-        before: "has_alibi = "
-        after: "(alibi_time > 0)"
-        choices: ["bool", "int", "str", "not"]
-        answer: "bool"
-        explanation: "bool(alibi_time > 0) converts the comparison to True if the suspect has any recorded alibi time, or False if there is none on file."
+        True'
+      explanation: Detective Cole uses bool() to classify every piece of evidence as valid or worthless. A count of 0 or a
+        blank entry is False — the lead goes nowhere. Any real value is True — worth following up. No grey areas in Cole's
+        casebook.
+      story_before: 'Cole sets up a classification system: every piece of evidence gets converted to True (worth following)
+        or False (dead end).'
+      story_after: Zero and blank entries are False, everything else is True — Cole's system is ruthlessly efficient.
+    - type: mcq
+      question: What does bool(0) return?
+      code: ''
+      choices:
+      - 'False'
+      - 'True'
+      - '0'
+      - None
+      correct: 'False'
+      explanation: A witness who saw nothing — 0 sightings — gives Cole nothing to work with. bool(0) returns False.
+      story_before: A witness reports 0 sightings — Cole checks what bool() returns for a zero count.
+      story_after: False — nothing to work with; Cole crosses the witness off the list and moves on.
+    - type: mcq
+      question: What does this print?
+      code: print(bool("hello"))
+      choices:
+      - 'True'
+      - 'False'
+      - hello
+      - None
+      correct: 'True'
+      explanation: A non-empty testimony means the witness said something. Cole's analyser returns True for any non-empty
+        string — it is worth recording.
+      story_before: A non-empty witness statement comes in — Cole checks whether bool() returns True for it.
+      story_after: True — something was said; Cole logs it and schedules a follow-up interview.
+    - type: fill_blank
+      prompt: Convert the suspect's motive strength into a True or False value — True if they have any motive, False if there
+        is none.
+      before: 'has_motive = '
+      after: (motive_strength)
+      choices:
+      - bool
+      - int
+      - str
+      - print
+      answer: bool
+      explanation: bool(motive_strength) converts the score to True if it is above 0 (motive exists) or False if it is 0 (no
+        motive detected).
+      story_before: Cole wants to convert a suspect's motive strength directly into a True or False signal.
+      story_after: The motive classification prints instantly — Cole files it under 'confirmed' or 'none' accordingly.
+    - type: mcq
+      question: What does this print?
+      code: print(bool([]))
+      choices:
+      - 'False'
+      - 'True'
+      - '[]'
+      - None
+      correct: 'False'
+      explanation: An empty evidence list means Cole found nothing at the scene. bool([]) returns False — no physical evidence
+        to go on.
+      story_before: Cole's evidence list comes back empty from the scene — he checks what bool() returns for an empty list.
+      story_after: False — nothing found; Cole widens the search radius and sends the forensics team back in.
+    - type: arrange
+      instruction: Build code to convert the number 5 to a boolean and print it
+      blocks:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      correct:
+      - print
+      - (
+      - bool
+      - (
+      - '5'
+      - )
+      - )
+      explanation: Cole has 5 corroborating witnesses. bool(5) returns True — that is solid support for the testimony.
+      story_before: Cole has 5 corroborating witnesses — he runs the count through bool() to confirm it is solid.
+      story_after: True — five witnesses is solid; Cole adds the testimony block to the prosecution file.
+    - type: mcq
+      question: Which values are falsy? (select the correct list)
+      code: ''
+      choices:
+      - 0, "", [], None
+      - 0, 1, "", []
+      - False, None, 1
+      - 0, False, True
+      correct: 0, "", [], None
+      explanation: 'Cole marks these as dead ends: 0 witnesses, a blank statement, an empty evidence list, or a None value
+        — all are False and lead nowhere.'
+      story_before: Cole needs to know which values his classification system treats as dead ends — the full list of falsy
+        values.
+      story_after: 0, empty string, empty list, None — Cole writes them in red at the top of his evidence-review checklist.
+    - type: fill_blank
+      prompt: Convert whether the suspect's alibi time is greater than zero into an explicit True or False value.
+      before: 'has_alibi = '
+      after: (alibi_time > 0)
+      choices:
+      - bool
+      - int
+      - str
+      - not
+      answer: bool
+      explanation: bool(alibi_time > 0) converts the comparison to True if the suspect has any recorded alibi time, or False
+        if there is none on file.
+      story_before: Cole wants an explicit True or False for whether the suspect has any recorded alibi time.
+      story_after: The alibi status is classified immediately — Cole either pursues the lead or marks it closed.
+    - type: mcq
+      question: What does this print?
+      code: 'x = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "x = 0\nprint(bool(x))\nx = -5\nprint(bool(x))"
-        choices: ["False\nTrue", "False\nFalse", "True\nTrue", "0\n-5"]
-        correct: "False\nTrue"
-        explanation: "The suspect has 0 confirmed sightings — Cole gets False. But a discrepancy of -5 minutes in the timeline is still a non-zero value and therefore truthy — Cole flags it as True and investigates further."
+        print(bool(x))
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nprint(bool(name))"
-        choices: ["False", "True", "\"\"", "None"]
-        correct: "False"
-        explanation: "Cole finds a witness report with a blank name field — an empty string. bool('') returns False — an anonymous tip with no attribution is not admissible."
+        x = -5
 
-      - type: mini_code
-        prompt: "Read a suspect's motive score with input(). Print its boolean value using bool() — True if they have any motive, False if there is none."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: "0"
-            message: "bool(0) is False"
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "50"
-            message: "bool(50) is True"
+        print(bool(x))'
+      choices:
+      - 'False
 
-      - type: mini_code
-        prompt: "Read a witness statement with input(). Print its boolean value using bool(). A non-empty statement is True, a blank statement is False."
-        starter: "s = input()\n"
-        tests:
-          - code: "assert _stdout.strip() == 'True'"
-            stdin: "Python"
-            message: "bool('Python') is True"
-          - code: "assert _stdout.strip() == 'False'"
-            stdin: ""
-            message: "bool('') is False"
+        True'
+      - 'False
+
+        False'
+      - 'True
+
+        True'
+      - '0
+
+        -5'
+      correct: 'False
+
+        True'
+      explanation: The suspect has 0 confirmed sightings — Cole gets False. But a discrepancy of -5 minutes in the timeline
+        is still a non-zero value and therefore truthy — Cole flags it as True and investigates further.
+      story_before: 'Two entries are checked: 0 confirmed sightings, then a -5 minute timeline discrepancy.'
+      story_after: False then True — even a negative discrepancy is truthy and worth investigating; Cole flags it.
+    - type: mcq
+      question: What does this print?
+      code: 'name = ""
+
+        print(bool(name))'
+      choices:
+      - 'False'
+      - 'True'
+      - '""'
+      - None
+      correct: 'False'
+      explanation: Cole finds a witness report with a blank name field — an empty string. bool('') returns False — an anonymous
+        tip with no attribution is not admissible.
+      story_before: A witness report arrives with a blank name field — Cole checks what bool() returns for an empty string.
+      story_after: False — anonymous and inadmissible; Cole sets it aside and looks for a signed version.
+    - type: mini_code
+      prompt: Read a suspect's motive score with input(). Print its boolean value using bool() — True if they have any motive,
+        False if there is none.
+      starter: 'n = int(input())
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'False'
+        stdin: '0'
+        message: bool(0) is False
+      - code: assert _stdout.strip() == 'True'
+        stdin: '50'
+        message: bool(50) is True
+      story_before: Cole reads a suspect's motive score and needs to print True if they have any motive, False if there is
+        none.
+      story_after: The motive check runs cleanly — Cole feeds it into the automated suspect-ranking pipeline.
+    - type: mini_code
+      prompt: Read a witness statement with input(). Print its boolean value using bool(). A non-empty statement is True,
+        a blank statement is False.
+      starter: 's = input()
+
+        '
+      tests:
+      - code: assert _stdout.strip() == 'True'
+        stdin: Python
+        message: bool('Python') is True
+      - code: assert _stdout.strip() == 'False'
+        stdin: ''
+        message: bool('') is False
+      story_before: Cole reads a witness statement and needs to print True if it is non-empty, False if it is blank.
+      story_after: Every piece of evidence is now classified True or False — Cole's investigation engine is fully operational.

@@ -1,365 +1,722 @@
-title: "Numbers and Maths"
+title: Numbers and Maths
 xp: 10
-
 exercises:
-  - type: concept
-    code: |
-      apples = 5
-      oranges = 3
-      total = apples + oranges
-      print(total)
-    output: "8"
-    explanation: "Numbers don't use quotes. You can do maths with variables. + adds, - subtracts, * multiplies, / divides."
+- type: concept
+  code: 'apples = 5
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 10\ny = 3\nprint(x - y)"
-    choices: ["7", "13", "10", "3"]
-    correct: "7"
-    explanation: "10 - 3 = 7."
+    oranges = 3
 
-  - type: fill_blank
-    prompt: "Multiply 4 and 5, storing the result."
-    before: "result = 4 "
-    after: " 5"
-    choices: ["*", "=", "+", "print"]
-    answer: "*"
-    explanation: "* is multiplication. 4 * 5 = 20."
+    total = apples + oranges
 
-  - type: mcq
-    question: "What does this print?"
-    code: "price = 12\nqty = 4\nprint(price * qty)"
-    choices: ["48", "124", "16", "3"]
-    correct: "48"
-    explanation: "12 × 4 = 48."
+    print(total)
 
-  - type: arrange
-    instruction: "Build code to divide 20 by 4 and print the result"
-    blocks: ["print", "(", "20", "/", "4", ")", "*"]
-    correct: ["print", "(", "20", "/", "4", ")"]
-    explanation: "/ divides. print(20 / 4) shows 5.0."
+    '
+  output: '8'
+  explanation: Numbers don't use quotes. You can do maths with variables. + adds, - subtracts, * multiplies, / divides.
+- type: mcq
+  question: What does this print?
+  code: 'x = 10
 
-  - type: mcq
-    question: "What does this print?"
-    code: "a = 7\nb = 2\nprint(a / b)"
-    choices: ["3.5", "3", "4", "7/2"]
-    correct: "3.5"
-    explanation: "/ always produces a float. 7 / 2 = 3.5."
+    y = 3
 
-  - type: fill_blank
-    prompt: "Add price and tax together to get the total."
-    before: "total = price "
-    after: " tax"
-    choices: ["+", "=", "print", "*"]
-    answer: "+"
-    explanation: "+ adds. total = price + tax sums the two values."
+    print(x - y)'
+  choices:
+  - '7'
+  - '13'
+  - '10'
+  - '3'
+  correct: '7'
+  explanation: 10 - 3 = 7.
+- type: fill_blank
+  prompt: Multiply 4 and 5, storing the result.
+  before: 'result = 4 '
+  after: ' 5'
+  choices:
+  - '*'
+  - '='
+  - +
+  - print
+  answer: '*'
+  explanation: '* is multiplication. 4 * 5 = 20.'
+- type: mcq
+  question: What does this print?
+  code: 'price = 12
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 5\nn = n + 1\nprint(n)"
-    choices: ["6", "5", "n + 1", "1"]
-    correct: "6"
-    explanation: "n + 1 computes 5 + 1 = 6, then stores 6 back into n."
+    qty = 4
 
-  - type: arrange
-    instruction: "Store the result of 100 minus 37 in a variable called remaining"
-    blocks: ["remaining", "=", "100", "-", "37", "+", "print"]
-    correct: ["remaining", "=", "100", "-", "37"]
-    explanation: "= assigns the computed result 63 to remaining."
+    print(price * qty)'
+  choices:
+  - '48'
+  - '124'
+  - '16'
+  - '3'
+  correct: '48'
+  explanation: 12 × 4 = 48.
+- type: arrange
+  instruction: Build code to divide 20 by 4 and print the result
+  blocks:
+  - print
+  - (
+  - '20'
+  - /
+  - '4'
+  - )
+  - '*'
+  correct:
+  - print
+  - (
+  - '20'
+  - /
+  - '4'
+  - )
+  explanation: / divides. print(20 / 4) shows 5.0.
+- type: mcq
+  question: What does this print?
+  code: 'a = 7
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 3\nprint(x * x)"
-    choices: ["9", "6", "33", "x * x"]
-    correct: "9"
-    explanation: "x * x = 3 * 3 = 9."
+    b = 2
 
-  - type: mini_code
-    prompt: "You have 3 boxes, each containing 8 items. Print the total number of items."
-    starter: "boxes = 3\nitems_per_box = 8\n"
-    tests:
-      - code: "_stdout.strip() == '24'"
-        message: "Should print 24 (3 × 8)"
+    print(a / b)'
+  choices:
+  - '3.5'
+  - '3'
+  - '4'
+  - 7/2
+  correct: '3.5'
+  explanation: / always produces a float. 7 / 2 = 3.5.
+- type: fill_blank
+  prompt: Add price and tax together to get the total.
+  before: 'total = price '
+  after: ' tax'
+  choices:
+  - +
+  - '='
+  - print
+  - '*'
+  answer: +
+  explanation: + adds. total = price + tax sums the two values.
+- type: mcq
+  question: What does this print?
+  code: 'n = 5
 
-  - type: mini_code
-    prompt: "Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it."
-    starter: ""
-    tests:
-      - code: "assert remaining == 65"
-        message: "remaining should be 65"
-      - code: "_stdout.strip() == '65'"
-        message: "Should print 65"
+    n = n + 1
 
+    print(n)'
+  choices:
+  - '6'
+  - '5'
+  - n + 1
+  - '1'
+  correct: '6'
+  explanation: n + 1 computes 5 + 1 = 6, then stores 6 back into n.
+- type: arrange
+  instruction: Store the result of 100 minus 37 in a variable called remaining
+  blocks:
+  - remaining
+  - '='
+  - '100'
+  - '-'
+  - '37'
+  - +
+  - print
+  correct:
+  - remaining
+  - '='
+  - '100'
+  - '-'
+  - '37'
+  explanation: = assigns the computed result 63 to remaining.
+- type: mcq
+  question: What does this print?
+  code: 'x = 3
+
+    print(x * x)'
+  choices:
+  - '9'
+  - '6'
+  - '33'
+  - x * x
+  correct: '9'
+  explanation: x * x = 3 * 3 = 9.
+- type: mini_code
+  prompt: You have 3 boxes, each containing 8 items. Print the total number of items.
+  starter: 'boxes = 3
+
+    items_per_box = 8
+
+    '
+  tests:
+  - code: _stdout.strip() == '24'
+    message: Should print 24 (3 × 8)
+- type: mini_code
+  prompt: Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it.
+  starter: ''
+  tests:
+  - code: assert remaining == 65
+    message: remaining should be 65
+  - code: _stdout.strip() == '65'
+    message: Should print 65
 worlds:
   fantasy:
-    title: "Measuring the Ingredients"
+    title: Measuring the Ingredients
     exercises:
-      - type: concept
-        code: |
-          petals = 5
-          roots = 3
-          total_ingredients = petals + roots
-          print(total_ingredients)
-        output: "8"
-        explanation: "Numbers don't need quotes in Elara's recipe notes. You can calculate with variables. + adds quantities, - removes them, * scales a recipe, / splits a batch."
+    - type: concept
+      code: 'petals = 5
 
-      - type: mcq
-        question: "Elara subtracts spoiled petals from her count. What does this print?"
-        code: "petals = 10\nspoiled = 3\nprint(petals - spoiled)"
-        choices: ["7", "13", "10", "3"]
-        correct: "7"
-        explanation: "10 - 3 = 7. Elara has 7 good petals left."
+        roots = 3
 
-      - type: fill_blank
-        prompt: "Multiply the petal count by the batch size to find the total needed."
-        before: "result = 4 "
-        after: " 5"
-        choices: ["*", "=", "+", "print"]
-        answer: "*"
-        explanation: "* scales the recipe. 4 * 5 = 20 petals needed for the full batch."
+        total_ingredients = petals + roots
 
-      - type: mcq
-        question: "Elara calculates the cost of potion vials. What does this print?"
-        code: "vial_cost = 12\nvials = 4\nprint(vial_cost * vials)"
-        choices: ["48", "124", "16", "3"]
-        correct: "48"
-        explanation: "12 gold per vial times 4 vials = 48 gold total."
+        print(total_ingredients)
 
-      - type: arrange
-        instruction: "Build code to divide 20 drops of essence evenly into 4 flasks and print the result"
-        blocks: ["print", "(", "20", "/", "4", ")", "*"]
-        correct: ["print", "(", "20", "/", "4", ")"]
-        explanation: "/ splits the essence equally. print(20 / 4) shows 5.0 drops per flask."
+        '
+      output: '8'
+      explanation: Numbers don't need quotes in Elara's recipe notes. You can calculate with variables. + adds quantities,
+        - removes them, * scales a recipe, / splits a batch.
+      story_before: Elara's recipe calls for precise quantities — she must add the petal count to the root count to know how
+        many ingredients to gather.
+      story_after: The total ingredient count is calculated; she scribbles it at the top of the recipe scroll.
+    - type: mcq
+      question: Elara subtracts spoiled petals from her count. What does this print?
+      code: 'petals = 10
 
-      - type: mcq
-        question: "Elara divides a batch of moonwater between two cauldrons. What does this print?"
-        code: "moonwater = 7\ncauldrons = 2\nprint(moonwater / cauldrons)"
-        choices: ["3.5", "3", "4", "7/2"]
-        correct: "3.5"
-        explanation: "/ always produces a float. 7 / 2 = 3.5 flasks each."
+        spoiled = 3
 
-      - type: fill_blank
-        prompt: "Add the base_cost and the ingredient_tax together to get the total potion cost."
-        before: "total = price "
-        after: " tax"
-        choices: ["+", "=", "print", "*"]
-        answer: "+"
-        explanation: "+ combines costs. total = base_cost + ingredient_tax gives the full price."
+        print(petals - spoiled)'
+      choices:
+      - '7'
+      - '13'
+      - '10'
+      - '3'
+      correct: '7'
+      explanation: 10 - 3 = 7. Elara has 7 good petals left.
+      story_before: Three moonpetals turned black overnight — Elara needs to subtract the spoiled ones from her total.
+      story_after: Seven good petals remain; she sets the spoiled ones aside and updates her count.
+    - type: fill_blank
+      prompt: Multiply the petal count by the batch size to find the total needed.
+      before: 'result = 4 '
+      after: ' 5'
+      choices:
+      - '*'
+      - '='
+      - +
+      - print
+      answer: '*'
+      explanation: '* scales the recipe. 4 * 5 = 20 petals needed for the full batch.'
+      story_before: The master wants double the usual batch — Elara must scale the petal count by the batch multiplier.
+      story_after: The scaled quantity is ready; she measures out twenty petals for the full batch.
+    - type: mcq
+      question: Elara calculates the cost of potion vials. What does this print?
+      code: 'vial_cost = 12
 
-      - type: mcq
-        question: "Elara adds one more moonpetal to her count. What does this print?"
-        code: "petals = 5\npetals = petals + 1\nprint(petals)"
-        choices: ["6", "5", "n + 1", "1"]
-        correct: "6"
-        explanation: "petals + 1 computes 5 + 1 = 6, then stores 6 back into petals."
+        vials = 4
 
-      - type: arrange
-        instruction: "Store the result of 100 minus 37 in a variable called potion_supply"
-        blocks: ["remaining", "=", "100", "-", "37", "+", "print"]
-        correct: ["remaining", "=", "100", "-", "37"]
-        explanation: "= records the remaining supply of 63 doses in potion_supply."
+        print(vial_cost * vials)'
+      choices:
+      - '48'
+      - '124'
+      - '16'
+      - '3'
+      correct: '48'
+      explanation: 12 gold per vial times 4 vials = 48 gold total.
+      story_before: Elara needs to buy four vials from the market — she must calculate the total gold required before she
+        leaves.
+      story_after: Forty-eight gold coins accounted for; she counts them into her purse.
+    - type: arrange
+      instruction: Build code to divide 20 drops of essence evenly into 4 flasks and print the result
+      blocks:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      - '*'
+      correct:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      explanation: / splits the essence equally. print(20 / 4) shows 5.0 drops per flask.
+      story_before: Twenty drops of moonwater essence must be divided evenly across four flasks for the ritual.
+      story_after: Five drops per flask confirmed; she fills each one carefully and lines them up.
+    - type: mcq
+      question: Elara divides a batch of moonwater between two cauldrons. What does this print?
+      code: 'moonwater = 7
 
-      - type: mcq
-        question: "Elara squares the magic amplifier. What does this print?"
-        code: "amplifier = 3\nprint(amplifier * amplifier)"
-        choices: ["9", "6", "33", "x * x"]
-        correct: "9"
-        explanation: "amplifier * amplifier = 3 * 3 = 9. The potion's power is squared."
+        cauldrons = 2
 
-      - type: mini_code
-        prompt: "Elara has 3 cauldrons, each needing 8 moonpetals. Print the total number of petals required."
-        starter: "boxes = 3\nitems_per_box = 8\n"
-        tests:
-          - code: "_stdout.strip() == '24'"
-            message: "Should print 24 (3 × 8)"
+        print(moonwater / cauldrons)'
+      choices:
+      - '3.5'
+      - '3'
+      - '4'
+      - 7/2
+      correct: '3.5'
+      explanation: / always produces a float. 7 / 2 = 3.5 flasks each.
+      story_before: Seven measures of moonwater must be split between two cauldrons — division always gives a decimal here.
+      story_after: Each cauldron gets 3.5 measures; the decimal result is expected when splitting an odd amount.
+    - type: fill_blank
+      prompt: Add the base_cost and the ingredient_tax together to get the total potion cost.
+      before: 'total = price '
+      after: ' tax'
+      choices:
+      - +
+      - '='
+      - print
+      - '*'
+      answer: +
+      explanation: + combines costs. total = base_cost + ingredient_tax gives the full price.
+      story_before: Elara needs to add the ingredient tax on top of the base cost to find what she'll actually pay.
+      story_after: Total potion cost calculated; she writes it on the invoice and seals the order.
+    - type: mcq
+      question: Elara adds one more moonpetal to her count. What does this print?
+      code: 'petals = 5
 
-      - type: mini_code
-        prompt: "Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it."
-        starter: ""
-        tests:
-          - code: "assert remaining == 65"
-            message: "remaining should be 65"
-          - code: "_stdout.strip() == '65'"
-            message: "Should print 65"
+        petals = petals + 1
 
+        print(petals)'
+      choices:
+      - '6'
+      - '5'
+      - n + 1
+      - '1'
+      correct: '6'
+      explanation: petals + 1 computes 5 + 1 = 6, then stores 6 back into petals.
+      story_before: One extra moonpetal was found at the bottom of the sack — Elara adds it to the running count.
+      story_after: The count updates to six; she tucks the petal into the recipe pile.
+    - type: arrange
+      instruction: Store the result of 100 minus 37 in a variable called potion_supply
+      blocks:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      - +
+      - print
+      correct:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      explanation: = records the remaining supply of 63 doses in potion_supply.
+      story_before: The workshop started with 100 doses of potion supply — 37 have been used and Elara needs the remainder.
+      story_after: Sixty-three doses remain; she marks the level on the supply barrel.
+    - type: mcq
+      question: Elara squares the magic amplifier. What does this print?
+      code: 'amplifier = 3
+
+        print(amplifier * amplifier)'
+      choices:
+      - '9'
+      - '6'
+      - '33'
+      - x * x
+      correct: '9'
+      explanation: amplifier * amplifier = 3 * 3 = 9. The potion's power is squared.
+      story_before: The magic amplifier grows stronger when multiplied by itself — Elara squares it to find the true potency.
+      story_after: Potency confirmed at 9; she inscribes the value on the amplifier's base.
+    - type: mini_code
+      prompt: Elara has 3 cauldrons, each needing 8 moonpetals. Print the total number of petals required.
+      starter: 'boxes = 3
+
+        items_per_box = 8
+
+        '
+      tests:
+      - code: _stdout.strip() == '24'
+        message: Should print 24 (3 × 8)
+      story_before: Three cauldrons each need eight moonpetals — Elara must compute the total petal requirement before heading
+        to the herb store.
+      story_after: Twenty-four petals logged; the herb store order is written and ready to send.
+    - type: mini_code
+      prompt: Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it.
+      starter: ''
+      tests:
+      - code: assert remaining == 65
+        message: remaining should be 65
+      - code: _stdout.strip() == '65'
+        message: Should print 65
+      story_before: The workshop budget is 100 gold and 35 have already been spent — Elara must calculate what's left before
+        ordering more supplies.
+      story_after: Sixty-five gold remaining; the budget is balanced and the supply order is approved.
   scifi:
-    title: "Recalculating Ship Systems"
+    title: Recalculating Ship Systems
     exercises:
-      - type: concept
-        code: |
-          fuel_cells = 5
-          reserve_cells = 3
-          total_fuel = fuel_cells + reserve_cells
-          print(total_fuel)
-        output: "8"
-        explanation: "Sensor readings don't need quotes. You can calculate with variables. + adds readings, - subtracts drain, * multiplies output, / splits across systems."
+    - type: concept
+      code: 'fuel_cells = 5
 
-      - type: mcq
-        question: "Yara checks remaining hull integrity after a collision. What does this print?"
-        code: "hull_rating = 10\ndamage = 3\nprint(hull_rating - damage)"
-        choices: ["7", "13", "10", "3"]
-        correct: "7"
-        explanation: "10 - 3 = 7. Hull integrity drops to 7 after the impact."
+        reserve_cells = 3
 
-      - type: fill_blank
-        prompt: "Multiply the engine thrust by the boost factor to get total engine output."
-        before: "result = 4 "
-        after: " 5"
-        choices: ["*", "=", "+", "print"]
-        answer: "*"
-        explanation: "* scales the thrust. 4 * 5 = 20 units of output."
+        total_fuel = fuel_cells + reserve_cells
 
-      - type: mcq
-        question: "Yara calculates total power draw from multiple shields. What does this print?"
-        code: "shield_draw = 12\nshields = 4\nprint(shield_draw * shields)"
-        choices: ["48", "124", "16", "3"]
-        correct: "48"
-        explanation: "12 watts per shield times 4 shields = 48 watts total."
+        print(total_fuel)
 
-      - type: arrange
-        instruction: "Build code to divide 20 power units across 4 decks and print the result"
-        blocks: ["print", "(", "20", "/", "4", ")", "*"]
-        correct: ["print", "(", "20", "/", "4", ")"]
-        explanation: "/ distributes power equally. print(20 / 4) shows 5.0 units per deck."
+        '
+      output: '8'
+      explanation: Sensor readings don't need quotes. You can calculate with variables. + adds readings, - subtracts drain,
+        * multiplies output, / splits across systems.
+      story_before: The Helix lost its fuel tally in the power surge — Yara must add active fuel cells to reserve cells to
+        know total power available.
+      story_after: Total fuel computed and logged to the dashboard; the jump drive pre-check can begin.
+    - type: mcq
+      question: Yara checks remaining hull integrity after a collision. What does this print?
+      code: 'hull_rating = 10
 
-      - type: mcq
-        question: "Yara splits the oxygen supply between two compartments. What does this print?"
-        code: "oxygen = 7\ncompartments = 2\nprint(oxygen / compartments)"
-        choices: ["3.5", "3", "4", "7/2"]
-        correct: "3.5"
-        explanation: "/ produces a float. 7 / 2 = 3.5 units per compartment."
+        damage = 3
 
-      - type: fill_blank
-        prompt: "Add the base_power and the backup_power together to get total available power."
-        before: "total = price "
-        after: " tax"
-        choices: ["+", "=", "print", "*"]
-        answer: "+"
-        explanation: "+ combines the readings. total = base_power + backup_power gives total power."
+        print(hull_rating - damage)'
+      choices:
+      - '7'
+      - '13'
+      - '10'
+      - '3'
+      correct: '7'
+      explanation: 10 - 3 = 7. Hull integrity drops to 7 after the impact.
+      story_before: An asteroid collision just knocked three points off hull integrity — Yara subtracts the damage to get
+        the current rating.
+      story_after: Hull integrity reads 7; she flags a repair alert and keeps monitoring.
+    - type: fill_blank
+      prompt: Multiply the engine thrust by the boost factor to get total engine output.
+      before: 'result = 4 '
+      after: ' 5'
+      choices:
+      - '*'
+      - '='
+      - +
+      - print
+      answer: '*'
+      explanation: '* scales the thrust. 4 * 5 = 20 units of output.'
+      story_before: The engine boost factor must multiply the base thrust to calculate total output before the evasive manoeuvre.
+      story_after: Output calculated at 20 units; the helm is cleared to begin the manoeuvre.
+    - type: mcq
+      question: Yara calculates total power draw from multiple shields. What does this print?
+      code: 'shield_draw = 12
 
-      - type: mcq
-        question: "Yara increments the crew count as another survivor is found. What does this print?"
-        code: "crew = 5\ncrew = crew + 1\nprint(crew)"
-        choices: ["6", "5", "n + 1", "1"]
-        correct: "6"
-        explanation: "crew + 1 computes 5 + 1 = 6, then stores 6 back into crew."
+        shields = 4
 
-      - type: arrange
-        instruction: "Store the result of 100 minus 37 in a variable called fuel_remaining"
-        blocks: ["remaining", "=", "100", "-", "37", "+", "print"]
-        correct: ["remaining", "=", "100", "-", "37"]
-        explanation: "= stores the computed fuel level of 63 units in fuel_remaining."
+        print(shield_draw * shields)'
+      choices:
+      - '48'
+      - '124'
+      - '16'
+      - '3'
+      correct: '48'
+      explanation: 12 watts per shield times 4 shields = 48 watts total.
+      story_before: Four shields are running — Yara must calculate the total power draw to see if the reactor can handle it.
+      story_after: Forty-eight watts total; the reactor is at capacity but holding.
+    - type: arrange
+      instruction: Build code to divide 20 power units across 4 decks and print the result
+      blocks:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      - '*'
+      correct:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      explanation: / distributes power equally. print(20 / 4) shows 5.0 units per deck.
+      story_before: Twenty power units must be distributed equally across four decks before the emergency shutdown ends.
+      story_after: Five units per deck confirmed; the distribution relays are set.
+    - type: mcq
+      question: Yara splits the oxygen supply between two compartments. What does this print?
+      code: 'oxygen = 7
 
-      - type: mcq
-        question: "Yara calculates the squared sensor gain. What does this print?"
-        code: "gain = 3\nprint(gain * gain)"
-        choices: ["9", "6", "33", "x * x"]
-        correct: "9"
-        explanation: "gain * gain = 3 * 3 = 9. The amplified sensor reading is 9."
+        compartments = 2
 
-      - type: mini_code
-        prompt: "The starship has 3 reactor cores, each producing 8 power units. Print the total power output."
-        starter: "boxes = 3\nitems_per_box = 8\n"
-        tests:
-          - code: "_stdout.strip() == '24'"
-            message: "Should print 24 (3 × 8)"
+        print(oxygen / compartments)'
+      choices:
+      - '3.5'
+      - '3'
+      - '4'
+      - 7/2
+      correct: '3.5'
+      explanation: / produces a float. 7 / 2 = 3.5 units per compartment.
+      story_before: Seven oxygen units must be split between two compartments — the result will be a decimal.
+      story_after: Each compartment receives 3.5 units; Yara notes the float result and moves on.
+    - type: fill_blank
+      prompt: Add the base_power and the backup_power together to get total available power.
+      before: 'total = price '
+      after: ' tax'
+      choices:
+      - +
+      - '='
+      - print
+      - '*'
+      answer: +
+      explanation: + combines the readings. total = base_power + backup_power gives total power.
+      story_before: Yara needs to combine base power and backup reserves to know total available power for the jump.
+      story_after: Total power calculated; the jump drive is authorised to spin up.
+    - type: mcq
+      question: Yara increments the crew count as another survivor is found. What does this print?
+      code: 'crew = 5
 
-      - type: mini_code
-        prompt: "Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it."
-        starter: ""
-        tests:
-          - code: "assert remaining == 65"
-            message: "remaining should be 65"
-          - code: "_stdout.strip() == '65'"
-            message: "Should print 65"
+        crew = crew + 1
 
+        print(crew)'
+      choices:
+      - '6'
+      - '5'
+      - n + 1
+      - '1'
+      correct: '6'
+      explanation: crew + 1 computes 5 + 1 = 6, then stores 6 back into crew.
+      story_before: Another survivor was found in the cargo bay — Yara increments the crew count on the life-support manifest.
+      story_after: Crew count updated to 6; the life-support allocation is recalculated.
+    - type: arrange
+      instruction: Store the result of 100 minus 37 in a variable called fuel_remaining
+      blocks:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      - +
+      - print
+      correct:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      explanation: = stores the computed fuel level of 63 units in fuel_remaining.
+      story_before: The fuel reserves started at 100 units and 37 have been consumed — Yara must log what remains.
+      story_after: Sixty-three units logged as fuel_remaining; the navigation computer updates the jump range estimate.
+    - type: mcq
+      question: Yara calculates the squared sensor gain. What does this print?
+      code: 'gain = 3
+
+        print(gain * gain)'
+      choices:
+      - '9'
+      - '6'
+      - '33'
+      - x * x
+      correct: '9'
+      explanation: gain * gain = 3 * 3 = 9. The amplified sensor reading is 9.
+      story_before: The sensor gain squared gives the amplified signal strength — Yara needs that value for the deep-space
+        scan.
+      story_after: Amplified gain confirmed at 9; the deep-space scanner is locked on target.
+    - type: mini_code
+      prompt: The starship has 3 reactor cores, each producing 8 power units. Print the total power output.
+      starter: 'boxes = 3
+
+        items_per_box = 8
+
+        '
+      tests:
+      - code: _stdout.strip() == '24'
+        message: Should print 24 (3 × 8)
+      story_before: Three reactor cores each produce 8 power units — Yara needs the total output before authorising the weapons
+        array.
+      story_after: Total power output of 24 units confirmed; the weapons array is authorised.
+    - type: mini_code
+      prompt: Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it.
+      starter: ''
+      tests:
+      - code: assert remaining == 65
+        message: remaining should be 65
+      - code: _stdout.strip() == '65'
+        message: Should print 65
+      story_before: The repair budget is 100 credits and 35 have already been spent — Yara must calculate remaining funds
+        before ordering parts.
+      story_after: Sixty-five credits remaining; the parts requisition is approved and the repair crew is dispatched.
   mystery:
-    title: "Tallying the Evidence"
+    title: Tallying the Evidence
     exercises:
-      - type: concept
-        code: |
-          clues_found = 5
-          clues_dismissed = 3
-          valid_clues = clues_found + clues_dismissed
-          print(valid_clues)
-        output: "8"
-        explanation: "Evidence counts don't need quotes. Cole can calculate with variables. + adds clues, - removes false leads, * scales a tally, / splits a group."
+    - type: concept
+      code: 'clues_found = 5
 
-      - type: mcq
-        question: "Cole removes discredited witnesses from his list. What does this print?"
-        code: "witnesses = 10\ndiscredited = 3\nprint(witnesses - discredited)"
-        choices: ["7", "13", "10", "3"]
-        correct: "7"
-        explanation: "10 - 3 = 7. Seven credible witnesses remain."
+        clues_dismissed = 3
 
-      - type: fill_blank
-        prompt: "Multiply the clue count by the number of suspects to find total cross-references needed."
-        before: "result = 4 "
-        after: " 5"
-        choices: ["*", "=", "+", "print"]
-        answer: "*"
-        explanation: "* scales the investigation. 4 * 5 = 20 cross-references needed."
+        valid_clues = clues_found + clues_dismissed
 
-      - type: mcq
-        question: "Cole calculates total ransom demanded by multiple suspects. What does this print?"
-        code: "ransom_per = 12\nsuspects = 4\nprint(ransom_per * suspects)"
-        choices: ["48", "124", "16", "3"]
-        correct: "48"
-        explanation: "12 thousand per suspect times 4 suspects = 48 thousand total."
+        print(valid_clues)
 
-      - type: arrange
-        instruction: "Build code to divide 20 evidence items across 4 case folders and print the result"
-        blocks: ["print", "(", "20", "/", "4", ")", "*"]
-        correct: ["print", "(", "20", "/", "4", ")"]
-        explanation: "/ distributes items equally. print(20 / 4) shows 5.0 items per folder."
+        '
+      output: '8'
+      explanation: Evidence counts don't need quotes. Cole can calculate with variables. + adds clues, - removes false leads,
+        * scales a tally, / splits a group.
+      story_before: Cole's evidence tally was wiped when the precinct server crashed — he must recalculate totals from his
+        paper notes.
+      story_after: Valid clue count restored; he writes the total on the top of the case folder.
+    - type: mcq
+      question: Cole removes discredited witnesses from his list. What does this print?
+      code: 'witnesses = 10
 
-      - type: mcq
-        question: "Cole splits coded pages between two analysts. What does this print?"
-        code: "coded_pages = 7\nanalysts = 2\nprint(coded_pages / analysts)"
-        choices: ["3.5", "3", "4", "7/2"]
-        correct: "3.5"
-        explanation: "/ produces a float. 7 / 2 = 3.5 pages each."
+        discredited = 3
 
-      - type: fill_blank
-        prompt: "Add the primary_clues and the tip_offs together to get total leads."
-        before: "total = price "
-        after: " tax"
-        choices: ["+", "=", "print", "*"]
-        answer: "+"
-        explanation: "+ combines the tallies. total = primary_clues + tip_offs gives the full lead count."
+        print(witnesses - discredited)'
+      choices:
+      - '7'
+      - '13'
+      - '10'
+      - '3'
+      correct: '7'
+      explanation: 10 - 3 = 7. Seven credible witnesses remain.
+      story_before: Three witnesses have been discredited — Cole strikes them from the list to see how many credible ones
+        remain.
+      story_after: Seven credible witnesses left; Cole circles their names and schedules the interviews.
+    - type: fill_blank
+      prompt: Multiply the clue count by the number of suspects to find total cross-references needed.
+      before: 'result = 4 '
+      after: ' 5'
+      choices:
+      - '*'
+      - '='
+      - +
+      - print
+      answer: '*'
+      explanation: '* scales the investigation. 4 * 5 = 20 cross-references needed.'
+      story_before: Cole must cross-reference every clue against every suspect — he multiplies to find the total number of
+        cross-checks needed.
+      story_after: Twenty cross-references required; he assigns them to his team and starts the clock.
+    - type: mcq
+      question: Cole calculates total ransom demanded by multiple suspects. What does this print?
+      code: 'ransom_per = 12
 
-      - type: mcq
-        question: "Cole logs one more piece of evidence as he searches the room. What does this print?"
-        code: "evidence_count = 5\nevidence_count = evidence_count + 1\nprint(evidence_count)"
-        choices: ["6", "5", "n + 1", "1"]
-        correct: "6"
-        explanation: "evidence_count + 1 computes 5 + 1 = 6, then stores 6 back into evidence_count."
+        suspects = 4
 
-      - type: arrange
-        instruction: "Store the result of 100 minus 37 in a variable called leads_remaining"
-        blocks: ["remaining", "=", "100", "-", "37", "+", "print"]
-        correct: ["remaining", "=", "100", "-", "37"]
-        explanation: "= records 63 remaining leads to investigate in leads_remaining."
+        print(ransom_per * suspects)'
+      choices:
+      - '48'
+      - '124'
+      - '16'
+      - '3'
+      correct: '48'
+      explanation: 12 thousand per suspect times 4 suspects = 48 thousand total.
+      story_before: Four suspects each demanded the same ransom — Cole calculates the total demand to include in the warrant.
+      story_after: Forty-eight thousand total; the figure goes into the warrant application.
+    - type: arrange
+      instruction: Build code to divide 20 evidence items across 4 case folders and print the result
+      blocks:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      - '*'
+      correct:
+      - print
+      - (
+      - '20'
+      - /
+      - '4'
+      - )
+      explanation: / distributes items equally. print(20 / 4) shows 5.0 items per folder.
+      story_before: Twenty evidence items must be sorted evenly into four case folders before the court deadline.
+      story_after: Five items per folder; the folders are sealed and couriered to the courthouse.
+    - type: mcq
+      question: Cole splits coded pages between two analysts. What does this print?
+      code: 'coded_pages = 7
 
-      - type: mcq
-        question: "Cole squares the cipher key to break the code. What does this print?"
-        code: "cipher_key = 3\nprint(cipher_key * cipher_key)"
-        choices: ["9", "6", "33", "x * x"]
-        correct: "9"
-        explanation: "cipher_key * cipher_key = 3 * 3 = 9. The decoded value is 9."
+        analysts = 2
 
-      - type: mini_code
-        prompt: "Cole has 3 suspects, each linked to 8 pieces of evidence. Print the total evidence count."
-        starter: "boxes = 3\nitems_per_box = 8\n"
-        tests:
-          - code: "_stdout.strip() == '24'"
-            message: "Should print 24 (3 × 8)"
+        print(coded_pages / analysts)'
+      choices:
+      - '3.5'
+      - '3'
+      - '4'
+      - 7/2
+      correct: '3.5'
+      explanation: / produces a float. 7 / 2 = 3.5 pages each.
+      story_before: Seven coded pages must be split between two analysts — the division will yield a decimal result.
+      story_after: Each analyst gets 3.5 pages; the half-page overlap means they'll need to compare notes.
+    - type: fill_blank
+      prompt: Add the primary_clues and the tip_offs together to get total leads.
+      before: 'total = price '
+      after: ' tax'
+      choices:
+      - +
+      - '='
+      - print
+      - '*'
+      answer: +
+      explanation: + combines the tallies. total = primary_clues + tip_offs gives the full lead count.
+      story_before: Cole needs to add the primary clues to the tip-offs to know how many total leads he's working with.
+      story_after: Total leads tallied; he pins the number to the board and assigns priorities.
+    - type: mcq
+      question: Cole logs one more piece of evidence as he searches the room. What does this print?
+      code: 'evidence_count = 5
 
-      - type: mini_code
-        prompt: "Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it."
-        starter: ""
-        tests:
-          - code: "assert remaining == 65"
-            message: "remaining should be 65"
-          - code: "_stdout.strip() == '65'"
-            message: "Should print 65"
+        evidence_count = evidence_count + 1
+
+        print(evidence_count)'
+      choices:
+      - '6'
+      - '5'
+      - n + 1
+      - '1'
+      correct: '6'
+      explanation: evidence_count + 1 computes 5 + 1 = 6, then stores 6 back into evidence_count.
+      story_before: Cole finds another piece of evidence while searching the room — he increments the count in his notes.
+      story_after: Evidence count rises to 6; he bags and tags the new item.
+    - type: arrange
+      instruction: Store the result of 100 minus 37 in a variable called leads_remaining
+      blocks:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      - +
+      - print
+      correct:
+      - remaining
+      - '='
+      - '100'
+      - '-'
+      - '37'
+      explanation: = records 63 remaining leads to investigate in leads_remaining.
+      story_before: Cole started with 100 leads and has eliminated 37 — he needs to record how many are still open.
+      story_after: Sixty-three leads remaining; he highlights the most promising ones for tomorrow's work.
+    - type: mcq
+      question: Cole squares the cipher key to break the code. What does this print?
+      code: 'cipher_key = 3
+
+        print(cipher_key * cipher_key)'
+      choices:
+      - '9'
+      - '6'
+      - '33'
+      - x * x
+      correct: '9'
+      explanation: cipher_key * cipher_key = 3 * 3 = 9. The decoded value is 9.
+      story_before: Squaring the cipher key is the first step in breaking the suspect's code — Cole runs the calculation.
+      story_after: Decoded value is 9; the cipher is cracked and the hidden message can now be read.
+    - type: mini_code
+      prompt: Cole has 3 suspects, each linked to 8 pieces of evidence. Print the total evidence count.
+      starter: 'boxes = 3
+
+        items_per_box = 8
+
+        '
+      tests:
+      - code: _stdout.strip() == '24'
+        message: Should print 24 (3 × 8)
+      story_before: Three suspects are each linked to 8 pieces of evidence — Cole multiplies to get the total evidence count
+        for the case summary.
+      story_after: Twenty-four pieces of evidence logged; the case summary is complete.
+    - type: mini_code
+      prompt: Store 100 in budget and 35 in spent. Calculate remaining = budget - spent and print it.
+      starter: ''
+      tests:
+      - code: assert remaining == 65
+        message: remaining should be 65
+      - code: _stdout.strip() == '65'
+        message: Should print 65
+      story_before: The investigation budget is 100 and 35 has already been spent — Cole must calculate what's left for the
+        surveillance operation.
+      story_after: Sixty-five remains for surveillance; Cole authorises the stakeout and briefs his team.

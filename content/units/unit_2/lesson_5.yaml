@@ -197,6 +197,9 @@ worlds:
 
         True'
       explanation: Finn checks the climb. and needs both True. or needs one. not flips the flag.
+      story_before: Finn reaches a junction where two conditions must be evaluated together — he needs logical operators to
+        combine Truth Rune checks.
+      story_after: and, or, and not give Finn the power to make complex climb decisions with a single expression.
     - type: mcq
       question: Finn reads a storm flag. What does this print?
       code: print(True and False)
@@ -207,6 +210,8 @@ worlds:
       - Error
       correct: 'False'
       explanation: and requires both sides True. True and False = False. Storm cancels safe climbing.
+      story_before: Finn reads two storm flags — both must be clear before he can proceed safely.
+      story_after: False — one flag is set; the route is blocked and Finn waits for the storm to pass.
     - type: mcq
       question: Two trail conditions are checked — only one needs to hold. What does this print?
       code: print(True or False)
@@ -217,6 +222,8 @@ worlds:
       - Error
       correct: 'True'
       explanation: or only needs one side True. The route is safe if either condition holds.
+      story_before: Two trail conditions are checked — the path is safe if either one holds.
+      story_after: True — at least one condition is met; Finn picks the safer trail and continues.
     - type: fill_blank
       prompt: Allow Finn to attempt the summit only when stamina is high enough AND he has a rope.
       before: 'can_summit = stamina >= 50 '
@@ -228,6 +235,9 @@ worlds:
       - ==
       answer: and
       explanation: 'Both must be True: stamina >= 50 AND has_rope must both hold.'
+      story_before: Finn can only attempt the summit when both his stamina is high enough AND he has a rope — he needs the
+        right operator.
+      story_after: Both conditions locked in with and; Finn checks his gear and starts the final ascent.
     - type: mcq
       question: Finn checks if stamina is outside the healthy range. What does this print?
       code: 'stamina = 45
@@ -240,6 +250,9 @@ worlds:
       - None
       correct: 'True'
       explanation: stamina >= 60 is False, but stamina < 50 is True. False or True = True.
+      story_before: Finn checks whether his stamina is outside the healthy range — either too high to be realistic or worryingly
+        low.
+      story_after: True — stamina is below 50; Finn stops at the nearest waystone and drinks a restorative potion.
     - type: arrange
       instruction: Build code that prints True when altitude is greater than zero AND less than 100
       blocks:
@@ -265,6 +278,9 @@ worlds:
       - '100'
       - )
       explanation: Both altitude checks must be True for the safe climbing window.
+      story_before: 'Finn builds a condition that confirms he is in the valid climbing window: altitude above zero AND below
+        100.'
+      story_after: Both bounds check out; the safe climbing window is confirmed and Finn's route is clear.
     - type: mcq
       question: Finn flips a danger flag. What does this print?
       code: 'altitude = 15
@@ -277,6 +293,8 @@ worlds:
       - None
       correct: 'False'
       explanation: altitude > 10 is True (15 > 10). not True = False.
+      story_before: Finn flips a danger flag — he wants to know when he is NOT above the storm threshold.
+      story_after: False — he is above 10; the flag stays clear and Finn keeps his pace.
     - type: fill_blank
       prompt: Mark the trail as unsafe when altitude is NOT in the safe range.
       before: 'is_unsafe = '
@@ -288,6 +306,9 @@ worlds:
       - bool
       answer: not
       explanation: not flips the boolean. not True = False means safe.
+      story_before: Finn marks the trail as unsafe when altitude is NOT in the valid range — he needs the right operator to
+        flip the result.
+      story_after: not flips the flag cleanly; the unsafe marker activates the moment altitude goes out of range.
     - type: mcq
       question: Finn logs two trail flags. What does this print?
       code: 'a = True
@@ -314,6 +335,8 @@ worlds:
 
         True'
       explanation: True and False = False. True or False = True.
+      story_before: Finn logs two trail flags and needs to predict what and and or return for each combination.
+      story_after: False then True — and is strict, or is flexible; Finn now knows exactly which gate to use for each decision.
     - type: mcq
       question: Which expression is True when altitude is between 1 and 10 (inclusive)?
       code: ''
@@ -324,6 +347,8 @@ worlds:
       - x > 1 and x < 10
       correct: x >= 1 and x <= 10
       explanation: 'Both bounds must hold: altitude >= 1 AND <= 10.'
+      story_before: Finn needs a single expression that is True only when altitude is between 1 and 10 inclusive.
+      story_after: and is the answer — both bounds must hold; Finn's safe-zone check is now one clean line.
     - type: mini_code
       prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
         print False.
@@ -343,6 +368,9 @@ worlds:
 
           True'
         message: stamina=30 is not above 50, cannot summit
+      story_before: Finn reads his hp and shield status and must print True only when both conditions are met.
+      story_after: The combined check works perfectly — Finn's summit gate now requires both stamina and equipment to be in
+        order.
     - type: mini_code
       prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
       starter: 'age = int(input())
@@ -358,6 +386,9 @@ worlds:
       - code: assert _stdout.strip() == 'True'
         stdin: '20'
         message: 20 is 18 or above, prints True
+      story_before: Finn reads an age value and must print True if it falls outside the mid-range, False if it is in between.
+      story_after: or captures both extremes in one expression — Finn's logical toolkit is complete and the summit is within
+        reach.
   scifi:
     title: Proximity and Fuel Logic
     exercises:
@@ -377,6 +408,9 @@ worlds:
 
         True'
       explanation: Zara checks flight conditions. and needs both True. or needs one. not flips the flag.
+      story_before: Zara needs to combine multiple sensor conditions into single go/no-go signals — logical operators will
+        link them together.
+      story_after: and, or, and not give Zara precise control over every flight-safety decision on the Helix.
     - type: mcq
       question: Zara reads a collision flag. What does this print?
       code: print(True and False)
@@ -387,6 +421,8 @@ worlds:
       - Error
       correct: 'False'
       explanation: and requires both sides True. True and False = False. Collision alert stays.
+      story_before: Zara reads two collision flags — both must be clear before she can accelerate.
+      story_after: False — one flag is still set; Zara holds position and waits for the debris to clear.
     - type: mcq
       question: Two navigation conditions are checked. What does this print?
       code: print(True or False)
@@ -397,6 +433,8 @@ worlds:
       - Error
       correct: 'True'
       explanation: or only needs one side True. A safe route exists if either sensor clears.
+      story_before: Two navigation sensors are checked — a safe route exists if either one clears.
+      story_after: True — one sensor confirms a clear path; Zara threads the ship through the gap.
     - type: fill_blank
       prompt: Allow launch only when fuel is sufficient AND clearance is granted.
       before: 'can_launch = fuel >= 20 '
@@ -408,6 +446,9 @@ worlds:
       - ==
       answer: and
       explanation: 'Both must be True: fuel >= 20 AND clearance must both hold for launch.'
+      story_before: Launch requires both sufficient fuel AND air traffic clearance — Zara links the conditions with the right
+        operator.
+      story_after: Both conditions met with and; Zara fires the main engines and the Helix lifts off.
     - type: mcq
       question: Zara checks if fuel is outside the normal range. What does this print?
       code: 'fuel = 45
@@ -420,6 +461,9 @@ worlds:
       - None
       correct: 'True'
       explanation: fuel >= 60 is False, but fuel < 50 is True. False or True = True.
+      story_before: Zara checks whether fuel is outside the normal operating range — either suspiciously full or dangerously
+        low.
+      story_after: True — fuel is below 50; Zara reroutes to the nearest refuelling depot.
     - type: arrange
       instruction: Build code that prints True when distance is greater than zero AND less than 100
       blocks:
@@ -445,6 +489,9 @@ worlds:
       - '100'
       - )
       explanation: Both distance checks must be True for a safe flight corridor.
+      story_before: 'Zara builds a condition that confirms the target is within the safe flight corridor: distance above zero
+        AND below 100.'
+      story_after: Corridor confirmed — Zara locks in the heading and engages the autopilot.
     - type: mcq
       question: Zara flips a proximity alert. What does this print?
       code: 'distance = 15
@@ -457,6 +504,8 @@ worlds:
       - None
       correct: 'False'
       explanation: distance > 10 is True. not True = False. No proximity alert.
+      story_before: Zara flips a proximity alert — she wants to know when the target is NOT farther than 10 units away.
+      story_after: False — it is farther than 10; no proximity alert, and Zara relaxes her grip on the controls.
     - type: fill_blank
       prompt: Mark the sector as unsafe when distance is NOT in the safe range.
       before: 'is_unsafe = '
@@ -468,6 +517,9 @@ worlds:
       - bool
       answer: not
       explanation: not flips the boolean. not True = False means the sector is clear.
+      story_before: Zara marks a sector as unsafe when distance is NOT in the valid range — she flips the condition with the
+        right operator.
+      story_after: not reverses the flag; the sector is marked unsafe the instant distance goes out of bounds.
     - type: mcq
       question: Zara logs two sensor flags. What does this print?
       code: 'a = True
@@ -494,6 +546,8 @@ worlds:
 
         True'
       explanation: True and False = False. True or False = True. Sensor readings are mixed.
+      story_before: Zara logs two sensor flags and needs to predict what and and or return for each combination.
+      story_after: False then True — and demands both, or accepts either; Zara now wires the correct gate into each system.
     - type: mcq
       question: Which expression is True when a reading is between 1 and 10 (inclusive)?
       code: ''
@@ -504,6 +558,8 @@ worlds:
       - x > 1 and x < 10
       correct: x >= 1 and x <= 10
       explanation: 'Both bounds must hold: reading >= 1 AND <= 10.'
+      story_before: Zara needs a single expression that returns True only when a sensor reading is between 1 and 10 inclusive.
+      story_after: and enforces both bounds simultaneously — Zara's range checker is now one tight line of code.
     - type: mini_code
       prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
         print False.
@@ -523,6 +579,8 @@ worlds:
 
           True'
         message: hull=30 is not above 50, proximity alert active
+      story_before: Zara reads hull integrity and shield status and must print True only when both are within safe limits.
+      story_after: The combined go/no-go check is live — the Helix will only proceed when both systems are green.
     - type: mini_code
       prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
       starter: 'age = int(input())
@@ -538,6 +596,9 @@ worlds:
       - code: assert _stdout.strip() == 'True'
         stdin: '20'
         message: 20 is 18 or above, prints True
+      story_before: Zara reads a crew age value and must print True if it falls outside the mid-range, False if it is in the
+        middle.
+      story_after: or captures both ends of the range in one expression — Zara's logical sensor suite is fully operational.
   mystery:
     title: Evaluating the Evidence Logic
     exercises:
@@ -557,6 +618,9 @@ worlds:
 
         True'
       explanation: Cole checks the evidence. and needs both True. or needs one. not flips the result.
+      story_before: Cole needs to combine multiple evidence conditions into single verdicts — logical operators will link
+        his comparisons together.
+      story_after: and, or, and not give Cole the precision to evaluate complex alibi and motive combinations in one expression.
     - type: mcq
       question: Cole tests an alibi flag. What does this print?
       code: print(True and False)
@@ -567,6 +631,8 @@ worlds:
       - Error
       correct: 'False'
       explanation: and requires both sides True. True and False = False. The alibi does not hold.
+      story_before: Cole tests an alibi flag against a motive flag — both must hold for the alibi to stick.
+      story_after: False — one condition fails; the alibi collapses and Cole moves the suspect up the list.
     - type: mcq
       question: Cole evaluates two witness statements. What does this print?
       code: print(True or False)
@@ -577,6 +643,8 @@ worlds:
       - Error
       correct: 'True'
       explanation: or only needs one side True. At least one statement checks out.
+      story_before: Two witness statements are evaluated — the sighting is confirmed if either one checks out.
+      story_after: True — at least one statement holds; Cole marks the sighting as corroborated.
     - type: fill_blank
       prompt: Confirm a suspect only when motive is confirmed AND the alibi is broken.
       before: 'is_suspect = motive_confirmed '
@@ -588,6 +656,9 @@ worlds:
       - ==
       answer: and
       explanation: 'Both must be True: motive confirmed AND alibi broken.'
+      story_before: Cole can name a suspect only when motive is confirmed AND the alibi is broken — he links both with the
+        right operator.
+      story_after: Both conditions locked in with and; Cole writes the suspect's name at the top of the board.
     - type: mcq
       question: Cole checks if an evidence count is outside the expected range. What does this print?
       code: 'evidence = 45
@@ -600,6 +671,9 @@ worlds:
       - None
       correct: 'True'
       explanation: evidence >= 60 is False, but evidence < 50 is True. False or True = True.
+      story_before: Cole checks whether an evidence count is outside the expected range — either surprisingly high or suspiciously
+        low.
+      story_after: True — it is below 50; Cole flags the shortage and requests a second sweep of the scene.
     - type: arrange
       instruction: Build code that prints True when evidence count is greater than zero AND less than 100
       blocks:
@@ -625,6 +699,8 @@ worlds:
       - '100'
       - )
       explanation: Both bounds on the evidence count must hold.
+      story_before: 'Cole builds a condition that confirms evidence is within a credible range: above zero AND below 100.'
+      story_after: Both bounds hold — the evidence count is plausible and Cole logs it as valid.
     - type: mcq
       question: Cole flips an alibi status. What does this print?
       code: 'alibis = 15
@@ -637,6 +713,8 @@ worlds:
       - None
       correct: 'False'
       explanation: alibis > 10 is True. not True = False.
+      story_before: Cole flips an alibi status — he wants to know when the suspect does NOT have more than 10 alibis.
+      story_after: False — they do have more than 10; Cole notes the unusually high alibi count as suspicious in itself.
     - type: fill_blank
       prompt: Flag a statement as unreliable when it is NOT within the valid range.
       before: 'is_unreliable = '
@@ -648,6 +726,8 @@ worlds:
       - bool
       answer: not
       explanation: not flips the boolean. not True = False means valid.
+      story_before: Cole flags a statement as unreliable when it is NOT within the valid evidence range — he flips the condition.
+      story_after: not inverts the flag; any out-of-range entry is automatically marked unreliable.
     - type: mcq
       question: Cole logs two investigation flags. What does this print?
       code: 'a = True
@@ -674,6 +754,9 @@ worlds:
 
         True'
       explanation: True and False = False. True or False = True.
+      story_before: Cole logs two investigation flags and needs to predict what and and or return for each pair.
+      story_after: False then True — and is strict, or is lenient; Cole knows exactly which gate to apply to each piece of
+        evidence.
     - type: mcq
       question: Which expression is True when a suspect score is between 1 and 10 (inclusive)?
       code: ''
@@ -684,6 +767,8 @@ worlds:
       - x > 1 and x < 10
       correct: x >= 1 and x <= 10
       explanation: Both bounds must hold.
+      story_before: Cole needs a single expression that returns True only when a suspect score is between 1 and 10 inclusive.
+      story_after: and captures both bounds — Cole's in-range check is now a single clean expression.
     - type: mini_code
       prompt: Read hp then shield ('True'/'False') with input(). Print True if hp is above 50 AND shield is True, otherwise
         print False.
@@ -703,6 +788,10 @@ worlds:
 
           True'
         message: evidence=30 is not above 50, case incomplete
+      story_before: Cole reads an evidence score and an alibi-broken flag and must print True only when both conditions are
+        met.
+      story_after: The confirmation check runs correctly — Cole only names a suspect when the evidence and the broken alibi
+        both clear the bar.
     - type: mini_code
       prompt: Read an age with input(). Print True if the age is less than 13 OR 18 or above, otherwise print False.
       starter: 'age = int(input())
@@ -718,3 +807,6 @@ worlds:
       - code: assert _stdout.strip() == 'True'
         stdin: '20'
         message: 20 is 18 or above, prints True
+      story_before: Cole reads a value and must print True if it falls outside the mid-range, False if it is in between.
+      story_after: or handles both extremes in one expression — Cole's logical evidence engine is fully built, and the case
+        is ready for court.

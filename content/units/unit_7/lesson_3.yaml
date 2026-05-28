@@ -236,6 +236,10 @@ worlds:
         0'
       explanation: Elara drains a magical battery. Methods can modify self attributes. Each call changes the object's state
         permanently. The second drain clamps to 0 because 70 - 80 < 0.
+      story_before: Ash's creatures can speak and describe themselves, but the workshop needs objects whose inner state can
+        actually change — like a magical battery that drains.
+      story_after: The Battery drains twice and clamps at zero; Ash now understands that each method call permanently alters
+        the object's stored value.
     - type: mcq
       question: The enchantment counter is triggered twice. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
@@ -247,6 +251,9 @@ worlds:
       - None
       correct: '2'
       explanation: increment() adds 1 each call. After two calls, count = 2.
+      story_before: An enchantment counter ticks twice — Ash must predict the final count.
+      story_after: Count reaches 2; Ash sees that each increment() call builds on the previous state, not a fixed starting
+        point.
     - type: fill_blank
       prompt: Deduct the spent mana from the wizard's mana pool.
       before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
@@ -266,6 +273,8 @@ worlds:
       - '*='
       answer: -=
       explanation: -= subtracts the mana cost. 100 - 30 = 70 mana remaining.
+      story_before: A wizard's mana pool needs a spend() method that deducts the cast cost — Ash must choose the right operator.
+      story_after: With -= in place, the mana pool shrinks correctly after each spell; the pouch drains as the wizard works.
     - type: mcq
       question: Elara pushes two spell scrolls onto the stack. What does this print?
       code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
@@ -279,6 +288,8 @@ worlds:
         2'
       correct: '[1, 2]'
       explanation: push appends to self.items. After two pushes, items = [1, 2].
+      story_before: Elara pushes two spell scrolls onto a stack — Ash must read what the stack looks like afterwards.
+      story_after: 'Both scrolls appear in order: [1, 2]; Ash confirms that append-based methods preserve insertion order.'
     - type: arrange
       instruction: Add a deposit method to BankAccount that adds to self.balance
       blocks:
@@ -378,6 +389,8 @@ worlds:
       - balance
       - )
       explanation: deposit() takes self and amount. self.balance += amount modifies state. 100 + 50 = 150.
+      story_before: A magical BankAccount needs a deposit method that adds to its balance — the code blocks need assembling.
+      story_after: The deposit method is assembled; gold can now flow into the account and the balance updates with each call.
     - type: mcq
       question: A magic torch is toggled twice. What does this print?
       code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
@@ -389,6 +402,8 @@ worlds:
       - '0'
       correct: 'False'
       explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+      story_before: A magic torch is toggled on then off — Ash must determine its final state.
+      story_after: The torch returns to False after two toggles; Ash sees that state changes are cumulative and reversible.
     - type: fill_blank
       prompt: Add a new ingredient to the end of the cauldron's ingredient list.
       before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
@@ -407,6 +422,8 @@ worlds:
       - insert
       answer: append
       explanation: append adds to the end of the list. items = ['a'].
+      story_before: A cauldron needs a method that adds new ingredients to its queue — the right list method must be chosen.
+      story_after: append slots the ingredient at the end; the cauldron's queue grows in the correct order.
     - type: mcq
       question: Elara refuels then uses a mana tank. What does this print?
       code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
@@ -419,6 +436,8 @@ worlds:
       - '30'
       correct: '60'
       explanation: 50 + 30 = 80, then 80 - 20 = 60.
+      story_before: Elara refuels a mana tank then uses some — Ash must trace the final fuel level.
+      story_after: 'Fuel ends at 60; Ash follows the arithmetic: 50 + 30 = 80, then 80 - 20 = 60.'
     - type: mcq
       question: A spell score tracker adds then resets. What does this print?
       code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
@@ -430,6 +449,8 @@ worlds:
       - '5'
       correct: '0'
       explanation: reset() sets points back to 0 regardless of previous value.
+      story_before: A spell score tracker accumulates points then resets — Ash must predict the final score.
+      story_after: Zero is printed after reset(); Ash sees that a reset method can wipe accumulated state in a single call.
     - type: mini_code
       prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
         and print seconds.
@@ -439,6 +460,8 @@ worlds:
         message: 5 ticks should give seconds = 5
       - code: _stdout.strip() == '5'
         message: Should print 5
+      story_before: Ash needs a Timer that ticks five seconds — a seconds attribute and a tick() method that adds 1 are required.
+      story_after: Five ticks land correctly at seconds = 5; the enchanted timer is working and ready for longer rituals.
     - type: mini_code
       prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
         and 'shield', remove 'sword', print the list.
@@ -450,6 +473,9 @@ worlds:
         message: remove_item should remove from the list
       - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
         message: Should print ['shield']
+      story_before: Ash's spell inventory needs add_item and remove_item methods — the sword must be removable from the shield.
+      story_after: 'The inventory updates cleanly: sword gone, shield remains; Ash''s mutable collection pattern is complete
+        and ready for Lesson 4.'
   scifi:
     title: System State Changes
     exercises:
@@ -462,6 +488,10 @@ worlds:
         0'
       explanation: Voss drains a ship's battery. Methods modify self attributes, changing state permanently. The second drain
         clamps to 0 because 70 - 80 < 0.
+      story_before: The Helix's components store data and report status, but the crew needs systems that actually change state
+        under load — starting with the ship's battery.
+      story_after: The battery drains and clamps at zero; Voss confirms that each method call on a mutable object permanently
+        updates its stored charge.
     - type: mcq
       question: The system event counter triggers twice. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
@@ -473,6 +503,8 @@ worlds:
       - None
       correct: '2'
       explanation: increment() adds 1 each call. After two calls, count = 2.
+      story_before: The system event counter fires twice — Rex must predict the final count logged to the console.
+      story_after: Count reads 2; Rex sees that increment() accumulates on live state, not a snapshot.
     - type: fill_blank
       prompt: Deduct the fuel cost from the ship's fuel reserve.
       before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
@@ -492,6 +524,9 @@ worlds:
       - '*='
       answer: -=
       explanation: -= subtracts the fuel cost. 100 - 30 = 70 fuel remaining.
+      story_before: The ship's fuel reserve needs a spend() method that deducts cost — Rex must pick the correct assignment
+        operator.
+      story_after: With -= wired in, the reserve drains correctly each time the engines fire.
     - type: mcq
       question: Voss pushes two commands onto the command stack. What does this print?
       code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
@@ -505,6 +540,8 @@ worlds:
         2'
       correct: '[1, 2]'
       explanation: push appends to self.items. After two pushes, items = [1, 2].
+      story_before: Voss pushes two commands onto the command stack — Rex must read the stack's final contents.
+      story_after: The stack holds [1, 2] in order; Rex confirms that the command queue preserves insertion sequence.
     - type: arrange
       instruction: Add a deposit method to BankAccount that adds to self.balance
       blocks:
@@ -604,6 +641,8 @@ worlds:
       - balance
       - )
       explanation: deposit() adds to self.balance. 100 + 50 = 150.
+      story_before: The ship's BankAccount needs a deposit method to add to its balance — the code blocks need ordering.
+      story_after: The deposit method is wired up; the account balance now updates correctly with each transaction.
     - type: mcq
       question: A ship indicator light is toggled twice. What does this print?
       code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
@@ -615,6 +654,8 @@ worlds:
       - '0'
       correct: 'False'
       explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+      story_before: A ship indicator light is toggled on then off — Rex must determine its final state.
+      story_after: The indicator returns to False; Rex sees that two toggles cancel each other and restore the original state.
     - type: fill_blank
       prompt: Add a new task to the end of the mission queue.
       before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
@@ -633,6 +674,8 @@ worlds:
       - insert
       answer: append
       explanation: append adds to the end of the queue. items = ['a'].
+      story_before: The mission queue needs a method to append new tasks — Rex must choose the right list operation.
+      story_after: append queues the task at the end; the mission stack grows in the correct priority order.
     - type: mcq
       question: Voss refuels then uses a fuel tank. What does this print?
       code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
@@ -645,6 +688,8 @@ worlds:
       - '30'
       correct: '60'
       explanation: 50 + 30 = 80, then 80 - 20 = 60.
+      story_before: Voss refuels a tank then burns some on a manoeuvre — Rex must trace the final fuel reading.
+      story_after: Fuel settles at 60; Rex traces 50 + 30 = 80, then 80 - 20 = 60 on the gauge.
     - type: mcq
       question: A mission score tracker adds then resets. What does this print?
       code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
@@ -656,6 +701,8 @@ worlds:
       - '5'
       correct: '0'
       explanation: reset() sets points back to 0 regardless of previous value.
+      story_before: A mission score tracker logs points then resets for the next sortie — Rex must predict the final value.
+      story_after: Zero prints after reset(); Rex notes that a reset method is the cleanest way to wipe accumulated state.
     - type: mini_code
       prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
         and print seconds.
@@ -665,6 +712,8 @@ worlds:
         message: 5 ticks should give seconds = 5
       - code: _stdout.strip() == '5'
         message: Should print 5
+      story_before: Rex needs a mission Timer that counts seconds — a seconds attribute and a tick() method adding 1 are required.
+      story_after: Five ticks produce seconds = 5; the timer is mission-ready and logging elapsed time correctly.
     - type: mini_code
       prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
         and 'shield', remove 'sword', print the list.
@@ -676,6 +725,9 @@ worlds:
         message: remove_item should remove from the list
       - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
         message: Should print ['shield']
+      story_before: The ship's Inventory needs add_item and remove_item methods to manage cargo — 'sword' must be removable.
+      story_after: 'The cargo list updates correctly: sword offloaded, shield retained; Rex''s mutable inventory system is
+        operational for Lesson 4.'
   mystery:
     title: Updating the Case File
     exercises:
@@ -688,6 +740,10 @@ worlds:
         0'
       explanation: Cole drains a suspect's credibility. Methods modify self attributes permanently. The second drain clamps
         to 0 when credibility is exhausted.
+      story_before: Cole's profiles can describe suspects, but the case needs records that change as new information arrives
+        — like a credibility score that drains under interrogation.
+      story_after: The Battery drains and clamps at zero; Cole sees that each method call permanently alters the object's
+        stored value, just as evidence shifts a suspect's standing.
     - type: mcq
       question: The evidence counter is updated twice. What does this print?
       code: "class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count\
@@ -699,6 +755,8 @@ worlds:
       - None
       correct: '2'
       explanation: increment() adds 1 each call. After two calls, count = 2.
+      story_before: The evidence counter is updated twice as new items are logged — Cole must predict the final tally.
+      story_after: Count reaches 2; Cole confirms that each increment() builds on the live state of the object.
     - type: fill_blank
       prompt: Deduct the hours from the suspect's alibi window.
       before: "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n    def spend(self, amount):\n\
@@ -718,6 +776,8 @@ worlds:
       - '*='
       answer: -=
       explanation: -= subtracts the hours. 100 - 30 = 70 hours remaining in the alibi.
+      story_before: A suspect's alibi window needs a spend() method that deducts hours — Cole must choose the right operator.
+      story_after: With -= in place, the alibi window narrows correctly as each hour is accounted for.
     - type: mcq
       question: Cole pushes two clues onto the evidence stack. What does this print?
       code: "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n\
@@ -731,6 +791,9 @@ worlds:
         2'
       correct: '[1, 2]'
       explanation: push appends to self.items. After two pushes, items = [1, 2].
+      story_before: Cole pushes two clues onto the evidence stack — the order matters, so he checks the final contents.
+      story_after: Both clues appear in order [1, 2]; Cole confirms the stack preserves the sequence in which evidence was
+        filed.
     - type: arrange
       instruction: Add a deposit method to BankAccount that adds to self.balance
       blocks:
@@ -830,6 +893,8 @@ worlds:
       - balance
       - )
       explanation: deposit() adds to self.balance. 100 + 50 = 150.
+      story_before: The department fund needs a deposit method to add incoming money — the code pieces need to be ordered.
+      story_after: The deposit method is filed; the fund balance now updates correctly each time resources are added.
     - type: mcq
       question: A case-open indicator is toggled twice. What does this print?
       code: "class Light:\n    def __init__(self):\n        self.on = False\n    def toggle(self):\n        self.on = not\
@@ -841,6 +906,9 @@ worlds:
       - '0'
       correct: 'False'
       explanation: toggle flips self.on. False → True → False. Two toggles return to start.
+      story_before: A case-open indicator is toggled on then off — Cole must determine its final state.
+      story_after: The indicator returns to False after two toggles; Cole notes that reversible state changes can be tracked
+        precisely.
     - type: fill_blank
       prompt: Add a new clue to the end of the case file's evidence list.
       before: "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, x):\n        self.items."
@@ -859,6 +927,8 @@ worlds:
       - insert
       answer: append
       explanation: append adds to the end of the evidence list. items = ['a'].
+      story_before: The evidence queue needs a method that appends new clues — Cole must choose the right list operation.
+      story_after: append adds the clue to the end; the evidence queue grows in the order items were discovered.
     - type: mcq
       question: Cole adds then spends from an informant fund. What does this print?
       code: "class Tank:\n    def __init__(self, fuel):\n        self.fuel = fuel\n    def refuel(self, amount):\n       \
@@ -871,6 +941,8 @@ worlds:
       - '30'
       correct: '60'
       explanation: 50 + 30 = 80, then 80 - 20 = 60.
+      story_before: Cole adds to then draws from the informant fund — he must trace the final balance.
+      story_after: The fund settles at 60; Cole follows 50 + 30 = 80, then 80 - 20 = 60 in the ledger.
     - type: mcq
       question: A case score tracker adds then resets. What does this print?
       code: "class Score:\n    def __init__(self):\n        self.points = 0\n    def add(self, n):\n        self.points +=\
@@ -882,6 +954,10 @@ worlds:
       - '5'
       correct: '0'
       explanation: reset() sets points back to 0 regardless of previous value.
+      story_before: A case score tracker accumulates leads then resets when the case is closed — Cole must predict the final
+        value.
+      story_after: Zero prints after reset(); Cole notes that resetting a score object clears all accumulated state in one
+        call.
     - type: mini_code
       prompt: Define a class called Timer with a seconds attribute (start at 0). Add a tick() method that adds 1. Tick 5 times
         and print seconds.
@@ -891,6 +967,9 @@ worlds:
         message: 5 ticks should give seconds = 5
       - code: _stdout.strip() == '5'
         message: Should print 5
+      story_before: Cole needs a Timer to track interrogation length — a seconds attribute and a tick() method adding 1 are
+        required.
+      story_after: Five ticks land at seconds = 5; the interrogation timer is calibrated and running.
     - type: mini_code
       prompt: Define a class called Inventory with an items list. Add add_item(item) and remove_item(item) methods. Add 'sword'
         and 'shield', remove 'sword', print the list.
@@ -902,3 +981,7 @@ worlds:
         message: remove_item should remove from the list
       - code: '"[''shield'']" in _stdout or _stdout.strip() == "[''shield'']"'
         message: Should print ['shield']
+      story_before: The case file needs add_item and remove_item methods to manage evidence — 'sword' must be removable, leaving
+        'shield'.
+      story_after: 'The evidence list updates cleanly: sword gone, shield on record; Cole''s mutable case file is ready for
+        Lesson 4.'

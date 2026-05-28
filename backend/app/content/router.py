@@ -40,6 +40,8 @@ class ConceptExOut(BaseModel):
     code: str
     output: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 class McqExOut(BaseModel):
@@ -49,6 +51,8 @@ class McqExOut(BaseModel):
     choices: list[str]
     correct: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 class ArrangeExOut(BaseModel):
@@ -57,6 +61,8 @@ class ArrangeExOut(BaseModel):
     blocks: list[str]
     correct: list[str]
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 class FillBlankExOut(BaseModel):
@@ -67,6 +73,8 @@ class FillBlankExOut(BaseModel):
     choices: list[str]
     answer: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 class MiniCodeExOut(BaseModel):
@@ -74,6 +82,8 @@ class MiniCodeExOut(BaseModel):
     prompt: str
     starter: str
     test_count: int
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 ExerciseOut = Union[ConceptExOut, McqExOut, ArrangeExOut, FillBlankExOut, MiniCodeExOut]
@@ -130,7 +140,10 @@ class CapstonOut(BaseModel):
 
 def _exercise_to_out(ex: Any) -> ExerciseOut:
     if isinstance(ex, ConceptExercise):
-        return ConceptExOut(type="concept", code=ex.code, output=ex.output, explanation=ex.explanation)
+        return ConceptExOut(
+            type="concept", code=ex.code, output=ex.output, explanation=ex.explanation,
+            story_before=ex.story_before, story_after=ex.story_after,
+        )
     if isinstance(ex, McqExercise):
         return McqExOut(
             type="mcq",
@@ -139,6 +152,8 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
             choices=ex.choices,
             correct=ex.correct,
             explanation=ex.explanation,
+            story_before=ex.story_before,
+            story_after=ex.story_after,
         )
     if isinstance(ex, ArrangeExercise):
         return ArrangeExOut(
@@ -147,6 +162,8 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
             blocks=ex.blocks,
             correct=ex.correct,
             explanation=ex.explanation,
+            story_before=ex.story_before,
+            story_after=ex.story_after,
         )
     if isinstance(ex, FillBlankExercise):
         return FillBlankExOut(
@@ -157,9 +174,14 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
             choices=ex.choices,
             answer=ex.answer,
             explanation=ex.explanation,
+            story_before=ex.story_before,
+            story_after=ex.story_after,
         )
     if isinstance(ex, MiniCodeExercise):
-        return MiniCodeExOut(type="mini_code", prompt=ex.prompt, starter=ex.starter, test_count=len(ex.tests))
+        return MiniCodeExOut(
+            type="mini_code", prompt=ex.prompt, starter=ex.starter, test_count=len(ex.tests),
+            story_before=ex.story_before, story_after=ex.story_after,
+        )
     raise ValueError(f"Unknown exercise type: {type(ex)}")
 
 

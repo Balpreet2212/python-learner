@@ -1,385 +1,756 @@
-title: "if Statements"
+title: if Statements
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      score = 85
-      if score >= 60:
-          print("You passed!")
-    output: "You passed!"
-    explanation: "The if statement runs a block only when the condition is True. The indented lines belong to the if block."
+- type: concept
+  code: "score = 85\nif score >= 60:\n    print(\"You passed!\")\n"
+  output: You passed!
+  explanation: The if statement runs a block only when the condition is True. The indented lines belong to the if block.
+- type: mcq
+  question: What does this print?
+  code: "age = 10\nif age < 13:\n    print(\"child\")"
+  choices:
+  - child
+  - Nothing
+  - age
+  - 'True'
+  correct: child
+  explanation: 10 < 13 is True, so the indented print runs.
+- type: fill_blank
+  prompt: Trigger 'game over' only when hp has reached exactly zero.
+  before: 'hp = 0
 
-  - type: mcq
-    question: "What does this print?"
-    code: "age = 10\nif age < 13:\n    print(\"child\")"
-    choices: ["child", "Nothing", "age", "True"]
-    correct: "child"
-    explanation: "10 < 13 is True, so the indented print runs."
+    if hp '
+  after: " 0:\n    print(\"game over\")"
+  choices:
+  - ==
+  - '='
+  - '!='
+  - '>='
+  answer: ==
+  explanation: == checks equality. if hp == 0 runs when hp is exactly 0.
+- type: arrange
+  instruction: Build an if statement that prints 'win' when score is greater than 100
+  blocks:
+  - if
+  - score
+  - '>'
+  - '100'
+  - ':'
+  - print
+  - (
+  - '"win"'
+  - )
+  correct:
+  - if
+  - score
+  - '>'
+  - '100'
+  - ':'
+  - print
+  - (
+  - '"win"'
+  - )
+  explanation: 'The colon : ends the if condition. The print is indented inside the block.'
+- type: mcq
+  question: What does this print?
+  code: "x = 5\nif x > 10:\n    print(\"big\")\nprint(\"done\")"
+  choices:
+  - done
+  - 'big
 
-  - type: fill_blank
-    prompt: "Trigger 'game over' only when hp has reached exactly zero."
-    before: "hp = 0\nif hp "
-    after: " 0:\n    print(\"game over\")"
-    choices: ["==", "=", "!=", ">="]
-    answer: "=="
-    explanation: "== checks equality. if hp == 0 runs when hp is exactly 0."
+    done'
+  - big
+  - Nothing
+  correct: done
+  explanation: x > 10 is False (5 is not > 10), so the if block is skipped. But print('done') runs always.
+- type: mcq
+  question: What does this print?
+  code: "name = \"Alice\"\nif name == \"Alice\":\n    print(\"Hello, Alice!\")"
+  choices:
+  - Hello, Alice!
+  - Nothing
+  - name
+  - Alice
+  correct: Hello, Alice!
+  explanation: name == 'Alice' is True, so the block executes.
+- type: fill_blank
+  prompt: Start a conditional block that checks whether the level requirement is met.
+  before: 'level = 5
 
-  - type: arrange
-    instruction: "Build an if statement that prints 'win' when score is greater than 100"
-    blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-    correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-    explanation: "The colon : ends the if condition. The print is indented inside the block."
+    '
+  after: " level >= 5:\n    print(\"unlocked\")"
+  choices:
+  - if
+  - for
+  - while
+  - def
+  answer: if
+  explanation: if starts a conditional block. When level >= 5 is True, 'unlocked' prints.
+- type: mcq
+  question: What does this print?
+  code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
+  choices:
+  - even
+  - Nothing
+  - 'True'
+  - '0'
+  correct: even
+  explanation: 4 % 2 == 0 is True (4 is divisible by 2). So 'even' prints.
+- type: arrange
+  instruction: Build code that prints 'dead' when health equals zero
+  blocks:
+  - if
+  - health
+  - ==
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"dead"'
+  - )
+  correct:
+  - if
+  - health
+  - ==
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"dead"'
+  - )
+  explanation: == checks if health equals 0. The colon ends the condition.
+- type: mcq
+  question: Which if statement correctly checks that a number n is positive?
+  code: ''
+  choices:
+  - 'if n > 0:'
+  - 'if n = 0:'
+  - 'if n >= 0:'
+  - 'if n == positive:'
+  correct: 'if n > 0:'
+  explanation: n > 0 is True for any number greater than zero.
+- type: mini_code
+  prompt: Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise.
+  starter: 'temperature = float(input())
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 5\nif x > 10:\n    print(\"big\")\nprint(\"done\")"
-    choices: ["done", "big\ndone", "big", "Nothing"]
-    correct: "done"
-    explanation: "x > 10 is False (5 is not > 10), so the if block is skipped. But print('done') runs always."
+    '
+  tests:
+  - code: assert 'fever' in _stdout
+    stdin: '37'
+    message: 37 > 36.5, should print 'fever'
+  - code: assert _stdout.strip() == ''
+    stdin: '36'
+    message: 36 is not > 36.5, should print nothing
+- type: mini_code
+  prompt: Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise.
+  starter: 'password = input()
 
-  - type: mcq
-    question: "What does this print?"
-    code: "name = \"Alice\"\nif name == \"Alice\":\n    print(\"Hello, Alice!\")"
-    choices: ["Hello, Alice!", "Nothing", "name", "Alice"]
-    correct: "Hello, Alice!"
-    explanation: "name == 'Alice' is True, so the block executes."
-
-  - type: fill_blank
-    prompt: "Start a conditional block that checks whether the level requirement is met."
-    before: "level = 5\n"
-    after: " level >= 5:\n    print(\"unlocked\")"
-    choices: ["if", "for", "while", "def"]
-    answer: "if"
-    explanation: "if starts a conditional block. When level >= 5 is True, 'unlocked' prints."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
-    choices: ["even", "Nothing", "True", "0"]
-    correct: "even"
-    explanation: "4 % 2 == 0 is True (4 is divisible by 2). So 'even' prints."
-
-  - type: arrange
-    instruction: "Build code that prints 'dead' when health equals zero"
-    blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-    correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-    explanation: "== checks if health equals 0. The colon ends the condition."
-
-  - type: mcq
-    question: "Which if statement correctly checks that a number n is positive?"
-    code: ""
-    choices: ["if n > 0:", "if n = 0:", "if n >= 0:", "if n == positive:"]
-    correct: "if n > 0:"
-    explanation: "n > 0 is True for any number greater than zero."
-
-  - type: mini_code
-    prompt: "Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise."
-    starter: "temperature = float(input())\n"
-    tests:
-      - code: "assert 'fever' in _stdout"
-        stdin: "37"
-        message: "37 > 36.5, should print 'fever'"
-      - code: "assert _stdout.strip() == ''"
-        stdin: "36"
-        message: "36 is not > 36.5, should print nothing"
-
-  - type: mini_code
-    prompt: "Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise."
-    starter: "password = input()\n"
-    tests:
-      - code: "assert 'strong password' in _stdout"
-        stdin: "secret123"
-        message: "len('secret123') = 9 >= 8, prints 'strong password'"
-      - code: "assert _stdout.strip() == ''"
-        stdin: "hi"
-        message: "len('hi') = 2 < 8, prints nothing"
-
+    '
+  tests:
+  - code: assert 'strong password' in _stdout
+    stdin: secret123
+    message: len('secret123') = 9 >= 8, prints 'strong password'
+  - code: assert _stdout.strip() == ''
+    stdin: hi
+    message: len('hi') = 2 < 8, prints nothing
 worlds:
   fantasy:
-    title: "Reading the Creature's Sign"
+    title: Reading the Creature's Sign
     exercises:
-      - type: concept
-        code: |
-          threat_level = 85
-          if threat_level >= 60:
-              print("Draw your sword!")
-        output: "Draw your sword!"
-        explanation: "Ranger Kira reads the creature's threat level. Because 85 is at least 60, the if block runs and she draws her weapon."
+    - type: concept
+      code: "threat_level = 85\nif threat_level >= 60:\n    print(\"Draw your sword!\")\n"
+      output: Draw your sword!
+      explanation: Ranger Kira reads the creature's threat level. Because 85 is at least 60, the if block runs and she draws
+        her weapon.
+      story_before: Ranger Kira's bestiary scroll lights up as a creature prowls the tree-line — she must decide whether its
+        threat level warrants drawing steel.
+      story_after: 'The scroll''s rune flares gold: the if block runs and Kira''s blade is already in hand as the creature
+        steps into the clearing.'
+    - type: mcq
+      question: What does this print?
+      code: "creature_age = 10\nif creature_age < 13:\n    print(\"child\")"
+      choices:
+      - child
+      - Nothing
+      - age
+      - 'True'
+      correct: child
+      explanation: 10 < 13 is True, so the indented print runs. The creature is a young one.
+      story_before: Kira spots a small, wide-eyed beast and wonders whether it is young enough to be harmless — only one condition
+        will tell her.
+      story_after: The creature blinks back at her, barely a yearling; the if fires and Kira lowers her bow.
+    - type: fill_blank
+      prompt: Sound the alarm only when Kira's hp has reached exactly zero.
+      before: 'hp = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "creature_age = 10\nif creature_age < 13:\n    print(\"child\")"
-        choices: ["child", "Nothing", "age", "True"]
-        correct: "child"
-        explanation: "10 < 13 is True, so the indented print runs. The creature is a young one."
+        if hp '
+      after: " 0:\n    print(\"game over\")"
+      choices:
+      - ==
+      - '='
+      - '!='
+      - '>='
+      answer: ==
+      explanation: == checks equality. The alarm triggers only when hp is exactly 0 — Kira has fallen.
+      story_before: The battle is fierce — Kira needs her alarm rune to trigger the instant her hit points reach exactly zero,
+        not a moment before.
+      story_after: She inscribes the == symbol and the rune locks in place, ready to sound the moment her last point of health
+        drains away.
+    - type: arrange
+      instruction: Build an if statement that prints 'win' when score is greater than 100
+      blocks:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      correct:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      explanation: Kira wins the encounter when her score exceeds 100. The colon ends the condition.
+      story_before: After the skirmish Kira tallies her combat score; the enchanted ledger should only cry 'win' when she
+        has truly surpassed a hundred points.
+      story_after: The ledger's ink rearranges itself into a perfect if statement, and Kira watches the word 'win' shimmer
+        into view above the threshold.
+    - type: mcq
+      question: What does this print?
+      code: "beast_size = 5\nif beast_size > 10:\n    print(\"big\")\nprint(\"done\")"
+      choices:
+      - done
+      - 'big
 
-      - type: fill_blank
-        prompt: "Sound the alarm only when Kira's hp has reached exactly zero."
-        before: "hp = 0\nif hp "
-        after: " 0:\n    print(\"game over\")"
-        choices: ["==", "=", "!=", ">="]
-        answer: "=="
-        explanation: "== checks equality. The alarm triggers only when hp is exactly 0 — Kira has fallen."
+        done'
+      - big
+      - Nothing
+      correct: done
+      explanation: beast_size > 10 is False (5 is not > 10), so the if block is skipped. But print('done') always runs.
+      story_before: A compact beast trots past — Kira checks whether it exceeds her 'big' threshold, knowing the patrol log
+        will always note 'done' regardless.
+      story_after: The beast is smaller than the threshold; the if skips, but 'done' appears in her log — the patrol continues
+        undisturbed.
+    - type: mcq
+      question: What does this print?
+      code: "creature_name = \"Alice\"\nif creature_name == \"Alice\":\n    print(\"Hello, Alice!\")"
+      choices:
+      - Hello, Alice!
+      - Nothing
+      - name
+      - Alice
+      correct: Hello, Alice!
+      explanation: creature_name == 'Alice' is True, so the block executes.
+      story_before: A voice from the shadows matches a name in Kira's wanted list — the scroll will greet the creature only
+        if the name matches exactly.
+      story_after: The name checks out; the scroll unfurls a greeting, and Kira steps forward to meet the surprisingly polite
+        creature.
+    - type: fill_blank
+      prompt: Start a conditional block that checks whether Kira's rank is high enough to enter the zone.
+      before: 'rank = 5
 
-      - type: arrange
-        instruction: "Build an if statement that prints 'win' when score is greater than 100"
-        blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        explanation: "Kira wins the encounter when her score exceeds 100. The colon ends the condition."
+        '
+      after: " rank >= 5:\n    print(\"unlocked\")"
+      choices:
+      - if
+      - for
+      - while
+      - def
+      answer: if
+      explanation: if starts the conditional. When rank >= 5, the enchanted zone unlocks for Kira.
+      story_before: An enchanted gate bars the way into the ancient zone — Kira needs to start the rank check that will swing
+        it open for her.
+      story_after: She writes the if keyword and the gate shudders, ready to swing open the moment her rank clears the threshold.
+    - type: mcq
+      question: What does this print?
+      code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
+      choices:
+      - even
+      - Nothing
+      - 'True'
+      - '0'
+      correct: even
+      explanation: 4 % 2 == 0 is True. Kira knows an even number of beasts means they travel in pairs.
+      story_before: Kira counts four pairs of tracks in the mud and suspects the beasts travel in groups — she checks whether
+        the number is even to confirm.
+      story_after: Four divides cleanly by two; 'even' echoes through the forest, and Kira notes the creatures hunt in pairs.
+    - type: arrange
+      instruction: Build code that prints 'dead' when health equals zero
+      blocks:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Kira checks if the creature's health has reached zero before moving on.
+      story_before: After landing the final blow, Kira needs her combat script to confirm the creature has truly fallen —
+        only health at exactly zero should mark it dead.
+      story_after: The script clicks together and prints 'dead' the instant the creature's health hits zero; Kira can finally
+        catch her breath.
+    - type: mcq
+      question: Which if statement correctly checks that a number n is positive?
+      code: ''
+      choices:
+      - 'if n > 0:'
+      - 'if n = 0:'
+      - 'if n >= 0:'
+      - 'if n == positive:'
+      correct: 'if n > 0:'
+      explanation: n > 0 is True for any number greater than zero — Kira only acts on a real threat.
+      story_before: Kira has learned that only a genuinely positive threat reading calls for action — she must choose the
+        correct condition to test for that.
+      story_after: 'She picks if n > 0 and marks the lesson in her bestiary: zero or below means no threat worth pursuing.'
+    - type: mini_code
+      prompt: Kira measures a creature's body heat with her sensor. Read a temperature with input(). If it is above 36.5,
+        print 'fever'. Print nothing otherwise.
+      starter: 'temperature = float(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "beast_size = 5\nif beast_size > 10:\n    print(\"big\")\nprint(\"done\")"
-        choices: ["done", "big\ndone", "big", "Nothing"]
-        correct: "done"
-        explanation: "beast_size > 10 is False (5 is not > 10), so the if block is skipped. But print('done') always runs."
+        '
+      tests:
+      - code: assert 'fever' in _stdout
+        stdin: '37'
+        message: 37 > 36.5, should print 'fever'
+      - code: assert _stdout.strip() == ''
+        stdin: '36'
+        message: 36 is not > 36.5, should print nothing
+      story_before: Kira presses her sensor to a captured creature to see whether its body heat signals sickness — she must
+        write the check herself.
+      story_after: The sensor script is ready; any reading above 36.5 will flash 'fever' and Kira will know to keep her distance.
+    - type: mini_code
+      prompt: Kira must set a camp password to keep the party safe. Read a password with input(). If its length is at least
+        8, print 'strong password'. Print nothing otherwise.
+      starter: 'password = input()
 
-      - type: mcq
-        question: "What does this print?"
-        code: "creature_name = \"Alice\"\nif creature_name == \"Alice\":\n    print(\"Hello, Alice!\")"
-        choices: ["Hello, Alice!", "Nothing", "name", "Alice"]
-        correct: "Hello, Alice!"
-        explanation: "creature_name == 'Alice' is True, so the block executes."
-
-      - type: fill_blank
-        prompt: "Start a conditional block that checks whether Kira's rank is high enough to enter the zone."
-        before: "rank = 5\n"
-        after: " rank >= 5:\n    print(\"unlocked\")"
-        choices: ["if", "for", "while", "def"]
-        answer: "if"
-        explanation: "if starts the conditional. When rank >= 5, the enchanted zone unlocks for Kira."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
-        choices: ["even", "Nothing", "True", "0"]
-        correct: "even"
-        explanation: "4 % 2 == 0 is True. Kira knows an even number of beasts means they travel in pairs."
-
-      - type: arrange
-        instruction: "Build code that prints 'dead' when health equals zero"
-        blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Kira checks if the creature's health has reached zero before moving on."
-
-      - type: mcq
-        question: "Which if statement correctly checks that a number n is positive?"
-        code: ""
-        choices: ["if n > 0:", "if n = 0:", "if n >= 0:", "if n == positive:"]
-        correct: "if n > 0:"
-        explanation: "n > 0 is True for any number greater than zero — Kira only acts on a real threat."
-
-      - type: mini_code
-        prompt: "Kira measures a creature's body heat with her sensor. Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise."
-        starter: "temperature = float(input())\n"
-        tests:
-          - code: "assert 'fever' in _stdout"
-            stdin: "37"
-            message: "37 > 36.5, should print 'fever'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "36"
-            message: "36 is not > 36.5, should print nothing"
-
-      - type: mini_code
-        prompt: "Kira must set a camp password to keep the party safe. Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise."
-        starter: "password = input()\n"
-        tests:
-          - code: "assert 'strong password' in _stdout"
-            stdin: "secret123"
-            message: "len('secret123') = 9 >= 8, prints 'strong password'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "hi"
-            message: "len('hi') = 2 < 8, prints nothing"
-
+        '
+      tests:
+      - code: assert 'strong password' in _stdout
+        stdin: secret123
+        message: len('secret123') = 9 >= 8, prints 'strong password'
+      - code: assert _stdout.strip() == ''
+        stdin: hi
+        message: len('hi') = 2 < 8, prints nothing
+      story_before: Before making camp, Kira must secure the perimeter with a password long enough to keep intruders out —
+        only eight or more characters will do.
+      story_after: The camp ward hums to life, rejecting short passwords and accepting strong ones; Kira's party can rest
+        safely tonight.
   scifi:
-    title: "Triggering the Alert System"
+    title: Triggering the Alert System
     exercises:
-      - type: concept
-        code: |
-          hull_integrity = 85
-          if hull_integrity >= 60:
-              print("Systems nominal.")
-        output: "Systems nominal."
-        explanation: "Captain Voss checks hull integrity. Because 85 is at least 60, the if block runs and the system reports nominal status."
+    - type: concept
+      code: "hull_integrity = 85\nif hull_integrity >= 60:\n    print(\"Systems nominal.\")\n"
+      output: Systems nominal.
+      explanation: Captain Voss checks hull integrity. Because 85 is at least 60, the if block runs and the system reports
+        nominal status.
+      story_before: Engineer Yara pulls up the hull-integrity readout — the ship's alert system needs an if check before it
+        can report status to the bridge.
+      story_after: Hull at 85 clears the threshold; the if block fires and 'Systems nominal.' scrolls across every panel on
+        deck.
+    - type: mcq
+      question: What does this print?
+      code: "crew_age = 10\nif crew_age < 13:\n    print(\"child\")"
+      choices:
+      - child
+      - Nothing
+      - age
+      - 'True'
+      correct: child
+      explanation: 10 < 13 is True, so the indented print runs. The crew manifest flags this passenger as a child.
+      story_before: The passenger manifest flags an unusual entry — Yara needs to verify whether the age value triggers the
+        under-13 condition.
+      story_after: 'The check confirms it: the passenger is a child, and the system prints the correct flag for the cabin
+        assignment algorithm.'
+    - type: fill_blank
+      prompt: Trigger the evacuation alarm only when hull_integrity has dropped to exactly zero.
+      before: 'hull_integrity = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "crew_age = 10\nif crew_age < 13:\n    print(\"child\")"
-        choices: ["child", "Nothing", "age", "True"]
-        correct: "child"
-        explanation: "10 < 13 is True, so the indented print runs. The crew manifest flags this passenger as a child."
+        if hull_integrity '
+      after: " 0:\n    print(\"game over\")"
+      choices:
+      - ==
+      - '='
+      - '!='
+      - '>='
+      answer: ==
+      explanation: == checks equality. The alarm fires only when hull_integrity is exactly 0 — the hull is gone.
+      story_before: Yara programs the evacuation alarm to fire only when hull integrity drops to exactly zero — no false triggers,
+        no missed warnings.
+      story_after: The == operator locks in the condition; the alarm will stay silent right up to the last possible moment,
+        then scream.
+    - type: arrange
+      instruction: Build an if statement that prints 'win' when score is greater than 100
+      blocks:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      correct:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      explanation: Captain Voss marks the mission a success when the score surpasses 100. The colon ends the condition.
+      story_before: After a successful asteroid-dodge manoeuvre, Voss needs the mission log to record 'win' only when the
+        score genuinely tops 100.
+      story_after: The if block snaps into place; the log will stamp 'win' the moment the score crosses the line.
+    - type: mcq
+      question: What does this print?
+      code: "reactor_output = 5\nif reactor_output > 10:\n    print(\"big\")\nprint(\"done\")"
+      choices:
+      - done
+      - 'big
 
-      - type: fill_blank
-        prompt: "Trigger the evacuation alarm only when hull_integrity has dropped to exactly zero."
-        before: "hull_integrity = 0\nif hull_integrity "
-        after: " 0:\n    print(\"game over\")"
-        choices: ["==", "=", "!=", ">="]
-        answer: "=="
-        explanation: "== checks equality. The alarm fires only when hull_integrity is exactly 0 — the hull is gone."
+        done'
+      - big
+      - Nothing
+      correct: done
+      explanation: reactor_output > 10 is False, so the if block is skipped. But print('done') always runs — the checklist
+        continues.
+      story_before: The reactor output is low but the checklist must keep running — Yara traces what prints when the if condition
+        fails.
+      story_after: The if skips the 'big' warning, but 'done' rolls on regardless; the checklist never stalls, even on a quiet
+        reactor day.
+    - type: mcq
+      question: What does this print?
+      code: "pilot_name = \"Alice\"\nif pilot_name == \"Alice\":\n    print(\"Hello, Alice!\")"
+      choices:
+      - Hello, Alice!
+      - Nothing
+      - name
+      - Alice
+      correct: Hello, Alice!
+      explanation: pilot_name == 'Alice' is True, so the block executes. The system greets the recognised pilot.
+      story_before: The cockpit door scanner matches the pilot's name before granting access — Yara traces what the system
+        prints when it finds a match.
+      story_after: Name verified; the system greets the pilot and the door hisses open, exactly as the if block intended.
+    - type: fill_blank
+      prompt: Start a conditional block that checks whether clearance level is high enough to open the launch bay.
+      before: 'clearance_level = 5
 
-      - type: arrange
-        instruction: "Build an if statement that prints 'win' when score is greater than 100"
-        blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        explanation: "Captain Voss marks the mission a success when the score surpasses 100. The colon ends the condition."
+        '
+      after: " clearance_level >= 5:\n    print(\"unlocked\")"
+      choices:
+      - if
+      - for
+      - while
+      - def
+      answer: if
+      explanation: if starts the conditional. When clearance_level >= 5 the launch bay unlocks.
+      story_before: The launch bay is sealed until the crew member's clearance level meets the minimum — Yara needs to open
+        the conditional that will check it.
+      story_after: The if keyword is in place; the bay doors will slide apart the moment clearance_level reaches five.
+    - type: mcq
+      question: What does this print?
+      code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
+      choices:
+      - even
+      - Nothing
+      - 'True'
+      - '0'
+      correct: even
+      explanation: 4 % 2 == 0 is True. The system flags an even thruster count for symmetry checks.
+      story_before: The symmetry check on the thruster array needs to confirm the thruster count is even before the balancing
+        routine can run.
+      story_after: '''even'' prints and the balancing routine kicks in — four thrusters aligned, the ship steadies on its
+        heading.'
+    - type: arrange
+      instruction: Build code that prints 'dead' when health equals zero
+      blocks:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Captain Voss checks if the crew member's health reading has hit zero.
+      story_before: Yara's bio-monitor must flag a crew member's life signs the instant they drop to zero — she assembles
+        the condition now.
+      story_after: The monitor script is assembled; it will trigger the medical alert the moment any reading hits zero.
+    - type: mcq
+      question: Which if statement correctly checks that a number n is positive?
+      code: ''
+      choices:
+      - 'if n > 0:'
+      - 'if n = 0:'
+      - 'if n >= 0:'
+      - 'if n == positive:'
+      correct: 'if n > 0:'
+      explanation: n > 0 is True for any number greater than zero — only a positive reading means the sensor is live.
+      story_before: A sensor only counts as live when it returns a strictly positive reading — Yara must pick the right condition
+        for the diagnostic.
+      story_after: if n > 0 is confirmed; the diagnostic will skip any dead sensor returning zero or below.
+    - type: mini_code
+      prompt: Voss's bio-scanner checks crew temperature. Read a temperature with input(). If it is above 36.5, print 'fever'.
+        Print nothing otherwise.
+      starter: 'temperature = float(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "reactor_output = 5\nif reactor_output > 10:\n    print(\"big\")\nprint(\"done\")"
-        choices: ["done", "big\ndone", "big", "Nothing"]
-        correct: "done"
-        explanation: "reactor_output > 10 is False, so the if block is skipped. But print('done') always runs — the checklist continues."
+        '
+      tests:
+      - code: assert 'fever' in _stdout
+        stdin: '37'
+        message: 37 > 36.5, should print 'fever'
+      - code: assert _stdout.strip() == ''
+        stdin: '36'
+        message: 36 is not > 36.5, should print nothing
+      story_before: Yara's bio-scanner sweeps the crew roster — she must write the check that flags elevated temperatures
+        before the next shift.
+      story_after: The scanner is armed; any crew member above 36.5 will be flagged 'fever' and redirected to the med bay.
+    - type: mini_code
+      prompt: The ship's security door needs a strong access code. Read a password with input(). If its length is at least
+        8, print 'strong password'. Print nothing otherwise.
+      starter: 'password = input()
 
-      - type: mcq
-        question: "What does this print?"
-        code: "pilot_name = \"Alice\"\nif pilot_name == \"Alice\":\n    print(\"Hello, Alice!\")"
-        choices: ["Hello, Alice!", "Nothing", "name", "Alice"]
-        correct: "Hello, Alice!"
-        explanation: "pilot_name == 'Alice' is True, so the block executes. The system greets the recognised pilot."
-
-      - type: fill_blank
-        prompt: "Start a conditional block that checks whether clearance level is high enough to open the launch bay."
-        before: "clearance_level = 5\n"
-        after: " clearance_level >= 5:\n    print(\"unlocked\")"
-        choices: ["if", "for", "while", "def"]
-        answer: "if"
-        explanation: "if starts the conditional. When clearance_level >= 5 the launch bay unlocks."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
-        choices: ["even", "Nothing", "True", "0"]
-        correct: "even"
-        explanation: "4 % 2 == 0 is True. The system flags an even thruster count for symmetry checks."
-
-      - type: arrange
-        instruction: "Build code that prints 'dead' when health equals zero"
-        blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Captain Voss checks if the crew member's health reading has hit zero."
-
-      - type: mcq
-        question: "Which if statement correctly checks that a number n is positive?"
-        code: ""
-        choices: ["if n > 0:", "if n = 0:", "if n >= 0:", "if n == positive:"]
-        correct: "if n > 0:"
-        explanation: "n > 0 is True for any number greater than zero — only a positive reading means the sensor is live."
-
-      - type: mini_code
-        prompt: "Voss's bio-scanner checks crew temperature. Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise."
-        starter: "temperature = float(input())\n"
-        tests:
-          - code: "assert 'fever' in _stdout"
-            stdin: "37"
-            message: "37 > 36.5, should print 'fever'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "36"
-            message: "36 is not > 36.5, should print nothing"
-
-      - type: mini_code
-        prompt: "The ship's security door needs a strong access code. Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise."
-        starter: "password = input()\n"
-        tests:
-          - code: "assert 'strong password' in _stdout"
-            stdin: "secret123"
-            message: "len('secret123') = 9 >= 8, prints 'strong password'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "hi"
-            message: "len('hi') = 2 < 8, prints nothing"
-
+        '
+      tests:
+      - code: assert 'strong password' in _stdout
+        stdin: secret123
+        message: len('secret123') = 9 >= 8, prints 'strong password'
+      - code: assert _stdout.strip() == ''
+        stdin: hi
+        message: len('hi') = 2 < 8, prints nothing
+      story_before: The security door to the engine room demands a strong access code — Yara's script must enforce the eight-character
+        minimum.
+      story_after: The door's logic is locked in; short codes bounce off, strong codes slide it open, and the engine room
+        stays secure.
   mystery:
-    title: "Acting on the First Clue"
+    title: Acting on the First Clue
     exercises:
-      - type: concept
-        code: |
-          alibi_strength = 85
-          if alibi_strength >= 60:
-              print("Alibi holds.")
-        output: "Alibi holds."
-        explanation: "Detective Cole scores the suspect's alibi. Because 85 is at least 60, the if block runs and the alibi is considered credible."
+    - type: concept
+      code: "alibi_strength = 85\nif alibi_strength >= 60:\n    print(\"Alibi holds.\")\n"
+      output: Alibi holds.
+      explanation: Detective Cole scores the suspect's alibi. Because 85 is at least 60, the if block runs and the alibi is
+        considered credible.
+      story_before: Detective Cole has a suspect's alibi on his desk — he needs an if check to decide whether the score is
+        high enough to hold.
+      story_after: Score at 85 clears the bar; the if block runs and Cole marks the alibi credible, moving the suspect to
+        the witness column.
+    - type: mcq
+      question: What does this print?
+      code: "suspect_age = 10\nif suspect_age < 13:\n    print(\"child\")"
+      choices:
+      - child
+      - Nothing
+      - age
+      - 'True'
+      correct: child
+      explanation: 10 < 13 is True, so the indented print runs. Cole notes the witness is a child.
+      story_before: A witness on the list looks suspiciously young — Cole checks whether the age value will trigger the under-13
+        condition in his notes.
+      story_after: The condition fires; Cole notes the witness is a child and adjusts his interview approach accordingly.
+    - type: fill_blank
+      prompt: Flag the case closed only when the evidence count has dropped to exactly zero.
+      before: 'evidence_count = 0
 
-      - type: mcq
-        question: "What does this print?"
-        code: "suspect_age = 10\nif suspect_age < 13:\n    print(\"child\")"
-        choices: ["child", "Nothing", "age", "True"]
-        correct: "child"
-        explanation: "10 < 13 is True, so the indented print runs. Cole notes the witness is a child."
+        if evidence_count '
+      after: " 0:\n    print(\"game over\")"
+      choices:
+      - ==
+      - '='
+      - '!='
+      - '>='
+      answer: ==
+      explanation: == checks equality. The case ends only when evidence_count is exactly 0 — nothing left to examine.
+      story_before: Cole wants his case file to close only when every shred of evidence has been catalogued — the alarm should
+        fire at exactly zero, not before.
+      story_after: The == operator is inked in; the file will stay open until the last piece of evidence is logged.
+    - type: arrange
+      instruction: Build an if statement that prints 'win' when score is greater than 100
+      blocks:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      correct:
+      - if
+      - score
+      - '>'
+      - '100'
+      - ':'
+      - print
+      - (
+      - '"win"'
+      - )
+      explanation: Cole wins the case when his confidence score surpasses 100. The colon ends the condition.
+      story_before: Cole's confidence meter should only flash 'win' when he's gathered enough to close the case definitively
+        — over a hundred points.
+      story_after: The if block is assembled; once his confidence cracks 100 the meter will finally declare the case solved.
+    - type: mcq
+      question: What does this print?
+      code: "clue_count = 5\nif clue_count > 10:\n    print(\"big\")\nprint(\"done\")"
+      choices:
+      - done
+      - 'big
 
-      - type: fill_blank
-        prompt: "Flag the case closed only when the evidence count has dropped to exactly zero."
-        before: "evidence_count = 0\nif evidence_count "
-        after: " 0:\n    print(\"game over\")"
-        choices: ["==", "=", "!=", ">="]
-        answer: "=="
-        explanation: "== checks equality. The case ends only when evidence_count is exactly 0 — nothing left to examine."
+        done'
+      - big
+      - Nothing
+      correct: done
+      explanation: clue_count > 10 is False (5 is not > 10), so the if block is skipped. But print('done') always runs — Cole
+        moves on.
+      story_before: Cole has five clues — not enough to trigger the major-haul alert, but the log still needs to confirm the
+        sweep is 'done'.
+      story_after: The if skips the alert, but 'done' stamps the log; Cole pockets his notebook and moves to the next room.
+    - type: mcq
+      question: What does this print?
+      code: "witness_name = \"Alice\"\nif witness_name == \"Alice\":\n    print(\"Hello, Alice!\")"
+      choices:
+      - Hello, Alice!
+      - Nothing
+      - name
+      - Alice
+      correct: Hello, Alice!
+      explanation: witness_name == 'Alice' is True. Cole greets the witness he was looking for.
+      story_before: Cole is looking for a specific witness by name — he needs to see what his script prints when the name
+        matches exactly.
+      story_after: The match fires and Cole greets Alice at the door; he knows exactly who he's dealing with.
+    - type: fill_blank
+      prompt: Start a conditional block that checks whether the evidence level is strong enough to search the study.
+      before: 'evidence_level = 5
 
-      - type: arrange
-        instruction: "Build an if statement that prints 'win' when score is greater than 100"
-        blocks: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        correct: ["if", "score", ">", "100", ":", "print", "(", "\"win\"", ")"]
-        explanation: "Cole wins the case when his confidence score surpasses 100. The colon ends the condition."
+        '
+      after: " evidence_level >= 5:\n    print(\"unlocked\")"
+      choices:
+      - if
+      - for
+      - while
+      - def
+      answer: if
+      explanation: if starts the conditional. When evidence_level >= 5 Cole can unlock the next area of the study.
+      story_before: The study door will only open once Cole's evidence level is strong enough — he needs to write the check
+        that decides.
+      story_after: The if is in place; once evidence_level hits five the lock yields and Cole steps into the study.
+    - type: mcq
+      question: What does this print?
+      code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
+      choices:
+      - even
+      - Nothing
+      - 'True'
+      - '0'
+      correct: even
+      explanation: 4 % 2 == 0 is True. Cole notices an even number of fingerprints — they come in pairs.
+      story_before: Four fingerprints on the windowsill — Cole suspects they come in pairs, and needs the parity check to
+        confirm.
+      story_after: '''even'' confirms it: the prints come in pairs, and Cole adds ''two-person entry'' to his working theory.'
+    - type: arrange
+      instruction: Build code that prints 'dead' when health equals zero
+      blocks:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - health
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Cole checks if the suspect's alibi health rating has reached zero before making an arrest.
+      story_before: Cole's alibi-health tracker must flag the moment a suspect's alibi crumbles completely to zero — he assembles
+        the condition.
+      story_after: The condition is set; the instant alibi health hits zero, the tracker flags the suspect for arrest.
+    - type: mcq
+      question: Which if statement correctly checks that a number n is positive?
+      code: ''
+      choices:
+      - 'if n > 0:'
+      - 'if n = 0:'
+      - 'if n >= 0:'
+      - 'if n == positive:'
+      correct: 'if n > 0:'
+      explanation: n > 0 is True for any number greater than zero — only a positive clue count warrants further investigation.
+      story_before: Cole only pursues a lead when it shows a positive count — he needs the right condition to filter out dead
+        ends.
+      story_after: if n > 0 is confirmed; Cole will only follow leads that show real, positive weight.
+    - type: mini_code
+      prompt: Cole uses a thermometer to check when a key piece of evidence was last touched. Read a temperature with input().
+        If it is above 36.5, print 'fever'. Print nothing otherwise.
+      starter: 'temperature = float(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clue_count = 5\nif clue_count > 10:\n    print(\"big\")\nprint(\"done\")"
-        choices: ["done", "big\ndone", "big", "Nothing"]
-        correct: "done"
-        explanation: "clue_count > 10 is False (5 is not > 10), so the if block is skipped. But print('done') always runs — Cole moves on."
+        '
+      tests:
+      - code: assert 'fever' in _stdout
+        stdin: '37'
+        message: 37 > 36.5, should print 'fever'
+      - code: assert _stdout.strip() == ''
+        stdin: '36'
+        message: 36 is not > 36.5, should print nothing
+      story_before: A piece of evidence was recently handled — Cole uses a thermometer to check whether the surface temperature
+        indicates recent human contact.
+      story_after: The script is ready; any reading above 36.5 will print 'fever' and Cole will know the evidence was touched
+        recently.
+    - type: mini_code
+      prompt: The study's locked cabinet needs a secure combination. Read a password with input(). If its length is at least
+        8, print 'strong password'. Print nothing otherwise.
+      starter: 'password = input()
 
-      - type: mcq
-        question: "What does this print?"
-        code: "witness_name = \"Alice\"\nif witness_name == \"Alice\":\n    print(\"Hello, Alice!\")"
-        choices: ["Hello, Alice!", "Nothing", "name", "Alice"]
-        correct: "Hello, Alice!"
-        explanation: "witness_name == 'Alice' is True. Cole greets the witness he was looking for."
-
-      - type: fill_blank
-        prompt: "Start a conditional block that checks whether the evidence level is strong enough to search the study."
-        before: "evidence_level = 5\n"
-        after: " evidence_level >= 5:\n    print(\"unlocked\")"
-        choices: ["if", "for", "while", "def"]
-        answer: "if"
-        explanation: "if starts the conditional. When evidence_level >= 5 Cole can unlock the next area of the study."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 4\nif n % 2 == 0:\n    print(\"even\")"
-        choices: ["even", "Nothing", "True", "0"]
-        correct: "even"
-        explanation: "4 % 2 == 0 is True. Cole notices an even number of fingerprints — they come in pairs."
-
-      - type: arrange
-        instruction: "Build code that prints 'dead' when health equals zero"
-        blocks: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "health", "==", "0", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Cole checks if the suspect's alibi health rating has reached zero before making an arrest."
-
-      - type: mcq
-        question: "Which if statement correctly checks that a number n is positive?"
-        code: ""
-        choices: ["if n > 0:", "if n = 0:", "if n >= 0:", "if n == positive:"]
-        correct: "if n > 0:"
-        explanation: "n > 0 is True for any number greater than zero — only a positive clue count warrants further investigation."
-
-      - type: mini_code
-        prompt: "Cole uses a thermometer to check when a key piece of evidence was last touched. Read a temperature with input(). If it is above 36.5, print 'fever'. Print nothing otherwise."
-        starter: "temperature = float(input())\n"
-        tests:
-          - code: "assert 'fever' in _stdout"
-            stdin: "37"
-            message: "37 > 36.5, should print 'fever'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "36"
-            message: "36 is not > 36.5, should print nothing"
-
-      - type: mini_code
-        prompt: "The study's locked cabinet needs a secure combination. Read a password with input(). If its length is at least 8, print 'strong password'. Print nothing otherwise."
-        starter: "password = input()\n"
-        tests:
-          - code: "assert 'strong password' in _stdout"
-            stdin: "secret123"
-            message: "len('secret123') = 9 >= 8, prints 'strong password'"
-          - code: "assert _stdout.strip() == ''"
-            stdin: "hi"
-            message: "len('hi') = 2 < 8, prints nothing"
+        '
+      tests:
+      - code: assert 'strong password' in _stdout
+        stdin: secret123
+        message: len('secret123') = 9 >= 8, prints 'strong password'
+      - code: assert _stdout.strip() == ''
+        stdin: hi
+        message: len('hi') = 2 < 8, prints nothing
+      story_before: The locked cabinet in the study needs a combination — Cole must write the check that decides whether it's
+        strong enough to have kept the killer out.
+      story_after: The combination check is written; short codes get rejected, and Cole now knows whether the killer had inside
+        knowledge.

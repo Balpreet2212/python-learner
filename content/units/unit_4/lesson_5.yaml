@@ -221,6 +221,9 @@ worlds:
         4'
       explanation: Finn activates the Break Rune to stop the enchantment loop early. break exits the loop immediately. Without
         it, the spell runs all 10 cycles.
+      story_before: Finn is racing through the enchanted corridor — the Break Rune will shatter the loop the moment he triggers
+        it.
+      story_after: The loop halts at tile 5; Finn now tests how early an exit happens inside a shorter corridor.
     - type: mcq
       question: Finn runs through a cursed corridor and stops early. What does this print?
       code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
@@ -253,6 +256,8 @@ worlds:
 
         2'
       explanation: When i is 3, break exits. Tiles 0, 1, 2 are passed before the rune activates.
+      story_before: A three-tile cursed passage — Finn needs to know exactly which tiles he passes before the rune fires.
+      story_after: Tiles 0, 1, 2 cleared before the rune; now Finn learns the companion spell that skips a single bad tile.
     - type: concept
       code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
       output: '0
@@ -263,6 +268,8 @@ worlds:
 
         4'
       explanation: The Skip Charm bypasses cursed tile 2. continue jumps to the next iteration without printing tile 2.
+      story_before: The Skip Charm lets Finn bypass cursed tile 2 without abandoning the whole corridor run.
+      story_after: Tile 2 skipped cleanly; Finn now tests the charm against every even tile in a longer passage.
     - type: mcq
       question: Finn skips every even-numbered cursed tile. What does this print?
       code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
@@ -299,6 +306,8 @@ worlds:
 
         5'
       explanation: continue skips even tiles. Only odd ones (1, 3, 5) are printed.
+      story_before: Even tiles are booby-trapped — Finn applies the Skip Charm to leap past each one.
+      story_after: Odd tiles 1, 3, 5 traversed; now Finn drills placing the Break Rune at the right spot in the code.
     - type: fill_blank
       prompt: Break the enchantment loop immediately when the exit rune is found.
       before: "for item in items:\n    if item == \"exit\":\n        "
@@ -310,6 +319,8 @@ worlds:
       - stop
       answer: break
       explanation: break exits the loop when the exit rune item is found.
+      story_before: Finn must place the Break Rune exactly where the exit-rune item appears so the loop stops instantly.
+      story_after: Rune placed correctly; Finn now arranges a full corridor that skips only the forbidden fifth tile.
     - type: arrange
       instruction: Build a loop that passes through tiles 0-9 but skips tile 5
       blocks:
@@ -351,6 +362,8 @@ worlds:
       - i
       - )
       explanation: continue skips tile 5 and moves to tile 6.
+      story_before: Finn lays out tiles 0 through 9 and must insert the Skip Charm so tile 5 is bypassed seamlessly.
+      story_after: Tile 5 skipped; Finn faces a while-True corridor that relies on the Break Rune to end at all.
     - type: mcq
       question: Finn counts rounds until the Break Rune triggers. What does this print?
       code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
@@ -375,6 +388,8 @@ worlds:
 
         3'
       explanation: break exits when n > 3. Rounds 1, 2, 3 are printed before the rune fires.
+      story_before: The corridor runs indefinitely — only the Break Rune at round 4 can shut it down.
+      story_after: Rounds 1, 2, 3 logged before the rune fires; next Finn places the Skip Charm to ignore the lower tiles.
     - type: fill_blank
       prompt: Skip all cursed tiles below position 5 and continue to the next.
       before: "for i in range(10):\n    if i < 5:\n        "
@@ -386,6 +401,9 @@ worlds:
       - return
       answer: continue
       explanation: continue skips positions below 5. Only 5, 6, 7, 8, 9 are printed.
+      story_before: Tiles below position 5 are cursed — Finn uses the Skip Charm to continue past each one without printing
+        it.
+      story_after: Lower tiles bypassed; Finn finally clarifies which rune exits and which merely skips.
     - type: mcq
       question: What is the difference between break and continue in Finn's path?
       code: ''
@@ -396,6 +414,9 @@ worlds:
       - break works in for; continue only in while
       correct: break exits the loop; continue skips to the next iteration
       explanation: break stops all further iterations. continue skips only the current tile and continues.
+      story_before: 'Master Aldric quizzes Finn: which rune ends the whole run and which only skips a single tile?'
+      story_after: Break exits, continue skips — Finn masters the difference; now he hunts for the first tile divisible by
+        both 6 and 8.
     - type: mini_code
       prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
       starter: ''
@@ -404,6 +425,8 @@ worlds:
         message: 24 is the first multiple of both 6 and 8
       - code: assert 'break' in _code
         message: Should use break to stop after finding the first match
+      story_before: The exit portal only opens at the first tile divisible by both 6 and 8 — Finn must find it and break.
+      story_after: Portal found at 24; Finn's last task is continuing through tiles 1 to 20, skipping every third.
     - type: mini_code
       prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
       starter: ''
@@ -413,6 +436,8 @@ worlds:
       - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
           == '20'
         message: Should go from 1 to 20
+      story_before: Every third tile crumbles underfoot — Finn uses the Skip Charm to continue past them and print the rest.
+      story_after: All safe tiles from 1 to 20 printed; Finn emerges from the corridor triumphant, runes mastered.
   scifi:
     title: Emergency Stop
     exercises:
@@ -428,6 +453,9 @@ worlds:
 
         4'
       explanation: Voss triggers the emergency stop at module 5. break exits the scan immediately.
+      story_before: Yara's hull-integrity scan runs module by module — an emergency stop at module 5 will abort the entire
+        sweep.
+      story_after: Scan halts at module 5; Yara now checks which modules are logged before a fault triggers a halt.
     - type: mcq
       question: Voss scans modules and halts at a critical fault. What does this print?
       code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
@@ -460,6 +488,8 @@ worlds:
 
         2'
       explanation: When i is 3, break exits. Modules 0, 1, 2 are scanned before the fault triggers the stop.
+      story_before: A critical fault at module 3 triggers the emergency stop — Yara reads how many modules were logged first.
+      story_after: Modules 0, 1, 2 logged before the halt; now Yara learns to skip a single offline module mid-scan.
     - type: concept
       code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
       output: '0
@@ -470,6 +500,8 @@ worlds:
 
         4'
       explanation: Voss skips the offline module at position 2. continue jumps to the next module without logging it.
+      story_before: Module 2 is offline — Yara's continue directive skips it and lets the scan carry on without full abort.
+      story_after: Module 2 bypassed; Yara now handles a scan where all even-indexed modules are damaged.
     - type: mcq
       question: Voss skips every even-indexed damaged module. What does this print?
       code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
@@ -506,6 +538,8 @@ worlds:
 
         5'
       explanation: continue skips even modules. Only odd ones (1, 3, 5) are processed.
+      story_before: Even-indexed modules are flagged as damaged and must be skipped — Yara confirms which ones get logged.
+      story_after: Odd modules 1, 3, 5 processed; Yara now places the shutdown trigger in the right position.
     - type: fill_blank
       prompt: Trigger emergency stop when the shutdown signal is received.
       before: "for item in items:\n    if item == \"exit\":\n        "
@@ -517,6 +551,8 @@ worlds:
       - stop
       answer: break
       explanation: break exits the scan when the shutdown signal is found.
+      story_before: When the shutdown signal arrives in the item stream, Yara must trigger an immediate emergency stop.
+      story_after: Shutdown wired in; Yara builds a full scan loop that skips only the compromised fifth module.
     - type: arrange
       instruction: Build a scan loop that processes modules 0-9 but skips module 5
       blocks:
@@ -558,6 +594,8 @@ worlds:
       - i
       - )
       explanation: continue skips module 5 and continues with module 6.
+      story_before: Yara sequences a ten-module scan that uses continue to bypass module 5 and logs all others.
+      story_after: Module 5 skipped cleanly; Yara runs a while-True alert loop that relies on break to terminate.
     - type: mcq
       question: The emergency counter triggers a halt. What does this print?
       code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
@@ -582,6 +620,8 @@ worlds:
 
         3'
       explanation: break exits when n > 3. Modules 1, 2, 3 are logged before the halt.
+      story_before: The alert system cycles indefinitely — only the break at counter 4 shuts it down.
+      story_after: Alert ended after 3 logs; now Yara programs the scan to skip all modules below level 5.
     - type: fill_blank
       prompt: Skip all modules below level 5 and move to the next.
       before: "for i in range(10):\n    if i < 5:\n        "
@@ -593,6 +633,8 @@ worlds:
       - return
       answer: continue
       explanation: continue skips levels below 5. Only levels 5-9 are processed.
+      story_before: Modules below level 5 are in low-power mode and must be skipped — Yara inserts continue to bypass them.
+      story_after: Low-power modules skipped; Yara documents the exact operational difference between break and continue.
     - type: mcq
       question: What is the difference between break and continue in Voss's scan?
       code: ''
@@ -603,6 +645,10 @@ worlds:
       - break works in for; continue only in while
       correct: break exits the loop; continue skips to the next iteration
       explanation: break halts all scanning. continue skips only the current module and continues.
+      story_before: 'The mission report asks Yara to define the distinction: does break halt or skip, and does continue halt
+        or skip?'
+      story_after: Definitions confirmed — break halts, continue skips; Yara's last diagnostic finds the first dual-divisible
+        module.
     - type: mini_code
       prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
       starter: ''
@@ -611,6 +657,8 @@ worlds:
         message: 24 is the first multiple of both 6 and 8
       - code: assert 'break' in _code
         message: Should use break to stop after finding the first match
+      story_before: The docking bay opens only at the first module number divisible by both 6 and 8 — Yara finds it and breaks.
+      story_after: Bay opens at module 24; Yara's final scan lists all modules from 1 to 20 except those divisible by 3.
     - type: mini_code
       prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
       starter: ''
@@ -620,6 +668,9 @@ worlds:
       - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
           == '20'
         message: Should go from 1 to 20
+      story_before: Every third module is undergoing maintenance and must be skipped — Yara continues past them and logs the
+        rest.
+      story_after: All active modules from 1 to 20 logged; the Helix's emergency scan protocol is fully validated.
   mystery:
     title: Skipping Irrelevant Leads
     exercises:
@@ -635,6 +686,9 @@ worlds:
 
         4'
       explanation: Cole stops reviewing leads when he reaches the key suspect at position 5. break exits the loop immediately.
+      story_before: Cole is reviewing a list of leads — the moment he hits the key suspect at position 5, he breaks off and
+        arrests.
+      story_after: Investigation halts at lead 5; Cole now practises stopping at an earlier point in a shorter lead list.
     - type: mcq
       question: Cole reviews leads and stops at the key clue. What does this print?
       code: "for i in range(5):\n    if i == 3:\n        break\n    print(i)"
@@ -667,6 +721,8 @@ worlds:
 
         2'
       explanation: When i is 3, break exits. Leads 0, 1, 2 are reviewed before the key clue stops the search.
+      story_before: The key clue sits at index 3 — Cole reads how many leads he reviews before breaking off.
+      story_after: Leads 0, 1, 2 logged before the break; now Cole learns to skip a single irrelevant lead mid-loop.
     - type: concept
       code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)\n"
       output: '0
@@ -677,6 +733,8 @@ worlds:
 
         4'
       explanation: Cole skips the irrelevant lead at index 2. continue skips to the next lead without logging it.
+      story_before: Lead 2 is a dead end — continue lets Cole skip it and move straight to lead 3 without abandoning the sweep.
+      story_after: Lead 2 bypassed; Cole now skips every even-indexed dead-end in the full list.
     - type: mcq
       question: Cole skips every even-indexed dead-end lead. What does this print?
       code: "for i in range(6):\n    if i % 2 == 0:\n        continue\n    print(i)"
@@ -713,6 +771,8 @@ worlds:
 
         5'
       explanation: continue skips even-indexed leads. Only odd ones (1, 3, 5) are logged.
+      story_before: Even-indexed leads are all dead ends — Cole applies continue and logs only the promising odd ones.
+      story_after: Odd leads 1, 3, 5 logged; Cole now drills placing the case-closed break in exactly the right spot.
     - type: fill_blank
       prompt: Close the investigation immediately when the case-closed signal is found.
       before: "for item in items:\n    if item == \"exit\":\n        "
@@ -724,6 +784,9 @@ worlds:
       - stop
       answer: break
       explanation: break closes the investigation when the exit clue is found.
+      story_before: The case-closed signal ends the investigation — Cole must place break so it fires the moment that item
+        appears.
+      story_after: Break placed correctly; Cole now arranges a full lead-review loop that skips only lead 5.
     - type: arrange
       instruction: Build a loop that reviews leads 0-9 but skips lead 5
       blocks:
@@ -765,6 +828,8 @@ worlds:
       - i
       - )
       explanation: continue skips lead 5 and moves to lead 6.
+      story_before: Cole reviews leads 0 through 9 and inserts continue at precisely the right line to skip lead 5.
+      story_after: Lead 5 skipped; Cole faces a while-True session loop that only a break can end.
     - type: mcq
       question: Cole counts review sessions until he cracks the case. What does this print?
       code: "n = 0\nwhile True:\n    n += 1\n    if n > 3:\n        break\n    print(n)"
@@ -789,6 +854,9 @@ worlds:
 
         3'
       explanation: break exits when n > 3. Sessions 1, 2, 3 are logged before the case is closed.
+      story_before: Cole's review session runs until the counter exceeds 3 — he reads how many sessions are logged before
+        the break.
+      story_after: Sessions 1, 2, 3 noted before the case closes; Cole now skips all low-priority leads below index 5.
     - type: fill_blank
       prompt: Skip all low-priority leads below index 5 and continue to the next.
       before: "for i in range(10):\n    if i < 5:\n        "
@@ -800,6 +868,8 @@ worlds:
       - return
       answer: continue
       explanation: continue skips low-priority leads. Only index 5-9 are reviewed.
+      story_before: Low-priority leads below index 5 waste time — Cole inserts continue to bypass them and focus on the rest.
+      story_after: Low-priority leads skipped; Cole articulates the exact difference between his two most important tools.
     - type: mcq
       question: What is the difference between break and continue in Cole's investigation?
       code: ''
@@ -810,6 +880,10 @@ worlds:
       - break works in for; continue only in while
       correct: break exits the loop; continue skips to the next iteration
       explanation: break closes the entire investigation. continue skips only the current lead and continues.
+      story_before: 'The captain asks Cole to explain: does break close the case or skip one lead, and does continue close
+        or skip?'
+      story_after: Break closes, continue skips — Cole is ready; his final task is finding the first lead divisible by both
+        6 and 8.
     - type: mini_code
       prompt: Find the first number in range(1, 100) divisible by both 6 and 8, then break and print it.
       starter: ''
@@ -818,6 +892,8 @@ worlds:
         message: 24 is the first multiple of both 6 and 8
       - code: assert 'break' in _code
         message: Should use break to stop after finding the first match
+      story_before: The confession is hidden at the first number divisible by both 6 and 8 — Cole must find it and break.
+      story_after: Confession found at 24; Cole's last sweep prints all leads from 1 to 20 except those divisible by 3.
     - type: mini_code
       prompt: Print all numbers from 1 to 20 except those divisible by 3. Use continue.
       starter: ''
@@ -827,3 +903,6 @@ worlds:
       - code: lines = [l.strip() for l in _stdout.strip().split('\n') if l.strip()]; assert lines[0] == '1' and lines[-1]
           == '20'
         message: Should go from 1 to 20
+      story_before: Every third lead is a planted distraction — Cole uses continue to skip them and logs only the genuine
+        ones.
+      story_after: Genuine leads from 1 to 20 logged; Cole closes the casebook — the investigation is solved.

@@ -1,353 +1,640 @@
-title: "return Values"
+title: return Values
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      def add(a, b):
-          return a + b
-
-      result = add(3, 4)
-      print(result)
-    output: "7"
-    explanation: "return sends a value back from a function. The caller can store or use it. Without return, functions give back None."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def square(n):\n    return n * n\n\nprint(square(5))"
-    choices: ["25", "5", "n * n", "None"]
-    correct: "25"
-    explanation: "square(5) returns 5 * 5 = 25. print() shows that returned value."
-
-  - type: fill_blank
-    prompt: "Send the computed value n * 2 back to whoever called this function."
-    before: "def double(n):\n    "
-    after: " n * 2"
-    choices: ["return", "print", "def", "="]
-    answer: "return"
-    explanation: "return sends the value back to the caller. Without it, the function returns None."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def make_greeting(name):\n    return f\"Hello, {name}!\"\n\nmsg = make_greeting(\"Alice\")\nprint(msg)"
-    choices: ["Hello, Alice!", "None", "name", "msg"]
-    correct: "Hello, Alice!"
-    explanation: "The function returns the f-string. It's stored in msg and then printed."
-
-  - type: arrange
-    instruction: "Build a function that returns the larger of two numbers"
-    blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-    correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-    explanation: "If a > b, return a. Otherwise, return b (the fallback after the if)."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
-    choices: ["None", "5", "x", "Error"]
-    correct: "None"
-    explanation: "Functions without return give back None automatically."
-
-  - type: fill_blank
-    prompt: "Use the remainder operator to check whether n divides evenly by 2."
-    before: "def is_even(n):\n    return n "
-    after: " 2 == 0"
-    choices: ["%", "//", "/", "**"]
-    answer: "%"
-    explanation: "n % 2 == 0 is True when n is even. This boolean is returned."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
-    choices: ["18", "6", "2", "12"]
-    correct: "18"
-    explanation: "triple(2) = 6. triple(6) = 18."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
-    choices: ["100", "150", "0", "150"]
-    correct: "100"
-    explanation: "150 > 100, so the function returns high = 100."
-
-  - type: mini_code
-    prompt: "Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32."
-    starter: ""
-    tests:
-      - code: "assert celsius_to_fahrenheit(100) == 212.0"
-        message: "100°C = 212°F"
-      - code: "assert celsius_to_fahrenheit(0) == 32.0"
-        message: "0°C = 32°F"
-
-  - type: mini_code
-    prompt: "Define a function power(base, exp) that returns base ** exp."
-    starter: ""
-    tests:
-      - code: "assert power(2, 10) == 1024"
-        message: "2 ** 10 = 1024"
-      - code: "assert power(3, 3) == 27"
-        message: "3 ** 3 = 27"
-
+- type: concept
+  code: "def add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)\n"
+  output: '7'
+  explanation: return sends a value back from a function. The caller can store or use it. Without return, functions give back
+    None.
+- type: mcq
+  question: What does this print?
+  code: "def square(n):\n    return n * n\n\nprint(square(5))"
+  choices:
+  - '25'
+  - '5'
+  - n * n
+  - None
+  correct: '25'
+  explanation: square(5) returns 5 * 5 = 25. print() shows that returned value.
+- type: fill_blank
+  prompt: Send the computed value n * 2 back to whoever called this function.
+  before: "def double(n):\n    "
+  after: ' n * 2'
+  choices:
+  - return
+  - print
+  - def
+  - '='
+  answer: return
+  explanation: return sends the value back to the caller. Without it, the function returns None.
+- type: mcq
+  question: What does this print?
+  code: "def make_greeting(name):\n    return f\"Hello, {name}!\"\n\nmsg = make_greeting(\"Alice\")\nprint(msg)"
+  choices:
+  - Hello, Alice!
+  - None
+  - name
+  - msg
+  correct: Hello, Alice!
+  explanation: The function returns the f-string. It's stored in msg and then printed.
+- type: arrange
+  instruction: Build a function that returns the larger of two numbers
+  blocks:
+  - def
+  - max_val
+  - (
+  - a
+  - ','
+  - b
+  - )
+  - ':'
+  - if
+  - a
+  - '>'
+  - b
+  - ':'
+  - return
+  - a
+  - return
+  - b
+  correct:
+  - def
+  - max_val
+  - (
+  - a
+  - ','
+  - b
+  - )
+  - ':'
+  - if
+  - a
+  - '>'
+  - b
+  - ':'
+  - return
+  - a
+  - return
+  - b
+  explanation: If a > b, return a. Otherwise, return b (the fallback after the if).
+- type: mcq
+  question: What does this print?
+  code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+  choices:
+  - None
+  - '5'
+  - x
+  - Error
+  correct: None
+  explanation: Functions without return give back None automatically.
+- type: fill_blank
+  prompt: Use the remainder operator to check whether n divides evenly by 2.
+  before: "def is_even(n):\n    return n "
+  after: ' 2 == 0'
+  choices:
+  - '%'
+  - //
+  - /
+  - '**'
+  answer: '%'
+  explanation: n % 2 == 0 is True when n is even. This boolean is returned.
+- type: mcq
+  question: What does this print?
+  code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+  choices:
+  - '18'
+  - '6'
+  - '2'
+  - '12'
+  correct: '18'
+  explanation: triple(2) = 6. triple(6) = 18.
+- type: mcq
+  question: What does this print?
+  code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return\
+    \ n\n\nprint(clamp(150, 0, 100))"
+  choices:
+  - '100'
+  - '150'
+  - '0'
+  - '150'
+  correct: '100'
+  explanation: 150 > 100, so the function returns high = 100.
+- type: mini_code
+  prompt: Define a function celsius_to_fahrenheit(c) that returns c * 9/5 + 32.
+  starter: ''
+  tests:
+  - code: assert celsius_to_fahrenheit(100) == 212.0
+    message: 100°C = 212°F
+  - code: assert celsius_to_fahrenheit(0) == 32.0
+    message: 0°C = 32°F
+- type: mini_code
+  prompt: Define a function power(base, exp) that returns base ** exp.
+  starter: ''
+  tests:
+  - code: assert power(2, 10) == 1024
+    message: 2 ** 10 = 1024
+  - code: assert power(3, 3) == 27
+    message: 3 ** 3 = 27
 worlds:
   fantasy:
-    title: "Bottling the Potion's Power"
+    title: Bottling the Potion's Power
     exercises:
-      - type: concept
-        code: |
-          def combine(a, b):
-              return a + b
-
-          potency = combine(3, 4)
-          print(potency)
-        output: "7"
-        explanation: "return bottles up the result of the potion and sends it back to Master Theo. Without return, the recipe yields nothing (None)."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def amplify(n):\n    return n * n\n\nprint(amplify(5))"
-        choices: ["25", "5", "n * n", "None"]
-        correct: "25"
-        explanation: "amplify(5) returns 5 * 5 = 25. The bottled potency is then revealed by print()."
-
-      - type: fill_blank
-        prompt: "Bottle up the computed potency n * 2 and send it back from the recipe."
-        before: "def double_brew(n):\n    "
-        after: " n * 2"
-        choices: ["return", "print", "def", "="]
-        answer: "return"
-        explanation: "return bottles the value back to Master Theo. Without it, the recipe returns None."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def label_potion(name):\n    return f\"Hello, {name}!\"\n\nmsg = label_potion(\"Alice\")\nprint(msg)"
-        choices: ["Hello, Alice!", "None", "name", "msg"]
-        correct: "Hello, Alice!"
-        explanation: "The recipe bottles up the label string. It's stored in msg and then revealed."
-
-      - type: arrange
-        instruction: "Build a recipe that returns the stronger of two potions"
-        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        explanation: "If potion a is stronger than b, return a. Otherwise, return b as the fallback."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
-        choices: ["None", "5", "x", "Error"]
-        correct: "None"
-        explanation: "A recipe without return yields nothing — Python gives back None automatically."
-
-      - type: fill_blank
-        prompt: "Use the remainder rune to check whether a potion quantity n divides evenly by 2."
-        before: "def is_even(n):\n    return n "
-        after: " 2 == 0"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "n % 2 == 0 is True when n is even — the potion divides cleanly in two."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
-        choices: ["18", "6", "2", "12"]
-        correct: "18"
-        explanation: "triple(2) brews a potency of 6. triple(6) amplifies it to 18."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
-        choices: ["100", "150", "0", "150"]
-        correct: "100"
-        explanation: "150 exceeds the safe limit of 100, so the stabilising rune returns 100."
-
-      - type: mini_code
-        prompt: "Define a potion conversion recipe celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — converting heat measurements for the cauldron."
-        starter: ""
-        tests:
-          - code: "assert celsius_to_fahrenheit(100) == 212.0"
-            message: "100°C = 212°F"
-          - code: "assert celsius_to_fahrenheit(0) == 32.0"
-            message: "0°C = 32°F"
-
-      - type: mini_code
-        prompt: "Define a potency amplifier power(base, exp) that returns base ** exp — used to calculate magical exponential boosts."
-        starter: ""
-        tests:
-          - code: "assert power(2, 10) == 1024"
-            message: "2 ** 10 = 1024"
-          - code: "assert power(3, 3) == 27"
-            message: "3 ** 3 = 27"
-
+    - type: concept
+      code: "def combine(a, b):\n    return a + b\n\npotency = combine(3, 4)\nprint(potency)\n"
+      output: '7'
+      explanation: return bottles up the result of the potion and sends it back to Master Theo. Without return, the recipe
+        yields nothing (None).
+      story_before: Elara's recipes have been printing results, but Master Theo explains that a truly powerful spell should
+        bottle up its result and hand it back for later use.
+      story_after: Seven units of combined potency are stored in the variable — Elara sees that return lets her save and reuse
+        any result.
+    - type: mcq
+      question: What does this print?
+      code: "def amplify(n):\n    return n * n\n\nprint(amplify(5))"
+      choices:
+      - '25'
+      - '5'
+      - n * n
+      - None
+      correct: '25'
+      explanation: amplify(5) returns 5 * 5 = 25. The bottled potency is then revealed by print().
+      story_before: Elara tests an amplifying recipe and traces what bottled potency is revealed when it's printed.
+      story_after: 25 — the squared potency came back from the recipe and was displayed, just as Theo promised.
+    - type: fill_blank
+      prompt: Bottle up the computed potency n * 2 and send it back from the recipe.
+      before: "def double_brew(n):\n    "
+      after: ' n * 2'
+      choices:
+      - return
+      - print
+      - def
+      - '='
+      answer: return
+      explanation: return bottles the value back to Master Theo. Without it, the recipe returns None.
+      story_before: A recipe is brewing but has no keyword to bottle its result; Elara must choose the right word to send
+        it back.
+      story_after: With return in place the double-brewed potency is now captured rather than lost to the air.
+    - type: mcq
+      question: What does this print?
+      code: "def label_potion(name):\n    return f\"Hello, {name}!\"\n\nmsg = label_potion(\"Alice\")\nprint(msg)"
+      choices:
+      - Hello, Alice!
+      - None
+      - name
+      - msg
+      correct: Hello, Alice!
+      explanation: The recipe bottles up the label string. It's stored in msg and then revealed.
+      story_before: Elara traces a labelling recipe that bottles up a formatted string and stores it before printing.
+      story_after: Hello, Alice! — the label was bottled by return, stored in msg, and revealed intact.
+    - type: arrange
+      instruction: Build a recipe that returns the stronger of two potions
+      blocks:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      correct:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      explanation: If potion a is stronger than b, return a. Otherwise, return b as the fallback.
+      story_before: Elara assembles a recipe that compares two potion strengths and returns the greater one.
+      story_after: The stronger potion is selected and returned — Elara can now pick the best ingredient automatically.
+    - type: mcq
+      question: What does this print?
+      code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+      choices:
+      - None
+      - '5'
+      - x
+      - Error
+      correct: None
+      explanation: A recipe without return yields nothing — Python gives back None automatically.
+      story_before: Theo warns Elara about a recipe that does work but never bottles anything; she must predict what comes
+        back.
+      story_after: None — Elara learns that every recipe without return yields an empty vial, so she'll always add return
+        to useful recipes.
+    - type: fill_blank
+      prompt: Use the remainder rune to check whether a potion quantity n divides evenly by 2.
+      before: "def is_even(n):\n    return n "
+      after: ' 2 == 0'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: n % 2 == 0 is True when n is even — the potion divides cleanly in two.
+      story_before: Elara needs a parity rune inside a recipe that tells her whether a potion quantity splits evenly in two.
+      story_after: The remainder rune is set; now the recipe returns True for even quantities and False for odd ones.
+    - type: mcq
+      question: What does this print?
+      code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+      choices:
+      - '18'
+      - '6'
+      - '2'
+      - '12'
+      correct: '18'
+      explanation: triple(2) brews a potency of 6. triple(6) amplifies it to 18.
+      story_before: Theo nests one triple-potency recipe inside another and challenges Elara to trace the final amplified
+        result.
+      story_after: 18 — the inner recipe bottled 6 and the outer one tripled it again, showing Elara how return enables chaining.
+    - type: mcq
+      question: What does this print?
+      code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return\
+        \ n\n\nprint(clamp(150, 0, 100))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '150'
+      correct: '100'
+      explanation: 150 exceeds the safe limit of 100, so the stabilising rune returns 100.
+      story_before: A stabilising recipe keeps potency within safe limits; Elara must trace what it returns when given an
+        over-limit value.
+      story_after: 100 — the recipe capped the runaway potency at the maximum safe level, protecting the cauldron.
+    - type: mini_code
+      prompt: Define a potion conversion recipe celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — converting heat measurements
+        for the cauldron.
+      starter: ''
+      tests:
+      - code: assert celsius_to_fahrenheit(100) == 212.0
+        message: 100°C = 212°F
+      - code: assert celsius_to_fahrenheit(0) == 32.0
+        message: 0°C = 32°F
+      story_before: Master Theo's cauldron uses a different heat scale; Elara must write a conversion recipe that returns
+        the transformed temperature.
+      story_after: 212.0 and 32.0 confirmed — the conversion recipe works perfectly and the cauldron temperatures are now
+        calibrated.
+    - type: mini_code
+      prompt: Define a potency amplifier power(base, exp) that returns base ** exp — used to calculate magical exponential
+        boosts.
+      starter: ''
+      tests:
+      - code: assert power(2, 10) == 1024
+        message: 2 ** 10 = 1024
+      - code: assert power(3, 3) == 27
+        message: 3 ** 3 = 27
+      story_before: Elara needs a potency amplifier recipe that raises a base ingredient to an exponential power and returns
+        the result.
+      story_after: 1024 and 27 returned correctly — Elara's amplifier recipe is ready to supercharge any brew in the workshop.
   scifi:
-    title: "Reading the Drone's Output"
+    title: Reading the Drone's Output
     exercises:
-      - type: concept
-        code: |
-          def combine(a, b):
-              return a + b
-
-          result = combine(3, 4)
-          print(result)
-        output: "7"
-        explanation: "return transmits the computed value back from a drone subroutine. The caller can store or use it. Without return, subroutines send back None."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def power_reading(n):\n    return n * n\n\nprint(power_reading(5))"
-        choices: ["25", "5", "n * n", "None"]
-        correct: "25"
-        explanation: "power_reading(5) returns 5 * 5 = 25. The drone transmits that sensor value."
-
-      - type: fill_blank
-        prompt: "Transmit the computed output n * 2 back from the drone subroutine."
-        before: "def boost(n):\n    "
-        after: " n * 2"
-        choices: ["return", "print", "def", "="]
-        answer: "return"
-        explanation: "return transmits the value back to the engineer. Without it, the subroutine sends None."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def system_label(name):\n    return f\"Hello, {name}!\"\n\nmsg = system_label(\"Alice\")\nprint(msg)"
-        choices: ["Hello, Alice!", "None", "name", "msg"]
-        correct: "Hello, Alice!"
-        explanation: "The subroutine returns the system label string. It's stored in msg and displayed on the console."
-
-      - type: arrange
-        instruction: "Build a subroutine that returns the higher of two power readings"
-        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        explanation: "If reading a is higher than b, transmit a. Otherwise, transmit b as the fallback."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
-        choices: ["None", "5", "x", "Error"]
-        correct: "None"
-        explanation: "A subroutine without return transmits nothing — Python automatically sends None."
-
-      - type: fill_blank
-        prompt: "Use the modulo sensor to check whether a reading n divides evenly by 2."
-        before: "def is_even(n):\n    return n "
-        after: " 2 == 0"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "n % 2 == 0 is True when n is even — the sensor reports a clean split."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
-        choices: ["18", "6", "2", "12"]
-        correct: "18"
-        explanation: "triple(2) outputs 6. triple(6) amplifies to 18 — the drone boosts twice."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
-        choices: ["100", "150", "0", "150"]
-        correct: "100"
-        explanation: "150 exceeds the safe limit of 100, so the safety clamp subroutine returns 100."
-
-      - type: mini_code
-        prompt: "Define a conversion subroutine celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to calibrate the ship's heat sensors."
-        starter: ""
-        tests:
-          - code: "assert celsius_to_fahrenheit(100) == 212.0"
-            message: "100°C = 212°F"
-          - code: "assert celsius_to_fahrenheit(0) == 32.0"
-            message: "0°C = 32°F"
-
-      - type: mini_code
-        prompt: "Define a power subroutine power(base, exp) that returns base ** exp — used to calculate exponential energy outputs."
-        starter: ""
-        tests:
-          - code: "assert power(2, 10) == 1024"
-            message: "2 ** 10 = 1024"
-          - code: "assert power(3, 3) == 27"
-            message: "3 ** 3 = 27"
-
+    - type: concept
+      code: "def combine(a, b):\n    return a + b\n\nresult = combine(3, 4)\nprint(result)\n"
+      output: '7'
+      explanation: return transmits the computed value back from a drone subroutine. The caller can store or use it. Without
+        return, subroutines send back None.
+      story_before: Yara notices that her subroutines print values but can't pass them to other modules; Sana shows her that
+        return is the fix.
+      story_after: The combined output of 7 is stored in a variable — Yara now understands that return is how subroutines
+        communicate results.
+    - type: mcq
+      question: What does this print?
+      code: "def power_reading(n):\n    return n * n\n\nprint(power_reading(5))"
+      choices:
+      - '25'
+      - '5'
+      - n * n
+      - None
+      correct: '25'
+      explanation: power_reading(5) returns 5 * 5 = 25. The drone transmits that sensor value.
+      story_before: Yara traces a sensor subroutine that squares its input and transmits the result; she predicts the console
+        output.
+      story_after: 25 transmitted — the squared reading came back from the subroutine and was printed to the console.
+    - type: fill_blank
+      prompt: Transmit the computed output n * 2 back from the drone subroutine.
+      before: "def boost(n):\n    "
+      after: ' n * 2'
+      choices:
+      - return
+      - print
+      - def
+      - '='
+      answer: return
+      explanation: return transmits the value back to the engineer. Without it, the subroutine sends None.
+      story_before: A boost subroutine is computing a doubled output but missing the keyword that transmits it back to the
+        caller.
+      story_after: With return inserted, the boosted value is now transmitted rather than discarded.
+    - type: mcq
+      question: What does this print?
+      code: "def system_label(name):\n    return f\"Hello, {name}!\"\n\nmsg = system_label(\"Alice\")\nprint(msg)"
+      choices:
+      - Hello, Alice!
+      - None
+      - name
+      - msg
+      correct: Hello, Alice!
+      explanation: The subroutine returns the system label string. It's stored in msg and displayed on the console.
+      story_before: Yara traces a labelling subroutine that returns a formatted string into a variable before it's displayed.
+      story_after: Hello, Alice! — the label was returned, stored in msg, and printed to the console as expected.
+    - type: arrange
+      instruction: Build a subroutine that returns the higher of two power readings
+      blocks:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      correct:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      explanation: If reading a is higher than b, transmit a. Otherwise, transmit b as the fallback.
+      story_before: Yara builds a comparison subroutine that returns the higher of two power readings.
+      story_after: The higher reading is selected and returned — Yara can now route the stronger signal automatically.
+    - type: mcq
+      question: What does this print?
+      code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+      choices:
+      - None
+      - '5'
+      - x
+      - Error
+      correct: None
+      explanation: A subroutine without return transmits nothing — Python automatically sends None.
+      story_before: Sana shows Yara a subroutine that runs but transmits nothing; Yara must identify what the caller receives.
+      story_after: None — a subroutine without return sends nothing back, so Yara commits to always returning meaningful values.
+    - type: fill_blank
+      prompt: Use the modulo sensor to check whether a reading n divides evenly by 2.
+      before: "def is_even(n):\n    return n "
+      after: ' 2 == 0'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: n % 2 == 0 is True when n is even — the sensor reports a clean split.
+      story_before: Yara needs a modulo check inside a subroutine to determine whether a sensor reading is even.
+      story_after: The modulo operator is wired in; the parity check now returns True or False cleanly.
+    - type: mcq
+      question: What does this print?
+      code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+      choices:
+      - '18'
+      - '6'
+      - '2'
+      - '12'
+      correct: '18'
+      explanation: triple(2) outputs 6. triple(6) amplifies to 18 — the drone boosts twice.
+      story_before: The drone boosts its output twice in sequence; Yara traces through both calls to find the final transmitted
+        value.
+      story_after: 18 — the first boost returned 6 and the second amplified it to 18, demonstrating why return is essential
+        for chaining.
+    - type: mcq
+      question: What does this print?
+      code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return\
+        \ n\n\nprint(clamp(150, 0, 100))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '150'
+      correct: '100'
+      explanation: 150 exceeds the safe limit of 100, so the safety clamp subroutine returns 100.
+      story_before: A safety-clamp subroutine limits power readings to valid bounds; Yara traces its return value for an over-limit
+        input.
+      story_after: 100 — the clamp subroutine correctly capped the reading, preventing an out-of-range value from reaching
+        other modules.
+    - type: mini_code
+      prompt: Define a conversion subroutine celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to calibrate the ship's
+        heat sensors.
+      starter: ''
+      tests:
+      - code: assert celsius_to_fahrenheit(100) == 212.0
+        message: 100°C = 212°F
+      - code: assert celsius_to_fahrenheit(0) == 32.0
+        message: 0°C = 32°F
+      story_before: The Helix's heat sensors speak Fahrenheit but the fuel data is in Celsius; Yara writes a conversion subroutine.
+      story_after: 212.0 and 32.0 confirmed — the calibration subroutine is ready and the thermal sensors are now in sync.
+    - type: mini_code
+      prompt: Define a power subroutine power(base, exp) that returns base ** exp — used to calculate exponential energy outputs.
+      starter: ''
+      tests:
+      - code: assert power(2, 10) == 1024
+        message: 2 ** 10 = 1024
+      - code: assert power(3, 3) == 27
+        message: 3 ** 3 = 27
+      story_before: Yara needs a power-exponent subroutine to calculate exponential energy outputs for the ship's reactor
+        simulations.
+      story_after: 1024 and 27 returned correctly — the energy subroutine is validated and cleared for use in the reactor
+        model.
   mystery:
-    title: "Reporting the Findings"
+    title: Reporting the Findings
     exercises:
-      - type: concept
-        code: |
-          def combine(a, b):
-              return a + b
-
-          score = combine(3, 4)
-          print(score)
-        output: "7"
-        explanation: "return hands the finding back to Detective Cole. The caller can store or use it. Without return, tools give back None — an empty report."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def suspicion_score(n):\n    return n * n\n\nprint(suspicion_score(5))"
-        choices: ["25", "5", "n * n", "None"]
-        correct: "25"
-        explanation: "suspicion_score(5) returns 5 * 5 = 25. Cole receives that finding from the tool."
-
-      - type: fill_blank
-        prompt: "Hand back the computed suspicion rating n * 2 from the analysis tool."
-        before: "def amplify_clue(n):\n    "
-        after: " n * 2"
-        choices: ["return", "print", "def", "="]
-        answer: "return"
-        explanation: "return hands the value back to Cole. Without it, the tool returns None — no evidence."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def format_suspect(name):\n    return f\"Hello, {name}!\"\n\nmsg = format_suspect(\"Alice\")\nprint(msg)"
-        choices: ["Hello, Alice!", "None", "name", "msg"]
-        correct: "Hello, Alice!"
-        explanation: "The tool returns the formatted suspect label. It's stored in msg and printed to the case file."
-
-      - type: arrange
-        instruction: "Build a tool that returns the more suspicious of two clue scores"
-        blocks: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        correct: ["def", "max_val", "(", "a", ",", "b", ")", ":", "if", "a", ">", "b", ":", "return", "a", "return", "b"]
-        explanation: "If clue a is more suspicious than b, return a. Otherwise, return b as the fallback."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
-        choices: ["None", "5", "x", "Error"]
-        correct: "None"
-        explanation: "A tool without return hands back nothing — Python gives None automatically, an empty report."
-
-      - type: fill_blank
-        prompt: "Use the remainder check to see whether a clue number n divides evenly by 2."
-        before: "def is_even(n):\n    return n "
-        after: " 2 == 0"
-        choices: ["%", "//", "/", "**"]
-        answer: "%"
-        explanation: "n % 2 == 0 is True when n is even — the clue splits cleanly, a good sign."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
-        choices: ["18", "6", "2", "12"]
-        correct: "18"
-        explanation: "triple(2) = 6. triple(6) = 18. Cole triples the suspicion score twice for emphasis."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return n\n\nprint(clamp(150, 0, 100))"
-        choices: ["100", "150", "0", "150"]
-        correct: "100"
-        explanation: "150 exceeds the maximum valid score of 100, so the bounding tool returns 100."
-
-      - type: mini_code
-        prompt: "Define a conversion tool celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to cross-check temperature readings from the crime scene."
-        starter: ""
-        tests:
-          - code: "assert celsius_to_fahrenheit(100) == 212.0"
-            message: "100°C = 212°F"
-          - code: "assert celsius_to_fahrenheit(0) == 32.0"
-            message: "0°C = 32°F"
-
-      - type: mini_code
-        prompt: "Define a scoring tool power(base, exp) that returns base ** exp — used to calculate exponential suspicion ratings."
-        starter: ""
-        tests:
-          - code: "assert power(2, 10) == 1024"
-            message: "2 ** 10 = 1024"
-          - code: "assert power(3, 3) == 27"
-            message: "3 ** 3 = 27"
+    - type: concept
+      code: "def combine(a, b):\n    return a + b\n\nscore = combine(3, 4)\nprint(score)\n"
+      output: '7'
+      explanation: return hands the finding back to Detective Cole. The caller can store or use it. Without return, tools
+        give back None — an empty report.
+      story_before: Cole realises his analysis tools only print findings to the screen but can't hand the result to another
+        tool; return is the missing piece.
+      story_after: A combined score of 7 is stored in a variable — Cole sees that return is how one tool passes its finding
+        to the next.
+    - type: mcq
+      question: What does this print?
+      code: "def suspicion_score(n):\n    return n * n\n\nprint(suspicion_score(5))"
+      choices:
+      - '25'
+      - '5'
+      - n * n
+      - None
+      correct: '25'
+      explanation: suspicion_score(5) returns 5 * 5 = 25. Cole receives that finding from the tool.
+      story_before: Cole traces a scoring tool that squares a clue's weight and hands back the suspicion score.
+      story_after: 25 returned — the squared score came back from the tool, ready to be fed into further analysis.
+    - type: fill_blank
+      prompt: Hand back the computed suspicion rating n * 2 from the analysis tool.
+      before: "def amplify_clue(n):\n    "
+      after: ' n * 2'
+      choices:
+      - return
+      - print
+      - def
+      - '='
+      answer: return
+      explanation: return hands the value back to Cole. Without it, the tool returns None — no evidence.
+      story_before: A tool is computing a doubled suspicion rating but missing the keyword that hands it back to Cole.
+      story_after: With return in place, the amplified rating is now handed back rather than silently discarded.
+    - type: mcq
+      question: What does this print?
+      code: "def format_suspect(name):\n    return f\"Hello, {name}!\"\n\nmsg = format_suspect(\"Alice\")\nprint(msg)"
+      choices:
+      - Hello, Alice!
+      - None
+      - name
+      - msg
+      correct: Hello, Alice!
+      explanation: The tool returns the formatted suspect label. It's stored in msg and printed to the case file.
+      story_before: Cole traces a formatting tool that returns a labelled suspect string and stores it before printing.
+      story_after: Hello, Alice! — the formatted label was returned, stored, and printed to the case file correctly.
+    - type: arrange
+      instruction: Build a tool that returns the more suspicious of two clue scores
+      blocks:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      correct:
+      - def
+      - max_val
+      - (
+      - a
+      - ','
+      - b
+      - )
+      - ':'
+      - if
+      - a
+      - '>'
+      - b
+      - ':'
+      - return
+      - a
+      - return
+      - b
+      explanation: If clue a is more suspicious than b, return a. Otherwise, return b as the fallback.
+      story_before: Cole builds a comparison tool that returns the more suspicious of two clue scores.
+      story_after: The higher score is returned — Cole can now automatically surface the most damning clue from any pair.
+    - type: mcq
+      question: What does this print?
+      code: "def nothing():\n    x = 5\n\nresult = nothing()\nprint(result)"
+      choices:
+      - None
+      - '5'
+      - x
+      - Error
+      correct: None
+      explanation: A tool without return hands back nothing — Python gives None automatically, an empty report.
+      story_before: A tool runs but hands back nothing; Cole must identify what Python gives the caller in that case.
+      story_after: None — an empty report, and Cole notes this as a mistake to avoid when writing his own tools.
+    - type: fill_blank
+      prompt: Use the remainder check to see whether a clue number n divides evenly by 2.
+      before: "def is_even(n):\n    return n "
+      after: ' 2 == 0'
+      choices:
+      - '%'
+      - //
+      - /
+      - '**'
+      answer: '%'
+      explanation: n % 2 == 0 is True when n is even — the clue splits cleanly, a good sign.
+      story_before: Cole needs a remainder check inside a tool to determine whether a clue number splits evenly.
+      story_after: The modulo operator is in place; the tool now returns True for even clue numbers and False for odd ones.
+    - type: mcq
+      question: What does this print?
+      code: "def triple(n):\n    return n * 3\n\nprint(triple(triple(2)))"
+      choices:
+      - '18'
+      - '6'
+      - '2'
+      - '12'
+      correct: '18'
+      explanation: triple(2) = 6. triple(6) = 18. Cole triples the suspicion score twice for emphasis.
+      story_before: Cole multiplies a suspicion score by three, then triples the result again, and must trace the final number.
+      story_after: 18 — the chained triples work because each tool returned its result for the next one to use.
+    - type: mcq
+      question: What does this print?
+      code: "def clamp(n, low, high):\n    if n < low:\n        return low\n    if n > high:\n        return high\n    return\
+        \ n\n\nprint(clamp(150, 0, 100))"
+      choices:
+      - '100'
+      - '150'
+      - '0'
+      - '150'
+      correct: '100'
+      explanation: 150 exceeds the maximum valid score of 100, so the bounding tool returns 100.
+      story_before: A bounding tool keeps suspect scores within the valid range; Cole traces what it returns for an over-limit
+        input.
+      story_after: 100 — the tool capped the score correctly, keeping the case file's numbers within valid bounds.
+    - type: mini_code
+      prompt: Define a conversion tool celsius_to_fahrenheit(c) that returns c * 9/5 + 32 — used to cross-check temperature
+        readings from the crime scene.
+      starter: ''
+      tests:
+      - code: assert celsius_to_fahrenheit(100) == 212.0
+        message: 100°C = 212°F
+      - code: assert celsius_to_fahrenheit(0) == 32.0
+        message: 0°C = 32°F
+      story_before: Crime-scene temperature logs are in Celsius but the lab reports use Fahrenheit; Cole writes a conversion
+        tool.
+      story_after: 212.0 and 32.0 confirmed — the conversion tool is ready and Cole can now cross-check temperature evidence
+        instantly.
+    - type: mini_code
+      prompt: Define a scoring tool power(base, exp) that returns base ** exp — used to calculate exponential suspicion ratings.
+      starter: ''
+      tests:
+      - code: assert power(2, 10) == 1024
+        message: 2 ** 10 = 1024
+      - code: assert power(3, 3) == 27
+        message: 3 ** 3 = 27
+      story_before: Cole needs an exponential scoring tool to calculate compounding suspicion ratings across multiple clues.
+      story_after: 1024 and 27 returned correctly — the scoring tool is ready, and Cole's analytical toolkit is growing fast.

@@ -196,6 +196,10 @@ worlds:
         [2, 4]'
       explanation: 'Elara filters and transforms ingredients in one line. A comprehension builds a new list: [expression for
         item in list]. Add if to filter.'
+      story_before: Elara discovers a powerful one-line enchantment that can transform and filter an entire ingredient list
+        in a single incantation.
+      story_after: Squares and even-numbered counts conjured in a breath — Elara realises comprehensions are the most elegant
+        magic she has learned.
     - type: mcq
       question: Elara doubles each potion strength. What does this print?
       code: 'nums = [1, 2, 3, 4]
@@ -210,6 +214,8 @@ worlds:
       - '[2, 4]'
       correct: '[2, 4, 6, 8]'
       explanation: 'Each x is multiplied by 2. Result: [2, 4, 6, 8].'
+      story_before: Elara needs every potion strength value doubled in a single spell — no long loops allowed.
+      story_after: All four values are doubled in one line — the master alchemist raises an eyebrow in approval.
     - type: fill_blank
       prompt: Pass each spell word to len() to build a list of character counts.
       before: 'words = [''hi'', ''hello'', ''hey'']
@@ -225,6 +231,8 @@ worlds:
       - x
       answer: w
       explanation: 'len(w) computes the length of each spell word. Result: [2, 5, 3].'
+      story_before: Elara must measure the length of each spell word in the grimoire using a comprehension.
+      story_after: The character counts are conjured in a single expression — the grimoire page is annotated in moments.
     - type: mcq
       question: Elara collects only the odd-numbered ingredient counts. What does this print?
       code: 'nums = [1, 2, 3, 4, 5, 6]
@@ -239,6 +247,8 @@ worlds:
       - '[1, 3, 5, 7]'
       correct: '[1, 3, 5]'
       explanation: 'n % 2 != 0 filters odd numbers: 1, 3, 5.'
+      story_before: The recipe calls for only the odd-numbered ingredient quantities — Elara filters them with a comprehension.
+      story_after: Only the odd counts remain — Elara mixes the correct batch and the cauldron glows the right colour.
     - type: arrange
       instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
       blocks:
@@ -284,6 +294,8 @@ worlds:
       - squares
       - )
       explanation: range(1, 6) gives 1 through 5. n * n squares each ingredient count.
+      story_before: Elara must compute the square of each number from one to five to calibrate the enchantment matrix.
+      story_after: The squares are computed and printed — the enchantment matrix aligns and the chamber hums with power.
     - type: mcq
       question: Elara capitalises all ingredient names. What does this print?
       code: 'names = [''alice'', ''bob'', ''carol'']
@@ -302,6 +314,8 @@ worlds:
       - '[''Alice'', ''Bob'', ''Carol'']'
       correct: '[''ALICE'', ''BOB'', ''CAROL'']'
       explanation: .upper() converts each name to uppercase. The result is a new list.
+      story_before: Elara capitalises every ingredient name for the formal spell catalogue in one sweeping enchantment.
+      story_after: Every name blazes in uppercase — the catalogue is formatted and ready for the Grand Archivist.
     - type: fill_blank
       prompt: Filter the ingredient list to keep only values greater than 5.
       before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -317,6 +331,8 @@ worlds:
       - '!='
       answer: '>'
       explanation: 'n > 5 filters to numbers greater than 5: [6, 7, 8].'
+      story_before: Only ingredients with a value greater than five are potent enough — Elara filters the list with a comprehension.
+      story_after: The weak ingredients are sifted out — only the potent ones remain and the brew is strengthened.
     - type: mcq
       question: Elara counts potions priced below 20 gold. What does this print?
       code: 'prices = [10, 25, 5, 30, 15]
@@ -331,6 +347,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+      story_before: Elara counts how many potions in the shop cost less than twenty gold to plan the discount sale.
+      story_after: Three affordable potions identified — Elara marks them for the sale shelf and adjusts the price tags.
     - type: mcq
       question: What is the equivalent loop for [x**2 for x in range(4)]?
       code: ''
@@ -341,18 +359,28 @@ worlds:
       - result = [x**2 while x < 4]
       correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
       explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+      story_before: Elara must recognise the long-form loop that is equivalent to a list comprehension — understanding the
+        magic behind the shorthand.
+      story_after: The loop equivalent is matched — Elara understands that the comprehension is simply elegant shorthand for
+        the same spell.
     - type: mini_code
       prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
       starter: ''
       tests:
       - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
         message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+      story_before: Elara needs a list of every multiple of three from one to thirty, conjured in a single comprehension.
+      story_after: All ten multiples appear at once — the ritual circle is complete and the enchantment holds.
     - type: mini_code
       prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
       starter: temps = [22, 35, 18, 41, 28, 15]
       tests:
       - code: eval(_stdout.strip()) == [35, 41, 28]
         message: Should be [35, 41, 28]
+      story_before: 'Final challenge: filter the temperature readings above twenty-five using a comprehension — only the hottest
+        values should fuel the forge.'
+      story_after: The high temperatures are extracted in one line — the forge is stoked to perfect intensity and Elara's
+        list mastery is complete.
   scifi:
     title: Data Pipeline
     exercises:
@@ -373,6 +401,10 @@ worlds:
         [2, 4]'
       explanation: 'Zara transforms and filters asteroid sensor readings in one line. A comprehension builds a new list: [expression
         for item in list]. Add if to filter.'
+      story_before: Zara discovers that the sensor pipeline can transform and filter entire data arrays in a single line of
+        code — no verbose loops required.
+      story_after: Squared values and even readings produced in one expression — Zara realises comprehensions are the most
+        efficient tool in the data pipeline.
     - type: mcq
       question: Zara doubles each sensor signal. What does this print?
       code: 'nums = [1, 2, 3, 4]
@@ -387,6 +419,8 @@ worlds:
       - '[2, 4]'
       correct: '[2, 4, 6, 8]'
       explanation: 'Each signal is multiplied by 2. Result: [2, 4, 6, 8].'
+      story_before: Zara needs every sensor signal doubled in one compact operation for the amplified scan.
+      story_after: All four signals are doubled in a single line — Command confirms the amplified scan is live.
     - type: fill_blank
       prompt: Pass each sector code to len() to build a list of code lengths.
       before: 'words = [''hi'', ''hello'', ''hey'']
@@ -402,6 +436,8 @@ worlds:
       - x
       answer: w
       explanation: 'len(w) computes the length of each sector code. Result: [2, 5, 3].'
+      story_before: Zara must compute the length of each sector code in a single pipeline expression.
+      story_after: The code lengths are computed instantly — Zara flags any that exceed the transmission limit.
     - type: mcq
       question: Zara keeps only odd-indexed sensor readings. What does this print?
       code: 'nums = [1, 2, 3, 4, 5, 6]
@@ -416,6 +452,8 @@ worlds:
       - '[1, 3, 5, 7]'
       correct: '[1, 3, 5]'
       explanation: 'n % 2 != 0 filters odd numbers: 1, 3, 5.'
+      story_before: Only odd-indexed sensor readings are relevant to the interference filter — Zara extracts them with a comprehension.
+      story_after: The odd readings are isolated — the interference analysis can now proceed with clean data.
     - type: arrange
       instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
       blocks:
@@ -461,6 +499,8 @@ worlds:
       - squares
       - )
       explanation: range(1, 6) gives 1 through 5. n * n squares each reading.
+      story_before: Zara must generate the squared values for numbers one through five to calibrate the sensor gain.
+      story_after: The gain calibration values are printed — the sensor array is tuned and ready for deep-space operation.
     - type: mcq
       question: Zara capitalises all sector names for the log. What does this print?
       code: 'names = [''alice'', ''bob'', ''carol'']
@@ -479,6 +519,8 @@ worlds:
       - '[''Alice'', ''Bob'', ''Carol'']'
       correct: '[''ALICE'', ''BOB'', ''CAROL'']'
       explanation: .upper() converts each name to uppercase. The result is a new list.
+      story_before: Zara capitalises all sector names in one pass for inclusion in the official mission log.
+      story_after: Every name is uppercased and logged — the mission report is formatted and transmitted to Command.
     - type: fill_blank
       prompt: Filter sensor readings to keep only values greater than 5.
       before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -494,6 +536,8 @@ worlds:
       - '!='
       answer: '>'
       explanation: 'n > 5 filters to readings greater than 5: [6, 7, 8].'
+      story_before: Only sensor readings above five are strong enough to be meaningful — Zara filters them with a comprehension.
+      story_after: Weak readings are dropped — only high-fidelity data remains and the analysis is far more reliable.
     - type: mcq
       question: Zara counts asteroids with a mass below 20. What does this print?
       code: 'prices = [10, 25, 5, 30, 15]
@@ -508,6 +552,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+      story_before: Zara counts how many asteroids have a mass below twenty to prioritise retrieval missions.
+      story_after: Three lightweight asteroids identified — Zara queues the retrieval drones and updates the mission plan.
     - type: mcq
       question: What is the equivalent loop for [x**2 for x in range(4)]?
       code: ''
@@ -518,18 +564,28 @@ worlds:
       - result = [x**2 while x < 4]
       correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
       explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+      story_before: Zara must identify the equivalent for-loop for a comprehension — understanding the underlying engine.
+      story_after: The loop equivalent is matched — Zara confirms the comprehension is just a streamlined version of the same
+        operation.
     - type: mini_code
       prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
       starter: ''
       tests:
       - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
         message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+      story_before: Zara needs a list of all multiples of three from one to thirty generated in a single comprehension for
+        the frequency scan.
+      story_after: All ten multiples are produced at once — the frequency scan completes and the data pipeline is operational.
     - type: mini_code
       prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
       starter: temps = [22, 35, 18, 41, 28, 15]
       tests:
       - code: eval(_stdout.strip()) == [35, 41, 28]
         message: Should be [35, 41, 28]
+      story_before: 'Final mission check: filter the temperature readings above twenty-five with a comprehension — only critical
+        heat signatures matter for the reactor alert.'
+      story_after: Critical temperatures extracted in one line — the reactor alert is calibrated and the Helix's data systems
+        are fully mission-ready.
   mystery:
     title: Filtering Witnesses
     exercises:
@@ -550,6 +606,10 @@ worlds:
         [2, 4]'
       explanation: 'Cole filters and scores witness statements in one line. A comprehension builds a new list: [expression
         for item in list]. Add if to filter.'
+      story_before: Cole discovers a one-line technique that can transform and filter an entire witness list in a single statement
+        — far faster than combing through them manually.
+      story_after: Squared scores and even IDs produced in one sweep — Cole realises comprehensions are the sharpest analytical
+        tool he has encountered.
     - type: mcq
       question: Cole doubles each witness credibility score. What does this print?
       code: 'nums = [1, 2, 3, 4]
@@ -564,6 +624,8 @@ worlds:
       - '[2, 4]'
       correct: '[2, 4, 6, 8]'
       explanation: 'Each score is multiplied by 2. Result: [2, 4, 6, 8].'
+      story_before: Cole needs every witness credibility score doubled in one concise statement to model inflated alibis.
+      story_after: All four scores are doubled in a single line — Cole flags the results for the psychological profiler.
     - type: fill_blank
       prompt: Pass each witness statement to len() to build a list of statement lengths.
       before: 'words = [''hi'', ''hello'', ''hey'']
@@ -579,6 +641,9 @@ worlds:
       - x
       answer: w
       explanation: 'len(w) computes the length of each statement. Result: [2, 5, 3].'
+      story_before: Cole must measure the length of each witness statement in one pass to identify unusually brief or long
+        accounts.
+      story_after: Statement lengths computed instantly — Cole circles the outliers and schedules follow-up interviews.
     - type: mcq
       question: Cole keeps only odd-numbered witness IDs. What does this print?
       code: 'nums = [1, 2, 3, 4, 5, 6]
@@ -593,6 +658,8 @@ worlds:
       - '[1, 3, 5, 7]'
       correct: '[1, 3, 5]'
       explanation: 'n % 2 != 0 filters odd IDs: 1, 3, 5.'
+      story_before: Only odd-numbered witness IDs fall in the evening shift — Cole filters them with a comprehension.
+      story_after: The odd IDs are isolated — Cole cross-references them with the security log and finds a match.
     - type: arrange
       instruction: Build a list of squares of numbers from 1 to 5 using a comprehension
       blocks:
@@ -638,6 +705,8 @@ worlds:
       - squares
       - )
       explanation: range(1, 6) gives 1 through 5. n * n squares each score.
+      story_before: Cole needs the squared credibility scores for IDs one through five to rank witness reliability.
+      story_after: The squared scores are printed — Cole pins the rankings to the board and identifies the most credible witness.
     - type: mcq
       question: Cole capitalises all suspect names for the report. What does this print?
       code: 'names = [''alice'', ''bob'', ''carol'']
@@ -656,6 +725,8 @@ worlds:
       - '[''Alice'', ''Bob'', ''Carol'']'
       correct: '[''ALICE'', ''BOB'', ''CAROL'']'
       explanation: .upper() converts each name to uppercase. The result is a new list.
+      story_before: Cole capitalises every suspect name in one operation to format the formal arrest brief.
+      story_after: Every name is uppercased — the arrest brief is formatted and delivered to the district attorney.
     - type: fill_blank
       prompt: Filter witness scores to keep only those greater than 5.
       before: 'nums = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -671,6 +742,8 @@ worlds:
       - '!='
       answer: '>'
       explanation: 'n > 5 filters to scores greater than 5: [6, 7, 8].'
+      story_before: Only witness scores above five are reliable enough to use in court — Cole filters them with a comprehension.
+      story_after: Low-reliability witnesses are filtered out — only the credible accounts remain in the court submission.
     - type: mcq
       question: Cole counts witnesses with a credibility score below 20. What does this print?
       code: 'prices = [10, 25, 5, 30, 15]
@@ -685,6 +758,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 10, 5, 15 are under 20. len([10, 5, 15]) = 3.
+      story_before: Cole counts how many witnesses gave a credibility score below twenty to assess how many are unreliable.
+      story_after: Three low-reliability witnesses identified — Cole notes their names and plans a second round of questioning.
     - type: mcq
       question: What is the equivalent loop for [x**2 for x in range(4)]?
       code: ''
@@ -695,15 +770,26 @@ worlds:
       - result = [x**2 while x < 4]
       correct: "result = []\nfor x in range(4):\n    result.append(x**2)"
       explanation: A comprehension is shorthand for creating an empty list, looping, and appending.
+      story_before: Cole must match a comprehension to its equivalent loop to understand the full investigative process behind
+        the shorthand.
+      story_after: The loop is correctly identified — Cole knows the comprehension is just a concise expression of the same
+        logical steps.
     - type: mini_code
       prompt: Use a list comprehension to create a list of all multiples of 3 from 1 to 30. Print the list.
       starter: ''
       tests:
       - code: eval(_stdout.strip()) == [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
         message: Should be [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+      story_before: Cole needs a list of all multiples of three from one to thirty to match against a numerical code found
+        at the scene.
+      story_after: All ten multiples are produced in one line — Cole scans the list and finds the matching code immediately.
     - type: mini_code
       prompt: Given temps = [22, 35, 18, 41, 28, 15], use a comprehension to get a list of temperatures above 25. Print it.
       starter: temps = [22, 35, 18, 41, 28, 15]
       tests:
       - code: eval(_stdout.strip()) == [35, 41, 28]
         message: Should be [35, 41, 28]
+      story_before: 'Final deduction: filter the temperature readings above twenty-five with a comprehension — only the hottest
+        moments correspond to the time of the crime.'
+      story_after: The critical readings are extracted in a single line — the timeline is confirmed, the case is closed, and
+        Cole reaches for his coat.

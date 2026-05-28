@@ -1,381 +1,864 @@
-title: "Creating Lists and Indexing"
+title: Creating Lists and Indexing
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      colours = ["red", "green", "blue"]
-      print(colours[0])
-      print(colours[2])
-      print(len(colours))
-    output: "red\nblue\n3"
-    explanation: "A list stores values in order inside square brackets. Items are zero-indexed: [0] is first, [1] is second. len() gives the total count."
+- type: concept
+  code: 'colours = ["red", "green", "blue"]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "nums = [10, 20, 30]\nprint(nums[1])"
-    choices: ["20", "10", "30", "1"]
-    correct: "20"
-    explanation: "Index 1 is the second item. nums[1] = 20."
+    print(colours[0])
 
-  - type: fill_blank
-    prompt: "Print the first item in the fruits list."
-    before: "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(fruits["
-    after: "])"
-    choices: ["0", "1", "3", "-1"]
-    answer: "0"
-    explanation: "fruits[0] is the first item: 'apple'."
+    print(colours[2])
 
-  - type: mcq
-    question: "What does this print?"
-    code: "items = [\"a\", \"b\", \"c\", \"d\"]\nprint(len(items))"
-    choices: ["4", "3", "0", "d"]
-    correct: "4"
-    explanation: "len() counts the items. There are 4 items."
+    print(len(colours))
 
-  - type: arrange
-    instruction: "Build a list called heroes with three names and print the first one"
-    blocks: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-    correct: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-    explanation: "Create the list with [], then index with [0] to get the first element."
+    '
+  output: 'red
 
-  - type: mcq
-    question: "What does this print?"
-    code: "scores = [95, 87, 72]\nprint(scores[2])"
-    choices: ["72", "95", "87", "3"]
-    correct: "72"
-    explanation: "Index 2 is the third item. scores[2] = 72."
+    blue
 
-  - type: fill_blank
-    prompt: "Print how many items are in the words list."
-    before: "words = [\"cat\", \"dog\", \"fish\"]\nprint("
-    after: "(words))"
-    choices: ["len", "str", "int", "print"]
-    answer: "len"
-    explanation: "len(words) returns 3, the number of items in the list."
+    3'
+  explanation: 'A list stores values in order inside square brackets. Items are zero-indexed: [0] is first, [1] is second.
+    len() gives the total count.'
+- type: mcq
+  question: What does this print?
+  code: 'nums = [10, 20, 30]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "data = [True, False, True]\nprint(data[0])"
-    choices: ["True", "False", "1", "0"]
-    correct: "True"
-    explanation: "Lists can hold booleans. data[0] is the first item: True."
+    print(nums[1])'
+  choices:
+  - '20'
+  - '10'
+  - '30'
+  - '1'
+  correct: '20'
+  explanation: Index 1 is the second item. nums[1] = 20.
+- type: fill_blank
+  prompt: Print the first item in the fruits list.
+  before: 'fruits = ["apple", "banana", "cherry"]
 
-  - type: arrange
-    instruction: "Print the length of a list called prices = [9.99, 4.99, 14.99]"
-    blocks: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-    correct: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-    explanation: "len(prices) counts the items and print() displays the result."
+    print(fruits['
+  after: '])'
+  choices:
+  - '0'
+  - '1'
+  - '3'
+  - '-1'
+  answer: '0'
+  explanation: 'fruits[0] is the first item: ''apple''.'
+- type: mcq
+  question: What does this print?
+  code: 'items = ["a", "b", "c", "d"]
 
-  - type: mcq
-    question: "Which is the correct way to create an empty list?"
-    code: ""
-    choices: ["my_list = []", "my_list = ()", "my_list = {}", "my_list = list"]
-    correct: "my_list = []"
-    explanation: "Empty square brackets [] create an empty list. () is a tuple, {} is a dict."
+    print(len(items))'
+  choices:
+  - '4'
+  - '3'
+  - '0'
+  - d
+  correct: '4'
+  explanation: len() counts the items. There are 4 items.
+- type: arrange
+  instruction: Build a list called heroes with three names and print the first one
+  blocks:
+  - heroes
+  - '='
+  - '['
+  - '"Alice"'
+  - ','
+  - '"Bob"'
+  - ','
+  - '"Carol"'
+  - ']'
+  - print
+  - (
+  - heroes
+  - '['
+  - '0'
+  - ']'
+  - )
+  correct:
+  - heroes
+  - '='
+  - '['
+  - '"Alice"'
+  - ','
+  - '"Bob"'
+  - ','
+  - '"Carol"'
+  - ']'
+  - print
+  - (
+  - heroes
+  - '['
+  - '0'
+  - ']'
+  - )
+  explanation: Create the list with [], then index with [0] to get the first element.
+- type: mcq
+  question: What does this print?
+  code: 'scores = [95, 87, 72]
 
-  - type: mini_code
-    prompt: "Create a list called planets with three planet names. Print the second planet."
-    starter: ""
-    tests:
-      - code: "assert isinstance(planets, list)"
-        message: "planets should be a list"
-      - code: "assert len(planets) == 3"
-        message: "planets should have 3 items"
-      - code: "assert planets[1] in _stdout"
-        message: "Should print the second planet"
+    print(scores[2])'
+  choices:
+  - '72'
+  - '95'
+  - '87'
+  - '3'
+  correct: '72'
+  explanation: Index 2 is the third item. scores[2] = 72.
+- type: fill_blank
+  prompt: Print how many items are in the words list.
+  before: 'words = ["cat", "dog", "fish"]
 
-  - type: mini_code
-    prompt: "Create a list of 4 numbers. Print the list and its length."
-    starter: ""
-    tests:
-      - code: "assert '[' in _stdout and ']' in _stdout"
-        message: "Should print the list with square brackets"
-      - code: "assert '4' in _stdout"
-        message: "Should print the length: 4"
+    print('
+  after: (words))
+  choices:
+  - len
+  - str
+  - int
+  - print
+  answer: len
+  explanation: len(words) returns 3, the number of items in the list.
+- type: mcq
+  question: What does this print?
+  code: 'data = [True, False, True]
 
+    print(data[0])'
+  choices:
+  - 'True'
+  - 'False'
+  - '1'
+  - '0'
+  correct: 'True'
+  explanation: 'Lists can hold booleans. data[0] is the first item: True.'
+- type: arrange
+  instruction: Print the length of a list called prices = [9.99, 4.99, 14.99]
+  blocks:
+  - prices
+  - '='
+  - '['
+  - '9.99'
+  - ','
+  - '4.99'
+  - ','
+  - '14.99'
+  - ']'
+  - print
+  - (
+  - len
+  - (
+  - prices
+  - )
+  - )
+  correct:
+  - prices
+  - '='
+  - '['
+  - '9.99'
+  - ','
+  - '4.99'
+  - ','
+  - '14.99'
+  - ']'
+  - print
+  - (
+  - len
+  - (
+  - prices
+  - )
+  - )
+  explanation: len(prices) counts the items and print() displays the result.
+- type: mcq
+  question: Which is the correct way to create an empty list?
+  code: ''
+  choices:
+  - my_list = []
+  - my_list = ()
+  - my_list = {}
+  - my_list = list
+  correct: my_list = []
+  explanation: Empty square brackets [] create an empty list. () is a tuple, {} is a dict.
+- type: mini_code
+  prompt: Create a list called planets with three planet names. Print the second planet.
+  starter: ''
+  tests:
+  - code: assert isinstance(planets, list)
+    message: planets should be a list
+  - code: assert len(planets) == 3
+    message: planets should have 3 items
+  - code: assert planets[1] in _stdout
+    message: Should print the second planet
+- type: mini_code
+  prompt: Create a list of 4 numbers. Print the list and its length.
+  starter: ''
+  tests:
+  - code: assert '[' in _stdout and ']' in _stdout
+    message: Should print the list with square brackets
+  - code: assert '4' in _stdout
+    message: 'Should print the length: 4'
 worlds:
   fantasy:
-    title: "Packing the Supply Crate"
+    title: Packing the Supply Crate
     exercises:
-      - type: concept
-        code: |
-          supplies = ["rope", "lantern", "bread"]
-          print(supplies[0])
-          print(supplies[2])
-          print(len(supplies))
-        output: "rope\nbread\n3"
-        explanation: "supplies is a list of gear Brin is packing. Index 0 gives 'rope' — the first item in the crate. Index 2 gives 'bread'. len() tells Brin how many items are packed."
+    - type: concept
+      code: 'supplies = ["rope", "lantern", "bread"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "gear = [10, 20, 30]\nprint(gear[1])"
-        choices: ["20", "10", "30", "1"]
-        correct: "20"
-        explanation: "Index 1 is the second item in Brin's gear list. gear[1] = 20."
+        print(supplies[0])
 
-      - type: fill_blank
-        prompt: "Print the first item in Brin's provisions list."
-        before: "provisions = [\"apple\", \"banana\", \"cherry\"]\nprint(provisions["
-        after: "])"
-        choices: ["0", "1", "3", "-1"]
-        answer: "0"
-        explanation: "provisions[0] is the first item Brin packed: 'apple'."
+        print(supplies[2])
 
-      - type: mcq
-        question: "What does this print?"
-        code: "pack = [\"a\", \"b\", \"c\", \"d\"]\nprint(len(pack))"
-        choices: ["4", "3", "0", "d"]
-        correct: "4"
-        explanation: "len() counts how many items are in Brin's pack. There are 4 items."
+        print(len(supplies))
 
-      - type: arrange
-        instruction: "Build a list called heroes with three names and print the first one"
-        blocks: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        correct: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        explanation: "Create the list with [], then index with [0] to get the first expedition member."
+        '
+      output: 'rope
 
-      - type: mcq
-        question: "What does this print?"
-        code: "weights = [95, 87, 72]\nprint(weights[2])"
-        choices: ["72", "95", "87", "3"]
-        correct: "72"
-        explanation: "Index 2 is the third weight in Brin's list. weights[2] = 72."
+        bread
 
-      - type: fill_blank
-        prompt: "Print how many supplies Brin has packed."
-        before: "supplies = [\"rope\", \"lantern\", \"bread\"]\nprint("
-        after: "(supplies))"
-        choices: ["len", "str", "int", "print"]
-        answer: "len"
-        explanation: "len(supplies) returns 3 — the number of items Brin has packed."
+        3'
+      explanation: supplies is a list of gear Brin is packing. Index 0 gives 'rope' — the first item in the crate. Index 2
+        gives 'bread'. len() tells Brin how many items are packed.
+      story_before: Brin's supply crate is a jumbled mess — the wizard insists every expedition item be organised into a proper
+        list before dawn.
+      story_after: Brin marvels at how the crate's contents line up neatly in order, each item reachable by its position.
+    - type: mcq
+      question: What does this print?
+      code: 'gear = [10, 20, 30]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "essentials = [True, False, True]\nprint(essentials[0])"
-        choices: ["True", "False", "1", "0"]
-        correct: "True"
-        explanation: "Brin's essentials list holds booleans marking what's ready. essentials[0] is True."
+        print(gear[1])'
+      choices:
+      - '20'
+      - '10'
+      - '30'
+      - '1'
+      correct: '20'
+      explanation: Index 1 is the second item in Brin's gear list. gear[1] = 20.
+      story_before: The enchanted inventory scroll numbers every slot starting from zero — Brin must learn to read the right
+        position.
+      story_after: Good — Brin knows that the second slot hides at index one, not two.
+    - type: fill_blank
+      prompt: Print the first item in Brin's provisions list.
+      before: 'provisions = ["apple", "banana", "cherry"]
 
-      - type: arrange
-        instruction: "Print the length of a list called prices = [9.99, 4.99, 14.99]"
-        blocks: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        correct: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        explanation: "len(prices) counts the gear costs and print() shows the total number of entries in Brin's budget list."
+        print(provisions['
+      after: '])'
+      choices:
+      - '0'
+      - '1'
+      - '3'
+      - '-1'
+      answer: '0'
+      explanation: 'provisions[0] is the first item Brin packed: ''apple''.'
+      story_before: The wizard needs the very first provision from the crate right away.
+      story_after: Brin hands over the first item without hesitation, knowing index zero always points to the front.
+    - type: mcq
+      question: What does this print?
+      code: 'pack = ["a", "b", "c", "d"]
 
-      - type: mcq
-        question: "Which is the correct way to create an empty list?"
-        code: ""
-        choices: ["my_list = []", "my_list = ()", "my_list = {}", "my_list = list"]
-        correct: "my_list = []"
-        explanation: "Brin starts with an empty crate using []. () is a tuple, {} is a dict — not what we need here."
+        print(len(pack))'
+      choices:
+      - '4'
+      - '3'
+      - '0'
+      - d
+      correct: '4'
+      explanation: len() counts how many items are in Brin's pack. There are 4 items.
+      story_before: Before setting off, Brin must count how many supplies have been packed.
+      story_after: The tally is confirmed — Brin's pack holds exactly four items and not one more.
+    - type: arrange
+      instruction: Build a list called heroes with three names and print the first one
+      blocks:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      correct:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      explanation: Create the list with [], then index with [0] to get the first expedition member.
+      story_before: The expedition roster needs to be written out and the lead hero's name called first.
+      story_after: The heroes list is assembled and the first name rings out — the guild is ready to march.
+    - type: mcq
+      question: What does this print?
+      code: 'weights = [95, 87, 72]
 
-      - type: mini_code
-        prompt: "Create a list called planets with three planet names. Print the second planet."
-        starter: ""
-        tests:
-          - code: "assert isinstance(planets, list)"
-            message: "planets should be a list"
-          - code: "assert len(planets) == 3"
-            message: "planets should have 3 items"
-          - code: "assert planets[1] in _stdout"
-            message: "Should print the second planet"
+        print(weights[2])'
+      choices:
+      - '72'
+      - '95'
+      - '87'
+      - '3'
+      correct: '72'
+      explanation: Index 2 is the third weight in Brin's list. weights[2] = 72.
+      story_before: Brin must check the weight of the third bundle in the gear list.
+      story_after: The third weight is located — Brin updates the load chart and shoulders the pack.
+    - type: fill_blank
+      prompt: Print how many supplies Brin has packed.
+      before: 'supplies = ["rope", "lantern", "bread"]
 
-      - type: mini_code
-        prompt: "Pack a list of 4 supplies for the expedition. Print the full pack list and how many items are in it."
-        starter: ""
-        tests:
-          - code: "assert '[' in _stdout and ']' in _stdout"
-            message: "Should print the list with square brackets"
-          - code: "assert '4' in _stdout"
-            message: "Should print the length: 4"
+        print('
+      after: (supplies))
+      choices:
+      - len
+      - str
+      - int
+      - print
+      answer: len
+      explanation: len(supplies) returns 3 — the number of items Brin has packed.
+      story_before: The wizard asks how many items remain in the supply list before the final count.
+      story_after: Brin recites the total — three supplies accounted for, the crate sealed tight.
+    - type: mcq
+      question: What does this print?
+      code: 'essentials = [True, False, True]
 
+        print(essentials[0])'
+      choices:
+      - 'True'
+      - 'False'
+      - '1'
+      - '0'
+      correct: 'True'
+      explanation: Brin's essentials list holds booleans marking what's ready. essentials[0] is True.
+      story_before: Some essentials are flagged as 'ready' with a True or False mark — Brin checks the first flag.
+      story_after: The first essential reads True, and Brin breathes a sigh of relief — it is packed.
+    - type: arrange
+      instruction: Print the length of a list called prices = [9.99, 4.99, 14.99]
+      blocks:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      correct:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      explanation: len(prices) counts the gear costs and print() shows the total number of entries in Brin's budget list.
+      story_before: The treasurer wants a count of how many priced items are in the budget list.
+      story_after: The count is printed — Brin can now tell the guild exactly how many cost entries exist.
+    - type: mcq
+      question: Which is the correct way to create an empty list?
+      code: ''
+      choices:
+      - my_list = []
+      - my_list = ()
+      - my_list = {}
+      - my_list = list
+      correct: my_list = []
+      explanation: Brin starts with an empty crate using []. () is a tuple, {} is a dict — not what we need here.
+      story_before: The wizard's apprentice needs a blank container before filling it with new supplies.
+      story_after: An empty crate stands ready — Brin knows square brackets conjure a list from thin air.
+    - type: mini_code
+      prompt: Create a list called planets with three planet names. Print the second planet.
+      starter: ''
+      tests:
+      - code: assert isinstance(planets, list)
+        message: planets should be a list
+      - code: assert len(planets) == 3
+        message: planets should have 3 items
+      - code: assert planets[1] in _stdout
+        message: Should print the second planet
+      story_before: Brin is charting a star route and must list three planet names, then call out the second stop.
+      story_after: The second planet echoes through the workshop — the route scroll is officially drafted.
+    - type: mini_code
+      prompt: Pack a list of 4 supplies for the expedition. Print the full pack list and how many items are in it.
+      starter: ''
+      tests:
+      - code: assert '[' in _stdout and ']' in _stdout
+        message: Should print the list with square brackets
+      - code: assert '4' in _stdout
+        message: 'Should print the length: 4'
+      story_before: 'The final task: pack four expedition supplies into a list, then report the full contents and the total
+        count to the wizard.'
+      story_after: The crate is inventoried and sealed — Brin's list is complete and the expedition can begin.
   scifi:
-    title: "Logging the First Asteroids"
+    title: Logging the First Asteroids
     exercises:
-      - type: concept
-        code: |
-          asteroids = ["A-01", "B-07", "C-14"]
-          print(asteroids[0])
-          print(asteroids[2])
-          print(len(asteroids))
-        output: "A-01\nC-14\n3"
-        explanation: "asteroids is a list of rock IDs Navigator Zev is tracking. Index 0 gives 'A-01' — the first logged asteroid. Index 2 gives 'C-14'. len() tells Zev how many rocks are on the map."
+    - type: concept
+      code: 'asteroids = ["A-01", "B-07", "C-14"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "readings = [10, 20, 30]\nprint(readings[1])"
-        choices: ["20", "10", "30", "1"]
-        correct: "20"
-        explanation: "Index 1 is the second sensor reading in Zev's list. readings[1] = 20."
+        print(asteroids[0])
 
-      - type: fill_blank
-        prompt: "Print the first asteroid ID in Zev's scan list."
-        before: "scan = [\"apple\", \"banana\", \"cherry\"]\nprint(scan["
-        after: "])"
-        choices: ["0", "1", "3", "-1"]
-        answer: "0"
-        explanation: "scan[0] is the first asteroid ID Zev recorded."
+        print(asteroids[2])
 
-      - type: mcq
-        question: "What does this print?"
-        code: "hazards = [\"a\", \"b\", \"c\", \"d\"]\nprint(len(hazards))"
-        choices: ["4", "3", "0", "d"]
-        correct: "4"
-        explanation: "len() counts how many hazard entries are in Zev's log. There are 4."
+        print(len(asteroids))
 
-      - type: arrange
-        instruction: "Build a list called heroes with three names and print the first one"
-        blocks: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        correct: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        explanation: "Create the list with [], then index with [0] to get the first crew member's name."
+        '
+      output: 'A-01
 
-      - type: mcq
-        question: "What does this print?"
-        code: "ratings = [95, 87, 72]\nprint(ratings[2])"
-        choices: ["72", "95", "87", "3"]
-        correct: "72"
-        explanation: "Index 2 is the third hazard rating in Zev's list. ratings[2] = 72."
+        C-14
 
-      - type: fill_blank
-        prompt: "Print how many asteroids Zev has logged."
-        before: "asteroids = [\"A-01\", \"B-07\", \"C-14\"]\nprint("
-        after: "(asteroids))"
-        choices: ["len", "str", "int", "print"]
-        answer: "len"
-        explanation: "len(asteroids) returns 3 — the number of asteroids Zev has mapped so far."
+        3'
+      explanation: asteroids is a list of rock IDs Navigator Zev is tracking. Index 0 gives 'A-01' — the first logged asteroid.
+        Index 2 gives 'C-14'. len() tells Zev how many rocks are on the map.
+      story_before: Navigator Zev's sensor log is overflowing with raw data — Command needs every asteroid ID stored in an
+        ordered list before the next jump.
+      story_after: Zev watches the asteroid IDs slot neatly into position, each one addressable by its index on the scanner
+        grid.
+    - type: mcq
+      question: What does this print?
+      code: 'readings = [10, 20, 30]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "active = [True, False, True]\nprint(active[0])"
-        choices: ["True", "False", "1", "0"]
-        correct: "True"
-        explanation: "Zev's active sensor list holds booleans. active[0] is True — the first sensor is online."
+        print(readings[1])'
+      choices:
+      - '20'
+      - '10'
+      - '30'
+      - '1'
+      correct: '20'
+      explanation: Index 1 is the second sensor reading in Zev's list. readings[1] = 20.
+      story_before: The onboard computer indexes all sensor readings from zero — Zev needs to pull the correct slot.
+      story_after: Index one confirmed — Zev records the second reading and relays it to the bridge.
+    - type: fill_blank
+      prompt: Print the first asteroid ID in Zev's scan list.
+      before: 'scan = ["apple", "banana", "cherry"]
 
-      - type: arrange
-        instruction: "Print the length of a list called prices = [9.99, 4.99, 14.99]"
-        blocks: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        correct: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        explanation: "len(prices) counts the fuel cost entries and print() shows how many readings are stored."
+        print(scan['
+      after: '])'
+      choices:
+      - '0'
+      - '1'
+      - '3'
+      - '-1'
+      answer: '0'
+      explanation: scan[0] is the first asteroid ID Zev recorded.
+      story_before: Command is requesting the first item in the scan list immediately.
+      story_after: Slot zero retrieved — Zev transmits the lead entry and the bridge logs it instantly.
+    - type: mcq
+      question: What does this print?
+      code: 'hazards = ["a", "b", "c", "d"]
 
-      - type: mcq
-        question: "Which is the correct way to create an empty list?"
-        code: ""
-        choices: ["my_list = []", "my_list = ()", "my_list = {}", "my_list = list"]
-        correct: "my_list = []"
-        explanation: "Zev starts a fresh scan log with []. () is a tuple, {} is a dict — those won't work here."
+        print(len(hazards))'
+      choices:
+      - '4'
+      - '3'
+      - '0'
+      - d
+      correct: '4'
+      explanation: len() counts how many hazard entries are in Zev's log. There are 4.
+      story_before: Before the next manoeuvre Zev needs a full count of hazard entries on the list.
+      story_after: Four hazards confirmed — Zev files the count and updates the threat assessment.
+    - type: arrange
+      instruction: Build a list called heroes with three names and print the first one
+      blocks:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      correct:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      explanation: Create the list with [], then index with [0] to get the first crew member's name.
+      story_before: The crew roster must be compiled and the first crew member's name broadcast over comms.
+      story_after: The crew list is live and the first name announced — all stations acknowledge.
+    - type: mcq
+      question: What does this print?
+      code: 'ratings = [95, 87, 72]
 
-      - type: mini_code
-        prompt: "Create a list called planets with three planet names. Print the second planet."
-        starter: ""
-        tests:
-          - code: "assert isinstance(planets, list)"
-            message: "planets should be a list"
-          - code: "assert len(planets) == 3"
-            message: "planets should have 3 items"
-          - code: "assert planets[1] in _stdout"
-            message: "Should print the second planet"
+        print(ratings[2])'
+      choices:
+      - '72'
+      - '95'
+      - '87'
+      - '3'
+      correct: '72'
+      explanation: Index 2 is the third hazard rating in Zev's list. ratings[2] = 72.
+      story_before: A specific hazard rating deep in the list needs to be checked before altering course.
+      story_after: The third rating is retrieved — Zev adjusts the navigation path accordingly.
+    - type: fill_blank
+      prompt: Print how many asteroids Zev has logged.
+      before: 'asteroids = ["A-01", "B-07", "C-14"]
 
-      - type: mini_code
-        prompt: "Log 4 asteroid IDs in a list. Print the full list and how many asteroids are tracked."
-        starter: ""
-        tests:
-          - code: "assert '[' in _stdout and ']' in _stdout"
-            message: "Should print the list with square brackets"
-          - code: "assert '4' in _stdout"
-            message: "Should print the length: 4"
+        print('
+      after: (asteroids))
+      choices:
+      - len
+      - str
+      - int
+      - print
+      answer: len
+      explanation: len(asteroids) returns 3 — the number of asteroids Zev has mapped so far.
+      story_before: Command wants to know exactly how many asteroids are currently tracked in the log.
+      story_after: Three asteroids confirmed in the log — Zev's count report is transmitted successfully.
+    - type: mcq
+      question: What does this print?
+      code: 'active = [True, False, True]
 
+        print(active[0])'
+      choices:
+      - 'True'
+      - 'False'
+      - '1'
+      - '0'
+      correct: 'True'
+      explanation: Zev's active sensor list holds booleans. active[0] is True — the first sensor is online.
+      story_before: The sensor status array uses True and False flags — Zev checks whether the first sensor is online.
+      story_after: First sensor reads True — it is active and streaming data to the navigation console.
+    - type: arrange
+      instruction: Print the length of a list called prices = [9.99, 4.99, 14.99]
+      blocks:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      correct:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      explanation: len(prices) counts the fuel cost entries and print() shows how many readings are stored.
+      story_before: Engineering needs a count of fuel cost entries stored in the budget list.
+      story_after: The entry count is printed — Zev passes the fuel summary to the chief engineer.
+    - type: mcq
+      question: Which is the correct way to create an empty list?
+      code: ''
+      choices:
+      - my_list = []
+      - my_list = ()
+      - my_list = {}
+      - my_list = list
+      correct: my_list = []
+      explanation: Zev starts a fresh scan log with []. () is a tuple, {} is a dict — those won't work here.
+      story_before: Zev needs a fresh, empty list to start a new scan log for the next sector.
+      story_after: An empty log is initialised with square brackets — ready to receive incoming asteroid data.
+    - type: mini_code
+      prompt: Create a list called planets with three planet names. Print the second planet.
+      starter: ''
+      tests:
+      - code: assert isinstance(planets, list)
+        message: planets should be a list
+      - code: assert len(planets) == 3
+        message: planets should have 3 items
+      - code: assert planets[1] in _stdout
+        message: Should print the second planet
+      story_before: Zev is charting three planets on the star map and must display the second destination.
+      story_after: The second planet is on screen — Zev plots the jump coordinates and awaits confirmation.
+    - type: mini_code
+      prompt: Log 4 asteroid IDs in a list. Print the full list and how many asteroids are tracked.
+      starter: ''
+      tests:
+      - code: assert '[' in _stdout and ']' in _stdout
+        message: Should print the list with square brackets
+      - code: assert '4' in _stdout
+        message: 'Should print the length: 4'
+      story_before: 'Final system check: log four asteroid IDs in a list and report both the full list and its length to Command.'
+      story_after: Four asteroids logged and count verified — the sensor array is fully operational for the mission.
   mystery:
-    title: "Pinning Suspects to the Board"
+    title: Pinning Suspects to the Board
     exercises:
-      - type: concept
-        code: |
-          suspects = ["Raven", "Stone", "Harlow"]
-          print(suspects[0])
-          print(suspects[2])
-          print(len(suspects))
-        output: "Raven\nHarlow\n3"
-        explanation: "suspects is Detective Cole's list of persons of interest. Index 0 gives 'Raven' — the first pinned suspect. Index 2 gives 'Harlow'. len() shows Cole how many suspects are on the board."
+    - type: concept
+      code: 'suspects = ["Raven", "Stone", "Harlow"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "case_ids = [10, 20, 30]\nprint(case_ids[1])"
-        choices: ["20", "10", "30", "1"]
-        correct: "20"
-        explanation: "Index 1 is the second case ID on Cole's list. case_ids[1] = 20."
+        print(suspects[0])
 
-      - type: fill_blank
-        prompt: "Print the first clue in Cole's evidence list."
-        before: "evidence = [\"apple\", \"banana\", \"cherry\"]\nprint(evidence["
-        after: "])"
-        choices: ["0", "1", "3", "-1"]
-        answer: "0"
-        explanation: "evidence[0] is the first clue Cole pinned to the board."
+        print(suspects[2])
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clues = [\"a\", \"b\", \"c\", \"d\"]\nprint(len(clues))"
-        choices: ["4", "3", "0", "d"]
-        correct: "4"
-        explanation: "len() counts how many clues Cole has pinned. There are 4 clues."
+        print(len(suspects))
 
-      - type: arrange
-        instruction: "Build a list called heroes with three names and print the first one"
-        blocks: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        correct: ["heroes", "=", "[", "\"Alice\"", ",", "\"Bob\"", ",", "\"Carol\"", "]", "print", "(", "heroes", "[", "0", "]", ")"]
-        explanation: "Create the list with [], then index with [0] to get the first suspect's name."
+        '
+      output: 'Raven
 
-      - type: mcq
-        question: "What does this print?"
-        code: "relevance = [95, 87, 72]\nprint(relevance[2])"
-        choices: ["72", "95", "87", "3"]
-        correct: "72"
-        explanation: "Index 2 is the third relevance score in Cole's list. relevance[2] = 72."
+        Harlow
 
-      - type: fill_blank
-        prompt: "Print how many suspects Cole has on the board."
-        before: "suspects = [\"Raven\", \"Stone\", \"Harlow\"]\nprint("
-        after: "(suspects))"
-        choices: ["len", "str", "int", "print"]
-        answer: "len"
-        explanation: "len(suspects) returns 3 — the number of suspects Cole is investigating."
+        3'
+      explanation: suspects is Detective Cole's list of persons of interest. Index 0 gives 'Raven' — the first pinned suspect.
+        Index 2 gives 'Harlow'. len() shows Cole how many suspects are on the board.
+      story_before: Cole's corkboard is chaos — before questioning anyone, every suspect name must be pinned into an ordered
+        list.
+      story_after: Three names line up on the board, each reachable by position — Cole can now navigate the suspect file with
+        precision.
+    - type: mcq
+      question: What does this print?
+      code: 'case_ids = [10, 20, 30]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "alibis = [True, False, True]\nprint(alibis[0])"
-        choices: ["True", "False", "1", "0"]
-        correct: "True"
-        explanation: "Cole's alibis list tracks whether each suspect has a verified alibi. alibis[0] is True."
+        print(case_ids[1])'
+      choices:
+      - '20'
+      - '10'
+      - '30'
+      - '1'
+      correct: '20'
+      explanation: Index 1 is the second case ID on Cole's list. case_ids[1] = 20.
+      story_before: The case file numbers every entry starting at zero — Cole needs to pull the right index.
+      story_after: Case ID at index one located — Cole underlines it and adds it to the active file.
+    - type: fill_blank
+      prompt: Print the first clue in Cole's evidence list.
+      before: 'evidence = ["apple", "banana", "cherry"]
 
-      - type: arrange
-        instruction: "Print the length of a list called prices = [9.99, 4.99, 14.99]"
-        blocks: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        correct: ["prices", "=", "[", "9.99", ",", "4.99", ",", "14.99", "]", "print", "(", "len", "(", "prices", ")", ")"]
-        explanation: "len(prices) counts the ransom amounts logged as evidence and print() displays the total count."
+        print(evidence['
+      after: '])'
+      choices:
+      - '0'
+      - '1'
+      - '3'
+      - '-1'
+      answer: '0'
+      explanation: evidence[0] is the first clue Cole pinned to the board.
+      story_before: Cole needs the first clue logged in the evidence list — the one that started this whole case.
+      story_after: The first piece of evidence is in hand — Cole pins it front-and-centre on the board.
+    - type: mcq
+      question: What does this print?
+      code: 'clues = ["a", "b", "c", "d"]
 
-      - type: mcq
-        question: "Which is the correct way to create an empty list?"
-        code: ""
-        choices: ["my_list = []", "my_list = ()", "my_list = {}", "my_list = list"]
-        correct: "my_list = []"
-        explanation: "Cole starts a fresh evidence list with []. () is a tuple, {} is a dict — those aren't lists."
+        print(len(clues))'
+      choices:
+      - '4'
+      - '3'
+      - '0'
+      - d
+      correct: '4'
+      explanation: len() counts how many clues Cole has pinned. There are 4 clues.
+      story_before: Before the morning briefing, Cole needs a precise count of clues currently pinned.
+      story_after: Four clues counted — Cole updates the whiteboard tally before the chief arrives.
+    - type: arrange
+      instruction: Build a list called heroes with three names and print the first one
+      blocks:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      correct:
+      - heroes
+      - '='
+      - '['
+      - '"Alice"'
+      - ','
+      - '"Bob"'
+      - ','
+      - '"Carol"'
+      - ']'
+      - print
+      - (
+      - heroes
+      - '['
+      - '0'
+      - ']'
+      - )
+      explanation: Create the list with [], then index with [0] to get the first suspect's name.
+      story_before: Cole compiles the suspect list and announces the lead name to the precinct.
+      story_after: The list is assembled and the prime suspect's name is spoken aloud — the investigation has a focus.
+    - type: mcq
+      question: What does this print?
+      code: 'relevance = [95, 87, 72]
 
-      - type: mini_code
-        prompt: "Create a list called planets with three planet names. Print the second planet."
-        starter: ""
-        tests:
-          - code: "assert isinstance(planets, list)"
-            message: "planets should be a list"
-          - code: "assert len(planets) == 3"
-            message: "planets should have 3 items"
-          - code: "assert planets[1] in _stdout"
-            message: "Should print the second planet"
+        print(relevance[2])'
+      choices:
+      - '72'
+      - '95'
+      - '87'
+      - '3'
+      correct: '72'
+      explanation: Index 2 is the third relevance score in Cole's list. relevance[2] = 72.
+      story_before: A relevance score buried third in the list may crack the alibi wide open.
+      story_after: Score at index two retrieved — Cole marks it as a key data point in the case notes.
+    - type: fill_blank
+      prompt: Print how many suspects Cole has on the board.
+      before: 'suspects = ["Raven", "Stone", "Harlow"]
 
-      - type: mini_code
-        prompt: "Create a list of 4 suspect names. Print the full list and how many suspects Cole is tracking."
-        starter: ""
-        tests:
-          - code: "assert '[' in _stdout and ']' in _stdout"
-            message: "Should print the list with square brackets"
-          - code: "assert '4' in _stdout"
-            message: "Should print the length: 4"
+        print('
+      after: (suspects))
+      choices:
+      - len
+      - str
+      - int
+      - print
+      answer: len
+      explanation: len(suspects) returns 3 — the number of suspects Cole is investigating.
+      story_before: The lieutenant wants a headcount of everyone currently on the suspect board.
+      story_after: Three suspects confirmed — Cole reads the number to the lieutenant without hesitation.
+    - type: mcq
+      question: What does this print?
+      code: 'alibis = [True, False, True]
+
+        print(alibis[0])'
+      choices:
+      - 'True'
+      - 'False'
+      - '1'
+      - '0'
+      correct: 'True'
+      explanation: Cole's alibis list tracks whether each suspect has a verified alibi. alibis[0] is True.
+      story_before: The alibi log uses True and False — Cole checks whether the first suspect's alibi holds.
+      story_after: Alibi at position zero is True — Cole circles the name and moves to the next lead.
+    - type: arrange
+      instruction: Print the length of a list called prices = [9.99, 4.99, 14.99]
+      blocks:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      correct:
+      - prices
+      - '='
+      - '['
+      - '9.99'
+      - ','
+      - '4.99'
+      - ','
+      - '14.99'
+      - ']'
+      - print
+      - (
+      - len
+      - (
+      - prices
+      - )
+      - )
+      explanation: len(prices) counts the ransom amounts logged as evidence and print() displays the total count.
+      story_before: The evidence locker has ransom amounts logged — Cole needs a count of entries for the DA.
+      story_after: The count is printed — Cole passes the tally to the DA's office for the court filing.
+    - type: mcq
+      question: Which is the correct way to create an empty list?
+      code: ''
+      choices:
+      - my_list = []
+      - my_list = ()
+      - my_list = {}
+      - my_list = list
+      correct: my_list = []
+      explanation: Cole starts a fresh evidence list with []. () is a tuple, {} is a dict — those aren't lists.
+      story_before: Cole needs a fresh, empty list to start logging a new round of clues from the witness interview.
+      story_after: An empty evidence list stands ready — Cole picks up the pen and prepares to record.
+    - type: mini_code
+      prompt: Create a list called planets with three planet names. Print the second planet.
+      starter: ''
+      tests:
+      - code: assert isinstance(planets, list)
+        message: planets should be a list
+      - code: assert len(planets) == 3
+        message: planets should have 3 items
+      - code: assert planets[1] in _stdout
+        message: Should print the second planet
+      story_before: Cole is cross-referencing planets in a smuggling route and needs to display the second stop.
+      story_after: The second planet on the route is identified — Cole marks it on the map and calls for backup.
+    - type: mini_code
+      prompt: Create a list of 4 suspect names. Print the full list and how many suspects Cole is tracking.
+      starter: ''
+      tests:
+      - code: assert '[' in _stdout and ']' in _stdout
+        message: Should print the list with square brackets
+      - code: assert '4' in _stdout
+        message: 'Should print the length: 4'
+      story_before: 'Final board update: record four suspect names in a list and report the full list and count to the chief.'
+      story_after: The suspect list is filed and the count confirmed — Cole's board is organised and the case can proceed.

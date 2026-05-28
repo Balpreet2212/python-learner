@@ -155,6 +155,10 @@ worlds:
         Stand down\")\n"
       output: Brace for impact!
       explanation: Kira checks two conditions at once. Both threat >= 7 AND has_shield must be True to brace.
+      story_before: Kira faces a high-threat creature while her shield is raised — she needs both conditions true at once
+        to decide her stance.
+      story_after: Threat 9 and shield both True; the if fires and Kira braces, combining two pieces of information into one
+        decisive moment.
     - type: mcq
       question: Kira checks if a creature is within striking range. What does this print?
       code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
@@ -165,6 +169,9 @@ worlds:
       - x
       correct: in range
       explanation: Both x > 0 (True) and x < 10 (True) are True, so the creature is in range.
+      story_before: A creature is somewhere in the clearing — Kira checks whether it falls within striking range using two
+        boundary conditions joined by and.
+      story_after: Both conditions hold; 'in range' prints and Kira nocks her arrow, confident of the creature's position.
     - type: fill_blank
       prompt: Identify a creature as a juvenile only when size meets both the lower AND upper bounds.
       before: 'if size >= 13 '
@@ -176,6 +183,9 @@ worlds:
       - ==
       answer: and
       explanation: 'Both conditions must be True: size >= 13 AND size <= 19.'
+      story_before: Kira needs to classify a creature as juvenile only when its size falls within both the lower and upper
+        bounds — she must choose the right connector.
+      story_after: and is chosen; the juvenile tag now requires both boundaries to be satisfied before it appears in the bestiary.
     - type: mcq
       question: Kira checks if a threat level is out of the safe range. What does this print?
       code: "threat = 45\nif threat < 0 or threat > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
@@ -186,6 +196,9 @@ worlds:
       - Nothing
       correct: valid
       explanation: threat < 0 is False and threat > 100 is False. False or False = False, so else runs.
+      story_before: Kira checks whether a threat reading of 45 is out of the safe range using an or condition — she traces
+        the result.
+      story_after: Neither branch of the or is True; 'valid' prints and Kira trusts the reading is within normal bounds.
     - type: arrange
       instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
       blocks:
@@ -213,6 +226,9 @@ worlds:
       - '"qualified"'
       - )
       explanation: name is truthy when non-empty. Both conditions must hold to identify the creature.
+      story_before: Kira's combat-registry check must confirm a creature has both a recorded name and a score of at least
+        50 before marking it qualified.
+      story_after: The if with and is assembled; only creatures meeting both requirements will earn the qualified stamp.
     - type: mcq
       question: Kira evaluates complex storm and shield conditions. What does this print?
       code: "is_storming = True\nhas_shelter = False\nif not (is_storming and not has_shelter):\n    print(\"go outside\"\
@@ -224,6 +240,10 @@ worlds:
       - 'False'
       correct: stay inside
       explanation: is_storming is True, not has_shelter is True. True and True = True. not True = False. else runs.
+      story_before: A storm rages and Kira has no shelter — she evaluates the nested not/and logic to decide whether to venture
+        out.
+      story_after: The compound condition resolves to False; the else fires and Kira stays inside, warm and dry until the
+        storm passes.
     - type: fill_blank
       prompt: Cast the spell only when the correct scroll name AND mana cost match.
       before: 'if scroll_name == "Fireball" '
@@ -235,6 +255,9 @@ worlds:
       - if
       answer: and
       explanation: Both scroll name AND mana cost must match to successfully cast.
+      story_before: The Fireball spell demands both the correct scroll name and exact mana cost — Kira fills in the connector
+        that enforces both.
+      story_after: and is in place; the spell will only cast when both the name and the mana reading match exactly.
     - type: mcq
       question: Which condition is True when a threat level is outside the range 1 to 100?
       code: ''
@@ -245,6 +268,9 @@ worlds:
       - n <= 0 and n >= 101
       correct: n < 1 or n > 100
       explanation: Outside the range means less than 1 OR greater than 100.
+      story_before: Kira needs the condition that flags a threat level as outside the valid 1-to-100 range — she picks the
+        right logical operator.
+      story_after: n < 1 or n > 100 is correct; Kira now has a reliable out-of-range detector for any reading she receives.
     - type: mcq
       question: Kira checks hp and shield status. What does this print?
       code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
@@ -257,6 +283,9 @@ worlds:
       - 'True'
       correct: safe
       explanation: hp > 20 is True and shield is True. True and True = True.
+      story_before: Kira checks her hp and shield status simultaneously — she traces the and condition to see whether 'safe'
+        or 'danger' prints.
+      story_after: Both conditions are True; 'safe' prints and Kira pushes forward, confident her combined defences are holding.
     - type: mini_code
       prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
         is True, else print 'fail'.
@@ -281,6 +310,10 @@ worlds:
 
           True'
         message: threat=40 is below 50, retreat
+      story_before: Kira must advance to the next zone only when her combat score and her trial result both confirm she's
+        ready — she writes the combined check.
+      story_after: The and condition is live; Kira will only pass through when both the score and the trial outcome are in
+        her favour.
     - type: mini_code
       prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
       starter: 'hour = int(input())
@@ -296,6 +329,10 @@ worlds:
       - code: assert _stdout.strip() == 'closed'
         stdin: '18'
         message: hour 18 is after the patrol window
+      story_before: The enchanted hunting ground is only open during daylight hours — Kira writes the and condition that checks
+        whether the hour falls within the window.
+      story_after: The window check is in place; the gate will stay closed before dawn and after dusk, opening only during
+        the permitted hours.
   scifi:
     title: Launch Window Conditions
     exercises:
@@ -304,6 +341,9 @@ worlds:
         Abort\")\n"
       output: Abort
       explanation: 'Voss checks two conditions. fuel >= 18 is False (17 < 18), so else runs: "Abort".'
+      story_before: Voss needs both fuel and shields in the green before the launch window opens — a single and condition
+        will make or break the countdown.
+      story_after: Fuel is 17, one short; and fails and 'Abort' flashes — Voss calls a hold while the tanks are topped up.
     - type: mcq
       question: Voss checks if fuel is within the launch window. What does this print?
       code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
@@ -314,6 +354,9 @@ worlds:
       - x
       correct: in range
       explanation: Both x > 0 (True) and x < 10 (True) are True, so fuel is in the launch window.
+      story_before: The fuel gauge reads 5 — Voss checks whether that value falls inside the launch-window range using two
+        boundary conditions.
+      story_after: Both bounds are satisfied; 'in range' confirms the reading is valid and Voss marks the tank as mission-ready.
     - type: fill_blank
       prompt: Flag crew as junior cadets only when age is within both the lower AND upper limits.
       before: 'if age >= 13 '
@@ -325,6 +368,10 @@ worlds:
       - ==
       answer: and
       explanation: 'Both conditions must be True: age >= 13 AND age <= 19.'
+      story_before: A crew member must meet both the lower and upper age limits to be classified as a junior cadet — Voss
+        selects the right connector.
+      story_after: and is chosen; the cadet flag now requires both age boundaries to be True before it appears on the crew
+        manifest.
     - type: mcq
       question: Voss checks if hull integrity is out of the acceptable range. What does this print?
       code: "hull = 45\nif hull < 0 or hull > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
@@ -335,6 +382,8 @@ worlds:
       - Nothing
       correct: valid
       explanation: hull < 0 is False and hull > 100 is False. False or False = False, so else runs.
+      story_before: Voss checks a hull reading of 45 against the out-of-range or condition — he traces which branch fires.
+      story_after: Neither side of the or is True; 'valid' prints and Voss confirms the sensor data is within acceptable bounds.
     - type: arrange
       instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
       blocks:
@@ -362,6 +411,9 @@ worlds:
       - '"qualified"'
       - )
       explanation: Both conditions must hold to qualify for launch crew.
+      story_before: A crew member must have both an ID on file and a readiness score of at least 50 to qualify for the launch
+        team — Voss assembles the check.
+      story_after: The and condition is in place; only crew members meeting both criteria will make the final launch roster.
     - type: mcq
       question: Voss evaluates complex storm and shelter conditions. What does this print?
       code: "is_storming = True\nhas_shelter = False\nif not (is_storming and not has_shelter):\n    print(\"go outside\"\
@@ -373,6 +425,10 @@ worlds:
       - 'False'
       correct: stay inside
       explanation: is_storming True, not has_shelter True. True and True = True. not True = False. else runs.
+      story_before: A solar storm is raging and the shielding is down — Voss evaluates the compound logic to decide whether
+        to dispatch crew outside.
+      story_after: The compound condition resolves to False; the else fires and Voss keeps all crew inside until the storm
+        passes.
     - type: fill_blank
       prompt: Unlock the escape pod only when both crew ID AND launch code match.
       before: 'if crew_id == "admin" '
@@ -384,6 +440,9 @@ worlds:
       - if
       answer: and
       explanation: Both crew ID AND launch code must match to unlock the escape pod.
+      story_before: The escape pod requires both a valid crew ID and the correct launch code — Voss fills in the connector
+        that enforces both.
+      story_after: and is in; the pod will only unlock when both the ID and the code match the registry.
     - type: mcq
       question: Which condition is True when a fuel reading is outside the range 1 to 100?
       code: ''
@@ -394,6 +453,9 @@ worlds:
       - n <= 0 and n >= 101
       correct: n < 1 or n > 100
       explanation: Outside the range means less than 1 OR greater than 100.
+      story_before: Voss needs the condition that flags a fuel reading as out of the valid range — he selects the right logical
+        operator.
+      story_after: n < 1 or n > 100 is correct; Voss now has a reliable out-of-range guard for every fuel sensor on the ship.
     - type: mcq
       question: Voss checks hull integrity and shields. What does this print?
       code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
@@ -406,6 +468,9 @@ worlds:
       - 'True'
       correct: safe
       explanation: hp > 20 is True and shield is True. True and True = True.
+      story_before: Voss checks hull integrity and shield status together — he traces the and condition to see whether 'safe'
+        or 'danger' appears.
+      story_after: Both conditions are True; 'safe' prints and Voss logs the section as structurally sound.
     - type: mini_code
       prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
         is True, else print 'fail'.
@@ -430,6 +495,9 @@ worlds:
 
           True'
         message: hull=40 is below 50, abort
+      story_before: A crew member must hit both the fitness threshold and pass the clearance check to board the ship — Voss
+        writes the combined condition.
+      story_after: The and condition is armed; only personnel who clear both gates will receive a boarding pass.
     - type: mini_code
       prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
       starter: 'hour = int(input())
@@ -445,6 +513,10 @@ worlds:
       - code: assert _stdout.strip() == 'closed'
         stdin: '18'
         message: hour 18 is after the window closes
+      story_before: The launch window is restricted to specific hours — Voss writes the and condition that confirms the current
+        hour is inside the window.
+      story_after: The window check is live; any launch attempt outside the hours will be blocked automatically by the new
+        condition.
   mystery:
     title: Ruling Out the Suspects
     exercises:
@@ -453,6 +525,10 @@ worlds:
         \ denied\")\n"
       output: Access denied
       explanation: Cole checks two conditions. age >= 18 is False (17 < 18), so the else branch runs.
+      story_before: Cole needs both age and badge to clear a witness for access — one condition alone isn't enough; both must
+        be true.
+      story_after: Age is 17, just short; the and fails and 'Access denied' prints — Cole sends the witness back for proper
+        clearance.
     - type: mcq
       question: Cole checks if a suspect score is within the investigation range. What does this print?
       code: "x = 5\nif x > 0 and x < 10:\n    print(\"in range\")"
@@ -463,6 +539,9 @@ worlds:
       - x
       correct: in range
       explanation: Both x > 0 (True) and x < 10 (True) are True, so the score is in range.
+      story_before: A suspect's credibility score is 5 — Cole checks whether it falls within the valid investigation range
+        using two boundary conditions.
+      story_after: Both bounds hold; 'in range' confirms the score is meaningful and Cole adds the suspect to the active list.
     - type: fill_blank
       prompt: Flag a suspect as a young adult only when age meets both the lower AND upper age limits.
       before: 'if age >= 13 '
@@ -474,6 +553,10 @@ worlds:
       - ==
       answer: and
       explanation: 'Both conditions must be True: age >= 13 AND age <= 19.'
+      story_before: Cole must flag a suspect as a young adult only when the age falls within both limits — he picks the connector
+        that enforces both.
+      story_after: and is chosen; the young-adult tag now requires both age conditions to be True before it appears in the
+        case file.
     - type: mcq
       question: Cole checks if a credibility score is out of range. What does this print?
       code: "score = 45\nif score < 0 or score > 100:\n    print(\"invalid\")\nelse:\n    print(\"valid\")"
@@ -484,6 +567,8 @@ worlds:
       - Nothing
       correct: valid
       explanation: score < 0 is False and score > 100 is False. False or False = False, so else runs.
+      story_before: Cole checks a credibility score of 45 against the out-of-range or condition — he traces which branch fires.
+      story_after: Neither side of the or is True; 'valid' prints and Cole accepts the score as a legitimate data point.
     - type: arrange
       instruction: Build code that prints 'qualified' when name is not empty and score is 50 or above
       blocks:
@@ -511,6 +596,10 @@ worlds:
       - '"qualified"'
       - )
       explanation: Both conditions must hold to qualify as a primary suspect.
+      story_before: A suspect qualifies for deeper investigation only when they have an ID and a suspicion score of at least
+        50 — Cole assembles the check.
+      story_after: The and condition is assembled; only suspects meeting both requirements will be escalated to the formal
+        inquiry.
     - type: mcq
       question: Cole evaluates weather and witness conditions. What does this print?
       code: "is_raining = True\nhas_umbrella = False\nif not (is_raining and not has_umbrella):\n    print(\"go outside\"\
@@ -522,6 +611,9 @@ worlds:
       - 'False'
       correct: stay inside
       explanation: is_raining True, not has_umbrella True. True and True = True. not True = False. else runs.
+      story_before: It's raining and Cole has no umbrella — he evaluates the compound not/and logic to decide whether the
+        outdoor stakeout can proceed.
+      story_after: The compound condition resolves to False; the else fires and Cole decides the stakeout waits for dry weather.
     - type: fill_blank
       prompt: Access the locked room only when both the name AND the code match.
       before: 'if suspect_name == "admin" '
@@ -533,6 +625,9 @@ worlds:
       - if
       answer: and
       explanation: Both the name AND the access code must match.
+      story_before: The locked room requires both the right name and the correct code — Cole fills in the connector that enforces
+        both at once.
+      story_after: and is in; the room will only open when both the name and the code are a match.
     - type: mcq
       question: Which condition is True when a suspect score is outside the range 1 to 100?
       code: ''
@@ -543,6 +638,10 @@ worlds:
       - n <= 0 and n >= 101
       correct: n < 1 or n > 100
       explanation: Outside the range means less than 1 OR greater than 100.
+      story_before: Cole needs the condition that flags a credibility score as outside the valid range — he selects the right
+        logical operator.
+      story_after: n < 1 or n > 100 is correct; Cole now has a reliable filter for any score that falls outside what the case
+        can use.
     - type: mcq
       question: Cole checks alibi strength and witness support. What does this print?
       code: "hp = 30\nshield = True\nif hp > 20 and shield:\n    print(\"safe\")\nelse:\n    print(\"danger\")"
@@ -555,6 +654,9 @@ worlds:
       - 'True'
       correct: safe
       explanation: hp > 20 is True and shield is True. True and True = True.
+      story_before: Cole checks alibi strength and witness support together — he traces the and condition to confirm whether
+        the suspect reads as 'safe' or 'danger'.
+      story_after: Both conditions are True; 'safe' prints and Cole marks the suspect as currently low-priority.
     - type: mini_code
       prompt: Read score then passed_exam ('True'/'False') with input(). Print 'pass' if score is 50 or above AND passed_exam
         is True, else print 'fail'.
@@ -579,6 +681,9 @@ worlds:
 
           True'
         message: evidence=40 is below 50, insufficient
+      story_before: Cole will only formally charge a suspect when both the evidence score clears 50 and the alibi has been
+        broken — he writes the combined check.
+      story_after: The and condition is ready; only cases where both gates are cleared will generate an arrest warrant.
     - type: mini_code
       prompt: Read an hour with input(). Print 'open' if the hour is between 9 and 17 (inclusive), else print 'closed'.
       starter: 'hour = int(input())
@@ -594,3 +699,7 @@ worlds:
       - code: assert _stdout.strip() == 'closed'
         stdin: '18'
         message: hour 18 is after the office closes
+      story_before: The interview office is open only between certain hours — Cole writes the and condition that confirms
+        whether he can still get in.
+      story_after: The window check is live; any visit outside the hours will print 'closed' and Cole will have to come back
+        tomorrow.

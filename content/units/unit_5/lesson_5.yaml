@@ -177,6 +177,10 @@ worlds:
       output: 'True'
       explanation: Elara's compound spell calls a helper incantation. Functions can call other functions. This builds complex
         spells from simple, tested pieces.
+      story_before: Elara has a library of tested spells; Master Theo shows her that a compound enchantment can call smaller
+        spells from within, building complex magic from simple pieces.
+      story_after: True — the absolute-zero compound spell called the helper conversion and returned a clear verdict; Elara
+        is amazed at how spells can nest.
     - type: mcq
       question: A spell is doubled twice to quadruple its power. What does this print?
       code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
@@ -187,6 +191,10 @@ worlds:
       - '9'
       correct: '12'
       explanation: double(3) = 6. double(6) = 12.
+      story_before: A quadrupling spell doubles its result twice by calling the double spell from inside; Elara traces the
+        final potency.
+      story_after: 12 — double(3)=6, double(6)=12; Elara sees that calling one spell from inside another is both clean and
+        powerful.
     - type: fill_blank
       prompt: Call the helper spell to square each ingredient amount before summing.
       before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
@@ -198,6 +206,8 @@ worlds:
       - int
       answer: square
       explanation: sum_of_squares calls square twice, once for each ingredient.
+      story_before: Elara must name the helper spell that squares each ingredient before the two squares are summed.
+      story_after: The square helper is called twice — the sum_of_squares compound spell now works correctly.
     - type: mcq
       question: Three potion ingredients are combined. What does this print?
       code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
@@ -208,6 +218,8 @@ worlds:
       - '12'
       correct: '6'
       explanation: add(1, 2) = 3. add(3, 3) = 6.
+      story_before: Three potion ingredients are combined by calling the add spell twice in sequence; Elara traces the total.
+      story_after: 6 — add(1,2)=3, add(3,3)=6; the pattern of building totals by chaining helper calls is clear.
     - type: arrange
       instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
       blocks:
@@ -277,6 +289,10 @@ worlds:
       - '**'
       - '0.5'
       explanation: '** 0.5 computes the square root. The compound spell calls the simpler square helper.'
+      story_before: Elara assembles a compound spell that calculates a magical distance by calling the square helper and then
+        taking a root.
+      story_after: The hypotenuse spell is complete — it calls square for each side and combines the results, all in one elegant
+        incantation.
     - type: mcq
       question: Elara counts even-numbered spell slots. What does this print?
       code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
@@ -288,6 +304,8 @@ worlds:
       - '4'
       correct: '3'
       explanation: 2, 4, 6 are even. is_even() is called for each slot.
+      story_before: Elara counts the even-numbered spell slots by calling is_even for every slot; she predicts the total count.
+      story_after: 3 — slots 2, 4, and 6 are even; the counting spell relies on the boolean is_even spell to do its work.
     - type: fill_blank
       prompt: Use the negate helper to flip the even check into an odd check.
       before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
@@ -299,6 +317,8 @@ worlds:
       - int
       answer: negate
       explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+      story_before: Elara names the helper spell that flips a True to False so her odd-check spell is the inverse of is_even.
+      story_after: negate is called with the even result — is_odd now correctly returns the opposite verdict.
     - type: mcq
       question: What is the main benefit of casting a spell from inside another spell?
       code: ''
@@ -309,6 +329,8 @@ worlds:
       - It avoids using loops
       correct: Code reuse — you don't repeat logic, just call what you wrote
       explanation: 'Spells compose: each does one thing, and you combine them to build complex enchantments.'
+      story_before: Master Theo asks Elara what the main benefit is of casting one spell from inside another.
+      story_after: Code reuse — Elara doesn't repeat logic, she just calls the spell she already wrote; Theo nods approvingly.
     - type: mcq
       question: Elara clamps a spell power to a safe range. What does this print?
       code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
@@ -320,6 +342,8 @@ worlds:
       - '50'
       correct: '100'
       explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+      story_before: A normalising spell calls the clamp spell to keep a power value within safe bounds; Elara traces the result.
+      story_after: 100 — the normalising spell delegated the clamping to clamp and returned the safe maximum, exactly as designed.
     - type: mini_code
       prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
       starter: ''
@@ -330,6 +354,9 @@ worlds:
         message: 7 is odd
       - code: assert is_even(4) == True
         message: 4 is even
+      story_before: Elara writes is_odd as a spell that calls is_even and flips its answer, reusing the work she already did.
+      story_after: All three tests pass — is_odd correctly delegates to is_even, and Elara's spell library grows without any
+        duplicated logic.
     - type: mini_code
       prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
       starter: ''
@@ -338,6 +365,10 @@ worlds:
         message: 5! = 120
       - code: assert factorial(3) == 6
         message: 3! = 6
+      story_before: Master Theo introduces Elara to a factorial spell that calls itself — a spell that casts itself to compute
+        growing potency.
+      story_after: 120 and 6 confirmed — the recursive factorial spell works perfectly, and Elara has mastered the deepest
+        form of spell composition.
   scifi:
     title: Nested Subroutines
     exercises:
@@ -347,6 +378,10 @@ worlds:
       output: 'True'
       explanation: Voss calls a conversion subroutine from inside a check subroutine. Functions can call other functions.
         This builds complex behaviour from simple, tested pieces.
+      story_before: Voss shows Yara that complex ship diagnostics can be built by calling smaller, already-tested subroutines
+        from inside new ones.
+      story_after: True — the absolute-zero check called the conversion subroutine internally; Yara immediately sees the elegance
+        of composed subroutines.
     - type: mcq
       question: A subsystem doubles its output twice. What does this print?
       code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
@@ -357,6 +392,8 @@ worlds:
       - '9'
       correct: '12'
       explanation: double(3) = 6. double(6) = 12.
+      story_before: A quadruple-output subroutine calls double twice in sequence; Yara traces the final transmitted value.
+      story_after: 12 — double(3)=6, double(6)=12; nesting subroutine calls compounds the output without writing new logic.
     - type: fill_blank
       prompt: Call the helper subroutine to square each sensor reading before summing.
       before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
@@ -368,6 +405,8 @@ worlds:
       - int
       answer: square
       explanation: sum_of_squares calls square twice, once for each sensor reading.
+      story_before: Yara must name the helper subroutine that squares each sensor reading before summing the two results.
+      story_after: The square helper is called twice and the sum_of_squares subroutine now works correctly.
     - type: mcq
       question: Three subsystem outputs are combined. What does this print?
       code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
@@ -378,6 +417,9 @@ worlds:
       - '12'
       correct: '6'
       explanation: add(1, 2) = 3. add(3, 3) = 6.
+      story_before: Three subsystem outputs are totalled by chaining two add calls; Yara traces the combined result.
+      story_after: 6 — add(1,2)=3, add(3,3)=6; chaining the same helper twice avoids writing a new three-input subroutine
+        from scratch.
     - type: arrange
       instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
       blocks:
@@ -447,6 +489,9 @@ worlds:
       - '**'
       - '0.5'
       explanation: '** 0.5 computes the square root. The nav subroutine calls the simpler square helper.'
+      story_before: Yara assembles a navigation subroutine that computes distance by calling the square helper and then rooting
+        the sum.
+      story_after: The hypotenuse subroutine is operational — it reuses square for both legs and returns the precise distance.
     - type: mcq
       question: Voss counts even-numbered active modules. What does this print?
       code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
@@ -458,6 +503,9 @@ worlds:
       - '4'
       correct: '3'
       explanation: 2, 4, 6 are even-numbered modules. is_even() is called for each.
+      story_before: Voss counts the even-numbered active modules by calling is_even for each module ID; Yara predicts the
+        count.
+      story_after: 3 — modules 2, 4, and 6 are even; the counter subroutine delegates the individual check to is_even cleanly.
     - type: fill_blank
       prompt: Use the negate helper to flip the even check into an odd check.
       before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
@@ -469,6 +517,8 @@ worlds:
       - int
       answer: negate
       explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+      story_before: Yara names the helper subroutine that flips a boolean so is_odd reports the opposite of is_even.
+      story_after: negate is called with the even result — is_odd now correctly identifies odd module IDs.
     - type: mcq
       question: What is the main benefit of calling a subroutine from another subroutine?
       code: ''
@@ -479,6 +529,8 @@ worlds:
       - It avoids using loops
       correct: Code reuse — you don't repeat logic, just call what you wrote
       explanation: 'Subroutines compose: each does one thing, and you combine them to build complex ship functions.'
+      story_before: Voss asks Yara what the principal engineering advantage is of calling a subroutine from inside another.
+      story_after: Code reuse — Yara doesn't duplicate logic, she calls what she already wrote; the Helix codebase stays lean.
     - type: mcq
       question: Voss clamps a power reading to a valid range. What does this print?
       code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
@@ -490,6 +542,10 @@ worlds:
       - '50'
       correct: '100'
       explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+      story_before: A normalise subroutine delegates boundary enforcement to clamp; Yara traces the output for an over-limit
+        input.
+      story_after: 100 — normalise called clamp and received the capped value back, keeping the reading within safe operational
+        limits.
     - type: mini_code
       prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
       starter: ''
@@ -500,6 +556,9 @@ worlds:
         message: 7 is odd
       - code: assert is_even(4) == True
         message: 4 is even
+      story_before: Yara codes is_odd to call is_even and flip its result, so no parity logic is ever duplicated.
+      story_after: All three tests pass — is_odd reuses is_even perfectly, and Yara's subroutine library is composable and
+        clean.
     - type: mini_code
       prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
       starter: ''
@@ -508,6 +567,10 @@ worlds:
         message: 5! = 120
       - code: assert factorial(3) == 6
         message: 3! = 6
+      story_before: Voss challenges Yara with a self-calling factorial subroutine that computes exponential values by calling
+        itself.
+      story_after: 120 and 6 confirmed — the recursive subroutine works, and Yara has unlocked the most powerful form of subroutine
+        composition on the Helix.
   mystery:
     title: Building the Case
     exercises:
@@ -517,6 +580,10 @@ worlds:
       output: 'True'
       explanation: Cole uses a helper function inside a larger deduction. Functions can call other functions. This builds
         complex reasoning from simple, tested steps.
+      story_before: Cole realises that his best deductions are built from smaller conclusions; he learns to call one tool
+        from inside another to create layered reasoning.
+      story_after: True — the absolute-zero deduction called a helper tool internally and returned a precise verdict; Cole
+        files this technique immediately.
     - type: mcq
       question: A lead's strength is doubled twice. What does this print?
       code: "def double(n):\n    return n * 2\n\ndef quadruple(n):\n    return double(double(n))\n\nprint(quadruple(3))"
@@ -527,6 +594,10 @@ worlds:
       - '9'
       correct: '12'
       explanation: double(3) = 6. double(6) = 12.
+      story_before: A lead's strength is amplified twice by calling the double tool from inside another tool; Cole traces
+        the final score.
+      story_after: 12 — double(3)=6, double(6)=12; Cole sees that each call hands its result to the next, just like building
+        a chain of deductions.
     - type: fill_blank
       prompt: Call the helper function to square each clue weight before summing.
       before: "def square(n):\n    return n * n\n\ndef sum_of_squares(a, b):\n    return "
@@ -538,6 +609,9 @@ worlds:
       - int
       answer: square
       explanation: sum_of_squares calls square twice, once per clue weight.
+      story_before: Cole must name the helper tool that squares each clue weight before the two squares are summed into one
+        suspicion score.
+      story_after: The square helper is invoked twice — sum_of_squares now correctly compounds the two clue weights.
     - type: mcq
       question: Three witness scores are combined. What does this print?
       code: "def add(a, b):\n    return a + b\n\ndef total(x, y, z):\n    return add(add(x, y), z)\n\nprint(total(1, 2, 3))"
@@ -548,6 +622,8 @@ worlds:
       - '12'
       correct: '6'
       explanation: add(1, 2) = 3. add(3, 3) = 6.
+      story_before: Three witness credibility scores are combined by chaining two add calls; Cole traces the final total.
+      story_after: 6 — add(1,2)=3, add(3,3)=6; three scores combined through two helper calls, no new logic needed.
     - type: arrange
       instruction: Build a function hypotenuse(a, b) that uses square and computes the square root
       blocks:
@@ -617,6 +693,10 @@ worlds:
       - '**'
       - '0.5'
       explanation: '** 0.5 computes the square root. The deduction calls the simpler square helper.'
+      story_before: Cole assembles a geometric tool that calculates the straight-line distance between two locations by calling
+        the square helper.
+      story_after: The distance tool is ready — it calls square for each coordinate offset and returns the precise separation
+        between sites.
     - type: mcq
       question: Cole counts even-numbered evidence items. What does this print?
       code: "def is_even(n):\n    return n % 2 == 0\n\ndef count_even(nums):\n    count = 0\n    for n in nums:\n        if\
@@ -628,6 +708,10 @@ worlds:
       - '4'
       correct: '3'
       explanation: 2, 4, 6 are even-numbered items. is_even() is called for each.
+      story_before: Cole counts the even-numbered evidence items in a batch by calling is_even for each one; he predicts the
+        total.
+      story_after: 3 — items 2, 4, and 6 are even; the counting tool delegates individual parity checks to is_even without
+        any repeated code.
     - type: fill_blank
       prompt: Use the negate helper to flip the even check into an odd check.
       before: "def negate(b):\n    return not b\n\ndef is_odd(n):\n    return "
@@ -639,6 +723,9 @@ worlds:
       - int
       answer: negate
       explanation: negate(True) returns False. negate(n % 2 == 0) flips even to odd.
+      story_before: Cole names the helper tool that flips a boolean so is_odd correctly identifies clues that don't pass the
+        even check.
+      story_after: negate is wired in — is_odd now returns the inverse of is_even and Cole can classify any clue number instantly.
     - type: mcq
       question: What is the main benefit of building deductions from smaller functions?
       code: ''
@@ -649,6 +736,9 @@ worlds:
       - It avoids using loops
       correct: Code reuse — you don't repeat logic, just call what you wrote
       explanation: Smaller helpers compose into complex deductions without repeating code.
+      story_before: Cole reflects on why the best investigative tools are built from smaller, reusable ones rather than written
+        from scratch.
+      story_after: Code reuse — Cole doesn't rewrite logic he already has, he calls it; every tool in his kit earns its place.
     - type: mcq
       question: Cole clamps a suspect score to a valid range. What does this print?
       code: "def clamp(n, lo, hi):\n    if n < lo:\n        return lo\n    if n > hi:\n        return hi\n    return n\n\n\
@@ -660,6 +750,10 @@ worlds:
       - '50'
       correct: '100'
       explanation: clamp(150, 0, 100) returns 100 because 150 > 100.
+      story_before: A bounding tool calls clamp internally to keep a suspect score within the valid range; Cole traces the
+        output.
+      story_after: 100 — the bounding tool delegated to clamp and returned the capped score, keeping the case file's numbers
+        clean.
     - type: mini_code
       prompt: Define is_even(n) and is_odd(n) where is_odd calls is_even.
       starter: ''
@@ -670,6 +764,9 @@ worlds:
         message: 7 is odd
       - code: assert is_even(4) == True
         message: 4 is even
+      story_before: Cole writes is_odd to call is_even and flip the result, avoiding any duplicated parity logic in his toolkit.
+      story_after: All three tests pass — is_odd reuses is_even perfectly, and Cole's toolkit now has layered tools that build
+        on each other.
     - type: mini_code
       prompt: 'Define factorial(n) recursively: factorial(1) = 1, factorial(n) = n * factorial(n-1).'
       starter: ''
@@ -678,3 +775,7 @@ worlds:
         message: 5! = 120
       - code: assert factorial(3) == 6
         message: 3! = 6
+      story_before: Cole discovers that a suspect's code uses factorial numbers; he writes a self-calling tool to generate
+        them.
+      story_after: 120 and 6 confirmed — the recursive factorial tool works, and Cole has cracked the code sequence, closing
+        the final gap in the case.

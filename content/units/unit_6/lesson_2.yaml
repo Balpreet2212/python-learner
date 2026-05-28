@@ -1,365 +1,873 @@
-title: "Modifying Lists"
+title: Modifying Lists
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      tools = ["hammer", "drill"]
-      tools.append("saw")
-      print(tools)
-      tools.remove("drill")
-      print(tools)
-      last = tools.pop()
-      print(last)
-      print(tools)
-    output: "['hammer', 'drill', 'saw']\n['hammer', 'saw']\nsaw\n['hammer']"
-    explanation: "append() adds to the end. remove() deletes the first matching item. pop() removes and returns the last item."
+- type: concept
+  code: 'tools = ["hammer", "drill"]
 
-  - type: mcq
-    question: "What does this print?"
-    code: "nums = [1, 2, 3]\nnums.append(4)\nprint(len(nums))"
-    choices: ["4", "3", "5", "1"]
-    correct: "4"
-    explanation: "append(4) adds 4 to the list. Length becomes 4."
+    tools.append("saw")
 
-  - type: fill_blank
-    prompt: "Delete the item 'b' from the list by value."
-    before: "items = [\"a\", \"b\", \"c\"]\nitems."
-    after: "(\"b\")\nprint(items)"
-    choices: ["remove", "append", "pop", "delete"]
-    answer: "remove"
-    explanation: "remove('b') finds and deletes the first 'b' from the list."
+    print(tools)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "stack = [10, 20, 30]\nval = stack.pop()\nprint(val)\nprint(stack)"
-    choices: ["30\n[10, 20]", "10\n[20, 30]", "30\n[10, 20, 30]", "20\n[10, 30]"]
-    correct: "30\n[10, 20]"
-    explanation: "pop() removes and returns the last item (30). The list becomes [10, 20]."
+    tools.remove("drill")
 
-  - type: arrange
-    instruction: "Append 'potion' to inventory and print it"
-    blocks: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-    correct: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-    explanation: "Call .append() on the list to add the item, then print."
+    print(tools)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "letters = [\"x\", \"y\", \"z\"]\nletters.remove(\"y\")\nprint(letters)"
-    choices: ["['x', 'z']", "['x', 'y']", "['y', 'z']", "['x', 'y', 'z']"]
-    correct: "['x', 'z']"
-    explanation: "remove('y') deletes 'y'. The list becomes ['x', 'z']."
+    last = tools.pop()
 
-  - type: fill_blank
-    prompt: "Remove and capture the last item from the list."
-    before: "nums = [5, 10, 15]\nlast = nums."
-    after: "()\nprint(last)"
-    choices: ["pop", "remove", "append", "len"]
-    answer: "pop"
-    explanation: "pop() removes and returns the last item. last = 15."
+    print(last)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "animals = [\"cat\", \"dog\", \"bird\"]\nanimals.append(\"fish\")\nanimals.remove(\"dog\")\nprint(len(animals))"
-    choices: ["3", "4", "2", "1"]
-    correct: "3"
-    explanation: "Start with 3, append adds 1 (→4), remove deletes 1 (→3)."
+    print(tools)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "q = [1, 2, 3]\nq.append(q.pop())\nprint(q)"
-    choices: ["[1, 2, 3]", "[1, 2]", "[3, 1, 2]", "[1, 2, 3, 3]"]
-    correct: "[1, 2, 3]"
-    explanation: "pop() removes 3, then append(3) adds it back. No net change."
+    '
+  output: '[''hammer'', ''drill'', ''saw'']
 
-  - type: mini_code
-    prompt: "Start with a list of 3 fruits. Append a 4th fruit, then remove the first fruit. Print the final list."
-    starter: ""
-    tests:
-      - code: "isinstance(eval(_stdout.strip()), list)"
-        message: "Should print a list"
-      - code: "len(eval(_stdout.strip())) == 3"
-        message: "Final list should have 3 items"
+    [''hammer'', ''saw'']
 
-  - type: mini_code
-    prompt: "Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list."
-    starter: ""
-    tests:
-      - code: "len(eval(_stdout.strip())) == 2"
-        message: "Should have 2 items remaining"
-      - code: "eval(_stdout.strip()) == [1, 2]"
-        message: "Should be [1, 2]"
+    saw
 
+    [''hammer'']'
+  explanation: append() adds to the end. remove() deletes the first matching item. pop() removes and returns the last item.
+- type: mcq
+  question: What does this print?
+  code: 'nums = [1, 2, 3]
+
+    nums.append(4)
+
+    print(len(nums))'
+  choices:
+  - '4'
+  - '3'
+  - '5'
+  - '1'
+  correct: '4'
+  explanation: append(4) adds 4 to the list. Length becomes 4.
+- type: fill_blank
+  prompt: Delete the item 'b' from the list by value.
+  before: 'items = ["a", "b", "c"]
+
+    items.'
+  after: '("b")
+
+    print(items)'
+  choices:
+  - remove
+  - append
+  - pop
+  - delete
+  answer: remove
+  explanation: remove('b') finds and deletes the first 'b' from the list.
+- type: mcq
+  question: What does this print?
+  code: 'stack = [10, 20, 30]
+
+    val = stack.pop()
+
+    print(val)
+
+    print(stack)'
+  choices:
+  - '30
+
+    [10, 20]'
+  - '10
+
+    [20, 30]'
+  - '30
+
+    [10, 20, 30]'
+  - '20
+
+    [10, 30]'
+  correct: '30
+
+    [10, 20]'
+  explanation: pop() removes and returns the last item (30). The list becomes [10, 20].
+- type: arrange
+  instruction: Append 'potion' to inventory and print it
+  blocks:
+  - inventory
+  - '='
+  - '['
+  - '"sword"'
+  - ','
+  - '"shield"'
+  - ']'
+  - inventory
+  - .
+  - append
+  - (
+  - '"potion"'
+  - )
+  - print
+  - (
+  - inventory
+  - )
+  correct:
+  - inventory
+  - '='
+  - '['
+  - '"sword"'
+  - ','
+  - '"shield"'
+  - ']'
+  - inventory
+  - .
+  - append
+  - (
+  - '"potion"'
+  - )
+  - print
+  - (
+  - inventory
+  - )
+  explanation: Call .append() on the list to add the item, then print.
+- type: mcq
+  question: What does this print?
+  code: 'letters = ["x", "y", "z"]
+
+    letters.remove("y")
+
+    print(letters)'
+  choices:
+  - '[''x'', ''z'']'
+  - '[''x'', ''y'']'
+  - '[''y'', ''z'']'
+  - '[''x'', ''y'', ''z'']'
+  correct: '[''x'', ''z'']'
+  explanation: remove('y') deletes 'y'. The list becomes ['x', 'z'].
+- type: fill_blank
+  prompt: Remove and capture the last item from the list.
+  before: 'nums = [5, 10, 15]
+
+    last = nums.'
+  after: '()
+
+    print(last)'
+  choices:
+  - pop
+  - remove
+  - append
+  - len
+  answer: pop
+  explanation: pop() removes and returns the last item. last = 15.
+- type: mcq
+  question: What does this print?
+  code: 'animals = ["cat", "dog", "bird"]
+
+    animals.append("fish")
+
+    animals.remove("dog")
+
+    print(len(animals))'
+  choices:
+  - '3'
+  - '4'
+  - '2'
+  - '1'
+  correct: '3'
+  explanation: Start with 3, append adds 1 (→4), remove deletes 1 (→3).
+- type: mcq
+  question: What does this print?
+  code: 'q = [1, 2, 3]
+
+    q.append(q.pop())
+
+    print(q)'
+  choices:
+  - '[1, 2, 3]'
+  - '[1, 2]'
+  - '[3, 1, 2]'
+  - '[1, 2, 3, 3]'
+  correct: '[1, 2, 3]'
+  explanation: pop() removes 3, then append(3) adds it back. No net change.
+- type: mini_code
+  prompt: Start with a list of 3 fruits. Append a 4th fruit, then remove the first fruit. Print the final list.
+  starter: ''
+  tests:
+  - code: isinstance(eval(_stdout.strip()), list)
+    message: Should print a list
+  - code: len(eval(_stdout.strip())) == 3
+    message: Final list should have 3 items
+- type: mini_code
+  prompt: Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list.
+  starter: ''
+  tests:
+  - code: len(eval(_stdout.strip())) == 2
+    message: Should have 2 items remaining
+  - code: eval(_stdout.strip()) == [1, 2]
+    message: Should be [1, 2]
 worlds:
   fantasy:
-    title: "Packing and Repacking the Expedition Pack"
+    title: Packing and Repacking the Expedition Pack
     exercises:
-      - type: concept
-        code: |
-          supplies = ["rope", "torch"]
-          supplies.append("bandage")
-          print(supplies)
-          supplies.remove("torch")
-          print(supplies)
-          last = supplies.pop()
-          print(last)
-          print(supplies)
-        output: "['rope', 'torch', 'bandage']\n['rope', 'bandage']\nbandage\n['rope']"
-        explanation: "Brin updates the pack as the expedition needs change. append() adds a new supply to the end. remove() tosses out an unwanted item. pop() pulls the last item out and tells you what it was."
+    - type: concept
+      code: 'supplies = ["rope", "torch"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "gear = [1, 2, 3]\ngear.append(4)\nprint(len(gear))"
-        choices: ["4", "3", "5", "1"]
-        correct: "4"
-        explanation: "Brin appended one more piece of gear. The pack now holds 4 items."
+        supplies.append("bandage")
 
-      - type: fill_blank
-        prompt: "Brin needs to drop 'b' from the supply list by name."
-        before: "supplies = [\"a\", \"b\", \"c\"]\nsupplies."
-        after: "(\"b\")\nprint(supplies)"
-        choices: ["remove", "append", "pop", "delete"]
-        answer: "remove"
-        explanation: "remove('b') finds the item by name and drops it from the pack."
+        print(supplies)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "pack = [10, 20, 30]\nval = pack.pop()\nprint(val)\nprint(pack)"
-        choices: ["30\n[10, 20]", "10\n[20, 30]", "30\n[10, 20, 30]", "20\n[10, 30]"]
-        correct: "30\n[10, 20]"
-        explanation: "pop() pulls the last supply out of Brin's pack (30) and the pack shrinks to [10, 20]."
+        supplies.remove("torch")
 
-      - type: arrange
-        instruction: "Append 'potion' to inventory and print it"
-        blocks: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        correct: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        explanation: "Brin uses .append() to slip a potion into the inventory, then prints the updated pack."
+        print(supplies)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "gear = [\"x\", \"y\", \"z\"]\ngear.remove(\"y\")\nprint(gear)"
-        choices: ["['x', 'z']", "['x', 'y']", "['y', 'z']", "['x', 'y', 'z']"]
-        correct: "['x', 'z']"
-        explanation: "Brin removes 'y' from the pack. Only 'x' and 'z' remain."
+        last = supplies.pop()
 
-      - type: fill_blank
-        prompt: "Brin pulls the last supply out of the pack and checks what it was."
-        before: "supplies = [5, 10, 15]\nlast = supplies."
-        after: "()\nprint(last)"
-        choices: ["pop", "remove", "append", "len"]
-        answer: "pop"
-        explanation: "pop() removes the last supply and returns it so Brin can see what was grabbed."
+        print(last)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "supplies = [\"rope\", \"torch\", \"map\"]\nsupplies.append(\"canteen\")\nsupplies.remove(\"torch\")\nprint(len(supplies))"
-        choices: ["3", "4", "2", "1"]
-        correct: "3"
-        explanation: "Brin starts with 3, adds a canteen (4), then drops the torch (3). The pack has 3 items."
+        print(supplies)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "q = [1, 2, 3]\nq.append(q.pop())\nprint(q)"
-        choices: ["[1, 2, 3]", "[1, 2]", "[3, 1, 2]", "[1, 2, 3, 3]"]
-        correct: "[1, 2, 3]"
-        explanation: "Brin pops the last item and puts it right back. The pack is unchanged."
+        '
+      output: '[''rope'', ''torch'', ''bandage'']
 
-      - type: mini_code
-        prompt: "Start with a pack of 3 supplies. Add a 4th item, then drop the first one. Print the final pack."
-        starter: ""
-        tests:
-          - code: "isinstance(eval(_stdout.strip()), list)"
-            message: "Should print a list"
-          - code: "len(eval(_stdout.strip())) == 3"
-            message: "Final list should have 3 items"
+        [''rope'', ''bandage'']
 
-      - type: mini_code
-        prompt: "Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list."
-        starter: ""
-        tests:
-          - code: "len(eval(_stdout.strip())) == 2"
-            message: "Pack should have 2 items left after Brin finishes popping"
-          - code: "eval(_stdout.strip()) == [1, 2]"
-            message: "Should be [1, 2]"
+        bandage
 
+        [''rope'']'
+      explanation: Brin updates the pack as the expedition needs change. append() adds a new supply to the end. remove() tosses
+        out an unwanted item. pop() pulls the last item out and tells you what it was.
+      story_before: The expedition plan keeps changing — Brin must learn to add, remove, and pull items from the supply list
+        on the fly.
+      story_after: 'Brin has the three core techniques down: append for loading, remove for discarding, pop for grabbing the
+        last item.'
+    - type: mcq
+      question: What does this print?
+      code: 'gear = [1, 2, 3]
+
+        gear.append(4)
+
+        print(len(gear))'
+      choices:
+      - '4'
+      - '3'
+      - '5'
+      - '1'
+      correct: '4'
+      explanation: Brin appended one more piece of gear. The pack now holds 4 items.
+      story_before: A new piece of gear just arrived — Brin needs to check how many items the pack holds after adding it.
+      story_after: Four items confirmed after the addition — Brin tightens the straps and heads toward the gate.
+    - type: fill_blank
+      prompt: Brin needs to drop 'b' from the supply list by name.
+      before: 'supplies = ["a", "b", "c"]
+
+        supplies.'
+      after: '("b")
+
+        print(supplies)'
+      choices:
+      - remove
+      - append
+      - pop
+      - delete
+      answer: remove
+      explanation: remove('b') finds the item by name and drops it from the pack.
+      story_before: One supply on the list turned out to be a duplicate — Brin must drop it by name.
+      story_after: The unwanted item is gone — the list is clean and every remaining supply is needed.
+    - type: mcq
+      question: What does this print?
+      code: 'pack = [10, 20, 30]
+
+        val = pack.pop()
+
+        print(val)
+
+        print(pack)'
+      choices:
+      - '30
+
+        [10, 20]'
+      - '10
+
+        [20, 30]'
+      - '30
+
+        [10, 20, 30]'
+      - '20
+
+        [10, 30]'
+      correct: '30
+
+        [10, 20]'
+      explanation: pop() pulls the last supply out of Brin's pack (30) and the pack shrinks to [10, 20].
+      story_before: Brin reaches into the pack and pulls out the last item, checking what it was.
+      story_after: The last supply is retrieved and identified — Brin tucks it aside and notes the pack is shorter by one.
+    - type: arrange
+      instruction: Append 'potion' to inventory and print it
+      blocks:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      correct:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      explanation: Brin uses .append() to slip a potion into the inventory, then prints the updated pack.
+      story_before: A potion arrived last minute and must be slipped into the inventory before departure.
+      story_after: The potion is appended and the updated inventory printed — Brin is relieved nothing was forgotten.
+    - type: mcq
+      question: What does this print?
+      code: 'gear = ["x", "y", "z"]
+
+        gear.remove("y")
+
+        print(gear)'
+      choices:
+      - '[''x'', ''z'']'
+      - '[''x'', ''y'']'
+      - '[''y'', ''z'']'
+      - '[''x'', ''y'', ''z'']'
+      correct: '[''x'', ''z'']'
+      explanation: Brin removes 'y' from the pack. Only 'x' and 'z' remain.
+      story_before: A damaged item needs to be struck from the gear list by name.
+      story_after: The damaged gear is removed — the pack is lighter and every remaining item is serviceable.
+    - type: fill_blank
+      prompt: Brin pulls the last supply out of the pack and checks what it was.
+      before: 'supplies = [5, 10, 15]
+
+        last = supplies.'
+      after: '()
+
+        print(last)'
+      choices:
+      - pop
+      - remove
+      - append
+      - len
+      answer: pop
+      explanation: pop() removes the last supply and returns it so Brin can see what was grabbed.
+      story_before: Brin wants to pull the last supply from the crate and inspect it before the wizard arrives.
+      story_after: The last item is popped and examined — Brin sets it on the table and awaits the wizard's verdict.
+    - type: mcq
+      question: What does this print?
+      code: 'supplies = ["rope", "torch", "map"]
+
+        supplies.append("canteen")
+
+        supplies.remove("torch")
+
+        print(len(supplies))'
+      choices:
+      - '3'
+      - '4'
+      - '2'
+      - '1'
+      correct: '3'
+      explanation: Brin starts with 3, adds a canteen (4), then drops the torch (3). The pack has 3 items.
+      story_before: After loading a new supply and dropping an old one, Brin needs to confirm the final item count.
+      story_after: Three items remain — Brin knows the pack is manageable and the weight balanced.
+    - type: mcq
+      question: What does this print?
+      code: 'q = [1, 2, 3]
+
+        q.append(q.pop())
+
+        print(q)'
+      choices:
+      - '[1, 2, 3]'
+      - '[1, 2]'
+      - '[3, 1, 2]'
+      - '[1, 2, 3, 3]'
+      correct: '[1, 2, 3]'
+      explanation: Brin pops the last item and puts it right back. The pack is unchanged.
+      story_before: The wizard tests Brin with a tricky pop-then-append puzzle to see if the pack truly changes.
+      story_after: Brin sees through the trick — popping then re-appending the same item leaves the pack unchanged.
+    - type: mini_code
+      prompt: Start with a pack of 3 supplies. Add a 4th item, then drop the first one. Print the final pack.
+      starter: ''
+      tests:
+      - code: isinstance(eval(_stdout.strip()), list)
+        message: Should print a list
+      - code: len(eval(_stdout.strip())) == 3
+        message: Final list should have 3 items
+      story_before: 'Brin practises a full restock: start with three supplies, add a fourth, drop the first, and show the
+        final pack.'
+      story_after: The pack is restocked correctly — Brin presents it to the wizard and earns an approving nod.
+    - type: mini_code
+      prompt: Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list.
+      starter: ''
+      tests:
+      - code: len(eval(_stdout.strip())) == 2
+        message: Pack should have 2 items left after Brin finishes popping
+      - code: eval(_stdout.strip()) == [1, 2]
+        message: Should be [1, 2]
+      story_before: 'The wizard sets a final challenge: reduce a five-item stack down to just two by popping, then display
+        what remains.'
+      story_after: Only two items remain in the crate — Brin has mastered adding and removing supplies, and the expedition
+        roster is locked in.
   scifi:
-    title: "Cargo Bay Operations"
+    title: Cargo Bay Operations
     exercises:
-      - type: concept
-        code: |
-          cargo = ["fuel_cell", "probe"]
-          cargo.append("repair_kit")
-          print(cargo)
-          cargo.remove("probe")
-          print(cargo)
-          last = cargo.pop()
-          print(last)
-          print(cargo)
-        output: "['fuel_cell', 'probe', 'repair_kit']\n['fuel_cell', 'repair_kit']\nrepair_kit\n['fuel_cell']"
-        explanation: "Zev updates the cargo manifest as missions change. append() loads new cargo. remove() offloads a specific item by name. pop() unloads the last item and returns what it was."
+    - type: concept
+      code: 'cargo = ["fuel_cell", "probe"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "modules = [1, 2, 3]\nmodules.append(4)\nprint(len(modules))"
-        choices: ["4", "3", "5", "1"]
-        correct: "4"
-        explanation: "Zev docked one more module. The bay now holds 4 items."
+        cargo.append("repair_kit")
 
-      - type: fill_blank
-        prompt: "Zev needs to offload cargo item 'b' from the manifest."
-        before: "cargo = [\"a\", \"b\", \"c\"]\ncargo."
-        after: "(\"b\")\nprint(cargo)"
-        choices: ["remove", "append", "pop", "delete"]
-        answer: "remove"
-        explanation: "remove('b') finds the cargo item by ID and offloads it from the bay."
+        print(cargo)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "bay = [10, 20, 30]\nval = bay.pop()\nprint(val)\nprint(bay)"
-        choices: ["30\n[10, 20]", "10\n[20, 30]", "30\n[10, 20, 30]", "20\n[10, 30]"]
-        correct: "30\n[10, 20]"
-        explanation: "pop() unloads the last cargo unit (30) and the bay holds [10, 20]."
+        cargo.remove("probe")
 
-      - type: arrange
-        instruction: "Append 'potion' to inventory and print it"
-        blocks: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        correct: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        explanation: "Zev uses .append() to load a potion into the cargo inventory, then prints the updated manifest."
+        print(cargo)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "manifest = [\"x\", \"y\", \"z\"]\nmanifest.remove(\"y\")\nprint(manifest)"
-        choices: ["['x', 'z']", "['x', 'y']", "['y', 'z']", "['x', 'y', 'z']"]
-        correct: "['x', 'z']"
-        explanation: "Zev offloads 'y' from the manifest. Only 'x' and 'z' remain in the bay."
+        last = cargo.pop()
 
-      - type: fill_blank
-        prompt: "Zev unloads the last item from the cargo bay and logs what it was."
-        before: "cargo = [5, 10, 15]\nlast = cargo."
-        after: "()\nprint(last)"
-        choices: ["pop", "remove", "append", "len"]
-        answer: "pop"
-        explanation: "pop() removes the last cargo unit and returns it so Zev can log the unloading."
+        print(last)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "cargo = [\"fuel_cell\", \"probe\", \"antenna\"]\ncargo.append(\"drill\")\ncargo.remove(\"probe\")\nprint(len(cargo))"
-        choices: ["3", "4", "2", "1"]
-        correct: "3"
-        explanation: "Zev starts with 3, loads a drill (4), then removes the probe (3). Bay holds 3 items."
+        print(cargo)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "q = [1, 2, 3]\nq.append(q.pop())\nprint(q)"
-        choices: ["[1, 2, 3]", "[1, 2]", "[3, 1, 2]", "[1, 2, 3, 3]"]
-        correct: "[1, 2, 3]"
-        explanation: "Zev unloads the last item and immediately reloads it. The cargo manifest stays the same."
+        '
+      output: '[''fuel_cell'', ''probe'', ''repair_kit'']
 
-      - type: mini_code
-        prompt: "Start with a cargo manifest of 3 items. Load a 4th item, then offload the first one. Print the final manifest."
-        starter: ""
-        tests:
-          - code: "isinstance(eval(_stdout.strip()), list)"
-            message: "Should print a list"
-          - code: "len(eval(_stdout.strip())) == 3"
-            message: "Final list should have 3 items"
+        [''fuel_cell'', ''repair_kit'']
 
-      - type: mini_code
-        prompt: "Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list."
-        starter: ""
-        tests:
-          - code: "len(eval(_stdout.strip())) == 2"
-            message: "Cargo bay should have 2 units left after Zev finishes unloading"
-          - code: "eval(_stdout.strip()) == [1, 2]"
-            message: "Should be [1, 2]"
+        repair_kit
 
+        [''fuel_cell'']'
+      explanation: Zev updates the cargo manifest as missions change. append() loads new cargo. remove() offloads a specific
+        item by name. pop() unloads the last item and returns what it was.
+      story_before: The cargo manifest is never static — Zev must learn to load new units, offload specific items, and retrieve
+        the last cargo in the bay.
+      story_after: 'Zev now has three essential cargo operations: append to load, remove to offload by ID, pop to unload the
+        last unit.'
+    - type: mcq
+      question: What does this print?
+      code: 'modules = [1, 2, 3]
+
+        modules.append(4)
+
+        print(len(modules))'
+      choices:
+      - '4'
+      - '3'
+      - '5'
+      - '1'
+      correct: '4'
+      explanation: Zev docked one more module. The bay now holds 4 items.
+      story_before: A new module just docked — Zev needs to verify the updated item count in the cargo bay.
+      story_after: Four modules confirmed in the bay — Zev clears the docking clamps and updates the manifest.
+    - type: fill_blank
+      prompt: Zev needs to offload cargo item 'b' from the manifest.
+      before: 'cargo = ["a", "b", "c"]
+
+        cargo.'
+      after: '("b")
+
+        print(cargo)'
+      choices:
+      - remove
+      - append
+      - pop
+      - delete
+      answer: remove
+      explanation: remove('b') finds the cargo item by ID and offloads it from the bay.
+      story_before: One cargo item in the manifest is flagged for offloading by ID.
+      story_after: The flagged item is removed — the manifest is clean and the remaining cargo is mission-ready.
+    - type: mcq
+      question: What does this print?
+      code: 'bay = [10, 20, 30]
+
+        val = bay.pop()
+
+        print(val)
+
+        print(bay)'
+      choices:
+      - '30
+
+        [10, 20]'
+      - '10
+
+        [20, 30]'
+      - '30
+
+        [10, 20, 30]'
+      - '20
+
+        [10, 30]'
+      correct: '30
+
+        [10, 20]'
+      explanation: pop() unloads the last cargo unit (30) and the bay holds [10, 20].
+      story_before: Zev runs an unloading sequence on the last unit in the bay to log what it was.
+      story_after: The last unit is retrieved and logged — the bay shrinks by one and the manifest is updated.
+    - type: arrange
+      instruction: Append 'potion' to inventory and print it
+      blocks:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      correct:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      explanation: Zev uses .append() to load a potion into the cargo inventory, then prints the updated manifest.
+      story_before: A last-minute supply needs to be loaded into the inventory before departure clearance.
+      story_after: The supply is appended and the updated manifest confirmed — Zev signals ready for launch.
+    - type: mcq
+      question: What does this print?
+      code: 'manifest = ["x", "y", "z"]
+
+        manifest.remove("y")
+
+        print(manifest)'
+      choices:
+      - '[''x'', ''z'']'
+      - '[''x'', ''y'']'
+      - '[''y'', ''z'']'
+      - '[''x'', ''y'', ''z'']'
+      correct: '[''x'', ''z'']'
+      explanation: Zev offloads 'y' from the manifest. Only 'x' and 'z' remain in the bay.
+      story_before: One cargo item in the manifest has been recalled — Zev must offload it by name.
+      story_after: The recalled item is removed — the bay is clear of problematic cargo and the mission proceeds.
+    - type: fill_blank
+      prompt: Zev unloads the last item from the cargo bay and logs what it was.
+      before: 'cargo = [5, 10, 15]
+
+        last = cargo.'
+      after: '()
+
+        print(last)'
+      choices:
+      - pop
+      - remove
+      - append
+      - len
+      answer: pop
+      explanation: pop() removes the last cargo unit and returns it so Zev can log the unloading.
+      story_before: Zev needs to unload the last cargo unit and record exactly what was retrieved.
+      story_after: The last unit is popped and logged — Zev files the retrieval report with the cargo officer.
+    - type: mcq
+      question: What does this print?
+      code: 'cargo = ["fuel_cell", "probe", "antenna"]
+
+        cargo.append("drill")
+
+        cargo.remove("probe")
+
+        print(len(cargo))'
+      choices:
+      - '3'
+      - '4'
+      - '2'
+      - '1'
+      correct: '3'
+      explanation: Zev starts with 3, loads a drill (4), then removes the probe (3). Bay holds 3 items.
+      story_before: After loading a drill and offloading a probe, Zev checks the bay's final item count.
+      story_after: Three units remain in the bay — Zev confirms the count with the cargo officer and seals the hatch.
+    - type: mcq
+      question: What does this print?
+      code: 'q = [1, 2, 3]
+
+        q.append(q.pop())
+
+        print(q)'
+      choices:
+      - '[1, 2, 3]'
+      - '[1, 2]'
+      - '[3, 1, 2]'
+      - '[1, 2, 3, 3]'
+      correct: '[1, 2, 3]'
+      explanation: Zev unloads the last item and immediately reloads it. The cargo manifest stays the same.
+      story_before: Command tests Zev with a pop-then-reload cycle to see whether the manifest actually changes.
+      story_after: 'Zev reports back: unloading and immediately reloading the same unit leaves the manifest identical.'
+    - type: mini_code
+      prompt: Start with a cargo manifest of 3 items. Load a 4th item, then offload the first one. Print the final manifest.
+      starter: ''
+      tests:
+      - code: isinstance(eval(_stdout.strip()), list)
+        message: Should print a list
+      - code: len(eval(_stdout.strip())) == 3
+        message: Final list should have 3 items
+      story_before: 'Zev runs a live manifest update: start with three cargo items, load a fourth, offload the first, and
+        print the result.'
+      story_after: The manifest is updated and verified — Zev transmits the final cargo list to Command.
+    - type: mini_code
+      prompt: Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list.
+      starter: ''
+      tests:
+      - code: len(eval(_stdout.strip())) == 2
+        message: Cargo bay should have 2 units left after Zev finishes unloading
+      - code: eval(_stdout.strip()) == [1, 2]
+        message: Should be [1, 2]
+      story_before: 'Final drill: reduce a five-unit stack to two by popping, then display what remains in the bay.'
+      story_after: Two units remain — Zev has mastered cargo operations and the Helix is cleared for departure.
   mystery:
-    title: "Evidence Locker Updates"
+    title: Evidence Locker Updates
     exercises:
-      - type: concept
-        code: |
-          evidence = ["fingerprint", "note"]
-          evidence.append("keycard")
-          print(evidence)
-          evidence.remove("note")
-          print(evidence)
-          last = evidence.pop()
-          print(last)
-          print(evidence)
-        output: "['fingerprint', 'note', 'keycard']\n['fingerprint', 'keycard']\nkeycard\n['fingerprint']"
-        explanation: "Cole updates the evidence locker as new clues come in. append() logs a new piece of evidence. remove() clears a clue that turned out to be irrelevant. pop() retrieves the last item from the locker."
+    - type: concept
+      code: 'evidence = ["fingerprint", "note"]
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clues = [1, 2, 3]\nclues.append(4)\nprint(len(clues))"
-        choices: ["4", "3", "5", "1"]
-        correct: "4"
-        explanation: "Cole added one more clue. The evidence locker now holds 4 items."
+        evidence.append("keycard")
 
-      - type: fill_blank
-        prompt: "Cole needs to clear clue 'b' from the evidence list."
-        before: "evidence = [\"a\", \"b\", \"c\"]\nevidence."
-        after: "(\"b\")\nprint(evidence)"
-        choices: ["remove", "append", "pop", "delete"]
-        answer: "remove"
-        explanation: "remove('b') finds the clue by name and removes it from the board."
+        print(evidence)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "locker = [10, 20, 30]\nval = locker.pop()\nprint(val)\nprint(locker)"
-        choices: ["30\n[10, 20]", "10\n[20, 30]", "30\n[10, 20, 30]", "20\n[10, 30]"]
-        correct: "30\n[10, 20]"
-        explanation: "pop() retrieves the last piece of evidence (30) from the locker. The locker now holds [10, 20]."
+        evidence.remove("note")
 
-      - type: arrange
-        instruction: "Append 'potion' to inventory and print it"
-        blocks: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        correct: ["inventory", "=", "[", "\"sword\"", ",", "\"shield\"", "]", "inventory", ".", "append", "(", "\"potion\"", ")", "print", "(", "inventory", ")"]
-        explanation: "Cole uses .append() to add a new piece of evidence to the board, then prints the updated list."
+        print(evidence)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clues = [\"x\", \"y\", \"z\"]\nclues.remove(\"y\")\nprint(clues)"
-        choices: ["['x', 'z']", "['x', 'y']", "['y', 'z']", "['x', 'y', 'z']"]
-        correct: "['x', 'z']"
-        explanation: "Cole removes clue 'y' from the board. Only 'x' and 'z' remain under investigation."
+        last = evidence.pop()
 
-      - type: fill_blank
-        prompt: "Cole retrieves the last piece of evidence from the locker and notes what it is."
-        before: "evidence = [5, 10, 15]\nlast = evidence."
-        after: "()\nprint(last)"
-        choices: ["pop", "remove", "append", "len"]
-        answer: "pop"
-        explanation: "pop() takes the last item from the evidence locker and returns it so Cole can examine it."
+        print(last)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clues = [\"fingerprint\", \"receipt\", \"photo\"]\nclues.append(\"witness\")\nclues.remove(\"receipt\")\nprint(len(clues))"
-        choices: ["3", "4", "2", "1"]
-        correct: "3"
-        explanation: "Cole starts with 3, logs a witness (4), then drops the irrelevant receipt (3). Board has 3 items."
+        print(evidence)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "q = [1, 2, 3]\nq.append(q.pop())\nprint(q)"
-        choices: ["[1, 2, 3]", "[1, 2]", "[3, 1, 2]", "[1, 2, 3, 3]"]
-        correct: "[1, 2, 3]"
-        explanation: "Cole removes the last clue and immediately re-pins it. The evidence board is unchanged."
+        '
+      output: '[''fingerprint'', ''note'', ''keycard'']
 
-      - type: mini_code
-        prompt: "Start with an evidence list of 3 items. Log a 4th clue, then remove the first one. Print the final board."
-        starter: ""
-        tests:
-          - code: "isinstance(eval(_stdout.strip()), list)"
-            message: "Should print a list"
-          - code: "len(eval(_stdout.strip())) == 3"
-            message: "Final list should have 3 items"
+        [''fingerprint'', ''keycard'']
 
-      - type: mini_code
-        prompt: "Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list."
-        starter: ""
-        tests:
-          - code: "len(eval(_stdout.strip())) == 2"
-            message: "Evidence locker should have 2 items left after Cole finishes removing"
-          - code: "eval(_stdout.strip()) == [1, 2]"
-            message: "Should be [1, 2]"
+        keycard
+
+        [''fingerprint'']'
+      explanation: Cole updates the evidence locker as new clues come in. append() logs a new piece of evidence. remove()
+        clears a clue that turned out to be irrelevant. pop() retrieves the last item from the locker.
+      story_before: Fresh leads keep arriving and old ones keep getting debunked — Cole must learn to add new clues, remove
+        dead ends, and retrieve the latest piece of evidence.
+      story_after: 'Cole has the three board operations locked in: append to log new evidence, remove to clear irrelevant
+        items, pop to pull the last entry.'
+    - type: mcq
+      question: What does this print?
+      code: 'clues = [1, 2, 3]
+
+        clues.append(4)
+
+        print(len(clues))'
+      choices:
+      - '4'
+      - '3'
+      - '5'
+      - '1'
+      correct: '4'
+      explanation: Cole added one more clue. The evidence locker now holds 4 items.
+      story_before: A new clue just came in — Cole needs to check the updated evidence count after logging it.
+      story_after: Four clues now on the board — Cole marks the addition and briefs the sergeant.
+    - type: fill_blank
+      prompt: Cole needs to clear clue 'b' from the evidence list.
+      before: 'evidence = ["a", "b", "c"]
+
+        evidence.'
+      after: '("b")
+
+        print(evidence)'
+      choices:
+      - remove
+      - append
+      - pop
+      - delete
+      answer: remove
+      explanation: remove('b') finds the clue by name and removes it from the board.
+      story_before: One entry on the board has been ruled irrelevant — Cole must clear it by name.
+      story_after: The dead-end clue is gone — the board is sharper and every remaining item points toward the truth.
+    - type: mcq
+      question: What does this print?
+      code: 'locker = [10, 20, 30]
+
+        val = locker.pop()
+
+        print(val)
+
+        print(locker)'
+      choices:
+      - '30
+
+        [10, 20]'
+      - '10
+
+        [20, 30]'
+      - '30
+
+        [10, 20, 30]'
+      - '20
+
+        [10, 30]'
+      correct: '30
+
+        [10, 20]'
+      explanation: pop() retrieves the last piece of evidence (30) from the locker. The locker now holds [10, 20].
+      story_before: Cole retrieves the last piece of evidence from the locker to examine it under the lamp.
+      story_after: The last item is pulled and identified — Cole notes it in the case file and the locker holds one less entry.
+    - type: arrange
+      instruction: Append 'potion' to inventory and print it
+      blocks:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      correct:
+      - inventory
+      - '='
+      - '['
+      - '"sword"'
+      - ','
+      - '"shield"'
+      - ']'
+      - inventory
+      - .
+      - append
+      - (
+      - '"potion"'
+      - )
+      - print
+      - (
+      - inventory
+      - )
+      explanation: Cole uses .append() to add a new piece of evidence to the board, then prints the updated list.
+      story_before: A new piece of evidence must be added to the board before the detective's morning briefing.
+      story_after: The evidence is logged and the updated board printed — Cole is ready to present the case.
+    - type: mcq
+      question: What does this print?
+      code: 'clues = ["x", "y", "z"]
+
+        clues.remove("y")
+
+        print(clues)'
+      choices:
+      - '[''x'', ''z'']'
+      - '[''x'', ''y'']'
+      - '[''y'', ''z'']'
+      - '[''x'', ''y'', ''z'']'
+      correct: '[''x'', ''z'']'
+      explanation: Cole removes clue 'y' from the board. Only 'x' and 'z' remain under investigation.
+      story_before: A clue that turned out to be planted needs to be struck from the evidence list.
+      story_after: The planted clue is removed — the investigation refocuses on the genuine leads.
+    - type: fill_blank
+      prompt: Cole retrieves the last piece of evidence from the locker and notes what it is.
+      before: 'evidence = [5, 10, 15]
+
+        last = evidence.'
+      after: '()
+
+        print(last)'
+      choices:
+      - pop
+      - remove
+      - append
+      - len
+      answer: pop
+      explanation: pop() takes the last item from the evidence locker and returns it so Cole can examine it.
+      story_before: Cole reaches into the evidence locker for the last item and records what it is.
+      story_after: The last clue is popped and examined — Cole adds a note to the file and prepares to follow up.
+    - type: mcq
+      question: What does this print?
+      code: 'clues = ["fingerprint", "receipt", "photo"]
+
+        clues.append("witness")
+
+        clues.remove("receipt")
+
+        print(len(clues))'
+      choices:
+      - '3'
+      - '4'
+      - '2'
+      - '1'
+      correct: '3'
+      explanation: Cole starts with 3, logs a witness (4), then drops the irrelevant receipt (3). Board has 3 items.
+      story_before: After logging a witness account and discarding a bad receipt, Cole checks how many items remain.
+      story_after: Three items on the board — Cole knows the case is tightening and the suspect pool is narrowing.
+    - type: mcq
+      question: What does this print?
+      code: 'q = [1, 2, 3]
+
+        q.append(q.pop())
+
+        print(q)'
+      choices:
+      - '[1, 2, 3]'
+      - '[1, 2]'
+      - '[3, 1, 2]'
+      - '[1, 2, 3, 3]'
+      correct: '[1, 2, 3]'
+      explanation: Cole removes the last clue and immediately re-pins it. The evidence board is unchanged.
+      story_before: 'Cole tests a theory: remove the last clue and immediately re-pin it — does the board change?'
+      story_after: The board is unchanged — Cole nods, understanding that pop then append is a net-zero operation.
+    - type: mini_code
+      prompt: Start with an evidence list of 3 items. Log a 4th clue, then remove the first one. Print the final board.
+      starter: ''
+      tests:
+      - code: isinstance(eval(_stdout.strip()), list)
+        message: Should print a list
+      - code: len(eval(_stdout.strip())) == 3
+        message: Final list should have 3 items
+      story_before: 'Cole drills the full evidence cycle: start with three items, add a fourth clue, remove the first, and
+        display the board.'
+      story_after: The board is updated correctly — Cole photographs it and sends the image to the DA.
+    - type: mini_code
+      prompt: Create a list called stack = [1, 2, 3, 4, 5]. Pop items until the list has 2 items. Print the list.
+      starter: ''
+      tests:
+      - code: len(eval(_stdout.strip())) == 2
+        message: Evidence locker should have 2 items left after Cole finishes removing
+      - code: eval(_stdout.strip()) == [1, 2]
+        message: Should be [1, 2]
+      story_before: 'Final test: whittle a five-item evidence stack down to two by popping, then show what remains.'
+      story_after: Two core clues remain — Cole has mastered the evidence locker, and the case file is airtight.

@@ -1,433 +1,846 @@
-title: "elif Chains"
+title: elif Chains
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      score = 82
-      if score >= 90:
-          print("A")
-      elif score >= 75:
-          print("B")
-      elif score >= 60:
-          print("C")
-      else:
-          print("F")
-    output: "B"
-    explanation: "elif (else if) adds more conditions. Python checks each in order and runs only the first True branch."
+- type: concept
+  code: "score = 82\nif score >= 90:\n    print(\"A\")\nelif score >= 75:\n    print(\"B\")\nelif score >= 60:\n    print(\"\
+    C\")\nelse:\n    print(\"F\")\n"
+  output: B
+  explanation: elif (else if) adds more conditions. Python checks each in order and runs only the first True branch.
+- type: mcq
+  question: What does this print?
+  code: "x = 50\nif x > 100:\n    print(\"big\")\nelif x > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
+  choices:
+  - medium
+  - big
+  - small
+  - 'big
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 50\nif x > 100:\n    print(\"big\")\nelif x > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
-    choices: ["medium", "big", "small", "big\nmedium"]
-    correct: "medium"
-    explanation: "x > 100 is False. x > 25 is True (50 > 25), so 'medium' prints."
+    medium'
+  correct: medium
+  explanation: x > 100 is False. x > 25 is True (50 > 25), so 'medium' prints.
+- type: fill_blank
+  prompt: Add a second speed check that only runs when the first condition was false.
+  before: "if speed > 120:\n    print(\"fast\")\n"
+  after: " speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
+  choices:
+  - elif
+  - else
+  - if
+  - then
+  answer: elif
+  explanation: elif adds another condition to check if the first one was False.
+- type: mcq
+  question: What does this print?
+  code: "temp = 100\nif temp > 100:\n    print(\"boiling\")\nelif temp == 100:\n    print(\"at boiling point\")\nelse:\n \
+    \   print(\"below\")"
+  choices:
+  - at boiling point
+  - boiling
+  - below
+  - 'boiling
 
-  - type: fill_blank
-    prompt: "Add a second speed check that only runs when the first condition was false."
-    before: "if speed > 120:\n    print(\"fast\")\n"
-    after: " speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
-    choices: ["elif", "else", "if", "then"]
-    answer: "elif"
-    explanation: "elif adds another condition to check if the first one was False."
+    at boiling point'
+  correct: at boiling point
+  explanation: temp > 100 is False. temp == 100 is True, so the elif branch runs.
+- type: arrange
+  instruction: Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise
+  blocks:
+  - if
+  - x
+  - '>'
+  - '10'
+  - ':'
+  - print
+  - (
+  - '"high"'
+  - )
+  - elif
+  - x
+  - '>'
+  - '5'
+  - ':'
+  - print
+  - (
+  - '"mid"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"low"'
+  - )
+  correct:
+  - if
+  - x
+  - '>'
+  - '10'
+  - ':'
+  - print
+  - (
+  - '"high"'
+  - )
+  - elif
+  - x
+  - '>'
+  - '5'
+  - ':'
+  - print
+  - (
+  - '"mid"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"low"'
+  - )
+  explanation: Python checks conditions in order and runs only the first True branch.
+- type: mcq
+  question: What does this print when score = 90?
+  code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\"\
+    )"
+  choices:
+  - A
+  - also A
+  - 'A
 
-  - type: mcq
-    question: "What does this print?"
-    code: "temp = 100\nif temp > 100:\n    print(\"boiling\")\nelif temp == 100:\n    print(\"at boiling point\")\nelse:\n    print(\"below\")"
-    choices: ["at boiling point", "boiling", "below", "boiling\nat boiling point"]
-    correct: "at boiling point"
-    explanation: "temp > 100 is False. temp == 100 is True, so the elif branch runs."
+    also A'
+  - other
+  correct: A
+  explanation: The first True branch wins. Even though the elif is also True, only the first matching branch runs.
+- type: fill_blank
+  prompt: Catch all remaining cases where hp is 25 or below, marking them as critical.
+  before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
+  after: ":\n    status = \"critical\""
+  choices:
+  - else
+  - elif
+  - if
+  - then
+  answer: else
+  explanation: else catches all remaining cases — when hp is 25 or below.
+- type: mcq
+  question: What does this print?
+  code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
+  choices:
+  - B
+  - A
+  - C
+  - 'B
 
-  - type: arrange
-    instruction: "Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise"
-    blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-    correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-    explanation: "Python checks conditions in order and runs only the first True branch."
+    C'
+  correct: B
+  explanation: n > 5 is False. n > 3 is True, so 'B' prints. C is not reached.
+- type: mcq
+  question: How many elif branches can you have?
+  code: ''
+  choices:
+  - As many as you need
+  - Exactly one
+  - Maximum 2
+  - None — use nested if instead
+  correct: As many as you need
+  explanation: You can chain as many elif branches as needed, but only the first True one runs.
+- type: mini_code
+  prompt: Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'.
+  starter: 'score = int(input())
 
-  - type: mcq
-    question: "What does this print when score = 90?"
-    code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\")"
-    choices: ["A", "also A", "A\nalso A", "other"]
-    correct: "A"
-    explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs."
+    '
+  tests:
+  - code: assert _stdout.strip() == 'C'
+    stdin: '73'
+    message: score 73 is between 60 and 74, grade is C
+  - code: assert _stdout.strip() == 'A'
+    stdin: '91'
+    message: score 91 is 90 or above, grade is A
+  - code: assert _stdout.strip() == 'B'
+    stdin: '80'
+    message: score 80 is between 75 and 89, grade is B
+  - code: assert _stdout.strip() == 'F'
+    stdin: '50'
+    message: score 50 is below 60, grade is F
+- type: mini_code
+  prompt: Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30,
+    else 'obese'.
+  starter: 'bmi = float(input())
 
-  - type: fill_blank
-    prompt: "Catch all remaining cases where hp is 25 or below, marking them as critical."
-    before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
-    after: ":\n    status = \"critical\""
-    choices: ["else", "elif", "if", "then"]
-    answer: "else"
-    explanation: "else catches all remaining cases — when hp is 25 or below."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
-    choices: ["B", "A", "C", "B\nC"]
-    correct: "B"
-    explanation: "n > 5 is False. n > 3 is True, so 'B' prints. C is not reached."
-
-  - type: mcq
-    question: "How many elif branches can you have?"
-    code: ""
-    choices: ["As many as you need", "Exactly one", "Maximum 2", "None — use nested if instead"]
-    correct: "As many as you need"
-    explanation: "You can chain as many elif branches as needed, but only the first True one runs."
-
-  - type: mini_code
-    prompt: "Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'."
-    starter: "score = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'C'"
-        stdin: "73"
-        message: "score 73 is between 60 and 74, grade is C"
-      - code: "assert _stdout.strip() == 'A'"
-        stdin: "91"
-        message: "score 91 is 90 or above, grade is A"
-      - code: "assert _stdout.strip() == 'B'"
-        stdin: "80"
-        message: "score 80 is between 75 and 89, grade is B"
-      - code: "assert _stdout.strip() == 'F'"
-        stdin: "50"
-        message: "score 50 is below 60, grade is F"
-
-  - type: mini_code
-    prompt: "Read a BMI value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
-    starter: "bmi = float(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'normal'"
-        stdin: "22"
-        message: "22 is between 18.5 and 25, prints 'normal'"
-      - code: "assert _stdout.strip() == 'underweight'"
-        stdin: "17"
-        message: "17 is below 18.5, prints 'underweight'"
-      - code: "assert _stdout.strip() == 'overweight'"
-        stdin: "27"
-        message: "27 is between 25 and 30, prints 'overweight'"
-      - code: "assert _stdout.strip() == 'obese'"
-        stdin: "31"
-        message: "31 is 30 or above, prints 'obese'"
-
+    '
+  tests:
+  - code: assert _stdout.strip() == 'normal'
+    stdin: '22'
+    message: 22 is between 18.5 and 25, prints 'normal'
+  - code: assert _stdout.strip() == 'underweight'
+    stdin: '17'
+    message: 17 is below 18.5, prints 'underweight'
+  - code: assert _stdout.strip() == 'overweight'
+    stdin: '27'
+    message: 27 is between 25 and 30, prints 'overweight'
+  - code: assert _stdout.strip() == 'obese'
+    stdin: '31'
+    message: 31 is 30 or above, prints 'obese'
 worlds:
   fantasy:
-    title: "The Rank Crystal"
+    title: The Rank Crystal
     exercises:
-      - type: concept
-        code: |
-          threat_level = 82
-          if threat_level >= 90:
-              print("Legendary beast!")
-          elif threat_level >= 75:
-              print("Dangerous creature.")
-          elif threat_level >= 60:
-              print("Minor threat.")
-          else:
-              print("Harmless critter.")
-        output: "Dangerous creature."
-        explanation: "Ranger Kira checks threat level through each branch in order. 82 is not >= 90, but it is >= 75, so 'Dangerous creature.' prints."
+    - type: concept
+      code: "threat_level = 82\nif threat_level >= 90:\n    print(\"Legendary beast!\")\nelif threat_level >= 75:\n    print(\"\
+        Dangerous creature.\")\nelif threat_level >= 60:\n    print(\"Minor threat.\")\nelse:\n    print(\"Harmless critter.\"\
+        )\n"
+      output: Dangerous creature.
+      explanation: Ranger Kira checks threat level through each branch in order. 82 is not >= 90, but it is >= 75, so 'Dangerous
+        creature.' prints.
+      story_before: Kira holds up the Rank Crystal and it pulses with a score of 82 — she needs the elif chain to translate
+        that number into a threat tier.
+      story_after: 82 skips 'Legendary' but catches 'Dangerous'; the crystal settles on amber and Kira readies her mid-level
+        defences.
+    - type: mcq
+      question: What does this print?
+      code: "beast_size = 50\nif beast_size > 100:\n    print(\"big\")\nelif beast_size > 25:\n    print(\"medium\")\nelse:\n\
+        \    print(\"small\")"
+      choices:
+      - medium
+      - big
+      - small
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "beast_size = 50\nif beast_size > 100:\n    print(\"big\")\nelif beast_size > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
-        choices: ["medium", "big", "small", "big\nmedium"]
-        correct: "medium"
-        explanation: "beast_size > 100 is False. beast_size > 25 is True (50 > 25), so 'medium' prints. A medium-sized beast."
+        medium'
+      correct: medium
+      explanation: beast_size > 100 is False. beast_size > 25 is True (50 > 25), so 'medium' prints. A medium-sized beast.
+      story_before: A creature of middling bulk lumbers into view — Kira traces the elif chain to see which size label it
+        earns.
+      story_after: 50 clears the 25-threshold but not 100; 'medium' is stamped in the bestiary and Kira adjusts her approach.
+    - type: fill_blank
+      prompt: Add a second creature speed check that only runs when the first condition was false.
+      before: "if creature_speed > 120:\n    print(\"fast\")\n"
+      after: " creature_speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
+      choices:
+      - elif
+      - else
+      - if
+      - then
+      answer: elif
+      explanation: elif adds another speed tier to check if the first one was False. Kira knows how to pace her response.
+      story_before: Kira's speed-response chart has two tiers and needs the keyword that links them — the second check only
+        runs if the first failed.
+      story_after: elif slots in perfectly; Kira's chart now classifies every creature speed without overlapping conditions.
+    - type: mcq
+      question: What does this print?
+      code: "dragon_heat = 100\nif dragon_heat > 100:\n    print(\"boiling\")\nelif dragon_heat == 100:\n    print(\"at boiling\
+        \ point\")\nelse:\n    print(\"below\")"
+      choices:
+      - at boiling point
+      - boiling
+      - below
+      - 'boiling
 
-      - type: fill_blank
-        prompt: "Add a second creature speed check that only runs when the first condition was false."
-        before: "if creature_speed > 120:\n    print(\"fast\")\n"
-        after: " creature_speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
-        choices: ["elif", "else", "if", "then"]
-        answer: "elif"
-        explanation: "elif adds another speed tier to check if the first one was False. Kira knows how to pace her response."
+        at boiling point'
+      correct: at boiling point
+      explanation: dragon_heat > 100 is False. dragon_heat == 100 is True, so the elif branch runs — the dragon is at peak
+        heat.
+      story_before: The dragon's heat reads exactly 100 — Kira walks through the chain to find which branch that triggers.
+      story_after: '> 100 is False, == 100 is True; ''at boiling point'' prints and Kira knows the dragon is primed but hasn''t
+        unleashed yet.'
+    - type: arrange
+      instruction: Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise
+      blocks:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      correct:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      explanation: Kira ranks the threat from high to low. Python checks each condition in order and runs only the first True
+        branch.
+      story_before: Kira needs a three-tier threat scale from high to low — she arranges the full if/elif/else chain herself.
+      story_after: The chain is in place; every threat level will now route to exactly one tier, giving Kira a clear response
+        plan.
+    - type: mcq
+      question: What does this print when score = 90?
+      code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"\
+        other\")"
+      choices:
+      - A
+      - also A
+      - 'A
 
-      - type: mcq
-        question: "What does this print?"
-        code: "dragon_heat = 100\nif dragon_heat > 100:\n    print(\"boiling\")\nelif dragon_heat == 100:\n    print(\"at boiling point\")\nelse:\n    print(\"below\")"
-        choices: ["at boiling point", "boiling", "below", "boiling\nat boiling point"]
-        correct: "at boiling point"
-        explanation: "dragon_heat > 100 is False. dragon_heat == 100 is True, so the elif branch runs — the dragon is at peak heat."
+        also A'
+      - other
+      correct: A
+      explanation: The first True branch wins. Even though the elif is also True, only the first matching branch runs — Kira
+        trusts the first reading.
+      story_before: The crystal reads 90 twice in the chain — Kira must remember that only the first True branch matters.
+      story_after: First branch wins; 'A' prints once and the elif is skipped — Kira trusts the earliest reading.
+    - type: fill_blank
+      prompt: Catch all remaining cases where Kira's hp is 25 or below, marking her as critically wounded.
+      before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
+      after: ":\n    status = \"critical\""
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches all remaining cases — when hp is 25 or below, Kira is in critical condition.
+      story_before: Kira's health chain needs a final catch for the most dire cases — she adds the else that marks her as
+        critically wounded.
+      story_after: The else seals the chain; any hp at 25 or below now routes straight to 'critical' status.
+    - type: mcq
+      question: What does this print?
+      code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
+      choices:
+      - B
+      - A
+      - C
+      - 'B
 
-      - type: arrange
-        instruction: "Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise"
-        blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        explanation: "Kira ranks the threat from high to low. Python checks each condition in order and runs only the first True branch."
+        C'
+      correct: B
+      explanation: n > 5 is False. n > 3 is True, so 'B' prints. Kira gets a B-rank on the creature scale.
+      story_before: Kira's rank-scale has three labels — she traces what score 5 earns when only the B-tier condition is True.
+      story_after: n > 5 is False, n > 3 is True; 'B' prints and Kira records a solid mid-rank encounter.
+    - type: mcq
+      question: How many elif branches can you have?
+      code: ''
+      choices:
+      - As many as you need
+      - Exactly one
+      - Maximum 2
+      - None — use nested if instead
+      correct: As many as you need
+      explanation: Kira can add as many creature tiers as she needs — only the first matching tier triggers.
+      story_before: Kira wants to add more creature tiers to her bestiary — she checks whether there's a hard limit on elif
+        branches.
+      story_after: As many as she needs; Kira adds three more tiers to the crystal's scale, confident each will be evaluated
+        in order.
+    - type: mini_code
+      prompt: The Rank Crystal glows with a score for each beast Kira encounters. Read a score with input(). Print 'A' if
+        90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'.
+      starter: 'score = int(input())
 
-      - type: mcq
-        question: "What does this print when score = 90?"
-        code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\")"
-        choices: ["A", "also A", "A\nalso A", "other"]
-        correct: "A"
-        explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs — Kira trusts the first reading."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'C'
+        stdin: '73'
+        message: score 73 is between 60 and 74, grade is C
+      - code: assert _stdout.strip() == 'A'
+        stdin: '91'
+        message: score 91 is 90 or above, grade is A
+      - code: assert _stdout.strip() == 'B'
+        stdin: '80'
+        message: score 80 is between 75 and 89, grade is B
+      - code: assert _stdout.strip() == 'F'
+        stdin: '50'
+        message: score 50 is below 60, grade is F
+      story_before: The Rank Crystal needs Kira to program its grading logic — she reads a beast score and must print the
+        correct letter grade.
+      story_after: The grading chain is live; every score the crystal reads will now map to exactly one grade and Kira can
+        track her progress.
+    - type: mini_code
+      prompt: Kira's bestiary rates each creature by mass index. Read a value with input(). Print 'underweight' if below 18.5,
+        'normal' if below 25, 'overweight' if below 30, else 'obese'.
+      starter: 'bmi = float(input())
 
-      - type: fill_blank
-        prompt: "Catch all remaining cases where Kira's hp is 25 or below, marking her as critically wounded."
-        before: "if hp > 75:\n    status = \"healthy\"\nelif hp > 25:\n    status = \"injured\"\n"
-        after: ":\n    status = \"critical\""
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches all remaining cases — when hp is 25 or below, Kira is in critical condition."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
-        choices: ["B", "A", "C", "B\nC"]
-        correct: "B"
-        explanation: "n > 5 is False. n > 3 is True, so 'B' prints. Kira gets a B-rank on the creature scale."
-
-      - type: mcq
-        question: "How many elif branches can you have?"
-        code: ""
-        choices: ["As many as you need", "Exactly one", "Maximum 2", "None — use nested if instead"]
-        correct: "As many as you need"
-        explanation: "Kira can add as many creature tiers as she needs — only the first matching tier triggers."
-
-      - type: mini_code
-        prompt: "The Rank Crystal glows with a score for each beast Kira encounters. Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'."
-        starter: "score = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'C'"
-            stdin: "73"
-            message: "score 73 is between 60 and 74, grade is C"
-          - code: "assert _stdout.strip() == 'A'"
-            stdin: "91"
-            message: "score 91 is 90 or above, grade is A"
-          - code: "assert _stdout.strip() == 'B'"
-            stdin: "80"
-            message: "score 80 is between 75 and 89, grade is B"
-          - code: "assert _stdout.strip() == 'F'"
-            stdin: "50"
-            message: "score 50 is below 60, grade is F"
-
-      - type: mini_code
-        prompt: "Kira's bestiary rates each creature by mass index. Read a value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
-        starter: "bmi = float(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'normal'"
-            stdin: "22"
-            message: "22 is between 18.5 and 25, prints 'normal'"
-          - code: "assert _stdout.strip() == 'underweight'"
-            stdin: "17"
-            message: "17 is below 18.5, prints 'underweight'"
-          - code: "assert _stdout.strip() == 'overweight'"
-            stdin: "27"
-            message: "27 is between 25 and 30, prints 'overweight'"
-          - code: "assert _stdout.strip() == 'obese'"
-            stdin: "31"
-            message: "31 is 30 or above, prints 'obese'"
-
+        '
+      tests:
+      - code: assert _stdout.strip() == 'normal'
+        stdin: '22'
+        message: 22 is between 18.5 and 25, prints 'normal'
+      - code: assert _stdout.strip() == 'underweight'
+        stdin: '17'
+        message: 17 is below 18.5, prints 'underweight'
+      - code: assert _stdout.strip() == 'overweight'
+        stdin: '27'
+        message: 27 is between 25 and 30, prints 'overweight'
+      - code: assert _stdout.strip() == 'obese'
+        stdin: '31'
+        message: 31 is 30 or above, prints 'obese'
+      story_before: Kira's bestiary also classifies creatures by mass index — she builds the elif chain that converts a float
+        reading into a weight category.
+      story_after: The mass-index chain is complete; Kira can now classify any creature with a single scan, from underweight
+        waif to heavy-set brute.
   scifi:
-    title: "Status Levels"
+    title: Status Levels
     exercises:
-      - type: concept
-        code: |
-          hull_integrity = 82
-          if hull_integrity >= 90:
-              print("Hull optimal.")
-          elif hull_integrity >= 75:
-              print("Hull stable.")
-          elif hull_integrity >= 60:
-              print("Hull damaged.")
-          else:
-              print("Hull critical!")
-        output: "Hull stable."
-        explanation: "Captain Voss runs through the hull status chain. 82 is not >= 90, but it is >= 75, so 'Hull stable.' prints."
+    - type: concept
+      code: "hull_integrity = 82\nif hull_integrity >= 90:\n    print(\"Hull optimal.\")\nelif hull_integrity >= 75:\n   \
+        \ print(\"Hull stable.\")\nelif hull_integrity >= 60:\n    print(\"Hull damaged.\")\nelse:\n    print(\"Hull critical!\"\
+        )\n"
+      output: Hull stable.
+      explanation: Captain Voss runs through the hull status chain. 82 is not >= 90, but it is >= 75, so 'Hull stable.' prints.
+      story_before: Voss runs the hull status chain — integrity at 82 needs to route to the right tier before he can file
+        the maintenance report.
+      story_after: 82 misses 'optimal' but hits 'stable'; 'Hull stable.' prints and Voss schedules a routine patch rather
+        than an emergency repair.
+    - type: mcq
+      question: What does this print?
+      code: "reactor_output = 50\nif reactor_output > 100:\n    print(\"big\")\nelif reactor_output > 25:\n    print(\"medium\"\
+        )\nelse:\n    print(\"small\")"
+      choices:
+      - medium
+      - big
+      - small
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "reactor_output = 50\nif reactor_output > 100:\n    print(\"big\")\nelif reactor_output > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
-        choices: ["medium", "big", "small", "big\nmedium"]
-        correct: "medium"
-        explanation: "reactor_output > 100 is False. reactor_output > 25 is True (50 > 25), so 'medium' prints. A medium reactor output."
+        medium'
+      correct: medium
+      explanation: reactor_output > 100 is False. reactor_output > 25 is True (50 > 25), so 'medium' prints. A medium reactor
+        output.
+      story_before: The reactor readout shows 50 — Voss traces the elif chain to see which output tier that triggers.
+      story_after: 50 clears 25 but not 100; 'medium' prints and Voss keeps the reactor on its current setting.
+    - type: fill_blank
+      prompt: Add a second thruster speed check that only runs when the first condition was false.
+      before: "if thruster_speed > 120:\n    print(\"fast\")\n"
+      after: " thruster_speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
+      choices:
+      - elif
+      - else
+      - if
+      - then
+      answer: elif
+      explanation: elif checks the next speed tier if the first was False. Voss classifies thruster output precisely.
+      story_before: The thruster classification system has two speed tiers — Voss fills in the keyword that connects them
+        in the chain.
+      story_after: elif locks in; the thruster chart now handles any speed input without ambiguity.
+    - type: mcq
+      question: What does this print?
+      code: "core_temp = 100\nif core_temp > 100:\n    print(\"boiling\")\nelif core_temp == 100:\n    print(\"at boiling\
+        \ point\")\nelse:\n    print(\"below\")"
+      choices:
+      - at boiling point
+      - boiling
+      - below
+      - 'boiling
 
-      - type: fill_blank
-        prompt: "Add a second thruster speed check that only runs when the first condition was false."
-        before: "if thruster_speed > 120:\n    print(\"fast\")\n"
-        after: " thruster_speed > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
-        choices: ["elif", "else", "if", "then"]
-        answer: "elif"
-        explanation: "elif checks the next speed tier if the first was False. Voss classifies thruster output precisely."
+        at boiling point'
+      correct: at boiling point
+      explanation: core_temp > 100 is False. core_temp == 100 is True, so the elif branch runs — reactor is at critical temperature.
+      story_before: The reactor core reads exactly 100 — Voss walks through the chain to find which branch catches that precise
+        value.
+      story_after: '> 100 is False, == 100 is True; ''at boiling point'' triggers and Voss initiates the controlled cool-down
+        protocol.'
+    - type: arrange
+      instruction: Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise
+      blocks:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      correct:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      explanation: Voss ranks the alert level from high to low. Python checks each condition in order and runs only the first
+        True branch.
+      story_before: Voss needs a three-level alert system — he assembles the if/elif/else chain that maps any reading to high,
+        mid, or low.
+      story_after: The chain is assembled; every incoming alert will now land in exactly one tier, giving the bridge a clear
+        priority.
+    - type: mcq
+      question: What does this print when score = 90?
+      code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"\
+        other\")"
+      choices:
+      - A
+      - also A
+      - 'A
 
-      - type: mcq
-        question: "What does this print?"
-        code: "core_temp = 100\nif core_temp > 100:\n    print(\"boiling\")\nelif core_temp == 100:\n    print(\"at boiling point\")\nelse:\n    print(\"below\")"
-        choices: ["at boiling point", "boiling", "below", "boiling\nat boiling point"]
-        correct: "at boiling point"
-        explanation: "core_temp > 100 is False. core_temp == 100 is True, so the elif branch runs — reactor is at critical temperature."
+        also A'
+      - other
+      correct: A
+      explanation: The first True branch wins. Even though the elif is also True, only the first matching branch runs — the
+        first sensor reading takes priority.
+      story_before: Two branches in the chain both match score 90 — Voss confirms which one takes priority.
+      story_after: The first True branch wins; 'A' prints once and Voss notes that sensor order matters in the diagnostic
+        chain.
+    - type: fill_blank
+      prompt: Catch all remaining cases where hull_integrity is 25 or below, marking the hull as critical.
+      before: "if hull_integrity > 75:\n    status = \"healthy\"\nelif hull_integrity > 25:\n    status = \"injured\"\n"
+      after: ":\n    status = \"critical\""
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches all remaining cases — when hull_integrity is 25 or below, the ship is in critical condition.
+      story_before: The hull chain needs a final catch for the worst-case scenario — Voss adds the else that labels it 'critical'.
+      story_after: The else is in place; any integrity at 25 or below now triggers the critical-damage protocol automatically.
+    - type: mcq
+      question: What does this print?
+      code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
+      choices:
+      - B
+      - A
+      - C
+      - 'B
 
-      - type: arrange
-        instruction: "Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise"
-        blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        explanation: "Voss ranks the alert level from high to low. Python checks each condition in order and runs only the first True branch."
+        C'
+      correct: B
+      explanation: n > 5 is False. n > 3 is True, so 'B' prints. The sector gets a B-level alert rating.
+      story_before: The sector alert scale has three tiers — Voss traces which tier a value of 5 earns when the top condition
+        is False.
+      story_after: n > 3 is True; 'B' prints and the sector gets a mid-level alert — not critical, but worth monitoring.
+    - type: mcq
+      question: How many elif branches can you have?
+      code: ''
+      choices:
+      - As many as you need
+      - Exactly one
+      - Maximum 2
+      - None — use nested if instead
+      correct: As many as you need
+      explanation: Voss can stack as many alert tiers as the checklist requires — only the first matching tier triggers.
+      story_before: Voss wants to extend the alert chain with more tiers — he checks whether the language imposes a limit
+        on elif.
+      story_after: No limit; Voss adds two more alert tiers to the chain, knowing only the first match will ever fire.
+    - type: mini_code
+      prompt: The ship's performance log grades each system check. Read a score with input(). Print 'A' if 90 or above, 'B'
+        if 75 or above, 'C' if 60 or above, else 'F'.
+      starter: 'score = int(input())
 
-      - type: mcq
-        question: "What does this print when score = 90?"
-        code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\")"
-        choices: ["A", "also A", "A\nalso A", "other"]
-        correct: "A"
-        explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs — the first sensor reading takes priority."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'C'
+        stdin: '73'
+        message: score 73 is between 60 and 74, grade is C
+      - code: assert _stdout.strip() == 'A'
+        stdin: '91'
+        message: score 91 is 90 or above, grade is A
+      - code: assert _stdout.strip() == 'B'
+        stdin: '80'
+        message: score 80 is between 75 and 89, grade is B
+      - code: assert _stdout.strip() == 'F'
+        stdin: '50'
+        message: score 50 is below 60, grade is F
+      story_before: The performance log needs grading logic — Voss programs the elif chain that converts a system-check score
+        into a letter grade.
+      story_after: The grading chain is live; every system-check score will now resolve to a single grade on the mission report.
+    - type: mini_code
+      prompt: The med-bay scanner classifies each crew member by body mass index. Read a value with input(). Print 'underweight'
+        if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'.
+      starter: 'bmi = float(input())
 
-      - type: fill_blank
-        prompt: "Catch all remaining cases where hull_integrity is 25 or below, marking the hull as critical."
-        before: "if hull_integrity > 75:\n    status = \"healthy\"\nelif hull_integrity > 25:\n    status = \"injured\"\n"
-        after: ":\n    status = \"critical\""
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches all remaining cases — when hull_integrity is 25 or below, the ship is in critical condition."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
-        choices: ["B", "A", "C", "B\nC"]
-        correct: "B"
-        explanation: "n > 5 is False. n > 3 is True, so 'B' prints. The sector gets a B-level alert rating."
-
-      - type: mcq
-        question: "How many elif branches can you have?"
-        code: ""
-        choices: ["As many as you need", "Exactly one", "Maximum 2", "None — use nested if instead"]
-        correct: "As many as you need"
-        explanation: "Voss can stack as many alert tiers as the checklist requires — only the first matching tier triggers."
-
-      - type: mini_code
-        prompt: "The ship's performance log grades each system check. Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'."
-        starter: "score = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'C'"
-            stdin: "73"
-            message: "score 73 is between 60 and 74, grade is C"
-          - code: "assert _stdout.strip() == 'A'"
-            stdin: "91"
-            message: "score 91 is 90 or above, grade is A"
-          - code: "assert _stdout.strip() == 'B'"
-            stdin: "80"
-            message: "score 80 is between 75 and 89, grade is B"
-          - code: "assert _stdout.strip() == 'F'"
-            stdin: "50"
-            message: "score 50 is below 60, grade is F"
-
-      - type: mini_code
-        prompt: "The med-bay scanner classifies each crew member by body mass index. Read a value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
-        starter: "bmi = float(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'normal'"
-            stdin: "22"
-            message: "22 is between 18.5 and 25, prints 'normal'"
-          - code: "assert _stdout.strip() == 'underweight'"
-            stdin: "17"
-            message: "17 is below 18.5, prints 'underweight'"
-          - code: "assert _stdout.strip() == 'overweight'"
-            stdin: "27"
-            message: "27 is between 25 and 30, prints 'overweight'"
-          - code: "assert _stdout.strip() == 'obese'"
-            stdin: "31"
-            message: "31 is 30 or above, prints 'obese'"
-
+        '
+      tests:
+      - code: assert _stdout.strip() == 'normal'
+        stdin: '22'
+        message: 22 is between 18.5 and 25, prints 'normal'
+      - code: assert _stdout.strip() == 'underweight'
+        stdin: '17'
+        message: 17 is below 18.5, prints 'underweight'
+      - code: assert _stdout.strip() == 'overweight'
+        stdin: '27'
+        message: 27 is between 25 and 30, prints 'overweight'
+      - code: assert _stdout.strip() == 'obese'
+        stdin: '31'
+        message: 31 is 30 or above, prints 'obese'
+      story_before: The med-bay scanner needs a body-mass classifier — Voss builds the elif chain that maps a float reading
+        to a health category.
+      story_after: The classifier is deployed; every crew member scanned will now receive an instant, unambiguous health category.
   mystery:
-    title: "Ranking Suspects"
+    title: Ranking Suspects
     exercises:
-      - type: concept
-        code: |
-          suspicion_level = 82
-          if suspicion_level >= 90:
-              print("Prime suspect!")
-          elif suspicion_level >= 75:
-              print("Strong lead.")
-          elif suspicion_level >= 60:
-              print("Worth questioning.")
-          else:
-              print("Likely innocent.")
-        output: "Strong lead."
-        explanation: "Detective Cole scores each suspect. 82 is not >= 90, but it is >= 75, so 'Strong lead.' prints — this person needs a closer look."
+    - type: concept
+      code: "suspicion_level = 82\nif suspicion_level >= 90:\n    print(\"Prime suspect!\")\nelif suspicion_level >= 75:\n\
+        \    print(\"Strong lead.\")\nelif suspicion_level >= 60:\n    print(\"Worth questioning.\")\nelse:\n    print(\"\
+        Likely innocent.\")\n"
+      output: Strong lead.
+      explanation: Detective Cole scores each suspect. 82 is not >= 90, but it is >= 75, so 'Strong lead.' prints — this person
+        needs a closer look.
+      story_before: Cole runs his suspicion-scoring chain on the next name in the file — 82 points needs to land in the right
+        tier.
+      story_after: 82 misses 'Prime suspect' but hits 'Strong lead'; Cole circles the name and moves it to the active-investigation
+        pile.
+    - type: mcq
+      question: What does this print?
+      code: "clue_weight = 50\nif clue_weight > 100:\n    print(\"big\")\nelif clue_weight > 25:\n    print(\"medium\")\n\
+        else:\n    print(\"small\")"
+      choices:
+      - medium
+      - big
+      - small
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clue_weight = 50\nif clue_weight > 100:\n    print(\"big\")\nelif clue_weight > 25:\n    print(\"medium\")\nelse:\n    print(\"small\")"
-        choices: ["medium", "big", "small", "big\nmedium"]
-        correct: "medium"
-        explanation: "clue_weight > 100 is False. clue_weight > 25 is True (50 > 25), so 'medium' prints. A medium-weight clue."
+        medium'
+      correct: medium
+      explanation: clue_weight > 100 is False. clue_weight > 25 is True (50 > 25), so 'medium' prints. A medium-weight clue.
+      story_before: A clue weighs in at 50 on Cole's importance scale — he traces the chain to see which tier it earns.
+      story_after: 50 clears 25 but not 100; 'medium' prints and Cole files the clue as supporting evidence, not the smoking
+        gun.
+    - type: fill_blank
+      prompt: Add a second urgency check for the investigation that only runs when the first condition was false.
+      before: "if urgency_level > 120:\n    print(\"fast\")\n"
+      after: " urgency_level > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
+      choices:
+      - elif
+      - else
+      - if
+      - then
+      answer: elif
+      explanation: elif checks the next urgency tier if the first was False. Cole classifies how quickly to act.
+      story_before: Cole's urgency scale has two tiers — he fills in the keyword that chains them so the second only checks
+        when the first fails.
+      story_after: elif is in; Cole's urgency chart now correctly prioritises actions without skipping or double-counting.
+    - type: mcq
+      question: What does this print?
+      code: "tension_level = 100\nif tension_level > 100:\n    print(\"boiling\")\nelif tension_level == 100:\n    print(\"\
+        at boiling point\")\nelse:\n    print(\"below\")"
+      choices:
+      - at boiling point
+      - boiling
+      - below
+      - 'boiling
 
-      - type: fill_blank
-        prompt: "Add a second urgency check for the investigation that only runs when the first condition was false."
-        before: "if urgency_level > 120:\n    print(\"fast\")\n"
-        after: " urgency_level > 60:\n    print(\"normal\")\nelse:\n    print(\"slow\")"
-        choices: ["elif", "else", "if", "then"]
-        answer: "elif"
-        explanation: "elif checks the next urgency tier if the first was False. Cole classifies how quickly to act."
+        at boiling point'
+      correct: at boiling point
+      explanation: tension_level > 100 is False. tension_level == 100 is True, so the elif branch runs — the interrogation
+        is at peak tension.
+      story_before: The interrogation tension reads exactly 100 — Cole traces the chain to find which branch catches that
+        peak value.
+      story_after: '> 100 is False, == 100 is True; ''at boiling point'' prints and Cole leans forward — the suspect is about
+        to talk.'
+    - type: arrange
+      instruction: Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise
+      blocks:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      correct:
+      - if
+      - x
+      - '>'
+      - '10'
+      - ':'
+      - print
+      - (
+      - '"high"'
+      - )
+      - elif
+      - x
+      - '>'
+      - '5'
+      - ':'
+      - print
+      - (
+      - '"mid"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"low"'
+      - )
+      explanation: Cole ranks the threat level from high to low. Python checks each condition in order and runs only the first
+        True branch.
+      story_before: Cole needs a three-tier threat-level scale for his field notes — he assembles the if/elif/else chain from
+        scratch.
+      story_after: The chain is assembled; Cole's field notes will now auto-classify every situation from high to low without
+        ambiguity.
+    - type: mcq
+      question: What does this print when score = 90?
+      code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"\
+        other\")"
+      choices:
+      - A
+      - also A
+      - 'A
 
-      - type: mcq
-        question: "What does this print?"
-        code: "tension_level = 100\nif tension_level > 100:\n    print(\"boiling\")\nelif tension_level == 100:\n    print(\"at boiling point\")\nelse:\n    print(\"below\")"
-        choices: ["at boiling point", "boiling", "below", "boiling\nat boiling point"]
-        correct: "at boiling point"
-        explanation: "tension_level > 100 is False. tension_level == 100 is True, so the elif branch runs — the interrogation is at peak tension."
+        also A'
+      - other
+      correct: A
+      explanation: The first True branch wins. Even though the elif is also True, only the first matching branch runs — Cole
+        acts on the first solid lead.
+      story_before: Two branches both match score 90 in the evidence chain — Cole confirms which one takes priority in Python.
+      story_after: The first True branch wins; 'A' prints once and Cole learns to always put his strongest criteria first.
+    - type: fill_blank
+      prompt: Catch all remaining cases where alibi_strength is 25 or below, marking the suspect as critically suspicious.
+      before: "if alibi_strength > 75:\n    status = \"healthy\"\nelif alibi_strength > 25:\n    status = \"injured\"\n"
+      after: ":\n    status = \"critical\""
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches all remaining cases — when alibi_strength is 25 or below, the suspect is critically suspicious.
+      story_before: Cole's alibi-health chain needs a final net for the most suspicious cases — he adds the else that marks
+        them 'critical'.
+      story_after: The else is sealed in; any alibi at 25 points or below now flags the suspect as critically suspicious.
+    - type: mcq
+      question: What does this print?
+      code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
+      choices:
+      - B
+      - A
+      - C
+      - 'B
 
-      - type: arrange
-        instruction: "Build code that prints 'high' when x is greater than 10, 'mid' when x is greater than 5, and 'low' otherwise"
-        blocks: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        correct: ["if", "x", ">", "10", ":", "print", "(", "\"high\"", ")", "elif", "x", ">", "5", ":", "print", "(", "\"mid\"", ")", "else", ":", "print", "(", "\"low\"", ")"]
-        explanation: "Cole ranks the threat level from high to low. Python checks each condition in order and runs only the first True branch."
+        C'
+      correct: B
+      explanation: n > 5 is False. n > 3 is True, so 'B' prints. This clue gets a B-tier importance rating.
+      story_before: Cole's evidence-importance scale has three tiers — he traces which tier a value of 5 earns when the top
+        condition fails.
+      story_after: n > 3 is True; 'B' prints and Cole tags the clue as moderately important — worth keeping, not worth leading
+        with.
+    - type: mcq
+      question: How many elif branches can you have?
+      code: ''
+      choices:
+      - As many as you need
+      - Exactly one
+      - Maximum 2
+      - None — use nested if instead
+      correct: As many as you need
+      explanation: Cole can add as many suspect tiers as the case requires — only the first matching tier triggers.
+      story_before: Cole wants to add more suspect tiers to his ranking chain — he checks whether elif has a limit.
+      story_after: No limit; Cole adds two more tiers and confidently knows only the first match will direct his next move.
+    - type: mini_code
+      prompt: Cole's case file grades each piece of evidence. Read a score with input(). Print 'A' if 90 or above, 'B' if
+        75 or above, 'C' if 60 or above, else 'F'.
+      starter: 'score = int(input())
 
-      - type: mcq
-        question: "What does this print when score = 90?"
-        code: "score = 90\nif score >= 90:\n    print(\"A\")\nelif score >= 90:\n    print(\"also A\")\nelse:\n    print(\"other\")"
-        choices: ["A", "also A", "A\nalso A", "other"]
-        correct: "A"
-        explanation: "The first True branch wins. Even though the elif is also True, only the first matching branch runs — Cole acts on the first solid lead."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'C'
+        stdin: '73'
+        message: score 73 is between 60 and 74, grade is C
+      - code: assert _stdout.strip() == 'A'
+        stdin: '91'
+        message: score 91 is 90 or above, grade is A
+      - code: assert _stdout.strip() == 'B'
+        stdin: '80'
+        message: score 80 is between 75 and 89, grade is B
+      - code: assert _stdout.strip() == 'F'
+        stdin: '50'
+        message: score 50 is below 60, grade is F
+      story_before: Cole needs his evidence grader to assign a letter tier to each piece — he builds the elif chain that reads
+        a score and prints the grade.
+      story_after: The grader is live; every piece of evidence will now receive a clear A-through-F rating in the casebook.
+    - type: mini_code
+      prompt: Cole's forensic scanner classifies physical evidence by density index. Read a value with input(). Print 'underweight'
+        if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'.
+      starter: 'bmi = float(input())
 
-      - type: fill_blank
-        prompt: "Catch all remaining cases where alibi_strength is 25 or below, marking the suspect as critically suspicious."
-        before: "if alibi_strength > 75:\n    status = \"healthy\"\nelif alibi_strength > 25:\n    status = \"injured\"\n"
-        after: ":\n    status = \"critical\""
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches all remaining cases — when alibi_strength is 25 or below, the suspect is critically suspicious."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 5\nif n > 5:\n    print(\"A\")\nelif n > 3:\n    print(\"B\")\nelif n > 1:\n    print(\"C\")"
-        choices: ["B", "A", "C", "B\nC"]
-        correct: "B"
-        explanation: "n > 5 is False. n > 3 is True, so 'B' prints. This clue gets a B-tier importance rating."
-
-      - type: mcq
-        question: "How many elif branches can you have?"
-        code: ""
-        choices: ["As many as you need", "Exactly one", "Maximum 2", "None — use nested if instead"]
-        correct: "As many as you need"
-        explanation: "Cole can add as many suspect tiers as the case requires — only the first matching tier triggers."
-
-      - type: mini_code
-        prompt: "Cole's case file grades each piece of evidence. Read a score with input(). Print 'A' if 90 or above, 'B' if 75 or above, 'C' if 60 or above, else 'F'."
-        starter: "score = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'C'"
-            stdin: "73"
-            message: "score 73 is between 60 and 74, grade is C"
-          - code: "assert _stdout.strip() == 'A'"
-            stdin: "91"
-            message: "score 91 is 90 or above, grade is A"
-          - code: "assert _stdout.strip() == 'B'"
-            stdin: "80"
-            message: "score 80 is between 75 and 89, grade is B"
-          - code: "assert _stdout.strip() == 'F'"
-            stdin: "50"
-            message: "score 50 is below 60, grade is F"
-
-      - type: mini_code
-        prompt: "Cole's forensic scanner classifies physical evidence by density index. Read a value with input(). Print 'underweight' if below 18.5, 'normal' if below 25, 'overweight' if below 30, else 'obese'."
-        starter: "bmi = float(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'normal'"
-            stdin: "22"
-            message: "22 is between 18.5 and 25, prints 'normal'"
-          - code: "assert _stdout.strip() == 'underweight'"
-            stdin: "17"
-            message: "17 is below 18.5, prints 'underweight'"
-          - code: "assert _stdout.strip() == 'overweight'"
-            stdin: "27"
-            message: "27 is between 25 and 30, prints 'overweight'"
-          - code: "assert _stdout.strip() == 'obese'"
-            stdin: "31"
-            message: "31 is 30 or above, prints 'obese'"
+        '
+      tests:
+      - code: assert _stdout.strip() == 'normal'
+        stdin: '22'
+        message: 22 is between 18.5 and 25, prints 'normal'
+      - code: assert _stdout.strip() == 'underweight'
+        stdin: '17'
+        message: 17 is below 18.5, prints 'underweight'
+      - code: assert _stdout.strip() == 'overweight'
+        stdin: '27'
+        message: 27 is between 25 and 30, prints 'overweight'
+      - code: assert _stdout.strip() == 'obese'
+        stdin: '31'
+        message: 31 is 30 or above, prints 'obese'
+      story_before: The forensic scanner needs a density-index classifier — Cole programs the elif chain that maps a float
+        reading to a physical category.
+      story_after: The classifier is deployed; every sample the scanner reads will now snap into one of four density categories
+        instantly.

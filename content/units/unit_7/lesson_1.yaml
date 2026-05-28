@@ -1,390 +1,852 @@
-title: "Classes and Attributes"
+title: Classes and Attributes
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      class Dog:
-          def __init__(self, name, age):
-              self.name = name
-              self.age = age
+- type: concept
+  code: "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nrex = Dog(\"\
+    Rex\", 4)\nprint(rex.name)\nprint(rex.age)\n"
+  output: 'Rex
 
-      rex = Dog("Rex", 4)
-      print(rex.name)
-      print(rex.age)
-    output: "Rex\n4"
-    explanation: "class defines a blueprint. __init__ runs automatically when you create an instance. self.name stores the value as an attribute on the object."
+    4'
+  explanation: class defines a blueprint. __init__ runs automatically when you create an instance. self.name stores the value
+    as an attribute on the object.
+- type: mcq
+  question: What does this print?
+  code: "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc = Car('Toyota')\nprint(c.brand)"
+  choices:
+  - Toyota
+  - brand
+  - Car
+  - self
+  correct: Toyota
+  explanation: Car('Toyota') creates an instance. c.brand reads the stored attribute.
+- type: fill_blank
+  prompt: Store the y value on the object using the instance reference.
+  before: "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        "
+  after: '.y = y
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc = Car('Toyota')\nprint(c.brand)"
-    choices: ["Toyota", "brand", "Car", "self"]
-    correct: "Toyota"
-    explanation: "Car('Toyota') creates an instance. c.brand reads the stored attribute."
 
-  - type: fill_blank
-    prompt: "Store the y value on the object using the instance reference."
-    before: "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        "
-    after: ".y = y\n\np = Point(3, 5)\nprint(p.x)"
-    choices: ["self", "Point", "x", "y"]
-    answer: "self"
-    explanation: "self refers to the object being created. self.y stores the y value on that object."
+    p = Point(3, 5)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\nc = Circle(7)\nprint(c.radius * 2)"
-    choices: ["14", "7", "radius", "49"]
-    correct: "14"
-    explanation: "c.radius is 7. 7 * 2 = 14."
-
-  - type: arrange
-    instruction: "Define a Book class with title and author attributes, then create an instance"
-    blocks: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-    correct: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-    explanation: "Define class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access with dot notation."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Person('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
-    choices: ["Alice is 30", "name is age", "Person is 30", "Alice 30"]
-    correct: "Alice is 30"
-    explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
-
-  - type: fill_blank
-    prompt: "Access the brightness attribute through the desk instance variable."
-    before: "class Lamp:\n    def __init__(self, brightness):\n        self.brightness = brightness\n\ndesk = Lamp(80)\nprint("
-    after: ".brightness)"
-    choices: ["desk", "Lamp", "self", "brightness"]
-    answer: "desk"
-    explanation: "desk is the instance variable. desk.brightness accesses the attribute."
-
-  - type: mcq
-    question: "What is the purpose of __init__?"
-    code: ""
-    choices: [
-      "It runs automatically when a new object is created and sets up its attributes",
-      "It prints the object",
-      "It is required in every Python file",
-      "It defines the class name"
-    ]
-    correct: "It runs automatically when a new object is created and sets up its attributes"
-    explanation: "__init__ is the constructor — it initialises the object's state when you write ClassName(...)."
-
-  - type: mcq
-    question: "What does this print?"
-    code: "class Square:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Square(6)\nprint(s.area)"
-    choices: ["36", "6", "12", "side * side"]
-    correct: "36"
-    explanation: "area = 6 * 6 = 36 is stored in __init__. s.area reads it."
-
-  - type: mini_code
-    prompt: "Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
-    starter: ""
-    tests:
-      - code: "r = Rectangle(4, 7); assert r.width == 4 and r.height == 7"
-        message: "Rectangle should store width=4 and height=7"
-      - code: "assert '4' in _stdout and '7' in _stdout"
-        message: "Should print 4 and 7"
-
-  - type: mini_code
-    prompt: "Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
-    starter: ""
-    tests:
-      - code: "s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90"
-        message: "Student should have name and grade attributes"
-      - code: "assert len(_stdout.strip().split('\\n')) >= 2"
-        message: "Should print info for both students"
-
+    print(p.x)'
+  choices:
+  - self
+  - Point
+  - x
+  - y
+  answer: self
+  explanation: self refers to the object being created. self.y stores the y value on that object.
+- type: mcq
+  question: What does this print?
+  code: "class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\nc = Circle(7)\nprint(c.radius * 2)"
+  choices:
+  - '14'
+  - '7'
+  - radius
+  - '49'
+  correct: '14'
+  explanation: c.radius is 7. 7 * 2 = 14.
+- type: arrange
+  instruction: Define a Book class with title and author attributes, then create an instance
+  blocks:
+  - class
+  - Book
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - title
+  - ','
+  - author
+  - )
+  - ':'
+  - self
+  - .
+  - title
+  - '='
+  - title
+  - self
+  - .
+  - author
+  - '='
+  - author
+  - b
+  - '='
+  - Book
+  - (
+  - '"Dune"'
+  - ','
+  - '"Herbert"'
+  - )
+  - print
+  - (
+  - b
+  - .
+  - title
+  - )
+  correct:
+  - class
+  - Book
+  - ':'
+  - def
+  - __init__
+  - (
+  - self
+  - ','
+  - title
+  - ','
+  - author
+  - )
+  - ':'
+  - self
+  - .
+  - title
+  - '='
+  - title
+  - self
+  - .
+  - author
+  - '='
+  - author
+  - b
+  - '='
+  - Book
+  - (
+  - '"Dune"'
+  - ','
+  - '"Herbert"'
+  - )
+  - print
+  - (
+  - b
+  - .
+  - title
+  - )
+  explanation: Define class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access
+    with dot notation.
+- type: mcq
+  question: What does this print?
+  code: "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Person('Alice',\
+    \ 30)\nprint(p.name + ' is ' + str(p.age))"
+  choices:
+  - Alice is 30
+  - name is age
+  - Person is 30
+  - Alice 30
+  correct: Alice is 30
+  explanation: p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'.
+- type: fill_blank
+  prompt: Access the brightness attribute through the desk instance variable.
+  before: "class Lamp:\n    def __init__(self, brightness):\n        self.brightness = brightness\n\ndesk = Lamp(80)\nprint("
+  after: .brightness)
+  choices:
+  - desk
+  - Lamp
+  - self
+  - brightness
+  answer: desk
+  explanation: desk is the instance variable. desk.brightness accesses the attribute.
+- type: mcq
+  question: What is the purpose of __init__?
+  code: ''
+  choices:
+  - It runs automatically when a new object is created and sets up its attributes
+  - It prints the object
+  - It is required in every Python file
+  - It defines the class name
+  correct: It runs automatically when a new object is created and sets up its attributes
+  explanation: __init__ is the constructor — it initialises the object's state when you write ClassName(...).
+- type: mcq
+  question: What does this print?
+  code: "class Square:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Square(6)\n\
+    print(s.area)"
+  choices:
+  - '36'
+  - '6'
+  - '12'
+  - side * side
+  correct: '36'
+  explanation: area = 6 * 6 = 36 is stored in __init__. s.area reads it.
+- type: mini_code
+  prompt: Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print
+    both attributes.
+  starter: ''
+  tests:
+  - code: r = Rectangle(4, 7); assert r.width == 4 and r.height == 7
+    message: Rectangle should store width=4 and height=7
+  - code: assert '4' in _stdout and '7' in _stdout
+    message: Should print 4 and 7
+- type: mini_code
+  prompt: Define a class called Student with name and grade attributes. Create two students. Print each student's name and
+    grade.
+  starter: ''
+  tests:
+  - code: s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90
+    message: Student should have name and grade attributes
+  - code: assert len(_stdout.strip().split('\n')) >= 2
+    message: Should print info for both students
 worlds:
   fantasy:
-    title: "Describing a Creature"
+    title: Describing a Creature
     exercises:
-      - type: concept
-        code: |
-          class Creature:
-              def __init__(self, name, threat):
-                  self.name = name
-                  self.threat = threat
+    - type: concept
+      code: "class Creature:\n    def __init__(self, name, threat):\n        self.name = name\n        self.threat = threat\n\
+        \nwyvern = Creature(\"Wyvern\", 4)\nprint(wyvern.name)\nprint(wyvern.threat)\n"
+      output: 'Wyvern
 
-          wyvern = Creature("Wyvern", 4)
-          print(wyvern.name)
-          print(wyvern.threat)
-        output: "Wyvern\n4"
-        explanation: "Scholar Ash defines a Creature class as a bestiary blueprint. __init__ runs when a creature is catalogued. self.name stores the creature's name as an attribute."
+        4'
+      explanation: Scholar Ash defines a Creature class as a bestiary blueprint. __init__ runs when a creature is catalogued.
+        self.name stores the creature's name as an attribute.
+      story_before: Scholar Ash has catalogued dozens of beasts, but writing out every creature by hand wastes precious parchment
+        — a single blueprint is needed.
+      story_after: 'The Creature blueprint is drawn: name and threat stored as one arcane record, ready to be copied for any
+        beast Ash encounters.'
+    - type: mcq
+      question: What does this print?
+      code: 'class Spell: def __init__(self, element): self.element = element
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Spell:
-    def __init__(self, element):
-        self.element = element
+        s = Spell(''Fire'') print(s.element)'
+      choices:
+      - Fire
+      - element
+      - Spell
+      - self
+      correct: Fire
+      explanation: Spell('Fire') creates a Spell instance. s.element reads the element attribute, which holds 'Fire'.
+      story_before: Ash spots a fire-aligned Spell in the grimoire and needs to read its element attribute.
+      story_after: The element leaps off the page — Ash now knows how to read any single attribute from a class instance.
+    - type: fill_blank
+      prompt: Store the threat_level on the creature object using the instance reference.
+      before: "class Creature:\n    def __init__(self, species, threat_level):\n        self.species = species\n        "
+      after: '.threat_level = threat_level
 
-s = Spell('Fire')
-print(s.element)"
-        choices: ["Fire", "element", "Spell", "self"]
-        correct: "Fire"
-        explanation: "Spell('Fire') creates a Spell instance. s.element reads the element attribute, which holds 'Fire'."
 
-      - type: fill_blank
-        prompt: "Store the threat_level on the creature object using the instance reference."
-        before: "class Creature:\n    def __init__(self, species, threat_level):\n        self.species = species\n        "
-        after: ".threat_level = threat_level\n\nbeast = Creature('Dragon', 5)\nprint(beast.species)"
-        choices: ["self", "Point", "x", "y"]
-        answer: "self"
-        explanation: "self refers to the creature being catalogued. self.threat_level stores the danger rating on that object."
+        beast = Creature(''Dragon'', 5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Orb:\n    def __init__(self, power):\n        self.power = power\n\no = Orb(7)\nprint(o.power * 2)"
-        choices: ["14", "7", "radius", "49"]
-        correct: "14"
-        explanation: "o.power is 7. 7 * 2 = 14."
-
-      - type: arrange
-        instruction: "Define a Tome class with title and author attributes, then create an instance"
-        blocks: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        correct: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        explanation: "Ash defines a Tome class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access with dot notation."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Mage:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Mage('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
-        choices: ["Alice is 30", "name is age", "Person is 30", "Alice 30"]
-        correct: "Alice is 30"
-        explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
-
-      - type: fill_blank
-        prompt: "Access the glow attribute through the lantern instance variable."
-        before: "class Lantern:\n    def __init__(self, glow):\n        self.glow = glow\n\nlantern = Lantern(80)\nprint("
-        after: ".glow)"
-        choices: ["desk", "Lamp", "self", "brightness"]
-        answer: "desk"
-        explanation: "lantern is the instance variable. lantern.glow accesses the attribute."
-
-      - type: mcq
-        question: "What is the purpose of __init__?"
-        code: ""
-        choices: [
-          "It runs automatically when a new object is created and sets up its attributes",
-          "It prints the object",
-          "It is required in every Python file",
-          "It defines the class name"
-        ]
-        correct: "It runs automatically when a new object is created and sets up its attributes"
-        explanation: "__init__ is the constructor — it initialises the creature's traits when Ash writes Creature(...)."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Rune:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Rune(6)\nprint(s.area)"
-        choices: ["36", "6", "12", "side * side"]
-        correct: "36"
-        explanation: "area = 6 * 6 = 36 is stored in __init__. s.area reads it."
-
-      - type: mini_code
-        prompt: "Scholar Ash needs a Creature blueprint. Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
-        starter: ""
-        tests:
-          - code: "r = Rectangle(4, 7); assert r.width == 4 and r.height == 7"
-            message: "The creature blueprint must store width=4 and height=7"
-          - code: "assert '4' in _stdout and '7' in _stdout"
-            message: "Ash must print both measurements to the compendium"
-
-      - type: mini_code
-        prompt: "Ash wants to record two creatures. Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
-        starter: ""
-        tests:
-          - code: "s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90"
-            message: "Each creature entry must have name and grade attributes"
-          - code: "assert len(_stdout.strip().split('\\n')) >= 2"
-            message: "Ash must record info for both creatures"
-
+        print(beast.species)'
+      choices:
+      - self
+      - Point
+      - x
+      - y
+      answer: self
+      explanation: self refers to the creature being catalogued. self.threat_level stores the danger rating on that object.
+      story_before: The bestiary template is nearly complete, but the threat_level is not yet stored on the creature object.
+      story_after: With self in place, the creature's danger rating is permanently bound to each individual beast record.
+    - type: mcq
+      question: What does this print?
+      code: "class Orb:\n    def __init__(self, power):\n        self.power = power\n\no = Orb(7)\nprint(o.power * 2)"
+      choices:
+      - '14'
+      - '7'
+      - radius
+      - '49'
+      correct: '14'
+      explanation: o.power is 7. 7 * 2 = 14.
+      story_before: An Orb's power is etched into the blueprint — Ash must verify what happens when that value is doubled.
+      story_after: The doubled power rolls off the page correctly; Ash grows confident reading computed expressions from attributes.
+    - type: arrange
+      instruction: Define a Tome class with title and author attributes, then create an instance
+      blocks:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      correct:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      explanation: Ash defines a Tome class, then __init__ with self and parameters. Store with self.attr = param. Create
+        instance and access with dot notation.
+      story_before: Ash wants a Tome class to catalogue magical books, complete with title and author — the blocks need assembling.
+      story_after: The Tome blueprint snaps together perfectly; Ash can now stamp out as many book records as the library
+        demands.
+    - type: mcq
+      question: What does this print?
+      code: "class Mage:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Mage('Alice',\
+        \ 30)\nprint(p.name + ' is ' + str(p.age))"
+      choices:
+      - Alice is 30
+      - name is age
+      - Person is 30
+      - Alice 30
+      correct: Alice is 30
+      explanation: p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'.
+      story_before: A Mage entry stores both name and age — Ash needs to know what the combined string prints.
+      story_after: The string concatenation reveals 'Alice is 30'; Ash sees how multiple attributes can be woven into a single
+        message.
+    - type: fill_blank
+      prompt: Access the glow attribute through the lantern instance variable.
+      before: "class Lantern:\n    def __init__(self, glow):\n        self.glow = glow\n\nlantern = Lantern(80)\nprint("
+      after: .glow)
+      choices:
+      - desk
+      - Lamp
+      - self
+      - brightness
+      answer: desk
+      explanation: lantern is the instance variable. lantern.glow accesses the attribute.
+      story_before: A glowing Lantern hangs in the workshop, but its glow can only be read through the right instance variable.
+      story_after: Reaching through the lantern variable, Ash retrieves the glow value and notes it in the compendium.
+    - type: mcq
+      question: What is the purpose of __init__?
+      code: ''
+      choices:
+      - It runs automatically when a new object is created and sets up its attributes
+      - It prints the object
+      - It is required in every Python file
+      - It defines the class name
+      correct: It runs automatically when a new object is created and sets up its attributes
+      explanation: __init__ is the constructor — it initialises the creature's traits when Ash writes Creature(...).
+      story_before: 'Ash''s apprentice asks: why does __init__ exist at all — what magic does it perform?'
+      story_after: 'The answer is clear: __init__ is the summoning ritual that breathes initial state into every new object.'
+    - type: mcq
+      question: What does this print?
+      code: "class Rune:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns =\
+        \ Rune(6)\nprint(s.area)"
+      choices:
+      - '36'
+      - '6'
+      - '12'
+      - side * side
+      correct: '36'
+      explanation: area = 6 * 6 = 36 is stored in __init__. s.area reads it.
+      story_before: A Rune blueprint stores its own area in __init__ — Ash must trace what value emerges when the side is
+        6.
+      story_after: The area 36 is confirmed; Ash now trusts that __init__ can pre-compute and store values, not just copy
+        parameters.
+    - type: mini_code
+      prompt: Scholar Ash needs a Creature blueprint. Define a class called Rectangle with width and height attributes. Create
+        an instance with width=4, height=7. Print both attributes.
+      starter: ''
+      tests:
+      - code: r = Rectangle(4, 7); assert r.width == 4 and r.height == 7
+        message: The creature blueprint must store width=4 and height=7
+      - code: assert '4' in _stdout and '7' in _stdout
+        message: Ash must print both measurements to the compendium
+      story_before: Ash needs a Rectangle blueprint to map creature territories — width and height must both be stored and
+        displayed.
+      story_after: The Rectangle class rises from the page; Ash measures the territory and the compendium records both dimensions.
+    - type: mini_code
+      prompt: Ash wants to record two creatures. Define a class called Student with name and grade attributes. Create two
+        students. Print each student's name and grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90
+        message: Each creature entry must have name and grade attributes
+      - code: assert len(_stdout.strip().split('\n')) >= 2
+        message: Ash must record info for both creatures
+      story_before: Two creatures need separate entries — Ash must build a Student-style class and produce records for both.
+      story_after: Both creature records are written and printed; Ash's bestiary grows one blueprint at a time, ready for
+        Lesson 2.
   scifi:
-    title: "Designing the Ship Blueprint"
+    title: Designing the Ship Blueprint
     exercises:
-      - type: concept
-        code: |
-          class Ship:
-              def __init__(self, name, crew):
-                  self.name = name
-                  self.crew = crew
+    - type: concept
+      code: "class Ship:\n    def __init__(self, name, crew):\n        self.name = name\n        self.crew = crew\n\nfalcon\
+        \ = Ship(\"Falcon\", 4)\nprint(falcon.name)\nprint(falcon.crew)\n"
+      output: 'Falcon
 
-          falcon = Ship("Falcon", 4)
-          print(falcon.name)
-          print(falcon.crew)
-        output: "Falcon\n4"
-        explanation: "Engineer Rex defines a Ship class as a starship blueprint. __init__ runs when a vessel is registered. self.name stores the ship's name as an attribute."
+        4'
+      explanation: Engineer Rex defines a Ship class as a starship blueprint. __init__ runs when a vessel is registered. self.name
+        stores the ship's name as an attribute.
+      story_before: Engineer Rex has a fleet of ships to register, but typing each vessel's data from scratch wastes critical
+        build time — one reusable blueprint is required.
+      story_after: 'The Ship class is drafted: name and crew count locked into a schematic that can spawn any vessel in the
+        fleet.'
+    - type: mcq
+      question: What does this print?
+      code: "class Engine:\n    def __init__(self, fuel_type):\n        self.fuel_type = fuel_type\n\ne = Engine('Toyota')\n\
+        print(e.fuel_type)"
+      choices:
+      - Toyota
+      - brand
+      - Car
+      - self
+      correct: Toyota
+      explanation: Engine('Toyota') creates an instance. e.fuel_type reads the stored attribute.
+      story_before: Rex spots an Engine entry in the manifest and needs to confirm what its fuel_type attribute holds.
+      story_after: The fuel type prints cleanly — Rex confirms that a stored attribute can be retrieved from any instance
+        by name.
+    - type: fill_blank
+      prompt: Store the shield_level on the starship object using the instance reference.
+      before: "class Ship:\n    def __init__(self, hull, shield_level):\n        self.hull = hull\n        "
+      after: '.shield_level = shield_level
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Engine:\n    def __init__(self, fuel_type):\n        self.fuel_type = fuel_type\n\ne = Engine('Toyota')\nprint(e.fuel_type)"
-        choices: ["Toyota", "brand", "Car", "self"]
-        correct: "Toyota"
-        explanation: "Engine('Toyota') creates an instance. e.fuel_type reads the stored attribute."
 
-      - type: fill_blank
-        prompt: "Store the shield_level on the starship object using the instance reference."
-        before: "class Ship:\n    def __init__(self, hull, shield_level):\n        self.hull = hull\n        "
-        after: ".shield_level = shield_level\n\nvessel = Ship('Cruiser', 5)\nprint(vessel.hull)"
-        choices: ["self", "Point", "x", "y"]
-        answer: "self"
-        explanation: "self refers to the starship being designed. self.shield_level stores the shield rating on that object."
+        vessel = Ship(''Cruiser'', 5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Reactor:\n    def __init__(self, output):\n        self.output = output\n\nr = Reactor(7)\nprint(r.output * 2)"
-        choices: ["14", "7", "radius", "49"]
-        correct: "14"
-        explanation: "r.output is 7. 7 * 2 = 14."
-
-      - type: arrange
-        instruction: "Define a Module class with title and author attributes, then create an instance"
-        blocks: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        correct: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        explanation: "Rex defines a Module class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access with dot notation."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Pilot:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Pilot('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
-        choices: ["Alice is 30", "name is age", "Person is 30", "Alice 30"]
-        correct: "Alice is 30"
-        explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
-
-      - type: fill_blank
-        prompt: "Access the power attribute through the console instance variable."
-        before: "class Console:\n    def __init__(self, power):\n        self.power = power\n\ndesk = Console(80)\nprint("
-        after: ".power)"
-        choices: ["desk", "Lamp", "self", "brightness"]
-        answer: "desk"
-        explanation: "desk is the instance variable. desk.power accesses the attribute."
-
-      - type: mcq
-        question: "What is the purpose of __init__?"
-        code: ""
-        choices: [
-          "It runs automatically when a new object is created and sets up its attributes",
-          "It prints the object",
-          "It is required in every Python file",
-          "It defines the class name"
-        ]
-        correct: "It runs automatically when a new object is created and sets up its attributes"
-        explanation: "__init__ is the constructor — it initialises the ship's systems when Rex writes Ship(...)."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Hull:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Hull(6)\nprint(s.area)"
-        choices: ["36", "6", "12", "side * side"]
-        correct: "36"
-        explanation: "area = 6 * 6 = 36 is stored in __init__. s.area reads it."
-
-      - type: mini_code
-        prompt: "Engineer Rex needs a hull blueprint. Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
-        starter: ""
-        tests:
-          - code: "r = Rectangle(4, 7); assert r.width == 4 and r.height == 7"
-            message: "The hull blueprint must store width=4 and height=7"
-          - code: "assert '4' in _stdout and '7' in _stdout"
-            message: "Rex must print both dimensions to the schematic"
-
-      - type: mini_code
-        prompt: "Rex wants to register two crew members. Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
-        starter: ""
-        tests:
-          - code: "s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90"
-            message: "Each crew record must have name and grade attributes"
-          - code: "assert len(_stdout.strip().split('\\n')) >= 2"
-            message: "Rex must log info for both crew members"
-
+        print(vessel.hull)'
+      choices:
+      - self
+      - Point
+      - x
+      - y
+      answer: self
+      explanation: self refers to the starship being designed. self.shield_level stores the shield rating on that object.
+      story_before: The Ship schematic is missing its shield_level binding — Rex must anchor it to self before the vessel
+        is spaceworthy.
+      story_after: The shield_level is now wired to the object; every Ship spawned from this blueprint will carry its own
+        rating.
+    - type: mcq
+      question: What does this print?
+      code: "class Reactor:\n    def __init__(self, output):\n        self.output = output\n\nr = Reactor(7)\nprint(r.output\
+        \ * 2)"
+      choices:
+      - '14'
+      - '7'
+      - radius
+      - '49'
+      correct: '14'
+      explanation: r.output is 7. 7 * 2 = 14.
+      story_before: A Reactor's output reading is on the schematic — Rex needs to verify what doubling it produces.
+      story_after: Output 14 confirmed on the console; Rex now knows how to derive computed values straight from stored attributes.
+    - type: arrange
+      instruction: Define a Module class with title and author attributes, then create an instance
+      blocks:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      correct:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      explanation: Rex defines a Module class, then __init__ with self and parameters. Store with self.attr = param. Create
+        instance and access with dot notation.
+      story_before: Rex needs a Module class with title and author fields to organise ship documentation — the code blocks
+        await assembly.
+      story_after: The Module blueprint assembles without errors; ship documentation can now be stamped out as individual
+        instances.
+    - type: mcq
+      question: What does this print?
+      code: "class Pilot:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Pilot('Alice',\
+        \ 30)\nprint(p.name + ' is ' + str(p.age))"
+      choices:
+      - Alice is 30
+      - name is age
+      - Person is 30
+      - Alice 30
+      correct: Alice is 30
+      explanation: p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'.
+      story_before: A Pilot record holds both name and age — Rex needs to predict what the combined status string prints.
+      story_after: The status string 'Alice is 30' transmits correctly; Rex sees how to broadcast multi-attribute data in
+        one line.
+    - type: fill_blank
+      prompt: Access the power attribute through the console instance variable.
+      before: "class Console:\n    def __init__(self, power):\n        self.power = power\n\ndesk = Console(80)\nprint("
+      after: .power)
+      choices:
+      - desk
+      - Lamp
+      - self
+      - brightness
+      answer: desk
+      explanation: desk is the instance variable. desk.power accesses the attribute.
+      story_before: A Console powers up, but its power reading is locked behind the correct instance variable name.
+      story_after: Accessing through desk, Rex reads the power value and logs it to the ship's diagnostic report.
+    - type: mcq
+      question: What is the purpose of __init__?
+      code: ''
+      choices:
+      - It runs automatically when a new object is created and sets up its attributes
+      - It prints the object
+      - It is required in every Python file
+      - It defines the class name
+      correct: It runs automatically when a new object is created and sets up its attributes
+      explanation: __init__ is the constructor — it initialises the ship's systems when Rex writes Ship(...).
+      story_before: A junior engineer asks Rex what __init__ actually does when a new object is created.
+      story_after: 'Rex explains: __init__ is the bootstrap sequence — it initialises every system the moment a new object
+        is registered.'
+    - type: mcq
+      question: What does this print?
+      code: "class Hull:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns =\
+        \ Hull(6)\nprint(s.area)"
+      choices:
+      - '36'
+      - '6'
+      - '12'
+      - side * side
+      correct: '36'
+      explanation: area = 6 * 6 = 36 is stored in __init__. s.area reads it.
+      story_before: A Hull schematic pre-computes its own area in __init__ — Rex needs to trace what prints for side = 6.
+      story_after: Area 36 is correct; Rex files it away — __init__ can pre-calculate and store values, not just record inputs.
+    - type: mini_code
+      prompt: Engineer Rex needs a hull blueprint. Define a class called Rectangle with width and height attributes. Create
+        an instance with width=4, height=7. Print both attributes.
+      starter: ''
+      tests:
+      - code: r = Rectangle(4, 7); assert r.width == 4 and r.height == 7
+        message: The hull blueprint must store width=4 and height=7
+      - code: assert '4' in _stdout and '7' in _stdout
+        message: Rex must print both dimensions to the schematic
+      story_before: Rex needs a Rectangle blueprint to define hull panel dimensions — both width and height must be stored
+        and reported.
+      story_after: The Rectangle class is drafted and both dimensions print to the schematic; the hull design is on record.
+    - type: mini_code
+      prompt: Rex wants to register two crew members. Define a class called Student with name and grade attributes. Create
+        two students. Print each student's name and grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90
+        message: Each crew record must have name and grade attributes
+      - code: assert len(_stdout.strip().split('\n')) >= 2
+        message: Rex must log info for both crew members
+      story_before: Two crew members need separate entries — Rex must produce a Student-style class and log both to the manifest.
+      story_after: Both crew records transmit to the manifest; Rex has a working blueprint pattern ready to carry into Lesson
+        2.
   mystery:
-    title: "Building a Suspect Profile"
+    title: Building a Suspect Profile
     exercises:
-      - type: concept
-        code: |
-          class Suspect:
-              def __init__(self, name, motive):
-                  self.name = name
-                  self.motive = motive
+    - type: concept
+      code: "class Suspect:\n    def __init__(self, name, motive):\n        self.name = name\n        self.motive = motive\n\
+        \nprime = Suspect(\"Victor\", 4)\nprint(prime.name)\nprint(prime.motive)\n"
+      output: 'Victor
 
-          prime = Suspect("Victor", 4)
-          print(prime.name)
-          print(prime.motive)
-        output: "Victor\n4"
-        explanation: "Profiler Sam defines a Suspect class as a profile template. __init__ runs when a new suspect is logged. self.name stores the suspect's name as an attribute."
+        4'
+      explanation: Profiler Sam defines a Suspect class as a profile template. __init__ runs when a new suspect is logged.
+        self.name stores the suspect's name as an attribute.
+      story_before: Detective Cole has a growing list of suspects but no consistent way to record them — a single profile
+        template will fix that.
+      story_after: 'The Suspect class is opened: name and motive filed together in one template Cole can replicate for every
+        person of interest.'
+    - type: mcq
+      question: What does this print?
+      code: "class Evidence:\n    def __init__(self, item):\n        self.item = item\n\ne = Evidence('Toyota')\nprint(e.item)"
+      choices:
+      - Toyota
+      - brand
+      - Car
+      - self
+      correct: Toyota
+      explanation: Evidence('Toyota') creates an instance. e.item reads the stored attribute.
+      story_before: A piece of Evidence is logged in the system — Cole needs to confirm what its item attribute actually holds.
+      story_after: The item value reads out cleanly; Cole now knows how to pull any single attribute from a filed profile.
+    - type: fill_blank
+      prompt: Store the alibi_strength on the suspect object using the instance reference.
+      before: "class Suspect:\n    def __init__(self, location, alibi_strength):\n        self.location = location\n     \
+        \   "
+      after: '.alibi_strength = alibi_strength
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Evidence:\n    def __init__(self, item):\n        self.item = item\n\ne = Evidence('Toyota')\nprint(e.item)"
-        choices: ["Toyota", "brand", "Car", "self"]
-        correct: "Toyota"
-        explanation: "Evidence('Toyota') creates an instance. e.item reads the stored attribute."
 
-      - type: fill_blank
-        prompt: "Store the alibi_strength on the suspect object using the instance reference."
-        before: "class Suspect:\n    def __init__(self, location, alibi_strength):\n        self.location = location\n        "
-        after: ".alibi_strength = alibi_strength\n\nperp = Suspect('Warehouse', 5)\nprint(perp.location)"
-        choices: ["self", "Point", "x", "y"]
-        answer: "self"
-        explanation: "self refers to the suspect being profiled. self.alibi_strength stores the alibi rating on that object."
+        perp = Suspect(''Warehouse'', 5)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "class Clue:\n    def __init__(self, weight):\n        self.weight = weight\n\nc = Clue(7)\nprint(c.weight * 2)"
-        choices: ["14", "7", "radius", "49"]
-        correct: "14"
-        explanation: "c.weight is 7. 7 * 2 = 14."
-
-      - type: arrange
-        instruction: "Define a CaseFile class with title and author attributes, then create an instance"
-        blocks: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        correct: ["class", "Book", ":", "def", "__init__", "(", "self", ",", "title", ",", "author", ")", ":", "self", ".", "title", "=", "title", "self", ".", "author", "=", "author", "b", "=", "Book", "(", "\"Dune\"", ",", "\"Herbert\"", ")", "print", "(", "b", ".", "title", ")"]
-        explanation: "Sam defines a CaseFile class, then __init__ with self and parameters. Store with self.attr = param. Create instance and access with dot notation."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Detective:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np = Detective('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
-        choices: ["Alice is 30", "name is age", "Person is 30", "Alice 30"]
-        correct: "Alice is 30"
-        explanation: "p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'."
-
-      - type: fill_blank
-        prompt: "Access the threat_level attribute through the suspect instance variable."
-        before: "class Suspect:\n    def __init__(self, threat_level):\n        self.threat_level = threat_level\n\ndesk = Suspect(80)\nprint("
-        after: ".threat_level)"
-        choices: ["desk", "Lamp", "self", "brightness"]
-        answer: "desk"
-        explanation: "desk is the instance variable. desk.threat_level accesses the attribute."
-
-      - type: mcq
-        question: "What is the purpose of __init__?"
-        code: ""
-        choices: [
-          "It runs automatically when a new object is created and sets up its attributes",
-          "It prints the object",
-          "It is required in every Python file",
-          "It defines the class name"
-        ]
-        correct: "It runs automatically when a new object is created and sets up its attributes"
-        explanation: "__init__ is the constructor — it initialises a suspect's profile when Sam writes Suspect(...)."
-
-      - type: mcq
-        question: "What does this print?"
-        code: "class Fingerprint:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\ns = Fingerprint(6)\nprint(s.area)"
-        choices: ["36", "6", "12", "side * side"]
-        correct: "36"
-        explanation: "area = 6 * 6 = 36 is stored in __init__. s.area reads it."
-
-      - type: mini_code
-        prompt: "Profiler Sam needs a suspect profile template. Define a class called Rectangle with width and height attributes. Create an instance with width=4, height=7. Print both attributes."
-        starter: ""
-        tests:
-          - code: "r = Rectangle(4, 7); assert r.width == 4 and r.height == 7"
-            message: "The profile template must store width=4 and height=7"
-          - code: "assert '4' in _stdout and '7' in _stdout"
-            message: "Sam must print both measurements to the case file"
-
-      - type: mini_code
-        prompt: "Sam wants to profile two suspects. Define a class called Student with name and grade attributes. Create two students. Print each student's name and grade."
-        starter: ""
-        tests:
-          - code: "s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90"
-            message: "Each suspect profile must have name and grade attributes"
-          - code: "assert len(_stdout.strip().split('\\n')) >= 2"
-            message: "Sam must record info for both suspects"
+        print(perp.location)'
+      choices:
+      - self
+      - Point
+      - x
+      - y
+      answer: self
+      explanation: self refers to the suspect being profiled. self.alibi_strength stores the alibi rating on that object.
+      story_before: The Suspect template is incomplete — the alibi_strength is not yet bound to the object, leaving the profile
+        open.
+      story_after: With self in place, the alibi rating is locked into every suspect record the moment it is created.
+    - type: mcq
+      question: What does this print?
+      code: "class Clue:\n    def __init__(self, weight):\n        self.weight = weight\n\nc = Clue(7)\nprint(c.weight * 2)"
+      choices:
+      - '14'
+      - '7'
+      - radius
+      - '49'
+      correct: '14'
+      explanation: c.weight is 7. 7 * 2 = 14.
+      story_before: A Clue's weight is on file — Cole needs to know what doubling it produces for the investigation's scoring.
+      story_after: Weight 14 confirmed; Cole sees how arithmetic on a stored attribute produces a derived value on the spot.
+    - type: arrange
+      instruction: Define a CaseFile class with title and author attributes, then create an instance
+      blocks:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      correct:
+      - class
+      - Book
+      - ':'
+      - def
+      - __init__
+      - (
+      - self
+      - ','
+      - title
+      - ','
+      - author
+      - )
+      - ':'
+      - self
+      - .
+      - title
+      - '='
+      - title
+      - self
+      - .
+      - author
+      - '='
+      - author
+      - b
+      - '='
+      - Book
+      - (
+      - '"Dune"'
+      - ','
+      - '"Herbert"'
+      - )
+      - print
+      - (
+      - b
+      - .
+      - title
+      - )
+      explanation: Sam defines a CaseFile class, then __init__ with self and parameters. Store with self.attr = param. Create
+        instance and access with dot notation.
+      story_before: Cole wants a CaseFile class to organise reports by title and author — the code pieces need to be ordered
+        correctly.
+      story_after: The CaseFile template locks into shape; every new report can now be filed as a clean, separate instance.
+    - type: mcq
+      question: What does this print?
+      code: "class Detective:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\np =\
+        \ Detective('Alice', 30)\nprint(p.name + ' is ' + str(p.age))"
+      choices:
+      - Alice is 30
+      - name is age
+      - Person is 30
+      - Alice 30
+      correct: Alice is 30
+      explanation: p.name = 'Alice', p.age = 30. String concatenation produces 'Alice is 30'.
+      story_before: A Detective profile stores name and age — Cole needs to predict how the combined identification string
+        prints.
+      story_after: The string 'Alice is 30' prints as expected; Cole notes how two attributes can be merged into one statement.
+    - type: fill_blank
+      prompt: Access the threat_level attribute through the suspect instance variable.
+      before: "class Suspect:\n    def __init__(self, threat_level):\n        self.threat_level = threat_level\n\ndesk = Suspect(80)\n\
+        print("
+      after: .threat_level)
+      choices:
+      - desk
+      - Lamp
+      - self
+      - brightness
+      answer: desk
+      explanation: desk is the instance variable. desk.threat_level accesses the attribute.
+      story_before: A Suspect is on file, but the threat_level can only be read through the correct instance variable.
+      story_after: Reaching through desk, Cole pulls the threat level and adds it to the case dossier.
+    - type: mcq
+      question: What is the purpose of __init__?
+      code: ''
+      choices:
+      - It runs automatically when a new object is created and sets up its attributes
+      - It prints the object
+      - It is required in every Python file
+      - It defines the class name
+      correct: It runs automatically when a new object is created and sets up its attributes
+      explanation: __init__ is the constructor — it initialises a suspect's profile when Sam writes Suspect(...).
+      story_before: A rookie detective asks Cole what __init__ actually does when a Suspect is created.
+      story_after: 'Cole answers plainly: __init__ is the intake process — it stamps every new profile with its opening data
+        the moment it is filed.'
+    - type: mcq
+      question: What does this print?
+      code: "class Fingerprint:\n    def __init__(self, side):\n        self.side = side\n        self.area = side * side\n\
+        \ns = Fingerprint(6)\nprint(s.area)"
+      choices:
+      - '36'
+      - '6'
+      - '12'
+      - side * side
+      correct: '36'
+      explanation: area = 6 * 6 = 36 is stored in __init__. s.area reads it.
+      story_before: A Fingerprint record pre-computes its own area in __init__ — Cole must trace what prints for side = 6.
+      story_after: Area 36 confirmed; Cole notes that __init__ can store calculated fields alongside raw inputs.
+    - type: mini_code
+      prompt: Profiler Sam needs a suspect profile template. Define a class called Rectangle with width and height attributes.
+        Create an instance with width=4, height=7. Print both attributes.
+      starter: ''
+      tests:
+      - code: r = Rectangle(4, 7); assert r.width == 4 and r.height == 7
+        message: The profile template must store width=4 and height=7
+      - code: assert '4' in _stdout and '7' in _stdout
+        message: Sam must print both measurements to the case file
+      story_before: Cole needs a Rectangle profile template to measure crime scene footprints — width and height must be stored
+        and displayed.
+      story_after: The Rectangle class is on file and both measurements print; Cole's scene-mapping toolkit is taking shape.
+    - type: mini_code
+      prompt: Sam wants to profile two suspects. Define a class called Student with name and grade attributes. Create two
+        students. Print each student's name and grade.
+      starter: ''
+      tests:
+      - code: s = Student('Test', 90); assert s.name == 'Test' and s.grade == 90
+        message: Each suspect profile must have name and grade attributes
+      - code: assert len(_stdout.strip().split('\n')) >= 2
+        message: Sam must record info for both suspects
+      story_before: Two suspects need separate profile entries — Cole must produce a Student-style class and print both records.
+      story_after: Both profiles print cleanly to the case file; Cole has a repeatable template ready to carry into Lesson
+        2.

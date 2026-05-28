@@ -1,397 +1,751 @@
-title: "Defining Functions"
+title: Defining Functions
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      def greet(name):
-          print(f"Hello, {name}!")
+- type: concept
+  code: "def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")\ngreet(\"Bob\")\n"
+  output: 'Hello, Alice!
 
-      greet("Alice")
-      greet("Bob")
-    output: "Hello, Alice!\nHello, Bob!"
-    explanation: "def defines a function. The name in parentheses is a parameter. Call it with different arguments to reuse the same code."
+    Hello, Bob!'
+  explanation: def defines a function. The name in parentheses is a parameter. Call it with different arguments to reuse the
+    same code.
+- type: mcq
+  question: What does this print?
+  code: "def say_hi():\n    print(\"Hi!\")\n\nsay_hi()"
+  choices:
+  - Hi!
+  - say_hi
+  - def
+  - Nothing
+  correct: Hi!
+  explanation: say_hi() calls the function. The indented block runs.
+- type: fill_blank
+  prompt: Start a function definition with the correct keyword.
+  before: ''
+  after: " double(n):\n    print(n * 2)"
+  choices:
+  - def
+  - for
+  - if
+  - class
+  answer: def
+  explanation: def starts a function definition. double is the name, n is its parameter.
+- type: arrange
+  instruction: Build a function that prints 'hello' and then call it
+  blocks:
+  - def
+  - hello
+  - (
+  - )
+  - ':'
+  - print
+  - (
+  - '"hello"'
+  - )
+  - hello
+  - (
+  - )
+  correct:
+  - def
+  - hello
+  - (
+  - )
+  - ':'
+  - print
+  - (
+  - '"hello"'
+  - )
+  - hello
+  - (
+  - )
+  explanation: First define the function with def, then call it by writing its name with ().
+- type: mcq
+  question: What does this print?
+  code: "def show(x):\n    print(x * 2)\n\nshow(5)"
+  choices:
+  - '10'
+  - '5'
+  - x * 2
+  - Nothing
+  correct: '10'
+  explanation: show(5) passes 5 as x. x * 2 = 5 * 2 = 10.
+- type: fill_blank
+  prompt: Add the two parameters together inside the function body.
+  before: "def add(a, b):\n    print(a "
+  after: ' b)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def say_hi():\n    print(\"Hi!\")\n\nsay_hi()"
-    choices: ["Hi!", "say_hi", "def", "Nothing"]
-    correct: "Hi!"
-    explanation: "say_hi() calls the function. The indented block runs."
 
-  - type: fill_blank
-    prompt: "Start a function definition with the correct keyword."
-    before: ""
-    after: " double(n):\n    print(n * 2)"
-    choices: ["def", "for", "if", "class"]
-    answer: "def"
-    explanation: "def starts a function definition. double is the name, n is its parameter."
+    add(3, 4)'
+  choices:
+  - +
+  - '='
+  - '*'
+  - '-'
+  answer: +
+  explanation: a + b adds the two parameters. add(3, 4) prints 7.
+- type: mcq
+  question: What does this print?
+  code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
+  choices:
+  - '1
 
-  - type: arrange
-    instruction: "Build a function that prints 'hello' and then call it"
-    blocks: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-    correct: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-    explanation: "First define the function with def, then call it by writing its name with ()."
+    4
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def show(x):\n    print(x * 2)\n\nshow(5)"
-    choices: ["10", "5", "x * 2", "Nothing"]
-    correct: "10"
-    explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10."
+    9'
+  - '1
 
-  - type: fill_blank
-    prompt: "Add the two parameters together inside the function body."
-    before: "def add(a, b):\n    print(a "
-    after: " b)\n\nadd(3, 4)"
-    choices: ["+", "=", "*", "-"]
-    answer: "+"
-    explanation: "a + b adds the two parameters. add(3, 4) prints 7."
+    2
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
-    choices: ["1\n4\n9", "1\n2\n3", "1\n4\n9\n16", "n * n"]
-    correct: "1\n4\n9"
-    explanation: "Calling square with 1, 2, 3 prints 1, 4, 9."
+    3'
+  - '1
 
-  - type: mcq
-    question: "What is a parameter?"
-    code: ""
-    choices: [
-      "A variable in the function definition that receives a value when called",
-      "The name of the function",
-      "The indented code inside a function",
-      "The value you pass when calling"
-    ]
-    correct: "A variable in the function definition that receives a value when called"
-    explanation: "In def greet(name), name is the parameter. 'Alice' is the argument passed when calling greet('Alice')."
+    4
 
-  - type: arrange
-    instruction: "Call the function describe with the argument 'Python'"
-    blocks: ["describe", "(", "\"Python\"", ")", "def", "describe"]
-    correct: ["describe", "(", "\"Python\"", ")"]
-    explanation: "Function name followed by () with the argument inside."
+    9
 
-  - type: mcq
-    question: "What does this print?"
-    code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
-    choices: ["Alice is 25", "name is age", "25 is Alice", "intro"]
-    correct: "Alice is 25"
-    explanation: "name gets 'Alice' and age gets 25. The f-string combines them."
+    16'
+  - n * n
+  correct: '1
 
-  - type: mini_code
-    prompt: "Define a function called double that takes a number n and prints n * 2. Call it with 7 and with 3."
-    starter: ""
-    tests:
-      - code: "assert '14' in _stdout"
-        message: "double(7) should print 14"
-      - code: "assert '6' in _stdout"
-        message: "double(3) should print 6"
+    4
 
-  - type: mini_code
-    prompt: "Define a function called greet that takes a name and prints 'Hello, [name]!'. Call it with 'World' and with 'Alice'."
-    starter: ""
-    tests:
-      - code: "assert 'Hello, World!' in _stdout"
-        message: "Should print 'Hello, World!'"
-      - code: "assert 'Hello, Alice!' in _stdout"
-        message: "Should print 'Hello, Alice!'"
-
+    9'
+  explanation: Calling square with 1, 2, 3 prints 1, 4, 9.
+- type: mcq
+  question: What is a parameter?
+  code: ''
+  choices:
+  - A variable in the function definition that receives a value when called
+  - The name of the function
+  - The indented code inside a function
+  - The value you pass when calling
+  correct: A variable in the function definition that receives a value when called
+  explanation: In def greet(name), name is the parameter. 'Alice' is the argument passed when calling greet('Alice').
+- type: arrange
+  instruction: Call the function describe with the argument 'Python'
+  blocks:
+  - describe
+  - (
+  - '"Python"'
+  - )
+  - def
+  - describe
+  correct:
+  - describe
+  - (
+  - '"Python"'
+  - )
+  explanation: Function name followed by () with the argument inside.
+- type: mcq
+  question: What does this print?
+  code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
+  choices:
+  - Alice is 25
+  - name is age
+  - 25 is Alice
+  - intro
+  correct: Alice is 25
+  explanation: name gets 'Alice' and age gets 25. The f-string combines them.
+- type: mini_code
+  prompt: Define a function called double that takes a number n and prints n * 2. Call it with 7 and with 3.
+  starter: ''
+  tests:
+  - code: assert '14' in _stdout
+    message: double(7) should print 14
+  - code: assert '6' in _stdout
+    message: double(3) should print 6
+- type: mini_code
+  prompt: Define a function called greet that takes a name and prints 'Hello, [name]!'. Call it with 'World' and with 'Alice'.
+  starter: ''
+  tests:
+  - code: assert 'Hello, World!' in _stdout
+    message: Should print 'Hello, World!'
+  - code: assert 'Hello, Alice!' in _stdout
+    message: Should print 'Hello, Alice!'
 worlds:
   fantasy:
-    title: "Writing the First Recipe"
+    title: Writing the First Recipe
     exercises:
-      - type: concept
-        code: |
-          def brew(ingredient):
-              print(f"Adding {ingredient} to the cauldron!")
+    - type: concept
+      code: "def brew(ingredient):\n    print(f\"Adding {ingredient} to the cauldron!\")\n\nbrew(\"moonpetal\")\nbrew(\"dragonroot\"\
+        )\n"
+      output: 'Adding moonpetal to the cauldron!
 
-          brew("moonpetal")
-          brew("dragonroot")
-        output: "Adding moonpetal to the cauldron!\nAdding dragonroot to the cauldron!"
-        explanation: "def defines a potion recipe. The ingredient in parentheses is a parameter. Call brew() with different ingredients to reuse the same recipe steps."
+        Adding dragonroot to the cauldron!'
+      explanation: def defines a potion recipe. The ingredient in parentheses is a parameter. Call brew() with different ingredients
+        to reuse the same recipe steps.
+      story_before: Master Theo shows Elara that instead of rewriting the same potion step each time, she can define a reusable
+        brew recipe.
+      story_after: Elara sees the cauldron respond to the same recipe called twice — the magic is real, and it's repeatable.
+    - type: mcq
+      question: What does this print?
+      code: "def mix():\n    print(\"Stirring the brew!\")\n\nmix()"
+      choices:
+      - Stirring the brew!
+      - mix
+      - def
+      - Nothing
+      correct: Stirring the brew!
+      explanation: mix() calls the recipe function. The indented block runs and prints the message.
+      story_before: Elara tries a simpler recipe that takes no ingredients at all, just to prove a function can work on its
+        own.
+      story_after: The stirring message echoes through the workshop — even an empty recipe springs to life when called.
+    - type: fill_blank
+      prompt: Master Theo starts every recipe definition with the correct keyword.
+      before: ''
+      after: " brew(ingredient):\n    print(ingredient * 2)"
+      choices:
+      - def
+      - for
+      - if
+      - class
+      answer: def
+      explanation: def starts a recipe definition. brew is the name, ingredient is its parameter.
+      story_before: Master Theo hands Elara a half-written recipe scroll; she must fill in the very first word that begins
+        every function.
+      story_after: With the correct keyword inscribed, the scroll glows — the recipe is now properly declared.
+    - type: arrange
+      instruction: Build a recipe function that prints 'bubble' and then call it
+      blocks:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      correct:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      explanation: First define the recipe with def, then activate it by writing its name with ().
+      story_before: Elara must arrange the magic tokens in the right order to build a bubble-chanting recipe from scratch
+        and then cast it.
+      story_after: The tokens snap into place and 'hello' rings out — Elara has written and called her first complete recipe.
+    - type: mcq
+      question: What does this print?
+      code: "def show(x):\n    print(x * 2)\n\nshow(5)"
+      choices:
+      - '10'
+      - '5'
+      - x * 2
+      - Nothing
+      correct: '10'
+      explanation: show(5) passes 5 as x. x * 2 = 5 * 2 = 10. The potion doubles the ingredient count.
+      story_before: Theo demonstrates how passing a number into a recipe can double the ingredient quantity automatically.
+      story_after: Ten units appear — Elara realises the parameter is what makes each call to the same recipe different.
+    - type: fill_blank
+      prompt: Combine two potion ingredients inside the recipe by adding them together.
+      before: "def add(a, b):\n    print(a "
+      after: ' b)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def mix():\n    print(\"Stirring the brew!\")\n\nmix()"
-        choices: ["Stirring the brew!", "mix", "def", "Nothing"]
-        correct: "Stirring the brew!"
-        explanation: "mix() calls the recipe function. The indented block runs and prints the message."
 
-      - type: fill_blank
-        prompt: "Master Theo starts every recipe definition with the correct keyword."
-        before: ""
-        after: " brew(ingredient):\n    print(ingredient * 2)"
-        choices: ["def", "for", "if", "class"]
-        answer: "def"
-        explanation: "def starts a recipe definition. brew is the name, ingredient is its parameter."
+        add(3, 4)'
+      choices:
+      - +
+      - '='
+      - '*'
+      - '-'
+      answer: +
+      explanation: a + b blends the two ingredient amounts. add(3, 4) prints 7 units combined.
+      story_before: Two ingredient amounts need combining; Elara must choose the right rune to blend them inside the recipe.
+      story_after: Seven combined units pour from the cauldron — the blending rune worked perfectly.
+    - type: mcq
+      question: What does this print?
+      code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
+      choices:
+      - '1
 
-      - type: arrange
-        instruction: "Build a recipe function that prints 'bubble' and then call it"
-        blocks: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        correct: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        explanation: "First define the recipe with def, then activate it by writing its name with ()."
+        4
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def show(x):\n    print(x * 2)\n\nshow(5)"
-        choices: ["10", "5", "x * 2", "Nothing"]
-        correct: "10"
-        explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10. The potion doubles the ingredient count."
+        9'
+      - '1
 
-      - type: fill_blank
-        prompt: "Combine two potion ingredients inside the recipe by adding them together."
-        before: "def add(a, b):\n    print(a "
-        after: " b)\n\nadd(3, 4)"
-        choices: ["+", "=", "*", "-"]
-        answer: "+"
-        explanation: "a + b blends the two ingredient amounts. add(3, 4) prints 7 units combined."
+        2
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
-        choices: ["1\n4\n9", "1\n2\n3", "1\n4\n9\n16", "n * n"]
-        correct: "1\n4\n9"
-        explanation: "Brewing with potency 1, 2, 3 yields 1, 4, 9 — each ingredient squared for amplification."
+        3'
+      - '1
 
-      - type: mcq
-        question: "What is a parameter in a potion recipe?"
-        code: ""
-        choices: [
-          "A variable in the function definition that receives a value when called",
-          "The name of the function",
-          "The indented code inside a function",
-          "The value you pass when calling"
-        ]
-        correct: "A variable in the function definition that receives a value when called"
-        explanation: "In def brew(ingredient), ingredient is the parameter. 'moonpetal' is the argument passed when calling brew('moonpetal')."
+        4
 
-      - type: arrange
-        instruction: "Call the recipe function describe with the argument 'Python'"
-        blocks: ["describe", "(", "\"Python\"", ")", "def", "describe"]
-        correct: ["describe", "(", "\"Python\"", ")"]
-        explanation: "Recipe name followed by () with the ingredient argument inside — that activates the spell."
+        9
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
-        choices: ["Alice is 25", "name is age", "25 is Alice", "intro"]
-        correct: "Alice is 25"
-        explanation: "name gets 'Alice' and age gets 25. Master Theo's recipe labels both ingredients correctly."
+        16'
+      - n * n
+      correct: '1
 
-      - type: mini_code
-        prompt: "Define a potion recipe called double that takes a potency n and prints n * 2. Brew it with potency 7 and potency 3."
-        starter: ""
-        tests:
-          - code: "assert '14' in _stdout"
-            message: "double(7) should print 14"
-          - code: "assert '6' in _stdout"
-            message: "double(3) should print 6"
+        4
 
-      - type: mini_code
-        prompt: "Define a recipe called greet that takes an ingredient name and prints 'Hello, [name]!'. Use it with 'World' and with 'Alice'."
-        starter: ""
-        tests:
-          - code: "assert 'Hello, World!' in _stdout"
-            message: "Should print 'Hello, World!'"
-          - code: "assert 'Hello, Alice!' in _stdout"
-            message: "Should print 'Hello, Alice!'"
-
+        9'
+      explanation: Brewing with potency 1, 2, 3 yields 1, 4, 9 — each ingredient squared for amplification.
+      story_before: Theo loops the squaring recipe over three ingredient potencies and asks Elara to predict the result.
+      story_after: 1, 4, 9 — the amplified series confirms that calling the same recipe repeatedly yields consistent magic.
+    - type: mcq
+      question: What is a parameter in a potion recipe?
+      code: ''
+      choices:
+      - A variable in the function definition that receives a value when called
+      - The name of the function
+      - The indented code inside a function
+      - The value you pass when calling
+      correct: A variable in the function definition that receives a value when called
+      explanation: In def brew(ingredient), ingredient is the parameter. 'moonpetal' is the argument passed when calling brew('moonpetal').
+      story_before: Master Theo quizzes Elara on the precise meaning of the variable inside a recipe's parentheses.
+      story_after: Elara answers correctly — a parameter is the placeholder that receives each new ingredient at call time.
+    - type: arrange
+      instruction: Call the recipe function describe with the argument 'Python'
+      blocks:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      - def
+      - describe
+      correct:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      explanation: Recipe name followed by () with the ingredient argument inside — that activates the spell.
+      story_before: A recipe called describe is already defined; Elara only needs to arrange the tokens to invoke it with
+        the right ingredient.
+      story_after: The recipe fires with 'Python' as its ingredient — calling a function is as simple as name plus parentheses.
+    - type: mcq
+      question: What does this print?
+      code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
+      choices:
+      - Alice is 25
+      - name is age
+      - 25 is Alice
+      - intro
+      correct: Alice is 25
+      explanation: name gets 'Alice' and age gets 25. Master Theo's recipe labels both ingredients correctly.
+      story_before: Theo's two-ingredient recipe labels both a name and an age; Elara must trace what it prints.
+      story_after: Alice is 25 — both parameters landed correctly, and Elara feels confident handling multi-ingredient recipes.
+    - type: mini_code
+      prompt: Define a potion recipe called double that takes a potency n and prints n * 2. Brew it with potency 7 and potency
+        3.
+      starter: ''
+      tests:
+      - code: assert '14' in _stdout
+        message: double(7) should print 14
+      - code: assert '6' in _stdout
+        message: double(3) should print 6
+      story_before: 'Now Elara writes her own recipe: one that doubles any potency she passes in.'
+      story_after: 14 and 6 appear in the cauldron's glow — Elara's first independent recipe works on every potency she tries.
+    - type: mini_code
+      prompt: Define a recipe called greet that takes an ingredient name and prints 'Hello, [name]!'. Use it with 'World'
+        and with 'Alice'.
+      starter: ''
+      tests:
+      - code: assert 'Hello, World!' in _stdout
+        message: Should print 'Hello, World!'
+      - code: assert 'Hello, Alice!' in _stdout
+        message: Should print 'Hello, Alice!'
+      story_before: Master Theo asks Elara to craft a greeting recipe that welcomes any ingredient by name.
+      story_after: The workshop echoes with 'Hello, World!' and 'Hello, Alice!' — Elara's recipe library has its first two
+        spells.
   scifi:
-    title: "Programming the First Drone"
+    title: Programming the First Drone
     exercises:
-      - type: concept
-        code: |
-          def repair(system):
-              print(f"Repairing {system} system...")
+    - type: concept
+      code: "def repair(system):\n    print(f\"Repairing {system} system...\")\n\nrepair(\"engine\")\nrepair(\"shields\")\n"
+      output: 'Repairing engine system...
 
-          repair("engine")
-          repair("shields")
-        output: "Repairing engine system...\nRepairing shields system..."
-        explanation: "def defines a repair subroutine. The system in parentheses is a parameter. Call repair() with different systems to reuse the same drone logic."
+        Repairing shields system...'
+      explanation: def defines a repair subroutine. The system in parentheses is a parameter. Call repair() with different
+        systems to reuse the same drone logic.
+      story_before: Chief Engineer Sana explains to Yara that instead of duplicating repair logic for every system, she should
+        write one reusable subroutine.
+      story_after: The repair subroutine fires for both engine and shields — Yara sees how a single definition handles any
+        system.
+    - type: mcq
+      question: What does this print?
+      code: "def activate():\n    print(\"Drone online!\")\n\nactivate()"
+      choices:
+      - Drone online!
+      - activate
+      - def
+      - Nothing
+      correct: Drone online!
+      explanation: activate() calls the drone function. The indented block runs and prints the status message.
+      story_before: Yara tests a zero-parameter boot subroutine to confirm the drone activates on command.
+      story_after: Drone online — the simplest subroutine runs the moment it is called.
+    - type: fill_blank
+      prompt: Chief Engineer Sana begins every drone subroutine with the correct keyword.
+      before: ''
+      after: " repair(system):\n    print(system * 2)"
+      choices:
+      - def
+      - for
+      - if
+      - class
+      answer: def
+      explanation: def starts a subroutine definition. repair is the name, system is its parameter.
+      story_before: Sana's repair template is missing its opening keyword; Yara must supply the correct one to register the
+        subroutine.
+      story_after: The subroutine compiles cleanly — the correct keyword is all it took to bring the template to life.
+    - type: arrange
+      instruction: Build a drone function that prints 'hello' and then call it
+      blocks:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      correct:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      explanation: First define the drone routine with def, then deploy it by writing its name with ().
+      story_before: Yara must sequence the code blocks to define and immediately deploy a basic drone routine.
+      story_after: The routine executes successfully — define first, deploy second, that is the protocol.
+    - type: mcq
+      question: What does this print?
+      code: "def show(x):\n    print(x * 2)\n\nshow(5)"
+      choices:
+      - '10'
+      - '5'
+      - x * 2
+      - Nothing
+      correct: '10'
+      explanation: show(5) passes 5 as x. x * 2 = 5 * 2 = 10. The drone doubles the repair intensity.
+      story_before: 'Sana runs a power test: the same subroutine is called with a level of 5 to see what output it transmits.'
+      story_after: Output of 10 confirmed — the parameter doubles the reading, exactly as the spec required.
+    - type: fill_blank
+      prompt: Combine two system charge levels inside the subroutine by adding them together.
+      before: "def add(a, b):\n    print(a "
+      after: ' b)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def activate():\n    print(\"Drone online!\")\n\nactivate()"
-        choices: ["Drone online!", "activate", "def", "Nothing"]
-        correct: "Drone online!"
-        explanation: "activate() calls the drone function. The indented block runs and prints the status message."
 
-      - type: fill_blank
-        prompt: "Chief Engineer Sana begins every drone subroutine with the correct keyword."
-        before: ""
-        after: " repair(system):\n    print(system * 2)"
-        choices: ["def", "for", "if", "class"]
-        answer: "def"
-        explanation: "def starts a subroutine definition. repair is the name, system is its parameter."
+        add(3, 4)'
+      choices:
+      - +
+      - '='
+      - '*'
+      - '-'
+      answer: +
+      explanation: a + b sums the two charge levels. add(3, 4) prints 7 total units.
+      story_before: Two charge level readings must be summed inside the subroutine; Yara selects the correct operator.
+      story_after: Seven total units logged — the subroutine combines both charge levels without a fault.
+    - type: mcq
+      question: What does this print?
+      code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
+      choices:
+      - '1
 
-      - type: arrange
-        instruction: "Build a drone function that prints 'hello' and then call it"
-        blocks: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        correct: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        explanation: "First define the drone routine with def, then deploy it by writing its name with ()."
+        4
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def show(x):\n    print(x * 2)\n\nshow(5)"
-        choices: ["10", "5", "x * 2", "Nothing"]
-        correct: "10"
-        explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10. The drone doubles the repair intensity."
+        9'
+      - '1
 
-      - type: fill_blank
-        prompt: "Combine two system charge levels inside the subroutine by adding them together."
-        before: "def add(a, b):\n    print(a "
-        after: " b)\n\nadd(3, 4)"
-        choices: ["+", "=", "*", "-"]
-        answer: "+"
-        explanation: "a + b sums the two charge levels. add(3, 4) prints 7 total units."
+        2
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
-        choices: ["1\n4\n9", "1\n2\n3", "1\n4\n9\n16", "n * n"]
-        correct: "1\n4\n9"
-        explanation: "Running the drone at power levels 1, 2, 3 outputs 1, 4, 9 — each squared for boost calculations."
+        3'
+      - '1
 
-      - type: mcq
-        question: "What is a parameter in a drone subroutine?"
-        code: ""
-        choices: [
-          "A variable in the function definition that receives a value when called",
-          "The name of the function",
-          "The indented code inside a function",
-          "The value you pass when calling"
-        ]
-        correct: "A variable in the function definition that receives a value when called"
-        explanation: "In def repair(system), system is the parameter. 'engine' is the argument passed when calling repair('engine')."
+        4
 
-      - type: arrange
-        instruction: "Call the drone subroutine describe with the argument 'Python'"
-        blocks: ["describe", "(", "\"Python\"", ")", "def", "describe"]
-        correct: ["describe", "(", "\"Python\"", ")"]
-        explanation: "Subroutine name followed by () with the target system argument inside — that deploys the drone."
+        9
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
-        choices: ["Alice is 25", "name is age", "25 is Alice", "intro"]
-        correct: "Alice is 25"
-        explanation: "name gets 'Alice' and age gets 25. Sana's subroutine logs both ship ID and age correctly."
+        16'
+      - n * n
+      correct: '1
 
-      - type: mini_code
-        prompt: "Define a drone subroutine called double that takes a power level n and prints n * 2. Deploy it with level 7 and level 3."
-        starter: ""
-        tests:
-          - code: "assert '14' in _stdout"
-            message: "double(7) should print 14"
-          - code: "assert '6' in _stdout"
-            message: "double(3) should print 6"
+        4
 
-      - type: mini_code
-        prompt: "Define a subroutine called greet that takes a system name and prints 'Hello, [name]!'. Run it with 'World' and with 'Alice'."
-        starter: ""
-        tests:
-          - code: "assert 'Hello, World!' in _stdout"
-            message: "Should print 'Hello, World!'"
-          - code: "assert 'Hello, Alice!' in _stdout"
-            message: "Should print 'Hello, Alice!'"
-
+        9'
+      explanation: Running the drone at power levels 1, 2, 3 outputs 1, 4, 9 — each squared for boost calculations.
+      story_before: Sana runs the power-boost subroutine at three increasing levels and asks Yara to predict the console output.
+      story_after: 1, 4, 9 confirmed on screen — squared outputs at each level match the expected energy curve.
+    - type: mcq
+      question: What is a parameter in a drone subroutine?
+      code: ''
+      choices:
+      - A variable in the function definition that receives a value when called
+      - The name of the function
+      - The indented code inside a function
+      - The value you pass when calling
+      correct: A variable in the function definition that receives a value when called
+      explanation: In def repair(system), system is the parameter. 'engine' is the argument passed when calling repair('engine').
+      story_before: Yara must correctly define what the variable inside a subroutine's parentheses actually represents.
+      story_after: Parameter identified — it is the slot that accepts a different target system each time the subroutine is
+        called.
+    - type: arrange
+      instruction: Call the drone subroutine describe with the argument 'Python'
+      blocks:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      - def
+      - describe
+      correct:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      explanation: Subroutine name followed by () with the target system argument inside — that deploys the drone.
+      story_before: The describe subroutine already exists; Yara just needs to arrange the tokens to call it with the right
+        argument.
+      story_after: Subroutine deployed with 'Python' as target — the call syntax is now locked in.
+    - type: mcq
+      question: What does this print?
+      code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
+      choices:
+      - Alice is 25
+      - name is age
+      - 25 is Alice
+      - intro
+      correct: Alice is 25
+      explanation: name gets 'Alice' and age gets 25. Sana's subroutine logs both ship ID and age correctly.
+      story_before: Sana's logging subroutine takes two parameters; Yara traces the output to verify both are recorded correctly.
+      story_after: Alice is 25 — two-parameter subroutines work just like one-parameter ones, with an extra slot in the call.
+    - type: mini_code
+      prompt: Define a drone subroutine called double that takes a power level n and prints n * 2. Deploy it with level 7
+        and level 3.
+      starter: ''
+      tests:
+      - code: assert '14' in _stdout
+        message: double(7) should print 14
+      - code: assert '6' in _stdout
+        message: double(3) should print 6
+      story_before: Yara codes a power-doubling subroutine from scratch and runs it at two different levels.
+      story_after: 14 and 6 transmitted — the subroutine handles both inputs and the Helix's diagnostics are one step closer
+        to complete.
+    - type: mini_code
+      prompt: Define a subroutine called greet that takes a system name and prints 'Hello, [name]!'. Run it with 'World' and
+        with 'Alice'.
+      starter: ''
+      tests:
+      - code: assert 'Hello, World!' in _stdout
+        message: Should print 'Hello, World!'
+      - code: assert 'Hello, Alice!' in _stdout
+        message: Should print 'Hello, Alice!'
+      story_before: Sana needs a generic greeting subroutine for the ship's comm system; Yara writes it now.
+      story_after: Hello, World! and Hello, Alice! broadcast successfully — the comm subroutine is ready for any crew member.
   mystery:
-    title: "Creating the First Tool"
+    title: Creating the First Tool
     exercises:
-      - type: concept
-        code: |
-          def analyze(clue):
-              print(f"Examining clue: {clue}")
+    - type: concept
+      code: "def analyze(clue):\n    print(f\"Examining clue: {clue}\")\n\nanalyze(\"muddy boot\")\nanalyze(\"torn letter\"\
+        )\n"
+      output: 'Examining clue: muddy boot
 
-          analyze("muddy boot")
-          analyze("torn letter")
-        output: "Examining clue: muddy boot\nExamining clue: torn letter"
-        explanation: "def defines an analysis tool. The clue in parentheses is a parameter. Call analyze() with different clues to reuse the same detective logic."
+        Examining clue: torn letter'
+      explanation: def defines an analysis tool. The clue in parentheses is a parameter. Call analyze() with different clues
+        to reuse the same detective logic.
+      story_before: Cole realises he keeps writing the same clue-examination steps for every piece of evidence, and decides
+        to define a reusable analysis tool.
+      story_after: The tool runs on both clues without rewriting a single line — Cole's case file is already more efficient.
+    - type: mcq
+      question: What does this print?
+      code: "def log_clue():\n    print(\"Clue recorded!\")\n\nlog_clue()"
+      choices:
+      - Clue recorded!
+      - log_clue
+      - def
+      - Nothing
+      correct: Clue recorded!
+      explanation: log_clue() calls the detective tool. The indented block runs and prints the confirmation.
+      story_before: Cole tests a simple tool with no parameters, just to confirm it logs a message when called.
+      story_after: Clue recorded — even the simplest tool fires reliably, and Cole notes that defining is separate from running.
+    - type: fill_blank
+      prompt: Detective Cole starts every analysis tool definition with the correct keyword.
+      before: ''
+      after: " analyze(clue):\n    print(clue * 2)"
+      choices:
+      - def
+      - for
+      - if
+      - class
+      answer: def
+      explanation: def starts a tool definition. analyze is the name, clue is its parameter.
+      story_before: A half-written tool definition sits on Cole's desk; he must fill in the opening keyword before he can
+        register it.
+      story_after: The keyword is inscribed and the tool is officially defined — Cole can now call it any time he needs it.
+    - type: arrange
+      instruction: Build a detective tool function that prints 'hello' and then call it
+      blocks:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      correct:
+      - def
+      - hello
+      - (
+      - )
+      - ':'
+      - print
+      - (
+      - '"hello"'
+      - )
+      - hello
+      - (
+      - )
+      explanation: First define the detective tool with def, then run it by writing its name with ().
+      story_before: Cole assembles the code blocks in the correct order to build a detective tool and then immediately deploy
+        it.
+      story_after: 'The tool runs on the first try — Cole knows the rule: define the procedure, then invoke it.'
+    - type: mcq
+      question: What does this print?
+      code: "def show(x):\n    print(x * 2)\n\nshow(5)"
+      choices:
+      - '10'
+      - '5'
+      - x * 2
+      - Nothing
+      correct: '10'
+      explanation: show(5) passes 5 as x. x * 2 = 5 * 2 = 10. Cole doubles the clue weight for emphasis.
+      story_before: Cole passes the number 5 into a tool and traces exactly what value it prints to the case file.
+      story_after: Output of 10 confirmed — the parameter doubles the clue weight, giving Cole a sharper suspicion score.
+    - type: fill_blank
+      prompt: Combine two clue scores inside the analysis tool by adding them together.
+      before: "def add(a, b):\n    print(a "
+      after: ' b)
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def log_clue():\n    print(\"Clue recorded!\")\n\nlog_clue()"
-        choices: ["Clue recorded!", "log_clue", "def", "Nothing"]
-        correct: "Clue recorded!"
-        explanation: "log_clue() calls the detective tool. The indented block runs and prints the confirmation."
 
-      - type: fill_blank
-        prompt: "Detective Cole starts every analysis tool definition with the correct keyword."
-        before: ""
-        after: " analyze(clue):\n    print(clue * 2)"
-        choices: ["def", "for", "if", "class"]
-        answer: "def"
-        explanation: "def starts a tool definition. analyze is the name, clue is its parameter."
+        add(3, 4)'
+      choices:
+      - +
+      - '='
+      - '*'
+      - '-'
+      answer: +
+      explanation: a + b adds the two clue scores. add(3, 4) prints a combined suspicion rating of 7.
+      story_before: Two clue scores need combining inside one tool; Cole selects the right operator to add them together.
+      story_after: A combined rating of 7 is written to the file — both scores blended cleanly with a single operator.
+    - type: mcq
+      question: What does this print?
+      code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
+      choices:
+      - '1
 
-      - type: arrange
-        instruction: "Build a detective tool function that prints 'hello' and then call it"
-        blocks: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        correct: ["def", "hello", "(", ")", ":", "print", "(", "\"hello\"", ")", "hello", "(", ")"]
-        explanation: "First define the detective tool with def, then run it by writing its name with ()."
+        4
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def show(x):\n    print(x * 2)\n\nshow(5)"
-        choices: ["10", "5", "x * 2", "Nothing"]
-        correct: "10"
-        explanation: "show(5) passes 5 as x. x * 2 = 5 * 2 = 10. Cole doubles the clue weight for emphasis."
+        9'
+      - '1
 
-      - type: fill_blank
-        prompt: "Combine two clue scores inside the analysis tool by adding them together."
-        before: "def add(a, b):\n    print(a "
-        after: " b)\n\nadd(3, 4)"
-        choices: ["+", "=", "*", "-"]
-        answer: "+"
-        explanation: "a + b adds the two clue scores. add(3, 4) prints a combined suspicion rating of 7."
+        2
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def square(n):\n    print(n * n)\n\nfor i in range(1, 4):\n    square(i)"
-        choices: ["1\n4\n9", "1\n2\n3", "1\n4\n9\n16", "n * n"]
-        correct: "1\n4\n9"
-        explanation: "Analysing clues of weight 1, 2, 3 yields suspicion scores of 1, 4, 9 — each squared."
+        3'
+      - '1
 
-      - type: mcq
-        question: "What is a parameter in a detective analysis tool?"
-        code: ""
-        choices: [
-          "A variable in the function definition that receives a value when called",
-          "The name of the function",
-          "The indented code inside a function",
-          "The value you pass when calling"
-        ]
-        correct: "A variable in the function definition that receives a value when called"
-        explanation: "In def analyze(clue), clue is the parameter. 'muddy boot' is the argument passed when calling analyze('muddy boot')."
+        4
 
-      - type: arrange
-        instruction: "Call the analysis tool describe with the argument 'Python'"
-        blocks: ["describe", "(", "\"Python\"", ")", "def", "describe"]
-        correct: ["describe", "(", "\"Python\"", ")"]
-        explanation: "Tool name followed by () with the clue argument inside — that runs Cole's investigation."
+        9
 
-      - type: mcq
-        question: "What does this print?"
-        code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
-        choices: ["Alice is 25", "name is age", "25 is Alice", "intro"]
-        correct: "Alice is 25"
-        explanation: "name gets 'Alice' and age gets 25. Cole's case file logs both suspect name and age correctly."
+        16'
+      - n * n
+      correct: '1
 
-      - type: mini_code
-        prompt: "Define a detective tool called double that takes a clue weight n and prints n * 2. Run it with weight 7 and weight 3."
-        starter: ""
-        tests:
-          - code: "assert '14' in _stdout"
-            message: "double(7) should print 14"
-          - code: "assert '6' in _stdout"
-            message: "double(3) should print 6"
+        4
 
-      - type: mini_code
-        prompt: "Define a tool called greet that takes a suspect name and prints 'Hello, [name]!'. Call it with 'World' and with 'Alice'."
-        starter: ""
-        tests:
-          - code: "assert 'Hello, World!' in _stdout"
-            message: "Should print 'Hello, World!'"
-          - code: "assert 'Hello, Alice!' in _stdout"
-            message: "Should print 'Hello, Alice!'"
+        9'
+      explanation: Analysing clues of weight 1, 2, 3 yields suspicion scores of 1, 4, 9 — each squared.
+      story_before: Cole squares clue weights at three different levels and must predict what the tool prints each time.
+      story_after: 1, 4, 9 — the squared suspicion scores mount across the three clues, and the pattern is unmistakable.
+    - type: mcq
+      question: What is a parameter in a detective analysis tool?
+      code: ''
+      choices:
+      - A variable in the function definition that receives a value when called
+      - The name of the function
+      - The indented code inside a function
+      - The value you pass when calling
+      correct: A variable in the function definition that receives a value when called
+      explanation: In def analyze(clue), clue is the parameter. 'muddy boot' is the argument passed when calling analyze('muddy
+        boot').
+      story_before: Cole pauses to make sure he understands precisely what the variable inside a tool's parentheses actually
+        is.
+      story_after: Correct — a parameter is a placeholder that receives a specific clue value each time the tool is called.
+    - type: arrange
+      instruction: Call the analysis tool describe with the argument 'Python'
+      blocks:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      - def
+      - describe
+      correct:
+      - describe
+      - (
+      - '"Python"'
+      - )
+      explanation: Tool name followed by () with the clue argument inside — that runs Cole's investigation.
+      story_before: The tool describe already exists; Cole just needs to arrange the tokens to call it with the right clue.
+      story_after: Tool invoked with 'Python' — Cole confirms that calling a function is just the name followed by the argument.
+    - type: mcq
+      question: What does this print?
+      code: "def intro(name, age):\n    print(f\"{name} is {age}\")\n\nintro(\"Alice\", 25)"
+      choices:
+      - Alice is 25
+      - name is age
+      - 25 is Alice
+      - intro
+      correct: Alice is 25
+      explanation: name gets 'Alice' and age gets 25. Cole's case file logs both suspect name and age correctly.
+      story_before: Cole traces a two-parameter tool that logs both a suspect's name and age to the case file.
+      story_after: Alice is 25 — both parameters landed in the right slots, and the suspect profile is correctly recorded.
+    - type: mini_code
+      prompt: Define a detective tool called double that takes a clue weight n and prints n * 2. Run it with weight 7 and
+        weight 3.
+      starter: ''
+      tests:
+      - code: assert '14' in _stdout
+        message: double(7) should print 14
+      - code: assert '6' in _stdout
+        message: double(3) should print 6
+      story_before: Cole writes a tool that doubles any clue weight and tests it on two different cases.
+      story_after: 14 and 6 printed — the doubling tool is in the kit and ready to amplify any clue Cole encounters.
+    - type: mini_code
+      prompt: Define a tool called greet that takes a suspect name and prints 'Hello, [name]!'. Call it with 'World' and with
+        'Alice'.
+      starter: ''
+      tests:
+      - code: assert 'Hello, World!' in _stdout
+        message: Should print 'Hello, World!'
+      - code: assert 'Hello, Alice!' in _stdout
+        message: Should print 'Hello, Alice!'
+      story_before: Cole needs a greeting tool that introduces suspects by name; he writes it and tests it twice.
+      story_after: Hello, World! and Hello, Alice! — the greeting tool works, and Cole's procedural toolkit is beginning to
+        take shape.

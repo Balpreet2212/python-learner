@@ -28,6 +28,8 @@ class ConceptExercise:
     code: str
     output: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 @dataclass
@@ -38,6 +40,8 @@ class McqExercise:
     choices: list[str]
     correct: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 @dataclass
@@ -47,6 +51,8 @@ class ArrangeExercise:
     blocks: list[str]
     correct: list[str]
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 @dataclass
@@ -58,6 +64,8 @@ class FillBlankExercise:
     choices: list[str]
     answer: str
     explanation: str
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 @dataclass
@@ -66,6 +74,8 @@ class MiniCodeExercise:
     prompt: str
     starter: str
     tests: list[LessonTest]
+    story_before: str | None = None
+    story_after: str | None = None
 
 
 Exercise = Union[ConceptExercise, McqExercise, ArrangeExercise, FillBlankExercise, MiniCodeExercise]
@@ -79,6 +89,8 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             code=raw.get("code", "").rstrip(),
             output=raw.get("output", "").strip(),
             explanation=raw.get("explanation", "").strip(),
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
         )
     if t == "mcq":
         return McqExercise(
@@ -88,6 +100,8 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             choices=raw.get("choices", []),
             correct=str(raw.get("correct", "")),
             explanation=raw.get("explanation", "").strip(),
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
         )
     if t == "arrange":
         return ArrangeExercise(
@@ -96,6 +110,8 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             blocks=raw.get("blocks", []),
             correct=raw.get("correct", []),
             explanation=raw.get("explanation", "").strip(),
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
         )
     if t == "fill_blank":
         return FillBlankExercise(
@@ -106,6 +122,8 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             choices=raw.get("choices", []),
             answer=str(raw.get("answer", "")),
             explanation=raw.get("explanation", "").strip(),
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
         )
     if t == "mini_code":
         raw_tests: list[dict[str, str]] = raw.get("tests", [])
@@ -114,6 +132,8 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
             prompt=raw.get("prompt", "").strip(),
             starter=raw.get("starter", "").rstrip(),
             tests=[LessonTest(code=r["code"], message=r["message"], stdin=r.get("stdin")) for r in raw_tests],
+            story_before=raw.get("story_before") or None,
+            story_after=raw.get("story_after") or None,
         )
     raise ValueError(f"Unknown exercise type: {t!r}")
 

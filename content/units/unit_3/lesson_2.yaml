@@ -1,417 +1,915 @@
-title: "if / else"
+title: if / else
 xp: 12
-
 exercises:
-  - type: concept
-    code: |
-      score = 45
-      if score >= 60:
-          print("Passed")
-      else:
-          print("Failed")
-    output: "Failed"
-    explanation: "else runs when the if condition is False. Exactly one branch always executes."
+- type: concept
+  code: "score = 45\nif score >= 60:\n    print(\"Passed\")\nelse:\n    print(\"Failed\")\n"
+  output: Failed
+  explanation: else runs when the if condition is False. Exactly one branch always executes.
+- type: mcq
+  question: What does this print?
+  code: "x = 3\nif x > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
+  choices:
+  - small
+  - big
+  - 'big
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = 3\nif x > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
-    choices: ["small", "big", "big\nsmall", "Nothing"]
-    correct: "small"
-    explanation: "x > 5 is False (3 is not > 5), so the else branch runs."
+    small'
+  - Nothing
+  correct: small
+  explanation: x > 5 is False (3 is not > 5), so the else branch runs.
+- type: arrange
+  instruction: Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'
+  blocks:
+  - if
+  - n
+  - '%'
+  - '2'
+  - ==
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"even"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"odd"'
+  - )
+  correct:
+  - if
+  - n
+  - '%'
+  - '2'
+  - ==
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"even"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"odd"'
+  - )
+  explanation: The if checks divisibility. else catches when n is odd.
+- type: fill_blank
+  prompt: Handle the case when the user is not logged in.
+  before: "if logged_in:\n    print(\"Welcome\")\n"
+  after: ":\n    print(\"Please log in\")"
+  choices:
+  - else
+  - elif
+  - if
+  - then
+  answer: else
+  explanation: else catches the case when logged_in is False.
+- type: mcq
+  question: What does this print?
+  code: "temp = 100\nif temp > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
+  choices:
+  - hot
+  - cold
+  - 'hot
 
-  - type: arrange
-    instruction: "Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'"
-    blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-    correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-    explanation: "The if checks divisibility. else catches when n is odd."
+    cold'
+  - Nothing
+  correct: hot
+  explanation: 100 > 50 is True, so the if branch runs and else is skipped.
+- type: mcq
+  question: What does this print?
+  code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
+  choices:
+  - No name
+  - 'Hello, '
+  - 'Hello,
 
-  - type: fill_blank
-    prompt: "Handle the case when the user is not logged in."
-    before: "if logged_in:\n    print(\"Welcome\")\n"
-    after: ":\n    print(\"Please log in\")"
-    choices: ["else", "elif", "if", "then"]
-    answer: "else"
-    explanation: "else catches the case when logged_in is False."
+    No name'
+  - Error
+  correct: No name
+  explanation: An empty string is falsy. The else branch runs.
+- type: fill_blank
+  prompt: Assign 'minor' status for everyone who doesn't meet the age condition.
+  before: "if age >= 18:\n    status = \"adult\"\n"
+  after: ":\n    status = \"minor\""
+  choices:
+  - else
+  - elif
+  - if not
+  - then
+  answer: else
+  explanation: else handles the case where age < 18.
+- type: mcq
+  question: What does this print?
+  code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
+  choices:
+  - falsy
+  - truthy
+  - '0'
+  - None
+  correct: falsy
+  explanation: 0 is falsy, so the else branch runs.
+- type: arrange
+  instruction: Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise
+  blocks:
+  - if
+  - hp
+  - '>'
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"alive"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"dead"'
+  - )
+  correct:
+  - if
+  - hp
+  - '>'
+  - '0'
+  - ':'
+  - print
+  - (
+  - '"alive"'
+  - )
+  - else
+  - ':'
+  - print
+  - (
+  - '"dead"'
+  - )
+  explanation: The else handles the hp == 0 case.
+- type: mcq
+  question: How many branches run in an if/else statement?
+  code: ''
+  choices:
+  - Exactly one
+  - Both
+  - None if condition is False
+  - Two always
+  correct: Exactly one
+  explanation: Either the if block or the else block runs — never both, never neither.
+- type: mini_code
+  prompt: Read a number with input(). Print 'odd' if it is odd, 'even' if it is even.
+  starter: 'n = int(input())
 
-  - type: mcq
-    question: "What does this print?"
-    code: "temp = 100\nif temp > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
-    choices: ["hot", "cold", "hot\ncold", "Nothing"]
-    correct: "hot"
-    explanation: "100 > 50 is True, so the if branch runs and else is skipped."
+    '
+  tests:
+  - code: assert _stdout.strip() == 'odd'
+    stdin: '7'
+    message: 7 is odd, should print 'odd'
+  - code: assert _stdout.strip() == 'even'
+    stdin: '4'
+    message: 4 is even, should print 'even'
+  - code: assert _stdout.strip() == 'odd'
+    stdin: '13'
+    message: 13 is odd, should print 'odd'
+- type: mini_code
+  prompt: Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'.
+  starter: 'speed = int(input())
 
-  - type: mcq
-    question: "What does this print?"
-    code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
-    choices: ["No name", "Hello, ", "Hello,\nNo name", "Error"]
-    correct: "No name"
-    explanation: "An empty string is falsy. The else branch runs."
+    limit = int(input())
 
-  - type: fill_blank
-    prompt: "Assign 'minor' status for everyone who doesn't meet the age condition."
-    before: "if age >= 18:\n    status = \"adult\"\n"
-    after: ":\n    status = \"minor\""
-    choices: ["else", "elif", "if not", "then"]
-    answer: "else"
-    explanation: "else handles the case where age < 18."
+    '
+  tests:
+  - code: assert _stdout.strip() == 'speeding'
+    stdin: '120
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
-    choices: ["falsy", "truthy", "0", "None"]
-    correct: "falsy"
-    explanation: "0 is falsy, so the else branch runs."
+      100'
+    message: speed 120, limit 100 — should print 'speeding'
+  - code: assert _stdout.strip() == 'ok'
+    stdin: '80
 
-  - type: arrange
-    instruction: "Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise"
-    blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-    correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-    explanation: "The else handles the hp == 0 case."
+      100'
+    message: speed 80, limit 100 — should print 'ok'
+  - code: assert _stdout.strip() == 'ok'
+    stdin: '100
 
-  - type: mcq
-    question: "How many branches run in an if/else statement?"
-    code: ""
-    choices: ["Exactly one", "Both", "None if condition is False", "Two always"]
-    correct: "Exactly one"
-    explanation: "Either the if block or the else block runs — never both, never neither."
-
-  - type: mini_code
-    prompt: "Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
-    starter: "n = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'odd'"
-        stdin: "7"
-        message: "7 is odd, should print 'odd'"
-      - code: "assert _stdout.strip() == 'even'"
-        stdin: "4"
-        message: "4 is even, should print 'even'"
-      - code: "assert _stdout.strip() == 'odd'"
-        stdin: "13"
-        message: "13 is odd, should print 'odd'"
-
-  - type: mini_code
-    prompt: "Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
-    starter: "speed = int(input())\nlimit = int(input())\n"
-    tests:
-      - code: "assert _stdout.strip() == 'speeding'"
-        stdin: "120\n100"
-        message: "speed 120, limit 100 — should print 'speeding'"
-      - code: "assert _stdout.strip() == 'ok'"
-        stdin: "80\n100"
-        message: "speed 80, limit 100 — should print 'ok'"
-      - code: "assert _stdout.strip() == 'ok'"
-        stdin: "100\n100"
-        message: "speed exactly equals limit — should print 'ok'"
-
+      100'
+    message: speed exactly equals limit — should print 'ok'
 worlds:
   fantasy:
-    title: "Two Paths in the Forest"
+    title: Two Paths in the Forest
     exercises:
-      - type: concept
-        code: |
-          threat_level = 45
-          if threat_level >= 60:
-              print("Cast the fire spell!")
-          else:
-              print("Hold your ground.")
-        output: "Hold your ground."
-        explanation: "Ranger Kira checks the creature's threat level. Because 45 is less than 60, the if is False and the else branch runs — she holds her position."
+    - type: concept
+      code: "threat_level = 45\nif threat_level >= 60:\n    print(\"Cast the fire spell!\")\nelse:\n    print(\"Hold your\
+        \ ground.\")\n"
+      output: Hold your ground.
+      explanation: Ranger Kira checks the creature's threat level. Because 45 is less than 60, the if is False and the else
+        branch runs — she holds her position.
+      story_before: 'Kira faces a new creature and must choose: cast the fire spell or hold her ground — exactly one action
+        is right, never both.'
+      story_after: Threat too low for fire; the else branch runs and Kira stands firm, saving her mana for the real fight
+        ahead.
+    - type: mcq
+      question: What does this print?
+      code: "beast_size = 3\nif beast_size > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
+      choices:
+      - small
+      - big
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "beast_size = 3\nif beast_size > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
-        choices: ["small", "big", "big\nsmall", "Nothing"]
-        correct: "small"
-        explanation: "beast_size > 5 is False (3 is not > 5), so the else branch runs. It's a small creature."
+        small'
+      - Nothing
+      correct: small
+      explanation: beast_size > 5 is False (3 is not > 5), so the else branch runs. It's a small creature.
+      story_before: A tiny creature scurries across the path — Kira traces the if/else to see which label it earns.
+      story_after: 3 is not greater than 5; the else fires and the bestiary stamps it 'small' — nothing to worry about.
+    - type: arrange
+      instruction: Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'
+      blocks:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      correct:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      explanation: Kira counts the creatures — the if checks if the number is divisible by 2, else catches the odd count.
+      story_before: Kira counts the creatures filing out of the burrow — she needs an if/else that decides whether the number
+        is even or odd.
+      story_after: The if/else is assembled; Kira will always get a clear even-or-odd count no matter how many beasts emerge.
+    - type: fill_blank
+      prompt: Handle the case when Kira has not yet bonded with a familiar spirit.
+      before: "if bonded:\n    print(\"Welcome\")\n"
+      after: ":\n    print(\"Please log in\")"
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches the case when bonded is False — Kira still needs to find her familiar.
+      story_before: 'Kira''s familiar-bond spell has two outcomes: welcome her spirit companion if bonded, or ask her to seek
+        one out — she needs the else.'
+      story_after: The else branch is in place; unbonded rangers now see the prompt to find their familiar.
+    - type: mcq
+      question: What does this print?
+      code: "dragon_heat = 100\nif dragon_heat > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
+      choices:
+      - hot
+      - cold
+      - 'hot
 
-      - type: arrange
-        instruction: "Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'"
-        blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        explanation: "Kira counts the creatures — the if checks if the number is divisible by 2, else catches the odd count."
+        cold'
+      - Nothing
+      correct: hot
+      explanation: 100 > 50 is True, so the if branch runs. The dragon's fire breath is scorching.
+      story_before: A dragon looms overhead, heat radiating from its scales — Kira checks which branch fires when the heat
+        reading exceeds 50.
+      story_after: 100 is well over 50; the if branch blazes 'hot' and Kira raises her heat-ward before approaching.
+    - type: mcq
+      question: What does this print?
+      code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
+      choices:
+      - No name
+      - 'Hello, '
+      - 'Hello,
 
-      - type: fill_blank
-        prompt: "Handle the case when Kira has not yet bonded with a familiar spirit."
-        before: "if bonded:\n    print(\"Welcome\")\n"
-        after: ":\n    print(\"Please log in\")"
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches the case when bonded is False — Kira still needs to find her familiar."
+        No name'
+      - Error
+      correct: No name
+      explanation: An empty string is falsy. The else branch runs — the creature has no known name in the bestiary.
+      story_before: The bestiary returns an empty name field for an unidentified creature — Kira must trace what the if/else
+        prints in that case.
+      story_after: An empty string is falsy; the else branch runs and the bestiary logs 'No name' until the creature can be
+        identified.
+    - type: fill_blank
+      prompt: Mark Kira as a 'squire' if she does not yet meet the warrior age threshold.
+      before: "if age >= 18:\n    status = \"adult\"\n"
+      after: ":\n    status = \"minor\""
+      choices:
+      - else
+      - elif
+      - if not
+      - then
+      answer: else
+      explanation: else handles when age < 18 — young rangers still earn the squire rank.
+      story_before: Young rangers below the age of 18 must earn the squire rank before advancing — Kira adds the else branch
+        that assigns it.
+      story_after: The else is written; any ranger under the threshold is now correctly labelled 'minor' in the guild register.
+    - type: mcq
+      question: What does this print?
+      code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
+      choices:
+      - falsy
+      - truthy
+      - '0'
+      - None
+      correct: falsy
+      explanation: 0 is falsy — Kira has zero potions left, triggering the else branch.
+      story_before: Kira's potion count is zero — she traces the if/else on a falsy value to confirm which branch will run.
+      story_after: 0 is falsy; the else fires and Kira gets the low-supply warning — time to visit the alchemist.
+    - type: arrange
+      instruction: Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise
+      blocks:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Kira checks whether the creature still has hp. The else handles the beast falling at last.
+      story_before: After a long battle, Kira's script must declare whether the creature still breathes — she assembles the
+        alive/dead if/else.
+      story_after: The if/else is complete; the script will always deliver a verdict, alive or dead, the moment the fight
+        ends.
+    - type: mcq
+      question: How many branches run in an if/else statement?
+      code: ''
+      choices:
+      - Exactly one
+      - Both
+      - None if condition is False
+      - Two always
+      correct: Exactly one
+      explanation: Kira takes exactly one path — the forest trail or the mountain pass — never both.
+      story_before: 'A forest crossroads: the trail or the mountain pass — Kira recalls the rule about how many branches an
+        if/else ever takes.'
+      story_after: Exactly one; Kira strides confidently down the chosen path, knowing the other route is closed off entirely.
+    - type: mini_code
+      prompt: The ancient crystal glows with a magical number. Read a number with input(). Print 'odd' if it is odd, 'even'
+        if it is even.
+      starter: 'n = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "dragon_heat = 100\nif dragon_heat > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
-        choices: ["hot", "cold", "hot\ncold", "Nothing"]
-        correct: "hot"
-        explanation: "100 > 50 is True, so the if branch runs. The dragon's fire breath is scorching."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '7'
+        message: 7 is odd, should print 'odd'
+      - code: assert _stdout.strip() == 'even'
+        stdin: '4'
+        message: 4 is even, should print 'even'
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '13'
+        message: 13 is odd, should print 'odd'
+      story_before: The ancient crystal hums with a number that will open one of two hidden doors — Kira must write the code
+        that reads it and picks the right door.
+      story_after: The odd/even check is ready; the crystal will always direct Kira to the correct door, never leaving her
+        guessing.
+    - type: mini_code
+      prompt: Kira spots a creature charging. Read speed then limit with input(). Print 'speeding' if speed exceeds the limit,
+        otherwise print 'ok'.
+      starter: 'speed = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
-        choices: ["No name", "Hello, ", "Hello,\nNo name", "Error"]
-        correct: "No name"
-        explanation: "An empty string is falsy. The else branch runs — the creature has no known name in the bestiary."
+        limit = int(input())
 
-      - type: fill_blank
-        prompt: "Mark Kira as a 'squire' if she does not yet meet the warrior age threshold."
-        before: "if age >= 18:\n    status = \"adult\"\n"
-        after: ":\n    status = \"minor\""
-        choices: ["else", "elif", "if not", "then"]
-        answer: "else"
-        explanation: "else handles when age < 18 — young rangers still earn the squire rank."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'speeding'
+        stdin: '120
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
-        choices: ["falsy", "truthy", "0", "None"]
-        correct: "falsy"
-        explanation: "0 is falsy — Kira has zero potions left, triggering the else branch."
+          100'
+        message: speed 120, limit 100 — should print 'speeding'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '80
 
-      - type: arrange
-        instruction: "Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise"
-        blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Kira checks whether the creature still has hp. The else handles the beast falling at last."
+          100'
+        message: speed 80, limit 100 — should print 'ok'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '100
 
-      - type: mcq
-        question: "How many branches run in an if/else statement?"
-        code: ""
-        choices: ["Exactly one", "Both", "None if condition is False", "Two always"]
-        correct: "Exactly one"
-        explanation: "Kira takes exactly one path — the forest trail or the mountain pass — never both."
-
-      - type: mini_code
-        prompt: "The ancient crystal glows with a magical number. Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "7"
-            message: "7 is odd, should print 'odd'"
-          - code: "assert _stdout.strip() == 'even'"
-            stdin: "4"
-            message: "4 is even, should print 'even'"
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "13"
-            message: "13 is odd, should print 'odd'"
-
-      - type: mini_code
-        prompt: "Kira spots a creature charging. Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
-        starter: "speed = int(input())\nlimit = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'speeding'"
-            stdin: "120\n100"
-            message: "speed 120, limit 100 — should print 'speeding'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "80\n100"
-            message: "speed 80, limit 100 — should print 'ok'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "100\n100"
-            message: "speed exactly equals limit — should print 'ok'"
-
+          100'
+        message: speed exactly equals limit — should print 'ok'
+      story_before: A creature charges toward camp at alarming speed — Kira writes the script that tells her whether it's
+        exceeding the safe approach limit.
+      story_after: The check is in place; any charge beyond the limit will flag 'speeding' and give Kira time to raise the
+        alarm.
   scifi:
-    title: "Mission Go / No Go"
+    title: Mission Go / No Go
     exercises:
-      - type: concept
-        code: |
-          hull_integrity = 45
-          if hull_integrity >= 60:
-              print("Launch approved.")
-          else:
-              print("Abort launch.")
-        output: "Abort launch."
-        explanation: "Captain Voss checks hull integrity. Because 45 is less than 60, the if is False and the else branch runs — the launch is aborted."
+    - type: concept
+      code: "hull_integrity = 45\nif hull_integrity >= 60:\n    print(\"Launch approved.\")\nelse:\n    print(\"Abort launch.\"\
+        )\n"
+      output: Abort launch.
+      explanation: Captain Voss checks hull integrity. Because 45 is less than 60, the if is False and the else branch runs
+        — the launch is aborted.
+      story_before: Voss is at the launch console — hull integrity must clear 60 or the mission is scrubbed; exactly one outcome
+        is possible.
+      story_after: Hull at 45 fails the check; the else branch fires and 'Abort launch.' flashes across every screen on the
+        bridge.
+    - type: mcq
+      question: What does this print?
+      code: "crew_count = 3\nif crew_count > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
+      choices:
+      - small
+      - big
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "crew_count = 3\nif crew_count > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
-        choices: ["small", "big", "big\nsmall", "Nothing"]
-        correct: "small"
-        explanation: "crew_count > 5 is False (3 is not > 5), so the else branch runs. The crew is small."
+        small'
+      - Nothing
+      correct: small
+      explanation: crew_count > 5 is False (3 is not > 5), so the else branch runs. The crew is small.
+      story_before: The head count comes in short — Voss traces the if/else to confirm whether it triggers the small-crew
+        protocol.
+      story_after: 3 is less than 5; the else runs and the small-crew alert lights up the mission board.
+    - type: arrange
+      instruction: Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'
+      blocks:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      correct:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      explanation: Voss pairs thrusters — the if checks if the count is divisible by 2, else catches the odd number.
+      story_before: Voss pairs the thrusters for the burn sequence — he builds the if/else that classifies any thruster count
+        as even or odd.
+      story_after: The if/else is assembled; the pairing algorithm can now safely route power no matter what count comes in.
+    - type: fill_blank
+      prompt: Handle the case when the crew member's access card has not been verified.
+      before: "if verified:\n    print(\"Welcome\")\n"
+      after: ":\n    print(\"Please log in\")"
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches when verified is False — the crew member must re-scan their badge.
+      story_before: The airlock only greets verified crew — Voss adds the else that redirects anyone whose badge hasn't been
+        scanned.
+      story_after: The else branch is live; unverified crew now see the re-scan prompt instead of slipping through unchecked.
+    - type: mcq
+      question: What does this print?
+      code: "reactor_temp = 100\nif reactor_temp > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
+      choices:
+      - hot
+      - cold
+      - 'hot
 
-      - type: arrange
-        instruction: "Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'"
-        blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        explanation: "Voss pairs thrusters — the if checks if the count is divisible by 2, else catches the odd number."
+        cold'
+      - Nothing
+      correct: hot
+      explanation: 100 > 50 is True, so the if branch runs. The reactor core is dangerously hot.
+      story_before: The reactor core temperature spikes — Voss traces the if/else to see which alert fires when the reading
+        hits 100.
+      story_after: 100 clears 50 by a wide margin; the if branch triggers 'hot' and Voss calls for a controlled shutdown.
+    - type: mcq
+      question: What does this print?
+      code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
+      choices:
+      - No name
+      - 'Hello, '
+      - 'Hello,
 
-      - type: fill_blank
-        prompt: "Handle the case when the crew member's access card has not been verified."
-        before: "if verified:\n    print(\"Welcome\")\n"
-        after: ":\n    print(\"Please log in\")"
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches when verified is False — the crew member must re-scan their badge."
+        No name'
+      - Error
+      correct: No name
+      explanation: An empty string is falsy. The else branch runs — no crew name was found in the registry.
+      story_before: The crew registry returns a blank name field for an unregistered access attempt — Voss traces what the
+        if/else prints.
+      story_after: Empty string is falsy; the else runs and 'No name' is logged as a security incident for review.
+    - type: fill_blank
+      prompt: Assign 'cadet' status to any crew member who does not yet meet the experience threshold.
+      before: "if experience >= 18:\n    status = \"adult\"\n"
+      after: ":\n    status = \"minor\""
+      choices:
+      - else
+      - elif
+      - if not
+      - then
+      answer: else
+      explanation: else handles when experience < 18 — junior crew earn the cadet rank.
+      story_before: Crew members below the experience threshold need the cadet rank — Voss adds the else that assigns it automatically.
+      story_after: The else is in place; junior crew are now correctly ranked and assigned to the training rotation.
+    - type: mcq
+      question: What does this print?
+      code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
+      choices:
+      - falsy
+      - truthy
+      - '0'
+      - None
+      correct: falsy
+      explanation: 0 is falsy — zero fuel cells remain, so the else branch runs.
+      story_before: Zero fuel cells remain in the reserve tank — Voss traces the if/else on a zero value to confirm the warning
+        fires.
+      story_after: 0 is falsy; the else branch triggers and the fuel-critical alert reaches the captain's console.
+    - type: arrange
+      instruction: Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise
+      blocks:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Voss checks whether the crew member's life signs still register. The else handles a zero reading.
+      story_before: The bio-monitor must report whether a crew member's life signs are still active — Voss assembles the alive/dead
+        if/else.
+      story_after: The if/else is live; medical will now receive an instant, unambiguous reading the moment any life sign
+        changes.
+    - type: mcq
+      question: How many branches run in an if/else statement?
+      code: ''
+      choices:
+      - Exactly one
+      - Both
+      - None if condition is False
+      - Two always
+      correct: Exactly one
+      explanation: The ship takes exactly one route — launch corridor A or corridor B — never both.
+      story_before: The ship faces a fork in the flight corridor — Voss recalls why if/else always commits to exactly one
+        route.
+      story_after: Exactly one; the Helix locks onto the chosen corridor and the other path is sealed off by the flight computer.
+    - type: mini_code
+      prompt: The ship's navigation system pings with a sector code. Read a number with input(). Print 'odd' if it is odd,
+        'even' if it is even.
+      starter: 'n = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "reactor_temp = 100\nif reactor_temp > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
-        choices: ["hot", "cold", "hot\ncold", "Nothing"]
-        correct: "hot"
-        explanation: "100 > 50 is True, so the if branch runs. The reactor core is dangerously hot."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '7'
+        message: 7 is odd, should print 'odd'
+      - code: assert _stdout.strip() == 'even'
+        stdin: '4'
+        message: 4 is even, should print 'even'
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '13'
+        message: 13 is odd, should print 'odd'
+      story_before: The navigation ping arrives with a sector code — Voss must write the check that classifies it as even
+        or odd for the routing table.
+      story_after: The classifier is ready; every incoming sector code will now be correctly routed without ambiguity.
+    - type: mini_code
+      prompt: An asteroid is closing fast on the ship. Read speed then limit with input(). Print 'speeding' if speed exceeds
+        the limit, otherwise print 'ok'.
+      starter: 'speed = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
-        choices: ["No name", "Hello, ", "Hello,\nNo name", "Error"]
-        correct: "No name"
-        explanation: "An empty string is falsy. The else branch runs — no crew name was found in the registry."
+        limit = int(input())
 
-      - type: fill_blank
-        prompt: "Assign 'cadet' status to any crew member who does not yet meet the experience threshold."
-        before: "if experience >= 18:\n    status = \"adult\"\n"
-        after: ":\n    status = \"minor\""
-        choices: ["else", "elif", "if not", "then"]
-        answer: "else"
-        explanation: "else handles when experience < 18 — junior crew earn the cadet rank."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'speeding'
+        stdin: '120
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
-        choices: ["falsy", "truthy", "0", "None"]
-        correct: "falsy"
-        explanation: "0 is falsy — zero fuel cells remain, so the else branch runs."
+          100'
+        message: speed 120, limit 100 — should print 'speeding'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '80
 
-      - type: arrange
-        instruction: "Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise"
-        blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Voss checks whether the crew member's life signs still register. The else handles a zero reading."
+          100'
+        message: speed 80, limit 100 — should print 'ok'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '100
 
-      - type: mcq
-        question: "How many branches run in an if/else statement?"
-        code: ""
-        choices: ["Exactly one", "Both", "None if condition is False", "Two always"]
-        correct: "Exactly one"
-        explanation: "The ship takes exactly one route — launch corridor A or corridor B — never both."
-
-      - type: mini_code
-        prompt: "The ship's navigation system pings with a sector code. Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "7"
-            message: "7 is odd, should print 'odd'"
-          - code: "assert _stdout.strip() == 'even'"
-            stdin: "4"
-            message: "4 is even, should print 'even'"
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "13"
-            message: "13 is odd, should print 'odd'"
-
-      - type: mini_code
-        prompt: "An asteroid is closing fast on the ship. Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
-        starter: "speed = int(input())\nlimit = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'speeding'"
-            stdin: "120\n100"
-            message: "speed 120, limit 100 — should print 'speeding'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "80\n100"
-            message: "speed 80, limit 100 — should print 'ok'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "100\n100"
-            message: "speed exactly equals limit — should print 'ok'"
-
+          100'
+        message: speed exactly equals limit — should print 'ok'
+      story_before: An asteroid is closing on the ship — Voss needs the script that tells him whether its speed breaches the
+        safe approach limit.
+      story_after: The check is live; any object exceeding the limit will trigger 'speeding' and auto-engage the deflector
+        array.
   mystery:
-    title: "Suspect or Witness?"
+    title: Suspect or Witness?
     exercises:
-      - type: concept
-        code: |
-          alibi_strength = 45
-          if alibi_strength >= 60:
-              print("Alibi accepted.")
-          else:
-              print("Alibi rejected.")
-        output: "Alibi rejected."
-        explanation: "Detective Cole scores the alibi. Because 45 is less than 60, the if is False and the else branch runs — the alibi doesn't hold up."
+    - type: concept
+      code: "alibi_strength = 45\nif alibi_strength >= 60:\n    print(\"Alibi accepted.\")\nelse:\n    print(\"Alibi rejected.\"\
+        )\n"
+      output: Alibi rejected.
+      explanation: Detective Cole scores the alibi. Because 45 is less than 60, the if is False and the else branch runs —
+        the alibi doesn't hold up.
+      story_before: Cole scores the alibi at 45 — it needs to hit 60 to hold, and he knows only one branch of the if/else
+        will run.
+      story_after: 45 falls short; the else fires and 'Alibi rejected.' goes into the casebook — the suspect moves up the
+        list.
+    - type: mcq
+      question: What does this print?
+      code: "clue_count = 3\nif clue_count > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
+      choices:
+      - small
+      - big
+      - 'big
 
-      - type: mcq
-        question: "What does this print?"
-        code: "clue_count = 3\nif clue_count > 5:\n    print(\"big\")\nelse:\n    print(\"small\")"
-        choices: ["small", "big", "big\nsmall", "Nothing"]
-        correct: "small"
-        explanation: "clue_count > 5 is False (3 is not > 5), so the else branch runs. Only a small number of clues found."
+        small'
+      - Nothing
+      correct: small
+      explanation: clue_count > 5 is False (3 is not > 5), so the else branch runs. Only a small number of clues found.
+      story_before: Cole counts only three clues from the scene — he traces the if/else to see whether that's enough to trigger
+        the major-haul label.
+      story_after: 3 is less than 5; the else runs and Cole notes a slim evidence haul — he'll need to dig deeper.
+    - type: arrange
+      instruction: Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'
+      blocks:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      correct:
+      - if
+      - n
+      - '%'
+      - '2'
+      - ==
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"even"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"odd"'
+      - )
+      explanation: Cole counts the fingerprints — the if checks if the count is divisible by 2, else catches an odd tally.
+      story_before: Cole counts the fingerprints on the glass — he builds the if/else that will tell him whether the count
+        is even or odd.
+      story_after: The if/else is assembled; Cole will always get a clean even-or-odd tally from the print scanner.
+    - type: fill_blank
+      prompt: Handle the case when the witness has not yet been cleared by the investigation.
+      before: "if cleared:\n    print(\"Welcome\")\n"
+      after: ":\n    print(\"Please log in\")"
+      choices:
+      - else
+      - elif
+      - if
+      - then
+      answer: else
+      explanation: else catches when cleared is False — the witness must answer more questions.
+      story_before: Cleared witnesses get a pass; those still under scrutiny need to answer more questions — Cole adds the
+        else branch.
+      story_after: The else is written; uncleared witnesses now receive the follow-up question prompt automatically.
+    - type: mcq
+      question: What does this print?
+      code: "tension_level = 100\nif tension_level > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
+      choices:
+      - hot
+      - cold
+      - 'hot
 
-      - type: arrange
-        instruction: "Build an if/else that prints 'even' when n is divisible by 2, otherwise prints 'odd'"
-        blocks: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        correct: ["if", "n", "%", "2", "==", "0", ":", "print", "(", "\"even\"", ")", "else", ":", "print", "(", "\"odd\"", ")"]
-        explanation: "Cole counts the fingerprints — the if checks if the count is divisible by 2, else catches an odd tally."
+        cold'
+      - Nothing
+      correct: hot
+      explanation: 100 > 50 is True, so the if branch runs. The interrogation room tension is high.
+      story_before: The interrogation room tension spikes to 100 — Cole traces the if/else to see which label the atmosphere
+        earns.
+      story_after: 100 clears 50 by a mile; the if branch prints 'hot' and Cole knows the suspect is close to cracking.
+    - type: mcq
+      question: What does this print?
+      code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
+      choices:
+      - No name
+      - 'Hello, '
+      - 'Hello,
 
-      - type: fill_blank
-        prompt: "Handle the case when the witness has not yet been cleared by the investigation."
-        before: "if cleared:\n    print(\"Welcome\")\n"
-        after: ":\n    print(\"Please log in\")"
-        choices: ["else", "elif", "if", "then"]
-        answer: "else"
-        explanation: "else catches when cleared is False — the witness must answer more questions."
+        No name'
+      - Error
+      correct: No name
+      explanation: An empty string is falsy. The else branch runs — the anonymous tip left no name.
+      story_before: An anonymous tip came in with no name attached — Cole traces the if/else to see what the system logs for
+        an empty string.
+      story_after: Empty string is falsy; the else runs and 'No name' is flagged in the tip log — the source remains unknown.
+    - type: fill_blank
+      prompt: Tag anyone who does not meet the adult age threshold as a 'minor' in the case file.
+      before: "if age >= 18:\n    status = \"adult\"\n"
+      after: ":\n    status = \"minor\""
+      choices:
+      - else
+      - elif
+      - if not
+      - then
+      answer: else
+      explanation: else handles when age < 18 — Cole notes the witness is a minor.
+      story_before: Anyone under 18 in the case file must be tagged as a minor — Cole adds the else branch that sets the status
+        automatically.
+      story_after: The else is in place; minors in the case file are now correctly flagged and routed to the appropriate officer.
+    - type: mcq
+      question: What does this print?
+      code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
+      choices:
+      - falsy
+      - truthy
+      - '0'
+      - None
+      correct: falsy
+      explanation: 0 is falsy — zero solid leads remain, so the else branch runs.
+      story_before: Zero solid leads left — Cole traces the if/else on a zero value to confirm the dead-end warning will fire.
+      story_after: 0 is falsy; the else fires and Cole's instinct is confirmed — time to revisit the first scene.
+    - type: arrange
+      instruction: Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise
+      blocks:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      correct:
+      - if
+      - hp
+      - '>'
+      - '0'
+      - ':'
+      - print
+      - (
+      - '"alive"'
+      - )
+      - else
+      - ':'
+      - print
+      - (
+      - '"dead"'
+      - )
+      explanation: Cole checks whether the suspect's alibi points are still positive. The else marks the alibi as dead.
+      story_before: Cole's alibi tracker must deliver a clear verdict on each suspect — he assembles the alive/dead if/else
+        now.
+      story_after: The if/else is complete; every alibi will receive an unambiguous verdict the moment Cole runs the check.
+    - type: mcq
+      question: How many branches run in an if/else statement?
+      code: ''
+      choices:
+      - Exactly one
+      - Both
+      - None if condition is False
+      - Two always
+      correct: Exactly one
+      explanation: Cole takes exactly one path — the suspect corridor or the witness room — never both.
+      story_before: 'The corridor splits: suspect room or witness room — Cole confirms the rule that if/else always takes
+        exactly one path.'
+      story_after: Exactly one; Cole strides down the correct corridor, the other door locked behind him by the logic of the
+        if/else.
+    - type: mini_code
+      prompt: A mysterious number was found scratched into the desk. Read a number with input(). Print 'odd' if it is odd,
+        'even' if it is even.
+      starter: 'n = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "tension_level = 100\nif tension_level > 50:\n    print(\"hot\")\nelse:\n    print(\"cold\")"
-        choices: ["hot", "cold", "hot\ncold", "Nothing"]
-        correct: "hot"
-        explanation: "100 > 50 is True, so the if branch runs. The interrogation room tension is high."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '7'
+        message: 7 is odd, should print 'odd'
+      - code: assert _stdout.strip() == 'even'
+        stdin: '4'
+        message: 4 is even, should print 'even'
+      - code: assert _stdout.strip() == 'odd'
+        stdin: '13'
+        message: 13 is odd, should print 'odd'
+      story_before: A number is scratched into the desk — Cole must write the script that classifies it as odd or even to
+        crack the next clue.
+      story_after: The classifier is ready; the number's parity will unlock the next step of Cole's investigation.
+    - type: mini_code
+      prompt: A fleeing suspect was clocked by Cole's scanner. Read speed then limit with input(). Print 'speeding' if speed
+        exceeds the limit, otherwise print 'ok'.
+      starter: 'speed = int(input())
 
-      - type: mcq
-        question: "What does this print?"
-        code: "name = \"\"\nif name:\n    print(\"Hello, \" + name)\nelse:\n    print(\"No name\")"
-        choices: ["No name", "Hello, ", "Hello,\nNo name", "Error"]
-        correct: "No name"
-        explanation: "An empty string is falsy. The else branch runs — the anonymous tip left no name."
+        limit = int(input())
 
-      - type: fill_blank
-        prompt: "Tag anyone who does not meet the adult age threshold as a 'minor' in the case file."
-        before: "if age >= 18:\n    status = \"adult\"\n"
-        after: ":\n    status = \"minor\""
-        choices: ["else", "elif", "if not", "then"]
-        answer: "else"
-        explanation: "else handles when age < 18 — Cole notes the witness is a minor."
+        '
+      tests:
+      - code: assert _stdout.strip() == 'speeding'
+        stdin: '120
 
-      - type: mcq
-        question: "What does this print?"
-        code: "n = 0\nif n:\n    print(\"truthy\")\nelse:\n    print(\"falsy\")"
-        choices: ["falsy", "truthy", "0", "None"]
-        correct: "falsy"
-        explanation: "0 is falsy — zero solid leads remain, so the else branch runs."
+          100'
+        message: speed 120, limit 100 — should print 'speeding'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '80
 
-      - type: arrange
-        instruction: "Build code that prints 'alive' when hp is greater than zero, and 'dead' otherwise"
-        blocks: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        correct: ["if", "hp", ">", "0", ":", "print", "(", "\"alive\"", ")", "else", ":", "print", "(", "\"dead\"", ")"]
-        explanation: "Cole checks whether the suspect's alibi points are still positive. The else marks the alibi as dead."
+          100'
+        message: speed 80, limit 100 — should print 'ok'
+      - code: assert _stdout.strip() == 'ok'
+        stdin: '100
 
-      - type: mcq
-        question: "How many branches run in an if/else statement?"
-        code: ""
-        choices: ["Exactly one", "Both", "None if condition is False", "Two always"]
-        correct: "Exactly one"
-        explanation: "Cole takes exactly one path — the suspect corridor or the witness room — never both."
-
-      - type: mini_code
-        prompt: "A mysterious number was found scratched into the desk. Read a number with input(). Print 'odd' if it is odd, 'even' if it is even."
-        starter: "n = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "7"
-            message: "7 is odd, should print 'odd'"
-          - code: "assert _stdout.strip() == 'even'"
-            stdin: "4"
-            message: "4 is even, should print 'even'"
-          - code: "assert _stdout.strip() == 'odd'"
-            stdin: "13"
-            message: "13 is odd, should print 'odd'"
-
-      - type: mini_code
-        prompt: "A fleeing suspect was clocked by Cole's scanner. Read speed then limit with input(). Print 'speeding' if speed exceeds the limit, otherwise print 'ok'."
-        starter: "speed = int(input())\nlimit = int(input())\n"
-        tests:
-          - code: "assert _stdout.strip() == 'speeding'"
-            stdin: "120\n100"
-            message: "speed 120, limit 100 — should print 'speeding'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "80\n100"
-            message: "speed 80, limit 100 — should print 'ok'"
-          - code: "assert _stdout.strip() == 'ok'"
-            stdin: "100\n100"
-            message: "speed exactly equals limit — should print 'ok'"
+          100'
+        message: speed exactly equals limit — should print 'ok'
+      story_before: Cole clocks a fleeing car — he writes the script that decides whether its speed exceeds the legal limit,
+        making it a lead worth chasing.
+      story_after: The check is live; any vehicle over the limit prints 'speeding' and Cole has grounds to call in the pursuit.

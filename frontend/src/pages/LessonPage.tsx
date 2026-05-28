@@ -74,13 +74,18 @@ function CodeEditor({
 
 // ── Feedback banner ───────────────────────────────────────────────────────────
 
-function Feedback({ correct, explanation, onContinue }: { correct: boolean; explanation: string; onContinue: () => void }) {
+function Feedback({
+  correct, explanation, onContinue, storyAfter,
+}: { correct: boolean; explanation: string; onContinue: () => void; storyAfter?: string | null }) {
   return (
     <div className={`rounded-xl border p-4 space-y-3 ${correct ? "border-green-700/50 bg-green-950/30" : "border-red-700/50 bg-red-950/30"}`}>
       <p className={`font-semibold ${correct ? "text-green-400" : "text-red-400"}`}>
         {correct ? "Correct!" : "Not quite."}
       </p>
       {explanation && <p className="text-sm text-gray-300">{explanation}</p>}
+      {correct && storyAfter && (
+        <p className="text-sm italic text-amber-300/90 border-l-2 border-amber-500/40 pl-3">{storyAfter}</p>
+      )}
       <Button onClick={onContinue} className={`w-full ${correct ? "bg-green-700 hover:bg-green-600" : "bg-gray-700 hover:bg-gray-600"}`}>
         Continue
       </Button>
@@ -119,6 +124,9 @@ function ConceptCard({
           )}
         </div>
       </div>
+      {ex.story_after && (
+        <p className="text-sm italic text-amber-300/90 border-l-2 border-amber-500/40 pl-3">{ex.story_after}</p>
+      )}
       <Button onClick={onContinue} className="w-full">Got it — Continue</Button>
     </div>
   );
@@ -180,7 +188,7 @@ function McqCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={!selected} className="w-full">Check</Button>
       ) : (
-        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} storyAfter={ex.story_after} />
       )}
     </div>
   );
@@ -267,7 +275,7 @@ function ArrangeCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={placed.length === 0} className="w-full">Check</Button>
       ) : (
-        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} storyAfter={ex.story_after} />
       )}
     </div>
   );
@@ -335,7 +343,7 @@ function FillBlankCard({
       {!checked ? (
         <Button onClick={handleCheck} disabled={!selected} className="w-full">Check</Button>
       ) : (
-        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} />
+        <Feedback correct={isCorrect} explanation={ex.explanation} onContinue={handleContinue} storyAfter={ex.story_after} />
       )}
     </div>
   );
@@ -426,9 +434,14 @@ function MiniCodeCard({
           Check Code
         </Button>
       ) : (
-        <Button onClick={() => { onDone(true); }} className="w-full bg-green-700 hover:bg-green-600">
-          Continue
-        </Button>
+        <div className="space-y-3">
+          {ex.story_after && (
+            <p className="text-sm italic text-amber-300/90 border-l-2 border-amber-500/40 pl-3">{ex.story_after}</p>
+          )}
+          <Button onClick={() => { onDone(true); }} className="w-full bg-green-700 hover:bg-green-600">
+            Continue
+          </Button>
+        </div>
       )}
     </div>
   );
@@ -559,7 +572,12 @@ export default function LessonPage() {
         ) : (
           /* Current exercise */
           currentEx && (
-            <div key={currentIndex}>
+            <div key={currentIndex} className="space-y-4">
+              {currentEx.story_before && (
+                <div className={`rounded-xl border ${style.border} ${style.surface} px-4 py-3`}>
+                  <p className={`text-sm italic ${style.text}`}>{currentEx.story_before}</p>
+                </div>
+              )}
               {currentEx.type === "concept" && (
                 <ConceptCard ex={currentEx} style={style} onContinue={() => { handleExerciseDone(true); }} />
               )}

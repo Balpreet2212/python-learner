@@ -1,393 +1,695 @@
-title: "input() and Types"
+title: input() and Types
 xp: 10
-
 exercises:
-  - type: concept
-    code: |
-      name = input("What is your name? ")
-      print(f"Hello, {name}!")
-    output: "(waits for user to type)"
-    explanation: "input() pauses and waits for the user to type. It always returns a string. You show a prompt in the brackets."
+- type: concept
+  code: 'name = input("What is your name? ")
 
-  - type: mcq
-    question: "What type does input() always return?"
-    code: "answer = input(\"Enter a number: \")"
-    choices: ["str (string)", "int (integer)", "float", "bool"]
-    correct: "str (string)"
-    explanation: "input() always returns a string. You must convert it if you want a number."
+    print(f"Hello, {name}!")
 
-  - type: concept
-    code: |
-      age_text = input("Your age: ")
-      age = int(age_text)
-      print(f"Next year: {age + 1}")
-    output: "(waits for input)"
-    explanation: "int() converts a string to an integer. float() converts to a decimal. This is called type casting."
+    '
+  output: (waits for user to type)
+  explanation: input() pauses and waits for the user to type. It always returns a string. You show a prompt in the brackets.
+- type: mcq
+  question: What type does input() always return?
+  code: 'answer = input("Enter a number: ")'
+  choices:
+  - str (string)
+  - int (integer)
+  - float
+  - bool
+  correct: str (string)
+  explanation: input() always returns a string. You must convert it if you want a number.
+- type: concept
+  code: 'age_text = input("Your age: ")
 
-  - type: fill_blank
-    prompt: "Convert the user's text input into an integer so you can do maths with it."
-    before: "text = input(\"Enter a number: \")\nnum = "
-    after: "(text)"
-    choices: ["int", "str", "print", "len"]
-    answer: "int"
-    explanation: "int() converts the string from input() into an integer so you can do maths."
+    age = int(age_text)
 
-  - type: mcq
-    question: "What does this print?"
-    code: "x = int(\"42\")\nprint(x + 8)"
-    choices: ["50", "428", "42", "Error"]
-    correct: "50"
-    explanation: "int(\"42\") converts the string to the integer 42. 42 + 8 = 50."
+    print(f"Next year: {age + 1}")
 
-  - type: arrange
-    instruction: "Convert the string '15' to an integer and store it in n"
-    blocks: ["n", "=", "int", "(", "\"15\"", ")", "str"]
-    correct: ["n", "=", "int", "(", "\"15\"", ")"]
-    explanation: "int('15') converts the string to the integer 15."
+    '
+  output: (waits for input)
+  explanation: int() converts a string to an integer. float() converts to a decimal. This is called type casting.
+- type: fill_blank
+  prompt: Convert the user's text input into an integer so you can do maths with it.
+  before: 'text = input("Enter a number: ")
 
-  - type: mcq
-    question: "What does this print?"
-    code: "n = int(\"7\")\nprint(n * 3)"
-    choices: ["21", "777", "73", "7"]
-    correct: "21"
-    explanation: "int('7') gives 7. 7 * 3 = 21."
+    num = '
+  after: (text)
+  choices:
+  - int
+  - str
+  - print
+  - len
+  answer: int
+  explanation: int() converts the string from input() into an integer so you can do maths.
+- type: mcq
+  question: What does this print?
+  code: 'x = int("42")
 
-  - type: fill_blank
-    prompt: "Convert the price input into a decimal number for currency calculations."
-    before: "price = "
-    after: "(input(\"Price? \"))"
-    choices: ["float", "int", "str", "len"]
-    answer: "float"
-    explanation: "float() converts input to a decimal number, useful for prices."
+    print(x + 8)'
+  choices:
+  - '50'
+  - '428'
+  - '42'
+  - Error
+  correct: '50'
+  explanation: int("42") converts the string to the integer 42. 42 + 8 = 50.
+- type: arrange
+  instruction: Convert the string '15' to an integer and store it in n
+  blocks:
+  - n
+  - '='
+  - int
+  - (
+  - '"15"'
+  - )
+  - str
+  correct:
+  - n
+  - '='
+  - int
+  - (
+  - '"15"'
+  - )
+  explanation: int('15') converts the string to the integer 15.
+- type: mcq
+  question: What does this print?
+  code: 'n = int("7")
 
-  - type: mcq
-    question: "Which correctly reads a number from the user and doubles it?"
-    code: ""
-    choices: [
-      "n = int(input('Number: '))\nprint(n * 2)",
-      "n = input('Number: ')\nprint(n * 2)",
-      "n = int('Number: ')\nprint(n * 2)",
-      "print(int('Number: ') * 2)"
-    ]
-    correct: "n = int(input('Number: '))\nprint(n * 2)"
-    explanation: "Wrap input() with int() to convert the string before multiplying."
+    print(n * 3)'
+  choices:
+  - '21'
+  - '777'
+  - '73'
+  - '7'
+  correct: '21'
+  explanation: int('7') gives 7. 7 * 3 = 21.
+- type: fill_blank
+  prompt: Convert the price input into a decimal number for currency calculations.
+  before: 'price = '
+  after: (input("Price? "))
+  choices:
+  - float
+  - int
+  - str
+  - len
+  answer: float
+  explanation: float() converts input to a decimal number, useful for prices.
+- type: mcq
+  question: Which correctly reads a number from the user and doubles it?
+  code: ''
+  choices:
+  - 'n = int(input(''Number: ''))
 
-  - type: mcq
-    question: "What does this print?"
-    code: "s = str(42)\nprint(len(s))"
-    choices: ["2", "42", "4", "Error"]
-    correct: "2"
-    explanation: "str(42) converts 42 to '42', which has 2 characters."
+    print(n * 2)'
+  - 'n = input(''Number: '')
 
-  - type: mini_code
-    prompt: "Convert the string '25' to an integer, add 1, and print the result."
-    starter: "age_str = '25'\n"
-    tests:
-      - code: "assert _stdout.strip() == '26'"
-        message: "Should print 26 (25 + 1)"
-      - code: "assert 'int(' in _code"
-        message: "Should use int() to convert the string"
+    print(n * 2)'
+  - 'n = int(''Number: '')
 
-  - type: mini_code
-    prompt: "price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal places."
-    starter: "price_str = '9.99'\n"
-    tests:
-      - code: "assert abs(float(_stdout.strip()) - 1.0) < 0.01"
-        message: "Should print 1.0 (10% of 9.99 ≈ 1.0)"
-      - code: "assert 'float(' in _code"
-        message: "Should use float() to convert the price string"
+    print(n * 2)'
+  - 'print(int(''Number: '') * 2)'
+  correct: 'n = int(input(''Number: ''))
 
+    print(n * 2)'
+  explanation: Wrap input() with int() to convert the string before multiplying.
+- type: mcq
+  question: What does this print?
+  code: 's = str(42)
+
+    print(len(s))'
+  choices:
+  - '2'
+  - '42'
+  - '4'
+  - Error
+  correct: '2'
+  explanation: str(42) converts 42 to '42', which has 2 characters.
+- type: mini_code
+  prompt: Convert the string '25' to an integer, add 1, and print the result.
+  starter: 'age_str = ''25''
+
+    '
+  tests:
+  - code: assert _stdout.strip() == '26'
+    message: Should print 26 (25 + 1)
+  - code: assert 'int(' in _code
+    message: Should use int() to convert the string
+- type: mini_code
+  prompt: price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal
+    places.
+  starter: 'price_str = ''9.99''
+
+    '
+  tests:
+  - code: assert abs(float(_stdout.strip()) - 1.0) < 0.01
+    message: Should print 1.0 (10% of 9.99 ≈ 1.0)
+  - code: assert 'float(' in _code
+    message: Should use float() to convert the price string
 worlds:
   fantasy:
-    title: "Consulting the Apprentice Registry"
+    title: Consulting the Apprentice Registry
     exercises:
-      - type: concept
-        code: |
-          ingredient = input("Name an ingredient: ")
-          print(f"Adding {ingredient} to the cauldron!")
-        output: "(waits for user to type)"
-        explanation: "input() pauses Elara's workshop and waits for the apprentice to name an ingredient. It always returns a string. The prompt in the brackets tells the apprentice what to type."
+    - type: concept
+      code: 'ingredient = input("Name an ingredient: ")
 
-      - type: mcq
-        question: "What type does input() always return when Elara asks for a potion strength?"
-        code: "answer = input(\"Enter a number: \")"
-        choices: ["str (string)", "int (integer)", "float", "bool"]
-        correct: "str (string)"
-        explanation: "input() always returns a string, even if the apprentice types a number. Elara must cast it to use it in a calculation."
+        print(f"Adding {ingredient} to the cauldron!")
 
-      - type: concept
-        code: |
-          quantity_text = input("How many petals? ")
-          quantity = int(quantity_text)
-          print(f"Adding {quantity + 1} petals to be safe!")
-        output: "(waits for input)"
-        explanation: "int() converts the apprentice's text answer into a whole number. float() converts it to a decimal. This is called type casting and lets Elara do maths with the input."
+        '
+      output: (waits for user to type)
+      explanation: input() pauses Elara's workshop and waits for the apprentice to name an ingredient. It always returns a
+        string. The prompt in the brackets tells the apprentice what to type.
+      story_before: Elara's enchanted cauldron can now ask the apprentice directly which ingredient to add — she must make
+        it wait for their answer.
+      story_after: The cauldron pauses, the apprentice types an ingredient name, and the workshop springs to life with the
+        right item.
+    - type: mcq
+      question: What type does input() always return when Elara asks for a potion strength?
+      code: 'answer = input("Enter a number: ")'
+      choices:
+      - str (string)
+      - int (integer)
+      - float
+      - bool
+      correct: str (string)
+      explanation: input() always returns a string, even if the apprentice types a number. Elara must cast it to use it in
+        a calculation.
+      story_before: An apprentice typed a number into the potion strength prompt — Elara must know what type she gets back
+        before using it.
+      story_after: It's a string, not a number; Elara knows she'll have to cast it before any arithmetic can happen.
+    - type: concept
+      code: 'quantity_text = input("How many petals? ")
 
-      - type: fill_blank
-        prompt: "Convert the apprentice's typed ingredient quantity into an integer so Elara can calculate the batch size."
-        before: "text = input(\"Enter a number: \")\nnum = "
-        after: "(text)"
-        choices: ["int", "str", "print", "len"]
-        answer: "int"
-        explanation: "int() converts the string from input() into an integer so Elara can do maths with the quantity."
+        quantity = int(quantity_text)
 
-      - type: mcq
-        question: "Elara converts a potion strength string to add a bonus. What does this print?"
-        code: "x = int(\"42\")\nprint(x + 8)"
-        choices: ["50", "428", "42", "Error"]
-        correct: "50"
-        explanation: "int(\"42\") converts the string to the integer 42. 42 + 8 = 50 potency points."
+        print(f"Adding {quantity + 1} petals to be safe!")
 
-      - type: arrange
-        instruction: "Convert the string '15' to an integer and store it in potion_doses"
-        blocks: ["n", "=", "int", "(", "\"15\"", ")", "str"]
-        correct: ["n", "=", "int", "(", "\"15\"", ")"]
-        explanation: "int('15') converts the string into the integer 15 so Elara can use it in calculations."
+        '
+      output: (waits for input)
+      explanation: int() converts the apprentice's text answer into a whole number. float() converts it to a decimal. This
+        is called type casting and lets Elara do maths with the input.
+      story_before: The cauldron needs a whole-number quantity of petals — Elara must convert the apprentice's typed text
+        into an integer.
+      story_after: The quantity is now a proper integer; the cauldron can calculate the batch size without error.
+    - type: fill_blank
+      prompt: Convert the apprentice's typed ingredient quantity into an integer so Elara can calculate the batch size.
+      before: 'text = input("Enter a number: ")
 
-      - type: mcq
-        question: "Elara triplicates a spell intensity value. What does this print?"
-        code: "intensity = int(\"7\")\nprint(intensity * 3)"
-        choices: ["21", "777", "73", "7"]
-        correct: "21"
-        explanation: "int('7') gives 7. 7 * 3 = 21 intensity units."
+        num = '
+      after: (text)
+      choices:
+      - int
+      - str
+      - print
+      - len
+      answer: int
+      explanation: int() converts the string from input() into an integer so Elara can do maths with the quantity.
+      story_before: The batch-size calculator received the quantity as text — Elara must wrap it in int() to make it usable.
+      story_after: Converted successfully; the calculator produces the correct batch total.
+    - type: mcq
+      question: Elara converts a potion strength string to add a bonus. What does this print?
+      code: 'x = int("42")
 
-      - type: fill_blank
-        prompt: "Convert the ingredient price input into a decimal number for cost calculations."
-        before: "price = "
-        after: "(input(\"Price? \"))"
-        choices: ["float", "int", "str", "len"]
-        answer: "float"
-        explanation: "float() converts the input to a decimal, useful for precise potion ingredient prices."
+        print(x + 8)'
+      choices:
+      - '50'
+      - '428'
+      - '42'
+      - Error
+      correct: '50'
+      explanation: int("42") converts the string to the integer 42. 42 + 8 = 50 potency points.
+      story_before: A potion strength of '42' arrived as a string — Elara converts it and adds an 8-point bonus.
+      story_after: Fifty potency points confirmed; the bonus is applied and the potion is upgraded.
+    - type: arrange
+      instruction: Convert the string '15' to an integer and store it in potion_doses
+      blocks:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      - str
+      correct:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      explanation: int('15') converts the string into the integer 15 so Elara can use it in calculations.
+      story_before: The dose counter shows '15' as text — Elara must convert it to an integer to store in potion_doses.
+      story_after: Fifteen doses stored as an integer; the batch planner can now divide them across vials.
+    - type: mcq
+      question: Elara triplicates a spell intensity value. What does this print?
+      code: 'intensity = int("7")
 
-      - type: mcq
-        question: "Which correctly reads an ingredient quantity and doubles it for a double batch?"
-        code: ""
-        choices: [
-          "n = int(input('Number: '))\nprint(n * 2)",
-          "n = input('Number: ')\nprint(n * 2)",
-          "n = int('Number: ')\nprint(n * 2)",
-          "print(int('Number: ') * 2)"
-        ]
-        correct: "n = int(input('Number: '))\nprint(n * 2)"
-        explanation: "Wrap input() with int() to convert the quantity string before doubling it."
+        print(intensity * 3)'
+      choices:
+      - '21'
+      - '777'
+      - '73'
+      - '7'
+      correct: '21'
+      explanation: int('7') gives 7. 7 * 3 = 21 intensity units.
+      story_before: A spell intensity string of '7' must be tripled — Elara converts and multiplies.
+      story_after: Twenty-one intensity units calculated; the triple-strength spell is ready to cast.
+    - type: fill_blank
+      prompt: Convert the ingredient price input into a decimal number for cost calculations.
+      before: 'price = '
+      after: (input("Price? "))
+      choices:
+      - float
+      - int
+      - str
+      - len
+      answer: float
+      explanation: float() converts the input to a decimal, useful for precise potion ingredient prices.
+      story_before: Ingredient prices involve copper coins and fractions — Elara needs a decimal conversion for precise cost
+        calculations.
+      story_after: The price is now a float; the cost calculation is precise to the last coin.
+    - type: mcq
+      question: Which correctly reads an ingredient quantity and doubles it for a double batch?
+      code: ''
+      choices:
+      - 'n = int(input(''Number: ''))
 
-      - type: mcq
-        question: "Elara checks how many digits are in a potion batch code. What does this print?"
-        code: "batch_code = str(42)\nprint(len(batch_code))"
-        choices: ["2", "42", "4", "Error"]
-        correct: "2"
-        explanation: "str(42) converts 42 to '42', which has 2 digit characters."
+        print(n * 2)'
+      - 'n = input(''Number: '')
 
-      - type: mini_code
-        prompt: "Convert the string '25' to an integer, add 1, and print the result."
-        starter: "age_str = '25'\n"
-        tests:
-          - code: "assert _stdout.strip() == '26'"
-            message: "Should print 26 (25 + 1)"
-          - code: "assert 'int(' in _code"
-            message: "Should use int() to convert the string"
+        print(n * 2)'
+      - 'n = int(''Number: '')
 
-      - type: mini_code
-        prompt: "price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal places."
-        starter: "price_str = '9.99'\n"
-        tests:
-          - code: "assert abs(float(_stdout.strip()) - 1.0) < 0.01"
-            message: "Should print 1.0 (10% of 9.99 ≈ 1.0)"
-          - code: "assert 'float(' in _code"
-            message: "Should use float() to convert the price string"
+        print(n * 2)'
+      - 'print(int(''Number: '') * 2)'
+      correct: 'n = int(input(''Number: ''))
 
+        print(n * 2)'
+      explanation: Wrap input() with int() to convert the quantity string before doubling it.
+      story_before: Elara writes a recipe doubler — it must read a quantity, convert it, then double it for the large-batch
+        potion.
+      story_after: The quantity doubles correctly; the large-batch recipe is calculated without error.
+    - type: mcq
+      question: Elara checks how many digits are in a potion batch code. What does this print?
+      code: 'batch_code = str(42)
+
+        print(len(batch_code))'
+      choices:
+      - '2'
+      - '42'
+      - '4'
+      - Error
+      correct: '2'
+      explanation: str(42) converts 42 to '42', which has 2 digit characters.
+      story_before: The batch code 42 must be converted to text so Elara can count how many digit characters it contains.
+      story_after: Two digit characters confirmed; the batch code format is validated.
+    - type: mini_code
+      prompt: Convert the string '25' to an integer, add 1, and print the result.
+      starter: 'age_str = ''25''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '26'
+        message: Should print 26 (25 + 1)
+      - code: assert 'int(' in _code
+        message: Should use int() to convert the string
+      story_before: The apprentice age string '25' must be converted to an integer and incremented to calculate their age
+        next year.
+      story_after: Twenty-six printed; the registry is updated with the apprentice's upcoming age.
+    - type: mini_code
+      prompt: price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to
+        2 decimal places.
+      starter: 'price_str = ''9.99''
+
+        '
+      tests:
+      - code: assert abs(float(_stdout.strip()) - 1.0) < 0.01
+        message: Should print 1.0 (10% of 9.99 ≈ 1.0)
+      - code: assert 'float(' in _code
+        message: Should use float() to convert the price string
+      story_before: The ingredient price '9.99' must be converted to a float so Elara can calculate and print the exact 10%
+        import tax.
+      story_after: Tax of 1.0 calculated and printed; the invoice is complete and the workshop accounts are balanced.
   scifi:
-    title: "Logging the Crew Status"
+    title: Logging the Crew Status
     exercises:
-      - type: concept
-        code: |
-          crew_name = input("Enter crew member name: ")
-          print(f"Welcome aboard, {crew_name}!")
-        output: "(waits for user to type)"
-        explanation: "input() pauses the terminal and waits for Yara to enter a crew name. It always returns a string. The prompt in the brackets tells the operator what to type."
+    - type: concept
+      code: 'crew_name = input("Enter crew member name: ")
 
-      - type: mcq
-        question: "What type does input() always return when Yara enters a hull reading?"
-        code: "answer = input(\"Enter a number: \")"
-        choices: ["str (string)", "int (integer)", "float", "bool"]
-        correct: "str (string)"
-        explanation: "input() always returns a string, even for sensor numbers. Yara must cast it before using it in calculations."
+        print(f"Welcome aboard, {crew_name}!")
 
-      - type: concept
-        code: |
-          crew_count_text = input("How many crew? ")
-          crew_count = int(crew_count_text)
-          print(f"Life support needed for {crew_count + 1} people!")
-        output: "(waits for input)"
-        explanation: "int() converts the text reading into a whole number. float() converts it to a decimal. This type casting lets Yara use the input in system calculations."
+        '
+      output: (waits for user to type)
+      explanation: input() pauses the terminal and waits for Yara to enter a crew name. It always returns a string. The prompt
+        in the brackets tells the operator what to type.
+      story_before: The Helix's crew logging terminal needs to accept a name typed by the operator — Yara hooks up input()
+        to the prompt.
+      story_after: The terminal accepts the typed name and welcomes the crew member; the roster updates in real time.
+    - type: mcq
+      question: What type does input() always return when Yara enters a hull reading?
+      code: 'answer = input("Enter a number: ")'
+      choices:
+      - str (string)
+      - int (integer)
+      - float
+      - bool
+      correct: str (string)
+      explanation: input() always returns a string, even for sensor numbers. Yara must cast it before using it in calculations.
+      story_before: A hull integrity reading was entered via keyboard — Yara needs to know what type the system received before
+        doing calculations.
+      story_after: It's a string; Yara knows she must cast it before the repair algorithm can use it.
+    - type: concept
+      code: 'crew_count_text = input("How many crew? ")
 
-      - type: fill_blank
-        prompt: "Convert Yara's typed crew count into an integer so the life support system can calculate requirements."
-        before: "text = input(\"Enter a number: \")\nnum = "
-        after: "(text)"
-        choices: ["int", "str", "print", "len"]
-        answer: "int"
-        explanation: "int() converts the string from input() into an integer so the system can do calculations."
+        crew_count = int(crew_count_text)
 
-      - type: mcq
-        question: "Yara converts a hull integrity string and adds a repair bonus. What does this print?"
-        code: "x = int(\"42\")\nprint(x + 8)"
-        choices: ["50", "428", "42", "Error"]
-        correct: "50"
-        explanation: "int(\"42\") converts the string to the integer 42. 42 + 8 = 50 integrity units."
+        print(f"Life support needed for {crew_count + 1} people!")
 
-      - type: arrange
-        instruction: "Convert the string '15' to an integer and store it in crew_count"
-        blocks: ["n", "=", "int", "(", "\"15\"", ")", "str"]
-        correct: ["n", "=", "int", "(", "\"15\"", ")"]
-        explanation: "int('15') converts the string into the integer 15 for the crew roster."
+        '
+      output: (waits for input)
+      explanation: int() converts the text reading into a whole number. float() converts it to a decimal. This type casting
+        lets Yara use the input in system calculations.
+      story_before: The life-support system needs a whole-number crew count — Yara must convert the typed text to an integer.
+      story_after: Crew count is now an integer; the life-support allocation formula runs without a type error.
+    - type: fill_blank
+      prompt: Convert Yara's typed crew count into an integer so the life support system can calculate requirements.
+      before: 'text = input("Enter a number: ")
 
-      - type: mcq
-        question: "Yara triples a thruster power reading. What does this print?"
-        code: "thrust = int(\"7\")\nprint(thrust * 3)"
-        choices: ["21", "777", "73", "7"]
-        correct: "21"
-        explanation: "int('7') gives 7. 7 * 3 = 21 power units."
+        num = '
+      after: (text)
+      choices:
+      - int
+      - str
+      - print
+      - len
+      answer: int
+      explanation: int() converts the string from input() into an integer so the system can do calculations.
+      story_before: The crew count came in as a string from the keyboard — Yara wraps it in int() to make it usable in calculations.
+      story_after: Converted; the life-support requirements are calculated correctly.
+    - type: mcq
+      question: Yara converts a hull integrity string and adds a repair bonus. What does this print?
+      code: 'x = int("42")
 
-      - type: fill_blank
-        prompt: "Convert the fuel cost reading into a decimal number for precise budget calculations."
-        before: "price = "
-        after: "(input(\"Price? \"))"
-        choices: ["float", "int", "str", "len"]
-        answer: "float"
-        explanation: "float() converts the input to a decimal for precise fuel cost calculations."
+        print(x + 8)'
+      choices:
+      - '50'
+      - '428'
+      - '42'
+      - Error
+      correct: '50'
+      explanation: int("42") converts the string to the integer 42. 42 + 8 = 50 integrity units.
+      story_before: Hull integrity '42' arrived as a string — Yara converts it and adds an 8-point repair bonus.
+      story_after: Fifty integrity units confirmed; the repair bonus is logged and the hull status is updated.
+    - type: arrange
+      instruction: Convert the string '15' to an integer and store it in crew_count
+      blocks:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      - str
+      correct:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      explanation: int('15') converts the string into the integer 15 for the crew roster.
+      story_before: The crew roster shows '15' as text — Yara converts it to an integer to store in crew_count.
+      story_after: Fifteen crew members logged as an integer; the headcount is official.
+    - type: mcq
+      question: Yara triples a thruster power reading. What does this print?
+      code: 'thrust = int("7")
 
-      - type: mcq
-        question: "Which correctly reads a power level from the console and doubles it for the boost?"
-        code: ""
-        choices: [
-          "n = int(input('Number: '))\nprint(n * 2)",
-          "n = input('Number: ')\nprint(n * 2)",
-          "n = int('Number: ')\nprint(n * 2)",
-          "print(int('Number: ') * 2)"
-        ]
-        correct: "n = int(input('Number: '))\nprint(n * 2)"
-        explanation: "Wrap input() with int() to convert the power reading string before doubling it."
+        print(thrust * 3)'
+      choices:
+      - '21'
+      - '777'
+      - '73'
+      - '7'
+      correct: '21'
+      explanation: int('7') gives 7. 7 * 3 = 21 power units.
+      story_before: A thruster power string of '7' must be tripled for the boost calculation — Yara converts and multiplies.
+      story_after: Twenty-one power units for the boost confirmed; the manoeuvre is authorised.
+    - type: fill_blank
+      prompt: Convert the fuel cost reading into a decimal number for precise budget calculations.
+      before: 'price = '
+      after: (input("Price? "))
+      choices:
+      - float
+      - int
+      - str
+      - len
+      answer: float
+      explanation: float() converts the input to a decimal for precise fuel cost calculations.
+      story_before: Fuel costs involve decimal credits — Yara needs float() to capture the precise price before calculating
+        the budget.
+      story_after: Fuel cost stored as a float; the budget calculation is accurate to two decimal places.
+    - type: mcq
+      question: Which correctly reads a power level from the console and doubles it for the boost?
+      code: ''
+      choices:
+      - 'n = int(input(''Number: ''))
 
-      - type: mcq
-        question: "Yara checks how many digits are in a ship registration code. What does this print?"
-        code: "reg_code = str(42)\nprint(len(reg_code))"
-        choices: ["2", "42", "4", "Error"]
-        correct: "2"
-        explanation: "str(42) converts 42 to '42', which has 2 digit characters."
+        print(n * 2)'
+      - 'n = input(''Number: '')
 
-      - type: mini_code
-        prompt: "Convert the string '25' to an integer, add 1, and print the result."
-        starter: "age_str = '25'\n"
-        tests:
-          - code: "assert _stdout.strip() == '26'"
-            message: "Should print 26 (25 + 1)"
-          - code: "assert 'int(' in _code"
-            message: "Should use int() to convert the string"
+        print(n * 2)'
+      - 'n = int(''Number: '')
 
-      - type: mini_code
-        prompt: "price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal places."
-        starter: "price_str = '9.99'\n"
-        tests:
-          - code: "assert abs(float(_stdout.strip()) - 1.0) < 0.01"
-            message: "Should print 1.0 (10% of 9.99 ≈ 1.0)"
-          - code: "assert 'float(' in _code"
-            message: "Should use float() to convert the price string"
+        print(n * 2)'
+      - 'print(int(''Number: '') * 2)'
+      correct: 'n = int(input(''Number: ''))
 
+        print(n * 2)'
+      explanation: Wrap input() with int() to convert the power reading string before doubling it.
+      story_before: The power boost subroutine must read a level from the console, convert it, and double it for output.
+      story_after: Doubled power level output correctly; the boost subroutine is cleared for use.
+    - type: mcq
+      question: Yara checks how many digits are in a ship registration code. What does this print?
+      code: 'reg_code = str(42)
+
+        print(len(reg_code))'
+      choices:
+      - '2'
+      - '42'
+      - '4'
+      - Error
+      correct: '2'
+      explanation: str(42) converts 42 to '42', which has 2 digit characters.
+      story_before: The ship registration code 42 must be converted to a string so Yara can count its digit characters for
+        validation.
+      story_after: Two characters confirmed; the registration code passes format validation.
+    - type: mini_code
+      prompt: Convert the string '25' to an integer, add 1, and print the result.
+      starter: 'age_str = ''25''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '26'
+        message: Should print 26 (25 + 1)
+      - code: assert 'int(' in _code
+        message: Should use int() to convert the string
+      story_before: The crew age string '25' must be converted to an integer and incremented to project next year's age for
+        the medical log.
+      story_after: Twenty-six printed; the medical log is updated with the projected age.
+    - type: mini_code
+      prompt: price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to
+        2 decimal places.
+      starter: 'price_str = ''9.99''
+
+        '
+      tests:
+      - code: assert abs(float(_stdout.strip()) - 1.0) < 0.01
+        message: Should print 1.0 (10% of 9.99 ≈ 1.0)
+      - code: assert 'float(' in _code
+        message: Should use float() to convert the price string
+      story_before: The fuel price string '9.99' must be converted to a float so Yara can calculate and display the exact
+        10% fuel tax.
+      story_after: Tax of 1.0 calculated and displayed; the fuel budget is finalised and the jump is approved.
   mystery:
-    title: "Taking Witness Statements"
+    title: Taking Witness Statements
     exercises:
-      - type: concept
-        code: |
-          witness_name = input("Witness name: ")
-          print(f"Statement recorded from {witness_name}!")
-        output: "(waits for user to type)"
-        explanation: "input() pauses the interview and waits for Cole to type the witness's name. It always returns a string. The prompt in the brackets reminds Cole what to enter."
+    - type: concept
+      code: 'witness_name = input("Witness name: ")
 
-      - type: mcq
-        question: "What type does input() always return when Cole enters a case number?"
-        code: "answer = input(\"Enter a number: \")"
-        choices: ["str (string)", "int (integer)", "float", "bool"]
-        correct: "str (string)"
-        explanation: "input() always returns a string, even for case numbers. Cole must cast it to use it in calculations."
+        print(f"Statement recorded from {witness_name}!")
 
-      - type: concept
-        code: |
-          suspect_count_text = input("How many suspects? ")
-          suspect_count = int(suspect_count_text)
-          print(f"Interviewing {suspect_count + 1} people including the informant!")
-        output: "(waits for input)"
-        explanation: "int() converts the typed count into a whole number. float() converts it to a decimal. This type casting lets Cole use the witness count in calculations."
+        '
+      output: (waits for user to type)
+      explanation: input() pauses the interview and waits for Cole to type the witness's name. It always returns a string.
+        The prompt in the brackets reminds Cole what to enter.
+      story_before: Cole needs his interview terminal to pause and accept a witness name from the keyboard before logging
+        it.
+      story_after: The terminal records the name; the witness statement is officially opened.
+    - type: mcq
+      question: What type does input() always return when Cole enters a case number?
+      code: 'answer = input("Enter a number: ")'
+      choices:
+      - str (string)
+      - int (integer)
+      - float
+      - bool
+      correct: str (string)
+      explanation: input() always returns a string, even for case numbers. Cole must cast it to use it in calculations.
+      story_before: Cole enters a case number via keyboard — he must know what type the system returns before doing any arithmetic
+        on it.
+      story_after: It's a string; Cole knows he'll need to cast it before calculating case reference totals.
+    - type: concept
+      code: 'suspect_count_text = input("How many suspects? ")
 
-      - type: fill_blank
-        prompt: "Convert Cole's typed suspect count into an integer so he can calculate total interviews needed."
-        before: "text = input(\"Enter a number: \")\nnum = "
-        after: "(text)"
-        choices: ["int", "str", "print", "len"]
-        answer: "int"
-        explanation: "int() converts the string from input() into an integer so Cole can plan the investigation."
+        suspect_count = int(suspect_count_text)
 
-      - type: mcq
-        question: "Cole converts a cipher key string and adds a decode offset. What does this print?"
-        code: "x = int(\"42\")\nprint(x + 8)"
-        choices: ["50", "428", "42", "Error"]
-        correct: "50"
-        explanation: "int(\"42\") converts the string to the integer 42. 42 + 8 = 50 as the decoded value."
+        print(f"Interviewing {suspect_count + 1} people including the informant!")
 
-      - type: arrange
-        instruction: "Convert the string '15' to an integer and store it in clue_number"
-        blocks: ["n", "=", "int", "(", "\"15\"", ")", "str"]
-        correct: ["n", "=", "int", "(", "\"15\"", ")"]
-        explanation: "int('15') converts the string into the integer 15 for Cole's evidence log."
+        '
+      output: (waits for input)
+      explanation: int() converts the typed count into a whole number. float() converts it to a decimal. This type casting
+        lets Cole use the witness count in calculations.
+      story_before: Cole must convert the typed suspect count from text to an integer before the interview schedule can be
+        calculated.
+      story_after: Suspect count is now an integer; the interview planner assigns time slots without error.
+    - type: fill_blank
+      prompt: Convert Cole's typed suspect count into an integer so he can calculate total interviews needed.
+      before: 'text = input("Enter a number: ")
 
-      - type: mcq
-        question: "Cole triples a cipher frequency reading. What does this print?"
-        code: "frequency = int(\"7\")\nprint(frequency * 3)"
-        choices: ["21", "777", "73", "7"]
-        correct: "21"
-        explanation: "int('7') gives 7. 7 * 3 = 21 decoded frequency units."
+        num = '
+      after: (text)
+      choices:
+      - int
+      - str
+      - print
+      - len
+      answer: int
+      explanation: int() converts the string from input() into an integer so Cole can plan the investigation.
+      story_before: The suspect count came back as a string from the input — Cole wraps it in int() so the investigation calculator
+        can use it.
+      story_after: Converted; the total interview count is computed correctly.
+    - type: mcq
+      question: Cole converts a cipher key string and adds a decode offset. What does this print?
+      code: 'x = int("42")
 
-      - type: fill_blank
-        prompt: "Convert the ransom amount input into a decimal number for precise financial calculations."
-        before: "price = "
-        after: "(input(\"Price? \"))"
-        choices: ["float", "int", "str", "len"]
-        answer: "float"
-        explanation: "float() converts the input to a decimal for precise ransom amount calculations."
+        print(x + 8)'
+      choices:
+      - '50'
+      - '428'
+      - '42'
+      - Error
+      correct: '50'
+      explanation: int("42") converts the string to the integer 42. 42 + 8 = 50 as the decoded value.
+      story_before: A cipher key string of '42' must be converted and offset by 8 to find the decoded value.
+      story_after: Decoded value of 50 confirmed; Cole writes it in the cipher notebook.
+    - type: arrange
+      instruction: Convert the string '15' to an integer and store it in clue_number
+      blocks:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      - str
+      correct:
+      - n
+      - '='
+      - int
+      - (
+      - '"15"'
+      - )
+      explanation: int('15') converts the string into the integer 15 for Cole's evidence log.
+      story_before: The clue number '15' is stored as text — Cole must convert it to an integer for the evidence log.
+      story_after: Clue number 15 stored as an integer; it's entered into the evidence tracking system.
+    - type: mcq
+      question: Cole triples a cipher frequency reading. What does this print?
+      code: 'frequency = int("7")
 
-      - type: mcq
-        question: "Which correctly reads a suspect count from the keyboard and doubles it for the search teams?"
-        code: ""
-        choices: [
-          "n = int(input('Number: '))\nprint(n * 2)",
-          "n = input('Number: ')\nprint(n * 2)",
-          "n = int('Number: ')\nprint(n * 2)",
-          "print(int('Number: ') * 2)"
-        ]
-        correct: "n = int(input('Number: '))\nprint(n * 2)"
-        explanation: "Wrap input() with int() to convert the count string before doubling it for team assignments."
+        print(frequency * 3)'
+      choices:
+      - '21'
+      - '777'
+      - '73'
+      - '7'
+      correct: '21'
+      explanation: int('7') gives 7. 7 * 3 = 21 decoded frequency units.
+      story_before: A cipher frequency string of '7' must be tripled to find the decoded transmission frequency.
+      story_after: Twenty-one decoded units; the frequency is matched and the transmission source is identified.
+    - type: fill_blank
+      prompt: Convert the ransom amount input into a decimal number for precise financial calculations.
+      before: 'price = '
+      after: (input("Price? "))
+      choices:
+      - float
+      - int
+      - str
+      - len
+      answer: float
+      explanation: float() converts the input to a decimal for precise ransom amount calculations.
+      story_before: The ransom amount involves decimal figures — Cole needs float() to capture the precise value for the financial
+        report.
+      story_after: Ransom amount stored as a float; the financial report is accurate to the last cent.
+    - type: mcq
+      question: Which correctly reads a suspect count from the keyboard and doubles it for the search teams?
+      code: ''
+      choices:
+      - 'n = int(input(''Number: ''))
 
-      - type: mcq
-        question: "Cole checks how many digits are in a case reference number. What does this print?"
-        code: "case_ref = str(42)\nprint(len(case_ref))"
-        choices: ["2", "42", "4", "Error"]
-        correct: "2"
-        explanation: "str(42) converts 42 to '42', which has 2 digit characters in the reference code."
+        print(n * 2)'
+      - 'n = input(''Number: '')
 
-      - type: mini_code
-        prompt: "Convert the string '25' to an integer, add 1, and print the result."
-        starter: "age_str = '25'\n"
-        tests:
-          - code: "assert _stdout.strip() == '26'"
-            message: "Should print 26 (25 + 1)"
-          - code: "assert 'int(' in _code"
-            message: "Should use int() to convert the string"
+        print(n * 2)'
+      - 'n = int(''Number: '')
 
-      - type: mini_code
-        prompt: "price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to 2 decimal places."
-        starter: "price_str = '9.99'\n"
-        tests:
-          - code: "assert abs(float(_stdout.strip()) - 1.0) < 0.01"
-            message: "Should print 1.0 (10% of 9.99 ≈ 1.0)"
-          - code: "assert 'float(' in _code"
-            message: "Should use float() to convert the price string"
+        print(n * 2)'
+      - 'print(int(''Number: '') * 2)'
+      correct: 'n = int(input(''Number: ''))
+
+        print(n * 2)'
+      explanation: Wrap input() with int() to convert the count string before doubling it for team assignments.
+      story_before: The search-team dispatch tool must read a suspect count, convert it, and double it to assign two officers
+        per suspect.
+      story_after: Team count doubled correctly; the dispatch order is sent.
+    - type: mcq
+      question: Cole checks how many digits are in a case reference number. What does this print?
+      code: 'case_ref = str(42)
+
+        print(len(case_ref))'
+      choices:
+      - '2'
+      - '42'
+      - '4'
+      - Error
+      correct: '2'
+      explanation: str(42) converts 42 to '42', which has 2 digit characters in the reference code.
+      story_before: The case reference number 42 must be converted to a string so Cole can count how many digit characters
+        it contains.
+      story_after: Two digit characters confirmed; the reference code format is valid and filed.
+    - type: mini_code
+      prompt: Convert the string '25' to an integer, add 1, and print the result.
+      starter: 'age_str = ''25''
+
+        '
+      tests:
+      - code: assert _stdout.strip() == '26'
+        message: Should print 26 (25 + 1)
+      - code: assert 'int(' in _code
+        message: Should use int() to convert the string
+      story_before: A witness age of '25' is stored as text — Cole must convert it to an integer and add one to calculate
+        next year's age for the record.
+      story_after: Twenty-six printed; the witness profile is updated in the case file.
+    - type: mini_code
+      prompt: price_str holds '9.99'. Convert it to a float, calculate 10% tax (price * 0.1), and print the tax rounded to
+        2 decimal places.
+      starter: 'price_str = ''9.99''
+
+        '
+      tests:
+      - code: assert abs(float(_stdout.strip()) - 1.0) < 0.01
+        message: Should print 1.0 (10% of 9.99 ≈ 1.0)
+      - code: assert 'float(' in _code
+        message: Should use float() to convert the price string
+      story_before: The ransom string '9.99' thousand must be converted to a float so Cole can calculate and print the exact
+        10% fee for the recovery agency.
+      story_after: Fee of 1.0 thousand calculated and printed; the recovery agency is briefed and the case is ready for court.

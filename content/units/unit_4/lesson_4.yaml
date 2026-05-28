@@ -180,6 +180,9 @@ worlds:
         4'
       explanation: The champion tracks training steps. while repeats as long as the condition is True. steps must increase
         each loop or it runs forever.
+      story_before: The champion must train until she has completed every required step — a while loop keeps her going as
+        long as she must.
+      story_after: Five training steps done; the champion sees the countdown begin as she prepares for battle.
     - type: mcq
       question: The champion counts down to battle. What does this print?
       code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
@@ -210,6 +213,8 @@ worlds:
 
         1'
       explanation: n starts at 3, decrements each round. Stops when n reaches 0.
+      story_before: Three rounds remain before the duel — the champion counts down with each strike.
+      story_after: Countdown hits zero and the duel begins; now the champion must keep doubling her intensity until she peaks.
     - type: fill_blank
       prompt: Keep doubling training intensity while it has not yet exceeded 100.
       before: 'x = 1
@@ -223,6 +228,8 @@ worlds:
       - '!='
       answer: <=
       explanation: x <= 100 keeps doubling while intensity is at most 100. When x exceeds 100 the trial ends.
+      story_before: Training intensity must keep doubling while it has not yet exceeded the master's threshold of 100.
+      story_after: Condition locked in; the champion now tallies her strike points round by round.
     - type: mcq
       question: The champion tallies strike points round by round. What does this print?
       code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
@@ -233,6 +240,8 @@ worlds:
       - '1'
       correct: '10'
       explanation: 1 + 2 + 3 + 4 = 10 total strike points.
+      story_before: Round by round the champion adds her strike points — the while loop runs until all four rounds are done.
+      story_after: Ten strike points total; the champion arranges her victory-round counter from scratch.
     - type: arrange
       instruction: Build a while loop that counts victory rounds 1, 2, 3 then stops
       blocks:
@@ -268,6 +277,9 @@ worlds:
       - +=
       - '1'
       explanation: Set i = 1 before the loop, print i, increment i each round.
+      story_before: The champion sets up the counter at 1 and builds a while loop that announces each of her three victory
+        rounds.
+      story_after: Rounds 1, 2, 3 declared; the champion reflects on when while is the right choice over for.
     - type: mcq
       question: What is the key difference between for and while in the champion's training?
       code: ''
@@ -278,6 +290,8 @@ worlds:
       - They are identical
       correct: while runs while a condition is True; for iterates over a sequence
       explanation: for is best for a fixed number of rounds. while is best when the champion trains until a goal is met.
+      story_before: 'The training master quizzes the champion: when should she choose while over for?'
+      story_after: Concept clear — while for unknown repetitions, for for known sequences; the champion drains her hp next.
     - type: fill_blank
       prompt: Reduce the champion's hp by 10 each training round.
       before: "hp = 100\nwhile hp > 0:\n    hp "
@@ -289,6 +303,8 @@ worlds:
       - /
       answer: '-'
       explanation: hp -= 10 reduces hp by 10 each round until the champion falls.
+      story_before: Each training round costs the champion 10 hp — she selects the operator that reduces hp correctly.
+      story_after: hp drains 10 per round; the champion watches her power double until the final threshold.
     - type: mcq
       question: The champion's power keeps doubling. What does this print?
       code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
@@ -299,6 +315,8 @@ worlds:
       - '31'
       correct: '32'
       explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False. Loop ends.'
+      story_before: The champion's power doubles every round — she needs to know what value it reaches when the loop ends.
+      story_after: Power lands at 32; the champion considers what would happen if the condition never turned False.
     - type: mcq
       question: What is an infinite loop in the champion's trial?
       code: ''
@@ -309,6 +327,8 @@ worlds:
       - A loop inside another loop
       correct: A while loop whose condition never becomes False
       explanation: If the condition never becomes False, the trial never ends. Always update the condition variable.
+      story_before: The master warns of the infinite loop — a trial that never ends because the condition stays True.
+      story_after: Infinite loop understood; the champion's final challenge is doubling her strength until it exceeds 1000.
     - type: mini_code
       prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
       starter: 'n = 1
@@ -319,6 +339,8 @@ worlds:
         message: Should print 1024 (first power of 2 > 1000)
       - code: assert 'while' in _code
         message: Should use a while loop
+      story_before: The champion starts at power 1 and keeps doubling — she must find the first value that surpasses 1000.
+      story_after: Power reaches 1024; the champion's last trial is announcing every seventh-round milestone below 50.
     - type: mini_code
       prompt: Print all multiples of 7 that are less than 50, using a while loop.
       starter: 'n = 7
@@ -329,6 +351,8 @@ worlds:
         message: Should start at 7 and end at 49
       - code: assert len(_stdout.strip().split('\n')) == 7
         message: Should print exactly 7 multiples of 7 below 50
+      story_before: The champion earns a milestone banner every 7 rounds — she must print all multiples of 7 below 50.
+      story_after: Banners raised at 7, 14, 21 … 49 — the champion's trial is complete and she is proclaimed worthy.
   scifi:
     title: Power Build-Up
     exercises:
@@ -345,6 +369,9 @@ worlds:
         4'
       explanation: The engineer charges the power cell step by step. while repeats as long as charge is below 5. charge must
         increase or it loops forever.
+      story_before: Yara must charge the power cell step by step — the while loop keeps adding charge as long as the cell
+        needs more.
+      story_after: Charge levels 0 through 4 logged; now Yara runs a countdown timer before reactor ignition.
     - type: mcq
       question: The reactor counts down to ignition. What does this print?
       code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
@@ -375,6 +402,8 @@ worlds:
 
         1'
       explanation: n starts at 3, decrements each cycle. Stops at 0.
+      story_before: The reactor ignition sequence counts down from 3 — Yara verifies the while loop decrements correctly.
+      story_after: Countdown 3, 2, 1 confirmed; Yara now doubles reactor output while it stays within safe limits.
     - type: fill_blank
       prompt: Keep doubling reactor output while it has not yet exceeded 100.
       before: 'x = 1
@@ -388,6 +417,8 @@ worlds:
       - '!='
       answer: <=
       explanation: x <= 100 keeps doubling while output is within safe limits.
+      story_before: Reactor output must keep doubling while it has not yet exceeded the safety ceiling of 100.
+      story_after: Condition set; Yara accumulates power readings cycle by cycle.
     - type: mcq
       question: The engineer sums power readings cycle by cycle. What does this print?
       code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
@@ -398,6 +429,8 @@ worlds:
       - '1'
       correct: '10'
       explanation: 1 + 2 + 3 + 4 = 10 total power units.
+      story_before: Yara logs power readings from four consecutive cycles and sums them as the while loop runs.
+      story_after: Total of 10 power units logged; Yara now builds the power-level monitor loop from scratch.
     - type: arrange
       instruction: Build a while loop that logs power levels 1, 2, 3 then stops
       blocks:
@@ -433,6 +466,8 @@ worlds:
       - +=
       - '1'
       explanation: Set i = 1, print each level, increment i each cycle.
+      story_before: Yara initialises the counter at 1 and constructs a while loop that logs power levels 1, 2, 3 then halts.
+      story_after: Power levels logged; Yara reviews when while is preferable to for in engineering scenarios.
     - type: mcq
       question: What is the key difference between for and while in the power build-up?
       code: ''
@@ -443,6 +478,8 @@ worlds:
       - They are identical
       correct: while runs while a condition is True; for iterates over a sequence
       explanation: for is best when cycles are known. while is best when the engineer runs until a power threshold is reached.
+      story_before: 'The engineering manual asks: when should Yara use while instead of for?'
+      story_after: Distinction understood; Yara now programs the energy drain simulation.
     - type: fill_blank
       prompt: Drain the ship's energy by 10 units each cycle.
       before: "hp = 100\nwhile hp > 0:\n    hp "
@@ -454,6 +491,8 @@ worlds:
       - /
       answer: '-'
       explanation: hp -= 10 drains 10 units of energy each cycle.
+      story_before: Each cycle drains 10 units from the ship's energy reserve — Yara picks the operator for the drain.
+      story_after: Energy drains by 10 per cycle; Yara watches the reactor output double toward its cap.
     - type: mcq
       question: Power output keeps doubling. What does this print?
       code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
@@ -464,6 +503,8 @@ worlds:
       - '31'
       correct: '32'
       explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False.'
+      story_before: Reactor output doubles each cycle — Yara reads the final value when the condition fails.
+      story_after: Output settles at 32; Yara considers what an infinite reactor loop would mean for the ship.
     - type: mcq
       question: What is an infinite loop in the power build-up?
       code: ''
@@ -474,6 +515,8 @@ worlds:
       - A loop inside another loop
       correct: A while loop whose condition never becomes False
       explanation: If the power condition never stops being True, the reactor runs forever.
+      story_before: An infinite loop in the power system would run the reactor forever — Yara identifies what causes it.
+      story_after: Root cause understood; Yara's final task is doubling the power cell charge until it exceeds 1000.
     - type: mini_code
       prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
       starter: 'n = 1
@@ -484,6 +527,8 @@ worlds:
         message: Should print 1024 (first power of 2 > 1000)
       - code: assert 'while' in _code
         message: Should use a while loop
+      story_before: The emergency cell starts at 1 and must double until it exceeds 1000 — Yara runs the simulation.
+      story_after: Cell reaches 1024; Yara's last check is listing every seventh power milestone below 50.
     - type: mini_code
       prompt: Print all multiples of 7 that are less than 50, using a while loop.
       starter: 'n = 7
@@ -494,6 +539,8 @@ worlds:
         message: Should start at 7 and end at 49
       - code: assert len(_stdout.strip().split('\n')) == 7
         message: Should print exactly 7 multiples of 7 below 50
+      story_before: Maintenance windows occur at every 7th power unit — Yara prints all multiples of 7 below 50.
+      story_after: Maintenance points logged at 7, 14 … 49 — the power build-up sequence is complete.
   mystery:
     title: Repeating the Search
     exercises:
@@ -510,6 +557,8 @@ worlds:
         4'
       explanation: Cole searches rooms one by one. while repeats as long as the room number is below 5. room must increase
         each pass or the search loops forever.
+      story_before: Cole must search every room in the building — the while loop keeps him moving as long as rooms remain.
+      story_after: Rooms 0 through 4 searched; Cole now counts down before cracking the next locked safe.
     - type: mcq
       question: Cole counts down before cracking the safe. What does this print?
       code: "n = 3\nwhile n > 0:\n    print(n)\n    n -= 1"
@@ -540,6 +589,8 @@ worlds:
 
         1'
       explanation: n starts at 3 and decrements each step. Stops when n reaches 0.
+      story_before: Three tumblers remain on the safe's dial — Cole decrements the counter with each click.
+      story_after: Clicks 3, 2, 1 — the safe opens; Cole now expands his search radius while it stays manageable.
     - type: fill_blank
       prompt: Keep expanding the search radius while it has not yet exceeded 100.
       before: 'x = 1
@@ -553,6 +604,8 @@ worlds:
       - '!='
       answer: <=
       explanation: x <= 100 keeps expanding the search while within range.
+      story_before: Cole widens the search radius by doubling it each pass, as long as it has not exceeded 100 blocks.
+      story_after: Doubling condition set; Cole tallies clue scores room by room.
     - type: mcq
       question: Cole tallies clue scores from each room. What does this print?
       code: "total = 0\ni = 1\nwhile i <= 4:\n    total += i\n    i += 1\nprint(total)"
@@ -563,6 +616,8 @@ worlds:
       - '1'
       correct: '10'
       explanation: 1 + 2 + 3 + 4 = 10 total clue points.
+      story_before: Cole scores each room's clues and accumulates the total as the while loop runs through four rooms.
+      story_after: Ten clue points tallied; Cole builds the room-search counter loop from scratch.
     - type: arrange
       instruction: Build a while loop that searches rooms 1, 2, 3 then stops
       blocks:
@@ -598,6 +653,8 @@ worlds:
       - +=
       - '1'
       explanation: Set i = 1, print each room number, increment i each pass.
+      story_before: Cole starts at room 1 and constructs a while loop that searches rooms 1, 2, 3 then stops.
+      story_after: Rooms 1 to 3 searched; Cole considers when while is the right tool versus for.
     - type: mcq
       question: What is the key difference between for and while in Cole's search?
       code: ''
@@ -608,6 +665,8 @@ worlds:
       - They are identical
       correct: while runs while a condition is True; for iterates over a sequence
       explanation: for is best when rooms are listed. while is best when Cole searches until a condition is met.
+      story_before: Cole's partner asks him to explain the difference between for and while — Cole obliges.
+      story_after: Difference noted; Cole's next step is tracking stamina as he searches each room.
     - type: fill_blank
       prompt: Reduce the detective's stamina by 10 each room searched.
       before: "hp = 100\nwhile hp > 0:\n    hp "
@@ -619,6 +678,8 @@ worlds:
       - /
       answer: '-'
       explanation: hp -= 10 costs 10 stamina per room. Stops when stamina is gone.
+      story_before: Each room costs Cole 10 stamina points — he selects the operator that deducts correctly.
+      story_after: Stamina drains by 10 per room; Cole watches the number of leads double with each tip.
     - type: mcq
       question: The number of leads keeps doubling. What does this print?
       code: "n = 1\nwhile n < 32:\n    n *= 2\nprint(n)"
@@ -629,6 +690,8 @@ worlds:
       - '31'
       correct: '32'
       explanation: 'n doubles: 1, 2, 4, 8, 16, 32. When n = 32, n < 32 is False.'
+      story_before: The tip chain keeps doubling — Cole reads the final count when the while condition fails.
+      story_after: Leads reach 32; Cole thinks about what an infinite search would mean if the condition never cleared.
     - type: mcq
       question: What is an infinite loop in the detective's search?
       code: ''
@@ -639,6 +702,8 @@ worlds:
       - A loop inside another loop
       correct: A while loop whose condition never becomes False
       explanation: If the clue condition never becomes False, the search never ends.
+      story_before: A search that never ends — Cole identifies the exact reason a while loop can run forever.
+      story_after: Infinite-loop trap understood; Cole's final task is doubling the lead count until it exceeds 1000.
     - type: mini_code
       prompt: Starting from 1, keep doubling until you exceed 1000. Print the final value.
       starter: 'n = 1
@@ -649,6 +714,8 @@ worlds:
         message: Should print 1024 (first power of 2 > 1000)
       - code: assert 'while' in _code
         message: Should use a while loop
+      story_before: Starting from a single lead, Cole doubles the count until it surpasses 1000 — he needs the final tally.
+      story_after: Lead count hits 1024; Cole's last sweep prints every seventh clue milestone below 50.
     - type: mini_code
       prompt: Print all multiples of 7 that are less than 50, using a while loop.
       starter: 'n = 7
@@ -659,3 +726,5 @@ worlds:
         message: Should start at 7 and end at 49
       - code: assert len(_stdout.strip().split('\n')) == 7
         message: Should print exactly 7 multiples of 7 below 50
+      story_before: Every 7th clue gets a priority flag — Cole prints all multiples of 7 below 50.
+      story_after: Priority clues flagged at 7, 14 … 49 — the investigation loop is closed and the case moves forward.
