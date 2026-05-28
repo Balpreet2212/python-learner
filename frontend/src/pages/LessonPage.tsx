@@ -322,13 +322,13 @@ function FillBlankCard({
       <p className={`text-base font-semibold ${style.highlight}`}>{ex.prompt}</p>
 
       {/* Code line with blank */}
-      <div className="rounded-xl bg-gray-950 px-5 py-4">
-        <span className="font-code text-sm text-gray-100">{ex.before}</span>
+      <div className="rounded-xl bg-gray-950 px-5 py-4 font-code text-sm text-gray-100 whitespace-pre-wrap leading-relaxed">
+        <span>{ex.before}</span>
         <span className={`inline-block min-w-12 rounded border-b-2 px-2 font-code text-sm font-bold mx-1
           ${checked && isCorrect ? "border-green-500 text-green-300" : checked && !isCorrect ? "border-red-500 text-red-300" : `${style.border} ${style.accent}`}`}>
           {selected ?? "____"}
         </span>
-        <span className="font-code text-sm text-gray-100">{ex.after}</span>
+        <span>{ex.after}</span>
       </div>
 
       {/* Word bank */}
