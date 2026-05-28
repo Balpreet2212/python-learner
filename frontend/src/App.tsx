@@ -136,6 +136,7 @@ export default function App() {
       <Route path="/account" element={<Navigate to="/dashboard/account" replace />} />
       <Route path="/billing" element={<Navigate to="/dashboard/billing" replace />} />
       <Route path="/settings" element={<Navigate to="/dashboard/settings" replace />} />
+      <Route path="/dashboard/progress" element={<Navigate to="/progress" replace />} />
 
       {/* Challenges hub */}
       <Route
@@ -144,6 +145,18 @@ export default function App() {
           <RequireAuth>
             <AppLayout>
               <ChallengesPage />
+            </AppLayout>
+          </RequireAuth>
+        }
+      />
+
+      {/* Progress */}
+      <Route
+        path="/progress"
+        element={
+          <RequireAuth>
+            <AppLayout>
+              <ProgressPage />
             </AppLayout>
           </RequireAuth>
         }

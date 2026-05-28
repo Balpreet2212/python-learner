@@ -55,6 +55,12 @@ const NAV_CARDS = [
     description: "Daily and weekly logic puzzles to sharpen your skills.",
     path: "/challenges",
   },
+  {
+    icon: "📊",
+    label: "Progress",
+    description: "Your XP, badges, and challenge milestones.",
+    path: "/progress",
+  },
 ] as const;
 
 export default function HomePage() {

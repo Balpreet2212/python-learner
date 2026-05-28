@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { getLearnerStats, type LearnerStats } from "../api/learner";
 
 const UNIT_NAMES: Record<number, string> = {
   1: "Python Basics",
@@ -22,6 +24,17 @@ const XP_PER_LESSON = 10;
 const XP_PER_CAPSTONE = 150;
 const XP_PER_UNIT = LESSONS_PER_UNIT * XP_PER_LESSON + XP_PER_CAPSTONE;
 
+// Milestone levels: [threshold, icon, label, border, bg, text]
+const MILESTONES = [
+  { min: 10, icon: "🥇", label: "Gold",   border: "border-yellow-500/60", bg: "bg-yellow-950/40", text: "text-yellow-300" },
+  { min: 5,  icon: "🥈", label: "Silver", border: "border-gray-400/50",   bg: "bg-gray-800/60",   text: "text-gray-200"  },
+  { min: 1,  icon: "🥉", label: "Bronze", border: "border-amber-700/50",  bg: "bg-amber-950/30",  text: "text-amber-400" },
+];
+
+function getMilestone(count: number) {
+  return MILESTONES.find((m) => count >= m.min) ?? null;
+}
+
 function parseBadgeUnit(badge: string): number | null {
   const m = badge.match(/^unit_(\d+)_complete$/);
   return m ? parseInt(m[1], 10) : null;
@@ -29,6 +42,11 @@ function parseBadgeUnit(badge: string): number | null {
 
 export default function ProgressPage() {
   const { profile } = useAuth();
+  const [stats, setStats] = useState<LearnerStats | null>(null);
+
+  useEffect(() => {
+    getLearnerStats().then(setStats).catch(() => {});
+  }, []);
 
   if (!profile) {
     return (
@@ -48,12 +66,13 @@ export default function ProgressPage() {
     completedUnits.length * XP_PER_UNIT +
     lessonsCompletedInCurrentUnit * XP_PER_LESSON;
 
-  // Overall progress: (completed units * 6 steps) + lessons done in current unit
-  // Each unit = 5 lessons + 1 capstone = 6 steps; total = 42
   const totalSteps = TOTAL_UNITS * (LESSONS_PER_UNIT + 1);
   const doneSteps =
     completedUnits.length * (LESSONS_PER_UNIT + 1) + lessonsCompletedInCurrentUnit;
   const progressPct = Math.round((doneSteps / totalSteps) * 100);
+
+  const dailyMilestone  = stats ? getMilestone(stats.daily_total)  : null;
+  const weeklyMilestone = stats ? getMilestone(stats.weekly_total) : null;
 
   return (
     <div className="mx-auto max-w-xl p-6 space-y-8">
@@ -69,6 +88,27 @@ export default function ProgressPage() {
           </p>
         </div>
       </section>
+
+      {/* Today's challenge status */}
+      {stats && (
+        <section className="space-y-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Today</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <StatusCard
+              label="Daily Challenge"
+              done={stats.daily_done_today}
+              doneText="Done ✓"
+              pendingText="Not done yet"
+            />
+            <StatusCard
+              label="Weekly Challenge"
+              done={stats.weekly_done_this_week}
+              doneText="Done ✓"
+              pendingText="Not done yet"
+            />
+          </div>
+        </section>
+      )}
 
       {/* Journey progress */}
       <section className="space-y-4">
@@ -101,10 +141,31 @@ export default function ProgressPage() {
         </div>
       </section>
 
-      {/* Badges */}
+      {/* Challenge streaks / milestones */}
+      {stats && (
+        <section className="space-y-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Challenges</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <ChallengeMilestoneCard
+              label="Daily"
+              icon="📅"
+              total={stats.daily_total}
+              milestone={dailyMilestone}
+            />
+            <ChallengeMilestoneCard
+              label="Weekly"
+              icon="⭐"
+              total={stats.weekly_total}
+              milestone={weeklyMilestone}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Unit badges */}
       <section className="space-y-4">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-          Badges{" "}
+          Unit Badges{" "}
           <span className="normal-case font-normal text-gray-600">
             {completedUnits.length} / {TOTAL_UNITS}
           </span>
@@ -122,7 +183,6 @@ export default function ProgressPage() {
           </div>
         )}
 
-        {/* Locked badges */}
         {TOTAL_UNITS - completedUnits.length > 0 && (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {Array.from({ length: TOTAL_UNITS }, (_, i) => i + 1)
@@ -133,6 +193,70 @@ export default function ProgressPage() {
           </div>
         )}
       </section>
+    </div>
+  );
+}
+
+function StatusCard({
+  label,
+  done,
+  doneText,
+  pendingText,
+}: {
+  label: string;
+  done: boolean;
+  doneText: string;
+  pendingText: string;
+}) {
+  return (
+    <div
+      className={`rounded-xl border p-4 text-center space-y-1 ${
+        done
+          ? "border-green-700/50 bg-green-950/20"
+          : "border-gray-700 bg-gray-900"
+      }`}
+    >
+      <p className="text-xs text-gray-400">{label}</p>
+      <p className={`text-sm font-semibold ${done ? "text-green-400" : "text-gray-500"}`}>
+        {done ? doneText : pendingText}
+      </p>
+    </div>
+  );
+}
+
+const NEXT_MILESTONE = [
+  { threshold: 1,  label: "1 to unlock Bronze" },
+  { threshold: 5,  label: "5 to unlock Silver" },
+  { threshold: 10, label: "10 to unlock Gold"  },
+];
+
+function ChallengeMilestoneCard({
+  label,
+  icon,
+  total,
+  milestone,
+}: {
+  label: string;
+  icon: string;
+  total: number;
+  milestone: ReturnType<typeof getMilestone>;
+}) {
+  const next = NEXT_MILESTONE.find((m) => total < m.threshold);
+
+  return (
+    <div
+      className={`rounded-xl border p-5 text-center space-y-2 ${
+        milestone ? `${milestone.border} ${milestone.bg}` : "border-gray-700 bg-gray-900"
+      }`}
+    >
+      <div className="text-3xl select-none">{milestone ? milestone.icon : icon}</div>
+      <p className={`text-xs font-semibold ${milestone ? milestone.text : "text-gray-400"}`}>
+        {label} {milestone ? `· ${milestone.label}` : ""}
+      </p>
+      <p className="text-2xl font-bold text-white">{total}</p>
+      <p className="text-xs text-gray-500">
+        {next ? next.label : "Max rank reached!"}
+      </p>
     </div>
   );
 }
