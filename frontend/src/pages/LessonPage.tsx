@@ -76,7 +76,7 @@ function CodeEditor({
 
 function Feedback({
   correct, explanation, onContinue, storyAfter,
-}: { correct: boolean; explanation: string; onContinue: () => void; storyAfter?: string | null }) {
+}: { correct: boolean; explanation: string; onContinue: () => void; storyAfter?: string | null | undefined }) {
   return (
     <div className={`rounded-xl border p-4 space-y-3 ${correct ? "border-green-700/50 bg-green-950/30" : "border-red-700/50 bg-red-950/30"}`}>
       <p className={`font-semibold ${correct ? "text-green-400" : "text-red-400"}`}>
