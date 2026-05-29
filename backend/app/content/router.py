@@ -24,7 +24,6 @@ from app.content.service import (
     MiniCodeExercise,
     load_capstone,
     load_lesson,
-    LessonSolution,
 )
 from app.core.errors import bad_request, forbidden
 from app.core.sandbox import run_challenge
