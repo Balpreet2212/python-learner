@@ -29,5 +29,5 @@ COPY --from=frontend /build/dist ./app/static
 
 EXPOSE 8000
 
-# Run migrations (log result but don't abort if they fail) then start server
-CMD ["sh", "-c", "alembic upgrade head || echo 'WARNING: alembic failed, continuing'; uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Run migrations with a 60s timeout so a hanging DB connection never blocks startup
+CMD ["sh", "-c", "timeout 60 alembic upgrade head || echo 'WARNING: migration skipped'; exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
