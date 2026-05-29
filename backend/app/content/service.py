@@ -19,6 +19,12 @@ class LessonTest:
     stdin: str | None = None
 
 
+@dataclass
+class LessonSolution:
+    code: str
+    note: str
+
+
 # ── Exercise types ────────────────────────────────────────────────────────────
 
 
@@ -74,6 +80,7 @@ class MiniCodeExercise:
     prompt: str
     starter: str
     tests: list[LessonTest]
+    solutions: list[LessonSolution] = field(default_factory=list)
     story_before: str | None = None
     story_after: str | None = None
 
@@ -139,11 +146,13 @@ def _parse_exercise(raw: dict[str, Any]) -> Exercise:
         )
     if t == "mini_code":
         raw_tests: list[dict[str, str]] = raw.get("tests", [])
+        raw_solutions: list[dict[str, str]] = raw.get("solutions", [])
         return MiniCodeExercise(
             type="mini_code",
             prompt=raw.get("prompt", "").strip(),
             starter=raw.get("starter", "").rstrip(),
             tests=[LessonTest(code=r["code"], message=r["message"], stdin=r.get("stdin")) for r in raw_tests],
+            solutions=[LessonSolution(code=s["code"].rstrip(), note=s.get("note", "")) for s in raw_solutions],
             story_before=raw.get("story_before") or None,
             story_after=raw.get("story_after") or None,
         )
