@@ -18,6 +18,10 @@ depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if "daily_attempt" in inspector.get_table_names():
+        return  # already applied (e.g. by a previous partial deploy)
     op.create_table(
         "daily_attempt",
         sa.Column("id", sa.Uuid(), nullable=False),
@@ -30,11 +34,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_index("ix_daily_attempt_account_id", "daily_attempt", ["account_id"])
-    op.create_index(
-        "ix_daily_attempt_account_date",
-        "daily_attempt",
-        ["account_id", "date_key"],
-    )
+    op.create_index("ix_daily_attempt_account_date", "daily_attempt", ["account_id", "date_key"])
 
 
 def downgrade() -> None:
