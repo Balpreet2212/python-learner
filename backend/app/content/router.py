@@ -4,6 +4,8 @@ import json
 from datetime import UTC, datetime
 from typing import Annotated, Any, Literal, Union
 
+from fastapi import Query
+
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -22,6 +24,7 @@ from app.content.service import (
     MiniCodeExercise,
     load_capstone,
     load_lesson,
+    LessonSolution,
 )
 from app.core.errors import bad_request, forbidden
 from app.core.sandbox import run_challenge
@@ -78,11 +81,17 @@ class FillBlankExOut(BaseModel):
     story_after: str | None = None
 
 
+class SolutionOut(BaseModel):
+    code: str
+    note: str
+
+
 class MiniCodeExOut(BaseModel):
     type: Literal["mini_code"]
     prompt: str
     starter: str
     test_count: int
+    solutions: list[SolutionOut] = []
     story_before: str | None = None
     story_after: str | None = None
 
@@ -192,6 +201,7 @@ def _exercise_to_out(ex: Any) -> ExerciseOut:
     if isinstance(ex, MiniCodeExercise):
         return MiniCodeExOut(
             type="mini_code", prompt=ex.prompt, starter=ex.starter, test_count=len(ex.tests),
+            solutions=[SolutionOut(code=s.code, note=s.note) for s in ex.solutions],
             story_before=ex.story_before, story_after=ex.story_after,
         )
     if isinstance(ex, BreakFixExercise):
@@ -254,6 +264,95 @@ async def check_exercise_code(
         raise bad_request("Complete onboarding before submitting")
 
     content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
+    if content is None:
+        raise bad_request("Lesson content not found")
+
+    code_exercises = [e for e in content.exercises if isinstance(e, (MiniCodeExercise, BreakFixExercise))]
+    if body.exercise_index < 0 or body.exercise_index >= len(code_exercises):
+        raise bad_request("Invalid exercise index")
+
+    exercise = code_exercises[body.exercise_index]
+    tests = [{"code": t.code, "message": t.message, "stdin": t.stdin} for t in exercise.tests]
+    result = run_challenge(body.code, tests)
+    return SubmitOut(
+        all_passed=result.all_passed,
+        exec_error=result.exec_error,
+        stdout=result.stdout,
+        tests=[
+            TestResultOut(passed=bool(t["passed"]), message=str(t["message"]))
+            for t in result.tests
+        ],
+    )
+
+
+class PracticeCodeRequest(BaseModel):
+    code: str
+    exercise_index: int
+    unit: int
+    lesson: int
+
+
+def _can_access_unit(profile: Any, unit: int) -> bool:
+    """True if the learner has unlocked this unit (completed or currently on it)."""
+    import json as _json
+    try:
+        badges: list[str] = _json.loads(profile.badges_json)
+    except Exception:
+        badges = []
+    completed_units = {int(b.split("_")[1]) for b in badges if b.startswith("unit_") and b.endswith("_complete")}
+    return unit in completed_units or unit == profile.current_unit
+
+
+@router.get("/lesson/practice")
+async def get_practice_lesson(
+    unit: int = Query(..., ge=1, le=7),
+    lesson: int = Query(..., ge=1, le=5),
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+) -> LessonOut:
+    if account.role != "learner":
+        raise forbidden("Only learner accounts have lessons")
+    if account.profile is None:
+        await db.refresh(account, ["profile"])
+    profile = account.profile
+    if profile is None or not profile.track:
+        raise bad_request("Complete onboarding before accessing lessons")
+    if not _can_access_unit(profile, unit):
+        raise forbidden("You have not unlocked this unit yet")
+
+    content = load_lesson(unit, lesson, profile.world)
+    if content is None:
+        raise bad_request(f"Lesson content not found for unit {unit} lesson {lesson}")
+    return LessonOut(
+        unit=content.unit,
+        lesson=content.lesson,
+        title=content.title,
+        xp=content.xp,
+        total_lessons=content.total_lessons,
+        exercise_count=len(content.exercises),
+        exercises=[_exercise_to_out(e) for e in content.exercises],
+    )
+
+
+@router.post("/exercise/code/practice")
+async def check_practice_exercise_code(
+    body: PracticeCodeRequest,
+    account: Account = Depends(get_current_account),
+    db: AsyncSession = Depends(get_db),
+    _csrf: None = Depends(require_csrf),
+) -> SubmitOut:
+    if account.role != "learner":
+        raise forbidden("Only learner accounts can submit code")
+    if len(body.code) > 10_000:
+        raise bad_request("Code submission too large")
+
+    profile = account.profile
+    if profile is None or not profile.track:
+        raise bad_request("Complete onboarding before submitting")
+    if not _can_access_unit(profile, body.unit):
+        raise forbidden("You have not unlocked this unit yet")
+
+    content = load_lesson(body.unit, body.lesson, profile.world)
     if content is None:
         raise bad_request("Lesson content not found")
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -73,6 +74,7 @@ function UnitCard({
   completed,
   style,
   onStart,
+  onPractice,
 }: {
   unitIndex: number;
   name: string;
@@ -81,8 +83,10 @@ function UnitCard({
   completed: boolean;
   style: (typeof WORLD_META)[World];
   onStart: () => void;
+  onPractice: (lesson: number) => void;
 }) {
   const number = unitIndex + 1;
+  const [showPicker, setShowPicker] = useState(false);
 
   return (
     <div
@@ -127,8 +131,37 @@ function UnitCard({
           {current ? "Continue" : "Start Unit"}
         </button>
       )}
-      {completed && (
-        <p className="mt-4 text-center text-xs font-medium text-green-400">Complete!</p>
+
+      {completed && !showPicker && (
+        <button
+          onClick={() => { setShowPicker(true); }}
+          className="mt-4 w-full rounded-lg py-2 text-sm font-semibold bg-gray-800 text-green-300 hover:bg-gray-700 transition-colors"
+        >
+          🔁 Practice
+        </button>
+      )}
+
+      {completed && showPicker && (
+        <div className="mt-4 space-y-2">
+          <p className={`text-xs font-semibold ${style.muted}`}>Choose a lesson:</p>
+          <div className="grid grid-cols-5 gap-1.5">
+            {Array.from({ length: UNIT_LESSONS }, (_, i) => i + 1).map((l) => (
+              <button
+                key={l}
+                onClick={() => { onPractice(l); }}
+                className="rounded-lg py-1.5 text-sm font-bold bg-gray-700 text-white hover:bg-indigo-600 transition-colors"
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => { setShowPicker(false); }}
+            className={`text-xs ${style.muted} underline`}
+          >
+            Cancel
+          </button>
+        </div>
       )}
     </div>
   );
@@ -175,6 +208,7 @@ export default function WorldMapPage() {
               completed={completed}
               style={style}
               onStart={() => { navigate("/lesson"); }}
+              onPractice={(lesson) => { navigate(`/lesson?unit=${unitNumber}&lesson=${lesson}`); }}
             />
           );
         })}

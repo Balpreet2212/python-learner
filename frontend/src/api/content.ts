@@ -47,11 +47,18 @@ export const FillBlankExSchema = z.object({
   ...storyBeats,
 });
 
+const SolutionSchema = z.object({
+  code: z.string(),
+  note: z.string(),
+});
+export type Solution = z.infer<typeof SolutionSchema>;
+
 export const MiniCodeExSchema = z.object({
   type: z.literal("mini_code"),
   prompt: z.string(),
   starter: z.string(),
   test_count: z.number().int(),
+  solutions: z.array(SolutionSchema).default([]),
   ...storyBeats,
 });
 
@@ -126,10 +133,28 @@ export async function getLesson(): Promise<Lesson> {
   return LessonSchema.parse(raw);
 }
 
+export async function getPracticeLesson(unit: number, lesson: number): Promise<Lesson> {
+  const raw = await apiFetch<unknown>(`/v1/learner/lesson/practice?unit=${unit}&lesson=${lesson}`);
+  return LessonSchema.parse(raw);
+}
+
 export async function checkExerciseCode(code: string, exerciseIndex: number): Promise<SubmitResult> {
   const raw = await apiFetch<unknown>("/v1/learner/exercise/code", {
     method: "POST",
     body: JSON.stringify({ code, exercise_index: exerciseIndex }),
+  });
+  return SubmitResultSchema.parse(raw);
+}
+
+export async function checkPracticeExerciseCode(
+  code: string,
+  exerciseIndex: number,
+  unit: number,
+  lesson: number,
+): Promise<SubmitResult> {
+  const raw = await apiFetch<unknown>("/v1/learner/exercise/code/practice", {
+    method: "POST",
+    body: JSON.stringify({ code, exercise_index: exerciseIndex, unit, lesson }),
   });
   return SubmitResultSchema.parse(raw);
 }

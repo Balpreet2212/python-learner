@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef, type KeyboardEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
   getLesson,
+  getPracticeLesson,
   checkExerciseCode,
+  checkPracticeExerciseCode,
   advanceLesson,
   type Lesson,
   type Exercise,
@@ -14,6 +16,7 @@ import {
   type MiniCodeEx,
   type BreakFixEx,
   type SubmitResult,
+  type Solution,
 } from "../api/content";
 import { ApiError } from "../api/client";
 import Button from "../components/ui/Button";
@@ -350,6 +353,34 @@ function FillBlankCard({
   );
 }
 
+// ── Alternative solutions panel ───────────────────────────────────────────────
+
+function AlternativeSolutions({ solutions, style }: { solutions: Solution[]; style: ReturnType<typeof getStyle> }) {
+  const [open, setOpen] = useState(false);
+  if (solutions.length === 0) return null;
+  return (
+    <div className={`rounded-xl border ${style.border} overflow-hidden`}>
+      <button
+        onClick={() => { setOpen((o) => !o); }}
+        className={`w-full flex items-center justify-between px-4 py-3 ${style.surface} text-left`}
+      >
+        <span className={`text-sm font-semibold ${style.accent}`}>Other ways to solve this</span>
+        <span className={`text-xs ${style.muted}`}>{open ? "▲ hide" : "▼ show"}</span>
+      </button>
+      {open && (
+        <div className={`divide-y divide-gray-800`}>
+          {solutions.map((s, i) => (
+            <div key={i} className="px-4 py-3 space-y-2">
+              <pre className="font-code text-sm text-gray-100 bg-gray-950 rounded-lg px-3 py-2 whitespace-pre-wrap overflow-x-auto">{s.code}</pre>
+              <p className={`text-xs ${style.muted}`}>{s.note}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Mini code card ────────────────────────────────────────────────────────────
 
 function MiniCodeCard({
@@ -357,7 +388,8 @@ function MiniCodeCard({
   exerciseIndex,
   style,
   onDone,
-}: { ex: MiniCodeEx; exerciseIndex: number; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+  checkCode,
+}: { ex: MiniCodeEx; exerciseIndex: number; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void; checkCode: (code: string, idx: number) => Promise<SubmitResult> }) {
   const [code, setCode] = useState(ex.starter);
   const [result, setResult] = useState<SubmitResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -368,7 +400,7 @@ function MiniCodeCard({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await checkExerciseCode(code, exerciseIndex);
+      const res = await checkCode(code, exerciseIndex);
       setResult(res);
       if (!res.all_passed) setHasEverFailed(true);
     } catch (err) {
@@ -439,6 +471,7 @@ function MiniCodeCard({
           {ex.story_after && (
             <p className="text-sm italic text-amber-300/90 border-l-2 border-amber-500/40 pl-3">{ex.story_after}</p>
           )}
+          <AlternativeSolutions solutions={ex.solutions} style={style} />
           <Button onClick={() => { onDone(true); }} className="w-full bg-green-700 hover:bg-green-600">
             Continue
           </Button>
@@ -455,7 +488,8 @@ function BreakFixCard({
   exerciseIndex,
   style,
   onDone,
-}: { ex: BreakFixEx; exerciseIndex: number; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void }) {
+  checkCode,
+}: { ex: BreakFixEx; exerciseIndex: number; style: ReturnType<typeof getStyle>; onDone: (correct: boolean) => void; checkCode: (code: string, idx: number) => Promise<SubmitResult> }) {
   const [code, setCode] = useState(ex.broken_code);
   const [result, setResult] = useState<SubmitResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -466,7 +500,7 @@ function BreakFixCard({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await checkExerciseCode(code, exerciseIndex);
+      const res = await checkCode(code, exerciseIndex);
       setResult(res);
       if (!res.all_passed) setHasEverFailed(true);
     } catch (err) {
@@ -560,6 +594,11 @@ function BreakFixCard({
 export default function LessonPage() {
   const { profile, setProfile } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const practiceUnit = searchParams.get("unit") ? parseInt(searchParams.get("unit")!) : null;
+  const practiceLesson = searchParams.get("lesson") ? parseInt(searchParams.get("lesson")!) : null;
+  const isPractice = practiceUnit !== null && practiceLesson !== null;
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -574,12 +613,15 @@ export default function LessonPage() {
   const style = getStyle(world);
 
   useEffect(() => {
-    getLesson()
+    const fetch = isPractice
+      ? getPracticeLesson(practiceUnit!, practiceLesson!)
+      : getLesson();
+    fetch
       .then((l) => { setLesson(l); })
       .catch((err: unknown) => {
         setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
       });
-  }, []);
+  }, [isPractice, practiceUnit, practiceLesson]);
 
   function handleExerciseDone(_correct: boolean) {
     if (!lesson) return;
@@ -663,12 +705,33 @@ export default function LessonPage() {
         {/* Completion screen */}
         {done ? (
           <div className="space-y-6 pt-8 text-center">
-            <div className="text-6xl">🎉</div>
+            <div className="text-6xl">{isPractice ? "🔁" : "🎉"}</div>
             <div>
-              <h2 className={`text-2xl font-bold ${style.highlight}`}>Lesson complete!</h2>
-              <p className={`mt-1 text-sm ${style.muted}`}>+{lesson.xp} XP earned</p>
+              <h2 className={`text-2xl font-bold ${style.highlight}`}>
+                {isPractice ? "Practice complete!" : "Lesson complete!"}
+              </h2>
+              <p className={`mt-1 text-sm ${style.muted}`}>
+                {isPractice ? "Great revision!" : `+${lesson.xp} XP earned`}
+              </p>
             </div>
-            {lesson.lesson < lesson.total_lessons ? (
+            {isPractice ? (
+              <div className="space-y-3">
+                {practiceLesson! < lesson.total_lessons ? (
+                  <Button
+                    onClick={() => { navigate(`/lesson?unit=${practiceUnit}&lesson=${practiceLesson! + 1}`); }}
+                    className="w-full bg-indigo-600 hover:bg-indigo-500 text-lg py-3"
+                  >
+                    Next Lesson →
+                  </Button>
+                ) : null}
+                <Button
+                  onClick={() => { navigate("/learn"); }}
+                  className="w-full bg-gray-700 hover:bg-gray-600 text-lg py-3"
+                >
+                  Back to Map
+                </Button>
+              </div>
+            ) : lesson.lesson < lesson.total_lessons ? (
               <Button onClick={() => void handleAdvance()} loading={advancing} className="w-full bg-green-700 hover:bg-green-600 text-lg py-3">
                 Next Lesson →
               </Button>
@@ -705,6 +768,9 @@ export default function LessonPage() {
                   exerciseIndex={codeExerciseIndex}
                   style={style}
                   onDone={(c) => { if (c) handleExerciseDone(c); }}
+                  checkCode={isPractice
+                    ? (code, idx) => checkPracticeExerciseCode(code, idx, practiceUnit!, practiceLesson!)
+                    : checkExerciseCode}
                 />
               )}
               {currentEx.type === "break_fix" && (
@@ -713,6 +779,9 @@ export default function LessonPage() {
                   exerciseIndex={codeExerciseIndex}
                   style={style}
                   onDone={(c) => { if (c) handleExerciseDone(c); }}
+                  checkCode={isPractice
+                    ? (code, idx) => checkPracticeExerciseCode(code, idx, practiceUnit!, practiceLesson!)
+                    : checkExerciseCode}
                 />
               )}
             </div>
