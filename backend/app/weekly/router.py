@@ -8,8 +8,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.dependencies import get_current_account, require_csrf
+from app.billing.router import has_full_access
 from app.content.service import load_weekly_challenge
-from app.core.errors import bad_request, forbidden
+from app.core.errors import bad_request, forbidden, payment_required
 from app.core.sandbox import run_challenge
 from app.db.models import Account, WeeklyAttempt
 from app.db.session import get_db
@@ -64,6 +65,8 @@ async def get_weekly_challenge(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before accessing weekly challenges")
+    if not has_full_access(account):
+        raise payment_required()
 
     content = load_weekly_challenge(profile.world)
     if content is None:
@@ -105,6 +108,8 @@ async def submit_weekly(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before submitting")
+    if not has_full_access(account):
+        raise payment_required()
 
     content = load_weekly_challenge(profile.world)
     if content is None:

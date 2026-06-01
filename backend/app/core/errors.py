@@ -42,3 +42,7 @@ def bad_request(message: str, details: object = None) -> AppError:
 
 def rate_limited() -> AppError:
     return AppError(429, "rate_limited", "Too many requests. Please try again later.")
+
+
+def payment_required(message: str = "A subscription is required to access this content") -> AppError:
+    return AppError(402, "subscription_required", message)

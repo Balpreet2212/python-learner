@@ -31,7 +31,7 @@ class Account(Base):
         back_populates="account", uselist=False, cascade="all, delete-orphan", lazy="selectin"
     )
     subscription: Mapped["Subscription | None"] = relationship(
-        back_populates="account", uselist=False, cascade="all, delete-orphan"
+        back_populates="account", uselist=False, cascade="all, delete-orphan", lazy="selectin"
     )
     sessions: Mapped[list["Session"]] = relationship(
         back_populates="account", cascade="all, delete-orphan"

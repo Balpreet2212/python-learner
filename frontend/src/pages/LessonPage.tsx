@@ -602,6 +602,7 @@ export default function LessonPage() {
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [paywalled, setPaywalled] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [advancing, setAdvancing] = useState(false);
@@ -619,7 +620,11 @@ export default function LessonPage() {
     fetch
       .then((l) => { setLesson(l); })
       .catch((err: unknown) => {
-        setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
+        if (err instanceof ApiError && (err.status === 402 || err.code === "subscription_required")) {
+          setPaywalled(true);
+        } else {
+          setLoadError(err instanceof ApiError ? err.message : "Failed to load lesson");
+        }
       });
   }, [isPractice, practiceUnit, practiceLesson]);
 
@@ -644,12 +649,43 @@ export default function LessonPage() {
       miniCodeCountRef.current = 0;
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
-      if (err instanceof ApiError && err.message.includes("all available units")) {
+      if (err instanceof ApiError && (err.status === 402 || err.code === "subscription_required")) {
+        setPaywalled(true);
+        setDone(false);
+      } else if (err instanceof ApiError && err.message.includes("all available units")) {
         navigate("/");
       }
     } finally {
       setAdvancing(false);
     }
+  }
+
+  if (paywalled) {
+    return (
+      <main className={`flex min-h-screen items-center justify-center ${style.bg}`}>
+        <div className="mx-auto max-w-sm p-8 space-y-6 text-center">
+          <div className="text-5xl">🔒</div>
+          <div>
+            <h2 className={`text-xl font-bold ${style.highlight}`}>Full Access Required</h2>
+            <p className={`mt-2 text-sm ${style.muted}`}>
+              The first 2 lessons are free. Subscribe to unlock all 35 lessons, capstones, and weekly challenges.
+            </p>
+          </div>
+          <button
+            onClick={() => { navigate("/dashboard/billing"); }}
+            className="w-full rounded-xl bg-indigo-600 py-3 text-sm font-semibold text-white hover:bg-indigo-500 transition-colors"
+          >
+            View plans
+          </button>
+          <button
+            onClick={() => { navigate("/learn"); }}
+            className={`text-sm underline ${style.muted}`}
+          >
+            Back to map
+          </button>
+        </div>
+      </main>
+    );
   }
 
   if (!lesson) {

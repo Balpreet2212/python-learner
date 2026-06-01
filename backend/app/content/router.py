@@ -25,7 +25,8 @@ from app.content.service import (
     load_capstone,
     load_lesson,
 )
-from app.core.errors import bad_request, forbidden
+from app.billing.router import has_full_access, is_free_lesson
+from app.core.errors import bad_request, forbidden, payment_required
 from app.core.sandbox import run_challenge
 from app.db.models import Account, ProgressEvent
 from app.db.session import get_db
@@ -228,6 +229,9 @@ async def get_lesson(
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before accessing lessons")
 
+    if not is_free_lesson(profile.current_unit, profile.current_lesson) and not has_full_access(account):
+        raise payment_required()
+
     content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
     if content is None:
         raise bad_request(
@@ -261,6 +265,8 @@ async def check_exercise_code(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before submitting")
+    if not is_free_lesson(profile.current_unit, profile.current_lesson) and not has_full_access(account):
+        raise payment_required()
 
     content = load_lesson(profile.current_unit, profile.current_lesson, profile.world)
     if content is None:
@@ -318,6 +324,8 @@ async def get_practice_lesson(
         raise bad_request("Complete onboarding before accessing lessons")
     if not _can_access_unit(profile, unit):
         raise forbidden("You have not unlocked this unit yet")
+    if not is_free_lesson(unit, lesson) and not has_full_access(account):
+        raise payment_required()
 
     content = load_lesson(unit, lesson, profile.world)
     if content is None:
@@ -387,8 +395,12 @@ async def advance_lesson(
         raise bad_request("Complete onboarding before advancing lessons")
 
     completed_lesson = profile.current_lesson
+    next_lesson = profile.current_lesson + 1
     if profile.current_lesson < LESSONS_PER_UNIT:
-        profile.current_lesson += 1
+        # Block advancing into a paid lesson without a subscription
+        if not is_free_lesson(profile.current_unit, next_lesson) and not has_full_access(account):
+            raise payment_required()
+        profile.current_lesson = next_lesson
     else:
         raise bad_request("Complete the unit capstone to advance to the next unit")
 
@@ -423,6 +435,8 @@ async def get_capstone(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before accessing capstones")
+    if not has_full_access(account):
+        raise payment_required()
 
     content = load_capstone(profile.current_unit, profile.world)
     if content is None:
@@ -455,6 +469,8 @@ async def submit_capstone(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before submitting")
+    if not has_full_access(account):
+        raise payment_required()
 
     content = load_capstone(profile.current_unit, profile.world)
     if content is None:
@@ -485,6 +501,8 @@ async def advance_capstone(
     profile = account.profile
     if profile is None or not profile.track:
         raise bad_request("Complete onboarding before advancing")
+    if not has_full_access(account):
+        raise payment_required()
 
     current_unit = profile.current_unit
 
